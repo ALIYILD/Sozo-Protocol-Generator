@@ -20,6 +20,32 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# ── Password gate ────────────────────────────────────────────────────────────
+def _check_password() -> bool:
+    """Returns True if the user has entered the correct password."""
+    if st.session_state.get("authenticated"):
+        return True
+
+    try:
+        correct = st.secrets["auth"]["password"]
+    except Exception:
+        # No secrets configured — skip gate in local dev
+        return True
+
+    st.markdown("## 🧠 SOZO Protocol Generator")
+    st.markdown("Enter the access password to continue.")
+    pwd = st.text_input("Password", type="password", key="pwd_input")
+    if st.button("Login"):
+        if pwd == correct:
+            st.session_state["authenticated"] = True
+            st.rerun()
+        else:
+            st.error("Incorrect password.")
+    st.stop()
+
+
+_check_password()
+
 # ── Lazy imports (cached) ────────────────────────────────────────────────────
 @st.cache_resource(show_spinner=False)
 def _load_registry():
@@ -80,8 +106,7 @@ def _zip_files(paths: dict) -> bytes:
 # SIDEBAR
 # ════════════════════════════════════════════════════════════════════════════
 with st.sidebar:
-    st.image("https://via.placeholder.com/200x60/1a1a2e/ffffff?text=SOZO+Brain+Center",
-             use_container_width=True)
+    st.markdown("### 🧠 SOZO Brain Center")
     st.title("🧠 SOZO Generator")
     st.caption("Clinical Protocol Document Generator")
     st.divider()
@@ -140,7 +165,7 @@ if page == "Generate Documents":
 
     st.divider()
 
-    if st.button("⚡ Generate", type="primary", use_container_width=True):
+    if st.button("⚡ Generate", type="primary", width="stretch"):
         from sozo_generator.core.enums import Tier, DocumentType
         from sozo_generator.docx.exporter import DocumentExporter
 
@@ -228,7 +253,7 @@ if page == "Generate Documents":
                 file_name=f"{selected_slug}_documents.zip",
                 mime="application/zip",
                 type="primary",
-                use_container_width=True,
+                width="stretch",
             )
 
 
@@ -263,7 +288,7 @@ elif page == "Conditions Overview":
 
     import pandas as pd
     df = pd.DataFrame(rows)
-    st.dataframe(df, use_container_width=True, hide_index=True)
+    st.dataframe(df, width="stretch", hide_index=True)
 
     st.divider()
     st.subheader("Condition Detail")
