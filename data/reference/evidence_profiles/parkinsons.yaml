@@ -1,0 +1,75 @@
+# Evidence search profile — Parkinson's Disease
+# Used by: python -m sozo_generator.cli.main ingest-evidence --condition parkinsons
+
+condition_slug: parkinsons
+condition_name: "Parkinson's Disease"
+icd10: G20
+
+search_profiles:
+  pathophysiology:
+    query: >
+      Parkinson disease[Title/Abstract] AND
+      (dopaminergic pathophysiology[Title/Abstract] OR
+       alpha-synuclein[Title/Abstract] OR
+       basal ganglia[Title/Abstract] OR
+       substantia nigra[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis, Review]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      Parkinson disease[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Clinical Trial, Systematic Review]
+    max_results: 30
+
+  motor_outcomes:
+    query: >
+      Parkinson disease[Title/Abstract] AND
+      (UPDRS[Title/Abstract] OR motor function[Title/Abstract]) AND
+      (brain stimulation[Title/Abstract] OR neuromodulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Clinical Trial]
+    max_results: 20
+
+  tps_protocols:
+    query: >
+      Parkinson disease[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract])
+    max_results: 15
+
+  non_motor_symptoms:
+    query: >
+      Parkinson disease[Title/Abstract] AND
+      (depression[Title/Abstract] OR cognitive decline[Title/Abstract] OR
+       sleep[Title/Abstract] OR pain[Title/Abstract]) AND
+      neuromodulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 20
+
+  assessment_scales:
+    query: >
+      Parkinson disease[Title/Abstract] AND
+      (MDS-UPDRS[Title/Abstract] OR
+       "Movement Disorder Society"[Title/Abstract] OR
+       UPDRS validation[Title/Abstract])
+    max_results: 10
+
+  safety:
+    query: >
+      Parkinson disease[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract] AND
+      (safety[Title/Abstract] OR adverse effects[Title/Abstract] OR
+       levodopa interaction[Title/Abstract])
+    max_results: 15
+
+priority_pmids:
+  - "20354211"  # Benninger 2010 tDCS Parkinson's NEJM
+  - "16467468"  # Boggio 2006 tDCS motor cortex PD
+  - "31784278"  # Doruk Cengiz 2020 M1/DLPFC tDCS PD
+  - "18986608"  # Fregni 2006 tDCS PD pilot
+
+notes: >
+  Focus on M1 (motor cortex) and DLPFC stimulation paradigms.
+  Key: levodopa interaction effects on tDCS response.
+  Avoid: deep brain stimulation (DBS) literature unless directly comparing to tDCS.

@@ -1,0 +1,226 @@
+scales:
+  # Motor / Neurological
+  updrs:
+    name: "Unified Parkinson's Disease Rating Scale"
+    abbreviation: "UPDRS / MDS-UPDRS"
+    conditions: ["parkinsons"]
+    domains: ["motor", "non_motor", "activities_of_daily_living"]
+    pmid: "19343477"
+    type: "clinician_administered"
+
+  mmse:
+    name: "Mini-Mental State Examination"
+    abbreviation: "MMSE"
+    conditions: ["parkinsons", "alzheimers", "tbi", "ms", "long_covid"]
+    domains: ["cognition"]
+    pmid: "1202204"
+    type: "clinician_administered"
+
+  moca:
+    name: "Montreal Cognitive Assessment"
+    abbreviation: "MoCA"
+    conditions: ["parkinsons", "alzheimers", "tbi", "ms", "stroke_rehab", "long_covid"]
+    domains: ["cognition"]
+    pmid: "15817019"
+    type: "clinician_administered"
+
+  # Depression
+  hamd:
+    name: "Hamilton Depression Rating Scale"
+    abbreviation: "HAM-D / HDRS"
+    conditions: ["depression", "parkinsons", "alzheimers"]
+    domains: ["mood", "depression"]
+    pmid: "14100341"
+    type: "clinician_administered"
+
+  madrs:
+    name: "Montgomery–Åsberg Depression Rating Scale"
+    abbreviation: "MADRS"
+    conditions: ["depression", "parkinsons", "tbi", "ms"]
+    domains: ["depression"]
+    pmid: "444788"
+    type: "clinician_administered"
+
+  phq9:
+    name: "Patient Health Questionnaire-9"
+    abbreviation: "PHQ-9"
+    conditions: ["depression", "anxiety", "tbi", "ms", "stroke_rehab", "long_covid", "ptsd"]
+    domains: ["depression"]
+    pmid: "11556941"
+    type: "self_report"
+
+  # Anxiety
+  gad7:
+    name: "Generalized Anxiety Disorder 7-item Scale"
+    abbreviation: "GAD-7"
+    conditions: ["anxiety", "ptsd", "ms", "long_covid", "tinnitus"]
+    domains: ["anxiety"]
+    pmid: "16717171"
+    type: "self_report"
+
+  hama:
+    name: "Hamilton Anxiety Rating Scale"
+    abbreviation: "HAM-A"
+    conditions: ["anxiety", "ptsd"]
+    domains: ["anxiety"]
+    pmid: "13638508"
+    type: "clinician_administered"
+
+  # PTSD
+  pcl5:
+    name: "PTSD Checklist for DSM-5"
+    abbreviation: "PCL-5"
+    conditions: ["ptsd"]
+    domains: ["ptsd_symptoms"]
+    pmid: "25891909"
+    type: "self_report"
+
+  caps5:
+    name: "Clinician-Administered PTSD Scale for DSM-5"
+    abbreviation: "CAPS-5"
+    conditions: ["ptsd"]
+    domains: ["ptsd_symptoms"]
+    pmid: "25891909"
+    type: "clinician_administered"
+
+  # OCD
+  ybocs:
+    name: "Yale-Brown Obsessive Compulsive Scale"
+    abbreviation: "Y-BOCS"
+    conditions: ["ocd"]
+    domains: ["ocd_symptoms"]
+    pmid: "2543153"
+    type: "clinician_administered"
+
+  # ADHD
+  asrs:
+    name: "Adult ADHD Self-Report Scale"
+    abbreviation: "ASRS-v1.1"
+    conditions: ["adhd"]
+    domains: ["attention", "hyperactivity"]
+    pmid: "15841682"
+    type: "self_report"
+
+  conners:
+    name: "Conners' Adult ADHD Rating Scales"
+    abbreviation: "CAARS"
+    conditions: ["adhd"]
+    domains: ["attention", "hyperactivity", "impulsivity"]
+    pmid: "9498418"
+    type: "self_report"
+
+  # Pain
+  nprs:
+    name: "Numeric Pain Rating Scale"
+    abbreviation: "NPRS"
+    conditions: ["chronic_pain", "tbi", "ms", "parkinsons"]
+    domains: ["pain_intensity"]
+    type: "self_report"
+
+  fiq:
+    name: "Fibromyalgia Impact Questionnaire"
+    abbreviation: "FIQ"
+    conditions: ["chronic_pain"]
+    domains: ["pain", "function", "fatigue"]
+    pmid: "1954998"
+    type: "self_report"
+
+  bpi:
+    name: "Brief Pain Inventory"
+    abbreviation: "BPI"
+    conditions: ["chronic_pain", "tbi", "ms", "tinnitus"]
+    domains: ["pain_intensity", "pain_interference"]
+    pmid: "8080219"
+    type: "self_report"
+
+  # Sleep
+  psqi:
+    name: "Pittsburgh Sleep Quality Index"
+    abbreviation: "PSQI"
+    conditions: ["insomnia", "parkinsons", "depression", "ptsd", "long_covid"]
+    domains: ["sleep_quality"]
+    pmid: "2748771"
+    type: "self_report"
+
+  isi:
+    name: "Insomnia Severity Index"
+    abbreviation: "ISI"
+    conditions: ["insomnia", "depression", "anxiety", "long_covid"]
+    domains: ["insomnia_severity"]
+    pmid: "11772681"
+    type: "self_report"
+
+  # Tinnitus
+  thi:
+    name: "Tinnitus Handicap Inventory"
+    abbreviation: "THI"
+    conditions: ["tinnitus"]
+    domains: ["tinnitus_severity", "functional_impact"]
+    pmid: "8668571"
+    type: "self_report"
+
+  tq:
+    name: "Tinnitus Questionnaire"
+    abbreviation: "TQ"
+    conditions: ["tinnitus"]
+    domains: ["tinnitus_distress"]
+    pmid: "1477600"
+    type: "self_report"
+
+  # MS
+  edss:
+    name: "Expanded Disability Status Scale"
+    abbreviation: "EDSS"
+    conditions: ["ms"]
+    domains: ["disability", "motor"]
+    pmid: "7202225"
+    type: "clinician_administered"
+
+  # Stroke
+  nihss:
+    name: "NIH Stroke Scale"
+    abbreviation: "NIHSS"
+    conditions: ["stroke_rehab"]
+    domains: ["stroke_severity", "neurological_deficit"]
+    type: "clinician_administered"
+
+  # ASD
+  ados2:
+    name: "Autism Diagnostic Observation Schedule, 2nd Edition"
+    abbreviation: "ADOS-2"
+    conditions: ["asd"]
+    domains: ["social_communication", "restricted_repetitive_behaviors"]
+    pmid: "11055457"
+    type: "clinician_administered"
+
+  srs2:
+    name: "Social Responsiveness Scale, 2nd Edition"
+    abbreviation: "SRS-2"
+    conditions: ["asd"]
+    domains: ["social_functioning"]
+    type: "caregiver_report"
+
+  # Long COVID
+  fatigue_severity_scale:
+    name: "Fatigue Severity Scale"
+    abbreviation: "FSS"
+    conditions: ["long_covid", "ms", "tbi", "parkinsons"]
+    domains: ["fatigue"]
+    pmid: "2803071"
+    type: "self_report"
+
+  dsq:
+    name: "DePaul Symptom Questionnaire"
+    abbreviation: "DSQ"
+    conditions: ["long_covid"]
+    domains: ["post_exertional_malaise", "multisystem_symptoms"]
+    type: "self_report"
+
+  # General function/QoL
+  eq5d:
+    name: "EuroQol 5-Dimension Quality of Life"
+    abbreviation: "EQ-5D"
+    conditions: ["parkinsons", "depression", "ms", "stroke_rehab", "tbi", "chronic_pain", "insomnia", "long_covid"]
+    domains: ["quality_of_life"]
+    pmid: "1634691"
+    type: "self_report"

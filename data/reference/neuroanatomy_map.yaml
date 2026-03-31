@@ -1,0 +1,173 @@
+brain_regions:
+  # Frontal Lobe
+  dlpfc:
+    name: "Dorsolateral Prefrontal Cortex"
+    abbreviation: "DLPFC"
+    lobe: "frontal"
+    hemisphere: "bilateral"
+    functions: ["working memory", "executive function", "cognitive control", "planning"]
+    networks: ["cen", "dmn"]
+    eeg_10_20: ["F3", "F4"]
+    tdcs_placement: "F3/F4 anode"
+    tps_accessible: true
+
+  mpfc:
+    name: "Medial Prefrontal Cortex"
+    abbreviation: "mPFC"
+    lobe: "frontal"
+    hemisphere: "bilateral"
+    functions: ["self-referential processing", "social cognition", "emotional regulation"]
+    networks: ["dmn", "limbic"]
+    eeg_10_20: ["Fz"]
+
+  vlpfc:
+    name: "Ventrolateral Prefrontal Cortex"
+    abbreviation: "vlPFC"
+    lobe: "frontal"
+    hemisphere: "bilateral"
+    functions: ["inhibitory control", "response inhibition", "emotional regulation"]
+    networks: ["cen", "sn"]
+
+  ofc:
+    name: "Orbitofrontal Cortex"
+    abbreviation: "OFC"
+    lobe: "frontal"
+    hemisphere: "bilateral"
+    functions: ["reward processing", "decision making", "emotional valuation"]
+    networks: ["limbic", "cen"]
+
+  acc:
+    name: "Anterior Cingulate Cortex"
+    abbreviation: "ACC"
+    lobe: "frontal"
+    hemisphere: "medial"
+    functions: ["error monitoring", "conflict detection", "emotional processing", "pain processing"]
+    networks: ["sn", "cen", "dmn"]
+    eeg_10_20: ["Fz", "Cz"]
+
+  sma:
+    name: "Supplementary Motor Area"
+    abbreviation: "SMA"
+    lobe: "frontal"
+    hemisphere: "bilateral"
+    functions: ["motor planning", "sequence learning", "movement initiation"]
+    networks: ["smn"]
+    eeg_10_20: ["Fz", "FCz"]
+    tps_accessible: true
+
+  m1:
+    name: "Primary Motor Cortex"
+    abbreviation: "M1"
+    lobe: "frontal"
+    hemisphere: "bilateral"
+    functions: ["voluntary motor output", "motor execution"]
+    networks: ["smn"]
+    eeg_10_20: ["C3", "C4"]
+    tdcs_placement: "C3/C4 anode"
+    tps_accessible: true
+
+  # Parietal Lobe
+  s1:
+    name: "Primary Somatosensory Cortex"
+    abbreviation: "S1"
+    lobe: "parietal"
+    hemisphere: "bilateral"
+    functions: ["somatosensory processing", "proprioception", "tactile discrimination"]
+    networks: ["smn"]
+    eeg_10_20: ["CP3", "CP4"]
+
+  ips:
+    name: "Intraparietal Sulcus"
+    abbreviation: "IPS"
+    lobe: "parietal"
+    hemisphere: "bilateral"
+    functions: ["visuospatial processing", "attentional orienting", "number processing"]
+    networks: ["attention", "cen"]
+
+  pcc:
+    name: "Posterior Cingulate Cortex"
+    abbreviation: "PCC"
+    lobe: "parietal"
+    hemisphere: "medial"
+    functions: ["self-referential processing", "memory retrieval", "internal attention"]
+    networks: ["dmn"]
+    eeg_10_20: ["Pz"]
+
+  tpj:
+    name: "Temporoparietal Junction"
+    abbreviation: "TPJ"
+    lobe: "parietal/temporal"
+    hemisphere: "bilateral"
+    functions: ["social cognition", "attentional reorienting", "theory of mind"]
+    networks: ["attention", "dmn"]
+
+  # Temporal Lobe
+  hippocampus:
+    name: "Hippocampus"
+    abbreviation: "HPC"
+    lobe: "temporal"
+    hemisphere: "bilateral"
+    functions: ["episodic memory", "spatial navigation", "pattern separation"]
+    networks: ["dmn", "limbic"]
+    eeg_10_20: ["T5", "T6"]
+
+  amygdala:
+    name: "Amygdala"
+    abbreviation: "AMY"
+    lobe: "temporal"
+    hemisphere: "bilateral"
+    functions: ["fear processing", "emotional memory", "threat detection"]
+    networks: ["limbic", "sn"]
+    eeg_10_20: ["T3", "T4"]
+
+  auditory_cortex:
+    name: "Primary Auditory Cortex"
+    abbreviation: "A1"
+    lobe: "temporal"
+    hemisphere: "bilateral"
+    functions: ["sound processing", "frequency discrimination", "auditory pattern recognition"]
+    networks: ["smn", "attention"]
+    eeg_10_20: ["T3", "T4"]
+    tps_accessible: true
+
+  # Subcortical
+  basal_ganglia:
+    name: "Basal Ganglia"
+    abbreviation: "BG"
+    structure: "subcortical"
+    components: ["putamen", "caudate nucleus", "globus pallidus", "subthalamic nucleus", "substantia nigra"]
+    functions: ["motor control", "habit learning", "reward processing", "action selection"]
+    networks: ["smn", "limbic"]
+
+  thalamus:
+    name: "Thalamus"
+    abbreviation: "THL"
+    structure: "subcortical"
+    functions: ["sensory relay", "motor relay", "consciousness regulation", "sleep-wake transitions"]
+    networks: ["smn", "attention", "dmn"]
+
+  cerebellum:
+    name: "Cerebellum"
+    abbreviation: "CB"
+    structure: "posterior_fossa"
+    functions: ["motor coordination", "balance", "timing", "motor learning", "some cognitive functions"]
+    networks: ["smn", "cen"]
+    tps_accessible: true
+
+  insula:
+    name: "Insular Cortex / Anterior Insula"
+    abbreviation: "AI"
+    lobe: "temporal/frontal"
+    hemisphere: "bilateral"
+    functions: ["interoception", "pain processing", "emotional awareness", "autonomic regulation"]
+    networks: ["sn", "limbic"]
+
+  # Occipital
+  v1_visual:
+    name: "Primary Visual Cortex"
+    abbreviation: "V1"
+    lobe: "occipital"
+    hemisphere: "bilateral"
+    functions: ["primary visual processing"]
+    networks: ["attention"]
+    eeg_10_20: ["O1", "O2", "Oz"]

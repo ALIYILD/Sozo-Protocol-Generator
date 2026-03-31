@@ -1,0 +1,105 @@
+conditions:
+  - slug: "parkinsons"
+    display_name: "Parkinson's Disease"
+    icd10: "G20"
+    aliases: ["PD", "Parkinson disease", "Parkinson's"]
+    template_status: "gold_standard"
+    evidence_quality: "high"
+
+  - slug: "depression"
+    display_name: "Major Depressive Disorder"
+    icd10: "F32"
+    aliases: ["MDD", "major depression", "unipolar depression"]
+    template_status: "generated"
+    evidence_quality: "high"
+
+  - slug: "anxiety"
+    display_name: "Generalized Anxiety Disorder"
+    icd10: "F41.1"
+    aliases: ["GAD", "generalized anxiety", "anxiety disorder"]
+    template_status: "generated"
+    evidence_quality: "high"
+
+  - slug: "adhd"
+    display_name: "Attention Deficit Hyperactivity Disorder"
+    icd10: "F90"
+    aliases: ["ADHD", "attention deficit", "ADD"]
+    template_status: "generated"
+    evidence_quality: "medium"
+
+  - slug: "alzheimers"
+    display_name: "Alzheimer's Disease / Mild Cognitive Impairment"
+    icd10: "G30"
+    aliases: ["AD", "MCI", "Alzheimer disease", "dementia"]
+    template_status: "generated"
+    evidence_quality: "high"
+
+  - slug: "stroke_rehab"
+    display_name: "Post-Stroke Rehabilitation"
+    icd10: "I69"
+    aliases: ["stroke", "post-stroke", "stroke rehabilitation", "CVA"]
+    template_status: "generated"
+    evidence_quality: "high"
+
+  - slug: "tbi"
+    display_name: "Traumatic Brain Injury"
+    icd10: "S09.90"
+    aliases: ["TBI", "head injury", "concussion", "mTBI"]
+    template_status: "generated"
+    evidence_quality: "medium"
+
+  - slug: "chronic_pain"
+    display_name: "Chronic Pain / Fibromyalgia"
+    icd10: "M79.7"
+    aliases: ["fibromyalgia", "chronic pain", "FMS", "widespread pain"]
+    template_status: "generated"
+    evidence_quality: "medium"
+
+  - slug: "ptsd"
+    display_name: "Post-Traumatic Stress Disorder"
+    icd10: "F43.1"
+    aliases: ["PTSD", "post-traumatic stress", "trauma"]
+    template_status: "generated"
+    evidence_quality: "medium"
+
+  - slug: "ocd"
+    display_name: "Obsessive-Compulsive Disorder"
+    icd10: "F42"
+    aliases: ["OCD", "obsessive compulsive"]
+    template_status: "generated"
+    evidence_quality: "medium"
+
+  - slug: "ms"
+    display_name: "Multiple Sclerosis"
+    icd10: "G35"
+    aliases: ["MS", "multiple sclerosis"]
+    template_status: "generated"
+    evidence_quality: "medium"
+
+  - slug: "asd"
+    display_name: "Autism Spectrum Disorder"
+    icd10: "F84.0"
+    aliases: ["ASD", "autism", "autism spectrum"]
+    template_status: "generated"
+    evidence_quality: "low"
+
+  - slug: "long_covid"
+    display_name: "Long COVID / Brain Fog"
+    icd10: "U09.9"
+    aliases: ["long COVID", "post-COVID", "brain fog", "post-acute COVID"]
+    template_status: "generated"
+    evidence_quality: "emerging"
+
+  - slug: "tinnitus"
+    display_name: "Tinnitus"
+    icd10: "H93.1"
+    aliases: ["tinnitus", "ringing in ears", "chronic tinnitus"]
+    template_status: "generated"
+    evidence_quality: "medium"
+
+  - slug: "insomnia"
+    display_name: "Insomnia / Sleep Disorder"
+    icd10: "G47.0"
+    aliases: ["insomnia", "sleep disorder", "chronic insomnia", "sleep disturbance"]
+    template_status: "generated"
+    evidence_quality: "medium"

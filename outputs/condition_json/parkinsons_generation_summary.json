@@ -1,0 +1,36 @@
+{
+  "condition_slug": "parkinsons",
+  "condition_name": "Parkinson's Disease",
+  "tier": "both",
+  "generated_at": "2026-03-31",
+  "documents_generated": 15,
+  "output_paths": [
+    "outputs\\documents\\Parkinsons\\Fellow\\Assessments\\Clinical_Examination_Checklist_Fellow.docx",
+    "outputs\\documents\\Parkinsons\\Fellow\\Assessments\\Phenotype_Classification_Fellow.docx",
+    "outputs\\documents\\Parkinsons\\Fellow\\Assessments\\Responder_Tracking_Fellow.docx",
+    "outputs\\documents\\Parkinsons\\Fellow\\Assessments\\Psychological_Intake_PRS_Baseline_Fellow.docx",
+    "outputs\\documents\\Parkinsons\\Fellow\\Handbook\\SOZO_Clinical_Handbook_Fellow.docx",
+    "outputs\\documents\\Parkinsons\\Fellow\\Protocols\\All_In_One_Protocol_Fellow.docx",
+    "outputs\\documents\\Parkinsons\\Fellow\\Protocols\\Evidence_Based_Protocol_Fellow.docx",
+    "outputs\\documents\\Parkinsons\\Partners\\Assessments\\Clinical_Examination_Checklist_Partners.docx",
+    "outputs\\documents\\Parkinsons\\Partners\\Assessments\\Phenotype_Classification_Partners.docx",
+    "outputs\\documents\\Parkinsons\\Partners\\Assessments\\Responder_Tracking_Partners.docx",
+    "outputs\\documents\\Parkinsons\\Partners\\Assessments\\Psychological_Intake_PRS_Baseline_Partners.docx",
+    "outputs\\documents\\Parkinsons\\Partners\\Assessments\\6Network_Bedside_Assessment_Partners.docx",
+    "outputs\\documents\\Parkinsons\\Partners\\Handbook\\SOZO_Clinical_Handbook_Partners.docx",
+    "outputs\\documents\\Parkinsons\\Partners\\Protocols\\All_In_One_Protocol_Partners.docx",
+    "outputs\\documents\\Parkinsons\\Partners\\Protocols\\Evidence_Based_Protocol_Partners.docx"
+  ],
+  "review_flags": [
+    "TPS protocols require explicit off-label consent documentation at every treatment block",
+    "Levodopa state consistency must be verified before each treatment session"
+  ],
+  "evidence_gaps": [
+    "Head-to-head trials comparing tDCS protocols (M1 vs SMA vs DLPFC) in PD — no direct comparisons published",
+    "Long-term maintenance effects of neuromodulation in PD beyond 3 months — limited data",
+    "TPS in advanced PD (H&Y 4-5) — insufficient trial data",
+    "Optimal tDCS montage for tremor-dominant vs akinetic-rigid phenotypes — underpowered comparative data",
+    "taVNS in PD: emerging pilot data only — no adequately powered RCT completed",
+    "Combined tDCS + TPS (multimodal) in PD: rationale strong, evidence limited to case series"
+  ]
+}

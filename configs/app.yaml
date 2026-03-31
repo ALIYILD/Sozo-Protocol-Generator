@@ -1,0 +1,28 @@
+app:
+  name: "SOZO Brain Center — Clinical Document Generator"
+  version: "1.0.0"
+  organization: "SOZO Brain Center"
+  copyright_year: 2026
+  confidentiality_statement: "CONFIDENTIAL — For authorized SOZO personnel only. Not for distribution."
+
+paths:
+  output_dir: "outputs/"
+  cache_dir: "data/raw/pubmed_cache/"
+  templates_dir: "templates/"
+  conditions_dir: "data/processed/conditions/"
+  evidence_dir: "data/processed/evidence/"
+  visuals_dir: "outputs/visuals/"
+  qa_dir: "outputs/qa/"
+
+generation:
+  default_tier: "both"  # both | fellow | partners
+  with_visuals: true
+  with_appendix: true
+  strict_evidence: false
+  review_mode: false
+  force_refresh_evidence: false
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
+  file: "sozo_generator.log"

@@ -1,0 +1,49 @@
+condition_slug: ptsd
+condition_name: "Post-Traumatic Stress Disorder"
+icd10: F43.10
+
+search_profiles:
+  pathophysiology:
+    query: >
+      PTSD[Title/Abstract] AND
+      (amygdala[Title/Abstract] OR hippocampus[Title/Abstract] OR
+       prefrontal cortex[Title/Abstract] OR fear extinction[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      PTSD[Title/Abstract] AND
+      (transcranial direct current stimulation[Title/Abstract] OR tDCS[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 25
+
+  tavns_protocols:
+    query: >
+      PTSD[Title/Abstract] AND
+      (vagus nerve stimulation[Title/Abstract] OR taVNS[Title/Abstract] OR
+       auricular vagus[Title/Abstract])
+    max_results: 15
+
+  assessment_scales:
+    query: >
+      PTSD[Title/Abstract] AND
+      (PCL-5[Title/Abstract] OR CAPS-5[Title/Abstract] OR
+       PCL checklist[Title/Abstract]) AND validation[Title/Abstract]
+    max_results: 10
+
+  comorbidities:
+    query: >
+      PTSD[Title/Abstract] AND
+      (depression[Title/Abstract] OR anxiety[Title/Abstract] OR
+       sleep disorder[Title/Abstract]) AND neuromodulation[Title/Abstract]
+    max_results: 15
+
+priority_pmids:
+  - "28915303"  # Philip 2018 taVNS PTSD
+  - "26602222"  # Isserles 2013 TMS PTSD (comparative)
+
+notes: >
+  Trauma-informed approach essential — note psychotherapy concurrent requirement.
+  Complex PTSD and combat-related PTSD have distinct evidence bases.
+  taVNS cardiac regulation evidence particularly relevant for hyperarousal phenotype.

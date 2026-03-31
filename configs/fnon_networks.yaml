@@ -1,0 +1,140 @@
+fnon:
+  framework_name: "Functional Network-Oriented Neuromodulation"
+  abbreviation: "FNON"
+  core_principle: "Do NOT stimulate symptoms. Stimulate dysfunctional NETWORKS."
+  version: "1.0"
+  organization: "SOZO Brain Center"
+
+  networks:
+    dmn:
+      name: "Default Mode Network"
+      abbreviation: "DMN"
+      core_functions:
+        - "Self-referential processing"
+        - "Autobiographical memory"
+        - "Mind-wandering and internal narrative"
+        - "Prospective thinking"
+      brain_hubs:
+        - "Medial prefrontal cortex (mPFC)"
+        - "Posterior cingulate cortex (PCC)"
+        - "Angular gyrus"
+        - "Hippocampus"
+        - "Precuneus"
+      eeg_electrodes: ["Fz", "Pz", "P3", "P4"]
+      dysfunction_patterns:
+        hypo: "Reduced self-awareness, impaired autobiographical memory, depression-related rumination suppression"
+        hyper: "Excessive rumination, intrusive thoughts, over-activation in depression/PTSD"
+      color: "#9B59B6"
+
+    cen:
+      name: "Central Executive Network"
+      abbreviation: "CEN"
+      aliases: ["FPN", "Frontoparietal Network"]
+      core_functions:
+        - "Working memory"
+        - "Planning and organization"
+        - "Cognitive control and inhibition"
+        - "Goal-directed behavior"
+      brain_hubs:
+        - "Dorsolateral prefrontal cortex (DLPFC)"
+        - "Posterior parietal cortex (PPC)"
+        - "Anterior cingulate cortex (ACC)"
+      eeg_electrodes: ["F3", "F4", "P3", "P4"]
+      dysfunction_patterns:
+        hypo: "Executive dysfunction, working memory deficits, planning impairments"
+        hyper: "Pathological over-control, rigidity, OCD-related cognitive perseveration"
+      color: "#2E86AB"
+
+    sn:
+      name: "Salience Network"
+      abbreviation: "SN"
+      core_functions:
+        - "Threat detection and interoception"
+        - "Network switching (DMN ↔ CEN)"
+        - "Emotional relevance tagging"
+        - "Autonomic regulation"
+      brain_hubs:
+        - "Anterior insula (AI)"
+        - "Anterior cingulate cortex (ACC)"
+        - "Amygdala"
+        - "Subthalamic nucleus"
+      eeg_electrodes: ["Fz", "F7", "F8", "T3", "T4"]
+      dysfunction_patterns:
+        hypo: "Reduced emotional reactivity, apathy, reduced autonomic responsivity"
+        hyper: "Hypervigilance, anxiety, PTSD hyperarousal, excessive threat detection"
+      color: "#E74C3C"
+
+    smn:
+      name: "Sensorimotor Network"
+      abbreviation: "SMN"
+      core_functions:
+        - "Motor output and execution"
+        - "Proprioception and somatosensory processing"
+        - "Motor learning and adaptation"
+        - "Basal ganglia-thalamocortical circuit regulation"
+      brain_hubs:
+        - "Primary motor cortex (M1)"
+        - "Supplementary motor area (SMA)"
+        - "Primary somatosensory cortex (S1)"
+        - "Basal ganglia (putamen, caudate)"
+        - "Cerebellum"
+        - "Thalamus"
+      eeg_electrodes: ["C3", "Cz", "C4", "CP3", "CP4"]
+      dysfunction_patterns:
+        hypo: "Motor slowing, rigidity, reduced motor output, cerebellar ataxia"
+        hyper: "Tremor, dyskinesia, tics, spasticity, motor overflow"
+      color: "#27AE60"
+
+    limbic:
+      name: "Limbic / Emotional Network"
+      abbreviation: "LEN"
+      core_functions:
+        - "Affect regulation"
+        - "Reward and motivation processing"
+        - "Stress response and fear conditioning"
+        - "Social and emotional memory"
+      brain_hubs:
+        - "Amygdala"
+        - "Hippocampus"
+        - "Orbitofrontal cortex (OFC)"
+        - "Ventral striatum / nucleus accumbens"
+        - "Hypothalamus"
+      eeg_electrodes: ["F7", "F8", "T3", "T4", "T5", "T6"]
+      dysfunction_patterns:
+        hypo: "Flat affect, anhedonia, reduced emotional responsiveness"
+        hyper: "Emotional dysregulation, anxiety, fear generalization, trauma re-experiencing"
+      color: "#F39C12"
+
+    attention:
+      name: "Attention Networks"
+      abbreviation: "ATN"
+      aliases: ["DAN/VAN", "Dorsal/Ventral Attention Networks"]
+      core_functions:
+        - "Sustained and selective attention"
+        - "Attentional orienting (exogenous/endogenous)"
+        - "Inhibitory control over distractors"
+        - "Vigilance maintenance"
+      brain_hubs:
+        - "Intraparietal sulcus (IPS)"
+        - "Frontal eye fields (FEF)"
+        - "Temporoparietal junction (TPJ)"
+        - "Ventral frontal cortex (VFC)"
+      eeg_electrodes: ["P3", "P4", "Pz", "F3", "F4", "Fz"]
+      dysfunction_patterns:
+        hypo: "Inattention, distractibility, poor vigilance, ADHD-pattern"
+        hyper: "Attentional capture, hypervigilance, scanning behavior"
+      color: "#1ABC9C"
+
+  scoring:
+    hypo: 1
+    normal: 0
+    hyper: 2
+    max_per_network: 16
+    total_networks: 6
+
+  five_level_pathway:
+    level_1: "Phenotype identification — determine clinical subtype"
+    level_2: "Network prioritization — identify primary, secondary, tertiary dysfunctional networks"
+    level_3: "Montage/target mapping — select stimulation targets based on network dysfunction"
+    level_4: "Response evaluation — reassess network function at 4-week checkpoint"
+    level_5: "Non-responder pathway — FNON-based adjustment of network targets and parameters"

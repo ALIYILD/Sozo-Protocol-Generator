@@ -1,0 +1,48 @@
+condition_slug: anxiety
+condition_name: "Generalized Anxiety Disorder"
+icd10: F41.1
+
+search_profiles:
+  pathophysiology:
+    query: >
+      generalized anxiety disorder[Title/Abstract] AND
+      (amygdala[Title/Abstract] OR prefrontal cortex[Title/Abstract] OR
+       salience network[Title/Abstract] OR HPA axis[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      anxiety[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 25
+
+  ces_protocols:
+    query: >
+      anxiety[Title/Abstract] AND
+      (cranial electrotherapy stimulation[Title/Abstract] OR Alpha-Stim[Title/Abstract])
+    filters: [Randomized Controlled Trial, Meta-Analysis]
+    max_results: 20
+
+  tavns_protocols:
+    query: >
+      anxiety[Title/Abstract] AND
+      (transcutaneous auricular vagus nerve stimulation[Title/Abstract] OR
+       taVNS[Title/Abstract] OR vagus nerve stimulation[Title/Abstract])
+    max_results: 15
+
+  assessment_scales:
+    query: >
+      anxiety[Title/Abstract] AND
+      (GAD-7[Title/Abstract] OR HAM-A[Title/Abstract] OR STAI[Title/Abstract]) AND
+      validation[Title/Abstract]
+    max_results: 10
+
+priority_pmids:
+  - "15765140"  # Kroenke 2007 GAD-7 validation
+  - "26363433"  # Bikson 2016 tDCS anxiety
+
+notes: >
+  Include both GAD-specific and broader anxiety literature.
+  CES (Alpha-Stim) has specific FDA clearance for anxiety — prioritize this evidence.

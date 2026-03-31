@@ -1,0 +1,52 @@
+devices:
+  newronika_hdckit:
+    name: "Newronika HDCkit"
+    manufacturer: "Newronika S.p.A."
+    type: "tDCS"
+    description: "Multi-channel HD-tDCS system with programmable electrode configurations."
+    features:
+      - "Up to 16 channels"
+      - "HD electrode support"
+      - "Real-time impedance monitoring"
+      - "Clinical software suite"
+    regulatory: "CE-marked medical device"
+    protocols_supported: ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"]
+
+  platoscience:
+    name: "PlatoScience / PlatoWork"
+    manufacturer: "PlatoScience"
+    type: "tDCS"
+    description: "Wireless app-controlled tDCS headset for clinical and home use."
+    features:
+      - "Wireless Bluetooth control"
+      - "Mobile app interface"
+      - "Portable form factor"
+      - "Home-use capable"
+    regulatory: "CE-marked"
+    protocols_supported: ["C1-PS", "C2-PS", "C3-PS", "C4-PS", "C5-PS", "C6-PS", "C7-PS", "C8-PS"]
+
+  neurolith_tps:
+    name: "NEUROLITH® TPS"
+    manufacturer: "Storz Medical AG"
+    type: "TPS"
+    description: "CE-marked transcranial pulse stimulation system for focused brain stimulation."
+    features:
+      - "CE-marked for Alzheimer's disease"
+      - "Neuronavigation-guided targeting"
+      - "Focus depth up to 80mm"
+      - "Real-time imaging integration"
+    regulatory: "CE-marked (Alzheimer's); OFF-LABEL for all other conditions"
+    warning: "OFF-LABEL use for non-Alzheimer's conditions requires explicit Doctor authorization and documented patient consent"
+    protocols_supported: ["T1", "T2", "T3", "T4", "T5"]
+
+  alpha_stim:
+    name: "Alpha-Stim®"
+    manufacturer: "Electromedical Products International"
+    type: "CES"
+    description: "FDA-cleared cranial electrotherapy stimulation for anxiety, depression, and insomnia."
+    features:
+      - "FDA 510(k) cleared"
+      - "Ear clip electrodes"
+      - "Adjustable frequency and intensity"
+    regulatory: "FDA-cleared for anxiety, insomnia, depression"
+    protocols_supported: ["CES-standard"]

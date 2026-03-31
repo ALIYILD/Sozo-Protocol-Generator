@@ -1,0 +1,77 @@
+evidence_levels:
+  highest:
+    - "clinical_practice_guideline"
+    - "systematic_review"
+    - "meta_analysis"
+    - "large_rct"
+    score: 5
+
+  high:
+    - "rct"
+    - "controlled_trial"
+    score: 4
+
+  medium:
+    - "cohort_study"
+    - "narrative_review"
+    - "consensus_statement"
+    score: 3
+
+  low:
+    - "pilot_study"
+    - "feasibility_study"
+    - "case_series"
+    score: 2
+
+  very_low:
+    - "case_report"
+    - "expert_opinion"
+    - "indirect_evidence"
+    score: 1
+
+confidence_thresholds:
+  high_confidence: 4
+  medium_confidence: 3
+  low_confidence: 2
+  insufficient: 1
+
+language_by_confidence:
+  high_confidence: "Evidence-based:"
+  medium_confidence: "Supported by emerging evidence:"
+  low_confidence: "Consensus-informed (limited evidence):"
+  insufficient: "⚠ REQUIRES CLINICAL REVIEW — Evidence insufficient:"
+
+review_flags:
+  missing_primary_source: true
+  contradicting_sources: true
+  indirect_evidence_only: true
+  pilot_data_only: true
+  no_rct_available: false  # flag but don't block
+  off_label_without_consent_note: true
+
+claim_categories:
+  - "pathophysiology"
+  - "brain_regions"
+  - "network_involvement"
+  - "clinical_phenotypes"
+  - "assessment_tools"
+  - "stimulation_targets"
+  - "stimulation_parameters"
+  - "modality_rationale"
+  - "safety"
+  - "contraindications"
+  - "responder_criteria"
+  - "inclusion_criteria"
+  - "exclusion_criteria"
+
+pubmed_search:
+  max_results_per_query: 50
+  preferred_publication_types:
+    - "Systematic Review"
+    - "Meta-Analysis"
+    - "Practice Guideline"
+    - "Randomized Controlled Trial"
+    - "Review"
+    - "Clinical Trial"
+  years_back: 10
+  min_abstract_length: 100

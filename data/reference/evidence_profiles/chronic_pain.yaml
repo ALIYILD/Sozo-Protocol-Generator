@@ -1,0 +1,57 @@
+condition_slug: chronic_pain
+condition_name: "Chronic Pain / Fibromyalgia"
+icd10: M79.3
+
+search_profiles:
+  pathophysiology:
+    query: >
+      fibromyalgia[Title/Abstract] AND
+      (central sensitization[Title/Abstract] OR pain processing[Title/Abstract] OR
+       salience network[Title/Abstract] OR descending inhibition[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  tdcs_pain:
+    query: >
+      chronic pain[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Systematic Review, Meta-Analysis]
+    max_results: 30
+
+  tdcs_fibromyalgia:
+    query: >
+      fibromyalgia[Title/Abstract] AND
+      (transcranial direct current stimulation[Title/Abstract] OR tDCS[Title/Abstract])
+    filters: [Randomized Controlled Trial]
+    max_results: 20
+
+  motor_cortex_stimulation:
+    query: >
+      chronic pain[Title/Abstract] AND
+      (motor cortex stimulation[Title/Abstract] OR M1 stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 20
+
+  ces_pain:
+    query: >
+      chronic pain[Title/Abstract] AND
+      cranial electrotherapy stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Meta-Analysis]
+    max_results: 15
+
+  assessment_scales:
+    query: >
+      fibromyalgia[Title/Abstract] AND
+      (FIQ[Title/Abstract] OR BPI[Title/Abstract] OR
+       VAS pain[Title/Abstract]) AND validation[Title/Abstract]
+    max_results: 10
+
+priority_pmids:
+  - "16870487"  # Fregni 2006 tDCS fibromyalgia
+  - "21371145"  # Marlow 2013 tDCS chronic pain meta-analysis
+  - "22878286"  # Castillo-Saavedra 2016 tDCS fibromyalgia RCT
+
+notes: >
+  M1 anodal stimulation has strongest evidence for pain reduction.
+  DLPFC cathodal as secondary target for affective pain component.
+  CES evidence for comorbid anxiety and sleep disturbance in chronic pain.

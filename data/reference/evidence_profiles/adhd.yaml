@@ -1,0 +1,44 @@
+condition_slug: adhd
+condition_name: "Attention Deficit Hyperactivity Disorder"
+icd10: F90
+
+search_profiles:
+  pathophysiology:
+    query: >
+      ADHD[Title/Abstract] AND
+      (dopamine[Title/Abstract] OR prefrontal cortex[Title/Abstract] OR
+       executive function[Title/Abstract] OR attention network[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      ADHD[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 30
+
+  assessment_scales:
+    query: >
+      ADHD[Title/Abstract] AND
+      (ASRS[Title/Abstract] OR Conners[Title/Abstract] OR CPT[Title/Abstract]) AND
+      (validation[Title/Abstract] OR psychometrics[Title/Abstract])
+    max_results: 10
+
+  executive_function:
+    query: >
+      ADHD[Title/Abstract] AND
+      (working memory[Title/Abstract] OR inhibitory control[Title/Abstract] OR
+       executive function[Title/Abstract]) AND
+      brain stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial]
+    max_results: 20
+
+priority_pmids:
+  - "33568986"  # Westwood 2021 tDCS ADHD systematic review
+  - "28261072"  # Sotnikova 2017 tDCS ADHD networks
+  - "20354211"  # Breitling 2010 anodal tDCS adult ADHD
+
+notes: >
+  Focus on left DLPFC anodal stimulation for executive function and attention.
+  Include both pediatric and adult ADHD literature separately.

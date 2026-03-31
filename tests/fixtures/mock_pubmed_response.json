@@ -1,0 +1,14 @@
+{
+  "pmids": ["33568986", "20354211"],
+  "articles": [
+    {
+      "pmid": "33568986",
+      "title": "Systematic review of tDCS in ADHD",
+      "authors": ["Westwood SJ", "Romani C"],
+      "journal": "Frontiers in Human Neuroscience",
+      "year": 2021,
+      "pub_types": ["Systematic Review"],
+      "abstract": "Background: tDCS is a non-invasive brain stimulation technique..."
+    }
+  ]
+}

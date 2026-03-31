@@ -1,0 +1,59 @@
+condition_slug: long_covid
+condition_name: "Long COVID / Post-Acute Sequelae SARS-CoV-2"
+icd10: U09.9
+
+search_profiles:
+  pathophysiology:
+    query: >
+      long COVID[Title/Abstract] AND
+      (neuroinflammation[Title/Abstract] OR brain fog[Title/Abstract] OR
+       autonomic dysfunction[Title/Abstract] OR microglial activation[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  cognitive_long_covid:
+    query: >
+      post-COVID[Title/Abstract] AND
+      (cognitive impairment[Title/Abstract] OR brain fog[Title/Abstract] OR
+       attention[Title/Abstract] OR memory[Title/Abstract])
+    filters: [Systematic Review, Cohort Study]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      long COVID[Title/Abstract] AND
+      (transcranial direct current stimulation[Title/Abstract] OR tDCS[Title/Abstract] OR
+       neuromodulation[Title/Abstract])
+    max_results: 20
+
+  fatigue_long_covid:
+    query: >
+      post-COVID fatigue[Title/Abstract] AND
+      (brain stimulation[Title/Abstract] OR taVNS[Title/Abstract] OR CES[Title/Abstract])
+    max_results: 15
+
+  dysautonomia:
+    query: >
+      long COVID[Title/Abstract] AND
+      (dysautonomia[Title/Abstract] OR POTS[Title/Abstract] OR
+       autonomic[Title/Abstract]) AND
+      (vagus nerve[Title/Abstract] OR taVNS[Title/Abstract])
+    max_results: 15
+
+  assessment_scales:
+    query: >
+      long COVID[Title/Abstract] AND
+      (Chalder fatigue[Title/Abstract] OR FSS[Title/Abstract] OR
+       CFQ[Title/Abstract] OR MoCA[Title/Abstract]) AND
+      (validation[Title/Abstract] OR outcome[Title/Abstract])
+    max_results: 10
+
+priority_pmids:
+  - "33461194"  # Taquet 2021 neurological sequelae COVID
+  - "33990065"  # Fernandez-de-las-Penas 2021 persistent symptoms
+
+notes: >
+  Very limited RCT evidence — most is case series and observational.
+  Mark all protocols as LOW confidence or INVESTIGATIONAL.
+  Distinguish brain fog/cognitive (DLPFC target) from dysautonomia (taVNS) phenotypes.
+  Evidence base growing rapidly — search with broader date range.

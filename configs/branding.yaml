@@ -1,0 +1,55 @@
+organization: "SOZO Brain Center"
+tagline: "Evidence-Based Neuromodulation"
+
+colors:
+  primary_brown: "#996600"
+  primary_blue: "#2E75B6"
+  dark_blue: "#1B3A5C"
+  accent_red: "#CC0000"
+  light_gray: "#F2F2F2"
+  medium_gray: "#999999"
+  dark_gray: "#666666"
+  white: "#FFFFFF"
+  black: "#000000"
+  warning_orange: "#FF8C00"
+  highlight_yellow: "#FFFF99"
+
+fonts:
+  heading: "Calibri"
+  body: "Calibri"
+  monospace: "Courier New"
+  heading_size_h1: 16
+  heading_size_h2: 14
+  heading_size_h3: 12
+  body_size: 11
+  small_size: 9
+  caption_size: 8
+
+margins:
+  top_cm: 2.54
+  bottom_cm: 2.54
+  left_cm: 2.54
+  right_cm: 2.54
+
+header:
+  show_condition: true
+  show_tier: true
+  show_version: true
+  show_confidentiality: true
+
+footer:
+  show_page_number: true
+  show_copyright: true
+  show_organization: true
+
+watermark: null
+
+tiers:
+  fellow:
+    label: "FELLOW TIER"
+    description: "For use by SOZO Fellow clinicians under Doctor supervision"
+    color: "#2E75B6"
+  partners:
+    label: "PARTNERS TIER"
+    description: "For use by SOZO Partner clinicians — includes full FNON framework"
+    color: "#996600"

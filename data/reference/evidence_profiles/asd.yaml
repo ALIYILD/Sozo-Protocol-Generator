@@ -1,0 +1,51 @@
+condition_slug: asd
+condition_name: "Autism Spectrum Disorder"
+icd10: F84.0
+
+search_profiles:
+  pathophysiology:
+    query: >
+      autism spectrum disorder[Title/Abstract] AND
+      (social brain[Title/Abstract] OR default mode network[Title/Abstract] OR
+       mirror neuron[Title/Abstract] OR temporal parietal junction[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      autism[Title/Abstract] AND
+      (transcranial direct current stimulation[Title/Abstract] OR tDCS[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 25
+
+  social_cognition:
+    query: >
+      autism[Title/Abstract] AND
+      (social cognition[Title/Abstract] OR theory of mind[Title/Abstract] OR
+       mentalizing[Title/Abstract]) AND
+      (brain stimulation[Title/Abstract] OR neuromodulation[Title/Abstract])
+    max_results: 15
+
+  executive_function_asd:
+    query: >
+      autism[Title/Abstract] AND
+      (executive function[Title/Abstract] OR working memory[Title/Abstract]) AND
+      (tDCS[Title/Abstract] OR brain stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial]
+    max_results: 15
+
+  assessment_scales:
+    query: >
+      autism[Title/Abstract] AND
+      (ADOS[Title/Abstract] OR SRS[Title/Abstract] OR ABC[Title/Abstract]) AND
+      (validation[Title/Abstract] OR psychometrics[Title/Abstract])
+    max_results: 10
+
+priority_pmids:
+  - "23683437"  # D'Urso 2015 tDCS ASD
+  - "20811047"  # Enticott 2012 TMS ASD (comparative)
+
+notes: >
+  All tDCS in ASD is investigational — clearly mark off-label.
+  Informed consent/assent from caregivers essential for adult ASD with intellectual disability.
+  Distinguish social communication (TPJ target) from executive function (DLPFC target) protocols.

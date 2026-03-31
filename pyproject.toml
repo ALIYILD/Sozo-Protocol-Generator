@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "sozo-generator"
+version = "1.0.0"
+description = "SOZO Brain Center — Clinical Document Generation Platform"
+requires-python = ">=3.11"
+dependencies = [
+    "python-docx>=1.2.0",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "typer>=0.9",
+    "httpx>=0.24",
+    "requests>=2.31",
+    "biopython>=1.81",
+    "jinja2>=3.1",
+    "pyyaml>=6.0",
+    "pandas>=2.0",
+    "matplotlib>=3.7",
+    "pillow>=10.0",
+    "lxml>=4.9",
+    "beautifulsoup4>=4.12",
+    "svgwrite>=1.4",
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+sozo = "sozo_generator.cli.main:app"

@@ -1,0 +1,60 @@
+condition_slug: insomnia
+condition_name: "Chronic Insomnia"
+icd10: G47.00
+
+search_profiles:
+  pathophysiology:
+    query: >
+      insomnia[Title/Abstract] AND
+      (default mode network[Title/Abstract] OR cortical hyperarousal[Title/Abstract] OR
+       HPA axis[Title/Abstract] OR sleep onset[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  ces_protocols:
+    query: >
+      insomnia[Title/Abstract] AND
+      (cranial electrotherapy stimulation[Title/Abstract] OR Alpha-Stim[Title/Abstract] OR CES[Title/Abstract])
+    filters: [Randomized Controlled Trial, Meta-Analysis, Systematic Review]
+    max_results: 25
+
+  tdcs_sleep:
+    query: >
+      insomnia[Title/Abstract] AND
+      (transcranial direct current stimulation[Title/Abstract] OR tDCS[Title/Abstract] OR
+       slow oscillation tDCS[Title/Abstract])
+    filters: [Randomized Controlled Trial]
+    max_results: 20
+
+  slow_oscillation:
+    query: >
+      slow oscillation tDCS[Title/Abstract] AND
+      (sleep[Title/Abstract] OR delta power[Title/Abstract] OR NREM[Title/Abstract])
+    max_results: 15
+
+  cbti_combination:
+    query: >
+      insomnia[Title/Abstract] AND
+      (CBT-I[Title/Abstract] OR cognitive behavioral therapy sleep[Title/Abstract]) AND
+      (brain stimulation[Title/Abstract] OR neuromodulation[Title/Abstract])
+    max_results: 15
+
+  assessment_scales:
+    query: >
+      insomnia[Title/Abstract] AND
+      (ISI[Title/Abstract] OR PSQI[Title/Abstract] OR
+       Insomnia Severity Index[Title/Abstract]) AND validation[Title/Abstract]
+    max_results: 10
+
+priority_pmids:
+  - "11438246"  # Bastien 2001 ISI validation
+  - "2748771"   # Buysse 1989 PSQI validation
+  - "16297783"  # Feige 2014 CES meta-analysis (check correct PMID)
+  - "30361645"  # Frase 2019 tDCS insomnia
+  - "16423094"  # Marshall 2006 slow oscillation tDCS Nature
+
+notes: >
+  CES (Alpha-Stim) is FDA-cleared for insomnia — prioritize this evidence.
+  so-tDCS (slow oscillation) requires EEG-triggered delivery — clearly mark investigational.
+  Distinguish CES (sub-sensory microamps) from conventional tDCS (milliamps).
+  CBT-I concurrent requirement should be documented in protocols.

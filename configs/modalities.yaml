@@ -1,0 +1,64 @@
+modalities:
+  tdcs:
+    name: "Transcranial Direct Current Stimulation"
+    abbreviation: "tDCS"
+    description: "Non-invasive brain stimulation using low-intensity direct current to modulate cortical excitability."
+    regulatory_status: "CE-marked for certain indications; off-label for most neuropsychiatric conditions"
+    evidence_level: "medium"
+    devices:
+      - newronika_hdckit
+      - platoscience
+    parameters:
+      typical_intensity_ma: [1.0, 2.0]
+      typical_duration_min: [20, 30]
+      electrode_size_cm2: [25, 35]
+      session_frequency: "Daily or 5x/week"
+
+  tps:
+    name: "Transcranial Pulse Stimulation"
+    abbreviation: "TPS"
+    description: "Focused ultrasound-based low-intensity extracorporeal shock wave stimulation targeting specific brain regions."
+    regulatory_status: "CE-marked for Alzheimer's disease; OFF-LABEL for all other conditions — requires Doctor authorization and explicit off-label consent"
+    evidence_level: "emerging"
+    devices:
+      - neurolith_tps
+    parameters:
+      pulses_per_session: [300, 600]
+      frequency_hz: 5
+      energy_level_mj: [0.2, 0.3]
+      depth_mm: "Up to 80mm"
+
+  tavns:
+    name: "Transcutaneous Auricular Vagus Nerve Stimulation"
+    abbreviation: "taVNS"
+    description: "Non-invasive stimulation of the auricular branch of the vagus nerve at the ear."
+    regulatory_status: "CE-marked for epilepsy (certain devices); off-label for neuropsychiatric use"
+    evidence_level: "emerging"
+    devices:
+      - generic_tavns_electrodes
+    parameters:
+      frequency_hz: [1, 25]
+      pulse_width_us: [200, 500]
+      duration_min: [30, 60]
+      intensity_ma: [0.5, 2.0]
+
+  ces:
+    name: "Cranial Electrotherapy Stimulation"
+    abbreviation: "CES"
+    description: "Microcurrent stimulation applied to earlobes targeting alpha wave entrainment and HPA axis modulation."
+    regulatory_status: "FDA-cleared for anxiety, depression, insomnia (Alpha-Stim®)"
+    evidence_level: "medium"
+    devices:
+      - alpha_stim
+    parameters:
+      frequency_hz: [0.5, 100]
+      intensity_ua: [10, 600]
+      duration_min: [20, 60]
+
+safety_principles:
+  - "Always screen for contraindications before initiating any modality"
+  - "Obtain informed consent including off-label disclosure where applicable"
+  - "Monitor for adverse events at every session"
+  - "Maintain consistent medication state (ON/OFF) throughout treatment blocks"
+  - "Discontinue immediately for Grade 3+ adverse events"
+  - "All TPS treatments require explicit Doctor authorization and off-label consent"

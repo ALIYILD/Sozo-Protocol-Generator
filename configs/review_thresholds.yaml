@@ -1,0 +1,35 @@
+completeness:
+  minimum_score: 0.70
+  warning_score: 0.85
+  sections_required:
+    - "clinical_overview"
+    - "pathophysiology"
+    - "brain_regions"
+    - "networks"
+    - "phenotypes"
+    - "assessment_tools"
+    - "inclusion_criteria"
+    - "exclusion_criteria"
+    - "safety"
+    - "protocols"
+    - "responder_tracking"
+    - "references"
+
+evidence_coverage:
+  minimum_claims_cited: 0.60
+  flag_below: 0.50
+
+review_triggers:
+  - placeholder_text_detected
+  - missing_required_section
+  - low_evidence_coverage
+  - contradicting_sources
+  - no_validated_scales
+  - safety_section_incomplete
+  - off_label_not_flagged
+
+report_formats:
+  - "json"
+  - "markdown"
+
+auto_block_generation: false  # set true to prevent generation when QA fails

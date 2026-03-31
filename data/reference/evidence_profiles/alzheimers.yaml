@@ -1,0 +1,50 @@
+condition_slug: alzheimers
+condition_name: "Alzheimer's Disease / Mild Cognitive Impairment"
+icd10: G30
+
+search_profiles:
+  pathophysiology:
+    query: >
+      Alzheimer disease[Title/Abstract] AND
+      (amyloid[Title/Abstract] OR tau[Title/Abstract] OR
+       hippocampus[Title/Abstract] OR default mode network[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  tps_protocols:
+    query: >
+      Alzheimer disease[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       NEUROLITH[Title/Abstract] OR ultrasound brain stimulation[Title/Abstract])
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      Alzheimer disease[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 25
+
+  mci_protocols:
+    query: >
+      mild cognitive impairment[Title/Abstract] AND
+      (brain stimulation[Title/Abstract] OR neuromodulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 20
+
+  assessment_scales:
+    query: >
+      Alzheimer disease[Title/Abstract] AND
+      (MoCA[Title/Abstract] OR MMSE[Title/Abstract] OR
+       ADAS-Cog[Title/Abstract] OR CDR[Title/Abstract]) AND
+      validation[Title/Abstract]
+    max_results: 10
+
+priority_pmids:
+  - "31978256"  # Benussi 2020 TPS Alzheimer's
+  - "31509498"  # Leblhuber 2019 NEUROLITH TPS
+
+notes: >
+  TPS (NEUROLITH) is FDA-cleared for Alzheimer's — this is the primary modality.
+  Distinguish MCI (F06.70) from full AD (G30) in evidence searches.
+  Include both cognitive and neuropsychiatric (NPI) outcome data.

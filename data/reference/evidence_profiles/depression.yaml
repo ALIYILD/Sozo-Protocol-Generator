@@ -1,0 +1,60 @@
+condition_slug: depression
+condition_name: "Major Depressive Disorder"
+icd10: F32
+
+search_profiles:
+  pathophysiology:
+    query: >
+      major depressive disorder[Title/Abstract] AND
+      (neuroplasticity[Title/Abstract] OR serotonin[Title/Abstract] OR
+       prefrontal cortex[Title/Abstract] OR default mode network[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      depression[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract] AND
+      (DLPFC[Title/Abstract] OR prefrontal[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review, Meta-Analysis]
+    max_results: 30
+
+  ces_protocols:
+    query: >
+      depression[Title/Abstract] AND
+      cranial electrotherapy stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Meta-Analysis]
+    max_results: 15
+
+  assessment_scales:
+    query: >
+      depression[Title/Abstract] AND
+      (PHQ-9[Title/Abstract] OR HAM-D[Title/Abstract] OR
+       MADRS[Title/Abstract] OR BDI[Title/Abstract]) AND
+      validation[Title/Abstract]
+    max_results: 10
+
+  networks:
+    query: >
+      major depressive disorder[Title/Abstract] AND
+      (default mode network[Title/Abstract] OR resting state fMRI[Title/Abstract] OR
+       functional connectivity[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis]
+    max_results: 15
+
+  safety:
+    query: >
+      depression[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract] AND
+      safety[Title/Abstract]
+    max_results: 10
+
+priority_pmids:
+  - "16868819"  # Fregni 2006 tDCS depression
+  - "22562094"  # Boggio 2007 tDCS MDD
+  - "24077291"  # Brunoni 2013 SELECT-TDCS
+  - "28805473"  # Brunoni 2017 ELECT-TDCS
+
+notes: >
+  Focus on left DLPFC anodal / right DLPFC cathodal montage evidence.
+  Include SELECT-TDCS and ELECT-TDCS landmark trials.

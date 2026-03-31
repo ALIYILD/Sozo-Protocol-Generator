@@ -1,0 +1,46 @@
+# Evidence search profile TEMPLATE
+# Copy this file and rename to {condition_slug}.yaml
+# Used by: python -m sozo_generator.cli.main ingest-evidence --condition {slug}
+
+condition_slug: REPLACE_ME
+condition_name: "Full Condition Name"
+icd10: X00.0
+
+search_profiles:
+  # Each profile key maps to a ClaimCategory
+  # Keys: pathophysiology, tdcs_protocols, brain_networks, assessment_scales,
+  #       non_motor_symptoms, safety, outcomes, phenotypes
+
+  pathophysiology:
+    query: >
+      {Condition Name}[Title/Abstract] AND
+      (pathophysiology[Title/Abstract] OR mechanism[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis, Review]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      {Condition Name}[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Clinical Trial, Systematic Review]
+    max_results: 30
+
+  assessment_scales:
+    query: >
+      {Condition Name}[Title/Abstract] AND
+      (assessment scale[Title/Abstract] OR questionnaire[Title/Abstract] OR
+       outcome measure[Title/Abstract])
+    max_results: 15
+
+  safety:
+    query: >
+      {Condition Name}[Title/Abstract] AND
+      neuromodulation[Title/Abstract] AND
+      (safety[Title/Abstract] OR adverse effects[Title/Abstract])
+    max_results: 15
+
+# Known high-quality PMIDs to always include
+priority_pmids: []
+
+notes: >
+  Add condition-specific search notes here.
