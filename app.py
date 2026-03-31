@@ -1,16 +1,26 @@
 """SOZO Protocol Generator — Streamlit UI."""
 import io
+import os
 import sys
 import zipfile
 from pathlib import Path
 
 import streamlit as st
 
-# ── Project root on sys.path ────────────────────────────────────────────────
-ROOT = Path(__file__).parent
+# ── Project root: always resolve relative paths from here ────────────────────
+ROOT = Path(__file__).resolve().parent
 SRC = ROOT / "src"
+os.chdir(ROOT)  # ensures data/, configs/ relative paths work on cloud
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
+
+# ── Matplotlib non-interactive backend (required on server) ──────────────────
+import matplotlib
+matplotlib.use("Agg")
+
+# ── Output dir: use /tmp on read-only filesystems (Streamlit Cloud) ──────────
+_IS_CLOUD = not (ROOT / "outputs").exists() or os.environ.get("STREAMLIT_SHARING_MODE")
+DEFAULT_OUTPUT_DIR = "/tmp/sozo_outputs" if _IS_CLOUD else str(ROOT / "outputs" / "documents")
 
 # ── Page config ─────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -55,22 +65,17 @@ def _load_registry():
 
 @st.cache_data(show_spinner=False)
 def _condition_options():
-    """Return list of (slug, display_name) tuples."""
+    """Return list of (slug, display_name) tuples from the registry."""
     registry = _load_registry()
-    slugs = [
-        "parkinsons", "depression", "anxiety", "adhd", "alzheimers",
-        "post_stroke", "tbi", "chronic_pain", "ptsd", "ocd",
-        "ms", "autism", "long_covid", "tinnitus", "insomnia",
-    ]
     options = []
-    for slug in slugs:
+    for slug in registry.list_slugs():
         try:
             meta = registry.get_meta(slug)
             display = meta.get("display_name", slug.replace("_", " ").title())
         except Exception:
             display = slug.replace("_", " ").title()
         options.append((slug, display))
-    return options
+    return sorted(options, key=lambda x: x[1])
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
@@ -106,7 +111,6 @@ def _zip_files(paths: dict) -> bytes:
 # SIDEBAR
 # ════════════════════════════════════════════════════════════════════════════
 with st.sidebar:
-    st.markdown("### 🧠 SOZO Brain Center")
     st.title("🧠 SOZO Generator")
     st.caption("Clinical Protocol Document Generator")
     st.divider()
@@ -160,7 +164,7 @@ if page == "Generate Documents":
         with_visuals = st.toggle("Include visual diagrams", value=False)
         output_dir = st.text_input(
             "Output directory",
-            value=str(ROOT / "outputs" / "documents"),
+            value=DEFAULT_OUTPUT_DIR,
         )
 
     st.divider()
@@ -349,7 +353,7 @@ elif page == "QA Report":
 
     selected = st.selectbox("Condition", display_names)
     col1, col2 = st.columns(2)
-    output_dir = col1.text_input("Documents directory", value=str(ROOT / "outputs" / "documents"))
+    output_dir = col1.text_input("Documents directory", value=DEFAULT_OUTPUT_DIR)
     report_format = col2.selectbox("Report format", ["Markdown", "JSON"])
 
     if st.button("Run QA", type="primary"):
