@@ -180,6 +180,78 @@ class ReviewManager:
         logger.info("Review %s marked as exported", build_id)
         return state
 
+    # ── Auto-assignment ──────────────────────────────────────────────────
+
+    def auto_assign_review_state(
+        self,
+        condition_slug: str,
+        confidence_label: str,
+        qa_report: object,  # expects .block_count attribute (QAReport)
+    ) -> ReviewStatus:
+        """Determine the initial review status based on QA and confidence.
+
+        Returns
+        -------
+        ReviewStatus
+            NEEDS_REVIEW if any red-flag conditions are met, otherwise DRAFT.
+        """
+        # QA blocks present
+        block_count = getattr(qa_report, "block_count", 0)
+        if block_count and block_count > 0:
+            return ReviewStatus.NEEDS_REVIEW
+
+        # Low or insufficient confidence
+        if confidence_label in ("insufficient", "low_confidence"):
+            return ReviewStatus.NEEDS_REVIEW
+
+        # Known lower-evidence conditions
+        if condition_slug in ("long_covid", "asd"):
+            return ReviewStatus.NEEDS_REVIEW
+
+        return ReviewStatus.DRAFT
+
+    # ── Flagging ───────────────────────────────────────────────────────
+
+    def add_flag(
+        self,
+        build_id: str,
+        flag_reason: str,
+        flagged_by: str,
+    ) -> ReviewState:
+        """Flag a document for further attention.
+
+        Transitions the review to FLAGGED status (any state except EXPORTED).
+
+        Parameters
+        ----------
+        build_id:
+            Build identifier.
+        flag_reason:
+            Free-text reason the document is being flagged.
+        flagged_by:
+            Name or identifier of the person/system flagging the document.
+
+        Raises
+        ------
+        FileNotFoundError
+            If the review does not exist.
+        ValueError
+            If the transition is not valid from the current status.
+        """
+        state = self._load_or_raise(build_id)
+        state.transition(ReviewStatus.FLAGGED, reviewer=flagged_by, reason=flag_reason)
+        self._save(state)
+        logger.info("Review %s flagged by %s: %s", build_id, flagged_by, flag_reason)
+        return state
+
+    def list_flagged(self) -> list[ReviewState]:
+        """Return all reviews currently in FLAGGED status."""
+        return [
+            state
+            for state in self._load_all()
+            if state.status == ReviewStatus.FLAGGED
+        ]
+
     # ── Comments ────────────────────────────────────────────────────────
 
     def add_section_comment(

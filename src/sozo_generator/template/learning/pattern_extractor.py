@@ -207,8 +207,13 @@ class PatternExtractor:
             dtp.typical_paragraph_count = round(sum(fp.total_paragraphs for fp in fps) / len(fps))
 
             # Most common section order (from first document as reference)
+            # Normalize to generic forms so condition-specific fragments don't
+            # pollute the expected order (see consistency_scorer._normalize_section_id).
             if fps:
-                dtp.typical_section_order = [s.section_id for s in fps[0].sections]
+                from .consistency_scorer import _normalize_section_id
+                dtp.typical_section_order = [
+                    _normalize_section_id(s.section_id) for s in fps[0].sections
+                ]
 
             # Title template
             titles = [fp.title for fp in fps if fp.title]

@@ -123,6 +123,7 @@ class ReviewStatus(str, Enum):
     APPROVED = "approved"
     REJECTED = "rejected"
     EXPORTED = "exported"
+    FLAGGED = "flagged"
 
 
 class EvidenceRelation(str, Enum):

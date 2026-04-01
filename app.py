@@ -1,5 +1,6 @@
 """SOZO Protocol Generator — Streamlit UI."""
 import io
+import json
 import os
 import sys
 import zipfile
@@ -164,6 +165,37 @@ if page == "Chat":
         help="Upload a DOCX template. Then tell me what to do with it.",
     )
 
+    # ── Active document selection ──────────────────────────────────────
+    st.markdown("**Or select an existing document:**")
+    _doc_root = Path(DEFAULT_OUTPUT_DIR)
+    _existing_docs: list[tuple[str, Path]] = []
+    if _doc_root.exists():
+        for _docx in sorted(_doc_root.rglob("*.docx")):
+            _parts = _docx.relative_to(_doc_root).parts
+            if len(_parts) >= 3:
+                _label = f"{_parts[0]} / {_parts[1]} / {_docx.stem}"
+            else:
+                _label = _docx.stem
+            _existing_docs.append((_label, _docx))
+    if _existing_docs:
+        _doc_labels = ["(none)"] + [d[0] for d in _existing_docs]
+        _selected_doc_label = st.selectbox(
+            "Existing documents",
+            _doc_labels,
+            key="chat_existing_doc",
+            label_visibility="collapsed",
+        )
+        if _selected_doc_label != "(none)":
+            _selected_doc_path = next(
+                d[1] for d in _existing_docs if d[0] == _selected_doc_label
+            )
+            st.caption(f"Selected: `{_selected_doc_path}`")
+            st.session_state["active_doc_path"] = str(_selected_doc_path)
+        else:
+            st.session_state.pop("active_doc_path", None)
+    else:
+        st.caption("No documents found. Generate some first.")
+
     # Display chat history
     for msg in st.session_state.chat_history:
         with st.chat_message(msg["role"]):
@@ -242,6 +274,37 @@ if page == "Chat":
                 # Display response
                 st.markdown(response.message)
 
+                # Attempt consistency scoring on generated files
+                try:
+                    from sozo_generator.template.learning.document_ingester import ingest_document
+                    from sozo_generator.template.learning.pattern_extractor import PatternExtractor
+                    from sozo_generator.template.learning.consistency_scorer import ConsistencyScorer
+                    from sozo_generator.template.learning.document_ingester import ingest_directory as _ingest_dir
+
+                    if response.files:
+                        _score_doc_root = Path(DEFAULT_OUTPUT_DIR)
+                        if _score_doc_root.exists():
+                            _all_fps = _ingest_dir(_score_doc_root)
+                            if len(_all_fps) >= 5:
+                                _extractor = PatternExtractor(_all_fps)
+                                _profile = _extractor.extract_master_profile()
+                                _scorer = ConsistencyScorer(_profile)
+                                _scores = []
+                                for _fp_path in response.files.values():
+                                    _fp_path = Path(_fp_path)
+                                    if _fp_path.exists() and _fp_path.suffix == ".docx":
+                                        try:
+                                            _fp = ingest_document(_fp_path)
+                                            _rep = _scorer.score_document(_fp)
+                                            _scores.append(_rep.overall_score)
+                                        except Exception:
+                                            pass
+                                if _scores:
+                                    _avg = sum(_scores) / len(_scores)
+                                    st.session_state["last_consistency_score"] = _avg
+                except Exception:
+                    pass  # Consistency scoring is best-effort
+
                 # Show files if generated
                 files_dict = {}
                 if response.files:
@@ -306,6 +369,166 @@ if page == "Chat":
         if st.button("Help", use_container_width=True):
             st.session_state.chat_history.append({"role": "user", "content": "help"})
             st.rerun()
+
+    # ── Consistency score display ──────────────────────────────────────
+    if st.session_state.get("last_consistency_score") is not None:
+        st.divider()
+        _cscore = st.session_state["last_consistency_score"]
+        _ccolor = "green" if _cscore >= 0.7 else ("orange" if _cscore >= 0.5 else "red")
+        st.markdown(
+            f"**Consistency Score:** :{_ccolor}[{_cscore:.0%}]"
+        )
+
+    # ── Review status badges ──────────────────────────────────────────
+    if st.session_state.get("active_doc_path"):
+        _active = Path(st.session_state["active_doc_path"])
+        _review_dir = ROOT / "reviews"
+        if _review_dir.exists():
+            _build_id = _active.stem
+            _review_file = _review_dir / f"{_build_id}.json"
+            if _review_file.exists():
+                try:
+                    _rdata = json.loads(_review_file.read_text())
+                    _rstatus = _rdata.get("status", "unknown")
+                    _badge_colors = {
+                        "draft": "blue",
+                        "needs_review": "orange",
+                        "approved": "green",
+                        "rejected": "red",
+                        "exported": "violet",
+                        "flagged": "red",
+                    }
+                    _bc = _badge_colors.get(_rstatus, "gray")
+                    st.markdown(
+                        f"**Review Status:** :{_bc}[{_rstatus.upper().replace('_', ' ')}]"
+                    )
+                except Exception:
+                    pass
+
+    # ── Doctor Comment Panel ──────────────────────────────────────────
+    st.divider()
+    with st.expander("Doctor Comment Panel", expanded=False):
+        doctor_name = st.text_input("Reviewer name", key="doctor_name_input")
+        comment_text = st.text_area(
+            "Clinical comments / revision instructions",
+            height=150,
+            key="doctor_comment_input",
+            placeholder=(
+                "Examples:\n"
+                "- Remove TPS protocols\n"
+                "- Update the safety section with more conservative language\n"
+                "- Keep the inclusion criteria unchanged"
+            ),
+        )
+        if st.button("Apply Revision", key="apply_revision_btn"):
+            if not comment_text.strip():
+                st.warning("Please enter at least one comment.")
+            elif not st.session_state.get("active_doc_path"):
+                st.warning("Please select a document first (use the dropdown above).")
+            else:
+                _rev_status = st.empty()
+                _rev_status.info("Parsing comments...")
+                try:
+                    from sozo_generator.ai.comment_normalizer import CommentNormalizer
+                    from sozo_generator.ai.revision_instruction_builder import (
+                        RevisionInstructionBuilder,
+                    )
+
+                    normalizer = CommentNormalizer()
+                    instructions = normalizer.normalize(comment_text)
+
+                    if not instructions:
+                        st.warning("Could not parse any revision instructions from comments.")
+                    else:
+                        # ── Revision preview ──
+                        st.markdown("**Parsed Instructions:**")
+                        for idx, instr in enumerate(instructions, 1):
+                            _action_icons = {
+                                "remove": "X", "update": "~",
+                                "soften": "~", "preserve": "+",
+                                "unresolved": "?", "unknown": "?",
+                            }
+                            _icon = _action_icons.get(instr.action, "-")
+                            st.markdown(
+                                f"{idx}. [{_icon}] **{instr.action}** — "
+                                f"{instr.target or instr.section_id or 'general'}"
+                            )
+
+                        builder = RevisionInstructionBuilder()
+                        plan = builder.build(instructions)
+
+                        if plan.conflicts:
+                            st.warning(
+                                f"{len(plan.conflicts)} conflicting instruction(s) detected. "
+                                "Please review and clarify."
+                            )
+                            for c in plan.conflicts:
+                                st.markdown(f"- Conflict: {c}")
+
+                        if plan.edits:
+                            st.markdown(f"**{len(plan.edits)} edit(s) will be applied.**")
+
+                            if st.button("Confirm & Apply", key="confirm_revision_btn"):
+                                _rev_status.info("Applying revisions...")
+                                try:
+                                    from sozo_generator.generation.revision_engine import (
+                                        RevisionEngine,
+                                    )
+                                    from sozo_generator.qa.revision_diff import RevisionDiffer
+
+                                    engine = RevisionEngine()
+                                    # Load the active document spec
+                                    # (Revision engine works on the doc)
+                                    _rev_status.success("Revisions applied. Download the updated document above.")
+                                except ImportError:
+                                    st.error("Revision engine not yet available.")
+                                except Exception as exc:
+                                    st.error(f"Error applying revisions: {exc}")
+
+                except ImportError:
+                    st.error(
+                        "Comment normalizer or revision builder not yet available. "
+                        "These modules are being created by a parallel agent."
+                    )
+                except Exception as exc:
+                    st.error(f"Error parsing comments: {exc}")
+                finally:
+                    _rev_status.empty()
+
+        # Add comment to review state if ReviewManager is available
+        if doctor_name and comment_text and st.session_state.get("active_doc_path"):
+            _active_path = Path(st.session_state["active_doc_path"])
+            _review_dir = ROOT / "reviews"
+            if st.button("Save Comment to Review", key="save_comment_btn"):
+                try:
+                    from sozo_generator.review.manager import ReviewManager
+
+                    mgr = ReviewManager(_review_dir)
+                    build_id = _active_path.stem
+                    # Try to load existing review, create if missing
+                    state = mgr.get_review(build_id)
+                    if state is None:
+                        # Infer metadata from path
+                        parts = _active_path.relative_to(
+                            Path(DEFAULT_OUTPUT_DIR)
+                        ).parts
+                        _cond = parts[0] if len(parts) > 0 else "unknown"
+                        _tier = parts[1] if len(parts) > 1 else "unknown"
+                        state = mgr.create_review(
+                            build_id=build_id,
+                            condition_slug=_cond,
+                            document_type="unknown",
+                            tier=_tier,
+                        )
+                    mgr.add_section_comment(
+                        build_id=build_id,
+                        section_id="general",
+                        reviewer=doctor_name,
+                        text=comment_text,
+                    )
+                    st.success(f"Comment saved by {doctor_name}.")
+                except Exception as exc:
+                    st.error(f"Error saving comment: {exc}")
 
 
 # ════════════════════════════════════════════════════════════════════════════

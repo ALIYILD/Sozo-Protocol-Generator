@@ -230,11 +230,12 @@ class ReviewState(BaseModel):
     def transition(self, new_status: ReviewStatus, reviewer: str, reason: str = "") -> None:
         """Transition to a new review status with audit trail."""
         _VALID_TRANSITIONS = {
-            ReviewStatus.DRAFT: {ReviewStatus.NEEDS_REVIEW},
-            ReviewStatus.NEEDS_REVIEW: {ReviewStatus.APPROVED, ReviewStatus.REJECTED},
-            ReviewStatus.REJECTED: {ReviewStatus.NEEDS_REVIEW, ReviewStatus.DRAFT},
-            ReviewStatus.APPROVED: {ReviewStatus.EXPORTED, ReviewStatus.NEEDS_REVIEW},
+            ReviewStatus.DRAFT: {ReviewStatus.NEEDS_REVIEW, ReviewStatus.FLAGGED},
+            ReviewStatus.NEEDS_REVIEW: {ReviewStatus.APPROVED, ReviewStatus.REJECTED, ReviewStatus.FLAGGED},
+            ReviewStatus.REJECTED: {ReviewStatus.NEEDS_REVIEW, ReviewStatus.DRAFT, ReviewStatus.FLAGGED},
+            ReviewStatus.APPROVED: {ReviewStatus.EXPORTED, ReviewStatus.NEEDS_REVIEW, ReviewStatus.FLAGGED},
             ReviewStatus.EXPORTED: set(),
+            ReviewStatus.FLAGGED: {ReviewStatus.NEEDS_REVIEW},
         }
         allowed = _VALID_TRANSITIONS.get(self.status, set())
         if new_status not in allowed:
