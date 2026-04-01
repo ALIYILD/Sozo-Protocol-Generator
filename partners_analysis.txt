@@ -1,0 +1,451 @@
+Paragraphs: 478
+Tables: 16
+~Words: 3621
+
+--- PARAGRAPHS ---
+[1] Normal               SOZO BRAIN CENTER
+[2] Normal               CYPRUS
+[3] Normal               CLINICAL HANDBOOK
+[4] Normal               Functional Network-Oriented Neuromodulation [PURPLE]
+[5] Normal               for
+[6] Normal               PARKINSON'S DISEASE
+[7] Normal               A Step-by-Step Clinical Pathway Guide
+[8] Normal               Integrating tDCS (Newronika HDCkit) • TPS (NEUROLITH®) • taVNS • CES
+[9] Normal               Partners Tier | Version 1.0 | March 2026 [PURPLE]
+[10] Normal               PARTNERS TIER: This document contains the complete FNON framework including network hypoth [PURPLE]
+[11] Normal               For use by the treating Doctor and authorised SOZO clinical staff only
+[19] Normal               © 2026 SOZO Brain Center. All rights reserved. CONFIDENTIAL.
+[20] Heading 1            Table of Contents
+[22] Heading 1            Introduction
+[23] Heading 2            About This Handbook
+[24] Normal               This handbook provides a complete step-by-step guide to the SOZO clinical pathway for Park
+[25] Normal               Each chapter corresponds to one stage of the patient journey, from initial appointment sch
+[26] Heading 2            What is FNON?
+[27] Normal               Functional Network-Oriented Neuromodulation (FNON) is SOZO's proprietary clinical framewor
+[29] Normal               FNON MODEL: The FNON model follows a five-level clinical decision pathway from phenotyping [PURPLE]
+[35] Heading 2            Available Modalities at SOZO
+[37] Normal               WARNING: Off-Label Disclosure: TPS (NEUROLITH®) use in Parkinson's disease is INVESTIGATIO
+[38] Heading 2            Roles and Responsibilities
+[39] Normal               WARNING: GOVERNANCE RULE: No Clinical Assistant may independently modify a treatment plan,
+[44] Heading 2            The Patient Journey at a Glance
+[46] Heading 1            Stage 1: Appointment Scheduling
+[47] Heading 2            Purpose
+[48] Normal               The patient schedules an appointment for an initial clinical evaluation and development of
+[49] Heading 2            Step-by-Step Procedure
+[50] Heading 3            1.1 Receive Enquiry
+[51] Normal               When a patient or referring physician contacts SOZO Brain Center, the administrative team 
+[52] Heading 3            1.2 Collect Preliminary Information
+[53] List Paragraph       Full name, date of birth, and contact details
+[54] List Paragraph       Referring physician details (if applicable)
+[55] List Paragraph       Primary diagnosis (confirmed PD or suspected)
+[56] List Paragraph       Brief description of chief complaints
+[57] Heading 3            1.3 Pre-Appointment Instructions
+[58] Normal               Inform the patient to bring the following to their first visit:
+[59] List Paragraph       All available medical records and discharge summaries
+[60] List Paragraph       Brain imaging (MRI / CT scans)
+[61] List Paragraph       Previous EEG reports (if any)
+[62] List Paragraph       Neuropsychological test results
+[63] List Paragraph       Complete and current medication list with dosages and timing
+[64] List Paragraph       Laboratory results (recent blood work)
+[65] Heading 3            1.4 Confirm and Schedule
+[66] List Paragraph       Confirm appointment date, time, and expected duration (allow 2–3 hours for initial assessm
+[67] List Paragraph       Send written confirmation via email with pre-appointment instructions
+[68] List Paragraph       Send a reminder 24 hours before the appointment
+[69] Heading 2            Checklist
+[70] Normal               ☐ Patient contact details recorded
+[71] Normal               ☐ Referral information documented
+[72] Normal               ☐ Pre-appointment instructions sent
+[73] Normal               ☐ Appointment confirmed in scheduling system
+[74] Normal               ☐ Reminder sent (24h before)
+[75] Normal               CLINICAL TIP: A well-prepared patient makes the assessment more efficient. Emphasise the i
+[76] Heading 2            Output
+[77] Normal               Initial visit scheduled. Patient informed of requirements.
+[78] Heading 2            Forms Used
+[79] Normal               Appointment Scheduling Form (Document 01 in the Patient Folder)
+[81] Heading 1            Stage 2: Informed Consent
+[82] Heading 2            Purpose
+[83] Normal               Before any diagnostic or therapeutic procedure is performed, the patient must provide writ
+[84] Heading 2            Step-by-Step Procedure
+[85] Heading 3            2.1 Welcome and Documentation
+[86] Normal               Upon arrival at the clinic, the patient:
+[87] List Paragraph       Is welcomed by the administrative or clinical team
+[88] List Paragraph       Completes required registration documentation
+[89] List Paragraph       Provides identification and emergency contact details
+[90] Heading 3            2.2 Consent Discussion
+[91] Normal               The treating Doctor (or designated clinician) conducts a structured consent discussion cov
+[92] List Paragraph       Nature of treatment — Non-invasive brain stimulation (NIBS) under the FNON framework, whic
+[93] List Paragraph       Off-label disclosure — TPS is CE-marked for Alzheimer's disease; its use for PD is investi
+[94] List Paragraph       Expected benefits — Potential improvement in motor symptoms, cognitive function, mood, pai
+[95] List Paragraph       Risks and side effects — Common (tingling, mild headache, skin redness), uncommon (burning
+[96] List Paragraph       Alternatives — Pharmacological treatment alone, DBS for eligible candidates, physiotherapy
+[97] List Paragraph       Right to withdraw — Participation is voluntary; withdrawal does not affect standard care
+[98] List Paragraph       Data protection — How clinical data will be collected, stored, and used
+[99] Heading 3            2.3 Obtain Signatures
+[100] List Paragraph       Patient signs the Informed Consent Form
+[101] List Paragraph       Doctor co-signs confirming the consent discussion took place
+[102] List Paragraph       Witness signature obtained (if required by local regulation)
+[103] Normal               WARNING: MANDATORY: No diagnostic or therapeutic procedures may be performed prior to info
+[104] Heading 2            Off-Label Disclosure Summary
+[105] Heading 2            Checklist
+[106] Normal               ☐ Patient registration completed
+[107] Normal               ☐ Consent discussion conducted by Doctor
+[108] Normal               ☐ All modalities explained including off-label TPS status
+[109] Normal               ☐ Patient questions addressed
+[110] Normal               ☐ Consent form signed (patient + Doctor + witness)
+[111] Normal               ☐ Signed consent filed in patient folder
+[112] Heading 2            Output
+[113] Normal               Signed informed consent. Patient cleared for assessment.
+[114] Heading 2            Forms Used
+[115] Normal               Informed Consent Form (Document 02 in the Patient Folder)
+[117] Heading 1            Stage 3: Psychological Intake & Psychometric Profiling
+[118] Heading 2            Purpose
+[119] Normal               This stage provides structured phenotyping and baseline quantification. The patient is eva
+[120] Heading 2            Step-by-Step Procedure
+[121] Heading 3            3.1 Structured Clinical Interview
+[122] Normal               Conduct a systematic interview covering:
+[123] Heading 3            3.2 Digitise Medical Documentation
+[124] Normal               Scan or digitally archive all medical documents the patient has brought. Record what was p
+[128] Heading 3            3.3 SOZO PRS — Patient Rating System (Baseline)
+[129] Normal               The SOZO PRS is the standardised psychometric tool used to quantify symptom severity acros
+[130] Normal               KEY PRINCIPLE: Select relevant domains based on diagnosis and presenting phenotype. Focus 
+[131] Normal               Motor Symptoms Domain — score each relevant item on a 0–10 scale (patient-rated):
+[132] List Paragraph       Tremor severity
+[133] List Paragraph       Stiffness / rigidity
+[134] List Paragraph       Slowness of movement (bradykinesia)
+[135] List Paragraph       Walking difficulty / freezing of gait
+[136] List Paragraph       Balance problems
+[137] List Paragraph       Involuntary movements (dyskinesias)
+[138] List Paragraph       Fine motor tasks (writing, buttons, utensils)
+[139] List Paragraph       Speech clarity
+[140] Normal               Non-Motor Symptoms Domain:
+[141] List Paragraph       Depression / low mood
+[142] List Paragraph       Anxiety
+[143] List Paragraph       Apathy / motivation
+[144] List Paragraph       Fatigue (physical and mental)
+[145] List Paragraph       Pain severity
+[146] List Paragraph       Sleep quality
+[147] List Paragraph       Memory / concentration
+[148] List Paragraph       Overall quality of life
+[149] Heading 3            3.4 Preliminary Phenotype Impression
+[150] Normal               Based on the interview and PRS results, form a preliminary clinical impression:
+[151] List Paragraph       Identify the dominant symptom cluster
+[152] List Paragraph       Assign a preliminary phenotype: Bradykinetic/rigid, Tremor-dominant, FOG/Gait, Executive d
+[153] List Paragraph       Record the patient's stated treatment goals
+[154] List Paragraph       Note the most disabling symptom from the patient's perspective
+[155] Heading 2            Checklist
+[156] Normal               ☐ Structured clinical interview completed
+[157] Normal               ☐ All medical documentation digitised and archived
+[158] Normal               ☐ SOZO PRS baseline scores recorded (relevant domains)
+[159] Normal               ☐ Preliminary phenotype impression documented
+[160] Normal               ☐ Patient treatment goals recorded
+[161] Normal               ☐ Form signed by assessing clinician
+[162] Heading 2            Output
+[163] Normal               Baseline phenotype profile with quantified symptom severity. Data ready for medical examin
+[164] Heading 2            Forms Used
+[165] Normal               Patient Intake & Medical History (Document 03) + Psychological Intake & PRS Baseline (Docu
+[167] Heading 1            Stage 4: Medical Examination
+[168] Heading 2            Purpose
+[169] Normal               The patient is examined by a SOZO doctor. This stage provides clinical validation of the p
+[170] Heading 2            Step-by-Step Procedure
+[171] Heading 3            4.1 Six-Network Bedside Assessment (FNON Master Assessment)
+[172] Normal               This is the core clinical assessment tool. Each bedside test is scored as: HYPO (1) | NORM
+[173] Normal               FNON ASSESSMENT: The 6-Network Bedside Assessment is the foundation of the FNON framework. [PURPLE]
+[174] Normal               THEORETICAL FOUNDATION: This assessment is grounded in the Triple Network Model (Menon, 20 [PURPLE]
+[175] Heading 3            4.2 Extended Neurological Examination (Section C)
+[176] Normal               A structured neurological examination ensures anatomical correlation and exclusion of foca
+[177] List Paragraph       Sensorimotor examination (tone, power, reflexes, coordination)
+[178] List Paragraph       Pyramidal tract signs
+[179] List Paragraph       Extrapyramidal signs (rigidity, bradykinesia, tremor assessment)
+[180] List Paragraph       Frontal release signs
+[181] List Paragraph       Cerebellar examination
+[182] List Paragraph       Cranial nerves and visual-oculomotor assessment
+[183] List Paragraph       Vestibular-oculomotor assessment
+[184] Heading 3            4.3 Phenotype Identification
+[185] Normal               Based on the combined 6-network assessment and neurological examination, the Doctor formal
+[186] Heading 3            4.4 EEG Assessment (if available)
+[187] Normal               When technically available, EEG assessment provides additional neurophysiological data for
+[188] Heading 3            4.5 Generate Network Hypothesis
+[189] Normal               FNON LEVEL 2: The Doctor synthesises all assessment data to generate a formal network dysf [PURPLE]
+[190] Normal               The network hypothesis must address:
+[191] List Paragraph       Which network(s) are primarily dysfunctional?
+[192] List Paragraph       What is the hypothesised direction of dysfunction (hypo- vs. hyperactive)?
+[193] List Paragraph       How does this map to the patient's symptom presentation?
+[194] List Paragraph       What is the preliminary neuromodulation strategy?
+[195] Heading 2            Checklist
+[196] Normal               ☐ 6-Network Bedside Assessment completed (all 6 networks scored)
+[197] Normal               ☐ Network Imbalance Profile summarised
+[198] Normal               ☐ Extended neurological examination completed
+[199] Normal               ☐ Clinical phenotype formally identified
+[200] Normal               ☐ EEG performed (or documented as not available)
+[201] Normal               ☐ Network dysfunction hypothesis generated
+[202] Normal               ☐ Preliminary neuromodulation strategy noted
+[203] Normal               ☐ Clinical Examination Checklist signed by examining Doctor
+[204] Heading 2            Output
+[205] Normal               Validated clinical phenotype, network dysfunction hypothesis, and preliminary NIBS strateg
+[206] Heading 2            Forms Used
+[207] Normal               Clinical Examination Checklist (Document 05 in the Patient Folder)
+[209] Heading 1            Stage 5: Report Preparation & Follow-Up Scheduling
+[210] Heading 2            Purpose
+[211] Normal               After completion of the comprehensive assessment (Stages 3–4), the clinical team prepares 
+[212] Heading 2            Step-by-Step Procedure
+[213] Heading 3            5.1 Compile Assessment Data
+[214] Normal               The clinical team gathers all data from the assessment stages:
+[215] List Paragraph       Psychological intake findings and PRS baseline scores (Stage 3)
+[216] List Paragraph       6-Network Assessment scores and network imbalance profile (Stage 4)
+[217] List Paragraph       Neurological examination findings (Stage 4)
+[218] List Paragraph       EEG results if available (Stage 4)
+[219] List Paragraph       Identified phenotype and network dysfunction hypothesis
+[220] Heading 3            5.2 Draft the Clinical Report
+[221] Normal               The report should include the following sections:
+[222] List Paragraph       Reason for referral
+[223] List Paragraph       Clinical history summary (PD diagnosis, medications, symptoms, comorbidities)
+[224] List Paragraph       Psychological assessment findings (chief complaints, psychiatric status, functional limita
+[225] List Paragraph       SOZO PRS baseline scores
+[226] List Paragraph       Clinical examination findings (neurological exam, 6-network scores, EEG)
+[227] List Paragraph       Identified phenotype and network hypothesis
+[228] List Paragraph       Proposed neuromodulation strategy (FNON Levels 1–3)
+[229] List Paragraph       Recommendations and next steps
+[230] Heading 3            5.3 Doctor Review and Approval
+[231] Normal               The report must be reviewed and approved by the treating Doctor before being sent to the p
+[232] Heading 3            5.4 Communicate with Patient
+[233] List Paragraph       Inform the patient that the comprehensive clinical report will be sent via email
+[234] List Paragraph       Schedule a follow-up appointment for report discussion, treatment plan finalisation, and c
+[235] Heading 2            Checklist
+[236] Normal               ☐ All assessment data compiled
+[237] Normal               ☐ Clinical report drafted
+[238] Normal               ☐ Report reviewed and approved by Doctor
+[239] Normal               ☐ Report sent to patient via email
+[240] Normal               ☐ Follow-up appointment scheduled
+[241] Heading 2            Output
+[242] Normal               Written comprehensive clinical report. Follow-up appointment confirmed.
+[243] Heading 2            Forms Used
+[244] Normal               Clinical Report Template (Document 06 in the Patient Folder)
+[246] Heading 1            Stage 6: Report Discussion & Treatment Planning
+[247] Heading 2            Purpose
+[248] Normal               During the second visit, the clinical report is reviewed in detail with the patient. The t
+[249] Heading 2            Step-by-Step Procedure
+[250] Heading 3            6.1 Review Clinical Report with Patient
+[251] Normal               The Doctor reviews the following with the patient:
+[252] List Paragraph       Identified phenotype and what it means in simple terms
+[253] List Paragraph       Network dysfunction hypothesis — which brain networks are underperforming or overactive
+[254] List Paragraph       Proposed neuromodulation strategy and the rationale for selected modalities
+[255] List Paragraph       Why specific brain regions and networks are being targeted
+[256] Heading 3            6.2 Present the Treatment Plan
+[257] Normal               Explain the complete treatment plan including:
+[260] Heading 3            6.3 The S–O–Z–O Multimodal Sequencing Framework
+[261] Normal               S-O-Z-O FRAMEWORK: The SOZO sequencing logic ensures each modality is delivered in the opt [PURPLE]
+[262] Normal               Explain the SOZO sequencing logic to the patient in accessible language:
+[263] Heading 3            6.4 Patient Decision
+[264] Normal               If the patient decides to proceed:
+[265] List Paragraph       Create a structured treatment schedule with specific dates
+[266] List Paragraph       Book all clinic session appointments
+[267] List Paragraph       Provide written treatment plan to the patient
+[268] List Paragraph       Discuss device purchase timeline (if home devices are indicated)
+[269] Heading 2            Checklist
+[270] Normal               ☐ Clinical report reviewed with patient
+[271] Normal               ☐ All questions answered
+[272] Normal               ☐ Treatment plan explained (modalities, montages, schedule, cost)
+[273] Normal               ☐ Patient decision documented (Proceed / Defer / Decline)
+[274] Normal               ☐ Treatment schedule created
+[275] Normal               ☐ Appointments booked
+[276] Normal               ☐ Treatment Plan form completed and signed (patient + Doctor)
+[277] Heading 2            Output
+[278] Normal               Finalised treatment plan. Treatment schedule created. Clinic appointments booked.
+[279] Heading 2            Forms Used
+[280] Normal               Treatment Plan (Document 07 in the Patient Folder)
+[281] Heading 1            Stage 7: Active Treatment Phase
+[282] Heading 2            Purpose
+[283] Normal               The patient undergoes the prescribed course of neuromodulation sessions in the clinic. Dur
+[284] Heading 2            Step-by-Step Procedure
+[285] Heading 3            7.1 Pre-Session Checklist (Every Session)
+[286] Normal               ☐ Verify patient identity and session number
+[287] Normal               ☐ Record medication timing (last levodopa dose, ON/OFF state)
+[288] Normal               ☐ Check skin integrity at electrode sites
+[289] Normal               ☐ Verify impedance (<15 kΩ for tDCS; do NOT stimulate if >15 kΩ)
+[290] Normal               ☐ Confirm prescribed montage and parameters match treatment plan
+[291] Normal               ☐ Prepare concurrent task materials (if task-pairing prescribed)
+[292] Heading 3            7.2 Deliver Treatment Session
+[293] Normal               Follow the prescribed multimodal sequence (S–O–Z–O) as defined in the treatment plan. For 
+[294] Normal               tDCS Session Delivery:
+[295] List Paragraph       Apply electrodes per prescribed montage using MindCap system
+[296] List Paragraph       Hydrate sponges with saline solution
+[297] List Paragraph       Set parameters as prescribed (intensity, duration, ramp time)
+[298] List Paragraph       Engage patient in prescribed concurrent task during stimulation
+[299] List Paragraph       Monitor for adverse effects throughout
+[300] Normal               TPS Session Delivery (Clinic Only):
+[301] List Paragraph       Set up NEUROLITH® with neuronavigation (if available)
+[302] List Paragraph       Allocate pulses per prescribed protocol (standard + targeted + peripheral)
+[303] List Paragraph       Deliver to prescribed ROIs (M1, DLPFC, PPC, Holocranial, etc.)
+[304] List Paragraph       Monitor for adverse effects (headache, jaw discomfort, nausea)
+[305] Normal               taVNS Session Delivery:
+[306] List Paragraph       Place ear clip on prescribed ear (tragus / cymba conchae)
+[307] List Paragraph       Adjust intensity to comfortable tingling without pain
+[308] List Paragraph       Monitor for dizziness or syncope
+[310] Heading 3            7.3 Session Documentation
+[311] Normal               After each session, document in the Session Log:
+[312] List Paragraph       Date, time, session number
+[313] List Paragraph       Modality, montage, and parameters used
+[314] List Paragraph       Medication state (ON/OFF, timing of last dose)
+[315] List Paragraph       Concurrent task performed
+[316] List Paragraph       Any adverse events (graded 1–3)
+[317] List Paragraph       Clinical observations and patient-reported effects
+[318] Heading 3            7.4 Adverse Event Management
+[319] Normal               WARNING: ADVERSE EVENT GRADING — Grade 1 (Mild): Tingling, mild headache, transient rednes
+[320] Heading 3            7.5 Patient Training for Home-Based Therapy
+[321] Normal               During the in-clinic phase, train the patient (and caregiver if applicable) in:
+[322] List Paragraph       Correct electrode placement for their prescribed montage
+[323] List Paragraph       Sponge preparation and hydration
+[324] List Paragraph       Device operation (power on/off, understanding Home Controlled Mode)
+[325] List Paragraph       Skin inspection before and after each session
+[326] List Paragraph       Stop criteria: burning, skin lesion, severe headache, dizziness, seizure → contact clinic 
+[327] List Paragraph       Device cleaning and storage
+[328] Heading 3            7.6 Issue Home Protocol Prescription
+[329] Normal               When the patient transitions to home-based therapy, the Doctor issues a written prescripti
+[330] List Paragraph       Prescribed device(s) and specific montage configuration
+[331] List Paragraph       Stimulation parameters (intensity, duration, frequency)
+[332] List Paragraph       Session schedule (daily or split sessions, maximum daily exposure)
+[333] List Paragraph       Concurrent task programme (cognitive training, exercises, relaxation)
+[334] Normal               HOME USE SAFETY: For HDCkit tDCS, all settings are pre-programmed by the Doctor via HDCpro
+[337] Heading 2            Safety Limits Quick Reference
+[338] Heading 2            In-Clinic Task Pairing (by Montage)
+[339] Normal               CONCURRENT TASK PAIRING: Activity-dependent plasticity is critical to FNON outcomes. The c [PURPLE]
+[340] Heading 2            Checklist (Per Session)
+[341] Normal               ☐ Pre-session checks complete (skin, impedance, medication timing)
+[342] Normal               ☐ Treatment delivered per prescribed protocol
+[343] Normal               ☐ Concurrent task completed
+[344] Normal               ☐ Post-session skin inspection
+[345] Normal               ☐ Session documented in Session Log
+[346] Normal               ☐ Any AEs documented and graded
+[347] Heading 2            Output
+[348] Normal               Active neuromodulation delivered. Patient trained for home continuation. Session data coll
+[349] Heading 2            Forms Used
+[350] Normal               Session Log & AE Tracker (Document 08) + Device Training & Home Protocol (Document 09)
+[352] Heading 1            Stage 8: Follow-Up Evaluation (2–3 Months)
+[353] Heading 2            Purpose
+[354] Normal               After 2–3 months of treatment, the patient undergoes a dynamic reassessment, fully repeati
+[355] Heading 2            Step-by-Step Procedure
+[356] Heading 3            8.1 Repeat Psychological Assessment (Stage 3)
+[357] List Paragraph       Conduct a structured clinical interview to assess any changes in complaints, mood, functio
+[358] List Paragraph       Re-administer the SOZO PRS across all baseline domains
+[359] List Paragraph       Record follow-up scores alongside baseline for direct comparison
+[360] Heading 3            8.2 Repeat Medical Examination (Stage 4)
+[361] List Paragraph       Repeat the full 6-Network Bedside Assessment
+[362] List Paragraph       Repeat the neurological examination
+[363] List Paragraph       Perform EEG (if applicable and available)
+[364] List Paragraph       Document all findings alongside baseline values
+[365] Heading 3            8.3 Compare Baseline vs. Follow-Up
+[366] Normal               For each domain, compare baseline and follow-up scores and assess whether changes are clin
+[367] Normal               WARNING: AVOIDING FALSE CLASSIFICATION: Standardise medication timing between baseline and
+[368] Heading 3            8.4 Classify Response
+[369] Heading 3            8.5 Make Clinical Decision
+[370] Normal               ☐ CONTINUE current protocol (patient is responding)
+[371] Normal               ☐ MODIFY protocol (partial response → proceed to Stage 9)
+[372] Normal               ☐ RETURN to FNON Level 1 (non-responder → full reassessment)
+[373] Normal               ☐ TRANSITION to home-only maintenance
+[374] Normal               ☐ DISCONTINUE neuromodulation programme
+[375] Heading 2            Output
+[376] Normal               Objective outcome comparison (baseline vs. follow-up). Response classification. Evidence-b
+[377] Heading 2            Forms Used
+[378] Normal               Follow-Up Assessment (Document 10 in the Patient Folder)
+[380] Heading 1            Stage 9: Therapy Optimisation
+[381] Heading 2            Purpose
+[382] Normal               Based on the follow-up findings from Stage 8, the treatment is optimised using the FNON Le
+[383] Heading 2            Step-by-Step Procedure
+[384] Heading 3            9.1 Analyse Treatment Response (FNON Level 4)
+[385] Normal               FNON LEVEL 4: Response Evaluation — Systematically review all outcome data to determine wh [PURPLE]
+[386] List Paragraph       Review which domains improved, which did not, and which worsened
+[387] List Paragraph       Review adverse event history from the treatment block
+[388] List Paragraph       Assess medication timing variability and its potential impact on results
+[389] List Paragraph       Review compliance data and home-use adherence
+[390] Heading 3            9.2 Reassess Phenotype (Return to FNON Level 1)
+[391] Normal               For non-responders or partial responders, formally reassess:
+[392] List Paragraph       Has the dominant phenotype changed since baseline?
+[393] List Paragraph       Are there new symptoms or symptom clusters?
+[394] List Paragraph       Does the original network hypothesis still hold?
+[395] Heading 3            9.3 Revise Network Hypothesis (FNON Level 2)
+[396] Normal               FNON LEVEL 2 REVISION: Update the network hypothesis based on new clinical data. The FNON  [PURPLE]
+[397] List Paragraph       Update the network hypothesis based on new clinical data
+[398] List Paragraph       Consider alternative or additional network targets
+[399] List Paragraph       Review EEG findings if new data is available
+[400] Heading 3            9.4 Modify Protocol (FNON Level 3 Adjustment)
+[401] Normal               The Doctor may make the following modifications:
+[402] List Paragraph       Change tDCS montage (different electrode positions)
+[403] List Paragraph       Adjust stimulation parameters (within safety limits)
+[404] List Paragraph       Change TPS targets or pulse allocation
+[405] List Paragraph       Add or remove modalities (e.g., add taVNS, adjust CES)
+[406] List Paragraph       Change the S-O-Z-O sequencing
+[407] List Paragraph       Adjust session frequency or block duration
+[408] List Paragraph       Switch devices (HDCkit ↔ PlatoScience)
+[409] Heading 3            9.5 Non-Responder Escalation Pathway
+[410] Normal               FNON LEVEL 5: Adjustment — If no meaningful improvement after 8–10 sessions, follow the st [PURPLE]
+[411] Normal               If no meaningful improvement after 8–10 sessions, follow this escalation:
+[412] List Paragraph       Re-verify phenotype through clinical re-examination
+[413] List Paragraph       Revisit network hypothesis (consider alternative networks)
+[414] List Paragraph       Change montage AND/OR switch modality
+[415] List Paragraph       Review medication timing (ON/OFF state variability)
+[416] List Paragraph       Consider discontinuation if no response after 2 full blocks
+[417] Normal               WARNING: SAFETY RULE: DO NOT escalate intensity beyond safety limits. The protocol explici
+[418] Heading 3            9.6 Issue Updated Treatment Plan
+[419] List Paragraph       Document all modifications with rationale
+[420] List Paragraph       Issue updated home protocol prescription (if applicable)
+[421] List Paragraph       Set the next review date
+[422] List Paragraph       Continue therapy for another 2–3 months under the updated protocol
+[423] Heading 2            The Continuous Improvement Cycle
+[424] Normal               THE FNON ITERATION LOOP: The FNON framework is designed to be iterative: Stages 7 → 8 → 9  [PURPLE]
+[425] Heading 2            Output
+[426] Normal               Updated treatment protocol. Revised network hypothesis. Patient continues under the optimi
+[427] Heading 2            Forms Used
+[428] Normal               Therapy Optimisation Record (Document 11 in the Patient Folder)
+[430] Heading 1            Appendices
+[431] Heading 2            Appendix A: Inclusion and Exclusion Criteria
+[432] Normal               Inclusion Criteria:
+[433] List Paragraph       Confirmed PD diagnosis (UK Brain Bank or MDS criteria)
+[434] List Paragraph       Hoehn and Yahr stage I–IV (V with Doctor approval)
+[435] List Paragraph       Age 18+ years
+[436] List Paragraph       Able to attend sessions or comply with home-use
+[437] List Paragraph       Written informed consent (including TPS off-label disclosure)
+[438] List Paragraph       Baseline outcome measures completed
+[439] Normal               Absolute Exclusion Criteria:
+[440] List Paragraph       Intracranial metallic hardware in stimulation path
+[441] List Paragraph       Cochlear implant
+[442] List Paragraph       Skull defects, craniectomy, or recent craniotomy
+[443] List Paragraph       Active intracranial tumour
+[444] List Paragraph       Open wounds at electrode sites
+[445] List Paragraph       Pregnancy (tDCS, TPS)
+[446] List Paragraph       Inability to provide informed consent
+[447] Normal               Conditions Requiring Discussion (NOT absolute — require documented risk–benefit assessment
+[448] List Paragraph       Cardiac pacemaker or defibrillator
+[449] List Paragraph       Epilepsy or seizure history
+[450] List Paragraph       Severe cognitive impairment
+[451] List Paragraph       Unstable medical conditions
+[452] List Paragraph       Active psychosis / impulse control disorders
+[453] List Paragraph       Coagulation disorders or anticoagulants (especially TPS)
+[454] List Paragraph       Dermatological conditions at electrode sites
+[455] List Paragraph       Severe dyskinesias preventing safe device application
+[463] Heading 2            Appendix B: Phenotype-to-Montage Quick Reference
+[464] Normal               FNON MONTAGE MAPPING: This quick reference maps each PD phenotype to the recommended SOZO  [PURPLE]
+[470] Heading 2            Appendix C: Complete Patient Folder Contents
+[471] Heading 2            Appendix D: Emergency Stop Criteria
+[472] Normal               WARNING: IMMEDIATE STOP — Grade 3 Adverse Events: If any of the following occur, STOP all 
+[474] Normal               End of Handbook
+[475] Normal               © 2026 SOZO Brain Center, Cyprus. All rights reserved.
+[476] Normal               This document is CONFIDENTIAL and intended for authorised SOZO clinical staff only.
+[477] Normal               Not to be reproduced or distributed without written permission.
+
+--- TABLES ---
+Table[0] 6r x 3c  hdr='Level'
+Table[1] 5r x 4c  hdr='Modality'
+Table[2] 3r x 2c  hdr='Role'
+Table[3] 10r x 4c  hdr='Stage'
+Table[4] 5r x 4c  hdr='Modality'
+Table[5] 7r x 2c  hdr='Domain'
+Table[6] 7r x 4c  hdr='Network'
+Table[7] 9r x 2c  hdr='Phenotype'
+Table[8] 7r x 2c  hdr='Component'
+Table[9] 5r x 3c  hdr='Phase'
+Table[10] 10r x 3c  hdr='Parameter'
+Table[11] 6r x 3c  hdr='Montage Target'
+Table[12] 5r x 2c  hdr='Domain'
+Table[13] 4r x 2c  hdr='Classification'
+Table[14] 10r x 2c  hdr='Phenotype'
+Table[15] 12r x 3c  hdr='Doc'
