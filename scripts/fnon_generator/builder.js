@@ -391,7 +391,8 @@ function section5(d) {
   items.push(S.h2('Network-Level Pathophysiological Abnormalities'));
   items.push(S.bodyPara(d.networkPathophysiologyIntro || `${d.conditionFull} is characterised by distributed network-level abnormalities that extend beyond single-region pathology.`));
   items.push(S.h3('Key Network Abnormalities'));
-  (d.networkAbnormalities || [
+  (Array.isArray(d.networkAbnormalities) ? d.networkAbnormalities :
+    typeof d.networkAbnormalities === 'string' ? [d.networkAbnormalities] : [
     `Default Mode Network (DMN): Hyperconnectivity within the DMN is a hallmark finding, associated with rumination, self-referential processing, and impaired cognitive engagement.`,
     `Central Executive Network (CEN): Hypoactivation of the DLPFC and associated CEN nodes underlies cognitive symptoms including poor concentration, working memory deficits, and executive dysfunction.`,
     `Salience Network (SN): Aberrant salience gating impairs the ability to appropriately switch between DMN and CEN activity, perpetuating maladaptive cognitive-affective patterns.`,
@@ -547,10 +548,13 @@ function section8(d) {
   items.push(S.bodyPara(`These protocols represent the most studied and replicated tDCS configurations for ${d.conditionShort} in the published literature. They form the evidence base from which FNON extensions are developed.`));
   items.push(S.emptyPara());
   if (d.classicTdcsProtocols && d.classicTdcsProtocols.length > 0) {
+    const classicTdcsRows = d.classicTdcsProtocols[0] && !Array.isArray(d.classicTdcsProtocols[0])
+      ? d.classicTdcsProtocols.map(p => [p.code||'', p.indication||p.name||'', p.montage||'', '', `${p.intensity||''} | ${p.duration||''} | ${p.sessions||''}`, p.evidence||''])
+      : d.classicTdcsProtocols.map(r => r.length >= 6 ? r.slice(0,6) : [...r, ...Array(6-r.length).fill('')]);
     items.push(T.buildTable(
-      ['ID', 'Symptom Target', 'Anode', 'Cathode', 'Parameters', 'Evidence'],
-      d.classicTdcsProtocols.map(r => r.length >= 6 ? r.slice(0,6) : [...r, ...Array(6-r.length).fill('')]),
-      { widths: [Math.floor(CONTENT*0.06), Math.floor(CONTENT*0.18), Math.floor(CONTENT*0.14), Math.floor(CONTENT*0.14), Math.floor(CONTENT*0.2), Math.floor(CONTENT*0.28)] }
+      ['ID', 'Symptom Target', 'Montage', 'Notes', 'Parameters', 'Evidence'],
+      classicTdcsRows,
+      { widths: [Math.floor(CONTENT*0.06), Math.floor(CONTENT*0.18), Math.floor(CONTENT*0.22), Math.floor(CONTENT*0.06), Math.floor(CONTENT*0.2), Math.floor(CONTENT*0.28)] }
     ));
   }
   items.push(S.emptyPara());
@@ -563,9 +567,12 @@ function section8(d) {
   }));
   items.push(S.emptyPara());
   if (d.fnonTdcsProtocols && d.fnonTdcsProtocols.length > 0) {
+    const fnonTdcsRows = d.fnonTdcsProtocols[0] && !Array.isArray(d.fnonTdcsProtocols[0])
+      ? d.fnonTdcsProtocols.map(p => [p.code||'', p.name||'', p.fnon_rationale||'', p.montage||'', `${p.intensity||''} | ${p.duration||''} | ${p.sessions||''}`])
+      : d.fnonTdcsProtocols.map(r => r.length >= 5 ? r.slice(0,5) : [...r, ...Array(5-r.length).fill('')]);
     items.push(T.buildTable(
-      ['ID', 'Clinical Focus', 'Network Hypothesis', 'SOZO Montage (Newronika)', 'Network Goal'],
-      d.fnonTdcsProtocols.map(r => r.length >= 5 ? r.slice(0,5) : [...r, ...Array(5-r.length).fill('')]),
+      ['ID', 'Clinical Focus', 'FNON Rationale', 'SOZO Montage (Newronika)', 'Parameters'],
+      fnonTdcsRows,
       { widths: [Math.floor(CONTENT*0.06), Math.floor(CONTENT*0.18), Math.floor(CONTENT*0.22), Math.floor(CONTENT*0.28), Math.floor(CONTENT*0.26)] }
     ));
   }
@@ -618,9 +625,12 @@ function section8(d) {
   items.push(S.emptyPara());
   items.push(S.emptyPara());
   if (d.classicTpsProtocols && d.classicTpsProtocols.length > 0) {
+    const classicTpsRows = d.classicTpsProtocols[0] && !Array.isArray(d.classicTpsProtocols[0])
+      ? d.classicTpsProtocols.map(p => [p.code||'', p.indication||p.name||'', p.target||'', p.parameters||'', p.sessions||'', p.evidence||''])
+      : d.classicTpsProtocols.map(r => r.length >= 6 ? r.slice(0,6) : [...r, ...Array(6-r.length).fill('')]);
     items.push(T.buildTable(
-      ['ID', 'Symptom Target', 'Brain Targets', 'SOZO Parameters', 'Pulse Allocation', 'Evidence'],
-      d.classicTpsProtocols.map(r => r.length >= 6 ? r.slice(0,6) : [...r, ...Array(6-r.length).fill('')]),
+      ['ID', 'Symptom Target', 'Brain Target', 'SOZO Parameters', 'Sessions', 'Evidence'],
+      classicTpsRows,
       { widths: [Math.floor(CONTENT*0.06), Math.floor(CONTENT*0.15), Math.floor(CONTENT*0.2), Math.floor(CONTENT*0.2), Math.floor(CONTENT*0.2), Math.floor(CONTENT*0.19)] }
     ));
   }
@@ -638,9 +648,12 @@ function section8(d) {
   }));
   items.push(S.emptyPara());
   if (d.fnonTpsProtocols && d.fnonTpsProtocols.length > 0) {
+    const fnonTpsRows = d.fnonTpsProtocols[0] && !Array.isArray(d.fnonTpsProtocols[0])
+      ? d.fnonTpsProtocols.map(p => [p.code||'', p.indication||p.name||'', p.fnon_rationale||'', p.target||'', p.parameters||'', p.sessions||''])
+      : d.fnonTpsProtocols.map(r => r.length >= 6 ? r.slice(0,6) : [...r, ...Array(6-r.length).fill('')]);
     items.push(T.buildTable(
-      ['ID', `${d.conditionShort} Phenotype`, 'Dominant Dysfunctional Networks', 'TPS Targets', 'Session Structure (10,000 pulses)', 'Course'],
-      d.fnonTpsProtocols.map(r => r.length >= 6 ? r.slice(0,6) : [...r, ...Array(6-r.length).fill('')]),
+      ['ID', `${d.conditionShort} Phenotype`, 'FNON Rationale', 'TPS Targets', 'Parameters', 'Sessions'],
+      fnonTpsRows,
       { widths: [Math.floor(CONTENT*0.06), Math.floor(CONTENT*0.14), Math.floor(CONTENT*0.2), Math.floor(CONTENT*0.18), Math.floor(CONTENT*0.26), Math.floor(CONTENT*0.16)] }
     ));
   }
@@ -857,13 +870,29 @@ function section9(d) {
         ['Full SOZO (tVNS→tDCS→TPS→tVNS/CES)', 'Complete S-O-Z-O cycle for maximum network engagement', 'Full session ~90–120 min; Doctor-supervised only', 'Intensive in-clinic block for treatment-resistant cases'],
       ],
     };
-    items.push(S.h3(`${i+1}) ${ph.name}`));
+    const phName = ph.phenotype || ph.name || `Phenotype ${i+1}`;
+    items.push(S.h3(`${i+1}) ${phName}`));
     items.push(S.h3(''));
-    items.push(T.buildTable(
-      ['Combination', 'Mechanistic Rationale (SOZO)', 'Timing', 'Clinical Indication'],
-      ph.combinations.map(r => r.length >= 4 ? r.slice(0,4) : [...r, ...Array(4-r.length).fill('')]),
-      { widths: [Math.floor(CONTENT*0.22), Math.floor(CONTENT*0.3), Math.floor(CONTENT*0.25), Math.floor(CONTENT*0.23)] }
-    ));
+    // New object format: {phenotype, stabilise, optimise, zone, outcome}
+    if (ph.stabilise !== undefined) {
+      items.push(T.buildTable(
+        ['SOZO Phase', 'Multimodal Protocol'],
+        [
+          ['Stabilise (S)', ph.stabilise || ''],
+          ['Optimise (O)', ph.optimise || ''],
+          ['Zone (Z)', ph.zone || ''],
+          ['Outcome (O)', ph.outcome || ''],
+        ],
+        { widths: [Math.floor(CONTENT*0.18), Math.floor(CONTENT*0.82)] }
+      ));
+    } else {
+      // Legacy array-of-arrays format: {name, combinations: [[col1,col2,col3,col4],...]}
+      items.push(T.buildTable(
+        ['Combination', 'Mechanistic Rationale (SOZO)', 'Timing', 'Clinical Indication'],
+        ph.combinations.map(r => r.length >= 4 ? r.slice(0,4) : [...r, ...Array(4-r.length).fill('')]),
+        { widths: [Math.floor(CONTENT*0.22), Math.floor(CONTENT*0.3), Math.floor(CONTENT*0.25), Math.floor(CONTENT*0.23)] }
+      ));
+    }
     items.push(S.emptyPara());
   }
 
@@ -962,7 +991,9 @@ function section12(d) {
 
   items.push(S.h2('Outcome Measures'));
   items.push(S.bodyPara(`For outcome measures please use SOZO PRS system. Condition-specific validated instruments for ${d.conditionShort}:`));
-  (d.outcomeMeasures || [`Primary: ${d.conditionShort}-specific validated rating scale (Doctor-selected based on clinical presentation)`]).forEach(m =>
+  (Array.isArray(d.outcomeMeasures) ? d.outcomeMeasures :
+    typeof d.outcomeMeasures === 'string' ? [d.outcomeMeasures] :
+    [`Primary: ${d.conditionShort}-specific validated rating scale (Doctor-selected based on clinical presentation)`]).forEach(m =>
     items.push(new Paragraph({
       children: [new TextRun({ text: `• ${m}`, color: S.BLACK, size: 22, font: 'Calibri' })],
       spacing: { after: 60 },
