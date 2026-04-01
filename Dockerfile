@@ -23,13 +23,10 @@ COPY data/ ./data/
 COPY configs/ ./configs/
 COPY app.py .
 COPY .streamlit/ ./.streamlit/
-COPY pyproject.toml .
-
-# Install the package itself
-RUN pip install --no-cache-dir -e . --no-deps
 
 ENV PYTHONUNBUFFERED=1
 ENV STREAMLIT_SHARING_MODE=1
+ENV PYTHONPATH=/app/src
 
 EXPOSE 8080
 
