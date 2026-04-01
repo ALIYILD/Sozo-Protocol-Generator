@@ -36,8 +36,16 @@ class DocComposer:
         condition: ConditionSchema,
         doc_types: list[str],
         tier: str = "both",
+        use_rich: bool = True,
+        anthropic_api_key: str = "",
+        openai_api_key: str = "",
     ) -> dict[str, Path]:
-        """Generate standard documents for a condition."""
+        """Generate documents for a condition.
+
+        If use_rich=True and a content library exists, uses the rich generator
+        which produces documents matching existing SOZO document quality.
+        Falls back to standard exporter if no library available.
+        """
         from ..core.enums import Tier as TierEnum, DocumentType as DTEnum
 
         tiers = [TierEnum.FELLOW, TierEnum.PARTNERS] if tier == "both" else [TierEnum(tier)]
@@ -47,10 +55,44 @@ class DocComposer:
                 dt_enums.append(DTEnum(dt))
             except ValueError:
                 logger.warning("Unknown doc type: %s", dt)
-
         if not dt_enums:
             dt_enums = list(DTEnum)
 
+        # Try rich generation first
+        if use_rich:
+            try:
+                from ..generation.rich_generator import RichDocumentGenerator
+                rich_gen = RichDocumentGenerator(
+                    anthropic_api_key=anthropic_api_key,
+                    openai_api_key=openai_api_key,
+                )
+                if rich_gen.has_library:
+                    outputs = {}
+                    for t in tiers:
+                        for dt in dt_enums:
+                            if dt == DTEnum.NETWORK_ASSESSMENT and t == TierEnum.FELLOW:
+                                continue
+                            try:
+                                spec = rich_gen.generate(
+                                    condition, dt.value, t.value,
+                                    use_ai=bool(anthropic_api_key or openai_api_key),
+                                )
+                                if spec.sections:
+                                    cond_dir = self.output_dir / condition.slug
+                                    tier_dir = cond_dir / t.value.capitalize()
+                                    tier_dir.mkdir(parents=True, exist_ok=True)
+                                    out_path = tier_dir / spec.output_filename
+                                    rendered = self.renderer.render(spec, out_path)
+                                    outputs[f"{t.value}_{dt.value}"] = rendered
+                            except Exception as e:
+                                logger.warning("Rich gen failed for %s/%s: %s", dt.value, t.value, e)
+                    if outputs:
+                        return outputs
+                    logger.info("Rich gen produced no outputs, falling back to standard")
+            except Exception as e:
+                logger.info("Rich generator unavailable: %s, using standard", e)
+
+        # Fallback to standard exporter
         exporter = DocumentExporter(
             output_dir=str(self.output_dir),
             with_visuals=False,
