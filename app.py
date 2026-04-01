@@ -122,7 +122,7 @@ with st.sidebar:
 
     page = st.radio(
         "Navigate",
-        ["Chat", "Generate from Template", "Generate Documents", "Review Queue",
+        ["Chat", "Jobs", "Generate from Template", "Generate Documents", "Review Queue",
          "Conditions Overview", "QA Report", "Evidence Ingest"],
         label_visibility="collapsed",
     )
@@ -710,6 +710,152 @@ if page == "Chat":
                     st.success(f"Comment saved by {doctor_name}.")
                 except Exception as exc:
                     st.error(f"Error saving comment: {exc}")
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# PAGE: JOBS
+# ════════════════════════════════════════════════════════════════════════════
+elif page == "Jobs":
+    st.title("Jobs Dashboard")
+    st.markdown("Create and monitor multi-agent document generation jobs.")
+
+    _jobs_dir = Path("/tmp/sozo_jobs") if _IS_CLOUD else ROOT / "jobs"
+    _ws_dir = Path("/tmp/sozo_workspaces") if _IS_CLOUD else ROOT / "workspaces"
+
+    try:
+        from sozo_generator.jobs.manager import JobManager
+        from sozo_generator.jobs.planner import JobPlanner
+        from sozo_generator.agents.executor import AgentExecutor
+        from sozo_generator.jobs.models import JobStatus
+        # Register agents
+        from sozo_generator.agents import (
+            template_agent, content_agent, evidence_agent,
+            draft_agent, revision_agent, qa_agent, review_pack_agent,
+        )
+        from sozo_generator.agents.registry import list_agents
+
+        jmgr = JobManager(_jobs_dir, _ws_dir)
+
+        # ── Create Job ──
+        st.subheader("Create New Job")
+        with st.form("create_job_form"):
+            _jp = st.text_area("What do you need?", height=100,
+                               placeholder="e.g., Generate all handbooks for depression and anxiety, partners tier")
+            _jc = st.multiselect("Conditions", [s for s, _ in _condition_options()])
+            jcol1, jcol2 = st.columns(2)
+            _jdt = jcol1.multiselect("Document types",
+                                     ["handbook", "clinical_exam", "evidence_based_protocol",
+                                      "all_in_one_protocol", "phenotype_classification",
+                                      "responder_tracking", "psych_intake", "network_assessment"])
+            _jt = jcol2.multiselect("Tiers", ["fellow", "partners"], default=["fellow", "partners"])
+            _jcomments = st.text_area("Doctor comments (optional)", height=80,
+                                     placeholder="e.g., Remove TPS protocols, use conservative language")
+            _jtpl = st.file_uploader("Upload template (optional)", type=["docx"], key="job_template")
+            _submitted = st.form_submit_button("Create & Run Job", type="primary")
+
+        if _submitted and (_jc or _jp):
+            # Save template if uploaded
+            tpl_path = ""
+            if _jtpl:
+                import tempfile
+                _tdir = Path(tempfile.mkdtemp())
+                tpl_path = str(_tdir / _jtpl.name)
+                Path(tpl_path).write_bytes(_jtpl.getvalue())
+
+            comments = [c.strip() for c in _jcomments.split("\n") if c.strip()] if _jcomments else []
+
+            job = jmgr.create_job(
+                source_prompt=_jp,
+                target_conditions=_jc if _jc else [],
+                target_doc_types=_jdt if _jdt else [],
+                target_tiers=_jt,
+                template_ref=tpl_path,
+                doctor_comments=comments,
+            )
+
+            # Plan and execute
+            planner = JobPlanner()
+            plan = planner.plan(job)
+            job.plan = plan
+            jmgr._save_job(job)
+
+            _progress = st.progress(0, text="Starting job...")
+            _step = [0]
+            _total = len(plan.tasks)
+
+            def _on_progress(msg):
+                _step[0] += 1
+                _progress.progress(min(_step[0] / _total, 0.95), text=msg)
+
+            executor = AgentExecutor(jmgr)
+            result = executor.execute_job(job, progress_callback=_on_progress)
+            _progress.progress(100, text="Done!")
+
+            if result.status == JobStatus.AWAITING_REVIEW:
+                st.success(f"Job complete: **{result.total_documents}** documents generated, awaiting review")
+            elif result.status == JobStatus.FAILED:
+                st.error(f"Job failed: {'; '.join(result.errors[:3])}")
+            else:
+                st.info(f"Job status: {result.status.value}")
+
+            # Show artifacts
+            if result.artifacts:
+                with st.expander(f"Artifacts ({len(result.artifacts)})", expanded=True):
+                    for art in result.artifacts:
+                        fpath = Path(art.get("path", ""))
+                        if fpath.exists() and fpath.suffix == ".docx":
+                            col_a, col_b = st.columns([3, 1])
+                            col_a.markdown(f"**{fpath.name}** ({fpath.stat().st_size / 1024:.1f} KB)")
+                            with open(fpath, "rb") as f:
+                                col_b.download_button("Download", data=f.read(),
+                                                      file_name=fpath.name, key=f"jdl_{fpath.stem}",
+                                                      mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                        else:
+                            st.markdown(f"- {art.get('type', '?')}: `{art.get('path', '')}`")
+
+            if result.warnings:
+                with st.expander("Warnings"):
+                    for w in result.warnings:
+                        st.warning(w)
+
+        # ── Job History ──
+        st.divider()
+        st.subheader("Job History")
+        _all_jobs = jmgr.list_jobs()
+        if _all_jobs:
+            for j in _all_jobs[:20]:
+                _sc = {"created": "gray", "running": "blue", "awaiting_review": "orange",
+                       "completed": "green", "failed": "red", "canceled": "gray"}.get(j.status.value, "gray")
+                with st.expander(f":{_sc}[{j.status.value.upper()}] {j.job_id} — {j.source_prompt[:60]}"):
+                    st.markdown(f"**Created:** {j.created_at}")
+                    st.markdown(f"**Conditions:** {', '.join(j.target_conditions)}")
+                    st.markdown(f"**Documents:** {j.total_documents}")
+                    if j.errors:
+                        st.error(f"Errors: {'; '.join(j.errors[:3])}")
+                    if j.artifacts:
+                        st.markdown(f"**Artifacts:** {len(j.artifacts)}")
+                        for art in j.artifacts:
+                            fpath = Path(art.get("path", ""))
+                            if fpath.exists() and fpath.suffix == ".docx":
+                                with open(fpath, "rb") as f:
+                                    st.download_button(f"Download {fpath.name}", data=f.read(),
+                                                       file_name=fpath.name,
+                                                       key=f"hist_{j.job_id}_{fpath.stem}",
+                                                       mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+        else:
+            st.info("No jobs created yet. Use the form above to create your first job.")
+
+        # ── Agent Info ──
+        st.divider()
+        with st.expander("Available Agents"):
+            for name in list_agents():
+                from sozo_generator.agents.registry import get_agent
+                a = get_agent(name)
+                review = " (requires review)" if a.requires_human_review else ""
+                st.markdown(f"- **{a.name}**: {a.role}{review}")
+
+    except Exception as e:
+        st.error(f"Jobs system error: {e}")
 
 
 # ════════════════════════════════════════════════════════════════════════════
