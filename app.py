@@ -495,8 +495,107 @@ if page == "Chat":
                 finally:
                     _rev_status.empty()
 
-        # Add comment to review state if ReviewManager is available
-        if doctor_name and comment_text and st.session_state.get("active_doc_path"):
+            # --- Evidence-aware revision ---
+        if st.button("Apply Evidence-Aware Revision", key="evidence_revision_btn"):
+            if not st.session_state.get("active_doc_path"):
+                st.warning("Select a document first.")
+            else:
+                try:
+                    from sozo_generator.evidence.section_evidence_mapper import SectionEvidenceMapper
+                    _active = Path(st.session_state["active_doc_path"])
+                    _parts = _active.relative_to(Path(DEFAULT_OUTPUT_DIR)).parts
+                    _cond_slug = _parts[0].lower().replace(" ", "_") if _parts else ""
+                    registry = _load_registry()
+                    _cond = registry.get(_cond_slug)
+                    mapper = SectionEvidenceMapper(recency_years=5)
+                    _items = mapper.build_evidence_items_from_condition(_cond)
+                    st.info(f"Found **{len(_items)}** evidence items from {_cond.display_name}'s registry data")
+                    if _items:
+                        _pmids = [i.pmid for i in _items if i.pmid]
+                        st.markdown(f"PMIDs: {', '.join(_pmids[:10])}" + (" ..." if len(_pmids) > 10 else ""))
+                except Exception as exc:
+                    st.error(f"Evidence mapping error: {exc}")
+
+    # ── Evidence Preview Panel ──────────────────────────────────────────
+    st.divider()
+    with st.expander("Evidence Preview", expanded=False):
+        st.markdown("View evidence strength per section for the selected document.")
+        _ev_cond = st.selectbox(
+            "Condition for evidence preview",
+            [s for s, _ in _condition_options()],
+            key="evidence_preview_condition",
+        )
+        _ev_recency = st.slider("Recency window (years)", 3, 15, 5, key="evidence_recency_slider")
+        if st.button("Show Evidence Profile", key="show_evidence_btn"):
+            try:
+                from sozo_generator.evidence.section_evidence_mapper import (
+                    SectionEvidenceMapper,
+                    DocumentEvidenceProfile,
+                )
+                from sozo_generator.schemas.documents import DocumentSpec, SectionContent
+                from sozo_generator.core.enums import DocumentType, Tier
+
+                registry = _load_registry()
+                _cond = registry.get(_ev_cond)
+                mapper = SectionEvidenceMapper(recency_years=_ev_recency)
+                _items = mapper.build_evidence_items_from_condition(_cond)
+
+                st.markdown(f"**{_cond.display_name}**: {len(_items)} evidence items extracted")
+
+                if _items:
+                    # Build a minimal spec to map against
+                    from sozo_generator.content.assembler import ContentAssembler
+                    assembler = ContentAssembler()
+                    _sections = assembler.assemble(_cond, DocumentType.EVIDENCE_BASED_PROTOCOL, Tier.FELLOW)
+                    _spec = DocumentSpec(
+                        document_type=DocumentType.EVIDENCE_BASED_PROTOCOL,
+                        tier=Tier.FELLOW,
+                        condition_slug=_cond.slug,
+                        condition_name=_cond.display_name,
+                        title="Evidence Preview",
+                        sections=_sections,
+                    )
+                    _profile = mapper.map_to_sections(_spec, _items)
+
+                    # Display per-section evidence
+                    for sid, sp in _profile.sections.items():
+                        _conf_colors = {
+                            "high_confidence": "green",
+                            "medium_confidence": "blue",
+                            "low_confidence": "orange",
+                            "insufficient": "red",
+                        }
+                        _color = _conf_colors.get(sp.confidence, "gray")
+                        _warn = ""
+                        if sp.has_contradictions:
+                            _warn = " | CONFLICTING"
+                        if sp.needs_review:
+                            _warn += " | NEEDS REVIEW"
+                        st.markdown(
+                            f"- **{sid}**: :{_color}[{sp.confidence}] "
+                            f"({sp.article_count} articles, "
+                            f"newest {sp.newest_year or '?'}"
+                            f"{_warn})"
+                        )
+
+                    if _profile.weak_sections:
+                        st.warning(f"Weak evidence in: {', '.join(_profile.weak_sections)}")
+                    if _profile.outdated_sections:
+                        st.warning(f"Outdated evidence in: {', '.join(_profile.outdated_sections)}")
+                    if _profile.conflicting_sections:
+                        st.warning(f"Conflicting evidence in: {', '.join(_profile.conflicting_sections)}")
+                else:
+                    st.info("No evidence items found in condition registry.")
+            except Exception as exc:
+                st.error(f"Evidence preview error: {exc}")
+
+    # ── Save Comment to Review ──────────────────────────────────────────
+    if (st.session_state.get("doctor_name_input")
+            and st.session_state.get("doctor_comment_input")
+            and st.session_state.get("active_doc_path")):
+        doctor_name = st.session_state["doctor_name_input"]
+        comment_text = st.session_state["doctor_comment_input"]
+        if st.session_state.get("active_doc_path"):
             _active_path = Path(st.session_state["active_doc_path"])
             _review_dir = ROOT / "reviews"
             if st.button("Save Comment to Review", key="save_comment_btn"):

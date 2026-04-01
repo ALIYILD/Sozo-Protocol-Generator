@@ -142,6 +142,26 @@ _EVIDENCE_PHRASES: list[str] = [
     "newer studies",
     "latest research",
     "update the references",
+    "latest studies",
+    "recent literature",
+    "last 3 years",
+    "last 5 years",
+    "last three years",
+    "last five years",
+    "recent publications",
+    "up to date evidence",
+    "up-to-date",
+    "current evidence",
+    "remove weakly supported",
+    "remove weak claims",
+    "conservative wording",
+    "conservative language",
+    "cautious wording",
+    "cautious language",
+    "evidence is limited",
+    "limited evidence",
+    "hedge where",
+    "downgrade confidence",
     "recent literature",
     "newer evidence",
 ]
@@ -184,15 +204,47 @@ class CommentNormalizer:
 
         # --- Evidence detection ---
         if self._is_evidence_comment(lower):
-            instructions.append(
-                self._make_instruction(
-                    target="evidence",
-                    action="update",
-                    detail="Update references with more recent evidence",
-                    parameters={"newer": True},
-                    source=comment,
+            # Determine sub-action
+            if any(p in lower for p in ["conservative", "cautious", "hedge", "limited evidence"]):
+                instructions.append(
+                    self._make_instruction(
+                        target="tone",
+                        action="soften",
+                        detail="Apply conservative clinical wording where evidence is limited",
+                        parameters={"evidence_driven": True},
+                        source=comment,
+                    )
                 )
-            )
+            elif any(p in lower for p in ["remove weak", "remove weakly"]):
+                instructions.append(
+                    self._make_instruction(
+                        target="evidence",
+                        action="remove",
+                        detail="Remove weakly supported claims",
+                        parameters={"remove_weak": True},
+                        source=comment,
+                    )
+                )
+            elif any(p in lower for p in ["downgrade"]):
+                instructions.append(
+                    self._make_instruction(
+                        target="evidence",
+                        action="soften",
+                        detail="Downgrade confidence where evidence is insufficient",
+                        parameters={"downgrade": True},
+                        source=comment,
+                    )
+                )
+            else:
+                instructions.append(
+                    self._make_instruction(
+                        target="evidence",
+                        action="update",
+                        detail="Update references with more recent evidence",
+                        parameters={"newer": True},
+                        source=comment,
+                    )
+                )
             # May also contain section targeting, so continue
 
         # --- Modality detection ---

@@ -4,12 +4,19 @@ import logging
 import time
 from pathlib import Path
 from typing import Optional
-from Bio import Entrez
+
 from ..core.settings import get_settings
 from ..core.enums import EvidenceType, EvidenceLevel
 from ..schemas.evidence import ArticleMetadata
 from .cache import EvidenceCache
 from ..core.utils import clean_abstract, current_date_str
+
+# Lazy Biopython import — module loads even when Bio is not installed.
+# Actual Entrez calls fail gracefully at runtime.
+try:
+    from Bio import Entrez as _Entrez
+except ImportError:
+    _Entrez = None
 
 logger = logging.getLogger(__name__)
 
@@ -45,12 +52,14 @@ class PubMedClient:
         force_refresh: bool = False,
     ):
         settings = get_settings()
-        Entrez.email = email or settings.ncbi_email
-        if api_key or settings.ncbi_api_key:
-            Entrez.api_key = api_key or settings.ncbi_api_key
+        self._has_entrez = _Entrez is not None
+        if self._has_entrez:
+            _Entrez.email = email or settings.ncbi_email
+            if api_key or settings.ncbi_api_key:
+                _Entrez.api_key = api_key or settings.ncbi_api_key
         self.cache = EvidenceCache(cache_dir or settings.cache_dir)
         self.force_refresh = force_refresh
-        self._request_delay = 0.34 if Entrez.api_key else 1.0  # NCBI rate limits
+        self._request_delay = 0.34 if (self._has_entrez and getattr(_Entrez, 'api_key', None)) else 1.0
 
     def search(
         self,
@@ -66,6 +75,10 @@ class PubMedClient:
             if cached:
                 logger.debug(f"Cache hit for query: {query[:60]}")
                 return [ArticleMetadata(**a) for a in cached]
+
+        if not self._has_entrez:
+            logger.warning("Biopython not installed — PubMed search unavailable, returning empty results")
+            return []
 
         logger.info(f"PubMed search: {query[:80]}")
         pmids = self._esearch(query, max_results, years_back)
@@ -87,14 +100,14 @@ class PubMedClient:
         full_query = f"({query}) AND ({min_year}[PDAT]:3000[PDAT])"
 
         try:
-            handle = Entrez.esearch(
+            handle = _Entrez.esearch(
                 db="pubmed",
                 term=full_query,
                 retmax=max_results,
                 sort="relevance",
                 usehistory="n",
             )
-            record = Entrez.read(handle)
+            record = _Entrez.read(handle)
             handle.close()
             time.sleep(self._request_delay)
             return record.get("IdList", [])
@@ -113,13 +126,13 @@ class PubMedClient:
         for i in range(0, len(pmids), batch_size):
             batch = pmids[i : i + batch_size]
             try:
-                handle = Entrez.efetch(
+                handle = _Entrez.efetch(
                     db="pubmed",
                     id=",".join(batch),
                     rettype="xml",
                     retmode="xml",
                 )
-                records = Entrez.read(handle)
+                records = _Entrez.read(handle)
                 handle.close()
                 time.sleep(self._request_delay)
 

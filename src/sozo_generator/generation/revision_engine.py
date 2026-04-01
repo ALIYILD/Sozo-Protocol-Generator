@@ -173,6 +173,69 @@ class RevisionEngine:
         return revised, summary
 
     # ------------------------------------------------------------------
+    # Evidence-aware revision
+    # ------------------------------------------------------------------
+
+    def apply_evidence_revision(
+        self,
+        spec: DocumentSpec,
+        condition: ConditionSchema,
+        recency_years: int = 5,
+        soften_weak: bool = True,
+    ) -> tuple[DocumentSpec, RevisionSummary]:
+        """Apply evidence-aware revisions: downgrade confidence on weak sections,
+        soften language where evidence is limited, flag outdated sections.
+
+        This NEVER fabricates evidence. It only adjusts tone and flags.
+        """
+        from ..evidence.section_evidence_mapper import SectionEvidenceMapper
+
+        revised = spec.model_copy(deep=True)
+        summary = RevisionSummary()
+        mapper = SectionEvidenceMapper(recency_years=recency_years)
+
+        # Build evidence items from condition
+        items = mapper.build_evidence_items_from_condition(condition)
+        profile = mapper.map_to_sections(revised, items)
+
+        # Apply evidence metadata to spec
+        revised = mapper.apply_evidence_to_spec(revised, profile)
+
+        # Soften language in weak/unsupported sections
+        if soften_weak:
+            for section_id in profile.weak_sections + profile.unsupported_sections:
+                for section in revised.sections:
+                    if section.section_id == section_id:
+                        original = section.content
+                        section.content = self._soften_text(section.content)
+                        if section.content != original:
+                            summary.tone_changes += 1
+                            summary.diff_lines.append(
+                                f"~ {section_id}: softened (weak evidence)"
+                            )
+
+        # Flag outdated sections
+        for section_id in profile.outdated_sections:
+            for section in revised.sections:
+                if section.section_id == section_id:
+                    section.review_flags.append("EVIDENCE_OUTDATED")
+                    summary.diff_lines.append(
+                        f"! {section_id}: evidence may be outdated (>{recency_years} years)"
+                    )
+
+        # Flag conflicting sections
+        for section_id in profile.conflicting_sections:
+            for section in revised.sections:
+                if section.section_id == section_id:
+                    section.review_flags.append("EVIDENCE_CONFLICTING")
+                    summary.diff_lines.append(
+                        f"! {section_id}: conflicting evidence detected"
+                    )
+
+        summary.sections_modified = len(profile.weak_sections) + len(profile.outdated_sections)
+        return revised, summary
+
+    # ------------------------------------------------------------------
     # Section edits
     # ------------------------------------------------------------------
 
