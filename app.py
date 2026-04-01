@@ -122,7 +122,7 @@ with st.sidebar:
 
     page = st.radio(
         "Navigate",
-        ["Chat", "Jobs", "Generate from Template", "Generate Documents", "Review Queue",
+        ["Chat", "Studio", "Generate from Template", "Generate Documents", "Review Queue",
          "Conditions Overview", "QA Report", "Evidence Ingest"],
         label_visibility="collapsed",
     )
@@ -715,117 +715,318 @@ if page == "Chat":
 # ════════════════════════════════════════════════════════════════════════════
 # PAGE: JOBS
 # ════════════════════════════════════════════════════════════════════════════
-elif page == "Jobs":
-    st.title("Jobs Dashboard")
-    st.markdown("Create and monitor multi-agent document generation jobs.")
+elif page == "Studio":
+    st.title("Document Studio")
+    st.markdown("Upload templates, write prompts, generate documents with protocol visuals.")
 
     _jobs_dir = Path("/tmp/sozo_jobs") if _IS_CLOUD else ROOT / "jobs"
     _ws_dir = Path("/tmp/sozo_workspaces") if _IS_CLOUD else ROOT / "workspaces"
+    _visuals_dir = Path("/tmp/sozo_visuals") if _IS_CLOUD else ROOT / "outputs" / "visuals"
+    _visuals_dir.mkdir(parents=True, exist_ok=True)
 
     try:
+        import tempfile as _tmpmod
         from sozo_generator.jobs.manager import JobManager
         from sozo_generator.jobs.planner import JobPlanner
         from sozo_generator.agents.executor import AgentExecutor
         from sozo_generator.jobs.models import JobStatus
-        # Register agents
         from sozo_generator.agents import (
             template_agent, content_agent, evidence_agent,
             draft_agent, revision_agent, qa_agent, review_pack_agent,
         )
+        from sozo_generator.agents import visual_agent, condition_match_agent  # noqa: F811
         from sozo_generator.agents.registry import list_agents
+        from sozo_generator.ai.intent_parser import parse_intent_rules
 
         jmgr = JobManager(_jobs_dir, _ws_dir)
 
-        # ── Create Job ──
-        st.subheader("Create New Job")
-        with st.form("create_job_form"):
-            _jp = st.text_area("What do you need?", height=100,
-                               placeholder="e.g., Generate all handbooks for depression and anxiety, partners tier")
-            _jc = st.multiselect("Conditions", [s for s, _ in _condition_options()])
-            jcol1, jcol2 = st.columns(2)
-            _jdt = jcol1.multiselect("Document types",
-                                     ["handbook", "clinical_exam", "evidence_based_protocol",
-                                      "all_in_one_protocol", "phenotype_classification",
-                                      "responder_tracking", "psych_intake", "network_assessment"])
-            _jt = jcol2.multiselect("Tiers", ["fellow", "partners"], default=["fellow", "partners"])
-            _jcomments = st.text_area("Doctor comments (optional)", height=80,
-                                     placeholder="e.g., Remove TPS protocols, use conservative language")
-            _jtpl = st.file_uploader("Upload template (optional)", type=["docx"], key="job_template")
-            _submitted = st.form_submit_button("Create & Run Job", type="primary")
+        # Initialise session-state keys used by Studio
+        if "studio_result" not in st.session_state:
+            st.session_state["studio_result"] = None
+        if "studio_job" not in st.session_state:
+            st.session_state["studio_job"] = None
+        if "studio_log" not in st.session_state:
+            st.session_state["studio_log"] = []
 
-        if _submitted and (_jc or _jp):
-            # Save template if uploaded
+        # ── Two-column layout ──────────────────────────────────────────────
+        left_col, right_col = st.columns([1, 1])
+
+        with left_col:
+            st.subheader("Input")
+
+            # Template upload
+            _tpl = st.file_uploader(
+                "Upload template or example document",
+                type=["docx"],
+                key="studio_tpl",
+            )
+
+            # Prompt
+            _prompt = st.text_area(
+                "What do you need?",
+                height=120,
+                key="studio_prompt",
+                placeholder="e.g., Generate Parkinson's handbook from this template with protocol diagrams",
+            )
+
+            # Condition selection — auto or manual
+            _auto_detect = st.toggle("Auto-detect conditions from prompt", value=True, key="studio_auto")
+            if not _auto_detect:
+                _conditions = st.multiselect(
+                    "Select conditions",
+                    [s for s, _ in _condition_options()],
+                    format_func=lambda s: dict(_condition_options()).get(s, s),
+                    key="studio_conditions",
+                )
+            else:
+                _conditions = []
+
+            # Detected-conditions preview (shown only when auto + prompt present)
+            if _auto_detect and _prompt:
+                _intent = parse_intent_rules(_prompt)
+                if _intent.conditions:
+                    st.caption(f"Detected conditions: **{', '.join(_intent.conditions)}**")
+
+            # Doc types
+            _all_dtypes = list(DOC_TYPE_LABELS.keys())
+            _doc_types = st.multiselect(
+                "Document types (leave empty for auto)",
+                _all_dtypes,
+                format_func=lambda k: DOC_TYPE_LABELS.get(k, k),
+                key="studio_dt",
+            )
+
+            # Tiers
+            _tiers = st.multiselect(
+                "Tiers",
+                ["fellow", "partners"],
+                default=["fellow", "partners"],
+                key="studio_tiers",
+            )
+
+            # Options
+            _with_visuals = st.toggle("Generate protocol visuals", value=True, key="studio_vis")
+            _doc_comments = st.text_area(
+                "Doctor comments (optional)",
+                height=80,
+                key="studio_comments",
+                placeholder="e.g., Remove TPS protocols, use conservative language",
+            )
+
+            # ── Run button ─────────────────────────────────────────────────
+            _run = st.button(
+                "Generate Documents",
+                type="primary",
+                use_container_width=True,
+                key="studio_run",
+            )
+
+        # ── Execution logic (runs when button pressed) ─────────────────────
+        if _run and (_prompt or _conditions or _tpl):
+            # Save template to temp file if uploaded
             tpl_path = ""
-            if _jtpl:
-                import tempfile
-                _tdir = Path(tempfile.mkdtemp())
-                tpl_path = str(_tdir / _jtpl.name)
-                Path(tpl_path).write_bytes(_jtpl.getvalue())
+            if _tpl:
+                _tdir = Path(_tmpmod.mkdtemp())
+                tpl_path = str(_tdir / _tpl.name)
+                Path(tpl_path).write_bytes(_tpl.getvalue())
 
-            comments = [c.strip() for c in _jcomments.split("\n") if c.strip()] if _jcomments else []
+            # Parse doctor comments
+            comments = [c.strip() for c in _doc_comments.split("\n") if c.strip()] if _doc_comments else []
 
+            # Resolve conditions: auto-detect or explicit
+            if _auto_detect and _prompt:
+                _intent = parse_intent_rules(_prompt)
+                resolved_conditions = list(_intent.conditions) if _intent.conditions else []
+            else:
+                resolved_conditions = list(_conditions)
+
+            # Create the job
             job = jmgr.create_job(
-                source_prompt=_jp,
-                target_conditions=_jc if _jc else [],
-                target_doc_types=_jdt if _jdt else [],
-                target_tiers=_jt,
+                source_prompt=_prompt,
+                target_conditions=resolved_conditions,
+                target_doc_types=_doc_types if _doc_types else [],
+                target_tiers=_tiers,
                 template_ref=tpl_path,
                 doctor_comments=comments,
             )
 
-            # Plan and execute
+            # Plan
             planner = JobPlanner()
             plan = planner.plan(job)
             job.plan = plan
             jmgr._save_job(job)
 
-            _progress = st.progress(0, text="Starting job...")
-            _step = [0]
-            _total = len(plan.tasks)
+            # Execute with progress
+            with right_col:
+                st.subheader("Progress")
+                _progress_bar = st.progress(0, text="Starting job...")
+                _status_area = st.empty()
+                _step_counter = [0]
+                _total_tasks = max(len(plan.tasks), 1)
+                _log_lines = []
 
-            def _on_progress(msg):
-                _step[0] += 1
-                _progress.progress(min(_step[0] / _total, 0.95), text=msg)
+                def _studio_progress(msg):
+                    _step_counter[0] += 1
+                    pct = min(_step_counter[0] / _total_tasks, 0.95)
+                    _progress_bar.progress(pct, text=msg)
+                    _log_lines.append(msg)
 
-            executor = AgentExecutor(jmgr)
-            result = executor.execute_job(job, progress_callback=_on_progress)
-            _progress.progress(100, text="Done!")
+                executor = AgentExecutor(jmgr)
+                result = executor.execute_job(job, progress_callback=_studio_progress)
+                _progress_bar.progress(1.0, text="Complete")
 
-            if result.status == JobStatus.AWAITING_REVIEW:
-                st.success(f"Job complete: **{result.total_documents}** documents generated, awaiting review")
-            elif result.status == JobStatus.FAILED:
-                st.error(f"Job failed: {'; '.join(result.errors[:3])}")
+            # Persist into session state for the right-col display
+            st.session_state["studio_result"] = result
+            st.session_state["studio_job"] = job
+            st.session_state["studio_log"] = _log_lines
+
+            # If visuals requested, run visual agent for each condition
+            if _with_visuals and resolved_conditions:
+                try:
+                    from sozo_generator.agents.registry import get_agent
+                    va = get_agent("visual_agent")
+                    ws_path = str(_ws_dir / job.job_id)
+                    va.execute(
+                        {"conditions": resolved_conditions},
+                        workspace_path=ws_path,
+                        job=job,
+                    )
+                except Exception as ve:
+                    st.session_state["studio_log"].append(f"Visual generation warning: {ve}")
+
+        # ── Right column: output display ───────────────────────────────────
+        _result = st.session_state.get("studio_result")
+        _s_job = st.session_state.get("studio_job")
+
+        with right_col:
+            st.subheader("Output")
+
+            if _result is None:
+                st.info("Configure your inputs on the left and click **Generate Documents** to begin.")
             else:
-                st.info(f"Job status: {result.status.value}")
+                # Status banner
+                if _result.status == JobStatus.AWAITING_REVIEW:
+                    st.success(
+                        f"Job complete — **{_result.total_documents}** document(s) generated, awaiting review."
+                    )
+                elif _result.status == JobStatus.FAILED:
+                    st.error(f"Job failed: {'; '.join(_result.errors[:3])}")
+                else:
+                    st.info(f"Job status: {_result.status.value}")
 
-            # Show artifacts
-            if result.artifacts:
-                with st.expander(f"Artifacts ({len(result.artifacts)})", expanded=True):
-                    for art in result.artifacts:
+                # ── Document list with per-doc status ──────────────────────
+                _docx_artifacts = []
+                _other_artifacts = []
+                if _result.artifacts:
+                    for art in _result.artifacts:
                         fpath = Path(art.get("path", ""))
                         if fpath.exists() and fpath.suffix == ".docx":
-                            col_a, col_b = st.columns([3, 1])
-                            col_a.markdown(f"**{fpath.name}** ({fpath.stat().st_size / 1024:.1f} KB)")
-                            with open(fpath, "rb") as f:
-                                col_b.download_button("Download", data=f.read(),
-                                                      file_name=fpath.name, key=f"jdl_{fpath.stem}",
-                                                      mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-                        else:
-                            st.markdown(f"- {art.get('type', '?')}: `{art.get('path', '')}`")
+                            _docx_artifacts.append(fpath)
+                        elif fpath.exists():
+                            _other_artifacts.append(fpath)
 
-            if result.warnings:
-                with st.expander("Warnings"):
-                    for w in result.warnings:
-                        st.warning(w)
+                if _docx_artifacts:
+                    st.markdown(f"**Documents ({len(_docx_artifacts)})**")
+                    for idx, fpath in enumerate(_docx_artifacts):
+                        col_a, col_b = st.columns([3, 1])
+                        col_a.markdown(f"{fpath.name}  ({fpath.stat().st_size / 1024:.1f} KB)")
+                        with open(fpath, "rb") as f:
+                            col_b.download_button(
+                                "Download",
+                                data=f.read(),
+                                file_name=fpath.name,
+                                key=f"studio_dl_{idx}_{fpath.stem}",
+                                mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                            )
 
-        # ── Job History ──
+                # ── Download all as ZIP ────────────────────────────────────
+                if len(_docx_artifacts) > 1:
+                    _zip_map = {fp.name: fp for fp in _docx_artifacts}
+                    st.download_button(
+                        "Download all as ZIP",
+                        data=_zip_files(_zip_map),
+                        file_name="studio_documents.zip",
+                        mime="application/zip",
+                        key="studio_zip",
+                    )
+
+                # ── Visual gallery (PNG thumbnails) ────────────────────────
+                _visual_pngs = []
+                if _s_job:
+                    _ws_visuals = Path(_ws_dir / _s_job.job_id / "visuals")
+                    if _ws_visuals.exists():
+                        _visual_pngs = sorted(_ws_visuals.rglob("*.png"))
+
+                if _visual_pngs:
+                    st.markdown(f"**Protocol Visuals ({len(_visual_pngs)})**")
+                    # Show in a 2-column grid
+                    for i in range(0, len(_visual_pngs), 2):
+                        img_cols = st.columns(2)
+                        for j, col in enumerate(img_cols):
+                            idx = i + j
+                            if idx < len(_visual_pngs):
+                                img_path = _visual_pngs[idx]
+                                col.image(str(img_path), caption=img_path.stem, use_container_width=True)
+                                with open(img_path, "rb") as imgf:
+                                    col.download_button(
+                                        f"Download {img_path.name}",
+                                        data=imgf.read(),
+                                        file_name=img_path.name,
+                                        key=f"studio_img_{idx}_{img_path.stem}",
+                                        mime="image/png",
+                                    )
+
+                # ── Warnings ───────────────────────────────────────────────
+                if _result.warnings:
+                    with st.expander("Warnings"):
+                        for w in _result.warnings:
+                            st.warning(w)
+
+                # ── Execution log ──────────────────────────────────────────
+                _log = st.session_state.get("studio_log", [])
+                if _log:
+                    with st.expander("Execution Log"):
+                        for line in _log:
+                            st.text(line)
+
+                # ── Send to Review Queue ───────────────────────────────────
+                if _docx_artifacts and _s_job:
+                    st.divider()
+                    if st.button("Send to Review Queue", key="studio_review_handoff", use_container_width=True):
+                        try:
+                            from sozo_generator.review.manager import ReviewManager
+                            from sozo_generator.core.enums import ReviewStatus
+                            rmgr = ReviewManager(REVIEWS_DIR)
+                            _review_count = 0
+                            for art in _result.artifacts:
+                                fpath = Path(art.get("path", ""))
+                                if not fpath.exists() or fpath.suffix != ".docx":
+                                    continue
+                                _cond = art.get("condition", "unknown")
+                                _dtype = art.get("type", art.get("doc_type", "handbook"))
+                                _tier = art.get("tier", "fellow")
+                                rmgr.create_review(
+                                    build_id=f"{_s_job.job_id}_{fpath.stem}",
+                                    condition_slug=_cond,
+                                    document_type=_dtype,
+                                    tier=_tier,
+                                )
+                                rmgr.submit_for_review(f"{_s_job.job_id}_{fpath.stem}")
+                                _review_count += 1
+                            st.success(f"Sent **{_review_count}** document(s) to the Review Queue.")
+                        except Exception as rev_err:
+                            st.error(f"Review handoff error: {rev_err}")
+
+        # ── Recent Jobs (below the two columns) ───────────────────────────
         st.divider()
-        st.subheader("Job History")
+        st.subheader("Recent Jobs")
         _all_jobs = jmgr.list_jobs()
         if _all_jobs:
             for j in _all_jobs[:20]:
-                _sc = {"created": "gray", "running": "blue", "awaiting_review": "orange",
-                       "completed": "green", "failed": "red", "canceled": "gray"}.get(j.status.value, "gray")
+                _sc = {
+                    "created": "gray", "running": "blue", "awaiting_review": "orange",
+                    "completed": "green", "failed": "red", "canceled": "gray",
+                }.get(j.status.value, "gray")
                 with st.expander(f":{_sc}[{j.status.value.upper()}] {j.job_id} — {j.source_prompt[:60]}"):
                     st.markdown(f"**Created:** {j.created_at}")
                     st.markdown(f"**Conditions:** {', '.join(j.target_conditions)}")
@@ -838,12 +1039,17 @@ elif page == "Jobs":
                             fpath = Path(art.get("path", ""))
                             if fpath.exists() and fpath.suffix == ".docx":
                                 with open(fpath, "rb") as f:
-                                    st.download_button(f"Download {fpath.name}", data=f.read(),
-                                                       file_name=fpath.name,
-                                                       key=f"hist_{j.job_id}_{fpath.stem}",
-                                                       mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                                    st.download_button(
+                                        f"Download {fpath.name}",
+                                        data=f.read(),
+                                        file_name=fpath.name,
+                                        key=f"hist_{j.job_id}_{fpath.stem}",
+                                        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                    )
+                            elif fpath.exists() and fpath.suffix == ".png":
+                                st.image(str(fpath), caption=fpath.stem, width=200)
         else:
-            st.info("No jobs created yet. Use the form above to create your first job.")
+            st.info("No jobs yet. Use the input panel above to create your first document generation job.")
 
         # ── Agent Info ──
         st.divider()
@@ -851,11 +1057,11 @@ elif page == "Jobs":
             for name in list_agents():
                 from sozo_generator.agents.registry import get_agent
                 a = get_agent(name)
-                review = " (requires review)" if a.requires_human_review else ""
-                st.markdown(f"- **{a.name}**: {a.role}{review}")
+                review_tag = " (requires review)" if a.requires_human_review else ""
+                st.markdown(f"- **{a.name}**: {a.role}{review_tag}")
 
     except Exception as e:
-        st.error(f"Jobs system error: {e}")
+        st.error(f"Studio error: {e}")
 
 
 # ════════════════════════════════════════════════════════════════════════════
