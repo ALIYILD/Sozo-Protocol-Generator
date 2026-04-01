@@ -22,6 +22,10 @@ matplotlib.use("Agg")
 # ── Output dir: use /tmp on read-only filesystems (Streamlit Cloud) ──────────
 _IS_CLOUD = not (ROOT / "outputs").exists() or os.environ.get("STREAMLIT_SHARING_MODE")
 DEFAULT_OUTPUT_DIR = "/tmp/sozo_outputs" if _IS_CLOUD else str(ROOT / "outputs" / "documents")
+REVIEWS_DIR = Path("/tmp/sozo_reviews") if _IS_CLOUD else ROOT / "reviews"
+PILOT_LOGS_DIR = Path("/tmp/sozo_pilot_logs") if _IS_CLOUD else ROOT / "pilot_logs"
+REVIEWS_DIR.mkdir(parents=True, exist_ok=True)
+PILOT_LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
 # ── Page config ─────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -383,7 +387,7 @@ if page == "Chat":
     # ── Review status badges ──────────────────────────────────────────
     if st.session_state.get("active_doc_path"):
         _active = Path(st.session_state["active_doc_path"])
-        _review_dir = ROOT / "reviews"
+        _review_dir = REVIEWS_DIR
         if _review_dir.exists():
             _build_id = _active.stem
             _review_file = _review_dir / f"{_build_id}.json"
@@ -466,25 +470,102 @@ if page == "Chat":
                             for c in plan.conflicts:
                                 st.markdown(f"- Conflict: {c}")
 
-                        if plan.edits:
-                            st.markdown(f"**{len(plan.edits)} edit(s) will be applied.**")
+                        _total_edits = len(plan.section_edits) + len(plan.sections_to_remove) + len(plan.tone_adjustments) + len(plan.modality_changes)
+                        if _total_edits > 0:
+                            st.markdown(f"**{_total_edits} edit(s) will be applied.**")
 
-                            if st.button("Confirm & Apply", key="confirm_revision_btn"):
+                            if st.button("Confirm & Apply Revision", key="confirm_revision_btn"):
                                 _rev_status.info("Applying revisions...")
                                 try:
-                                    from sozo_generator.generation.revision_engine import (
-                                        RevisionEngine,
-                                    )
-                                    from sozo_generator.qa.revision_diff import RevisionDiffer
+                                    from sozo_generator.generation.revision_engine import RevisionEngine
+                                    from sozo_generator.qa.revision_diff import RevisionDiffGenerator
+                                    from sozo_generator.content.assembler import ContentAssembler
+                                    from sozo_generator.docx.renderer import DocumentRenderer
+                                    from sozo_generator.schemas.documents import DocumentSpec
+                                    from sozo_generator.core.enums import DocumentType, Tier
 
-                                    engine = RevisionEngine()
-                                    # Load the active document spec
-                                    # (Revision engine works on the doc)
-                                    _rev_status.success("Revisions applied. Download the updated document above.")
-                                except ImportError:
-                                    st.error("Revision engine not yet available.")
+                                    # Load condition for the active doc
+                                    _active = Path(st.session_state["active_doc_path"])
+                                    _parts = _active.relative_to(Path(DEFAULT_OUTPUT_DIR)).parts
+                                    _cond_slug = _parts[0].lower().replace(" ", "_") if _parts else ""
+                                    _tier_str = _parts[1].lower() if len(_parts) > 1 else "fellow"
+                                    _tier = Tier.FELLOW if "fellow" in _tier_str else Tier.PARTNERS
+
+                                    _registry = _load_registry()
+                                    _cond = _registry.get(_cond_slug)
+
+                                    # Build original spec
+                                    _assembler = ContentAssembler()
+                                    _sections = _assembler.assemble(_cond, DocumentType.EVIDENCE_BASED_PROTOCOL, _tier)
+                                    _orig_spec = DocumentSpec(
+                                        document_type=DocumentType.EVIDENCE_BASED_PROTOCOL,
+                                        tier=_tier,
+                                        condition_slug=_cond.slug,
+                                        condition_name=_cond.display_name,
+                                        title=f"Revised — {_cond.display_name}",
+                                        sections=_sections,
+                                        references=_cond.references or [],
+                                    )
+
+                                    # Apply revision
+                                    _engine = RevisionEngine()
+                                    _revised, _summary = _engine.apply_revision(_orig_spec, plan, _cond)
+
+                                    # Generate diff
+                                    _differ = RevisionDiffGenerator()
+                                    _diff = _differ.generate_diff(_orig_spec, _revised)
+
+                                    # Show inline diff
+                                    st.markdown("**Revision Summary:**")
+                                    st.markdown(f"- Modified: {_diff.total_modified}")
+                                    st.markdown(f"- Removed: {_diff.total_removed}")
+                                    st.markdown(f"- Unchanged: {_diff.total_unchanged}")
+                                    if _summary.tone_changes:
+                                        st.markdown(f"- Tone adjustments: {_summary.tone_changes}")
+
+                                    # Show per-section diffs
+                                    with st.expander("Section-level diff", expanded=True):
+                                        for sd in _diff.section_diffs:
+                                            if sd.change_type == "modified":
+                                                st.markdown(f"  ~ **{sd.section_id}**: {sd.detail}")
+                                            elif sd.change_type == "removed":
+                                                st.markdown(f"  - ~~{sd.section_id}~~: removed")
+                                            elif sd.change_type == "added":
+                                                st.markdown(f"  + **{sd.section_id}**: added")
+
+                                    # Render revised DOCX
+                                    _out_dir = Path(DEFAULT_OUTPUT_DIR) / _cond.slug / "Revised"
+                                    _out_dir.mkdir(parents=True, exist_ok=True)
+                                    _revised.output_filename = f"{_cond.slug}_revised_{_tier.value}.docx"
+                                    _out_path = _out_dir / _revised.output_filename
+                                    _renderer = DocumentRenderer(output_dir=str(Path(DEFAULT_OUTPUT_DIR)))
+                                    _rendered = _renderer.render(_revised, _out_path)
+
+                                    _rev_status.empty()
+                                    st.success(f"Revised document generated: {_rendered.name}")
+                                    with open(_rendered, "rb") as _f:
+                                        st.download_button(
+                                            "Download Revised Document",
+                                            data=_f.read(),
+                                            file_name=_rendered.name,
+                                            mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                            key="dl_revised_doc",
+                                        )
+
+                                    # Log activity
+                                    try:
+                                        from sozo_generator.orchestration.pilot_metrics import ActivityLogger
+                                        _al = ActivityLogger(PILOT_LOGS_DIR)
+                                        _al.log("revision", operator=doctor_name, build_id=_active.stem,
+                                                condition_slug=_cond.slug, detail=f"{_total_edits} edits applied")
+                                    except Exception:
+                                        pass
+
                                 except Exception as exc:
+                                    _rev_status.empty()
                                     st.error(f"Error applying revisions: {exc}")
+                        else:
+                            st.info("No concrete edits to apply. Comments noted for review.")
 
                 except ImportError:
                     st.error(
@@ -598,7 +679,7 @@ if page == "Chat":
         comment_text = st.session_state["doctor_comment_input"]
         if st.session_state.get("active_doc_path"):
             _active_path = Path(st.session_state["active_doc_path"])
-            _review_dir = ROOT / "reviews"
+            _review_dir = REVIEWS_DIR
             if st.button("Save Comment to Review", key="save_comment_btn"):
                 try:
                     from sozo_generator.review.manager import ReviewManager
@@ -996,8 +1077,7 @@ elif page == "Review Queue":
     st.title("Review Queue")
     st.markdown("Manage document review lifecycle: approve, reject, flag, export, and generate audit reports.")
 
-    _review_dir = ROOT / "reviews"
-    _review_dir.mkdir(exist_ok=True)
+    _review_dir = REVIEWS_DIR
 
     try:
         from sozo_generator.review.manager import ReviewManager
@@ -1226,7 +1306,7 @@ elif page == "Review Queue":
         st.subheader("Pilot Metrics")
         try:
             from sozo_generator.orchestration.pilot_metrics import ActivityLogger
-            _pilot_logger = ActivityLogger(ROOT / "pilot_logs")
+            _pilot_logger = ActivityLogger(PILOT_LOGS_DIR)
             _pilot_metrics = _pilot_logger.compute_metrics()
             if _pilot_metrics.total_events > 0:
                 mcol1, mcol2, mcol3, mcol4 = st.columns(4)
@@ -1567,3 +1647,51 @@ elif page == "Evidence Ingest":
         with st.expander("Ingest log", expanded=True):
             for line in log_lines:
                 st.markdown(line)
+
+    # ── Evidence Staleness Check ──
+    st.divider()
+    st.subheader("Evidence Staleness Check")
+    _stale_recency = st.slider("Recency window (years)", 1, 15, 5, key="stale_recency")
+    if st.button("Check Evidence Staleness", key="check_stale_btn"):
+        try:
+            from sozo_generator.evidence.refresh import EvidenceRefresher
+            _refresher = EvidenceRefresher(recency_years=_stale_recency)
+            _registry = _load_registry()
+            _cond = _registry.get(selected_slug)
+            _result = _refresher.assess_staleness(_cond)
+
+            col_a, col_b, col_c = st.columns(3)
+            col_a.metric("Total Items", _result.total_items)
+            col_b.metric("Fresh", _result.fresh_items)
+            col_c.metric("Stale", _result.stale_items)
+
+            if _result.stale_sections:
+                st.warning(f"Stale sections: {', '.join(_result.stale_sections)}")
+            if _result.qa_rerun_needed:
+                st.error("Evidence is substantially stale — QA re-run recommended.")
+                if st.button("Re-run QA", key="rerun_qa_btn"):
+                    _result2 = _refresher.refresh_and_rerun_qa(_cond)
+                    if _result2.qa_report:
+                        _result2.qa_report.compute_counts()
+                        _qa_status = "PASS" if _result2.qa_report.passed else f"FAIL ({_result2.qa_report.block_count} blocks)"
+                        st.markdown(f"QA result: **{_qa_status}**, {_result2.qa_report.warning_count} warnings")
+            else:
+                st.success("Evidence is reasonably current.")
+        except Exception as e:
+            st.error(f"Staleness check failed: {e}")
+
+    # ── Live Refresh Status ──
+    st.divider()
+    st.subheader("Live Refresh Status")
+    try:
+        from sozo_generator.evidence.live_refresh import LiveEvidenceRefresher
+        _lr = LiveEvidenceRefresher()
+        if _lr.is_live_available:
+            st.success("Live PubMed refresh is available (Biopython installed).")
+        else:
+            st.info(
+                "Live PubMed refresh is **not available** — Biopython is not installed. "
+                "The system uses cached evidence data. Install `biopython` to enable live refresh."
+            )
+    except Exception:
+        st.info("Live refresh status could not be determined.")
