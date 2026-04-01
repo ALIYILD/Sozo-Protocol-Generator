@@ -1221,6 +1221,35 @@ elif page == "Review Queue":
             else:
                 st.info("No approved documents to export.")
 
+        # ── Pilot Metrics ──
+        st.divider()
+        st.subheader("Pilot Metrics")
+        try:
+            from sozo_generator.orchestration.pilot_metrics import ActivityLogger
+            _pilot_logger = ActivityLogger(ROOT / "pilot_logs")
+            _pilot_metrics = _pilot_logger.compute_metrics()
+            if _pilot_metrics.total_events > 0:
+                mcol1, mcol2, mcol3, mcol4 = st.columns(4)
+                mcol1.metric("Total Activity", _pilot_metrics.total_events)
+                mcol2.metric("Reviewed", _pilot_metrics.docs_reviewed)
+                mcol3.metric("Generated", _pilot_metrics.docs_generated)
+                mcol4.metric("Operators", len(_pilot_metrics.unique_operators))
+
+                if _pilot_metrics.avg_review_turnaround_hours:
+                    st.markdown(
+                        f"**Avg review turnaround:** {_pilot_metrics.avg_review_turnaround_hours} hours"
+                    )
+
+                if st.button("Download Pilot Metrics", key="dl_pilot"):
+                    _md = _pilot_logger.format_metrics_markdown(_pilot_metrics)
+                    st.download_button("Download", data=_md.encode(),
+                                       file_name="pilot_metrics.md", mime="text/markdown",
+                                       key="dl_pilot_md")
+            else:
+                st.info("No pilot activity recorded yet. Actions in the review queue are logged automatically.")
+        except Exception as e:
+            st.warning(f"Pilot metrics unavailable: {e}")
+
         # ── Condition Onboarding ──
         st.divider()
         st.subheader("Onboard New Condition")
