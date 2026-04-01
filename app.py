@@ -118,7 +118,8 @@ with st.sidebar:
 
     page = st.radio(
         "Navigate",
-        ["Chat", "Generate from Template", "Generate Documents", "Conditions Overview", "QA Report", "Evidence Ingest"],
+        ["Chat", "Generate from Template", "Generate Documents", "Review Queue",
+         "Conditions Overview", "QA Report", "Evidence Ingest"],
         label_visibility="collapsed",
     )
     st.divider()
@@ -986,6 +987,144 @@ elif page == "Generate Documents":
                 type="primary",
                 width="stretch",
             )
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# PAGE: REVIEW QUEUE
+# ════════════════════════════════════════════════════════════════════════════
+elif page == "Review Queue":
+    st.title("Review Queue")
+    st.markdown("Manage document review lifecycle: approve, reject, flag, and export.")
+
+    _review_dir = ROOT / "reviews"
+    _review_dir.mkdir(exist_ok=True)
+
+    try:
+        from sozo_generator.review.manager import ReviewManager
+        from sozo_generator.core.enums import ReviewStatus
+
+        mgr = ReviewManager(_review_dir)
+        queue = mgr.get_review_queue()
+
+        # Summary metrics
+        col1, col2, col3, col4, col5 = st.columns(5)
+        col1.metric("Draft", len(queue.get("draft", [])))
+        col2.metric("Needs Review", len(queue.get("needs_review", [])))
+        col3.metric("Approved", len(queue.get("approved", [])))
+        col4.metric("Rejected", len(queue.get("rejected", [])))
+        col5.metric("Flagged", len(queue.get("flagged", [])))
+
+        st.divider()
+
+        # Pending review items
+        pending = queue.get("needs_review", []) + queue.get("flagged", [])
+        if pending:
+            st.subheader(f"Pending Review ({len(pending)})")
+            for state in pending:
+                _badge = "orange" if state.status.value == "needs_review" else "red"
+                with st.expander(
+                    f":{_badge}[{state.status.value.upper()}] "
+                    f"{state.condition_slug} / {state.document_type} / {state.tier} "
+                    f"({state.build_id})"
+                ):
+                    st.markdown(f"**Build ID:** `{state.build_id}`")
+                    st.markdown(f"**Created:** {state.created_at}")
+                    st.markdown(f"**Updated:** {state.updated_at}")
+
+                    # Show section comments if any
+                    if state.section_notes:
+                        st.markdown("**Comments:**")
+                        for sec_id, comments in state.section_notes.items():
+                            for c in comments:
+                                reviewer = c.reviewer if hasattr(c, "reviewer") else c.get("reviewer", "?")
+                                text = c.text if hasattr(c, "text") else c.get("text", "")
+                                st.markdown(f"  - **{reviewer}** on `{sec_id}`: {text}")
+
+                    # Action buttons
+                    acol1, acol2, acol3 = st.columns(3)
+                    _reviewer = st.text_input("Reviewer", key=f"rev_{state.build_id}")
+                    _reason = st.text_input("Reason", key=f"reason_{state.build_id}")
+
+                    with acol1:
+                        if st.button("Approve", key=f"approve_{state.build_id}"):
+                            if _reviewer:
+                                try:
+                                    mgr.approve(state.build_id, _reviewer, _reason)
+                                    st.success("Approved!")
+                                    st.rerun()
+                                except Exception as e:
+                                    st.error(str(e))
+                            else:
+                                st.warning("Enter reviewer name")
+                    with acol2:
+                        if st.button("Reject", key=f"reject_{state.build_id}"):
+                            if _reviewer and _reason:
+                                try:
+                                    mgr.reject(state.build_id, _reviewer, _reason)
+                                    st.success("Rejected.")
+                                    st.rerun()
+                                except Exception as e:
+                                    st.error(str(e))
+                            else:
+                                st.warning("Enter reviewer name and reason")
+                    with acol3:
+                        if st.button("Flag", key=f"flag_{state.build_id}"):
+                            if _reviewer:
+                                try:
+                                    mgr.add_flag(state.build_id, _reason or "Flagged for review", _reviewer)
+                                    st.success("Flagged.")
+                                    st.rerun()
+                                except Exception as e:
+                                    st.error(str(e))
+
+        else:
+            st.info("No documents pending review.")
+
+        # Approved documents
+        approved = queue.get("approved", [])
+        if approved:
+            st.divider()
+            st.subheader(f"Approved ({len(approved)})")
+            for state in approved:
+                st.markdown(
+                    f"- :green[APPROVED] `{state.build_id}` — "
+                    f"{state.condition_slug} / {state.document_type}"
+                )
+
+        # Draft condition onboarding
+        st.divider()
+        st.subheader("Onboard New Condition")
+        st.markdown("Add a condition not yet in the validated registry.")
+        _new_slug = st.text_input("Condition slug (lowercase, underscores)", key="onboard_slug")
+        _new_name = st.text_input("Display name", key="onboard_name")
+        _new_icd = st.text_input("ICD-10 code (if known)", key="onboard_icd")
+
+        if st.button("Create Draft Condition", key="create_draft_btn"):
+            if _new_slug and _new_name:
+                try:
+                    from sozo_generator.conditions.onboarding import ConditionOnboarder
+                    ob = ConditionOnboarder()
+                    if ob.is_known_condition(_new_slug):
+                        st.warning(f"'{_new_slug}' already exists in the registry.")
+                    else:
+                        draft = ob.create_draft_condition(_new_slug, _new_name, _new_icd)
+                        st.success(
+                            f"Draft condition created: **{draft.display_name}** "
+                            f"(evidence: {draft.overall_evidence_quality.value})"
+                        )
+                        st.warning(
+                            "This is a DRAFT condition. All documents generated from it "
+                            "will require clinical review before use."
+                        )
+                except Exception as e:
+                    st.error(f"Error: {e}")
+            else:
+                st.warning("Enter both slug and display name.")
+
+    except ImportError as e:
+        st.error(f"Review manager not available: {e}")
+    except Exception as e:
+        st.error(f"Error loading review queue: {e}")
 
 
 # ════════════════════════════════════════════════════════════════════════════

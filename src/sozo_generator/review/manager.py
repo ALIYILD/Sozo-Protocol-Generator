@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import logging
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
@@ -321,6 +322,135 @@ class ReviewManager:
         if condition_slug is not None:
             states = [s for s in states if s.condition_slug == condition_slug]
         return states
+
+    # ── Approval workflow ───────────────────────────────────────────────
+
+    def list_by_status(self, status: str) -> list[ReviewState]:
+        """List all reviews with a specific status."""
+        target = ReviewStatus(status)
+        return [s for s in self._load_all() if s.status == target]
+
+    def list_approved(self) -> list[ReviewState]:
+        """List all approved reviews."""
+        return [
+            s for s in self._load_all()
+            if s.status == ReviewStatus.APPROVED
+        ]
+
+    def export_approved_only(self, output_dir: Path) -> list[Path]:
+        """Copy approved document files to output_dir. Returns list of copied paths.
+
+        Only exports documents whose review state is APPROVED or EXPORTED.
+        After a successful copy the review state transitions to EXPORTED.
+        """
+        output_dir = Path(output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        copied: list[Path] = []
+
+        for state in self._load_all():
+            if state.status not in (ReviewStatus.APPROVED, ReviewStatus.EXPORTED):
+                continue
+
+            # Look up document path from the state's metadata dict
+            metadata = getattr(state, "metadata", None) or {}
+            doc_path_str = metadata.get("document_path", "") if isinstance(metadata, dict) else ""
+            if not doc_path_str:
+                logger.warning(
+                    "No document_path in metadata for build %s — skipping export",
+                    state.build_id,
+                )
+                continue
+
+            src = Path(doc_path_str)
+            if not src.exists():
+                logger.warning(
+                    "Document file does not exist for build %s: %s",
+                    state.build_id,
+                    src,
+                )
+                continue
+
+            dest = output_dir / src.name
+            shutil.copy2(src, dest)
+            copied.append(dest)
+            logger.info("Exported %s -> %s", src, dest)
+
+            # Transition to EXPORTED if not already
+            if state.status == ReviewStatus.APPROVED:
+                state.transition(
+                    ReviewStatus.EXPORTED, reviewer="system", reason="Exported to output directory"
+                )
+                self._save(state)
+
+        return copied
+
+    def get_review_queue(self) -> dict[str, list[ReviewState]]:
+        """Return reviews grouped by status: {status: [reviews]}."""
+        queue: dict[str, list[ReviewState]] = {}
+        for state in self._load_all():
+            key = state.status.value
+            queue.setdefault(key, []).append(state)
+        return queue
+
+    def reject_with_revision(
+        self,
+        build_id: str,
+        reviewer: str,
+        reason: str,
+        revision_notes: list[str] | None = None,
+    ) -> ReviewState:
+        """Reject and add revision notes for what needs to change.
+
+        Parameters
+        ----------
+        build_id:
+            Build identifier.
+        reviewer:
+            Name or identifier of the reviewer rejecting.
+        reason:
+            High-level reason for rejection.
+        revision_notes:
+            Specific items that need to change before re-submission.
+
+        Raises
+        ------
+        FileNotFoundError
+            If the review does not exist.
+        ValueError
+            If the transition is not valid from the current status.
+        """
+        state = self._load_or_raise(build_id)
+
+        # Build combined reason with revision notes
+        full_reason = reason
+        if revision_notes:
+            notes_str = "; ".join(revision_notes)
+            full_reason = f"{reason} | Revision notes: {notes_str}"
+
+        state.transition(ReviewStatus.REJECTED, reviewer=reviewer, reason=full_reason)
+
+        # Store revision notes as section comments for traceability
+        if revision_notes:
+            for idx, note in enumerate(revision_notes):
+                comment = ReviewComment(
+                    comment_id=f"rev-{_now_compact()}-{idx}",
+                    reviewer=reviewer,
+                    section_id="revision_notes",
+                    text=note,
+                )
+                if "revision_notes" not in state.section_notes:
+                    state.section_notes["revision_notes"] = []
+                state.section_notes["revision_notes"].append(comment)
+
+        self._save(state)
+        logger.info(
+            "Review %s rejected with revision by %s: %s (notes: %d)",
+            build_id,
+            reviewer,
+            reason,
+            len(revision_notes or []),
+        )
+        return state
 
     # ── Persistence internals ───────────────────────────────────────────
 
