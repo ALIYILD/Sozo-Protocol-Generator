@@ -2,6 +2,7 @@
 SOZO Brain Center — 8-stage patient journey diagram.
 Shared across all conditions — shows the standard SOZO care pathway.
 """
+from __future__ import annotations
 
 import logging
 import matplotlib

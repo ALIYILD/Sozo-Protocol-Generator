@@ -104,3 +104,30 @@ class NetworkDysfunction(str, Enum):
     HYPO = "hypo"
     NORMAL = "normal"
     HYPER = "hyper"
+
+
+# ── Phase 2 enums ────────────────────────────────────────────────────
+
+
+class QASeverity(str, Enum):
+    """Severity levels for QA issues. BLOCK prevents export."""
+    BLOCK = "block"
+    WARNING = "warning"
+    INFO = "info"
+
+
+class ReviewStatus(str, Enum):
+    """Lifecycle states for a generated document build."""
+    DRAFT = "draft"
+    NEEDS_REVIEW = "needs_review"
+    APPROVED = "approved"
+    REJECTED = "rejected"
+    EXPORTED = "exported"
+
+
+class EvidenceRelation(str, Enum):
+    """Relationship of an article to a claim."""
+    SUPPORTS = "supports"
+    CONTRADICTS = "contradicts"
+    NEUTRAL = "neutral"
+    INDIRECT = "indirect"

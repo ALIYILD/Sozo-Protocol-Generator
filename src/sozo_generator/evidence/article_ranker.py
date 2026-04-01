@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import logging
 from ..core.enums import EvidenceLevel, EvidenceType
 from ..schemas.evidence import ArticleMetadata

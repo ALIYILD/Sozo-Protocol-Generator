@@ -2,6 +2,8 @@
 SOZO QA — Figure/visual completeness checker.
 Verifies expected visual files exist for a condition.
 """
+from __future__ import annotations
+
 import logging
 from pathlib import Path
 

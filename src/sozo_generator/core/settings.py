@@ -33,9 +33,44 @@ class SozoSettings(BaseSettings):
     # LLM adapter (optional, off by default)
     llm_adapter_enabled: bool = Field(default=False, alias="SOZO_LLM_ADAPTER_ENABLED")
     openai_api_key: str = Field(default="")
+    anthropic_api_key: str = Field(default="", description="Anthropic API key for Claude-powered chat")
 
     # Logging
     log_level: str = Field(default="INFO")
+
+    # ── Phase 2 feature flags ────────────────────────────────────────
+    enable_qa_blocking: bool = Field(
+        default=False,
+        description="When True, BLOCK-severity QA issues prevent document export",
+    )
+    enable_claim_tracing: bool = Field(
+        default=True,
+        description="Attach structured claim objects to generated sections",
+    )
+    enable_evidence_snapshots: bool = Field(
+        default=True,
+        description="Write versioned evidence snapshots alongside builds",
+    )
+    enable_build_manifests: bool = Field(
+        default=True,
+        description="Write build manifests for every export",
+    )
+    enable_reviewer_workflow: bool = Field(
+        default=False,
+        description="Track review state for generated documents",
+    )
+    snapshots_dir: Path = Field(
+        default=Path("data/evidence_snapshots/"),
+        description="Directory for versioned evidence snapshots",
+    )
+    manifests_dir: Path = Field(
+        default=Path("outputs/manifests/"),
+        description="Directory for build manifests",
+    )
+    reviews_dir: Path = Field(
+        default=Path("outputs/reviews/"),
+        description="Directory for review state files",
+    )
 
 
 def get_settings() -> SozoSettings:

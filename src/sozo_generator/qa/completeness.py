@@ -2,6 +2,8 @@
 SOZO QA — Document completeness checker.
 Verifies all expected documents exist and are non-trivial size.
 """
+from __future__ import annotations
+
 import logging
 from pathlib import Path
 

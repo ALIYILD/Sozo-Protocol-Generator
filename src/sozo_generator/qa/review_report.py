@@ -2,6 +2,8 @@
 SOZO QA — Master review report generator.
 Aggregates all QA checks into a comprehensive report.
 """
+from __future__ import annotations
+
 import logging
 from datetime import datetime, timezone
 from pathlib import Path

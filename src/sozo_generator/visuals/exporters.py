@@ -2,6 +2,7 @@
 SOZO Brain Center — visuals export coordinator.
 Generates all visuals for a condition and returns paths.
 """
+from __future__ import annotations
 
 import logging
 from pathlib import Path

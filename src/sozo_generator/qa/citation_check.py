@@ -2,6 +2,8 @@
 SOZO QA — Citation format and validity checker.
 Checks citations are properly formatted and not fabricated.
 """
+from __future__ import annotations
+
 import logging
 import re
 from collections import Counter

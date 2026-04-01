@@ -3,6 +3,7 @@ SOZO Brain Center — brain region highlight maps.
 Generates simplified schematic brain diagrams with target regions highlighted.
 Uses matplotlib with SOZO brand colors.
 """
+from __future__ import annotations
 
 import logging
 import matplotlib

@@ -117,17 +117,422 @@ with st.sidebar:
 
     page = st.radio(
         "Navigate",
-        ["Generate Documents", "Conditions Overview", "QA Report", "Evidence Ingest"],
+        ["Chat", "Generate from Template", "Generate Documents", "Conditions Overview", "QA Report", "Evidence Ingest"],
         label_visibility="collapsed",
     )
     st.divider()
-    st.caption("v1.0.0  ·  SOZO Brain Center")
+
+    # AI settings in sidebar
+    with st.expander("AI Settings", expanded=False):
+        ai_api_key = st.text_input(
+            "Anthropic API Key",
+            type="password",
+            key="anthropic_key",
+            help="Optional. Enables smarter intent parsing. Works without it too.",
+        )
+        openai_key = st.text_input(
+            "OpenAI API Key (alt)",
+            type="password",
+            key="openai_key",
+            help="Alternative to Anthropic key.",
+        )
+
+    st.caption("v2.0.0  ·  SOZO Brain Center")
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# PAGE: CHAT
+# ════════════════════════════════════════════════════════════════════════════
+if page == "Chat":
+    st.title("SOZO Document Generator — Chat")
+    st.markdown(
+        "Tell me what you need in plain English. Upload templates, generate documents, "
+        "merge doc types, run QA — all from this chat."
+    )
+
+    # Initialize chat state
+    if "chat_history" not in st.session_state:
+        st.session_state.chat_history = []
+    if "chat_files" not in st.session_state:
+        st.session_state.chat_files = {}
+
+    # File upload area
+    uploaded_template = st.file_uploader(
+        "Upload a template (optional)",
+        type=["docx"],
+        key="chat_upload",
+        help="Upload a DOCX template. Then tell me what to do with it.",
+    )
+
+    # Display chat history
+    for msg in st.session_state.chat_history:
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
+            # Show download buttons for files
+            if msg.get("files"):
+                file_count = len(msg["files"])
+                with st.expander(f"Download {file_count} generated file(s)", expanded=False):
+                    for label, fpath in msg["files"].items():
+                        fpath = Path(fpath)
+                        if fpath.exists():
+                            with open(fpath, "rb") as f:
+                                st.download_button(
+                                    f"Download {fpath.name}",
+                                    data=f.read(),
+                                    file_name=fpath.name,
+                                    mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                    key=f"chat_dl_{label}_{len(st.session_state.chat_history)}",
+                                )
+                    # ZIP all button
+                    if file_count > 1:
+                        zip_data = _zip_files(msg["files"])
+                        st.download_button(
+                            "Download ALL as ZIP",
+                            data=zip_data,
+                            file_name="sozo_generated.zip",
+                            mime="application/zip",
+                            key=f"chat_zip_{len(st.session_state.chat_history)}",
+                        )
+
+    # Chat input
+    user_input = st.chat_input("e.g. Generate all documents for Parkinson's...")
+
+    if user_input:
+        # Add user message to history
+        st.session_state.chat_history.append({"role": "user", "content": user_input})
+
+        with st.chat_message("user"):
+            st.markdown(user_input)
+
+        # Handle uploaded file
+        template_path = None
+        if uploaded_template is not None:
+            import tempfile
+            tmp_dir = Path(tempfile.mkdtemp(prefix="sozo_chat_"))
+            template_path = tmp_dir / uploaded_template.name
+            template_path.write_bytes(uploaded_template.getvalue())
+
+        # Process with chat engine
+        with st.chat_message("assistant"):
+            status_placeholder = st.empty()
+            status_placeholder.markdown("*Thinking...*")
+
+            try:
+                from sozo_generator.ai.chat_engine import ChatEngine
+
+                # Get API keys from sidebar
+                anthropic_key = st.session_state.get("anthropic_key", "")
+                openai_key = st.session_state.get("openai_key", "")
+
+                engine = ChatEngine(
+                    output_dir=DEFAULT_OUTPUT_DIR,
+                    anthropic_api_key=anthropic_key,
+                    openai_api_key=openai_key,
+                    use_llm=bool(anthropic_key or openai_key),
+                    progress_callback=lambda msg: status_placeholder.markdown(f"*{msg}*"),
+                )
+
+                response = engine.process_message(
+                    text=user_input,
+                    uploaded_file_path=template_path,
+                )
+
+                status_placeholder.empty()
+
+                # Display response
+                st.markdown(response.message)
+
+                # Show files if generated
+                files_dict = {}
+                if response.files:
+                    file_count = len(response.files)
+                    st.success(f"{file_count} file(s) generated")
+                    with st.expander(f"Download {file_count} file(s)", expanded=True):
+                        for label, fpath in response.files.items():
+                            fpath = Path(fpath)
+                            if fpath.exists():
+                                files_dict[label] = str(fpath)
+                                with open(fpath, "rb") as f:
+                                    st.download_button(
+                                        f"Download {fpath.name}",
+                                        data=f.read(),
+                                        file_name=fpath.name,
+                                        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                        key=f"resp_dl_{label}",
+                                    )
+                        if file_count > 1:
+                            zip_data = _zip_files(response.files)
+                            st.download_button(
+                                "Download ALL as ZIP",
+                                data=zip_data,
+                                file_name="sozo_generated.zip",
+                                mime="application/zip",
+                                key="resp_zip",
+                            )
+
+                # Save to history
+                st.session_state.chat_history.append({
+                    "role": "assistant",
+                    "content": response.message,
+                    "files": files_dict,
+                })
+
+            except Exception as e:
+                status_placeholder.empty()
+                error_msg = f"Error: {e}"
+                st.error(error_msg)
+                st.session_state.chat_history.append({
+                    "role": "assistant",
+                    "content": error_msg,
+                })
+
+    # Quick action buttons
+    st.divider()
+    st.markdown("**Quick actions:**")
+    qcol1, qcol2, qcol3, qcol4 = st.columns(4)
+    with qcol1:
+        if st.button("Generate all 15 conditions", use_container_width=True):
+            st.session_state.chat_history.append({"role": "user", "content": "Generate all documents for all 15 conditions"})
+            st.rerun()
+    with qcol2:
+        if st.button("List conditions", use_container_width=True):
+            st.session_state.chat_history.append({"role": "user", "content": "List all conditions"})
+            st.rerun()
+    with qcol3:
+        if st.button("Run QA on all", use_container_width=True):
+            st.session_state.chat_history.append({"role": "user", "content": "Run QA on all conditions"})
+            st.rerun()
+    with qcol4:
+        if st.button("Help", use_container_width=True):
+            st.session_state.chat_history.append({"role": "user", "content": "help"})
+            st.rerun()
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# PAGE: GENERATE FROM TEMPLATE
+# ════════════════════════════════════════════════════════════════════════════
+elif page == "Generate from Template":
+    st.title("Generate from Template")
+    st.markdown(
+        "Upload a **Gold Standard DOCX template** (e.g. Parkinson's Evidence-Based Protocol). "
+        "The system will read its structure and generate matching documents for every condition, "
+        "populated with **real clinical data and verified references**."
+    )
+    st.info(
+        "**No hallucinations.** All content comes from the condition registry's verified clinical data. "
+        "Sections that can't be populated are clearly marked as requiring clinical input.",
+        icon="🛡️",
+    )
+
+    uploaded_file = st.file_uploader(
+        "Upload your template (.docx)",
+        type=["docx"],
+        help="Upload a SOZO clinical document template. The system will extract its section structure.",
+    )
+
+    if uploaded_file is not None:
+        # Save uploaded file to temp
+        import tempfile, shutil
+        tmp_dir = Path(tempfile.mkdtemp(prefix="sozo_template_"))
+        template_path = tmp_dir / uploaded_file.name
+        template_path.write_bytes(uploaded_file.getvalue())
+
+        st.success(f"Template uploaded: **{uploaded_file.name}** ({uploaded_file.size / 1024:.1f} KB)")
+
+        # Parse template
+        from sozo_generator.template.template_driven_generator import TemplateDrivenGenerator
+        generator = TemplateDrivenGenerator(template_path)
+
+        with st.spinner("Parsing template structure..."):
+            template_sections = generator.parse_template()
+
+        if not template_sections:
+            st.error("Could not parse any sections from the template. Make sure it uses Word Heading styles.")
+            st.stop()
+
+        # Show parsed structure
+        st.subheader("Template Structure Detected")
+        st.markdown(f"**{len(template_sections)} sections** found in template:")
+        for i, ts in enumerate(template_sections, 1):
+            level_indent = "  " * (ts.heading_level - 1)
+            placeholder_badge = f"  ⚠️ {ts.placeholder_count} placeholder(s)" if ts.placeholder_count > 0 else ""
+            table_badge = "  📊 has table" if ts.has_table else ""
+            st.markdown(f"{level_indent}{i}. **{ts.title}** (`{ts.section_id}`){placeholder_badge}{table_badge}")
+
+        st.divider()
+
+        # Condition selection
+        condition_options = _condition_options()
+        all_slugs = [s for s, _ in condition_options]
+        all_displays = [d for _, d in condition_options]
+
+        st.subheader("Select Conditions to Generate")
+        gen_mode = st.radio(
+            "Generate for:",
+            ["All 15 conditions", "Selected conditions"],
+            horizontal=True,
+        )
+
+        if gen_mode == "Selected conditions":
+            selected_displays = st.multiselect(
+                "Choose conditions",
+                all_displays,
+                default=all_displays[:3],
+            )
+            target_slugs = [all_slugs[all_displays.index(d)] for d in selected_displays]
+        else:
+            target_slugs = all_slugs
+
+        col1, col2 = st.columns(2)
+        with col1:
+            selected_tier_label = st.selectbox(
+                "Tier",
+                list(TIER_LABELS.values()),
+                index=0,
+                key="template_tier",
+            )
+            selected_tier = [k for k, v in TIER_LABELS.items() if v == selected_tier_label][0]
+        with col2:
+            output_dir = st.text_input(
+                "Output directory",
+                value=DEFAULT_OUTPUT_DIR,
+                key="template_output_dir",
+            )
+
+        st.divider()
+
+        if st.button("Generate Documents from Template", type="primary", use_container_width=True):
+            from sozo_generator.core.enums import Tier
+            from sozo_generator.docx.renderer import DocumentRenderer
+
+            if selected_tier == "both":
+                tiers = [Tier.FELLOW, Tier.PARTNERS]
+            else:
+                tiers = [Tier(selected_tier)]
+
+            registry = _load_registry()
+            renderer = DocumentRenderer(output_dir=output_dir)
+
+            all_outputs: dict[str, Path] = {}
+            errors: list[str] = []
+
+            progress = st.progress(0, text="Generating...")
+            total_work = len(target_slugs) * len(tiers)
+            done = 0
+
+            for slug in target_slugs:
+                try:
+                    condition = registry.get(slug)
+                except Exception as e:
+                    errors.append(f"{slug}: Failed to load — {e}")
+                    done += len(tiers)
+                    progress.progress(done / total_work)
+                    continue
+
+                for tier in tiers:
+                    try:
+                        spec = generator.generate_for_condition(condition, tier)
+
+                        # Compute output path
+                        condition_dir = Path(output_dir) / condition.slug.replace("_", " ").title().replace(" ", "_")
+                        tier_dir = condition_dir / tier.value.capitalize()
+                        tier_dir.mkdir(parents=True, exist_ok=True)
+                        out_path = tier_dir / spec.output_filename
+
+                        rendered_path = renderer.render(spec, out_path)
+                        key = f"{slug}_{tier.value}"
+                        all_outputs[key] = rendered_path
+
+                    except Exception as e:
+                        errors.append(f"{slug}/{tier.value}: {e}")
+
+                    done += 1
+                    progress.progress(
+                        done / total_work,
+                        text=f"Generating {condition.display_name} ({tier.value})...",
+                    )
+
+            progress.progress(100, text="Done!")
+
+            # Results
+            if all_outputs:
+                st.success(f"Generated **{len(all_outputs)}** documents across **{len(target_slugs)}** conditions")
+
+                # Count insufficient sections
+                total_insufficient = 0
+                total_sections = 0
+                for slug in target_slugs:
+                    try:
+                        condition = registry.get(slug)
+                        for tier in tiers:
+                            spec = generator.generate_for_condition(condition, tier)
+                            for s in spec.sections:
+                                total_sections += 1
+                                if s.is_placeholder:
+                                    total_insufficient += 1
+                    except Exception:
+                        pass
+
+                if total_insufficient > 0:
+                    st.warning(
+                        f"**{total_insufficient}/{total_sections}** sections marked as insufficient data. "
+                        f"These require clinical input before use.",
+                        icon="⚠️",
+                    )
+
+                # Download buttons
+                st.subheader("Download Generated Documents")
+
+                # Group by condition
+                by_condition: dict[str, list] = {}
+                for key, path in all_outputs.items():
+                    slug = key.rsplit("_", 1)[0]
+                    by_condition.setdefault(slug, []).append((key, path))
+
+                for slug, items in sorted(by_condition.items()):
+                    display_name = slug.replace("_", " ").title()
+                    with st.expander(f"📁 {display_name} ({len(items)} documents)", expanded=False):
+                        for key, path in items:
+                            if path.exists():
+                                tier_part = key.rsplit("_", 1)[-1]
+                                col_a, col_b = st.columns([3, 1])
+                                with col_a:
+                                    st.markdown(f"📄 **{path.name}** ({tier_part.capitalize()})")
+                                with col_b:
+                                    with open(path, "rb") as f:
+                                        st.download_button(
+                                            "Download",
+                                            data=f.read(),
+                                            file_name=path.name,
+                                            mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                            key=f"tdl_{key}",
+                                        )
+
+                # Bulk ZIP
+                st.divider()
+                zip_bytes = _zip_files(all_outputs)
+                st.download_button(
+                    "⬇️ Download All as ZIP",
+                    data=zip_bytes,
+                    file_name=f"sozo_template_generated_{len(target_slugs)}_conditions.zip",
+                    mime="application/zip",
+                    type="primary",
+                    use_container_width=True,
+                )
+
+            if errors:
+                st.divider()
+                st.subheader("Errors")
+                for err in errors:
+                    st.error(err)
+
+        # Cleanup temp on next rerun (Streamlit handles this naturally)
 
 
 # ════════════════════════════════════════════════════════════════════════════
 # PAGE: GENERATE DOCUMENTS
 # ════════════════════════════════════════════════════════════════════════════
-if page == "Generate Documents":
+elif page == "Generate Documents":
     st.title("Generate Clinical Documents")
     st.markdown("Select a condition and document options, then click **Generate**.")
 

@@ -3,6 +3,7 @@ SOZO Brain Center — FNON network diagrams.
 Generates network involvement diagrams showing which of the 6 FNON networks
 are affected and their interconnections.
 """
+from __future__ import annotations
 
 import logging
 import matplotlib

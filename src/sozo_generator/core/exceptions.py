@@ -32,3 +32,19 @@ class InsufficientEvidenceError(SozoGeneratorError):
 
 class ReviewRequiredError(SozoGeneratorError):
     """Raised when content requires clinical review and strict mode is enabled."""
+
+
+class QABlockError(SozoGeneratorError):
+    """Raised when QA finds BLOCK-severity issues and no override flag is set."""
+
+    def __init__(self, issues: list = None, message: str = ""):
+        self.issues = issues or []
+        super().__init__(message or f"QA blocked export: {len(self.issues)} blocking issue(s)")
+
+
+class EvidenceSnapshotError(SozoGeneratorError):
+    """Raised when evidence snapshot creation or loading fails."""
+
+
+class BuildManifestError(SozoGeneratorError):
+    """Raised when build manifest validation fails."""

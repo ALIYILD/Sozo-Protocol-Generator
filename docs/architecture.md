@@ -1,6 +1,38 @@
 # SOZO Generator — Technical Architecture
 
-## Module Dependency Graph
+## Phase 2 Architecture
+
+See also:
+- [Evidence Lifecycle](evidence_lifecycle.md)
+- [QA Lifecycle](qa_lifecycle.md)
+- [Reviewer Workflow](reviewer_workflow.md)
+- [Batch Generation](batch_generation.md)
+- [Safety & Evidence Policy](safety_evidence_policy.md)
+
+### Phase 2 Module Map
+
+| Package | Purpose |
+|---------|---------|
+| `schemas/contracts.py` | **Single source of truth** for all Phase 2 types |
+| `evidence/query_planner.py` | Build PubMed query plans per condition |
+| `evidence/deduper.py` | PMID deduplication with metadata merging |
+| `evidence/ranker.py` | Multi-factor evidence ranking |
+| `evidence/clusterer.py` | Group evidence into section-level bundles |
+| `evidence/bundles.py` | Bundle persistence (JSON) |
+| `evidence/snapshots.py` | Versioned evidence snapshots |
+| `evidence/contradiction.py` | Contradiction detection |
+| `content/claim_tracer.py` | Claim-evidence linking |
+| `qa/engine.py` | QA orchestrator with 6 rule modules |
+| `qa/rules/` | Citation, safety, modality, population, language, completeness rules |
+| `review/manager.py` | Review state machine + persistence |
+| `visuals/figure_manifest.py` | Figure manifest builder |
+| `visuals/templates.py` | Deterministic visual templates |
+| `orchestration/batch_runner.py` | Batch document generation |
+| `orchestration/versioning.py` | Build manifests + content hashing |
+
+---
+
+## Original Module Dependency Graph
 
 ```
 cli/main.py

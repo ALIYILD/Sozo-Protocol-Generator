@@ -2,6 +2,8 @@
 Template content extractor — extracts specific content blocks from parsed templates.
 Used to pull Gold Standard content for comparison and gap analysis.
 """
+from __future__ import annotations
+
 import logging
 import re
 from pathlib import Path

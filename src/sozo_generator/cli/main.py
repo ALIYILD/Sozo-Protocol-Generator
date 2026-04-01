@@ -45,6 +45,30 @@ except ImportError as e:
     typer.echo(typer.style(f"Warning: could not load 'visuals' command: {e}", fg=typer.colors.YELLOW))
     visuals_app = typer.Typer(name="visuals", help="(unavailable — import error)")
 
+try:
+    from .qa_engine_cli import qa_engine_app
+except ImportError as e:
+    typer.echo(typer.style(f"Warning: could not load 'qa2' command: {e}", fg=typer.colors.YELLOW))
+    qa_engine_app = typer.Typer(name="qa2", help="(unavailable — import error)")
+
+try:
+    from .review_cli import review_app
+except ImportError as e:
+    typer.echo(typer.style(f"Warning: could not load 'review' command: {e}", fg=typer.colors.YELLOW))
+    review_app = typer.Typer(name="review", help="(unavailable — import error)")
+
+try:
+    from .evidence_cli import evidence_cli_app
+except ImportError as e:
+    typer.echo(typer.style(f"Warning: could not load 'evidence' command: {e}", fg=typer.colors.YELLOW))
+    evidence_cli_app = typer.Typer(name="evidence", help="(unavailable — import error)")
+
+try:
+    from .manifest_cli import manifest_app
+except ImportError as e:
+    typer.echo(typer.style(f"Warning: could not load 'manifests' command: {e}", fg=typer.colors.YELLOW))
+    manifest_app = typer.Typer(name="manifests", help="(unavailable — import error)")
+
 # ---------------------------------------------------------------------------
 # Top-level Typer app
 # ---------------------------------------------------------------------------
@@ -61,6 +85,10 @@ app.add_typer(evidence_app, name="ingest-evidence")
 app.add_typer(build_app, name="build")
 app.add_typer(qa_app, name="qa")
 app.add_typer(visuals_app, name="visuals")
+app.add_typer(qa_engine_app, name="qa2")
+app.add_typer(review_app, name="review")
+app.add_typer(evidence_cli_app, name="evidence")
+app.add_typer(manifest_app, name="manifests")
 
 # Merge build-all commands into the build group
 if _build_all_available:

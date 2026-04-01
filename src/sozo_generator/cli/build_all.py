@@ -1,4 +1,6 @@
 """Build documents for all 15 conditions."""
+from __future__ import annotations
+
 from pathlib import Path
 from typing import Optional
 

@@ -2,6 +2,8 @@
 SOZO QA — Evidence coverage checker.
 Verifies conditions have sufficient evidence backing.
 """
+from __future__ import annotations
+
 import logging
 import re
 

@@ -1,4 +1,6 @@
 """Extract and analyze a template directory."""
+from __future__ import annotations
+
 import json
 import os
 from pathlib import Path

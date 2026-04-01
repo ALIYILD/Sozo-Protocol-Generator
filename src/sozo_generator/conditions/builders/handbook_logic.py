@@ -1,4 +1,6 @@
 """Builder for clinical handbook sections."""
+from __future__ import annotations
+
 from ...schemas.condition import ConditionSchema
 from ...schemas.documents import SectionContent
 

@@ -2,6 +2,8 @@
 Style map — defines the Word document styles used in SOZO document generation.
 Maps semantic content types to python-docx paragraph/character styles.
 """
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from typing import Optional
 

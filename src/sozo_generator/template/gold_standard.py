@@ -2,6 +2,8 @@
 Gold standard template manifest — defines the expected structure of all 15 document types.
 Used for template conformity checking and document generation scaffolding.
 """
+from __future__ import annotations
+
 from ..core.enums import DocumentType, Tier
 
 

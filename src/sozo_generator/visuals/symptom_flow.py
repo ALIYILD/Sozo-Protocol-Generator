@@ -2,6 +2,8 @@
 SOZO Brain Center — symptom → network → modality flow diagrams.
 Shows how symptoms map to affected networks and treatment modalities.
 """
+from __future__ import annotations
+
 
 import logging
 import matplotlib

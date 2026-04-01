@@ -2,6 +2,8 @@
 Template parser — extracts structure from Gold Standard .docx template files.
 Identifies section headers, table locations, placeholder fields, and review flags.
 """
+from __future__ import annotations
+
 import logging
 import re
 from pathlib import Path

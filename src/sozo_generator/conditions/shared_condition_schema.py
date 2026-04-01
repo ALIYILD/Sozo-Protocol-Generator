@@ -2,6 +2,8 @@
 Shared helpers for building ConditionSchema instances.
 All condition generators import from here.
 """
+from __future__ import annotations
+
 from ..schemas.condition import (
     ConditionSchema, PhenotypeSubtype, NetworkProfile,
     StimulationTarget, AssessmentTool, SafetyNote, ProtocolEntry

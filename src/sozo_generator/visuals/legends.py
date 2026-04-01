@@ -2,6 +2,7 @@
 SOZO Brain Center — shared legend figures.
 Evidence level legend, confidence label legend, network color legend.
 """
+from __future__ import annotations
 
 import logging
 import matplotlib

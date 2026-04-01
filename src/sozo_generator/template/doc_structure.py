@@ -2,6 +2,8 @@
 Document structure helpers — builds DocumentSpec objects from condition schemas
 and document type + tier specifications.
 """
+from __future__ import annotations
+
 import logging
 from datetime import datetime
 from pathlib import Path
