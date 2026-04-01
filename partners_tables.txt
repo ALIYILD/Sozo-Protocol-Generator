@@ -1,0 +1,143 @@
+
+=== TABLE[0] (6r x 3c) ===
+  [0] Level || Domain || Action
+  [1] 1 || Phenotype || Identify the dominant clinical phenotype
+  [2] 2 || Network Hypothesis || Map the phenotype to dysfunctional brain networks
+  [3] 3 || Stimulation Selection || Select montage(s), modality, and sequencing
+  [4] 4 || Response Evaluation || Assess at mid-point and end-of-block
+  [5] 5 || Adjustment || Reassess, revise, change montage or modality
+
+=== TABLE[1] (5r x 4c) ===
+  [0] Modality || Device || Classification || PD Status
+  [1] tDCS || Newronika HDCkit / PlatoScience || CE Class IIa || Level B evidence
+  [2] TPS || NEUROLITH® (Storz Medical) || CE Class IIa || INVESTIGATIONAL
+  [3] taVNS || Transcutaneous auricular VNS || CE-marked || Emerging adjunctive
+  [4] CES || Alpha-Stim® || FDA-cleared || Supportive adjunct
+
+=== TABLE[2] (3r x 2c) ===
+  [0] Role || Responsibilities
+  [1] Doctor || Overall governance; protocol approval; treatment planning; FNON montage selection; clinical decision-making; approves protocols; authorises off-label use; signs consent; designs treatment plans; oversees AE reporting
+  [2] Clinical Assistant || Device operation; session delivery; data recording; patient monitoring under Doctor supervision. Operates within prescribed parameters only. No independent protocol modifications.
+
+=== TABLE[3] (10r x 4c) ===
+  [0] Stage || Action || Responsible || Output
+  [1] 1 || Appointment booking || Patient || Initial visit scheduled
+  [2] 2 || Informed consent || Patient + Admin || Signed consent
+  [3] 3 || Psychological intake & SOZO PRS || Psychologist / Assistant || Baseline phenotype profile
+  [4] 4 || Clinical exam ± EEG || Physician || Clinical + network hypothesis
+  [5] 5 || Report preparation || Clinical team || Written report
+  [6] 6 || Report discussion & treatment plan || Physician || Finalised treatment plan
+  [7] 7 || Active treatment course || Clinic team || Active neuromodulation
+  [8] 8 || 2–3 month reassessment || Clinical team || Outcome comparison
+  [9] 9 || Therapy optimisation || Physician || Updated protocol
+
+=== TABLE[4] (5r x 4c) ===
+  [0] Modality || Regulatory Status || PD Classification || Disclosure Required
+  [1] tDCS || CE Class IIa || Established NIBS; Level B evidence || Standard informed consent
+  [2] TPS || CE Class IIa || INVESTIGATIONAL / OFF-LABEL || Mandatory off-label; Doctor sign-off
+  [3] taVNS || CE-marked || Emerging adjunctive || Informed consent + evidence disclosure
+  [4] CES || FDA-cleared || Supportive adjunct ONLY || Standard informed consent
+
+=== TABLE[5] (7r x 2c) ===
+  [0] Domain || What to Capture
+  [1] Chief Complaints || Patient's own description of their most troubling symptoms; what brought them to SOZO
+  [2] Medical History || Year of PD diagnosis, diagnosing physician, initial symptoms, Hoehn & Yahr stage, comorbidities, surgical history (DBS etc.)
+  [3] Psychiatric History || Previous/current psychiatric diagnoses, previous treatments, current psychiatric medications, suicidal ideation screening, substance use
+  [4] Current Pharmacotherapy || Complete medication list with doses, frequency, timing, and prescribing physician. Document levodopa timing specifically.
+  [5] Functional Limitations || ADL independence, work/occupation status, social functioning, caregiver involvement
+  [6] Treatment History || Previous therapies (pharmacological, surgical, rehabilitation), dates, providers, and outcomes
+
+=== TABLE[6] (7r x 4c) ===
+  [0] Network || Core Function || Max Score || EEG Sites
+  [1] 1. Default Mode (DMN) || Self-referential processing, autobiographical memory, mind-wandering || 14 || Fp1/2, Fz, Pz
+  [2] 2. Central Executive (CEN) || Working memory, planning, cognitive control || 14 || F3/4, F7/8, P3/4
+  [3] 3. Salience (SN) || Threat detection, interoception, DMN↔CEN switching || 14 || Fz, FCz, Cz
+  [4] 4. Sensorimotor (SMN) || Motor output, somatosensation, proprioception, motor learning || 16 || C3/4, Cz, CP3/4
+  [5] 5. Limbic / Emotional || Affect generation/regulation, reward, stress || 14 || Fp1/2, F7/8, T7/8
+  [6] 6. Attention (DAN/VAN) || Sustained/selective attention, orienting, reorienting || 16 || P3/4, Pz, F3/4
+
+=== TABLE[7] (9r x 2c) ===
+  [0] Phenotype || Key Features (Network Basis)
+  [1] Bradykinetic / Rigid || Motor network hypofunction, CEN compensation failure, SN dysregulation
+  [2] Tremor-Dominant || Cerebellar–thalamic loop instability, motor network oscillation abnormalities
+  [3] Executive Dysfunction || CEN fragmentation, impaired SN switching, DMN intrusion during task
+  [4] Depression / Apathy || CEN hypofunction, limbic–SN overcoupling, reduced salience processing
+  [5] Freezing of Gait (FOG) || SMA–motor disconnection, impaired SN–CEN switching under dual-task load
+  [6] Cognitive Impairment || Global network inefficiency, DMN–CEN decoupling, attention network disruption
+  [7] Pain Phenotype || Sensorimotor-salience coupling, reduced descending inhibition
+  [8] Mixed Phenotype || Multi-network dysfunction; prioritise the most disabling symptom cluster
+
+=== TABLE[8] (7r x 2c) ===
+  [0] Component || Details to Explain
+  [1] Selected NIBS techniques || Which modalities (tDCS, TPS, taVNS, CES) and why each was chosen
+  [2] Device montage(s) || Where electrodes or stimulation will be applied and what brain areas this targets
+  [3] Number of sessions || Total sessions per block, sessions per week, sessions per day
+  [4] Expected timeline || In-clinic phase duration (typically 8–12 weeks), home continuation phase
+  [5] Multimodal sequencing || The S-O-Z-O sequence: Stabilize → Optimize → Zone target → Outcome consolidation
+  [6] Estimated cost || In-clinic treatment course, device purchases (if applicable), follow-up assessments
+
+=== TABLE[9] (5r x 3c) ===
+  [0] Phase || What Happens || Modality
+  [1] S — Stabilize || Calm the nervous system, reduce arousal || taVNS or CES (pre-session)
+  [2] O — Optimize || Prime brain networks for plasticity || tDCS (before TPS)
+  [3] Z — Zone Target || Deliver focused deep stimulation || TPS (main session)
+  [4] O — Outcome || Consolidate gains with tasks/support || taVNS/CES + rehab tasks
+
+=== TABLE[10] (10r x 3c) ===
+  [0] Parameter || SOZO Standard || DO NOT EXCEED
+  [1] tDCS Intensity || Up to 2 mA/channel || 2 mA/channel
+  [2] tDCS Duration || 20–30 min/session || 30 min/session
+  [3] tDCS Daily || 1–2 sessions/day || 2 sessions/day; 60 min max
+  [4] tDCS Min Interval || ≥4–6 hours || No back-to-back sessions
+  [5] TPS Energy || 0.01–0.25 mJ/mm² || 0.25 mJ/mm²
+  [6] TPS Pulses/Session || 6,000–12,000 || 12,000 total
+  [7] taVNS Daily Max || Flexible (split sessions) || 4 hours total/day
+  [8] CES Current || 100–300 µA || 500 µA (device limit)
+  [9] Impedance || <15 kΩ || Do NOT stimulate >15 kΩ
+
+=== TABLE[11] (6r x 3c) ===
+  [0] Montage Target || Domain || Concurrent Task
+  [1] DLPFC (F1/C3) || Cognition / Mood || Computerised cognitive training (n-back, Stroop, task-switching)
+  [2] M1 (F2/C1) || Motor / Pain || Fine motor drills; physiotherapy-guided repetition; grip tasks
+  [3] Bilateral DLPFC (F3/C2) || Dual-Task Gait || Treadmill walking + cognitive task
+  [4] Cerebellar (F4/C7) || Dyskinesia / Balance || Balance board, coordinated reach-and-grasp
+  [5] Mixed F5 || Motor–Cognitive || Alternating motor drills + cognitive switching tasks
+
+=== TABLE[12] (5r x 2c) ===
+  [0] Domain || Response Criteria
+  [1] Motor || Clinically meaningful improvement in MDS-UPDRS III (consistent medication state) + clinician global impression
+  [2] Gait / FOG || Improvement in 10m walk, TUG, dual-task walking, and/or reduced FOG questionnaire score
+  [3] Cognition / Mood || Improvement in MoCA or executive tasks + change in PHQ-9/GAD-7 consistent with patient/caregiver report
+  [4] Function || Better ADL function (patient/caregiver-reported or clinician-observed) and/or improved therapy engagement
+
+=== TABLE[13] (4r x 2c) ===
+  [0] Classification || Definition
+  [1] Responder || Clinically meaningful improvement in one or more target domains
+  [2] Partial Responder || Some improvement but below meaningful threshold; or improvement in non-target domains
+  [3] Non-Responder || No meaningful improvement after full treatment block → proceed to Stage 9 optimisation
+
+=== TABLE[14] (10r x 2c) ===
+  [0] Phenotype || SOZO Device & Network Strategy
+  [1] Motor dominant || HDCstim tDCS (Fpz/Cbz anode, Cz cathode) + TPS cranial + peripheral (palms/soles) + taVNS
+  [2] Tremor primary || HDCstim tDCS (contralateral C3/C4 anode, Fpz cathode) + TPS cranial + peripheral (palms) + taVNS supportive
+  [3] Gait / FOG || HDCstim tDCS (Fpz/Cz anode, CervVII cathode) + TPS cranial + peripheral (soles) + taVNS supportive
+  [4] Cognitive / Executive || HDCstim tDCS (F3/F4 anode, Pz cathode) + TPS cranial targeted + taVNS supportive
+  [5] Depression / Apathy || HDCstim tDCS (F3 anode, F2 cathode) + TPS cranial targeted + taVNS + CES supportive
+  [6] Pain dominant || HDCstim tDCS (contralateral C3/C4 anode, Pz cathode) + TPS cranial + peripheral (affected derma/myotomes) + taVNS + CES
+  [7] Dyskinesias || HDCstim tDCS (Fpz/Cbz anode, Cz cathode) + TPS cranial + peripheral + taVNS + CES supportive
+  [8] Mixed motor + cognitive || FNON alternating strategy (F5): Block A motor emphasis, Block B executive emphasis (3:2 ratio)
+  [9] No response after 8–10 || Return to FNON Level 1: Reassess phenotype → Re-map network → Adjust montage/modality. DO NOT escalate intensity.
+
+=== TABLE[15] (12r x 3c) ===
+  [0] Doc || Document Name || Stage
+  [1] 01 || Appointment Scheduling Form || Stage 1
+  [2] 02 || Informed Consent Form (incl. TPS off-label) || Stage 2
+  [3] 03 || Patient Intake & Medical History || Stage 3
+  [4] 04 || Psychological Intake & SOZO PRS Baseline || Stage 3
+  [5] 05 || Clinical Examination Checklist (6-Network + Neuro) || Stage 4
+  [6] 06 || Clinical Report Template || Stage 5
+  [7] 07 || Treatment Plan || Stage 6
+  [8] 08 || Session Log & Adverse Event Tracker || Stage 7
+  [9] 09 || Device Training Checklist & Home Protocol || Stage 7
+  [10] 10 || Follow-Up Assessment Form || Stage 8
+  [11] 11 || Therapy Optimisation Record || Stage 9
