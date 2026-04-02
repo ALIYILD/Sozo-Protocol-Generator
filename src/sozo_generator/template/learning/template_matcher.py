@@ -10,6 +10,14 @@ from ..parser import TemplateParser, ParsedSection
 logger = logging.getLogger(__name__)
 
 @dataclass
+class TemplateMatchCandidate:
+    """A scored candidate doc type match."""
+    doc_type: str = ""
+    score: float = 0.0
+    matched_keywords: list[str] = field(default_factory=list)
+
+
+@dataclass
 class TemplateMatchResult:
     """Result of matching an uploaded template against known patterns."""
     matched_doc_type: str = ""
@@ -21,6 +29,8 @@ class TemplateMatchResult:
     condition_detected: str = ""
     warnings: list[str] = field(default_factory=list)
     section_ids: list[str] = field(default_factory=list)
+    # Fallback candidates when confidence is weak
+    candidates: list[TemplateMatchCandidate] = field(default_factory=list)
 
 # Known section patterns per doc type (from gold_standard.py)
 _DOC_TYPE_KEYWORDS = {
@@ -62,22 +72,29 @@ class TemplateMatcher:
         filename = template_path.stem.lower()
 
         # Score against each doc type
-        best_type = ""
-        best_score = 0.0
+        all_candidates: list[TemplateMatchCandidate] = []
 
         for doc_type, keywords in _DOC_TYPE_KEYWORDS.items():
-            score = 0
-            for kw in keywords:
-                if kw in all_text or kw in filename:
-                    score += 1
-            # Normalize
-            norm_score = score / len(keywords) if keywords else 0
-            if norm_score > best_score:
-                best_score = norm_score
-                best_type = doc_type
+            matched_kws = [kw for kw in keywords if kw in all_text or kw in filename]
+            norm_score = len(matched_kws) / len(keywords) if keywords else 0
+            all_candidates.append(TemplateMatchCandidate(
+                doc_type=doc_type,
+                score=norm_score,
+                matched_keywords=matched_kws,
+            ))
 
-        result.matched_doc_type = best_type
-        result.confidence = min(best_score * 1.3, 1.0)  # slight boost
+        all_candidates.sort(key=lambda c: c.score, reverse=True)
+        best = all_candidates[0] if all_candidates else None
+
+        if best and best.score > 0:
+            result.matched_doc_type = best.doc_type
+            result.confidence = min(best.score * 1.3, 1.0)
+        else:
+            result.matched_doc_type = "evidence_based_protocol"  # safe default
+            result.confidence = 0.1
+
+        # Store top 3 candidates for reviewer visibility
+        result.candidates = [c for c in all_candidates if c.score > 0][:3]
 
         # Detect tier
         for tier, keywords in _TIER_KEYWORDS.items():
@@ -95,15 +112,25 @@ class TemplateMatcher:
                 break
 
         # Count section matches
-        if best_type:
-            pattern_kws = _DOC_TYPE_KEYWORDS[best_type]
+        if result.matched_doc_type:
+            pattern_kws = _DOC_TYPE_KEYWORDS[result.matched_doc_type]
             matched = sum(1 for s in sections
                          if any(kw in s.section_id for kw in pattern_kws))
             result.section_match_count = matched
 
         # Warnings
         if result.confidence < 0.3:
-            result.warnings.append("Low confidence template match — manual doc type selection recommended")
+            cand_str = ", ".join(f"{c.doc_type} ({c.score:.0%})" for c in result.candidates[:3])
+            result.warnings.append(
+                f"Low confidence template match ({result.confidence:.0%}). "
+                f"Best candidates: {cand_str or 'none'}. "
+                f"Manual doc type selection recommended."
+            )
+        elif result.confidence < 0.6:
+            result.warnings.append(
+                f"Moderate confidence ({result.confidence:.0%}) for '{result.matched_doc_type}'. "
+                f"Verify this is the intended document type."
+            )
         if result.total_sections < 3:
             result.warnings.append("Very few sections detected — template may need Word Heading styles")
 

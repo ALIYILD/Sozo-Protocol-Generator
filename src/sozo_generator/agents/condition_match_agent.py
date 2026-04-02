@@ -1,9 +1,20 @@
-"""Condition Match Agent — infers target conditions from prompts and files."""
+"""Condition Match Agent — infers target conditions from prompts and files.
+
+Validates conditions against the registry, resolves aliases, flags unknowns
+as drafts, and provides confidence scores with reviewer warnings.
+"""
 from __future__ import annotations
 import logging
-import re
 from .base import BaseAgent, AgentResult
 from .registry import register_agent
+
+logger = logging.getLogger(__name__)
+
+# Confidence thresholds
+_HIGH_CONFIDENCE = 0.8
+_MEDIUM_CONFIDENCE = 0.5
+_LOW_CONFIDENCE = 0.3
+
 
 @register_agent
 class ConditionMatchAgent(BaseAgent):
@@ -17,58 +28,109 @@ class ConditionMatchAgent(BaseAgent):
 
         prompt = input_data.get("prompt", "")
         conditions_explicit = input_data.get("conditions", [])
+        warnings = []
 
-        # If conditions already specified, validate them
+        registry = get_registry()
+        all_slugs = set(registry.list_slugs())
+
+        # ── Path 1: Explicit conditions provided ──
         if conditions_explicit:
-            registry = get_registry()
-            valid = [c for c in conditions_explicit if registry.exists(c)]
-            unknown = [c for c in conditions_explicit if not registry.exists(c)]
-
-            # For unknown conditions, check aliases
-            onboarder = ConditionOnboarder()
+            valid = []
             draft_conditions = []
-            for unk in unknown:
-                # Try alias resolution
-                resolved = CONDITION_ALIASES.get(unk.lower())
-                if resolved and registry.exists(resolved):
-                    valid.append(resolved)
-                else:
-                    draft_conditions.append(unk)
 
+            for c in conditions_explicit:
+                if c in all_slugs:
+                    valid.append(c)
+                else:
+                    # Try alias resolution
+                    resolved = CONDITION_ALIASES.get(c.lower())
+                    if resolved and resolved in all_slugs:
+                        valid.append(resolved)
+                    else:
+                        draft_conditions.append(c)
+                        warnings.append(
+                            f"Unknown condition '{c}' — will be treated as draft "
+                            f"(requires clinical review before any output is usable)"
+                        )
+
+            confidence = 1.0 if not draft_conditions else 0.5
             return AgentResult(
                 success=True,
                 output_data={
                     "validated_conditions": sorted(set(valid)),
                     "draft_conditions": draft_conditions,
-                    "confidence": 1.0 if not draft_conditions else 0.5,
+                    "all_conditions": False,
+                    "confidence": confidence,
                     "source": "explicit",
                 },
-                warnings=[f"Unknown condition '{c}' — will be treated as draft" for c in draft_conditions],
+                warnings=warnings,
             )
 
-        # Infer from prompt
+        # ── Path 2: Infer from prompt ──
         if prompt:
             intent = parse_intent_rules(prompt)
-            registry = get_registry()
-            valid = [c for c in intent.conditions if registry.exists(c)]
 
             if intent.all_conditions:
-                valid = registry.list_slugs()
+                return AgentResult(
+                    success=True,
+                    output_data={
+                        "validated_conditions": sorted(all_slugs),
+                        "draft_conditions": [],
+                        "all_conditions": True,
+                        "confidence": 0.9,
+                        "source": "inferred_all",
+                        "inferred_doc_types": intent.doc_types,
+                        "inferred_tier": intent.tier,
+                    },
+                )
+
+            valid = [c for c in intent.conditions if c in all_slugs]
+
+            # Check for unresolved condition words in the prompt
+            # that the intent parser might have found but aren't valid slugs
+            unresolved = [c for c in intent.conditions if c not in all_slugs]
+            draft_conditions = []
+            for u in unresolved:
+                resolved = CONDITION_ALIASES.get(u.lower())
+                if resolved and resolved in all_slugs and resolved not in valid:
+                    valid.append(resolved)
+                elif u not in valid:
+                    draft_conditions.append(u)
+                    warnings.append(
+                        f"Unrecognized condition '{u}' in prompt — treating as draft"
+                    )
+
+            # Confidence scoring
+            if valid and not draft_conditions:
+                confidence = _HIGH_CONFIDENCE if len(valid) <= 3 else 0.85
+            elif valid and draft_conditions:
+                confidence = _MEDIUM_CONFIDENCE
+            elif not valid and intent.action in ("generate", "merge"):
+                confidence = _LOW_CONFIDENCE
+                warnings.append(
+                    "No specific condition detected in prompt. "
+                    "Please select conditions manually or be more specific."
+                )
+            else:
+                confidence = intent.confidence
 
             return AgentResult(
                 success=bool(valid),
                 output_data={
-                    "validated_conditions": valid,
-                    "draft_conditions": [],
-                    "confidence": intent.confidence,
+                    "validated_conditions": sorted(set(valid)),
+                    "draft_conditions": draft_conditions,
+                    "all_conditions": False,
+                    "confidence": confidence,
                     "source": "inferred_from_prompt",
                     "inferred_doc_types": intent.doc_types,
                     "inferred_tier": intent.tier,
                 },
-                warnings=[] if valid else ["Could not infer conditions from prompt"],
+                warnings=warnings,
             )
 
+        # ── Path 3: Nothing provided ──
         return AgentResult(
             success=False,
             error="No conditions specified and no prompt to infer from",
+            warnings=["Provide conditions explicitly or write a prompt describing what you need"],
         )
