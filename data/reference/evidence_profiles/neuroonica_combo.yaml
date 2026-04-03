@@ -59,13 +59,30 @@ search_profiles:
     max_results: 10
 
 priority_pmids:
-  - "19715144"   # Arns 2009 — NFB meta-analysis ADHD
-  - "25693607"   # Kim 2015 — tDCS + NFB motor imagery J Neural Eng
-  - "19207632"   # Gevensleben 2009 — NFB RCT ADHD
-  - "28588473"   # Enriquez-Geppert 2017 — NFB cognitive review
+  # tDCS + NFB motor imagery — Google Scholar confirmed
+  - "36937688"   # Yang 2023 — RCT NFB+tDCS: mu-ERD higher in combined group (p<0.05) — KEY
+  - "25599261"   # Gunduz 2015 — tDCS enhances mu-ERD handedness-dependent
+  - "22791228"   # Varkuti 2012 — tDCS modulates ERD in chronic stroke (clinical extension)
+
+  # NFB ADHD evidence base
+  - "19715144"   # Arns 2009 — NFB meta-analysis ADHD (N=1253, large ES)
+  - "19207632"   # Gevensleben 2009 — NFB RCT ADHD (N=102, 59% vs 37% response)
+  - "28588473"   # Enriquez-Geppert 2017 — EEG-NFB cognitive enhancement review
   - "26652570"   # Ros 2016 — NFB reporting consensus
+
+  # tDCS ADHD
   - "28299499"   # Soff 2017 — tDCS ADHD adolescents
-  - "23945780"   # Brunoni 2013 SELECT-TDCS
+  - "19390237"   # Salehinejad 2019 — tDCS ADHD meta-analysis (inhibitory control, WM)
+
+  # MDD NFB alpha asymmetry
+  - "28236680"   # Mennella 2017 — alpha asymmetry NFB RCT: reduced negative affect + anxiety
+  - "31302517"   # Choi 2019 — alpha asymmetry + high-beta NFB for MDD
+
+  # tDCS MDD
+  - "23945780"   # Brunoni 2013 — SELECT-TDCS (gold standard MDD tDCS RCT)
+
+  # Motor imagery + stroke
+  - "36429924"   # Wang 2022 — RCT: anodal M1 tDCS + MI + UL training → stroke rehab
 
 notes: >
   Primary evidence gap: no large RCT of tDCS+NFB combined vs monotherapy for ADHD or MDD.

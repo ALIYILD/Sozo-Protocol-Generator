@@ -40,6 +40,9 @@ class SozoSettings(BaseSettings):
     use_semantic_scholar: bool = Field(default=True, description="Enable Semantic Scholar search")
     semantic_scholar_api_key: str = Field(default="", description="S2 API key for higher rate limits")
 
+    # Phase 8 — additional evidence source keys
+    consensus_api_key: str = Field(default="", description="Consensus.app API key for structured academic search")
+
     # Research pipeline
     enable_research_pipeline: bool = Field(
         default=True,
