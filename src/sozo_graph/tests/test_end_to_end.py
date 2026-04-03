@@ -262,7 +262,7 @@ class TestEndToEnd:
         graph.add_edge("protocol_template_selector", "protocol_composer")
         graph.add_edge("protocol_composer", "grounding_validator")
         graph.add_edge("grounding_validator", "review_processor")
-        graph.add_conditional_edges("review_processor", route_after_review, {"protocol_reporter": "protocol_reporter", "review_processor": "review_processor", "__end__": END})
+        graph.add_conditional_edges("review_processor", route_after_review, {"protocol_reporter": "protocol_reporter", "review_processor": "review_processor", "protocol_composer": "protocol_composer", "__end__": END})
         graph.add_edge("protocol_reporter", "audit_logger")
         graph.add_edge("audit_logger", END)
 
@@ -358,7 +358,7 @@ class TestEndToEnd:
         graph.add_edge("protocol_template_selector", "protocol_composer")
         graph.add_edge("protocol_composer", "grounding_validator")
         graph.add_edge("grounding_validator", "review_processor")
-        graph.add_conditional_edges("review_processor", route_after_review, {"protocol_reporter": "protocol_reporter", "review_processor": "review_processor", "__end__": END})
+        graph.add_conditional_edges("review_processor", route_after_review, {"protocol_reporter": "protocol_reporter", "review_processor": "review_processor", "protocol_composer": "protocol_composer", "__end__": END})
         graph.add_edge("protocol_reporter", "audit_logger")
         graph.add_edge("audit_logger", END)
 
@@ -405,8 +405,12 @@ class TestEndToEnd:
         node_ids = [n["node_id"] for n in final["node_history"]]
         assert "review_processor" in node_ids
 
-    def test_rejection_terminates(self):
-        """Verify that rejection ends the graph."""
+    def test_rejection_loops_back_to_composer(self):
+        """Verify that rejection routes back to protocol_composer for re-composition.
+
+        On first rejection (revision 0 < MAX_REVISION_CYCLES=3), the graph
+        re-enters protocol_composer → grounding_validator → review interrupt.
+        """
         from sozo_graph.graph import create_initial_state
         from langgraph.graph import StateGraph, END
         from langgraph.checkpoint.memory import MemorySaver
@@ -450,14 +454,19 @@ class TestEndToEnd:
         graph.add_edge("protocol_template_selector", "protocol_composer")
         graph.add_edge("protocol_composer", "grounding_validator")
         graph.add_edge("grounding_validator", "review_processor")
-        graph.add_conditional_edges("review_processor", route_after_review, {"protocol_reporter": "protocol_reporter", "review_processor": "review_processor", "__end__": END})
+        graph.add_conditional_edges("review_processor", route_after_review, {
+            "protocol_reporter": "protocol_reporter",
+            "review_processor": "review_processor",
+            "protocol_composer": "protocol_composer",
+            "__end__": END,
+        })
         graph.add_edge("protocol_reporter", "audit_logger")
         graph.add_edge("audit_logger", END)
 
         checkpointer = MemorySaver()
         compiled = graph.compile(checkpointer=checkpointer, interrupt_before=["review_processor"])
 
-        # Run to interrupt
+        # Phase 1: Run to first interrupt
         initial = create_initial_state(
             source_mode="prompt",
             user_prompt="Generate a tDCS protocol for depression",
@@ -465,25 +474,30 @@ class TestEndToEnd:
         config = {"configurable": {"thread_id": initial["request_id"]}}
         compiled.invoke(initial, config=config)
 
-        # Clinician rejects
+        # Phase 2: Clinician rejects — should loop back to composer
         compiled.update_state(config, {
             "review": {
                 "status": "rejected",
                 "reviewer_id": "dr_test",
-                "review_notes": "Evidence not strong enough for this patient.",
+                "review_notes": "Please strengthen the safety section.",
                 "revision_number": 0,
                 "edits_applied": [],
                 "parameter_overrides": [],
             },
         })
 
-        final = compiled.invoke(None, config=config)
+        # Resume — should re-compose and hit review interrupt again
+        result = compiled.invoke(None, config=config)
 
-        # Should be rejected — no output generated
-        assert final["status"] == "rejected" or final["review"]["status"] == "rejected"
-        # protocol_reporter and audit_logger should NOT have run
-        node_ids = [n["node_id"] for n in final["node_history"]]
-        assert "protocol_reporter" not in node_ids
+        # Revision number should have incremented
+        assert result["review"]["revision_number"] >= 1
+
+        # protocol_composer should have run again (check node_history)
+        composer_runs = [
+            n for n in result["node_history"]
+            if n["node_id"] == "protocol_composer"
+        ]
+        assert len(composer_runs) >= 2  # initial + re-compose
 
 
 class TestSafetyIntegration:

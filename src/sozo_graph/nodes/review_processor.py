@@ -41,10 +41,17 @@ def review_processor(state: SozoGraphState) -> dict:
         }
 
     elif status == "rejected":
+        new_revision = revision + 1
+        notes = review.get("review_notes", "No reason given")
         decisions.append(
-            f"Protocol REJECTED by {reviewer_id}: {review.get('review_notes', 'No reason given')}"
+            f"Protocol REJECTED by {reviewer_id} (revision {revision} → {new_revision}): {notes}"
         )
         return {
+            "review": {
+                **review,
+                "revision_number": new_revision,
+                "status": "rejected",  # route_after_review checks this + revision_number
+            },
             "status": "rejected",
             "_decisions": decisions,
         }

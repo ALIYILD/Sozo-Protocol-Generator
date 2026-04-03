@@ -122,7 +122,7 @@ with st.sidebar:
 
     page = st.radio(
         "Navigate",
-        ["Chat", "Studio", "Template Studio", "Generate from Template", "Generate Documents",
+        ["Chat", "Studio", "Protocol Graph", "Template Studio", "Generate from Template", "Generate Documents",
          "Visual Preview", "Operator Cockpit", "Review Queue", "Conditions Overview", "QA Report", "Evidence Ingest"],
         label_visibility="collapsed",
     )
@@ -142,6 +142,110 @@ with st.sidebar:
             key="openai_key",
             help="Alternative to Anthropic key.",
         )
+
+    # ── Patient Context (V2) ─────────────────────────────────────────────
+    with st.expander("Patient Context (V2)", expanded=False):
+        patient_age = st.number_input(
+            "Age", min_value=18, max_value=100, value=35, key="sidebar_patient_age",
+        )
+        patient_sex = st.selectbox(
+            "Sex", ["male", "female", "other"], key="sidebar_patient_sex",
+        )
+        patient_medications = st.text_area(
+            "Current Medications (comma-separated)",
+            key="sidebar_patient_meds",
+            placeholder="e.g. sertraline, lithium, metformin",
+            height=68,
+        )
+        patient_history = st.text_area(
+            "Medical History (comma-separated)",
+            key="sidebar_patient_history",
+            placeholder="e.g. epilepsy, cardiac pacemaker, pregnancy",
+            height=68,
+        )
+
+        if st.button("Run Safety Check", key="sidebar_safety_btn"):
+            try:
+                from sozo_generator.safety import evaluate_patient_safety
+
+                _meds_raw = patient_medications or ""
+                _hist_raw = patient_history or ""
+                safety_result = evaluate_patient_safety(
+                    patient_demographics={"age": patient_age, "sex": patient_sex},
+                    medications=[
+                        {"name": m.strip(), "drug_class": m.strip()}
+                        for m in _meds_raw.split(",") if m.strip()
+                    ],
+                    medical_history=[
+                        h.strip() for h in _hist_raw.split(",") if h.strip()
+                    ],
+                )
+                st.session_state["safety_result"] = safety_result
+            except ImportError:
+                st.warning(
+                    "Safety module not yet available. "
+                    "Install `sozo_generator.safety` to enable patient safety checks."
+                )
+            except Exception as exc:
+                st.error(f"Safety check failed: {exc}")
+
+        # Display safety result if available
+        _sr = st.session_state.get("safety_result")
+        if _sr is not None:
+            _cleared = getattr(_sr, "cleared", _sr.get("cleared", None) if isinstance(_sr, dict) else None)
+            if _cleared:
+                st.success("Patient CLEARED for neuromodulation")
+            else:
+                st.error("Patient NOT CLEARED")
+
+            _warnings = getattr(_sr, "warnings", _sr.get("warnings", []) if isinstance(_sr, dict) else [])
+            if _warnings:
+                st.markdown("**Warnings:**")
+                for _w in _warnings:
+                    st.warning(str(_w))
+
+            _blocked = getattr(_sr, "blocked_modalities", _sr.get("blocked_modalities", []) if isinstance(_sr, dict) else [])
+            if _blocked:
+                st.markdown("**Blocked Modalities:**")
+                for _b in _blocked:
+                    st.error(str(_b))
+
+    # ── Evidence Health ────────────────────────────────────────────────
+    with st.expander("Evidence Health", expanded=False):
+        try:
+            from sozo_generator.evidence.staleness import get_staleness_report
+
+            _stale_report = get_staleness_report()
+            _health = getattr(_stale_report, "overall_health", _stale_report.get("overall_health", "unknown") if isinstance(_stale_report, dict) else "unknown")
+            _health_colors = {"green": "green", "yellow": "orange", "red": "red"}
+            _hc = _health_colors.get(str(_health).lower(), "gray")
+            st.markdown(f"**Overall Health:** :{_hc}[{str(_health).upper()}]")
+
+            # Counts
+            _fresh = getattr(_stale_report, "fresh", _stale_report.get("fresh", 0) if isinstance(_stale_report, dict) else 0)
+            _aging = getattr(_stale_report, "aging", _stale_report.get("aging", 0) if isinstance(_stale_report, dict) else 0)
+            _stale_count = getattr(_stale_report, "stale", _stale_report.get("stale", 0) if isinstance(_stale_report, dict) else 0)
+            _expired = getattr(_stale_report, "expired", _stale_report.get("expired", 0) if isinstance(_stale_report, dict) else 0)
+
+            ec1, ec2 = st.columns(2)
+            ec1.metric("Fresh", _fresh)
+            ec2.metric("Aging", _aging)
+            ec3, ec4 = st.columns(2)
+            ec3.metric("Stale", _stale_count)
+            ec4.metric("Expired", _expired)
+
+            _priority = getattr(_stale_report, "high_priority_refreshes", _stale_report.get("high_priority_refreshes", []) if isinstance(_stale_report, dict) else [])
+            if _priority:
+                st.markdown("**High-Priority Refreshes:**")
+                for _hp in _priority:
+                    st.markdown(f"- {_hp}")
+        except ImportError:
+            st.info(
+                "Evidence staleness module not available. "
+                "Install `sozo_generator.evidence.staleness` to enable."
+            )
+        except Exception as exc:
+            st.warning(f"Could not load evidence health: {exc}")
 
     st.caption("v2.0.0  ·  SOZO Brain Center")
 
@@ -1421,6 +1525,111 @@ elif page == "Generate Documents":
                 width="stretch",
             )
 
+            # ── Personalization Engine ────────────────────────────────
+            with st.expander("Personalization Engine", expanded=False):
+                try:
+                    from sozo_generator.personalization import PersonalizationEngine
+
+                    _pe = PersonalizationEngine()
+                    _patient_ctx = {
+                        "age": st.session_state.get("sidebar_patient_age", 35),
+                        "sex": st.session_state.get("sidebar_patient_sex", "male"),
+                        "medications": [
+                            m.strip()
+                            for m in (st.session_state.get("sidebar_patient_meds") or "").split(",")
+                            if m.strip()
+                        ],
+                        "medical_history": [
+                            h.strip()
+                            for h in (st.session_state.get("sidebar_patient_history") or "").split(",")
+                            if h.strip()
+                        ],
+                    }
+                    _pers_result = _pe.personalize(
+                        condition_slug=selected_slug,
+                        patient_context=_patient_ctx,
+                    )
+
+                    _phenotype = getattr(_pers_result, "matched_phenotype", _pers_result.get("matched_phenotype", None) if isinstance(_pers_result, dict) else None)
+                    _confidence = getattr(_pers_result, "confidence_score", _pers_result.get("confidence_score", None) if isinstance(_pers_result, dict) else None)
+                    _band = getattr(_pers_result, "confidence_band", _pers_result.get("confidence_band", None) if isinstance(_pers_result, dict) else None)
+                    _protocol = getattr(_pers_result, "recommended_protocol", _pers_result.get("recommended_protocol", None) if isinstance(_pers_result, dict) else None)
+                    _explanation = getattr(_pers_result, "explanation", _pers_result.get("explanation", None) if isinstance(_pers_result, dict) else None)
+
+                    if _phenotype:
+                        st.markdown(f"**Matched Phenotype:** {_phenotype}")
+                    if _confidence is not None:
+                        _band_str = f" ({_band})" if _band else ""
+                        _conf_color = "green" if (_confidence or 0) >= 0.7 else ("orange" if (_confidence or 0) >= 0.4 else "red")
+                        st.markdown(f"**Confidence:** :{_conf_color}[{_confidence:.0%}{_band_str}]")
+                    if _protocol:
+                        st.markdown("**Recommended Protocol:**")
+                        if isinstance(_protocol, dict):
+                            for _pk, _pv in _protocol.items():
+                                st.markdown(f"- **{_pk}**: {_pv}")
+                        else:
+                            st.markdown(str(_protocol))
+                    if _explanation:
+                        st.info(str(_explanation))
+
+                except ImportError:
+                    st.info(
+                        "Personalization engine not yet available. "
+                        "Install `sozo_generator.personalization` to enable phenotype matching."
+                    )
+                except Exception as exc:
+                    st.warning(f"Personalization error: {exc}")
+
+            # ── Assessment Scores ─────────────────────────────────────
+            with st.expander("Assessment Scores", expanded=False):
+                try:
+                    from sozo_generator.schemas.patient import VALIDATED_SCALES, get_scale
+
+                    _scale_names = list(VALIDATED_SCALES.keys()) if isinstance(VALIDATED_SCALES, dict) else [str(s) for s in VALIDATED_SCALES]
+                    _sel_scale = st.selectbox(
+                        "Assessment Scale",
+                        _scale_names,
+                        key="assess_scale_select",
+                    )
+                    _score_val = st.number_input(
+                        "Score",
+                        min_value=0,
+                        max_value=200,
+                        value=0,
+                        key="assess_score_input",
+                    )
+
+                    if _sel_scale and _score_val > 0:
+                        _scale_obj = get_scale(_sel_scale)
+                        if _scale_obj:
+                            _severity = None
+                            if hasattr(_scale_obj, "classify"):
+                                _severity = _scale_obj.classify(_score_val)
+                            elif isinstance(_scale_obj, dict) and "thresholds" in _scale_obj:
+                                _thresholds = _scale_obj["thresholds"]
+                                for _tname, _trange in sorted(_thresholds.items(), key=lambda x: x[1] if isinstance(x[1], (int, float)) else 0):
+                                    if isinstance(_trange, (int, float)) and _score_val >= _trange:
+                                        _severity = _tname
+                                    elif isinstance(_trange, (list, tuple)) and len(_trange) == 2:
+                                        if _trange[0] <= _score_val <= _trange[1]:
+                                            _severity = _tname
+                            if _severity:
+                                _sev_colors = {"mild": "green", "moderate": "orange", "severe": "red", "minimal": "green", "normal": "green"}
+                                _sc = _sev_colors.get(str(_severity).lower(), "blue")
+                                st.markdown(f"**Severity Classification:** :{_sc}[{_severity}]")
+                            else:
+                                st.info(f"Score {_score_val} on {_sel_scale} — classification not available.")
+                        else:
+                            st.warning(f"Scale '{_sel_scale}' not found.")
+
+                except ImportError:
+                    st.info(
+                        "Assessment scales module not yet available. "
+                        "Install `sozo_generator.schemas.patient` with VALIDATED_SCALES to enable."
+                    )
+                except Exception as exc:
+                    st.warning(f"Assessment scoring error: {exc}")
+
 
 # ════════════════════════════════════════════════════════════════════════════
 # OPERATOR COCKPIT
@@ -2398,3 +2607,389 @@ elif page == "Visual Preview":
                 st.error(f"Visual generation failed: {e}")
                 import traceback
                 st.code(traceback.format_exc())
+
+# ════════════════════════════════════════════════════════════════════════════
+# PAGE: PROTOCOL GRAPH — LangGraph-powered protocol generation with review
+# ════════════════════════════════════════════════════════════════════════════
+elif page == "Protocol Graph":
+    st.title("Protocol Graph — Evidence-Based Generation")
+    st.markdown(
+        "Generate protocols using the LangGraph pipeline. "
+        "The graph runs through evidence search, safety checks, and composition, "
+        "then pauses for your review before finalizing."
+    )
+
+    # ── Session state init ─────────────────────────────────────────────
+    if "graph_state" not in st.session_state:
+        st.session_state.graph_state = None
+    if "graph_thread_id" not in st.session_state:
+        st.session_state.graph_thread_id = None
+    if "graph_phase" not in st.session_state:
+        st.session_state.graph_phase = "input"  # input | running | review | completed | rejected
+    if "graph_checkpointer" not in st.session_state:
+        try:
+            from langgraph.checkpoint.memory import MemorySaver
+            st.session_state.graph_checkpointer = MemorySaver()
+        except ImportError:
+            st.session_state.graph_checkpointer = None
+
+    phase = st.session_state.graph_phase
+
+    # ═══════════════════════════════════════════════════════════════════
+    # PHASE: INPUT — clinician enters prompt and patient context
+    # ═══════════════════════════════════════════════════════════════════
+    if phase == "input":
+        st.subheader("1. Define Protocol Request")
+
+        col1, col2 = st.columns([2, 1])
+
+        with col1:
+            user_prompt = st.text_area(
+                "What protocol do you need?",
+                placeholder="e.g. Generate a tDCS protocol for treatment-resistant depression targeting left DLPFC",
+                height=100,
+                key="graph_prompt",
+            )
+
+            with st.expander("Patient Context (optional)", expanded=False):
+                p_col1, p_col2 = st.columns(2)
+                with p_col1:
+                    patient_age = st.number_input("Age", min_value=0, max_value=120, value=0, key="graph_age")
+                    patient_sex = st.selectbox("Sex", ["", "Male", "Female", "Other"], key="graph_sex")
+                with p_col2:
+                    patient_meds = st.text_input("Current Medications (comma-separated)", key="graph_meds")
+                    patient_contras = st.text_input("Known Contraindications (comma-separated)", key="graph_contras")
+
+        with col2:
+            st.markdown("**Settings**")
+            tier = st.selectbox("Tier", ["fellow", "partners"], key="graph_tier")
+
+        if st.button("Generate Protocol", type="primary", disabled=not user_prompt):
+            # Build patient context
+            patient_context = None
+            if patient_age or patient_sex or patient_meds or patient_contras:
+                patient_context = {
+                    "age": patient_age if patient_age else None,
+                    "sex": patient_sex if patient_sex else None,
+                    "current_medications": [m.strip() for m in patient_meds.split(",") if m.strip()] if patient_meds else [],
+                    "contraindications": [c.strip() for c in patient_contras.split(",") if c.strip()] if patient_contras else [],
+                }
+
+            with st.spinner("Running evidence pipeline..."):
+                try:
+                    from sozo_graph.graph import build_sozo_graph, create_initial_state
+                    from sozo_graph.graph import (
+                        route_after_evidence, route_after_contraindication, route_after_review,
+                    )
+                    from sozo_graph.state import SozoGraphState
+                    from sozo_graph.nodes.intake_router import intake_router
+                    from sozo_graph.nodes.prompt_normalizer import prompt_normalizer
+                    from sozo_graph.nodes.condition_resolver import condition_resolver
+                    from sozo_graph.nodes.evidence_search import evidence_search
+                    from sozo_graph.nodes.evidence_sufficiency_gate import evidence_sufficiency_gate
+                    from sozo_graph.nodes.safety_policy_engine import safety_policy_engine
+                    from sozo_graph.nodes.contraindication_gate import contraindication_gate
+                    from sozo_graph.nodes.protocol_template_selector import protocol_template_selector
+                    from sozo_graph.nodes.protocol_composer import protocol_composer
+                    from sozo_graph.nodes.grounding_validator import grounding_validator
+                    from sozo_graph.nodes.review_processor import review_processor
+                    from sozo_graph.nodes.protocol_reporter import protocol_reporter
+                    from sozo_graph.nodes.audit_logger import audit_logger
+                    from langgraph.graph import StateGraph, END
+
+                    graph = StateGraph(SozoGraphState)
+                    graph.add_node("intake_router", intake_router)
+                    graph.add_node("prompt_normalizer", prompt_normalizer)
+                    graph.add_node("condition_resolver", condition_resolver)
+                    graph.add_node("evidence_search", evidence_search)
+                    graph.add_node("evidence_sufficiency_gate", evidence_sufficiency_gate)
+                    graph.add_node("safety_policy_engine", safety_policy_engine)
+                    graph.add_node("contraindication_gate", contraindication_gate)
+                    graph.add_node("protocol_template_selector", protocol_template_selector)
+                    graph.add_node("protocol_composer", protocol_composer)
+                    graph.add_node("grounding_validator", grounding_validator)
+                    graph.add_node("review_processor", review_processor)
+                    graph.add_node("protocol_reporter", protocol_reporter)
+                    graph.add_node("audit_logger", audit_logger)
+
+                    graph.set_entry_point("intake_router")
+                    graph.add_edge("intake_router", "prompt_normalizer")
+                    graph.add_edge("prompt_normalizer", "condition_resolver")
+                    graph.add_edge("condition_resolver", "evidence_search")
+                    graph.add_edge("evidence_search", "evidence_sufficiency_gate")
+                    graph.add_conditional_edges("evidence_sufficiency_gate", route_after_evidence, {"safety_policy_engine": "safety_policy_engine"})
+                    graph.add_edge("safety_policy_engine", "contraindication_gate")
+                    graph.add_conditional_edges("contraindication_gate", route_after_contraindication, {"protocol_template_selector": "protocol_template_selector"})
+                    graph.add_edge("protocol_template_selector", "protocol_composer")
+                    graph.add_edge("protocol_composer", "grounding_validator")
+                    graph.add_edge("grounding_validator", "review_processor")
+                    graph.add_conditional_edges("review_processor", route_after_review, {"protocol_reporter": "protocol_reporter", "review_processor": "review_processor", "__end__": END})
+                    graph.add_edge("protocol_reporter", "audit_logger")
+                    graph.add_edge("audit_logger", END)
+
+                    checkpointer = st.session_state.graph_checkpointer
+                    compiled = graph.compile(checkpointer=checkpointer, interrupt_before=["review_processor"])
+
+                    initial = create_initial_state(
+                        source_mode="prompt",
+                        user_prompt=user_prompt,
+                        patient_context=patient_context,
+                        tier=tier,
+                    )
+                    config = {"configurable": {"thread_id": initial["request_id"]}}
+
+                    result = compiled.invoke(initial, config=config)
+
+                    st.session_state.graph_state = result
+                    st.session_state.graph_thread_id = initial["request_id"]
+                    st.session_state.graph_compiled = compiled
+                    st.session_state.graph_config = config
+                    st.session_state.graph_phase = "review"
+                    st.rerun()
+
+                except Exception as e:
+                    st.error(f"Pipeline failed: {e}")
+                    import traceback
+                    st.code(traceback.format_exc())
+
+    # ═══════════════════════════════════════════════════════════════════
+    # PHASE: REVIEW — clinician reviews the draft and approves/rejects
+    # ═══════════════════════════════════════════════════════════════════
+    elif phase == "review":
+        state = st.session_state.graph_state
+
+        if not state:
+            st.warning("No protocol draft available. Please generate one first.")
+            if st.button("Back to Input"):
+                st.session_state.graph_phase = "input"
+                st.rerun()
+            st.stop()
+
+        condition = state.get("condition", {})
+        evidence = state.get("evidence", {})
+        safety = state.get("safety", {})
+        protocol = state.get("protocol", {})
+        node_history = state.get("node_history", [])
+
+        st.subheader(f"2. Review Protocol — {condition.get('display_name', 'Unknown')}")
+
+        # ── Pipeline summary metrics ───────────────────────────────
+        m1, m2, m3, m4, m5 = st.columns(5)
+        m1.metric("Condition", condition.get("slug", "?"))
+        grade_dist = evidence.get("evidence_summary", {}).get("grade_distribution", {})
+        m2.metric("Evidence Articles", evidence.get("screened_article_count", len(evidence.get("articles", []))))
+        m3.metric("Grade A", grade_dist.get("A", 0))
+        m4.metric("Grounding Score", f"{protocol.get('grounding_score', 0):.0%}")
+        m5.metric("Safety", "Cleared" if safety.get("safety_cleared") else "BLOCKED")
+
+        # ── Tabs for detailed review ───────────────────────────────
+        tab_sections, tab_evidence, tab_safety, tab_audit = st.tabs(
+            ["Protocol Sections", "Evidence", "Safety", "Audit Trail"]
+        )
+
+        with tab_sections:
+            sections = protocol.get("composed_sections", [])
+            if not sections:
+                st.info("No sections composed (check evidence and safety tabs for issues).")
+            for section in sections:
+                with st.expander(f"{section.get('title', 'Untitled')} [{section.get('confidence', '?')}]", expanded=True):
+                    st.markdown(section.get("content", "*No content*"))
+                    cited = section.get("cited_evidence_ids", [])
+                    if cited:
+                        st.caption(f"Citations: {', '.join(cited)}")
+                    claims = section.get("claims", [])
+                    if claims:
+                        st.markdown("**Claims:**")
+                        for claim in claims:
+                            flag = ""
+                            if claim.get("uncertainty_flag"):
+                                flag = f" | {claim['uncertainty_flag']}"
+                            st.markdown(
+                                f"- [{claim.get('confidence', '?')}] {claim.get('claim_text', '')[:100]} "
+                                f"(refs: {', '.join(claim.get('evidence_ids', []))}){flag}"
+                            )
+
+            # Grounding issues
+            issues = protocol.get("grounding_issues", [])
+            if issues:
+                st.markdown("---")
+                st.markdown("**Grounding Issues:**")
+                for issue in issues:
+                    severity = issue.get("severity", "info")
+                    icon = {"block": "🛑", "warning": "⚠️", "info": "ℹ️"}.get(severity, "")
+                    st.markdown(f"{icon} [{severity}] {issue.get('section_id', '')}: {issue.get('message', '')}")
+
+        with tab_evidence:
+            articles = evidence.get("articles", [])
+            if articles:
+                st.markdown(f"**{len(articles)} articles** after search, dedup, and screening:")
+                for a in articles[:20]:
+                    grade = a.get("evidence_grade", "?")
+                    grade_color = {"A": "green", "B": "orange", "C": "gray", "D": "red"}.get(grade, "gray")
+                    st.markdown(
+                        f"- **[{grade}]** {a.get('title', 'Untitled')[:100]} "
+                        f"({', '.join(a.get('authors', [])[:2])}, {a.get('year', '?')}) "
+                        f"— PMID: {a.get('pmid', 'N/A')}"
+                    )
+            else:
+                st.info("No evidence articles found.")
+
+            # PRISMA counts
+            prisma = evidence.get("prisma_counts", {})
+            if prisma:
+                st.markdown("---")
+                st.markdown("**PRISMA Flow:**")
+                pc1, pc2, pc3, pc4 = st.columns(4)
+                pc1.metric("Identified", prisma.get("records_identified", 0))
+                pc2.metric("After Dedup", prisma.get("records_after_dedup", 0))
+                pc3.metric("Screened", prisma.get("records_screened", 0))
+                pc4.metric("Included", prisma.get("studies_included", 0))
+
+        with tab_safety:
+            if safety.get("safety_cleared"):
+                st.success("Safety assessment: CLEARED")
+            else:
+                st.error("Safety assessment: BLOCKED")
+                for b in safety.get("blocking_contraindications", []):
+                    st.markdown(f"- 🛑 {b}")
+
+            if safety.get("off_label_flags"):
+                st.warning("Off-label use detected:")
+                for f in safety.get("off_label_flags", []):
+                    st.markdown(f"- ⚠️ {f}")
+
+            if safety.get("consent_requirements"):
+                st.markdown("**Consent requirements:**")
+                for c in safety.get("consent_requirements", []):
+                    st.markdown(f"- {c}")
+
+            if safety.get("proceed_with_warnings"):
+                st.markdown("**Warnings:**")
+                for w in safety.get("proceed_with_warnings", []):
+                    st.markdown(f"- {w}")
+
+        with tab_audit:
+            st.markdown(f"**{len(node_history)} nodes executed:**")
+            for entry in node_history:
+                status_icon = {"success": "✅", "error": "❌", "skipped": "⏭️"}.get(entry.get("status", ""), "")
+                st.markdown(
+                    f"{status_icon} **{entry.get('node_id', '?')}** — "
+                    f"{entry.get('duration_ms', 0):.0f}ms"
+                )
+                decisions = entry.get("decisions", [])
+                for d in decisions[:3]:
+                    st.caption(f"  → {d[:120]}")
+
+        # ── Review actions ─────────────────────────────────────────
+        st.markdown("---")
+        st.subheader("3. Your Decision")
+
+        rev_col1, rev_col2 = st.columns([2, 1])
+        with rev_col1:
+            reviewer_id = st.text_input("Reviewer ID", placeholder="e.g. dr_smith", key="reviewer_id")
+            review_notes = st.text_area("Review Notes (optional)", key="review_notes", height=80)
+
+        with rev_col2:
+            st.markdown("")  # spacing
+            st.markdown("")
+
+        btn_col1, btn_col2, btn_col3 = st.columns(3)
+
+        with btn_col1:
+            if st.button("Approve Protocol", type="primary", disabled=not reviewer_id):
+                _do_review_action("approved", reviewer_id, review_notes)
+
+        with btn_col2:
+            if st.button("Reject Protocol", disabled=not reviewer_id):
+                _do_review_action("rejected", reviewer_id, review_notes)
+
+        with btn_col3:
+            if st.button("Start Over"):
+                st.session_state.graph_phase = "input"
+                st.session_state.graph_state = None
+                st.rerun()
+
+    # ═══════════════════════════════════════════════════════════════════
+    # PHASE: COMPLETED — protocol approved and output generated
+    # ═══════════════════════════════════════════════════════════════════
+    elif phase == "completed":
+        state = st.session_state.graph_state
+        st.subheader("Protocol Approved & Released")
+        st.success("The protocol has been approved by the clinician and output files generated.")
+
+        output = state.get("output", {}) if state else {}
+        paths = output.get("output_paths", {})
+        if paths:
+            st.markdown("**Output files:**")
+            for fmt, path in paths.items():
+                fpath = Path(path)
+                if fpath.exists():
+                    st.markdown(f"- **{fmt.upper()}**: `{path}`")
+                    with open(fpath, "rb") as f:
+                        st.download_button(
+                            f"Download {fmt.upper()}",
+                            f.read(),
+                            file_name=fpath.name,
+                            key=f"dl_{fmt}",
+                        )
+                else:
+                    st.markdown(f"- {fmt}: {path} (file not found)")
+
+        audit_id = output.get("audit_record_id")
+        if audit_id:
+            st.caption(f"Audit record: {audit_id}")
+
+        if st.button("Generate Another Protocol"):
+            st.session_state.graph_phase = "input"
+            st.session_state.graph_state = None
+            st.rerun()
+
+    # ═══════════════════════════════════════════════════════════════════
+    # PHASE: REJECTED
+    # ═══════════════════════════════════════════════════════════════════
+    elif phase == "rejected":
+        st.subheader("Protocol Rejected")
+        state = st.session_state.graph_state
+        review = state.get("review", {}) if state else {}
+        st.warning(f"Rejected by {review.get('reviewer_id', 'unknown')}: {review.get('review_notes', 'No reason given')}")
+
+        if st.button("Generate Another Protocol"):
+            st.session_state.graph_phase = "input"
+            st.session_state.graph_state = None
+            st.rerun()
+
+
+def _do_review_action(decision: str, reviewer_id: str, review_notes: str):
+    """Resume the graph after clinician review."""
+    from datetime import datetime, timezone
+
+    try:
+        compiled = st.session_state.graph_compiled
+        config = st.session_state.graph_config
+
+        compiled.update_state(config, {
+            "review": {
+                "status": decision,
+                "reviewer_id": reviewer_id,
+                "review_timestamp": datetime.now(timezone.utc).isoformat(),
+                "review_notes": review_notes,
+                "revision_number": st.session_state.graph_state.get("review", {}).get("revision_number", 0),
+                "edits_applied": [],
+                "parameter_overrides": [],
+            },
+        })
+
+        result = compiled.invoke(None, config=config)
+        st.session_state.graph_state = result
+
+        if decision == "approved":
+            st.session_state.graph_phase = "completed"
+        else:
+            st.session_state.graph_phase = "rejected"
+
+        st.rerun()
+
+    except Exception as e:
+        st.error(f"Review action failed: {e}")
+        import traceback
+        st.code(traceback.format_exc())

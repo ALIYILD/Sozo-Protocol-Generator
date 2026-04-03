@@ -21,6 +21,7 @@ from .state import SozoGraphState
 
 # Node imports
 from .nodes.intake_router import intake_router
+from .nodes.template_parser import template_parser
 from .nodes.prompt_normalizer import prompt_normalizer
 from .nodes.condition_resolver import condition_resolver
 from .nodes.evidence_search import evidence_search
@@ -41,7 +42,7 @@ from .nodes.audit_logger import audit_logger
 def route_after_intake(state: SozoGraphState) -> str:
     """Route based on source mode."""
     if state.get("source_mode") == "upload":
-        return "prompt_normalizer"  # MVP: treat upload hints as prompt
+        return "template_parser"
     return "prompt_normalizer"
 
 
@@ -65,16 +66,30 @@ def route_after_contraindication(state: SozoGraphState) -> str:
     return "protocol_template_selector"
 
 
+MAX_REVISION_CYCLES = 3
+
+
 def route_after_review(state: SozoGraphState) -> str:
-    """Route based on clinician review decision."""
+    """Route based on clinician review decision.
+
+    - approved → protocol_reporter (finalize)
+    - rejected + under max revisions → protocol_composer (re-compose with notes)
+    - rejected + at max revisions → __end__ (terminate)
+    - edited → review_processor (apply edits, then re-validate)
+    """
     review = state.get("review", {})
     status = review.get("status", "pending")
+    revision = review.get("revision_number", 0)
 
     if status == "approved":
         return "protocol_reporter"
     if status == "edited":
-        return "review_processor"  # apply edits then loop
-    # rejected or pending
+        return "review_processor"  # apply edits then re-validate
+    if status == "rejected":
+        if revision < MAX_REVISION_CYCLES:
+            return "protocol_composer"  # re-compose with rejection notes
+        return "__end__"  # max revisions reached
+    # pending or unknown
     return "__end__"
 
 
@@ -97,6 +112,7 @@ def build_sozo_graph(checkpointer=None):
 
     # ── Add nodes ─────────────────────────────────────────────
     graph.add_node("intake_router", intake_router)
+    graph.add_node("template_parser", template_parser)
     graph.add_node("prompt_normalizer", prompt_normalizer)
     graph.add_node("condition_resolver", condition_resolver)
     graph.add_node("evidence_search", evidence_search)
@@ -114,7 +130,15 @@ def build_sozo_graph(checkpointer=None):
     graph.set_entry_point("intake_router")
 
     # ── Edges: Intake ─────────────────────────────────────────
-    graph.add_edge("intake_router", "prompt_normalizer")
+    graph.add_conditional_edges(
+        "intake_router",
+        route_after_intake,
+        {
+            "template_parser": "template_parser",
+            "prompt_normalizer": "prompt_normalizer",
+        },
+    )
+    graph.add_edge("template_parser", "condition_resolver")
     graph.add_edge("prompt_normalizer", "condition_resolver")
 
     # ── Edges: Evidence ───────────────────────────────────────
@@ -152,7 +176,8 @@ def build_sozo_graph(checkpointer=None):
         route_after_review,
         {
             "protocol_reporter": "protocol_reporter",
-            "review_processor": "review_processor",  # edit loop
+            "review_processor": "review_processor",  # edit → apply → re-validate
+            "protocol_composer": "protocol_composer",  # reject → re-compose (max 3)
             "__end__": END,
         },
     )
