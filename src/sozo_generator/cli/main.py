@@ -460,5 +460,56 @@ def generate_canonical_cmd(
         typer.echo(typer.style(f"FAILED: {result.error}", fg=typer.colors.RED))
 
 
+@app.command("review-summary")
+def review_summary_cmd(
+    condition: str = typer.Argument(..., help="Condition slug"),
+    doc_type: str = typer.Option("evidence_based_protocol", "--doc-type", "-d"),
+    tier: str = typer.Option("fellow"),
+):
+    """Show a review summary for a canonical document."""
+    from ..knowledge.base import KnowledgeBase
+    from ..knowledge.assembler import CanonicalDocumentAssembler
+    from ..knowledge.review import build_review_summary
+
+    kb = KnowledgeBase()
+    kb.load_all()
+    assembler = CanonicalDocumentAssembler(kb)
+    try:
+        _, prov = assembler.assemble(condition, doc_type, tier)
+        summary = build_review_summary(prov)
+        typer.echo(summary.to_text())
+    except Exception as e:
+        typer.echo(typer.style(f"Error: {e}", fg=typer.colors.RED))
+
+
+@app.command("regression-compare")
+def regression_compare_cmd(
+    condition: str = typer.Argument(..., help="Condition slug"),
+    doc_type: str = typer.Option("evidence_based_protocol", "--doc-type", "-d"),
+    tier: str = typer.Option("fellow"),
+):
+    """Compare legacy vs canonical generation for a condition."""
+    from ..knowledge.regression import compare_outputs
+
+    result = compare_outputs(condition, doc_type, tier)
+    if result:
+        typer.echo(result.to_text())
+    else:
+        typer.echo(typer.style("Comparison not available", fg=typer.colors.YELLOW))
+
+
+@app.command("validate-knowledge")
+def validate_knowledge_cmd():
+    """Validate all knowledge and blueprint YAML files."""
+    from ..knowledge.validate import validate_all
+
+    report = validate_all()
+    typer.echo(report.to_text())
+    color = typer.colors.GREEN if report.passed else typer.colors.RED
+    typer.echo(typer.style(
+        f"\n{'PASSED' if report.passed else 'FAILED'}", fg=color, bold=True
+    ))
+
+
 if __name__ == "__main__":
     app()

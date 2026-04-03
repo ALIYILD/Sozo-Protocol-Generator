@@ -9,9 +9,10 @@
 
 | Pathway | Method | Status | Coverage |
 |---------|--------|--------|----------|
-| **Canonical** | `GenerationService.generate_canonical()` | Active — expanding | EBP (all tiers), Handbook, Clinical Exam |
-| **Legacy** | `GenerationService.generate()` | Active — stable | All 8 doc types × 15 conditions |
-| **Template** | `GenerationService.generate_from_template()` | Active — stable | Any template × any condition |
+| **Canonical (DEFAULT)** | `generate()` auto-routes to canonical | **Default for 3 doc types** | EBP, Handbook, Clinical Exam × 16 conditions |
+| **Canonical (explicit)** | `generate_canonical()` | Active | Any blueprint × any knowledge condition |
+| **Legacy (fallback)** | `generate()` falls back for 5 types | Active — fallback | All-in-One, Phenotype, Responder, Psych Intake, Network Assessment |
+| **Template** | `generate_from_template()` | Active | Any template × any condition |
 
 ## Document Family Status
 

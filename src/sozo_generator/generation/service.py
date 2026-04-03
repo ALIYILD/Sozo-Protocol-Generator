@@ -189,10 +189,21 @@ class GenerationService:
                     with_qa=with_qa if with_qa is not None else self.with_qa,
                 ))
 
-        # Execute
+        # Execute — prefer canonical path where safe
         results = []
         for req in requests:
-            result = self._execute_single(schema, req)
+            dt_value = req.doc_type.value if hasattr(req.doc_type, 'value') else str(req.doc_type)
+            tier_value = req.tier.value if hasattr(req.tier, 'value') else str(req.tier)
+
+            if self.can_route_canonical(condition, dt_value):
+                # Canonical path (stronger evidence/QA, provenance)
+                result = self.generate_canonical(condition, dt_value, tier_value)
+                result.doc_type = dt_value  # Normalize
+                logger.info(f"Routed to canonical: {condition}/{dt_value}/{tier_value}")
+            else:
+                # Legacy path (fallback)
+                result = self._execute_single(schema, req)
+
             results.append(result)
 
         return results
