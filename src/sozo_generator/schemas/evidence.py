@@ -2,13 +2,19 @@ from __future__ import annotations
 
 from datetime import date
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from ..core.enums import EvidenceLevel, EvidenceType, ClaimCategory, ConfidenceLabel
+from .validators import validate_pmid, validate_pmid_list
 
 
 class ArticleMetadata(BaseModel):
     """Metadata for a single PubMed or manual evidence source."""
     pmid: Optional[str] = None
+
+    @field_validator("pmid", mode="before")
+    @classmethod
+    def _validate_pmid(cls, v: str | None) -> str | None:
+        return validate_pmid(v)
     doi: Optional[str] = None
     title: str
     authors: list[str] = Field(default_factory=list)
@@ -37,6 +43,11 @@ class EvidenceClaim(BaseModel):
     confidence: ConfidenceLabel
     evidence_level: EvidenceLevel
     supporting_pmids: list[str] = Field(default_factory=list)
+
+    @field_validator("supporting_pmids", mode="before")
+    @classmethod
+    def _validate_pmids(cls, v: list[str]) -> list[str]:
+        return validate_pmid_list(v)
     supporting_sources: list[ArticleMetadata] = Field(default_factory=list)
     contradicting_sources: list[ArticleMetadata] = Field(default_factory=list)
     review_flags: list[str] = Field(default_factory=list)

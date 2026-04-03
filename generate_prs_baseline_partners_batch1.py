@@ -1,3 +1,8 @@
+# DEPRECATED: This script is superseded by the canonical generation pipeline.
+# Use instead: GenerationService.generate(condition="...", tier="...", doc_type="...")
+# Or CLI: PYTHONPATH=src python -m sozo_generator.cli.main build condition --condition <slug> --tier <tier> --doc-type <type>
+# See docs/MIGRATION_PLAN.md for details.
+
 """
 Generates Partners Tier Psychological_Intake_PRS_Baseline_Partners DOCX files
 for 7 neuromodulation conditions (Batch 1).
@@ -6,6 +11,8 @@ for 7 neuromodulation conditions (Batch 1).
 from pathlib import Path
 from docx import Document
 from docx.shared import RGBColor
+
+_PROJECT_ROOT = Path(__file__).resolve().parent
 
 C_WHITE = RGBColor(0xFF, 0xFF, 0xFF)
 C_BLACK = RGBColor(0x00, 0x00, 0x00)
@@ -85,9 +92,7 @@ def _global_replace(doc, old, new):
 
 
 def build_prs(c):
-    TEMPLATE = Path(
-        r"C:/Users/yildi/OneDrive/Desktop/Parkinson D/Partners/Assessments/Psychological_Intake_PRS_Baseline_Partners.docx"
-    )
+    TEMPLATE = _PROJECT_ROOT / "templates" / "gold_standard" / "Psychological_Intake_PRS.docx"
     doc = Document(str(TEMPLATE))
     paras = doc.paragraphs
     tables = doc.tables

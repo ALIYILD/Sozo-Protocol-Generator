@@ -10,7 +10,7 @@ import json
 from datetime import datetime, timezone
 from typing import Any, Optional
 
-from pydantic import BaseModel, Field, computed_field
+from pydantic import BaseModel, Field, computed_field, field_validator
 
 from ..core.enums import (
     ClaimCategory,
@@ -49,6 +49,12 @@ class EvidenceItem(BaseModel):
     population_match: bool = True
     condition_slug: Optional[str] = None
     modalities: list[Modality] = Field(default_factory=list)
+
+    @field_validator("pmid", mode="before")
+    @classmethod
+    def _validate_pmid(cls, v: str | None) -> str | None:
+        from .validators import validate_pmid
+        return validate_pmid(v)
 
 
 class EvidenceBundle(BaseModel):
@@ -103,6 +109,12 @@ class ClaimCitationLink(BaseModel):
     evidence_items: list[EvidenceItem] = Field(default_factory=list)
     requires_review: bool = False
     insufficient_evidence: bool = False
+
+    @field_validator("pmids", mode="before")
+    @classmethod
+    def _validate_pmids(cls, v: list[str]) -> list[str]:
+        from .validators import validate_pmid_list
+        return validate_pmid_list(v)
 
 
 class ClaimCitationMap(BaseModel):

@@ -1,0 +1,70 @@
+# Shared device/safety data used across all conditions
+# Source: scripts/protocol_data.py (shared constants)
+
+tps_warning_template: >-
+  WARNING  TPS use in {condition} is INVESTIGATIONAL / OFF-LABEL in most jurisdictions.
+  NEUROLITH is CE-marked for musculoskeletal indications. Use in neurological / psychiatric
+  conditions is supported by emerging clinical evidence only. Patient informed consent is
+  mandatory. This protocol is for use by qualified SOZO clinicians under Doctor supervision only.
+
+tps_note: >-
+  NOTE  Device: NEUROLITH (Storz Medical). Neurons targeted via ultrasound pulse propagation.
+  Scalp maps show approximate ROI; actual depth/spread depends on transducer angle and
+  patient anatomy. Doctor configures pulse count, frequency (Hz) and energy density (mJ/mm2).
+
+hdckit_note: >-
+  NOTE  Device: Newronika HDCkit (CE Class IIa, CE 0476) -- 2-channel anodal tDCS system.
+  Doctor programs via HDCprog; patient cannot modify. All protocols prescribe 2 mA unless
+  noted. Ramp up/down: 30 s. Electrodes: 25 cm2 (5x5 cm) saline-soaked sponge pads.
+
+platoscience_device:
+  headers: [Device, Specification]
+  rows:
+    - [PlatoWork Headset, "Single-channel tDCS - Max 1.6 mA (clinical 1.2-1.6 mA)"]
+    - [Placement Variants, "Multiple snap-in positions -- see protocol for Variant"]
+    - [Constraint, "Single-channel ONLY. Dual-channel montages not available on PlatoScience."]
+    - [Session Duration, "20 min (fixed). Ramp-up 30 s, ramp-down 30 s."]
+
+home_note: >-
+  NOTE  Home-based treatment prescribed by SOZO Brain Center Doctor ONLY.
+  Patients must complete supervised in-clinic baseline before home programme.
+  Follow-up call within 48 hours of first home session.
+
+sozo_sequence_header:
+  - S -- Stabilize
+  - O -- Optimize
+  - Z -- Zone Target
+  - O -- Outcome
+
+sozo_sequence_generic:
+  - "taVNS or CES  10-15 min\nDownshift sympathetic tone, reduce cortical noise"
+  - "tDCS  15-20 min\nPrime target networks for stimulation"
+  - "TPS (ROI + holocranial)  20-30 min\nDeep network modulation at target ROI"
+  - "taVNS/CES + rehab tasks  30-45 min\nPost-stimulation neuroplasticity window"
+
+evidence_levels:
+  - [Moderate adjunctive, "Supported by systematic reviews and/or multiple RCTs as combination therapy"]
+  - [Emerging / low-certainty, "Feasibility data and plausible mechanism; no large RCTs"]
+  - [Weak / supportive only, "Indirect evidence only; should not be first-line standalone"]
+
+safety_side_effects:
+  - [Tingling / itching, "tDCS - taVNS", "Common (40-70%)", "Reassure; check electrode contact"]
+  - [Headache, "tDCS - TPS - taVNS", "Uncommon (5-15%)", "Reduce intensity; hydration; paracetamol PRN"]
+  - [Skin redness, tDCS, "Common at electrode site", "Inspect post-session; petroleum jelly barrier"]
+  - [Transient phosphenes, "tDCS (frontal)", Uncommon, "Reposition electrodes; avoid OFC montages"]
+  - [Ear discomfort, taVNS, Common, "Adjust clip; reduce current; take break"]
+  - [Drowsiness, "CES - taVNS", Common, "Allow rest post-session; do not drive"]
+
+adverse_grading:
+  - [Grade 1 (Mild), "Self-resolving within 30 min", "Continue; document; monitor"]
+  - [Grade 2 (Moderate), "Persists > 30 min or recurs", "Pause session; reassess next visit"]
+  - [Grade 3 (Severe), "Requires medical attention", "STOP; escalate to Doctor; incident report"]
+  - [Seizure / LOC, "Any seizure or loss of consciousness", "STOP ALL; emergency services; Doctor immediately"]
+
+contraindications_base:
+  - [Metal implants (cranial), All modalities, ABSOLUTE]
+  - [Implanted cardiac device (pacemaker/ICD), All modalities, "ABSOLUTE -- consult cardiologist"]
+  - [Active epilepsy (uncontrolled), All modalities, ABSOLUTE]
+  - [Pregnancy, "TPS - tDCS (frontal)", "RELATIVE -- Doctor decision"]
+  - [Open scalp wounds / skin breakdown, "tDCS - TPS", ABSOLUTE at affected site]
+  - [Recent neurosurgery < 6 months, TPS, ABSOLUTE]

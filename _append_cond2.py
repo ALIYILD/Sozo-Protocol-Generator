@@ -1,6 +1,12 @@
+# DEPRECATED: This script is superseded by the canonical generation pipeline.
+# Use instead: GenerationService.generate(condition="...", tier="...", doc_type="...")
+# Or CLI: PYTHONPATH=src python -m sozo_generator.cli.main build condition --condition <slug> --tier <tier> --doc-type <type>
+# See docs/MIGRATION_PLAN.md for details.
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Appends Depression, Anxiety, ADHD conditions"""
+from pathlib import Path
 
 BLOCK = r'''
 # ══════════════════════════════════════
@@ -663,6 +669,6 @@ CONDITIONS["adhd"] = dict(
 )
 '''
 
-with open("C:/Users/yildi/Sozo-Protocol-Generator/generate_fellow_protocols.py", "a", encoding="utf-8") as f:
+with open(str(Path(__file__).resolve().parent / "generate_fellow_protocols.py"), "a", encoding="utf-8") as f:
     f.write(BLOCK)
 print("MDD + GAD + ADHD appended OK")

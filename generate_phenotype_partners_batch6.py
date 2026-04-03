@@ -1,6 +1,13 @@
+# DEPRECATED: This script is superseded by the canonical generation pipeline.
+# Use instead: GenerationService.generate(condition="...", tier="...", doc_type="...")
+# Or CLI: PYTHONPATH=src python -m sozo_generator.cli.main build condition --condition <slug> --tier <tier> --doc-type <type>
+# See docs/MIGRATION_PLAN.md for details.
+
 from pathlib import Path
 from docx import Document
 from docx.shared import RGBColor
+
+_PROJECT_ROOT = Path(__file__).resolve().parent
 
 C_WHITE = RGBColor(0xFF,0xFF,0xFF); C_BLACK = RGBColor(0x00,0x00,0x00)
 
@@ -49,7 +56,7 @@ def _global_replace(doc, old, new):
                     if old in "".join(r.text for r in para.runs): _para_replace(para, old, new)
 
 def build(c):
-    TEMPLATE = Path(r"C:/Users/yildi/OneDrive/Desktop/Parkinson D/Partners/Assessments/PD_Phenotype_Classification_Partners.docx")
+    TEMPLATE = _PROJECT_ROOT / "templates" / "gold_standard" / "Phenotype_Classification.docx"
     doc = Document(str(TEMPLATE)); paras = doc.paragraphs; tables = doc.tables
     for old, new in [
         ("Parkinson's Disease (PD)", c["full"]), ("Parkinson's Disease", c["full"]),
@@ -258,7 +265,7 @@ LONG_COVID = {
 
 if __name__ == "__main__":
     import os
-    os.chdir(r"C:/Users/yildi/Sozo-Protocol-Generator")
+    os.chdir(str(_PROJECT_ROOT))
     print("Building ASD...")
     asd_out = build(ASD)
     print("Building Long COVID...")

@@ -1,6 +1,6 @@
 # SOZO Generator — Example CLI Commands
 
-All examples assume you are in the project root directory (`C:\Users\yildi\sozo_generator\`)
+All examples assume you are in the project root directory
 and have set `PYTHONPATH=src`.
 
 **Windows (PowerShell):**

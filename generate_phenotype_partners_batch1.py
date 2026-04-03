@@ -1,3 +1,8 @@
+# DEPRECATED: This script is superseded by the canonical generation pipeline.
+# Use instead: GenerationService.generate(condition="...", tier="...", doc_type="...")
+# Or CLI: PYTHONPATH=src python -m sozo_generator.cli.main build condition --condition <slug> --tier <tier> --doc-type <type>
+# See docs/MIGRATION_PLAN.md for details.
+
 """
 Generate Partners Tier Phenotype Classification & Protocol Mapping DOCX files
 Batch 1: Depression (MDD) and Anxiety (GAD)
@@ -7,14 +12,13 @@ from pathlib import Path
 from docx import Document
 from docx.shared import RGBColor
 
+_PROJECT_ROOT = Path(__file__).resolve().parent
+
 # ─── Colour constants ────────────────────────────────────────────────────────
 C_WHITE = RGBColor(0xFF, 0xFF, 0xFF)
 C_BLACK = RGBColor(0x00, 0x00, 0x00)
 
-TEMPLATE = Path(
-    "C:/Users/yildi/OneDrive/Desktop/Parkinson D/Partners/Assessments/"
-    "PD_Phenotype_Classification_Partners.docx"
-)
+TEMPLATE = _PROJECT_ROOT / "templates" / "gold_standard" / "Phenotype_Classification.docx"
 
 
 # ─── Helper functions ────────────────────────────────────────────────────────
@@ -392,10 +396,7 @@ def build_phenotype_classification(c):
     _cell_write(t18.rows[1].cells[0], c["table18_phenotype"])
 
     # ── Save ──────────────────────────────────────────────────────────────
-    out_dir = Path(
-        f"C:/Users/yildi/Sozo-Protocol-Generator/outputs/documents/"
-        f"{c['slug']}/partners"
-    )
+    out_dir = _PROJECT_ROOT / "outputs" / "documents" / c['slug'] / "partners"
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / f"Phenotype_Classification_Partners_{c['slug']}.docx"
     doc.save(str(out_path))

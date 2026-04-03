@@ -1,3 +1,8 @@
+# DEPRECATED: This script is superseded by the canonical generation pipeline.
+# Use instead: GenerationService.generate(condition="...", tier="...", doc_type="...")
+# Or CLI: PYTHONPATH=src python -m sozo_generator.cli.main build condition --condition <slug> --tier <tier> --doc-type <type>
+# See docs/MIGRATION_PLAN.md for details.
+
 """Append Tinnitus and Insomnia condition data, then add runner block."""
 import os
 OUTFILE = os.path.join(os.path.dirname(__file__), "generate_fellow_protocols.py")

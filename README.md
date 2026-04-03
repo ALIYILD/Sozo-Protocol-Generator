@@ -131,6 +131,45 @@ PYTHONPATH=src python -m sozo_generator.cli.main ingest-evidence ingest \
 
 ---
 
+## Canonical Generation (Recommended)
+
+The unified `generate` command routes through the canonical `GenerationService` pipeline
+with QA, evidence traceability, and visual generation support:
+
+```bash
+# Generate all documents for Parkinson's (both tiers)
+PYTHONPATH=src python -m sozo_generator.cli.main generate parkinsons
+
+# Generate a specific document type
+PYTHONPATH=src python -m sozo_generator.cli.main generate parkinsons \
+    --tier partners --doc-type handbook
+
+# Generate everything for all 15 conditions
+PYTHONPATH=src python -m sozo_generator.cli.main generate all
+
+# Skip visuals and QA for faster generation
+PYTHONPATH=src python -m sozo_generator.cli.main generate parkinsons --no-visuals --no-qa
+```
+
+Or programmatically:
+
+```python
+from sozo_generator.generation.service import GenerationService
+
+service = GenerationService()
+results = service.generate(
+    condition="parkinsons",
+    tier="partners",
+    doc_type="evidence_based_protocol",
+)
+for r in results:
+    print(f"{r.doc_type}: {'OK' if r.success else r.error}")
+```
+
+See `docs/MIGRATION_PLAN.md` for the full architecture and migration details.
+
+---
+
 ## CLI Reference
 
 All commands are invoked as:

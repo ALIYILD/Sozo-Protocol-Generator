@@ -1,0 +1,136 @@
+# Parkinson's Disease — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["parkinsons"]
+# This is the gold-standard reference condition for data-as-YAML migration.
+
+display_name: "Parkinson's Disease"
+icd10: G20
+short_name: PD
+
+tps:
+  - code: T1
+    symptom: "Motor: Bradykinesia & Rigidity"
+    evidence: Emerging
+    targets: [C3, C4, FCz]
+    params_text: "TPS: Bilateral M1 + SMA - 3,000-5,000 pulses - 5 Hz - 0.2 mJ/mm2"
+    rationale: >-
+      M1 bilateral targeting reduces motor cortex hyperexcitability;
+      SMA involvement supports initiation circuits.
+  - code: T2
+    symptom: Tremor
+    evidence: Emerging
+    targets: [C3, C4, Cz]
+    params_text: "TPS: Bilateral M1 + Cerebellum - 3,000 pulses - 5 Hz"
+    rationale: >-
+      Cerebellar-thalamic-cortical loop modulation reduces tremor amplitude.
+  - code: T3
+    symptom: "Cognition: PD-MCI"
+    evidence: Preliminary
+    targets: [F3, F4, P3]
+    params_text: "TPS: L-DLPFC + bilateral PPC - 4,000 pulses - 5 Hz"
+    rationale: >-
+      DLPFC facilitates working memory; PPC supports spatial-attentional integration.
+  - code: T4
+    symptom: "Depression & Apathy"
+    evidence: Emerging Pilot
+    targets: [F3, F4]
+    params_text: "TPS: Bilateral DLPFC - 3,000 pulses - 5 Hz"
+    rationale: >-
+      DLPFC modulation targets affective circuits implicated in PD depression.
+  - code: T5
+    symptom: "Pain & Dyskinesia"
+    evidence: Experimental
+    targets: [C3, C4, Cb1, Cbz, Cb2]
+    params_text: "TPS: M1 + Cerebellum - 4,000 pulses - 5 Hz"
+    rationale: >-
+      Cerebellar stimulation modulates dopamine-independent motor loop; M1 for pain gate.
+
+tdcs:
+  - code: C1
+    symptom: "Motor (Bradykinesia & Rigidity)"
+    anodes: [C3, C4]
+    cathodes: [Fp1, Fp2]
+    params_text: "2 mA - 20-30 min | Bilateral M1 (C3+C4) -> supraorbital cathode"
+    rationale: >-
+      Bilateral anodal M1 tDCS enhances motor cortex excitability and reduces bradykinesia severity.
+  - code: C2
+    symptom: "Gait & Dual-Task Performance"
+    anodes: [F3, Cz]
+    cathodes: [Fp2]
+    params_text: "2 mA - 20-40 min | Combine with treadmill"
+    rationale: >-
+      Left DLPFC + SMA priming improves gait initiation and dual-task cognitive-motor coupling.
+  - code: C3
+    symptom: "Cognition & Executive Function"
+    anodes: [F3]
+    cathodes: [Fp2]
+    params_text: "2 mA - 20 min | L-DLPFC (F3) -> contralateral supraorbital"
+    rationale: >-
+      L-DLPFC anodal tDCS enhances working memory and executive control in PD-MCI.
+  - code: C4
+    symptom: "Depression & Mood (Apathy)"
+    anodes: [F3]
+    cathodes: [F4]
+    params_text: "2 mA - 20-30 min | L-DLPFC anode, R-DLPFC cathode"
+    rationale: >-
+      Left prefrontal facilitation with right inhibition mirrors rTMS antidepressant montage.
+  - code: C5
+    symptom: Fatigue
+    anodes: [F3, F4]
+    cathodes: [Oz]
+    params_text: "2 mA - 20 min | Bilateral DLPFC -> occipital cathode"
+    rationale: >-
+      Bilateral prefrontal engagement reduces central fatigue via corticothalamic upregulation.
+  - code: C6
+    symptom: "Balance & Posture"
+    anodes: [Cz, C3, C4]
+    cathodes: [Fp1]
+    params_text: "2 mA - 20-40 min | Pair with balance exercises"
+    rationale: >-
+      SMA/M1 anodal tDCS during balance tasks enhances somatosensory integration.
+  - code: C7
+    symptom: "ON/OFF Dyskinesia"
+    anodes: [Cb1, Cbz, Cb2]
+    cathodes: [Fpz]
+    params_text: "2 mA - 20-40 min | Cerebellar anodal stimulation"
+    rationale: >-
+      Cathodal cerebellar tDCS reduces LID; anodal enhances adaptation.
+      Protocol adapted per patient phase.
+  - code: C8
+    symptom: "Motor Learning & Skill Acquisition"
+    anodes: [C3]
+    cathodes: [Fp2]
+    params_text: "2 mA - 20 min | L-M1 during physiotherapy"
+    rationale: >-
+      L-M1 anodal tDCS during motor practice accelerates skill encoding via LTP-like plasticity.
+
+plato:
+  - code: C1-PS
+    symptom: "Motor (Bradykinesia / Rigidity)"
+    anodes: [C3]
+    cathodes: [Fpz]
+    params_text: "Variant 1A - M1 Hand | 1.2-1.6 mA - 20 min"
+    variant_note: "Variant 1A: C3 (M1 Hand) | Variant 1B: Cz (M1 Leg)"
+  - code: C2-PS
+    symptom: "Gait / Freezing of Gait (FOG)"
+    anodes: [Fz]
+    cathodes: [Pz]
+    params_text: "Variant 2 - SMA/Fz | 1.2-1.6 mA - 20 min"
+    variant_note: "Variant 2: Fz (SMA) -- use with treadmill walking"
+  - code: C3-PS
+    symptom: "Cognition / Executive Function"
+    anodes: [F3]
+    cathodes: [Fp2]
+    params_text: "Variant 3 - L-DLPFC (F3) | 1.2-1.6 mA - 20 min"
+    variant_note: "Variant 3: F3 (L-DLPFC) single-channel"
+  - code: C4-PS
+    symptom: "Mood / Depression & Apathy"
+    anodes: [F3]
+    cathodes: [F4]
+    params_text: "Variant 4 - Bifrontal | 1.2-1.6 mA - 20 min"
+    variant_note: "Variant 4: F3 anode -> F4 cathode"
+
+contraindications_extra:
+  - [Deep Brain Stimulator (DBS), "TPS - tDCS", "ABSOLUTE -- DBS interaction risk"]
+  - [Unstable ON/OFF fluctuations, TPS, "RELATIVE -- time session during stable ON window"]
+
+key_outcome_measures: "MDS-UPDRS III, TUG, MoCA, FOG-Q, SOZO PRS"

@@ -105,7 +105,7 @@ if _build_all_available:
 # Top-level commands
 # ---------------------------------------------------------------------------
 
-VERSION = "0.1.0"
+VERSION = "1.1.0"  # Post-refactor: canonical pipeline, PMID validation, shared helpers
 
 VALID_SLUGS = [
     "parkinsons", "depression", "anxiety", "adhd", "alzheimers",
@@ -190,6 +190,69 @@ def list_conditions():
         typer.echo(f"  {slug:<20}  {name}")
     typer.echo("")
     typer.echo(typer.style(f"Total: {len(VALID_SLUGS)} conditions", fg=typer.colors.GREEN))
+
+
+@app.command("generate")
+def generate(
+    condition: str = typer.Argument(..., help="Condition slug (e.g. 'parkinsons') or 'all'"),
+    tier: str = typer.Option("both", help="Tier: fellow, partners, or both"),
+    doc_type: str = typer.Option("all", "--doc-type", "-d", help="Document type or 'all'"),
+    output_dir: str = typer.Option(None, "--output-dir", "-o", help="Output directory override"),
+    no_visuals: bool = typer.Option(False, "--no-visuals", help="Skip visual generation"),
+    no_qa: bool = typer.Option(False, "--no-qa", help="Skip QA checks"),
+    with_images: bool = typer.Option(False, "--with-images", help="Search and insert web images from PMC/Wikimedia"),
+):
+    """Generate documents using the canonical GenerationService.
+
+    This is the recommended generation command. It routes through the unified
+    pipeline with QA, evidence traceability, and visual generation support.
+
+    Use --with-images to automatically search PubMed Central and Wikimedia Commons
+    for relevant clinical/scientific images and insert them into documents.
+
+    Examples:
+        sozo generate parkinsons
+        sozo generate parkinsons --tier partners --doc-type handbook
+        sozo generate all --tier both
+    """
+    from ..generation.service import GenerationService
+
+    svc = GenerationService(
+        output_dir=output_dir,
+        with_visuals=not no_visuals,
+        with_qa=not no_qa,
+        with_images=with_images,
+    )
+
+    if condition == "all":
+        results = svc.generate_batch(tier=tier, doc_type=doc_type)
+    else:
+        results = svc.generate(
+            condition=condition,
+            tier=tier,
+            doc_type=doc_type,
+            output_dir=output_dir,
+        )
+
+    # Print results
+    success_count = sum(1 for r in results if r.success)
+    fail_count = sum(1 for r in results if not r.success)
+
+    for r in results:
+        if r.success:
+            qa_tag = ""
+            if r.qa_passed is not None:
+                qa_tag = f" [QA: {'PASS' if r.qa_passed else 'ISSUES'}]"
+            typer.echo(f"  {typer.style('OK', fg=typer.colors.GREEN)}  {r.tier}/{r.doc_type}{qa_tag}")
+        else:
+            typer.echo(f"  {typer.style('FAIL', fg=typer.colors.RED)}  {r.tier}/{r.doc_type}: {r.error}")
+
+    typer.echo("")
+    color = typer.colors.GREEN if fail_count == 0 else typer.colors.YELLOW
+    typer.echo(typer.style(
+        f"Done: {success_count} generated, {fail_count} failed",
+        fg=color,
+    ))
 
 
 if __name__ == "__main__":

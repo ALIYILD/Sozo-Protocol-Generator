@@ -1,3 +1,8 @@
+# DEPRECATED: This script is superseded by the canonical generation pipeline.
+# Use instead: GenerationService.generate(condition="...", tier="...", doc_type="...")
+# Or CLI: PYTHONPATH=src python -m sozo_generator.cli.main build condition --condition <slug> --tier <tier> --doc-type <type>
+# See docs/MIGRATION_PLAN.md for details.
+
 """
 Generate Partners Tier Phenotype Classification & Protocol Mapping DOCX files
 Batch 4: Chronic Pain / Fibromyalgia + PTSD
@@ -5,6 +10,8 @@ Batch 4: Chronic Pain / Fibromyalgia + PTSD
 from pathlib import Path
 from docx import Document
 from docx.shared import RGBColor
+
+_PROJECT_ROOT = Path(__file__).resolve().parent
 
 C_WHITE = RGBColor(0xFF, 0xFF, 0xFF)
 C_BLACK = RGBColor(0x00, 0x00, 0x00)
@@ -20,7 +27,7 @@ def _para_replace(para, old, new):
     size = fr.font.size if fr else None
     try:
         color = fr.font.color.rgb if (fr and fr.font.color.type) else None
-    except:
+    except Exception:
         color = None
     for r in para.runs:
         r.text = ""
@@ -81,7 +88,7 @@ def _global_replace(doc, old, new):
 
 
 def build_phenotype_classification(c):
-    TEMPLATE = Path(r"C:/Users/yildi/OneDrive/Desktop/Parkinson D/Partners/Assessments/PD_Phenotype_Classification_Partners.docx")
+    TEMPLATE = _PROJECT_ROOT / "templates" / "gold_standard" / "Phenotype_Classification.docx"
     doc = Document(str(TEMPLATE))
     paras = doc.paragraphs
     tables = doc.tables
@@ -346,7 +353,7 @@ PTSD = {
 
 if __name__ == "__main__":
     import os
-    os.chdir(r"C:/Users/yildi/Sozo-Protocol-Generator")
+    os.chdir(str(_PROJECT_ROOT))
 
     print("Building Phenotype Classification Partners — Batch 4")
     print("=" * 60)

@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from ..core.enums import NetworkKey, NetworkDysfunction, Modality, EvidenceLevel
+from .validators import validate_pmid
 
 
 class PhenotypeSubtype(BaseModel):
@@ -46,6 +47,11 @@ class AssessmentTool(BaseModel):
     timing: str = "baseline"  # baseline | weekly | monthly | endpoint
     evidence_pmid: Optional[str] = None
     notes: Optional[str] = None
+
+    @field_validator("evidence_pmid", mode="before")
+    @classmethod
+    def _validate_pmid(cls, v: str | None) -> str | None:
+        return validate_pmid(v)
 
 
 class SafetyNote(BaseModel):

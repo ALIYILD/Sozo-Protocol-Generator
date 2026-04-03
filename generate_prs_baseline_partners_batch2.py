@@ -1,3 +1,8 @@
+# DEPRECATED: This script is superseded by the canonical generation pipeline.
+# Use instead: GenerationService.generate(condition="...", tier="...", doc_type="...")
+# Or CLI: PYTHONPATH=src python -m sozo_generator.cli.main build condition --condition <slug> --tier <tier> --doc-type <type>
+# See docs/MIGRATION_PLAN.md for details.
+
 """
 Generate Partners Tier Psychological_Intake_PRS_Baseline_Partners DOCX files
 Batch 2: ptsd, ocd, ms, asd, long_covid, tinnitus, insomnia (conditions 8-14)
@@ -5,6 +10,8 @@ Batch 2: ptsd, ocd, ms, asd, long_covid, tinnitus, insomnia (conditions 8-14)
 from pathlib import Path
 from docx import Document
 from docx.shared import RGBColor
+
+_PROJECT_ROOT = Path(__file__).resolve().parent
 
 C_WHITE = RGBColor(0xFF, 0xFF, 0xFF)
 C_BLACK = RGBColor(0x00, 0x00, 0x00)
@@ -20,7 +27,7 @@ def _para_replace(para, old, new):
     size = fr.font.size if fr else None
     try:
         color = fr.font.color.rgb if (fr and fr.font.color.type) else None
-    except:
+    except Exception:
         color = None
     for r in para.runs:
         r.text = ""
@@ -84,9 +91,7 @@ def _global_replace(doc, old, new):
 
 
 def build_prs(c):
-    TEMPLATE = Path(
-        r"C:/Users/yildi/OneDrive/Desktop/Parkinson D/Partners/Assessments/Psychological_Intake_PRS_Baseline_Partners.docx"
-    )
+    TEMPLATE = _PROJECT_ROOT / "templates" / "gold_standard" / "Psychological_Intake_PRS.docx"
     doc = Document(str(TEMPLATE))
     paras = doc.paragraphs
     tables = doc.tables

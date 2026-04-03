@@ -15,7 +15,9 @@ from responder_conditions_data import CONDITIONS
 from responder_conditions_data_2 import CONDITIONS_2
 CONDITIONS.update(CONDITIONS_2)
 
-TEMPLATE = Path(r"C:/Users/yildi/OneDrive/Desktop/Parkinson D/Partners/Assessments/PD_Responder_Tracking_Partners.docx")
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+TEMPLATE = _PROJECT_ROOT / "templates" / "gold_standard" / "Responder_Tracking.docx"
 OUTPUT_ROOT = Path("outputs/documents")
 
 C_WHITE  = RGBColor(0xFF, 0xFF, 0xFF)
