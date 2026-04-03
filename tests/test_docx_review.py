@@ -72,6 +72,30 @@ class TestSectionMapping:
         for c in mapped_result.comments:
             assert c.mapping_confidence > 0
 
+    def test_pathophysiology_high_confidence(self, mapped_result):
+        """Pathophysiology has multiple strong signal matches → high confidence."""
+        patho = next(c for c in mapped_result.comments if "pathophysiology" in c.text.lower())
+        assert patho.mapping_confidence >= 0.9
+        assert patho.mapping_state == "high_confidence"
+
+    def test_safety_high_confidence(self, mapped_result):
+        """Contraindications + pregnancy = strong safety signal."""
+        safety = next(c for c in mapped_result.comments if "contraindication" in c.text.lower())
+        assert safety.mapping_confidence >= 0.7
+        assert safety.mapping_state == "high_confidence"
+
+    def test_mapping_has_explanation(self, mapped_result):
+        for c in mapped_result.comments:
+            assert c.mapping_explanation, f"Comment '{c.text[:30]}' missing explanation"
+
+    def test_mapping_has_signals(self, mapped_result):
+        for c in mapped_result.comments:
+            assert len(c.mapping_signals) > 0, f"Comment '{c.text[:30]}' has no signals"
+
+    def test_mapping_state_set(self, mapped_result):
+        states = {c.mapping_state for c in mapped_result.comments}
+        assert "unmapped" not in states  # All should be mapped
+
 
 # ── Integration with Review Pipeline ─────────────────────────────────────
 

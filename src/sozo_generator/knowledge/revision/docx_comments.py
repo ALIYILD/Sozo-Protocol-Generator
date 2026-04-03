@@ -42,6 +42,15 @@ _W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 
 
 @dataclass
+class MappingSignal:
+    """One signal that contributed to a section mapping decision."""
+    signal_type: str  # heading_match, keyword_match, text_overlap, position, comment_cue, alias
+    section_slug: str
+    score: float
+    explanation: str = ""
+
+
+@dataclass
 class ExtractedDocxComment:
     """A single comment extracted from a DOCX file."""
     comment_id: str = ""
@@ -53,13 +62,20 @@ class ExtractedDocxComment:
     anchor_text: str = ""  # Text the comment is attached to
     surrounding_before: str = ""  # ~100 chars before anchor
     surrounding_after: str = ""  # ~100 chars after anchor
+    full_paragraph_text: str = ""  # Full paragraph containing anchor
+    preceding_heading: str = ""  # Nearest heading before this paragraph
     paragraph_index: int = -1
+    inside_table: bool = False
+    table_index: int = -1
     extraction_confidence: float = 1.0
 
-    # Section mapping (populated later)
+    # Section mapping (populated by mapper)
     mapped_section: str = ""
     mapping_confidence: float = 0.0
+    mapping_state: str = "unmapped"  # unmapped, high_confidence, medium_confidence, low_confidence, ambiguous
     alternate_sections: list[str] = field(default_factory=list)
+    mapping_signals: list[MappingSignal] = field(default_factory=list)
+    mapping_explanation: str = ""
 
     def __post_init__(self):
         if not self.comment_id:
@@ -116,10 +132,10 @@ def extract_docx_comments(docx_path: str | Path) -> DocxReviewIngestResult:
             # 1. Extract comments from word/comments.xml
             comments_data = _extract_comments_xml(zf)
 
-            # 2. Extract document text and comment anchors
-            paragraphs, comment_ranges = _extract_document_structure(zf)
+            # 2. Extract document text, comment anchors, and heading map
+            paragraphs, comment_ranges, heading_map = _extract_document_structure(zf)
 
-            # 3. Build extracted comments
+            # 3. Build extracted comments with richer context
             for cid, cdata in comments_data.items():
                 ec = ExtractedDocxComment(
                     docx_comment_id=cid,
@@ -136,11 +152,18 @@ def extract_docx_comments(docx_path: str | Path) -> DocxReviewIngestResult:
                     ec.paragraph_index = anchor_info.get("paragraph_index", -1)
                     ec.surrounding_before = anchor_info.get("before", "")
                     ec.surrounding_after = anchor_info.get("after", "")
+                    ec.full_paragraph_text = anchor_info.get("full_paragraph", "")
                     ec.extraction_confidence = 0.9
                 else:
                     ec.extraction_confidence = 0.5
                     result.extraction_warnings.append(
                         f"Comment '{cid}' has no anchor range in document"
+                    )
+
+                # Find preceding heading for this comment
+                if ec.paragraph_index >= 0:
+                    ec.preceding_heading = _find_preceding_heading(
+                        ec.paragraph_index, heading_map, paragraphs
                     )
 
                 result.comments.append(ec)
@@ -191,10 +214,17 @@ def _extract_comments_xml(zf: zipfile.ZipFile) -> dict[str, dict]:
     return comments
 
 
-def _extract_document_structure(zf: zipfile.ZipFile) -> tuple[list[str], dict]:
-    """Extract paragraph text and comment range markers from document.xml."""
+def _extract_document_structure(zf: zipfile.ZipFile) -> tuple[list[str], dict, dict]:
+    """Extract paragraph text, comment range markers, and heading map from document.xml.
+
+    Returns:
+        paragraphs: list of paragraph text strings
+        comment_ranges: dict of comment_id → anchor info
+        heading_map: dict of paragraph_index → heading text (for bold/large paragraphs)
+    """
     paragraphs = []
-    comment_ranges: dict[str, dict] = {}  # comment_id → {anchor_text, paragraph_index, ...}
+    comment_ranges: dict[str, dict] = {}
+    heading_map: dict[int, str] = {}  # paragraph_index → heading text
 
     try:
         xml_bytes = zf.read("word/document.xml")
@@ -202,187 +232,379 @@ def _extract_document_structure(zf: zipfile.ZipFile) -> tuple[list[str], dict]:
 
         body = root.find(f"{_W}body")
         if body is None:
-            return paragraphs, comment_ranges
+            return paragraphs, comment_ranges, heading_map
 
-        # Track active comment ranges
-        active_ranges: dict[str, list[str]] = {}  # comment_id → text pieces
-        active_range_starts: dict[str, int] = {}  # comment_id → start paragraph index
+        active_ranges: dict[str, list[str]] = {}
+        active_range_starts: dict[str, int] = {}
 
         for pi, p in enumerate(body.findall(f"{_W}p")):
             para_text_parts = []
+            is_heading = False
+
+            # Check paragraph properties for heading style or bold formatting
+            pPr = p.find(f"{_W}pPr")
+            if pPr is not None:
+                pStyle = pPr.find(f"{_W}pStyle")
+                if pStyle is not None:
+                    style_val = pStyle.get(f"{_W}val", "")
+                    if "heading" in style_val.lower() or "title" in style_val.lower():
+                        is_heading = True
 
             for child in p:
                 tag = child.tag
 
-                # Comment range start
                 if tag == f"{_W}commentRangeStart":
                     cid = child.get(f"{_W}id", "")
                     if cid:
                         active_ranges[cid] = []
                         active_range_starts[cid] = pi
 
-                # Comment range end
                 elif tag == f"{_W}commentRangeEnd":
                     cid = child.get(f"{_W}id", "")
                     if cid and cid in active_ranges:
                         anchor = " ".join(active_ranges[cid]).strip()
                         start_pi = active_range_starts.get(cid, pi)
-
-                        # Get surrounding context
                         before = paragraphs[start_pi - 1] if start_pi > 0 and paragraphs else ""
-                        after_idx = pi + 1
 
                         comment_ranges[cid] = {
                             "anchor_text": anchor,
                             "paragraph_index": start_pi,
-                            "before": before[:150],
-                            "after": "",  # Will fill after processing
+                            "before": before[:200],
+                            "after": "",
+                            "full_paragraph": "",  # Filled after para text built
                         }
                         del active_ranges[cid]
 
-                # Run text
                 elif tag == f"{_W}r":
+                    # Check if run is bold (heading-like)
+                    rPr = child.find(f"{_W}rPr")
+                    if rPr is not None:
+                        bold = rPr.find(f"{_W}b")
+                        sz = rPr.find(f"{_W}sz")
+                        if bold is not None or (sz is not None and int(sz.get(f"{_W}val", "22")) >= 26):
+                            is_heading = True
+
                     for t in child.findall(f"{_W}t"):
                         if t.text:
-                            text = t.text
-                            para_text_parts.append(text)
-                            # Add to any active comment ranges
+                            para_text_parts.append(t.text)
                             for cid in active_ranges:
-                                active_ranges[cid].append(text)
+                                active_ranges[cid].append(t.text)
 
             para_text = " ".join(para_text_parts).strip()
             paragraphs.append(para_text)
+
+            # Record headings (bold or styled)
+            if is_heading and para_text and len(para_text) < 200:
+                heading_map[pi] = para_text
+
+            # Fill full_paragraph for any comment ranges ending at this paragraph
+            for cid, info in comment_ranges.items():
+                if info.get("paragraph_index") == pi and not info.get("full_paragraph"):
+                    info["full_paragraph"] = para_text
 
         # Fill "after" context
         for cid, info in comment_ranges.items():
             pi = info["paragraph_index"]
             if pi + 1 < len(paragraphs):
-                info["after"] = paragraphs[pi + 1][:150]
+                info["after"] = paragraphs[pi + 1][:200]
 
     except Exception as e:
         logger.debug(f"Error parsing document.xml: {e}")
 
-    return paragraphs, comment_ranges
+    return paragraphs, comment_ranges, heading_map
 
 
-# ── Section Mapping ──────────────────────────────────────────────────────
+# ── Heading finder ────────────────────────────────────────────────────────
+
+
+def _find_preceding_heading(
+    para_index: int,
+    heading_map: dict[int, str],
+    paragraphs: list[str],
+) -> str:
+    """Find the nearest heading before a given paragraph index."""
+    # Check heading_map for explicit headings
+    for hi in sorted(heading_map.keys(), reverse=True):
+        if hi <= para_index:
+            return heading_map[hi]
+
+    # Fallback: scan backwards for short bold-looking paragraphs
+    for i in range(para_index - 1, max(para_index - 10, -1), -1):
+        if i >= 0 and i < len(paragraphs):
+            text = paragraphs[i]
+            if text and len(text) < 80 and text == text.strip():
+                # Likely a heading-like paragraph
+                return text
+    return ""
+
+
+# ── Section Mapping (Multi-Signal) ───────────────────────────────────────
+
+
+# Expanded section aliases for better matching
+_SECTION_ALIASES: dict[str, list[str]] = {
+    "document_control": [
+        "document control", "clinical responsibility", "governance", "version",
+        "organization", "sozo brain center", "confidential",
+    ],
+    "clinical_overview": [
+        "overview", "clinical overview", "epidemiology", "prevalence",
+        "disease burden", "disorder characterized", "treatment landscape",
+    ],
+    "pathophysiology": [
+        "pathophysiology", "mechanism", "neural circuit", "dopamine",
+        "serotonin", "braak", "neurodegeneration", "alpha-synuclein",
+        "neuroinflammation", "hpa axis", "circuit dysfunction",
+    ],
+    "brain_anatomy": [
+        "brain", "anatomy", "neuroanatomy", "region", "structure",
+        "substantia nigra", "basal ganglia", "prefrontal", "cortex",
+        "brain map", "brodmann",
+    ],
+    "network_profiles": [
+        "network", "fnon", "dmn", "default mode", "cen", "executive",
+        "salience", "sensorimotor", "limbic", "attention", "connectivity",
+        "dysfunction", "hypoactivation", "hyperactivation",
+    ],
+    "phenotypes": [
+        "phenotype", "subtype", "classification", "tremor-dominant",
+        "akinetic", "melancholic", "atypical", "treatment-resistant",
+    ],
+    "protocols_tdcs": [
+        "tdcs", "direct current", "electrode", "montage", "anode", "cathode",
+        "hdckit", "platoscience", "newronika", "2 ma",
+    ],
+    "protocols_tps": [
+        "tps", "pulse stimulation", "neurolith", "ultrasound",
+        "off-label", "tps target", "focused ultrasound", "mj/mm",
+    ],
+    "safety": [
+        "safety", "contraindication", "adverse", "monitoring", "screening",
+        "seizure", "pregnancy", "metal implant", "pacemaker", "stopping rule",
+    ],
+    "assessments": [
+        "assessment", "scale", "outcome measure", "phq", "updrs", "moca",
+        "ham-d", "madrs", "gad-7", "screening", "validated",
+    ],
+    "responder_criteria": [
+        "responder", "response", "non-responder", "improvement",
+        "partial responder", "week 4", "week 8", "30%", "15%",
+    ],
+    "evidence_summary": [
+        "evidence summary", "evidence gap", "quality", "literature",
+        "emerging evidence", "systematic review",
+    ],
+    "references": [
+        "reference", "citation", "pmid", "bibliography", "doi",
+    ],
+    "inclusion_exclusion": [
+        "inclusion", "exclusion", "eligibility", "criteria",
+    ],
+    "followup": [
+        "follow-up", "follow up", "reassessment", "decision",
+        "maintenance", "discharge",
+    ],
+}
+
+# Signal weights for multi-signal scoring
+_SIGNAL_WEIGHTS = {
+    "heading_match": 4.0,    # Preceding heading matches section title
+    "keyword_match": 1.0,    # Keyword/alias found in combined text
+    "comment_cue": 2.0,      # Comment text contains strong section cue
+    "heading_alias": 3.0,    # Heading text matches section alias
+    "anchor_overlap": 2.5,   # Anchor text overlaps with section-specific terms
+}
 
 
 def map_comments_to_sections(
     result: DocxReviewIngestResult,
     provenance_path: str | Path | None = None,
+    blueprint_slug: str = "",
 ) -> DocxReviewIngestResult:
     """Map extracted DOCX comments to canonical document sections.
 
-    Uses multiple signals: anchor text, surrounding context, section headings,
-    and provenance data.
+    Uses multi-signal scoring:
+    1. Heading match (preceding heading → section title)
+    2. Keyword/alias matching (expanded vocabulary)
+    3. Comment text cues (strong section-specific terms)
+    4. Anchor text overlap
+    5. Provenance section ordering
     """
-    # Load section titles from provenance if available
-    section_titles = _load_section_titles(provenance_path)
+    provenance_sections = _load_provenance_sections(provenance_path)
+    blueprint_sections = _load_blueprint_sections(blueprint_slug)
 
     for comment in result.comments:
-        # Try to map using anchor text and context
-        best_section, confidence, alternatives = _find_best_section(
-            comment, section_titles
-        )
-        comment.mapped_section = best_section
-        comment.mapping_confidence = confidence
-        comment.alternate_sections = alternatives
+        signals, ranked = _score_all_sections(comment, provenance_sections, blueprint_sections)
+        comment.mapping_signals = signals
 
-        if best_section:
+        if ranked:
+            best_slug, best_score = ranked[0]
+            comment.mapped_section = best_slug
+            comment.mapping_confidence = _calibrate_confidence(best_score, ranked)
+            comment.alternate_sections = [slug for slug, _ in ranked[1:4]]
+
+            # Determine mapping state
+            if comment.mapping_confidence >= 0.7:
+                comment.mapping_state = "high_confidence"
+            elif comment.mapping_confidence >= 0.4:
+                comment.mapping_state = "medium_confidence"
+            elif comment.mapping_confidence >= 0.2:
+                comment.mapping_state = "low_confidence"
+            else:
+                comment.mapping_state = "ambiguous"
+
+            # Build explanation
+            top_signals = sorted(signals, key=lambda s: -s.score)[:3]
+            explanations = [s.explanation for s in top_signals if s.explanation and s.section_slug == best_slug]
+            comment.mapping_explanation = "; ".join(explanations) if explanations else f"Best match: {best_slug}"
+
             result.comments_mapped += 1
-        elif alternatives:
-            result.comments_ambiguous += 1
-            result.mapping_warnings.append(
-                f"Comment '{comment.text[:40]}...' has ambiguous mapping: {alternatives}"
-            )
         else:
+            comment.mapping_state = "unmapped"
             result.comments_ambiguous += 1
             result.mapping_warnings.append(
-                f"Comment '{comment.text[:40]}...' could not be mapped to any section"
+                f"Comment '{comment.text[:40]}...' could not be mapped"
             )
 
     return result
 
 
-def _load_section_titles(provenance_path: str | Path | None) -> dict[str, str]:
-    """Load section slug → title mapping from provenance."""
-    if not provenance_path:
-        return {}
-
-    path = Path(provenance_path)
-    if not path.exists():
-        return {}
-
+def _load_provenance_sections(path: str | Path | None) -> list[dict]:
+    """Load section metadata from provenance sidecar."""
+    if not path:
+        return []
+    p = Path(path)
+    if not p.exists():
+        return []
     try:
         import json
-        data = json.loads(path.read_text())
-        return {
-            s["section_slug"]: s.get("section_slug", "")
-            for s in data.get("sections", [])
-        }
+        data = json.loads(p.read_text())
+        return data.get("sections", [])
     except Exception:
-        return {}
+        return []
 
 
-# Section keywords for fuzzy matching
-_SECTION_KEYWORDS = {
-    "document_control": ["document control", "governance", "clinical responsibility", "version"],
-    "clinical_overview": ["overview", "clinical overview", "epidemiology", "prevalence"],
-    "pathophysiology": ["pathophysiology", "mechanism", "neural", "circuit", "dopamine"],
-    "brain_anatomy": ["brain", "anatomy", "neuroanatomy", "region", "structure"],
-    "network_profiles": ["network", "fnon", "dmn", "cen", "salience", "connectivity"],
-    "phenotypes": ["phenotype", "subtype", "classification"],
-    "protocols_tdcs": ["tdcs", "direct current", "electrode", "montage", "anode", "cathode"],
-    "protocols_tps": ["tps", "pulse stimulation", "neurolith", "ultrasound", "off-label"],
-    "safety": ["safety", "contraindication", "adverse", "monitoring", "screening"],
-    "assessments": ["assessment", "scale", "outcome", "measure", "phq", "updrs"],
-    "responder_criteria": ["responder", "response", "non-responder", "improvement"],
-    "evidence_summary": ["evidence", "gap", "quality", "literature"],
-    "references": ["reference", "citation", "pmid", "bibliography"],
-    "inclusion_exclusion": ["inclusion", "exclusion", "eligibility", "criteria"],
-    "followup": ["follow-up", "follow up", "reassessment", "decision"],
-}
+def _load_blueprint_sections(blueprint_slug: str) -> list[dict]:
+    """Load section definitions from a blueprint."""
+    if not blueprint_slug:
+        return []
+    try:
+        from ..loader import load_blueprint
+        bp = load_blueprint(blueprint_slug)
+        if bp:
+            return [{"slug": s.slug, "title": s.title, "order": s.order} for s in bp.sections]
+    except Exception:
+        pass
+    return []
 
 
-def _find_best_section(
+def _score_all_sections(
     comment: ExtractedDocxComment,
-    section_titles: dict[str, str],
-) -> tuple[str, float, list[str]]:
-    """Find the best matching section for a comment."""
-    # Combine all available text signals
-    signals = " ".join(filter(None, [
+    provenance_sections: list[dict],
+    blueprint_sections: list[dict],
+) -> tuple[list[MappingSignal], list[tuple[str, float]]]:
+    """Score all candidate sections using multiple signals."""
+    scores: dict[str, float] = {}
+    all_signals: list[MappingSignal] = []
+
+    # Build combined text from all available context
+    combined_lower = " ".join(filter(None, [
+        comment.text,
         comment.anchor_text,
         comment.surrounding_before,
         comment.surrounding_after,
-        comment.text,
+        comment.full_paragraph_text,
     ])).lower()
 
-    if not signals.strip():
-        return "", 0.0, []
+    heading_lower = (comment.preceding_heading or "").lower()
 
-    # Score each section
-    scores: dict[str, float] = {}
-    for section_slug, keywords in _SECTION_KEYWORDS.items():
-        score = sum(1 for kw in keywords if kw in signals)
-        if score > 0:
-            scores[section_slug] = score
+    for section_slug, aliases in _SECTION_ALIASES.items():
+        section_score = 0.0
 
-    if not scores:
-        return "", 0.0, []
+        # Signal 1: Preceding heading matches section
+        if heading_lower:
+            # Check if heading contains the section slug or aliases
+            heading_matches = sum(1 for a in aliases if a in heading_lower)
+            if heading_matches > 0:
+                w = _SIGNAL_WEIGHTS["heading_match"] * heading_matches
+                section_score += w
+                signal = MappingSignal(
+                    signal_type="heading_match",
+                    section_slug=section_slug,
+                    score=w,
+                    explanation=f"Preceding heading '{comment.preceding_heading[:50]}' matches section '{section_slug}'",
+                )
+                all_signals.append(signal)
 
-    # Sort by score
+            # Also check if heading text is an alias directly
+            for a in aliases:
+                if heading_lower.startswith(a) or a.startswith(heading_lower[:10]):
+                    w = _SIGNAL_WEIGHTS["heading_alias"]
+                    section_score += w
+                    all_signals.append(MappingSignal(
+                        signal_type="heading_alias", section_slug=section_slug, score=w,
+                        explanation=f"Heading '{heading_lower[:30]}' is alias for '{section_slug}'",
+                    ))
+                    break
+
+        # Signal 2: Keyword/alias in combined text
+        keyword_hits = sum(1 for a in aliases if a in combined_lower)
+        if keyword_hits > 0:
+            w = _SIGNAL_WEIGHTS["keyword_match"] * keyword_hits
+            section_score += w
+            all_signals.append(MappingSignal(
+                signal_type="keyword_match", section_slug=section_slug, score=w,
+                explanation=f"{keyword_hits} keyword(s) matched for '{section_slug}'",
+            ))
+
+        # Signal 3: Comment text contains strong section cue
+        comment_lower = comment.text.lower()
+        comment_cue_hits = sum(1 for a in aliases if a in comment_lower)
+        if comment_cue_hits > 0:
+            w = _SIGNAL_WEIGHTS["comment_cue"] * comment_cue_hits
+            section_score += w
+            all_signals.append(MappingSignal(
+                signal_type="comment_cue", section_slug=section_slug, score=w,
+                explanation=f"Comment text directly references '{section_slug}' concepts",
+            ))
+
+        # Signal 4: Anchor text has strong overlap
+        if comment.anchor_text:
+            anchor_lower = comment.anchor_text.lower()
+            anchor_hits = sum(1 for a in aliases if a in anchor_lower)
+            if anchor_hits > 0:
+                w = _SIGNAL_WEIGHTS["anchor_overlap"] * anchor_hits
+                section_score += w
+                all_signals.append(MappingSignal(
+                    signal_type="anchor_overlap", section_slug=section_slug, score=w,
+                    explanation=f"Anchor text overlaps with '{section_slug}' terminology",
+                ))
+
+        if section_score > 0:
+            scores[section_slug] = section_score
+
+    # Rank by total score
     ranked = sorted(scores.items(), key=lambda x: -x[1])
-    best_slug = ranked[0][0]
-    best_score = ranked[0][1]
+    return all_signals, ranked
 
-    # Normalize confidence (max keyword matches ~ 3-4 for a good match)
-    confidence = min(best_score / 3.0, 1.0)
 
-    # Alternatives (next best)
-    alternatives = [slug for slug, _ in ranked[1:4]]
+def _calibrate_confidence(best_score: float, ranked: list[tuple[str, float]]) -> float:
+    """Calibrate mapping confidence based on absolute score and margin over second-best."""
+    if not ranked:
+        return 0.0
 
-    return best_slug, confidence, alternatives
+    # Absolute confidence from score (strong match = high score)
+    abs_conf = min(best_score / 8.0, 1.0)  # 8 points = max confidence
+
+    # Margin over second-best (separation = more confidence)
+    if len(ranked) >= 2:
+        margin = (ranked[0][1] - ranked[1][1]) / max(ranked[0][1], 0.1)
+        margin_bonus = margin * 0.3  # Up to 30% bonus for clear separation
+    else:
+        margin_bonus = 0.2  # Only one candidate = moderate bonus
+
+    confidence = min(abs_conf + margin_bonus, 1.0)
+    return round(confidence, 2)
 
 
 # ── Integration Helper ────────────────────────────────────────────────────
