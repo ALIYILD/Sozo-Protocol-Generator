@@ -650,5 +650,74 @@ def promotion_list_cmd():
         typer.echo(f"  [{p.get('status', '?')}] {p.get('proposal_id', '?')}: {p.get('proposed_change_summary', '')[:60]}")
 
 
+@app.command("docx-review-ingest")
+def docx_review_ingest_cmd(
+    docx_file: str = typer.Argument(..., help="Path to reviewed DOCX with Word comments"),
+    condition: str = typer.Option("", help="Condition slug (auto-detect if empty)"),
+    doc_type: str = typer.Option("evidence_based_protocol", "--doc-type", "-d"),
+    tier: str = typer.Option("fellow"),
+):
+    """Extract and map reviewer comments from a Word DOCX file."""
+    from ..knowledge.revision.docx_comments import (
+        extract_docx_comments, map_comments_to_sections, docx_comments_to_review_set
+    )
+
+    # Extract
+    result = extract_docx_comments(docx_file)
+    if not result.comments:
+        typer.echo("No comments found in DOCX.")
+        return
+
+    # Map to sections
+    prov_path = Path(docx_file).with_suffix(".provenance.json")
+    result = map_comments_to_sections(result, prov_path if prov_path.exists() else None)
+    typer.echo(result.to_text())
+
+    # Convert to review comments
+    review_set = docx_comments_to_review_set(result, condition, doc_type, tier)
+    typer.echo(f"\nConverted {len(review_set.comments)} comments to review pipeline format.")
+
+
+@app.command("docx-review-regenerate")
+def docx_review_regenerate_cmd(
+    docx_file: str = typer.Argument(..., help="Path to reviewed DOCX"),
+    condition: str = typer.Argument(..., help="Condition slug"),
+    doc_type: str = typer.Option("evidence_based_protocol", "--doc-type", "-d"),
+    tier: str = typer.Option("fellow"),
+    force: bool = typer.Option(False, "--force"),
+):
+    """Extract DOCX comments and regenerate the document."""
+    from ..knowledge.revision.docx_comments import (
+        extract_docx_comments, map_comments_to_sections, docx_comments_to_review_set
+    )
+    from ..knowledge.revision.engine import RevisionEngine
+
+    # Extract and map
+    result = extract_docx_comments(docx_file)
+    result = map_comments_to_sections(result)
+    review_set = docx_comments_to_review_set(result, condition, doc_type, tier)
+
+    if not review_set.comments:
+        typer.echo("No comments to apply.")
+        return
+
+    # Regenerate
+    engine = RevisionEngine()
+    regen = engine.review_and_regenerate(
+        document_id=f"docx-review-{condition}",
+        condition=condition,
+        blueprint=doc_type,
+        tier=tier,
+        comments=review_set,
+        force=force,
+    )
+
+    if regen.success:
+        typer.echo(typer.style(f"\nRegenerated: {regen.output_path}", fg=typer.colors.GREEN))
+        typer.echo(regen.to_text())
+    else:
+        typer.echo(typer.style(f"\nFailed: {regen.error}", fg=typer.colors.RED))
+
+
 if __name__ == "__main__":
     app()
