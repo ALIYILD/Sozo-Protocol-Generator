@@ -1,0 +1,21 @@
+{
+  "result_id": "regen-3e150567",
+  "plan_id": "plan-c2b95c28",
+  "old_document_id": "test-hist",
+  "new_document_id": "rev-regen-3e150567",
+  "condition": "parkinsons",
+  "blueprint": "handbook",
+  "tier": "fellow",
+  "created_at": "2026-04-03T14:13:17Z",
+  "applied_changes": [
+    "cr-9028c677"
+  ],
+  "blocked_changes": [],
+  "sections_changed": [],
+  "readiness_before": "review_required",
+  "readiness_after": "review_required",
+  "success": false,
+  "error": "",
+  "plan_summary": "=== CHANGE PLAN: plan-c2b95c28 ===\nDocument: parkinsons/handbook/fellow\nChanges: 1 proposed, 0 blocked\nImpacted sections: none\nRequires regeneration: True\nRequires evidence review: False\nSafe to auto-apply: True\n\n  [applied] cr-9028c677: general_update \u2192 section_override:\n    Comment: Fix this section\n    Resolution: Apply general_update to section ''",
+  "result_summary": "=== REGENERATION RESULT: regen-3e150567 ===\nPlan: plan-c2b95c28\nSuccess: False\nApplied: 1 changes\nBlocked: 0\nReadiness: review_required \u2192 review_required\nPMIDs: 70 \u2192 70\nSections changed: none\nOutput: outputs/documents/parkinsons/fellow/parkinsons_handbook_fellow.docx"
+}

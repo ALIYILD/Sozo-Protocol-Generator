@@ -1,0 +1,27 @@
+{
+  "result_id": "regen-a0552fd6",
+  "plan_id": "plan-3d35e3f2",
+  "old_document_id": "canon-test",
+  "new_document_id": "rev-regen-a0552fd6",
+  "condition": "parkinsons",
+  "blueprint": "evidence_based_protocol",
+  "tier": "fellow",
+  "created_at": "2026-04-03T14:11:09Z",
+  "applied_changes": [
+    "cr-eada0647",
+    "cr-d6621922"
+  ],
+  "blocked_changes": [
+    "cr-87fa7cd8"
+  ],
+  "sections_changed": [
+    "pathophysiology",
+    "protocols_tps"
+  ],
+  "readiness_before": "ready",
+  "readiness_after": "ready",
+  "success": false,
+  "error": "",
+  "plan_summary": "=== CHANGE PLAN: plan-3d35e3f2 ===\nDocument: parkinsons/evidence_based_protocol/fellow\nChanges: 6 proposed, 1 blocked\nImpacted sections: pathophysiology, protocols_tps, safety, network_profiles\nRequires regeneration: True\nRequires evidence review: True\nSafe to auto-apply: False\n\n  [applied] cr-eada0647: add_content \u2192 section_override:pathophysiology\n    Comment: This section needs more clinical detail on pathophysiology mechanisms.\n    Resolution: Apply add_content to section 'pathophysiology'\n  [deferred] cr-8ce0a94d: update_safety \u2192 knowledge_patch:safety [EVIDENCE-SENSITIVE] [NEEDS APPROVAL]\n    Comment: The contraindications list is too weak \u2014 add metal implants and pregnancy.\n    Resolution: Review evidence for section 'safety' \u2014 may need additional PMIDs\n  [deferred] cr-f743a9d7: update_wording \u2192 section_override:network_profiles\n    Comment: Too technical for Fellows \u2014 simplify the network analysis.\n    Resolution: Adjust tone/complexity in section 'network_profiles' for tier appropriateness\n  [deferred] cr-adb5a986: update_table \u2192 blueprint_patch:\n    Comment: Add a follow-up column to the protocol table.\n    Resolution: Apply update_table to section ''\n  [deferred] cr-7fbe1fe9: update_visual \u2192 blueprint_patch:\n    Comment: Move the EEG figure above the treatment schedule.\n    Resolution: Update visual placement or type in blueprint for section ''\n  [applied] cr-d6621922: strengthen_evidence \u2192 section_override:protocols_tps [EVIDENCE-SENSITIVE] [NEEDS APPROVAL]\n    Comment: This needs stronger evidence for the TPS claims.\n    Resolution: Review evidence for section 'protocols_tps' \u2014 may need additional PMIDs\n\nBLOCKED (1):\n  ! Rewrite everything from scratch.: Broad rewrite requests must be decomposed into specific section changes\n\nWARNINGS:\n  - Plan includes evidence-sensitive changes \u2014 manual review recommended\n  - Plan includes knowledge/rule patches \u2014 clinical review required\n  - 1 changes were blocked as unsafe",
+  "result_summary": "=== REGENERATION RESULT: regen-a0552fd6 ===\nPlan: plan-3d35e3f2\nSuccess: False\nApplied: 2 changes\nBlocked: 1\nReadiness: ready \u2192 ready\nPMIDs: 70 \u2192 70\nSections changed: pathophysiology, protocols_tps\nOutput: outputs/documents/parkinsons/fellow/parkinsons_evidence-based-protocol_fellow.docx"
+}

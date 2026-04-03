@@ -545,5 +545,64 @@ def batch_generate_cmd(
     typer.echo(f"\nReport saved: {report_path}")
 
 
+@app.command("review-plan")
+def review_plan_cmd(
+    condition: str = typer.Argument(..., help="Condition slug"),
+    comments_file: str = typer.Argument(..., help="Path to comments file (text or JSON)"),
+    doc_type: str = typer.Option("evidence_based_protocol", "--doc-type", "-d"),
+    tier: str = typer.Option("fellow"),
+):
+    """Create a change plan from reviewer comments (dry run — no regeneration)."""
+    from ..knowledge.revision.parser import ingest_from_text, ingest_from_json
+    from ..knowledge.revision.engine import RevisionEngine
+
+    path = Path(comments_file)
+    if path.suffix == ".json":
+        comments = ingest_from_json(path)
+    else:
+        text = path.read_text()
+        comments = ingest_from_text(text, f"review-{condition}", condition, doc_type, tier)
+
+    engine = RevisionEngine()
+    plan = engine.create_change_plan(comments)
+    typer.echo(plan.to_text())
+
+
+@app.command("review-regenerate")
+def review_regenerate_cmd(
+    condition: str = typer.Argument(..., help="Condition slug"),
+    comments_file: str = typer.Argument(..., help="Path to comments file"),
+    doc_type: str = typer.Option("evidence_based_protocol", "--doc-type", "-d"),
+    tier: str = typer.Option("fellow"),
+    force: bool = typer.Option(False, "--force", help="Force past manual approval requirements"),
+):
+    """Apply reviewer comments and regenerate the document."""
+    from ..knowledge.revision.parser import ingest_from_text, ingest_from_json
+    from ..knowledge.revision.engine import RevisionEngine
+
+    path = Path(comments_file)
+    if path.suffix == ".json":
+        comments = ingest_from_json(path)
+    else:
+        text = path.read_text()
+        comments = ingest_from_text(text, f"review-{condition}", condition, doc_type, tier)
+
+    engine = RevisionEngine()
+    result = engine.review_and_regenerate(
+        document_id=f"review-{condition}",
+        condition=condition,
+        blueprint=doc_type,
+        tier=tier,
+        comments=comments,
+        force=force,
+    )
+
+    if result.success:
+        typer.echo(typer.style(f"\nRegenerated: {result.output_path}", fg=typer.colors.GREEN))
+        typer.echo(result.to_text())
+    else:
+        typer.echo(typer.style(f"\nFailed: {result.error}", fg=typer.colors.RED))
+
+
 if __name__ == "__main__":
     app()
