@@ -1,0 +1,194 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# SOZO Brain Center — Modality Knowledge File
+# Transcranial Direct Current Stimulation (tDCS)
+#
+# Schema: KnowledgeModality (src/sozo_generator/knowledge/schemas.py)
+# Source: configs/modalities.yaml, configs/devices.yaml, clinical literature
+# ──────────────────────────────────────────────────────────────────────────────
+
+slug: tdcs
+name: "Transcranial Direct Current Stimulation"
+abbreviation: "tDCS"
+description: >
+  Non-invasive brain stimulation using low-intensity direct current (1-2 mA)
+  delivered via scalp electrodes to modulate cortical excitability. Anodal
+  stimulation increases excitability while cathodal stimulation decreases it.
+
+mechanism: >
+  tDCS delivers a weak constant current between an anode and cathode placed on
+  the scalp. The current flows through the skull and modulates resting membrane
+  potential of cortical neurons. Anodal stimulation depolarises neurons
+  (increasing excitability), while cathodal stimulation hyperpolarises them
+  (decreasing excitability). Prolonged stimulation induces NMDA-receptor-dependent
+  neuroplastic changes that outlast the stimulation period. Effects on synaptic
+  plasticity are mediated through LTP/LTD-like mechanisms.
+
+parameters:
+  typical_intensity_ma: [1.0, 2.0]
+  typical_duration_min: [20, 30]
+  electrode_size_cm2: [25, 35]
+  session_frequency: "Daily or 5x/week"
+  ramp_up_seconds: 30
+  ramp_down_seconds: 30
+  max_current_density_ua_per_cm2: 80
+
+devices:
+  - slug: newronika_hdckit
+    name: "Newronika HDCkit"
+    manufacturer: "Newronika S.p.A."
+    type: "tDCS"
+    description: "Multi-channel HD-tDCS system with programmable electrode configurations."
+    features:
+      - "Up to 16 channels"
+      - "HD electrode support"
+      - "Real-time impedance monitoring"
+      - "Clinical software suite"
+    regulatory: "CE-marked medical device"
+    protocols_supported: ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"]
+
+  - slug: platoscience
+    name: "PlatoScience / PlatoWork"
+    manufacturer: "PlatoScience"
+    type: "tDCS"
+    description: "Wireless app-controlled tDCS headset for clinical and home use."
+    features:
+      - "Wireless Bluetooth control"
+      - "Mobile app interface"
+      - "Portable form factor"
+      - "Home-use capable"
+    regulatory: "CE-marked"
+    protocols_supported: ["C1-PS", "C2-PS", "C3-PS", "C4-PS", "C5-PS", "C6-PS", "C7-PS", "C8-PS"]
+
+regulatory_status: >
+  CE Class IIa medical device in the EU. Not FDA-cleared for clinical treatment
+  in the US (research-use only). Off-label for most neuropsychiatric conditions.
+  CE marking covers the device itself, not specific therapeutic indications beyond
+  manufacturer claims.
+
+on_label_conditions: []
+
+off_label_conditions:
+  - "depression"
+  - "parkinsons"
+  - "adhd"
+  - "asd"
+  - "migraine"
+  - "chronic_pain"
+  - "stroke_rehabilitation"
+
+safety_principles:
+  - "Screen for all contraindications before initiating stimulation"
+  - "Ensure electrode impedance is within safe range before starting"
+  - "Monitor skin condition under electrodes before and after each session"
+  - "Use saline-soaked sponge electrodes or conductive gel to ensure even current distribution"
+  - "Never exceed 2 mA intensity or 40 minutes duration per session"
+  - "Ramp current up and down over at least 30 seconds to reduce phosphene risk"
+  - "Maintain consistent medication state throughout treatment blocks"
+  - "Obtain informed consent including off-label disclosure"
+  - "Monitor for adverse events at every session"
+  - "Discontinue immediately for Grade 3+ adverse events"
+
+contraindications:
+  - category: "contraindication"
+    description: "Metallic implants in the head (excluding dental fillings)"
+    severity: "absolute"
+    modalities: ["tdcs"]
+    source: "Clinical consensus guidelines"
+
+  - category: "contraindication"
+    description: "Implanted cardiac pacemaker or defibrillator"
+    severity: "absolute"
+    modalities: ["tdcs"]
+    source: "Device manufacturer guidelines"
+
+  - category: "contraindication"
+    description: "Active epilepsy or history of seizures in the past 12 months"
+    severity: "absolute"
+    modalities: ["tdcs"]
+    source: "Antal et al., 2017 safety guidelines"
+
+  - category: "contraindication"
+    description: "Unstable skull fracture or craniotomy defect at electrode site"
+    severity: "absolute"
+    modalities: ["tdcs"]
+    source: "Clinical consensus"
+
+  - category: "precaution"
+    description: "Pregnancy — insufficient safety data; use only if benefit clearly outweighs risk"
+    severity: "moderate"
+    modalities: ["tdcs"]
+    source: "Precautionary principle"
+
+  - category: "precaution"
+    description: "Skin lesions, eczema, or open wounds at electrode placement sites"
+    severity: "moderate"
+    modalities: ["tdcs"]
+    source: "Clinical practice"
+
+  - category: "precaution"
+    description: "Cochlear implants — consult manufacturer before proceeding"
+    severity: "moderate"
+    modalities: ["tdcs"]
+    source: "Device interaction risk"
+
+side_effects:
+  - effect: "Tingling or itching under electrodes"
+    frequency: "very_common"
+    severity: "mild"
+    typical_duration: "During stimulation, resolves within minutes"
+
+  - effect: "Skin redness at electrode sites"
+    frequency: "common"
+    severity: "mild"
+    typical_duration: "Resolves within 1-2 hours"
+
+  - effect: "Mild headache"
+    frequency: "common"
+    severity: "mild"
+    typical_duration: "Resolves within hours"
+
+  - effect: "Fatigue"
+    frequency: "occasional"
+    severity: "mild"
+    typical_duration: "Resolves within hours"
+
+  - effect: "Phosphenes (brief light flashes)"
+    frequency: "occasional"
+    severity: "mild"
+    typical_duration: "During ramp-up/down only"
+
+  - effect: "Skin burns at electrode site"
+    frequency: "rare"
+    severity: "moderate"
+    typical_duration: "Days; requires electrode protocol review"
+
+evidence_level_by_condition:
+  depression: "high"
+  parkinsons: "medium"
+  adhd: "medium"
+  asd: "low"
+  migraine: "medium"
+
+key_references:
+  - pmid: "28320638"
+    title: "Evidence-based guidelines on the therapeutic use of transcranial direct current stimulation (tDCS)"
+    authors: "Lefaucheur JP et al."
+    year: 2017
+    journal: "Clinical Neurophysiology"
+    evidence_level: "high"
+    notes: "Comprehensive guideline — Level A evidence for depression (anodal left DLPFC)"
+
+  - pmid: "28551164"
+    title: "Safety of transcranial direct current stimulation: evidence based update 2016"
+    authors: "Antal A et al."
+    year: 2017
+    journal: "Brain Stimulation"
+    evidence_level: "high"
+    notes: "Safety consensus guidelines"
+
+applicable_conditions:
+  - "parkinsons"
+  - "depression"
+  - "adhd"
+  - "asd"
+  - "migraine"

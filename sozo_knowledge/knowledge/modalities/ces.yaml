@@ -1,0 +1,171 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# SOZO Brain Center — Modality Knowledge File
+# Cranial Electrotherapy Stimulation (CES)
+#
+# Schema: KnowledgeModality (src/sozo_generator/knowledge/schemas.py)
+# Source: configs/modalities.yaml, configs/devices.yaml, clinical literature
+# ──────────────────────────────────────────────────────────────────────────────
+
+slug: ces
+name: "Cranial Electrotherapy Stimulation"
+abbreviation: "CES"
+description: >
+  Microcurrent stimulation applied to earlobes targeting alpha wave entrainment
+  and HPA axis modulation. Delivers sub-milliamp pulsed current to modulate
+  brain activity and autonomic function.
+
+mechanism: >
+  CES delivers pulsed microcurrent (typically 10-600 microamps) through ear clip
+  electrodes. The current passes through the brainstem region, modulating
+  reticular activating system activity and hypothalamic-pituitary-adrenal (HPA)
+  axis function. Proposed mechanisms include cortical alpha wave entrainment
+  (increased alpha activity associated with relaxation), modulation of
+  serotonin and norepinephrine levels, reduction of cortisol, and normalisation
+  of autonomic balance. EEG studies show increased alpha activity and decreased
+  delta activity following CES sessions.
+
+parameters:
+  frequency_hz: [0.5, 100]
+  intensity_ua: [10, 600]
+  duration_min: [20, 60]
+  waveform: "Modified square wave or asymmetric biphasic"
+  electrode_placement: "Ear clip electrodes on earlobes"
+
+devices:
+  - slug: alpha_stim
+    name: "Alpha-Stim"
+    manufacturer: "Electromedical Products International"
+    type: "CES"
+    description: "FDA-cleared cranial electrotherapy stimulation for anxiety, depression, and insomnia."
+    features:
+      - "FDA 510(k) cleared"
+      - "Ear clip electrodes"
+      - "Adjustable frequency and intensity"
+    regulatory: "FDA-cleared for anxiety, insomnia, depression"
+    protocols_supported: ["CES-standard"]
+
+regulatory_status: >
+  FDA-cleared (510(k)) for anxiety, depression, and insomnia via the Alpha-Stim
+  device. This is one of the few neuromodulation modalities with direct FDA
+  clearance for specific neuropsychiatric conditions. CE-marked in Europe.
+  Other conditions beyond the cleared indications remain off-label.
+
+on_label_conditions:
+  - "anxiety"
+  - "depression"
+  - "insomnia"
+
+off_label_conditions:
+  - "parkinsons"
+  - "adhd"
+  - "asd"
+  - "migraine"
+  - "chronic_pain"
+  - "ptsd"
+
+safety_principles:
+  - "Screen for all contraindications before initiating stimulation"
+  - "Start at lowest perceptible intensity and titrate as needed"
+  - "Ear clip electrodes must make good skin contact — use conductive solution if needed"
+  - "Monitor for dizziness or lightheadedness during first session"
+  - "Ensure device is FDA-cleared model for clinical use"
+  - "Obtain informed consent; disclose off-label status for non-cleared conditions"
+  - "Monitor for adverse events at every session"
+  - "Do not use concurrently with other cranial electrical stimulation devices"
+  - "Maintain consistent medication state throughout treatment blocks"
+
+contraindications:
+  - category: "contraindication"
+    description: "Implanted cardiac pacemaker or defibrillator"
+    severity: "absolute"
+    modalities: ["ces"]
+    source: "FDA device labelling"
+
+  - category: "contraindication"
+    description: "Implanted neurostimulator or deep brain stimulator"
+    severity: "absolute"
+    modalities: ["ces"]
+    source: "Device interaction risk"
+
+  - category: "contraindication"
+    description: "Active epilepsy or history of seizures in the past 12 months"
+    severity: "absolute"
+    modalities: ["ces"]
+    source: "Clinical consensus"
+
+  - category: "precaution"
+    description: "Pregnancy — insufficient safety data; use only if benefit clearly outweighs risk"
+    severity: "moderate"
+    modalities: ["ces"]
+    source: "Precautionary principle"
+
+  - category: "precaution"
+    description: "Metallic implants in the head — low risk given microcurrent levels but assess individually"
+    severity: "moderate"
+    modalities: ["ces"]
+    source: "Clinical caution"
+
+  - category: "precaution"
+    description: "Concomitant use of CNS-active medications — may alter response; document and monitor"
+    severity: "moderate"
+    modalities: ["ces"]
+    source: "Clinical practice"
+
+side_effects:
+  - effect: "Tingling sensation at earlobes"
+    frequency: "very_common"
+    severity: "mild"
+    typical_duration: "During stimulation only"
+
+  - effect: "Mild headache"
+    frequency: "occasional"
+    severity: "mild"
+    typical_duration: "Resolves within hours"
+
+  - effect: "Lightheadedness or dizziness"
+    frequency: "occasional"
+    severity: "mild"
+    typical_duration: "Resolves within minutes"
+
+  - effect: "Skin irritation at electrode sites"
+    frequency: "occasional"
+    severity: "mild"
+    typical_duration: "Resolves within hours"
+
+  - effect: "Drowsiness"
+    frequency: "occasional"
+    severity: "mild"
+    typical_duration: "May persist for 1-2 hours; expected given mechanism"
+
+evidence_level_by_condition:
+  depression: "medium"
+  anxiety: "high"
+  insomnia: "high"
+  parkinsons: "low"
+  adhd: "low"
+  asd: "low"
+  migraine: "low"
+
+key_references:
+  - pmid: "25677582"
+    title: "Cranial electrotherapy stimulation for the treatment of depression, anxiety, insomnia, and pain"
+    authors: "Kirsch DL, Nichols F"
+    year: 2013
+    journal: "Psychiatric Clinics of North America"
+    evidence_level: "medium"
+    notes: "Overview of CES evidence for FDA-cleared indications"
+
+  - pmid: "31031877"
+    title: "Alpha-Stim cranial electrotherapy stimulation for generalized anxiety disorder"
+    authors: "Barclay TH, Barclay RD"
+    year: 2014
+    journal: "Journal of Affective Disorders"
+    evidence_level: "medium"
+    notes: "RCT supporting CES for anxiety"
+
+applicable_conditions:
+  - "parkinsons"
+  - "depression"
+  - "adhd"
+  - "asd"
+  - "migraine"

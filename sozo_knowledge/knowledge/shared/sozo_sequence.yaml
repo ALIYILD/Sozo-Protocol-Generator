@@ -1,0 +1,23 @@
+# SOZO Brain Center — S-O-Z-O Treatment Session Sequence
+# The canonical multimodal treatment session protocol.
+
+rules:
+  - slug: sozo_sequence
+    name: SOZO Multimodal Session Sequence
+    category: session_protocol
+    description: The S-O-Z-O four-phase treatment session structure
+    applies_to: [all]
+    rule_text: >-
+      S — Stabilize (10-15 min): taVNS or CES to downshift sympathetic tone
+      and reduce cortical noise. Prepares the brain for targeted stimulation.
+
+      O — Optimize (15-20 min): tDCS to prime target networks for stimulation.
+      Anodal placement over primary target region.
+
+      Z — Zone Target (20-30 min): TPS with ROI and holocranial pulses for deep
+      network modulation at the target region of interest.
+
+      O — Outcome (30-45 min): taVNS/CES combined with rehabilitation tasks
+      during the post-stimulation neuroplasticity window.
+    mandatory: false
+    source: SOZO Brain Center Multimodal Protocol Framework

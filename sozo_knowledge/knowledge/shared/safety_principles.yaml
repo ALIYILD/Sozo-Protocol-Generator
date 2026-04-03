@@ -1,0 +1,47 @@
+# SOZO Brain Center — Safety Principles
+# Universal safety rules for all neuromodulation treatments.
+
+rules:
+  - slug: screen_contraindications
+    name: Screen All Contraindications
+    category: safety
+    description: Screen for contraindications before every treatment block
+    applies_to: [all]
+    rule_text: >-
+      Screen for all absolute and relative contraindications before initiating
+      any neuromodulation treatment block. Re-screen if patient circumstances
+      change (new medication, new implant, pregnancy, etc.).
+    mandatory: true
+
+  - slug: medication_stability
+    name: Medication Stability
+    category: safety
+    description: Maintain consistent medication state during treatment
+    applies_to: [all]
+    rule_text: >-
+      Patients should maintain a consistent medication regimen during the
+      neuromodulation treatment block. Document medication state (timing,
+      dosage, compliance) at each session.
+    mandatory: true
+
+  - slug: impedance_check
+    name: Electrode Impedance Check
+    category: monitoring
+    description: Verify electrode impedance before tDCS sessions
+    applies_to: [tdcs]
+    rule_text: >-
+      Check electrode impedance before each tDCS session. Target impedance
+      below 5 kOhm. If impedance is elevated, re-wet sponges, clean skin,
+      and reposition electrodes. Do not proceed if impedance exceeds 10 kOhm.
+    mandatory: true
+
+  - slug: discontinuation_grade3
+    name: Discontinue at Grade 3 AE
+    category: safety
+    description: Stop all stimulation for Grade 3 or higher adverse events
+    applies_to: [all]
+    rule_text: >-
+      Discontinue all neuromodulation immediately for Grade 3 (severe) adverse
+      events or any seizure/loss of consciousness. Escalate to supervising Doctor.
+      Complete incident report within 24 hours.
+    mandatory: true

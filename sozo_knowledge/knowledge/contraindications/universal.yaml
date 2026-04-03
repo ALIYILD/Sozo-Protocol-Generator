@@ -1,0 +1,60 @@
+# SOZO Brain Center — Universal Contraindications
+# These apply across all or most neuromodulation modalities.
+
+contraindications:
+  - slug: cranial_metal_implants
+    name: Cranial Metal Implants
+    description: Metal implants in the skull or brain (excluding dental)
+    severity: absolute
+    modalities: [tdcs, tps]
+    regulatory_basis: Device manufacturer safety guidelines
+    source: International tDCS safety consensus (Bikson et al. 2016)
+
+  - slug: cardiac_implant
+    name: Implanted Cardiac Device
+    description: Pacemaker, ICD, or other implanted cardiac stimulator
+    severity: absolute
+    modalities: [tdcs, tps, tavns, ces]
+    regulatory_basis: All modalities — consult cardiologist before any NIBS
+    source: International NIBS safety guidelines
+
+  - slug: active_epilepsy
+    name: Active Uncontrolled Epilepsy
+    description: Active epilepsy with uncontrolled seizures
+    severity: absolute
+    modalities: [tdcs, tps]
+    regulatory_basis: Seizure risk elevation
+    source: tDCS safety consensus; TPS manufacturer guidelines
+
+  - slug: pregnancy
+    name: Pregnancy
+    description: Pregnant or planning pregnancy
+    severity: relative
+    modalities: [tps, tdcs]
+    regulatory_basis: Insufficient safety data in pregnancy
+    source: Precautionary — no controlled pregnancy data available
+
+  - slug: open_scalp_wounds
+    name: Open Scalp Wounds or Skin Breakdown
+    description: Wounds, lesions, or skin breakdown at electrode/transducer site
+    severity: absolute
+    modalities: [tdcs, tps]
+    regulatory_basis: Risk of infection, altered current distribution
+    source: Standard electrode placement guidelines
+
+  - slug: recent_neurosurgery
+    name: Recent Neurosurgery (<6 months)
+    description: Neurosurgical procedure within the past 6 months
+    severity: absolute
+    modalities: [tps]
+    regulatory_basis: TPS manufacturer contraindication
+    source: NEUROLITH safety documentation
+
+  - slug: dbs_implant
+    name: Deep Brain Stimulator (DBS)
+    description: Implanted DBS device for movement disorders
+    severity: absolute
+    modalities: [tps, tdcs]
+    conditions_excluded: [parkinsons]
+    regulatory_basis: Electromagnetic interaction risk
+    source: DBS manufacturer guidelines; NIBS safety consensus

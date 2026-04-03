@@ -354,5 +354,83 @@ def template_list():
         typer.echo(f"  {p['profile_id']:<20} {p['name'][:28]:<30} {p['template_type']:<15} {p['total_sections']}")
 
 
+@app.command("knowledge-status")
+def knowledge_status():
+    """Show the status of the SOZO knowledge system."""
+    from ..knowledge.base import KnowledgeBase
+
+    kb = KnowledgeBase()
+    kb.load_all()
+
+    typer.echo(typer.style("SOZO Knowledge System", fg=typer.colors.CYAN, bold=True))
+    typer.echo("-" * 50)
+
+    s = kb.summary()
+    for key, val in s.items():
+        if key != "loaded":
+            typer.echo(f"  {key:<20} {val}")
+
+    typer.echo("")
+    report = kb.validate()
+    color = typer.colors.GREEN if report.valid else typer.colors.YELLOW
+    typer.echo(typer.style(
+        f"Validation: {report.resolved}/{report.total_checks} links resolved, "
+        f"{report.broken_count} issues",
+        fg=color,
+    ))
+
+    if report.issues:
+        typer.echo("")
+        for issue in report.issues[:10]:
+            typer.echo(f"  [{issue.severity}] {issue.message}")
+        if len(report.issues) > 10:
+            typer.echo(f"  ... and {len(report.issues) - 10} more")
+
+
+@app.command("knowledge-inspect")
+def knowledge_inspect(
+    condition: str = typer.Argument(..., help="Condition slug to inspect"),
+):
+    """Inspect knowledge for a specific condition."""
+    from ..knowledge.base import KnowledgeBase
+
+    kb = KnowledgeBase()
+    kb.load_all()
+
+    cond = kb.get_condition(condition)
+    if not cond:
+        typer.echo(typer.style(f"Condition not found: {condition}", fg=typer.colors.RED))
+        available = kb.list_conditions()
+        if available:
+            typer.echo(f"Available: {', '.join(available)}")
+        return
+
+    typer.echo(typer.style(f"{cond.display_name} ({cond.icd10})", fg=typer.colors.CYAN, bold=True))
+    typer.echo(f"  Category: {cond.category}")
+    typer.echo(f"  Evidence quality: {cond.evidence_quality}")
+    typer.echo(f"  Modalities: {', '.join(cond.applicable_modalities)}")
+    typer.echo(f"  Protocols: {len(cond.protocols)}")
+    typer.echo(f"  Phenotypes: {len(cond.phenotypes)}")
+    typer.echo(f"  References: {len(cond.references)}")
+    typer.echo(f"  Safety rules: {len(cond.safety_rules)}")
+
+    if cond.network_profiles:
+        typer.echo(f"\n  Networks:")
+        for np in cond.network_profiles:
+            marker = " *" if np.primary else ""
+            typer.echo(f"    {np.network.upper()}: {np.dysfunction} ({np.severity}){marker}")
+
+    if cond.phenotypes:
+        typer.echo(f"\n  Phenotypes:")
+        for p in cond.phenotypes:
+            typer.echo(f"    {p.label}: {', '.join(p.key_features[:3])}")
+
+    if cond.protocols:
+        typer.echo(f"\n  Protocols:")
+        for p in cond.protocols:
+            ol = " [OFF-LABEL]" if p.off_label else ""
+            typer.echo(f"    {p.protocol_id}: {p.label} ({p.modality}){ol}")
+
+
 if __name__ == "__main__":
     app()

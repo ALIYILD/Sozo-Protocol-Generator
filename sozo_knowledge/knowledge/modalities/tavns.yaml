@@ -1,0 +1,182 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# SOZO Brain Center — Modality Knowledge File
+# Transcutaneous Auricular Vagus Nerve Stimulation (taVNS)
+#
+# Schema: KnowledgeModality (src/sozo_generator/knowledge/schemas.py)
+# Source: configs/modalities.yaml, configs/devices.yaml, clinical literature
+# ──────────────────────────────────────────────────────────────────────────────
+
+slug: tavns
+name: "Transcutaneous Auricular Vagus Nerve Stimulation"
+abbreviation: "taVNS"
+description: >
+  Non-invasive stimulation of the auricular branch of the vagus nerve (ABVN)
+  at the ear, typically targeting the cymba conchae or tragus. Modulates
+  autonomic tone and central brain networks via vagal afferent pathways.
+
+mechanism: >
+  taVNS delivers electrical pulses to the auricular branch of the vagus nerve
+  via ear clip or electrode placed on the cymba conchae or tragus. Vagal
+  afferents project to the nucleus tractus solitarius (NTS) in the brainstem,
+  which relays to the locus coeruleus, dorsal raphe nucleus, and higher cortical
+  regions. This activates noradrenergic and serotonergic pathways, modulates the
+  HPA axis, reduces sympathetic tone, and decreases systemic inflammation via
+  the cholinergic anti-inflammatory pathway. Effects on the default mode network,
+  salience network, and limbic circuits have been demonstrated via fMRI.
+
+parameters:
+  frequency_hz: [1, 25]
+  pulse_width_us: [200, 500]
+  duration_min: [30, 60]
+  intensity_ma: [0.5, 2.0]
+  stimulation_pattern: "Typically 30s ON / 30s OFF or continuous"
+  electrode_placement: "Cymba conchae or tragus of left ear (preferred)"
+
+devices:
+  - slug: generic_tavns_electrodes
+    name: "Clinical taVNS Electrode System"
+    manufacturer: "Various"
+    type: "taVNS"
+    description: "Ear clip or custom auricular electrodes connected to a programmable stimulator."
+    features:
+      - "Adjustable frequency and pulse width"
+      - "Ear clip or concha electrode options"
+      - "Portable and patient-operated capable"
+    regulatory: "CE-marked for epilepsy (certain devices); off-label for neuropsychiatric use"
+    protocols_supported: []
+
+regulatory_status: >
+  CE-marked for drug-resistant epilepsy (certain devices, e.g., NEMOS by
+  tVNS Technologies). Off-label for all neuropsychiatric conditions including
+  depression, ADHD, and pain. Not FDA-cleared for neuropsychiatric indications.
+  Invasive VNS (implanted) is FDA-approved for epilepsy and treatment-resistant
+  depression, but transcutaneous auricular VNS has separate regulatory status.
+
+on_label_conditions:
+  - "epilepsy"
+
+off_label_conditions:
+  - "depression"
+  - "parkinsons"
+  - "adhd"
+  - "asd"
+  - "migraine"
+  - "chronic_pain"
+  - "tinnitus"
+
+safety_principles:
+  - "Screen for all contraindications before initiating stimulation"
+  - "Stimulate the LEFT ear preferentially to avoid cardiac vagal effects"
+  - "Start at low intensity and titrate up to perceptible but non-painful level"
+  - "Monitor heart rate during first session — watch for bradycardia"
+  - "Ensure electrode contact is on the cymba conchae or tragus, not the ear canal"
+  - "Obtain informed consent including off-label disclosure"
+  - "Monitor for adverse events at every session"
+  - "Discontinue if patient reports persistent dizziness, coughing, or throat tightness"
+  - "Maintain consistent medication state throughout treatment blocks"
+
+contraindications:
+  - category: "contraindication"
+    description: "Implanted cardiac pacemaker or defibrillator"
+    severity: "absolute"
+    modalities: ["tavns"]
+    source: "Vagal stimulation may interfere with cardiac device function"
+
+  - category: "contraindication"
+    description: "Implanted vagus nerve stimulator (iVNS)"
+    severity: "absolute"
+    modalities: ["tavns"]
+    source: "Risk of stimulation interference"
+
+  - category: "contraindication"
+    description: "Significant cardiac arrhythmia or bradycardia (resting HR < 50 bpm)"
+    severity: "absolute"
+    modalities: ["tavns"]
+    source: "Vagal stimulation risk of cardiac effects"
+
+  - category: "contraindication"
+    description: "Active ear infection, lesion, or surgical wound at electrode site"
+    severity: "absolute"
+    modalities: ["tavns"]
+    source: "Clinical practice"
+
+  - category: "precaution"
+    description: "Pregnancy — insufficient safety data; use only if benefit clearly outweighs risk"
+    severity: "moderate"
+    modalities: ["tavns"]
+    source: "Precautionary principle"
+
+  - category: "precaution"
+    description: "History of vasovagal syncope — monitor closely during initial sessions"
+    severity: "moderate"
+    modalities: ["tavns"]
+    source: "Clinical precaution"
+
+  - category: "precaution"
+    description: "Active epilepsy — while VNS is used for epilepsy, taVNS parameters must be carefully selected"
+    severity: "moderate"
+    modalities: ["tavns"]
+    source: "Clinical caution"
+
+side_effects:
+  - effect: "Tingling or prickling at the ear"
+    frequency: "very_common"
+    severity: "mild"
+    typical_duration: "During stimulation only"
+
+  - effect: "Ear redness or irritation at electrode site"
+    frequency: "common"
+    severity: "mild"
+    typical_duration: "Resolves within hours"
+
+  - effect: "Mild headache"
+    frequency: "occasional"
+    severity: "mild"
+    typical_duration: "Resolves within hours"
+
+  - effect: "Dizziness"
+    frequency: "occasional"
+    severity: "mild"
+    typical_duration: "Resolves within minutes"
+
+  - effect: "Coughing or throat sensation"
+    frequency: "occasional"
+    severity: "mild"
+    typical_duration: "During stimulation; resolves when stopped"
+
+  - effect: "Transient heart rate changes"
+    frequency: "rare"
+    severity: "moderate"
+    typical_duration: "During stimulation; monitor if persistent"
+
+evidence_level_by_condition:
+  depression: "medium"
+  parkinsons: "low"
+  adhd: "low"
+  asd: "low"
+  migraine: "emerging"
+  epilepsy: "high"
+
+key_references:
+  - pmid: "33232698"
+    title: "Transcutaneous auricular vagus nerve stimulation: a systematic review and meta-analysis"
+    authors: "Farmer AD et al."
+    year: 2021
+    journal: "Clinical Neurophysiology"
+    evidence_level: "high"
+    notes: "Systematic review of taVNS efficacy and safety across indications"
+
+  - pmid: "29260828"
+    title: "Transcutaneous vagus nerve stimulation (tVNS): a new neuromodulation tool in healthy humans?"
+    authors: "Burger AM et al."
+    year: 2018
+    journal: "Frontiers in Neuroscience"
+    evidence_level: "medium"
+    notes: "Mechanism and safety review"
+
+applicable_conditions:
+  - "parkinsons"
+  - "depression"
+  - "adhd"
+  - "asd"
+  - "migraine"

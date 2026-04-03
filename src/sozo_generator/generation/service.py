@@ -97,12 +97,26 @@ class GenerationService:
         self._registry = None
         self._exporter = None
         self._image_curator = None
+        self._knowledge_base = None
 
     @property
     def registry(self):
         if self._registry is None:
             self._registry = get_registry()
         return self._registry
+
+    @property
+    def knowledge_base(self):
+        """Lazy-loaded KnowledgeBase for the SOZO knowledge system."""
+        if self._knowledge_base is None:
+            try:
+                from ..knowledge.base import KnowledgeBase
+                self._knowledge_base = KnowledgeBase()
+                self._knowledge_base.load_all()
+            except Exception as e:
+                logger.debug(f"Knowledge base not available: {e}")
+                self._knowledge_base = None
+        return self._knowledge_base
 
     @property
     def exporter(self):
@@ -221,6 +235,44 @@ class GenerationService:
             f"{len(all_results)} total documents"
         )
         return all_results
+
+    def get_knowledge_summary(self, condition_slug: str) -> Optional[dict]:
+        """Get a knowledge summary for a condition from the knowledge base.
+
+        Returns None if knowledge base is not available or condition not found.
+        """
+        kb = self.knowledge_base
+        if not kb:
+            return None
+
+        cond = kb.get_condition(condition_slug)
+        if not cond:
+            return None
+
+        mods = kb.get_modalities_for_condition(condition_slug)
+        contras = []
+        for m in mods:
+            contras.extend(kb.get_contraindications_for_modality(m.slug))
+
+        return {
+            "condition": {
+                "slug": cond.slug,
+                "name": cond.display_name,
+                "icd10": cond.icd10,
+                "category": cond.category,
+                "evidence_quality": cond.evidence_quality,
+                "protocols": len(cond.protocols),
+                "phenotypes": len(cond.phenotypes),
+                "references": len(cond.references),
+            },
+            "modalities": [
+                {"slug": m.slug, "name": m.name, "regulatory": m.regulatory_status[:80]}
+                for m in mods
+            ],
+            "contraindications": list({c.slug for c in contras}),
+            "shared_rules": [r.slug for r in kb.get_shared_rules()],
+            "knowledge_base_summary": kb.summary(),
+        }
 
     def generate_from_template(
         self,

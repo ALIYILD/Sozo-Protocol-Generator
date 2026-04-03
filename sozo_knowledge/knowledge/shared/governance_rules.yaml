@@ -1,0 +1,74 @@
+# SOZO Brain Center — Governance Rules
+# These rules apply across all conditions and document types.
+
+rules:
+  - slug: doctor_authorization
+    name: Doctor Authorization Required
+    category: governance
+    description: All treatment protocols must be authorized by a SOZO Doctor
+    applies_to: [all]
+    rule_text: >-
+      No Fellow or Clinical Assistant may independently modify treatment protocols
+      without Doctor authorization. All protocol changes must be documented and
+      co-signed by the supervising Doctor.
+    mandatory: true
+    source: SOZO Brain Center Clinical Governance Policy
+
+  - slug: informed_consent
+    name: Informed Consent Required
+    category: consent
+    description: Informed consent must be obtained before any treatment
+    applies_to: [all]
+    rule_text: >-
+      No diagnostic or therapeutic neuromodulation procedures may be performed
+      prior to obtaining written informed consent from the patient. For off-label
+      modalities, specific off-label disclosure with Doctor sign-off is required.
+    mandatory: true
+    source: SOZO Brain Center Clinical Governance Policy
+
+  - slug: tps_off_label_disclosure
+    name: TPS Off-Label Disclosure
+    category: consent
+    description: TPS requires explicit off-label disclosure for all conditions except Alzheimer's
+    applies_to: [tps]
+    rule_text: >-
+      NEUROLITH TPS is CE-marked for Alzheimer's disease only. Use in all other
+      neurological and psychiatric conditions is INVESTIGATIONAL and OFF-LABEL.
+      Mandatory off-label disclosure and Doctor sign-off are required before
+      TPS treatment for any non-Alzheimer's condition.
+    mandatory: true
+    source: NEUROLITH CE marking; SOZO Clinical Governance
+
+  - slug: session_documentation
+    name: Session Documentation
+    category: monitoring
+    description: Every treatment session must be documented
+    applies_to: [all]
+    rule_text: >-
+      Document all session parameters, patient state, medication timing,
+      adverse events, and clinician observations. Use the SOZO session log
+      template for consistent documentation.
+    mandatory: true
+
+  - slug: adverse_event_protocol
+    name: Adverse Event Protocol
+    category: safety
+    description: Graded response to adverse events during treatment
+    applies_to: [all]
+    rule_text: >-
+      Grade 1 (Mild): Self-resolving within 30 min — continue, document, monitor.
+      Grade 2 (Moderate): Persists >30 min or recurs — pause session, reassess next visit.
+      Grade 3 (Severe): Requires medical attention — STOP, escalate to Doctor, incident report.
+      Seizure/LOC: STOP ALL stimulation, call emergency services, notify Doctor immediately.
+    mandatory: true
+
+  - slug: confidentiality
+    name: Document Confidentiality
+    category: governance
+    description: All SOZO documents are confidential
+    applies_to: [all]
+    rule_text: >-
+      All SOZO Brain Center clinical documents are proprietary and confidential.
+      Distribution, publication, or external sharing is prohibited without
+      written authorization from SOZO Brain Center leadership.
+    mandatory: true
