@@ -257,5 +257,102 @@ def generate(
     ))
 
 
+@app.command("generate-from-template")
+def generate_from_template(
+    template: str = typer.Argument(..., help="Path to DOCX template or stored template profile ID"),
+    condition: str = typer.Option("parkinsons", help="Target condition slug"),
+    tier: str = typer.Option("partners", help="Tier: fellow or partners"),
+    with_ai: bool = typer.Option(False, "--with-ai", help="Use AI (Claude/OpenAI) for section drafting"),
+    with_research: bool = typer.Option(True, "--with-research/--no-research", help="Search PubMed for evidence"),
+    with_visuals: bool = typer.Option(True, "--with-visuals/--no-visuals", help="Generate visual assets"),
+):
+    """Generate a document from an uploaded template for a different condition.
+
+    The system parses the template structure, researches evidence, and generates
+    content matching the template's layout and style for the target condition.
+
+    Examples:
+        sozo generate-from-template templates/gold_standard/Clinical_Handbook.docx --condition depression
+        sozo generate-from-template tp-abc123 --condition adhd --with-ai
+    """
+    from pathlib import Path
+    from ..generation.service import GenerationService
+
+    svc = GenerationService(with_visuals=with_visuals, with_qa=True)
+
+    # Determine if template is a file path or profile ID
+    template_path = None
+    template_id = None
+    if Path(template).exists():
+        template_path = template
+        typer.echo(f"Ingesting template: {template}")
+    else:
+        template_id = template
+        typer.echo(f"Using stored profile: {template}")
+
+    typer.echo(f"Generating for: {condition} ({tier})")
+
+    result = svc.generate_from_template(
+        template_path=template_path,
+        template_id=template_id,
+        condition=condition,
+        tier=tier,
+        with_ai=with_ai,
+        with_research=with_research,
+    )
+
+    if result.success:
+        typer.echo(typer.style(f"\nOK: {result.output_path}", fg=typer.colors.GREEN))
+        if result.qa_issues:
+            typer.echo(f"\nReview issues ({len(result.qa_issues)}):")
+            for issue in result.qa_issues[:10]:
+                typer.echo(f"  {issue}")
+        if result.visuals_generated:
+            typer.echo(f"\nVisuals: {len(result.visuals_generated)} generated")
+    else:
+        typer.echo(typer.style(f"\nFAILED: {result.error}", fg=typer.colors.RED))
+
+
+@app.command("template-ingest")
+def template_ingest(
+    path: str = typer.Argument(..., help="Path to DOCX template file"),
+    name: str = typer.Option("", help="Profile name (auto-generated if empty)"),
+):
+    """Ingest a DOCX template and store its learned profile."""
+    from ..template_profiles.builder import build_template_profile
+    from ..template_profiles.store import TemplateProfileStore
+
+    typer.echo(f"Ingesting: {path}")
+    profile = build_template_profile(path, name=name)
+    store = TemplateProfileStore()
+    store.save(profile)
+
+    typer.echo(typer.style(f"\nProfile created: {profile.profile_id}", fg=typer.colors.GREEN))
+    typer.echo(f"  Name: {profile.name}")
+    typer.echo(f"  Type: {profile.template_type}")
+    typer.echo(f"  Doc type: {profile.inferred_doc_type}")
+    typer.echo(f"  Sections: {profile.total_sections}")
+    typer.echo(f"  Tables: {profile.total_tables}")
+    typer.echo(f"  Figures: {profile.total_figures}")
+    typer.echo(f"  Source condition: {profile.source_condition}")
+
+
+@app.command("template-list")
+def template_list():
+    """List all stored template profiles."""
+    from ..template_profiles.store import TemplateProfileStore
+    store = TemplateProfileStore()
+    profiles = store.list_profiles()
+
+    if not profiles:
+        typer.echo("No template profiles stored.")
+        return
+
+    typer.echo(typer.style(f"{'ID':<20} {'Name':<30} {'Type':<15} {'Sections'}", fg=typer.colors.CYAN))
+    typer.echo("-" * 80)
+    for p in profiles:
+        typer.echo(f"  {p['profile_id']:<20} {p['name'][:28]:<30} {p['template_type']:<15} {p['total_sections']}")
+
+
 if __name__ == "__main__":
     app()

@@ -222,6 +222,205 @@ class GenerationService:
         )
         return all_results
 
+    def generate_from_template(
+        self,
+        template_path: Optional[str] = None,
+        template_id: Optional[str] = None,
+        condition: str = "parkinsons",
+        tier: str = "partners",
+        with_ai: bool = False,
+        with_research: bool = True,
+        anthropic_api_key: str = "",
+        openai_api_key: str = "",
+    ) -> GenerationResult:
+        """Generate a document using an uploaded template as the structural guide.
+
+        This is the template-driven AI-assisted generation path. It:
+        1. Ingests the template (or loads a stored profile)
+        2. Researches evidence per section
+        3. Builds section briefs
+        4. Writes content (data-driven or AI-assisted)
+        5. Validates grounding
+        6. Renders DOCX matching template style
+        7. Returns result with full provenance
+
+        Args:
+            template_path: Path to DOCX template (used if template_id not given)
+            template_id: ID of a stored template profile
+            condition: Target condition slug
+            tier: "fellow" or "partners"
+            with_ai: Use LLM for section drafting
+            with_research: Search PubMed for evidence
+            anthropic_api_key: Anthropic API key for AI drafting
+            openai_api_key: OpenAI API key (alternative)
+        """
+        import uuid
+        build_id = f"tpl-{uuid.uuid4().hex[:8]}"
+        result = GenerationResult(
+            condition_slug=condition,
+            tier=tier,
+            doc_type="from_template",
+            success=False,
+            build_id=build_id,
+        )
+
+        try:
+            # 1. Get or build template profile
+            from ..template_profiles.builder import build_template_profile
+            from ..template_profiles.store import TemplateProfileStore
+            from ..template_profiles.models import DocumentBuildManifest
+
+            store = TemplateProfileStore()
+            profile = None
+
+            if template_id:
+                profile = store.load(template_id)
+                if not profile:
+                    result.error = f"Template profile not found: {template_id}"
+                    return result
+            elif template_path:
+                profile = build_template_profile(template_path)
+                store.save(profile)
+            else:
+                result.error = "Either template_path or template_id must be provided"
+                return result
+
+            result.doc_type = profile.inferred_doc_type or "from_template"
+
+            # 2. Get condition
+            if not self.registry.exists(condition):
+                result.error = f"Unknown condition: {condition}"
+                return result
+            schema = self.registry.get(condition)
+
+            # 3. Research evidence per section
+            from ..research.orchestrator import ResearchOrchestrator
+            orchestrator = ResearchOrchestrator(use_pubmed=with_research)
+            bundles = orchestrator.research_all_sections(
+                condition, schema.display_name, profile.section_map
+            )
+
+            # 4. Build section briefs
+            from ..writers.brief_builder import BriefBuilder
+            brief_builder = BriefBuilder(
+                condition=schema,
+                tier=tier,
+                doc_type=profile.inferred_doc_type or "document",
+                template_sections=profile.section_map,
+                research_bundles=bundles,
+                tone_profile=profile.tone_profile,
+            )
+            briefs = brief_builder.build_all()
+
+            # 5. Write sections
+            from ..writers.section_writer import SectionWriter
+            writer = SectionWriter(
+                anthropic_api_key=anthropic_api_key if with_ai else "",
+                openai_api_key=openai_api_key if with_ai else "",
+            )
+            drafted_sections = writer.write_all(briefs)
+
+            # 6. Validate grounding
+            from ..grounding.validator import GroundingValidator
+            validator = GroundingValidator(target_condition_slug=condition)
+            grounding_results = validator.validate_all(
+                drafted_sections, bundles, condition
+            )
+
+            # Collect issues
+            all_issues = []
+            for gr in grounding_results:
+                for issue in gr.issues:
+                    all_issues.append(f"[{issue.severity}] {issue.section_id}: {issue.message}")
+
+            # 7. Convert to DocumentSpec and render
+            from ..schemas.documents import DocumentSpec, SectionContent
+            from ..core.enums import DocumentType, Tier
+
+            sections = []
+            for draft in drafted_sections:
+                sc = SectionContent(
+                    section_id=draft.section_id,
+                    title=draft.title,
+                    content=draft.content,
+                    tables=draft.tables,
+                    figures=draft.figures,
+                    review_flags=draft.review_flags,
+                    evidence_pmids=draft.citations_used,
+                    confidence_label=draft.confidence,
+                    is_placeholder=draft.needs_review and not draft.content,
+                )
+                sections.append(sc)
+
+            doc_type_enum = DocumentType(profile.inferred_doc_type) if profile.inferred_doc_type else DocumentType.EVIDENCE_BASED_PROTOCOL
+            tier_enum = Tier(tier)
+
+            spec = DocumentSpec(
+                document_type=doc_type_enum,
+                tier=tier_enum,
+                condition_slug=condition,
+                condition_name=schema.display_name,
+                title=f"{profile.name} — {schema.display_name}",
+                version="1.0",
+                audience="clinician",
+                sections=sections,
+                references=schema.references,
+                review_flags=[i for i in all_issues if "[block]" in i.lower()],
+                build_id=build_id,
+            )
+
+            # Render
+            output_path = self.exporter.renderer.render(spec)
+            result.output_path = str(output_path)
+            result.success = True
+            result.qa_issues = all_issues[:20]
+
+            # 8. Generate visuals if requested
+            if self.with_visuals:
+                visuals = self._generate_visuals(schema, GenerationRequest(
+                    condition_slug=condition,
+                    tier=tier_enum,
+                    doc_type=doc_type_enum,
+                    with_visuals=True,
+                    with_qa=False,
+                ))
+                result.visuals_generated = visuals
+
+            # 9. Build manifest
+            manifest = DocumentBuildManifest(
+                build_id=build_id,
+                condition_slug=condition,
+                condition_name=schema.display_name,
+                tier=tier,
+                doc_type=profile.inferred_doc_type or "from_template",
+                template_profile_id=profile.profile_id,
+                template_name=profile.name,
+                sections_generated=[d.section_id for d in drafted_sections],
+                sections_from_ai=sum(1 for d in drafted_sections if d.generation_method == "ai_draft"),
+                sections_from_data=sum(1 for d in drafted_sections if d.generation_method == "data_driven"),
+                sections_from_template=sum(1 for d in drafted_sections if d.generation_method == "template_adapt"),
+                sections_needing_review=sum(1 for d in drafted_sections if d.needs_review),
+                visuals_generated=result.visuals_generated,
+                qa_issues=all_issues,
+                output_paths={"docx": str(output_path)},
+            )
+
+            # Save manifest
+            manifest_path = Path(str(output_path)).parent / f"{build_id}_manifest.json"
+            manifest_path.write_text(manifest.model_dump_json(indent=2))
+
+            logger.info(
+                f"Template-driven generation complete: {condition}/{tier} "
+                f"({len(drafted_sections)} sections, {manifest.sections_from_ai} AI, "
+                f"{manifest.sections_from_data} data-driven)"
+            )
+
+        except Exception as e:
+            result.error = str(e)
+            logger.error(f"Template-driven generation failed: {e}", exc_info=True)
+
+        return result
+
     def _execute_single(
         self,
         schema: ConditionSchema,
