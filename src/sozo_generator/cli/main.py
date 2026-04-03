@@ -780,5 +780,66 @@ def docx_review_candidates_cmd(
                 typer.echo(f"     {cand.explanation[:80]}")
 
 
+@app.command("cockpit")
+def cockpit_cmd():
+    """Show platform-wide operational overview."""
+    from ..knowledge.cockpit import CockpitService
+    svc = CockpitService()
+    typer.echo(svc.overview().to_text())
+
+
+@app.command("cockpit-conditions")
+def cockpit_conditions_cmd():
+    """Show per-condition operational summary."""
+    from ..knowledge.cockpit import CockpitService
+    svc = CockpitService()
+
+    typer.echo(typer.style(
+        f"{'Condition':<18} {'Ready':>6} {'Review':>7} {'Incomplete':>10} {'PMIDs':>6}",
+        fg=typer.colors.CYAN,
+    ))
+    typer.echo("-" * 55)
+    for cs in svc.conditions_summary():
+        typer.echo(f"  {cs.condition:<18} {cs.ready:>4}   {cs.review_required:>5}   {cs.incomplete:>8}   {cs.total_pmids:>5}")
+
+
+@app.command("cockpit-blockers")
+def cockpit_blockers_cmd():
+    """Show all release blockers across the platform."""
+    from ..knowledge.cockpit import CockpitService
+    svc = CockpitService()
+    blockers = svc.blockers()
+    if not blockers:
+        typer.echo(typer.style("No blockers — all documents are release-ready!", fg=typer.colors.GREEN))
+        return
+    typer.echo(f"Total blockers: {len(blockers)}")
+    for b in blockers[:20]:
+        typer.echo(f"  [{b.blocker_type}] {b.condition}/{b.doc_type}/{b.tier}: {b.summary}")
+    if len(blockers) > 20:
+        typer.echo(f"  ... and {len(blockers) - 20} more")
+
+
+@app.command("cockpit-pack")
+def cockpit_pack_cmd(
+    condition: str = typer.Argument(...),
+    tier: str = typer.Option("fellow"),
+):
+    """Show release pack summary for a condition/tier."""
+    from ..knowledge.cockpit import CockpitService
+    svc = CockpitService()
+    pack = svc.pack_summary(condition, tier)
+
+    status = typer.style("RELEASE READY", fg=typer.colors.GREEN) if pack["release_ready"] else typer.style("NOT READY", fg=typer.colors.YELLOW)
+    typer.echo(f"\n{condition.upper()} ({tier}) — {status}")
+    typer.echo(f"  Total docs: {pack['total']}")
+    typer.echo(f"  Ready: {pack['ready']}")
+    if pack["ready_docs"]:
+        typer.echo(f"  Ready docs: {', '.join(pack['ready_docs'])}")
+    if pack["blocked_docs"]:
+        typer.echo(f"  Blocked:")
+        for bd in pack["blocked_docs"]:
+            typer.echo(f"    {bd['doc_type']}: {bd['reason']} ({bd['placeholders']} placeholders)")
+
+
 if __name__ == "__main__":
     app()
