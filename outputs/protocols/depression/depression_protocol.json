@@ -1,0 +1,340 @@
+{
+  "request_id": "01639877-a0e4-4c53-a039-4eb1568e56ea",
+  "condition": {
+    "slug": "depression",
+    "display_name": "Major Depressive Disorder",
+    "icd10": "F32"
+  },
+  "base_sequence": {
+    "sequence_id": "seq-cfac8ae8",
+    "name": "SOZO Session \u2014 depression",
+    "condition_slug": "depression",
+    "tier": "fellow",
+    "version": "1.0",
+    "phases": [
+      {
+        "phase_id": "phase-85f6320c",
+        "sozo_phase": "pre",
+        "label": "Pre-Session Preparation",
+        "steps": [
+          {
+            "step_id": "step-980b5edd",
+            "step_type": "monitoring",
+            "modality": "eeg",
+            "label": "Pre-session impedance check",
+            "electrodes_source": [],
+            "electrodes_sink": [],
+            "laterality": "bilateral",
+            "intensity_ma": null,
+            "intensity_mj": null,
+            "frequency_hz": null,
+            "pulse_width_us": null,
+            "pulse_count": null,
+            "duration_ms": 0,
+            "duration_min": 2.0,
+            "repetitions": 1,
+            "inter_rep_pause_ms": 0,
+            "max_impedance_kohm": 5.0,
+            "ramp_up_ms": 0,
+            "ramp_down_ms": 0,
+            "evidence_level": "medium",
+            "off_label": true,
+            "requires_consent": true,
+            "rationale": "",
+            "extra_params": {}
+          }
+        ],
+        "target_duration_min": null
+      },
+      {
+        "phase_id": "phase-4c112629",
+        "sozo_phase": "O1",
+        "label": "O \u2014 Optimize (prime target networks)",
+        "steps": [
+          {
+            "step_id": "step-fdffe1d0",
+            "step_type": "pulse",
+            "modality": "tdcs",
+            "label": "tDCS Core Depression (Primary Protocol)",
+            "electrodes_source": [
+              "F3",
+              "Fp2"
+            ],
+            "electrodes_sink": [
+              "Fp2"
+            ],
+            "laterality": "bilateral",
+            "intensity_ma": 2.0,
+            "intensity_mj": null,
+            "frequency_hz": null,
+            "pulse_width_us": null,
+            "pulse_count": null,
+            "duration_ms": 0,
+            "duration_min": 20.0,
+            "repetitions": 1,
+            "inter_rep_pause_ms": 0,
+            "max_impedance_kohm": 10.0,
+            "ramp_up_ms": 30000,
+            "ramp_down_ms": 30000,
+            "evidence_level": "high",
+            "off_label": false,
+            "requires_consent": true,
+            "rationale": "Standard tDCS antidepressant montage: L-DLPFC anodal facilitates hypofrontal left hemisphere.",
+            "extra_params": {}
+          },
+          {
+            "step_id": "step-cdf648cb",
+            "step_type": "pulse",
+            "modality": "tdcs",
+            "label": "tDCS Rumination Reduction",
+            "electrodes_source": [
+              "F3",
+              "P3"
+            ],
+            "electrodes_sink": [],
+            "laterality": "bilateral",
+            "intensity_ma": 2.0,
+            "intensity_mj": null,
+            "frequency_hz": null,
+            "pulse_width_us": null,
+            "pulse_count": null,
+            "duration_ms": 0,
+            "duration_min": 20.0,
+            "repetitions": 1,
+            "inter_rep_pause_ms": 0,
+            "max_impedance_kohm": 10.0,
+            "ramp_up_ms": 30000,
+            "ramp_down_ms": 30000,
+            "evidence_level": "medium",
+            "off_label": false,
+            "requires_consent": true,
+            "rationale": "Cathodal parietal placement inhibits posterior DMN; reduces ruminative self-referential processing.",
+            "extra_params": {}
+          },
+          {
+            "step_id": "step-c615925a",
+            "step_type": "pulse",
+            "modality": "tdcs",
+            "label": "tDCS Anxiety & Hyperarousal",
+            "electrodes_source": [
+              "F4",
+              "F3"
+            ],
+            "electrodes_sink": [
+              "Fp1"
+            ],
+            "laterality": "bilateral",
+            "intensity_ma": 2.0,
+            "intensity_mj": null,
+            "frequency_hz": null,
+            "pulse_width_us": null,
+            "pulse_count": null,
+            "duration_ms": 0,
+            "duration_min": 20.0,
+            "repetitions": 1,
+            "inter_rep_pause_ms": 0,
+            "max_impedance_kohm": 10.0,
+            "ramp_up_ms": 30000,
+            "ramp_down_ms": 30000,
+            "evidence_level": "medium",
+            "off_label": false,
+            "requires_consent": true,
+            "rationale": "Asymmetric frontal montage targets anxiety-predominant presentation; reverses standard depression montage.",
+            "extra_params": {}
+          }
+        ],
+        "target_duration_min": null
+      },
+      {
+        "phase_id": "phase-be344de4",
+        "sozo_phase": "Z",
+        "label": "Z \u2014 Zone Target (deep network modulation)",
+        "steps": [
+          {
+            "step_id": "step-a19c6e42",
+            "step_type": "pulse",
+            "modality": "tps",
+            "label": "TPS Core Depression",
+            "electrodes_source": [
+              "F3",
+              "F4"
+            ],
+            "electrodes_sink": [
+              "Fp1",
+              "Fp2"
+            ],
+            "laterality": "bilateral",
+            "intensity_ma": null,
+            "intensity_mj": 0.25,
+            "frequency_hz": 5.0,
+            "pulse_width_us": null,
+            "pulse_count": 3000,
+            "duration_ms": 0,
+            "duration_min": 20.0,
+            "repetitions": 1,
+            "inter_rep_pause_ms": 0,
+            "max_impedance_kohm": 10.0,
+            "ramp_up_ms": 0,
+            "ramp_down_ms": 0,
+            "evidence_level": "medium",
+            "off_label": true,
+            "requires_consent": true,
+            "rationale": "Bilateral DLPFC modulation targets hypofrontality in MDD; L>R asymmetry is primary treatment target.",
+            "extra_params": {}
+          },
+          {
+            "step_id": "step-8e04b165",
+            "step_type": "pulse",
+            "modality": "tps",
+            "label": "TPS Treatment-Resistant Depression",
+            "electrodes_source": [
+              "F3",
+              "F4",
+              "FC3",
+              "FC4"
+            ],
+            "electrodes_sink": [],
+            "laterality": "bilateral",
+            "intensity_ma": null,
+            "intensity_mj": 0.25,
+            "frequency_hz": 5.0,
+            "pulse_width_us": null,
+            "pulse_count": 5000,
+            "duration_ms": 0,
+            "duration_min": 20.0,
+            "repetitions": 1,
+            "inter_rep_pause_ms": 0,
+            "max_impedance_kohm": 10.0,
+            "ramp_up_ms": 0,
+            "ramp_down_ms": 0,
+            "evidence_level": "low",
+            "off_label": true,
+            "requires_consent": true,
+            "rationale": "Extended bilateral approach for TRD targets broader prefrontal network including sgACC connectivity.",
+            "extra_params": {}
+          }
+        ],
+        "target_duration_min": null
+      },
+      {
+        "phase_id": "phase-f8b3b65d",
+        "sozo_phase": "post",
+        "label": "Post-Session Assessment",
+        "steps": [
+          {
+            "step_id": "step-ee77b4ca",
+            "step_type": "monitoring",
+            "modality": "eeg",
+            "label": "Post-session outcome assessment",
+            "electrodes_source": [],
+            "electrodes_sink": [],
+            "laterality": "bilateral",
+            "intensity_ma": null,
+            "intensity_mj": null,
+            "frequency_hz": null,
+            "pulse_width_us": null,
+            "pulse_count": null,
+            "duration_ms": 0,
+            "duration_min": 5.0,
+            "repetitions": 1,
+            "inter_rep_pause_ms": 0,
+            "max_impedance_kohm": 10.0,
+            "ramp_up_ms": 0,
+            "ramp_down_ms": 0,
+            "evidence_level": "medium",
+            "off_label": true,
+            "requires_consent": true,
+            "rationale": "",
+            "extra_params": {}
+          }
+        ],
+        "target_duration_min": null
+      }
+    ],
+    "session_number": null,
+    "total_sessions": null,
+    "frequency": "",
+    "evidence_level": "medium",
+    "evidence_pmids": [],
+    "off_label": true,
+    "requires_doctor_authorization": true,
+    "requires_informed_consent": true
+  },
+  "sections": [
+    {
+      "section_id": "overview",
+      "title": "Clinical Overview",
+      "content": "Major Depressive Disorder (MDD) affects approximately 280 million people worldwide. Transcranial direct current stimulation (tDCS) has emerged as a promising non-invasive neuromodulation intervention for treatment-resistant depression (PMID: 28493655). A meta-analysis of 6 RCTs demonstrated response rates of 34% vs 19% for sham (PMID: 29800858).",
+      "cited_evidence_ids": [
+        "28493655",
+        "29800858"
+      ],
+      "confidence": "high",
+      "generation_method": "mock_composed",
+      "claims": [
+        {
+          "claim_text": "tDCS has emerged as a promising intervention for treatment-resistant depression",
+          "evidence_ids": [
+            "28493655"
+          ],
+          "claim_type": "supports",
+          "confidence": "high",
+          "uncertainty_flag": null
+        },
+        {
+          "claim_text": "Meta-analysis showed response rates of 34% vs 19% for sham",
+          "evidence_ids": [
+            "29800858"
+          ],
+          "claim_type": "supports",
+          "confidence": "high",
+          "uncertainty_flag": null
+        }
+      ]
+    },
+    {
+      "section_id": "safety_monitoring",
+      "title": "Safety & Monitoring",
+      "content": "A safety review across 33,000 tDCS sessions found adverse events to be mild and transient, including skin irritation (17%) and tingling (12%) (PMID: 27765600). Contraindications include metallic cranial implants.",
+      "cited_evidence_ids": [
+        "27765600"
+      ],
+      "confidence": "high",
+      "generation_method": "mock_composed",
+      "claims": [
+        {
+          "claim_text": "Adverse events were mild and transient across 33,000 sessions",
+          "evidence_ids": [
+            "27765600"
+          ],
+          "claim_type": "safety_note",
+          "confidence": "high",
+          "uncertainty_flag": null
+        }
+      ]
+    }
+  ],
+  "grounding_score": 1.0,
+  "evidence_summary": {
+    "total_articles": 3,
+    "grade_distribution": {
+      "A": 3,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    }
+  },
+  "review": {
+    "status": "approved",
+    "reviewer_id": "dr_test",
+    "approval_stamp": {
+      "reviewer_id": "dr_test",
+      "reviewer_credentials": "MD, Neurologist",
+      "approved_at": "2026-04-03T18:29:29.224173+00:00",
+      "revision_number": 0,
+      "protocol_version": "1.0.0"
+    },
+    "revision_number": 0
+  },
+  "version": "1.0"
+}
