@@ -1,0 +1,29 @@
+{
+  "condition_slug": "depression",
+  "searched_at": "2026-04-03T22:35:24.130493+00:00",
+  "total_articles": 24,
+  "articles_by_level": {
+    "medium": 24
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "40456469",
+    "37191697",
+    "40209536",
+    "40930185",
+    "39798713",
+    "31257092",
+    "38102647",
+    "37181556",
+    "32710772",
+    "38776083"
+  ],
+  "search_queries_used": [
+    "tDCS major depressive disorder treatment RCT",
+    "transcranial direct current stimulation depression meta-analysis",
+    "neuromodulation depression DLPFC efficacy"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

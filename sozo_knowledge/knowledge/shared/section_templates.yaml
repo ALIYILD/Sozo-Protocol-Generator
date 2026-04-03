@@ -1,0 +1,175 @@
+# SOZO Section Content Templates — rich clinical text scaffolding per section type.
+# These templates provide the detailed prose that makes protocols comprehensive.
+# Variables like {condition_name}, {icd10} are replaced at assembly time.
+
+rules:
+  - slug: overview_template
+    name: Clinical Overview Expanded Template
+    category: section_content
+    applies_to: [all]
+    rule_text: >-
+      {condition_name} ({icd10}) is a {category} condition managed at SOZO Brain Center
+      using evidence-based non-invasive neuromodulation (NIBS) techniques. This protocol
+      defines the clinical assessment pathway, treatment planning process, stimulation
+      protocols, safety monitoring requirements, and outcome tracking methodology for
+      {condition_name} within the SOZO treatment framework.
+
+      The SOZO approach integrates multiple neuromodulation modalities — transcranial
+      direct current stimulation (tDCS), transcranial pulse stimulation (TPS),
+      transcutaneous auricular vagus nerve stimulation (taVNS), and cranial electrotherapy
+      stimulation (CES) — within a structured multimodal session protocol (S-O-Z-O
+      sequence). Treatment targets are selected based on the Functional Network-Oriented
+      Neuromodulation (FNON) framework, which maps clinical phenotypes to dysfunctional
+      brain networks rather than treating isolated symptoms.
+
+      This document is intended for use by qualified SOZO clinicians operating under
+      Doctor supervision. All stimulation parameters, safety screening, and treatment
+      decisions documented here are evidence-informed recommendations requiring
+      independent clinical verification before patient application.
+
+  - slug: pathophysiology_template
+    name: Pathophysiology Expanded Template
+    category: section_content
+    applies_to: [all]
+    rule_text: >-
+      Understanding the pathophysiology of {condition_name} is essential for rational
+      neuromodulation target selection. The FNON framework requires clinicians to identify
+      which brain networks are dysfunctional and how their dysfunction maps to the
+      patient's clinical presentation.
+
+      The neural basis of {condition_name} involves disruption across multiple brain
+      circuits and neurotransmitter systems. These disruptions manifest as measurable
+      changes in cortical excitability, functional connectivity, and network dynamics
+      that can be detected through clinical assessment and, in advanced protocols,
+      quantitative EEG (QEEG) analysis.
+
+      From a neuromodulation perspective, the key pathophysiological features of
+      {condition_name} that inform target selection include alterations in regional
+      cortical excitability, inter-network connectivity patterns, and neurotransmitter
+      system function. Each of these represents a potential therapeutic target for
+      NIBS intervention.
+
+  - slug: protocol_preamble_template
+    name: Protocol Section Preamble Template
+    category: section_content
+    applies_to: [all]
+    rule_text: >-
+      The following stimulation protocols have been developed for {condition_name}
+      based on current clinical evidence, SOZO clinical experience, and the FNON
+      network-targeting framework. Each protocol specifies the modality, target brain
+      region, electrode/transducer placement, stimulation parameters, session duration,
+      and evidence level.
+
+      All protocols listed below are for use by qualified SOZO clinicians under Doctor
+      supervision. Protocol selection should be guided by the patient's clinical phenotype
+      assessment (see Phenotype Classification section) and the FNON network prioritisation
+      framework. The Doctor must authorise the final protocol assignment.
+
+      IMPORTANT: TPS (NEUROLITH) is CE-marked for Alzheimer's disease ONLY. Use in all
+      other neurological and psychiatric conditions is INVESTIGATIONAL and OFF-LABEL.
+      Informed consent with explicit off-label disclosure is MANDATORY for all TPS
+      protocols unless the patient has a primary diagnosis of Alzheimer's disease.
+
+  - slug: safety_preamble_template
+    name: Safety Section Preamble Template
+    category: section_content
+    applies_to: [all]
+    rule_text: >-
+      Patient safety is the highest priority in all SOZO neuromodulation treatments.
+      This section defines the safety screening requirements, absolute and relative
+      contraindications, adverse event grading system, monitoring protocols, and
+      emergency procedures that apply to all treatment sessions.
+
+      All patients must undergo comprehensive safety screening before initiating any
+      neuromodulation treatment block. Screening must be repeated if the patient's
+      medical circumstances change (new medications, new implants, pregnancy, etc.).
+      The supervising Doctor must verify that safety screening is complete and
+      documented before authorising treatment.
+
+      SOZO follows a graded adverse event (AE) monitoring protocol:
+      - Grade 1 (Mild): Self-resolving within 30 minutes. Action: Continue treatment,
+        document the event, monitor.
+      - Grade 2 (Moderate): Persists beyond 30 minutes or recurs across sessions.
+        Action: Pause session, reassess at next visit, consider parameter adjustment.
+      - Grade 3 (Severe): Requires medical attention. Action: STOP all stimulation
+        immediately, escalate to Doctor, complete incident report within 24 hours.
+      - Seizure or Loss of Consciousness: Action: STOP ALL stimulation, call emergency
+        services, notify Doctor immediately, complete critical incident report.
+
+  - slug: assessment_preamble_template
+    name: Assessment Section Preamble Template
+    category: section_content
+    applies_to: [all]
+    rule_text: >-
+      Validated clinical assessment instruments are essential for establishing treatment
+      baselines, monitoring progress, and determining treatment response. The following
+      scales have been selected for {condition_name} based on psychometric validation,
+      clinical utility, and relevance to the symptoms targeted by neuromodulation.
+
+      Assessment Schedule:
+      - Baseline: All primary and secondary outcome measures administered before the
+        first treatment session. Results inform phenotype classification and protocol
+        selection.
+      - Week 4 (Mid-block): Primary outcome measures re-administered. Results inform
+        the Week 4 response classification (Responder / Partial Responder / Non-Responder).
+      - Week 8-10 (End of block): Full assessment battery re-administered. Results
+        determine final response classification and maintenance planning.
+      - Follow-up: Recommended at 3 months and 6 months post-treatment to assess
+        durability of treatment effects.
+
+  - slug: responder_preamble_template
+    name: Responder Classification Preamble Template
+    category: section_content
+    applies_to: [all]
+    rule_text: >-
+      Response classification is a critical component of the SOZO treatment pathway.
+      The SOZO Operational Response Definition provides standardised criteria for
+      categorising patient outcomes and guiding treatment decisions.
+
+      Assessment Timepoints: Week 4, Week 8-10, End of Treatment Block.
+      Medication State: Must remain consistent throughout the treatment block. Changes
+      in medication during the block compromise the ability to attribute outcome changes
+      to neuromodulation.
+
+      Responder (>=30% improvement on primary outcome measure):
+      The patient demonstrates clinically meaningful improvement. Action: Continue
+      current protocol through the treatment block. Plan maintenance phase with reduced
+      session frequency. Document treatment response for clinical records.
+
+      Partial Responder (15-29% improvement on primary outcome measure):
+      The patient shows measurable but incomplete improvement. Action: Reassess phenotype
+      classification at Week 8. Consider protocol adjustment (different target,
+      additional modality, parameter modification). Extended treatment block may be
+      warranted. Doctor review recommended.
+
+      Non-Responder (<15% improvement across all outcome domains at BOTH Week 4 AND Week 8):
+      The patient does not demonstrate meaningful improvement at two consecutive timepoints.
+      Action: Initiate the FNON Level 5 Non-Responder Reassessment Pathway.
+
+      FNON Level 5 Non-Responder Pathway:
+      1. Repeat the 6-Network Bedside Assessment to re-evaluate the network dysfunction profile.
+      2. Re-evaluate phenotype classification — the original assignment may be incorrect.
+      3. Identify secondary and tertiary network targets not addressed in the initial protocol.
+      4. Adjust tDCS montage and/or TPS target based on the revised network profile.
+      5. Consider adjunct modality addition (taVNS for autonomic regulation, CES for
+         sleep/anxiety comorbidities).
+      6. Doctor review is MANDATORY before any protocol change. Document rationale for
+         all modifications.
+
+  - slug: inclusion_exclusion_template
+    name: Inclusion/Exclusion Preamble Template
+    category: section_content
+    applies_to: [all]
+    rule_text: >-
+      The following inclusion and exclusion criteria define patient eligibility for
+      SOZO neuromodulation treatment for {condition_name}. These criteria are designed
+      to ensure patient safety, treatment appropriateness, and outcome measurability.
+
+      All criteria must be assessed and documented during the initial clinical evaluation.
+      The supervising Doctor must confirm that the patient meets inclusion criteria and
+      does not meet any absolute exclusion criteria before authorising treatment.
+
+      Relative exclusion criteria require clinical judgement and Doctor decision. If a
+      relative exclusion criterion applies, the Doctor must document the clinical
+      rationale for proceeding with treatment and ensure appropriate monitoring is
+      in place.

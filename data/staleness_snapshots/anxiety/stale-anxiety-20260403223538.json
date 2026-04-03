@@ -1,0 +1,28 @@
+{
+  "condition_slug": "anxiety",
+  "searched_at": "2026-04-03T22:35:38.898477+00:00",
+  "total_articles": 15,
+  "articles_by_level": {
+    "medium": 15
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "35365806",
+    "35714757",
+    "39208534",
+    "30876986",
+    "40203547",
+    "36480651",
+    "32002936",
+    "35769365",
+    "31066227",
+    "37143014"
+  ],
+  "search_queries_used": [
+    "tDCS generalized anxiety disorder treatment",
+    "transcranial stimulation anxiety meta-analysis"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

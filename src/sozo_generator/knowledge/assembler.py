@@ -296,10 +296,15 @@ class CanonicalDocumentAssembler:
             content_type=blueprint.content_type,
         )
 
-        # Preamble
+        # Preamble from blueprint
         if blueprint.preamble:
             preamble = blueprint.preamble.replace("{condition_name}", condition.display_name)
             content_parts.append(preamble)
+
+        # Rich section template (shared clinical text scaffolding for depth)
+        template_text = self._get_section_template(blueprint.slug, condition, tier)
+        if template_text:
+            content_parts.append(template_text)
 
         # Special section: document_control gets full governance block
         if blueprint.slug == "document_control":
@@ -350,6 +355,11 @@ class CanonicalDocumentAssembler:
             )
             if table:
                 tables.append(table)
+
+        # Rich content expansion — generate detailed prose from structured data
+        expanded = self._expand_section_content(condition, blueprint, tier)
+        if expanded:
+            content_parts.append(expanded)
 
         # Build subsections recursively
         for sub_bp in blueprint.subsections:
@@ -524,3 +534,172 @@ class CanonicalDocumentAssembler:
         if pmid and not str(pmid).startswith("placeholder"):
             text += f" PMID: {pmid}."
         return text
+
+    # ── Rich content expansion ─────────────────────────────────────
+
+    def _expand_section_content(self, condition: KnowledgeCondition, blueprint: SectionBlueprint, tier: str) -> str:
+        """Generate detailed prose from structured condition data for section depth."""
+        slug = blueprint.slug
+        parts = []
+
+        # Expand protocol sections with per-protocol detail blocks
+        if slug.startswith("protocols_") or slug == "protocols":
+            mod_filter = blueprint.modality_filter
+            for proto in condition.protocols:
+                if mod_filter and proto.modality != mod_filter:
+                    continue
+                block = self._expand_protocol_detail(proto, condition, tier)
+                if block:
+                    parts.append(block)
+
+        # Expand network profiles with per-network analysis
+        elif slug == "network_profiles":
+            for np in condition.network_profiles:
+                block = self._expand_network_detail(np, condition)
+                if block:
+                    parts.append(block)
+
+        # Expand phenotypes with per-phenotype clinical description
+        elif slug == "phenotypes":
+            for pheno in condition.phenotypes:
+                block = self._expand_phenotype_detail(pheno, condition)
+                if block:
+                    parts.append(block)
+
+        # Expand brain anatomy with per-region detail
+        elif slug == "brain_anatomy":
+            for region in condition.brain_regions:
+                desc = condition.brain_region_details.get(region, "")
+                if desc:
+                    parts.append(f"\n{region}: {desc}")
+
+        # Expand safety with detailed rule descriptions
+        elif slug == "safety":
+            for rule in condition.safety_rules:
+                parts.append(f"\n{rule.category.title()} ({rule.severity.upper()}): {rule.description}")
+                if rule.source:
+                    parts.append(f"  Source: {rule.source}")
+
+        return "\n".join(parts)
+
+    def _expand_protocol_detail(self, proto, condition: KnowledgeCondition, tier: str) -> str:
+        """Generate a detailed description block for one protocol."""
+        lines = [
+            f"\nProtocol {proto.protocol_id}: {proto.label}",
+            f"Modality: {proto.modality.upper()}",
+            f"Target Region: {proto.target_region} ({proto.target_abbreviation})",
+        ]
+
+        # Parameters
+        if proto.parameters:
+            param_strs = [f"{k}: {v}" for k, v in proto.parameters.items()]
+            lines.append(f"Parameters: {', '.join(param_strs)}")
+
+        # Evidence
+        lines.append(f"Evidence Level: {proto.evidence_level}")
+        if proto.off_label:
+            lines.append(f"Regulatory Status: OFF-LABEL — requires informed consent and Doctor authorisation")
+
+        # Rationale (the clinical reasoning)
+        if proto.rationale:
+            lines.append(f"Clinical Rationale: {proto.rationale}")
+
+        # Network targets
+        if proto.network_targets:
+            nets = ", ".join(n.upper() if isinstance(n, str) else n for n in proto.network_targets)
+            lines.append(f"Network Targets: {nets}")
+
+        # Phenotype match
+        if proto.phenotype_slugs:
+            lines.append(f"Phenotype Match: {', '.join(proto.phenotype_slugs)}")
+
+        # Session info
+        if proto.session_count:
+            lines.append(f"Recommended Sessions: {proto.session_count}")
+
+        # Notes
+        if proto.notes:
+            lines.append(f"Clinical Notes: {proto.notes}")
+
+        return "\n".join(lines)
+
+    def _expand_network_detail(self, np, condition: KnowledgeCondition) -> str:
+        """Generate a detailed description for one network profile."""
+        net_name = _NETWORK_NAMES.get(np.network, np.network.upper())
+        dys_label = _DYSFUNCTION_LABELS.get(np.dysfunction, np.dysfunction)
+
+        lines = [
+            f"\n{net_name}",
+            f"Dysfunction Pattern: {dys_label}",
+            f"Severity: {np.severity.title()}",
+            f"Primary Network: {'Yes' if np.primary else 'No'}",
+        ]
+
+        if np.relevance:
+            lines.append(f"Clinical Relevance: {np.relevance}")
+
+        if np.evidence_note:
+            lines.append(f"Evidence Note: {np.evidence_note}")
+
+        return "\n".join(lines)
+
+    def _expand_phenotype_detail(self, pheno, condition: KnowledgeCondition) -> str:
+        """Generate a detailed description for one phenotype."""
+        lines = [
+            f"\nPhenotype: {pheno.label}",
+        ]
+
+        if pheno.description:
+            lines.append(f"Description: {pheno.description}")
+
+        if pheno.key_features:
+            lines.append(f"Key Features: {'; '.join(pheno.key_features)}")
+
+        if pheno.primary_networks:
+            nets = ", ".join(n.upper() if isinstance(n, str) else n for n in pheno.primary_networks)
+            lines.append(f"Primary Network Targets: {nets}")
+
+        if pheno.preferred_modalities:
+            mods = ", ".join(m.upper() if isinstance(m, str) else m for m in pheno.preferred_modalities)
+            lines.append(f"Preferred Modalities: {mods}")
+
+        if pheno.tdcs_target:
+            lines.append(f"tDCS Target: {pheno.tdcs_target}")
+
+        if pheno.tps_target:
+            lines.append(f"TPS Target: {pheno.tps_target}")
+
+        return "\n".join(lines)
+
+    # ── Section template enrichment ──────────────────────────────────
+
+    _SECTION_TEMPLATE_MAP = {
+        "clinical_overview": "overview_template",
+        "pathophysiology": "pathophysiology_template",
+        "protocols_tdcs": "protocol_preamble_template",
+        "protocols_tps": "protocol_preamble_template",
+        "protocols_tavns": "protocol_preamble_template",
+        "protocols_ces": "protocol_preamble_template",
+        "safety": "safety_preamble_template",
+        "assessments": "assessment_preamble_template",
+        "responder_criteria": "responder_preamble_template",
+        "inclusion_exclusion": "inclusion_exclusion_template",
+    }
+
+    def _get_section_template(self, section_slug: str, condition: KnowledgeCondition, tier: str) -> str:
+        """Load rich section template text from shared knowledge rules."""
+        template_slug = self._SECTION_TEMPLATE_MAP.get(section_slug)
+        if not template_slug:
+            return ""
+
+        # Look up template in shared rules
+        for rule in self.kb.get_shared_rules("section_content"):
+            if rule.slug == template_slug:
+                text = rule.rule_text
+                # Replace variables
+                text = text.replace("{condition_name}", condition.display_name)
+                text = text.replace("{icd10}", condition.icd10)
+                text = text.replace("{category}", condition.category or "clinical")
+                return text
+
+        return ""

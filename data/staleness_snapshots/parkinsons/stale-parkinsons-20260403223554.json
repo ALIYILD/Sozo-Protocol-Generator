@@ -1,0 +1,28 @@
+{
+  "condition_slug": "parkinsons",
+  "searched_at": "2026-04-03T22:35:54.341149+00:00",
+  "total_articles": 16,
+  "articles_by_level": {
+    "medium": 16
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "41460489",
+    "39932498",
+    "38032371",
+    "37485837",
+    "36188380",
+    "40722464",
+    "40867162",
+    "39192004",
+    "32827221",
+    "39133053"
+  ],
+  "search_queries_used": [
+    "TPS Parkinson disease treatment",
+    "transcranial stimulation Parkinson motor symptoms"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}
