@@ -1,24 +1,24 @@
 {
-  "request_id": "01639877-a0e4-4c53-a039-4eb1568e56ea",
+  "request_id": "471ce2df-877d-41d5-a17e-16000f555d64",
   "condition": {
     "slug": "depression",
     "display_name": "Major Depressive Disorder",
     "icd10": "F32"
   },
   "base_sequence": {
-    "sequence_id": "seq-cfac8ae8",
+    "sequence_id": "seq-b076c35d",
     "name": "SOZO Session \u2014 depression",
     "condition_slug": "depression",
     "tier": "fellow",
     "version": "1.0",
     "phases": [
       {
-        "phase_id": "phase-85f6320c",
+        "phase_id": "phase-200a3b5e",
         "sozo_phase": "pre",
         "label": "Pre-Session Preparation",
         "steps": [
           {
-            "step_id": "step-980b5edd",
+            "step_id": "step-d34b21cb",
             "step_type": "monitoring",
             "modality": "eeg",
             "label": "Pre-session impedance check",
@@ -47,12 +47,12 @@
         "target_duration_min": null
       },
       {
-        "phase_id": "phase-4c112629",
+        "phase_id": "phase-f18f282f",
         "sozo_phase": "O1",
         "label": "O \u2014 Optimize (prime target networks)",
         "steps": [
           {
-            "step_id": "step-fdffe1d0",
+            "step_id": "step-93eb1623",
             "step_type": "pulse",
             "modality": "tdcs",
             "label": "tDCS Core Depression (Primary Protocol)",
@@ -83,7 +83,7 @@
             "extra_params": {}
           },
           {
-            "step_id": "step-cdf648cb",
+            "step_id": "step-df0f28fd",
             "step_type": "pulse",
             "modality": "tdcs",
             "label": "tDCS Rumination Reduction",
@@ -112,7 +112,7 @@
             "extra_params": {}
           },
           {
-            "step_id": "step-c615925a",
+            "step_id": "step-00c14c9a",
             "step_type": "pulse",
             "modality": "tdcs",
             "label": "tDCS Anxiety & Hyperarousal",
@@ -146,12 +146,12 @@
         "target_duration_min": null
       },
       {
-        "phase_id": "phase-be344de4",
+        "phase_id": "phase-63aa06bb",
         "sozo_phase": "Z",
         "label": "Z \u2014 Zone Target (deep network modulation)",
         "steps": [
           {
-            "step_id": "step-a19c6e42",
+            "step_id": "step-5bd52dc0",
             "step_type": "pulse",
             "modality": "tps",
             "label": "TPS Core Depression",
@@ -183,7 +183,7 @@
             "extra_params": {}
           },
           {
-            "step_id": "step-8e04b165",
+            "step_id": "step-3c3ed21a",
             "step_type": "pulse",
             "modality": "tps",
             "label": "TPS Treatment-Resistant Depression",
@@ -217,12 +217,12 @@
         "target_duration_min": null
       },
       {
-        "phase_id": "phase-f8b3b65d",
+        "phase_id": "phase-b1d3ace8",
         "sozo_phase": "post",
         "label": "Post-Session Assessment",
         "steps": [
           {
-            "step_id": "step-ee77b4ca",
+            "step_id": "step-0122f24e",
             "step_type": "monitoring",
             "modality": "eeg",
             "label": "Post-session outcome assessment",
@@ -330,7 +330,7 @@
     "approval_stamp": {
       "reviewer_id": "dr_test",
       "reviewer_credentials": "MD, Neurologist",
-      "approved_at": "2026-04-03T18:29:29.224173+00:00",
+      "approved_at": "2026-04-03T22:29:47.283907+00:00",
       "revision_number": 0,
       "protocol_version": "1.0.0"
     },

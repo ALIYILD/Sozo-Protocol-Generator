@@ -1,0 +1,129 @@
+version: "3.9"
+
+services:
+  # PostgreSQL database
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: sozo
+      POSTGRES_USER: sozo
+      POSTGRES_PASSWORD: sozo_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sozo"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Redis for Celery broker and caching
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # FastAPI backend
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: uvicorn sozo_api.server:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      DATABASE_URL: postgresql+asyncpg://sozo:sozo_dev_password@db:5432/sozo
+      SOZO_CELERY_BROKER_URL: redis://redis:6379/0
+      SOZO_CELERY_RESULT_BACKEND: redis://redis:6379/1
+      SOZO_AUTH_SECRET_KEY: dev-secret-key-change-in-production
+      PYTHONPATH: /app/src
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./sozo_knowledge:/app/sozo_knowledge
+      - ./configs:/app/configs
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+      - ./templates:/app/templates
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Celery worker
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: celery -A sozo_workers.app worker --loglevel=info --concurrency=2
+    environment:
+      DATABASE_URL: postgresql+asyncpg://sozo:sozo_dev_password@db:5432/sozo
+      SOZO_CELERY_BROKER_URL: redis://redis:6379/0
+      SOZO_CELERY_RESULT_BACKEND: redis://redis:6379/1
+      PYTHONPATH: /app/src
+    volumes:
+      - ./src:/app/src
+      - ./sozo_knowledge:/app/sozo_knowledge
+      - ./configs:/app/configs
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Celery beat scheduler
+  beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: celery -A sozo_workers.app beat --loglevel=info
+    environment:
+      SOZO_CELERY_BROKER_URL: redis://redis:6379/0
+      SOZO_CELERY_RESULT_BACKEND: redis://redis:6379/1
+      PYTHONPATH: /app/src
+    volumes:
+      - ./src:/app/src
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # React frontend
+  frontend:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      VITE_API_URL: http://localhost:8000
+
+  # Database migration runner (one-shot)
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: alembic upgrade head
+    environment:
+      DATABASE_URL: postgresql+asyncpg://sozo:sozo_dev_password@db:5432/sozo
+      PYTHONPATH: /app/src
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./alembic:/app/alembic
+      - ./alembic.ini:/app/alembic.ini
+      - ./src:/app/src
+
+volumes:
+  pgdata:

@@ -1,0 +1,220 @@
+{
+  "audit_id": "audit-61766b4e-44ec-43ed-a658-9ea6ac12c3d1",
+  "request_id": "61766b4e-44ec-43ed-a658-9ea6ac12c3d1",
+  "condition_slug": "depression",
+  "condition_name": "Major Depressive Disorder",
+  "created_at": "2026-04-03T22:26:36.021258+00:00",
+  "completed_at": "2026-04-03T22:26:36.329171+00:00",
+  "total_duration_ms": 302.39,
+  "node_history": [
+    {
+      "node_id": "intake_router",
+      "started_at": "2026-04-03T22:26:36.021836+00:00",
+      "completed_at": "2026-04-03T22:26:36.021856+00:00",
+      "duration_ms": 0.02,
+      "status": "success",
+      "error": null,
+      "input_hash": "9171d75761c9290b",
+      "output_hash": "1d1a655dad5461d4",
+      "decisions": [
+        "Prompt detected \u2014 routing to prompt_normalizer"
+      ]
+    },
+    {
+      "node_id": "prompt_normalizer",
+      "started_at": "2026-04-03T22:26:36.021996+00:00",
+      "completed_at": "2026-04-03T22:26:36.022337+00:00",
+      "duration_ms": 0.34,
+      "status": "success",
+      "error": null,
+      "input_hash": "8be8912887e3b36f",
+      "output_hash": "2aca78820b87ab46",
+      "decisions": [
+        "No API key \u2014 using keyword-based normalization"
+      ]
+    },
+    {
+      "node_id": "condition_resolver",
+      "started_at": "2026-04-03T22:26:36.022548+00:00",
+      "completed_at": "2026-04-03T22:26:36.022620+00:00",
+      "duration_ms": 0.07,
+      "status": "success",
+      "error": null,
+      "input_hash": "9430be0a6b793a65",
+      "output_hash": "fc127dcb674a9212",
+      "decisions": [
+        "Resolved 'depression' \u2192 Major Depressive Disorder (ICD-10: F32) via prompt_inferred"
+      ]
+    },
+    {
+      "node_id": "evidence_search",
+      "started_at": "2026-04-03T22:26:36.022930+00:00",
+      "completed_at": "2026-04-03T22:26:36.022930+00:00",
+      "duration_ms": 1.0,
+      "status": "success",
+      "error": null,
+      "input_hash": "mock",
+      "output_hash": "mock",
+      "decisions": [
+        "Mock evidence: 3 Grade A articles"
+      ]
+    },
+    {
+      "node_id": "evidence_sufficiency_gate",
+      "started_at": "2026-04-03T22:26:36.023352+00:00",
+      "completed_at": "2026-04-03T22:26:36.023486+00:00",
+      "duration_ms": 0.14,
+      "status": "success",
+      "error": null,
+      "input_hash": "fc3438cfe9a6a4e2",
+      "output_hash": "72bfef68141bb475",
+      "decisions": [
+        "Evidence sufficient: 3 Grade A, 0 Grade B articles available"
+      ]
+    },
+    {
+      "node_id": "safety_policy_engine",
+      "started_at": "2026-04-03T22:26:36.023663+00:00",
+      "completed_at": "2026-04-03T22:26:36.023817+00:00",
+      "duration_ms": 0.16,
+      "status": "success",
+      "error": null,
+      "input_hash": "ed44d5d2a32dcb2e",
+      "output_hash": "26c2d191e40c9f2c",
+      "decisions": [
+        "Off-label: tps for depression",
+        "Safety cleared for modalities: [<Modality.TDCS: 'tdcs'>, <Modality.TPS: 'tps'>]"
+      ]
+    },
+    {
+      "node_id": "contraindication_gate",
+      "started_at": "2026-04-03T22:26:36.023957+00:00",
+      "completed_at": "2026-04-03T22:26:36.024123+00:00",
+      "duration_ms": 0.17,
+      "status": "success",
+      "error": null,
+      "input_hash": "5a5f452d8e780c8a",
+      "output_hash": "0c572c9fba906ee0",
+      "decisions": [
+        "Contraindication gate PASSED"
+      ]
+    },
+    {
+      "node_id": "protocol_template_selector",
+      "started_at": "2026-04-03T22:26:36.024280+00:00",
+      "completed_at": "2026-04-03T22:26:36.256392+00:00",
+      "duration_ms": 232.12,
+      "status": "success",
+      "error": null,
+      "input_hash": "aee915a93bd4e1cc",
+      "output_hash": "8229951e6f717742",
+      "decisions": [
+        "Loaded 5 protocols from knowledge base",
+        "Built SOZO sequence: SOZO Session \u2014 depression, 4 phases, modalities: ['eeg', 'tdcs', 'tps'], duration: 107 min"
+      ]
+    },
+    {
+      "node_id": "protocol_composer",
+      "started_at": "2026-04-03T22:26:36.256692+00:00",
+      "completed_at": "2026-04-03T22:26:36.256692+00:00",
+      "duration_ms": 1.0,
+      "status": "success",
+      "error": null,
+      "input_hash": "mock",
+      "output_hash": "mock",
+      "decisions": [
+        "Mock composed 2 sections with 3 citations"
+      ]
+    },
+    {
+      "node_id": "grounding_validator",
+      "started_at": "2026-04-03T22:26:36.256816+00:00",
+      "completed_at": "2026-04-03T22:26:36.257200+00:00",
+      "duration_ms": 0.39,
+      "status": "success",
+      "error": null,
+      "input_hash": "b013343f83c33a39",
+      "output_hash": "628c25d531015b01",
+      "decisions": [
+        "Grounding: 3/3 citations verified (score: 1.00), 0 blocking issues, 0 warnings"
+      ]
+    },
+    {
+      "node_id": "review_processor",
+      "started_at": "2026-04-03T22:26:36.260848+00:00",
+      "completed_at": "2026-04-03T22:26:36.261046+00:00",
+      "duration_ms": 0.2,
+      "status": "success",
+      "error": null,
+      "input_hash": "ea7dffbbeaf26b58",
+      "output_hash": "6496895c46dd0b9f",
+      "decisions": [
+        "Protocol APPROVED by dr_test (revision 0)"
+      ]
+    },
+    {
+      "node_id": "protocol_reporter",
+      "started_at": "2026-04-03T22:26:36.261294+00:00",
+      "completed_at": "2026-04-03T22:26:36.328064+00:00",
+      "duration_ms": 66.78,
+      "status": "success",
+      "error": null,
+      "input_hash": "62c317f85b90f6df",
+      "output_hash": "364e49cb6c723470",
+      "decisions": [
+        "Protocol JSON saved: outputs/protocols/depression/depression_protocol.json",
+        "PRISMA flow diagram generated: 3 identified \u2192 3 deduped \u2192 3 included",
+        "PRISMA flow diagram appended to DOCX as appendix section",
+        "DOCX rendered with 4 sections (incl. appendices): outputs/protocols/depression/depression/fellow/depression_evidence-based-protocol_fellow.docx"
+      ]
+    }
+  ],
+  "errors": [],
+  "total_nodes_executed": 12,
+  "total_llm_calls": 2,
+  "evidence_articles_searched": 3,
+  "evidence_articles_screened": 3,
+  "evidence_articles_cited": 3,
+  "evidence_ids_cited": [
+    "27765600",
+    "28493655",
+    "29800858"
+  ],
+  "evidence_grade_distribution": {
+    "A": 3,
+    "B": 0,
+    "C": 0,
+    "D": 0
+  },
+  "prisma_counts": {
+    "records_identified": 3,
+    "records_after_dedup": 3,
+    "records_screened": 3,
+    "studies_included": 3
+  },
+  "contraindications_checked": [],
+  "safety_flags_raised": [],
+  "consent_requirements": [
+    "Informed consent for neuromodulation treatment",
+    "Doctor authorization required for TPS",
+    "Off-label consent required for TPS"
+  ],
+  "review_cycles": 0,
+  "reviewer_id": "dr_test",
+  "review_decision": "approved",
+  "approval_stamp": {
+    "reviewer_id": "dr_test",
+    "reviewer_credentials": "MD, Neurologist",
+    "approved_at": "2026-04-03T22:26:36.261044+00:00",
+    "revision_number": 0,
+    "protocol_version": "1.0.0"
+  },
+  "output_paths": {
+    "json": "outputs/protocols/depression/depression_protocol.json",
+    "prisma_text": "outputs/protocols/depression/depression_prisma_flow.txt",
+    "prisma_mermaid": "outputs/protocols/depression/depression_prisma_mermaid.md",
+    "docx": "outputs/protocols/depression/depression/fellow/depression_evidence-based-protocol_fellow.docx"
+  },
+  "graph_version": "0.1.0-mvp",
+  "state_version": "1.0"
+}

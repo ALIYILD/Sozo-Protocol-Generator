@@ -60,6 +60,23 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
+    # ── Router includes ──────────────────────────────────────────────
+    from sozo_api.routes.protocols import router as protocols_router
+    from sozo_api.routes.patients import router as patients_router
+    from sozo_api.routes.reviews import router as reviews_router
+    from sozo_api.routes.audit import router as audit_router
+
+    try:
+        from sozo_auth import auth_router
+        application.include_router(auth_router, prefix="/api")
+    except ImportError:
+        logger.warning("sozo_auth not available — auth endpoints disabled")
+
+    application.include_router(protocols_router)
+    application.include_router(patients_router)
+    application.include_router(reviews_router)
+    application.include_router(audit_router)
+
     # ── Startup event ─────────────────────────────────────────────────
 
     @application.on_event("startup")
@@ -214,6 +231,157 @@ def create_app() -> FastAPI:
         svc = CockpitService()
         summaries = svc.conditions_summary()
         return {"conditions": [asdict(s) for s in summaries]}
+
+    # ── Graph-based generation ─────────────────────────────────────────
+
+    class GraphGenerateRequest(BaseModel):
+        """Request body for graph-based protocol generation."""
+        condition_slug: str
+        modality: str | None = None
+        tier: str = "fellow"
+        doc_type: str = "evidence_based_protocol"
+        prompt: str | None = None
+        patient_id: str | None = None
+
+    @application.post("/api/generate/graph")
+    async def generate_via_graph(body: GraphGenerateRequest) -> dict:
+        """Generate a protocol using the unified LangGraph pipeline.
+
+        This is the production generation path that runs:
+        intake -> condition -> evidence -> safety -> personalization ->
+        composition -> grounding -> QA -> [review interrupt] -> render
+        """
+        from sozo_graph.unified_graph import (
+            build_unified_graph,
+            create_initial_state,
+            run_unified_generation,
+        )
+
+        try:
+            # Build prompt from condition_slug and optional user prompt
+            effective_prompt = body.prompt or f"Generate {body.doc_type} for {body.condition_slug}"
+
+            result = run_unified_generation(
+                user_prompt=effective_prompt,
+                tier=body.tier,
+            )
+
+            return {
+                "success": True,
+                "status": result.get("review", {}).get("status", "pending_review"),
+                "protocol": result.get("protocol", {}),
+                "evidence_summary": {
+                    "total_articles": result.get("evidence", {}).get("total_articles", 0),
+                    "sufficiency": result.get("evidence", {}).get("evidence_sufficient", False),
+                },
+                "safety": result.get("safety", {}),
+                "qa_summary": result.get("protocol", {}).get("qa_summary", {}),
+                "output": result.get("output", {}),
+                "audit": {
+                    "node_count": len(result.get("node_history", [])),
+                    "errors": len(result.get("errors", [])),
+                },
+            }
+        except Exception as exc:
+            logger.exception("Graph generation failed")
+            raise HTTPException(status_code=500, detail=str(exc))
+
+    # ── Evidence staleness ─────────────────────────────────────────────
+
+    @application.get("/api/evidence/staleness")
+    async def evidence_staleness() -> dict:
+        """Get evidence freshness report across all conditions."""
+        from sozo_generator.evidence.staleness import get_staleness_report
+        report = get_staleness_report()
+        return {
+            "overall_health": report.overall_health,
+            "total_conditions": report.total_conditions,
+            "fresh": report.fresh_count,
+            "aging": report.aging_count,
+            "stale": report.stale_count,
+            "expired": report.expired_count,
+            "high_priority_refreshes": report.high_priority_refreshes,
+            "conditions": [
+                {
+                    "slug": c.condition_slug,
+                    "name": c.condition_name,
+                    "freshness": c.freshness.value,
+                    "days_since_search": c.days_since_search,
+                    "evidence_level": c.evidence_level,
+                    "needs_refresh": c.needs_refresh,
+                }
+                for c in report.conditions
+            ],
+        }
+
+    # ── Safety check endpoint ──────────────────────────────────────────
+
+    @application.post("/api/safety/check")
+    async def safety_check(body: dict) -> dict:
+        """Run patient safety evaluation."""
+        from sozo_generator.safety import evaluate_patient_safety
+
+        result = evaluate_patient_safety(
+            patient_demographics=body.get("demographics", {}),
+            medications=body.get("medications", []),
+            medical_history=body.get("medical_history", []),
+            target_modalities=body.get("modalities"),
+        )
+        return {
+            "safety_cleared": result.safety_cleared,
+            "absolute_contraindications": result.absolute_contraindications,
+            "relative_contraindications": result.relative_contraindications,
+            "modality_clearance": result.modality_clearance,
+            "warnings": result.warnings,
+            "medication_summary": result.medication_interactions.summary,
+        }
+
+    # ── Personalization endpoint ───────────────────────────────────────
+
+    @application.post("/api/personalization/run")
+    async def run_personalization(body: dict) -> dict:
+        """Run the personalization engine for a patient."""
+        from sozo_personalization import PersonalizationEngine
+        from sozo_personalization.models import PersonalizationRequest
+
+        # Load condition schema for personalization
+        condition_slug = body["condition_slug"]
+        kb = _get_kb()
+        cond = kb.get_condition(condition_slug)
+        condition_schema = cond.model_dump() if cond else {"slug": condition_slug}
+
+        engine = PersonalizationEngine(condition_schema=condition_schema)
+        request = PersonalizationRequest(
+            condition_slug=body["condition_slug"],
+            patient_demographics=body.get("demographics", {}),
+            symptoms=body.get("symptoms", []),
+            medications=body.get("medications", []),
+            treatment_history=body.get("treatment_history", []),
+            medical_history=body.get("medical_history", []),
+            eeg_features=body.get("eeg_features"),
+            target_modalities=body.get("modalities"),
+        )
+
+        result = engine.personalize(request)
+
+        return {
+            "safety_cleared": result.safety_cleared,
+            "matched_phenotype": result.matched_phenotype,
+            "confidence_score": result.confidence_score,
+            "confidence_band": result.confidence_band,
+            "recommended_protocol": {
+                "modality": result.recommended_protocol.modality,
+                "target": result.recommended_protocol.target,
+                "parameters": result.recommended_protocol.parameters,
+                "evidence_level": result.recommended_protocol.evidence_level,
+                "score": result.recommended_protocol.score,
+                "rationale": result.recommended_protocol.rationale,
+            } if result.recommended_protocol else None,
+            "ranked_protocols_count": len(result.ranked_protocols),
+            "blocked_modalities": result.blocked_modalities,
+            "warnings": result.safety_warnings,
+            "explanation": result.explanation,
+        }
 
     return application
 

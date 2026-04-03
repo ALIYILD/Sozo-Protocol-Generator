@@ -321,6 +321,22 @@ class GenerationService:
             assembler = CanonicalDocumentAssembler(kb)
             spec, provenance = assembler.assemble(condition, doc_type, tier)
 
+            # Run safety validation before rendering
+            cond_obj = kb.get_condition(condition)
+            if cond_obj:
+                from ..knowledge.safety import SafetyValidator
+                validator = SafetyValidator()
+                safety_report = validator.validate_protocol(
+                    condition_slug=condition,
+                    protocols=[p.model_dump() for p in cond_obj.protocols],
+                    safety_rules=[s.model_dump() for s in cond_obj.safety_rules],
+                    doc_type=doc_type, tier=tier,
+                )
+                if not safety_report.passed:
+                    result.qa_issues.extend(
+                        [f"[SAFETY BLOCK] {c.message}" for c in safety_report.checks if c.severity == "block"]
+                    )
+
             # Render using existing renderer
             output_path = self.exporter.renderer.render(spec)
             result.output_path = str(output_path)
