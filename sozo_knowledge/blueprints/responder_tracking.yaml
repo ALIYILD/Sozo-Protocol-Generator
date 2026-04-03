@@ -1,0 +1,91 @@
+# SOZO Responder Tracking — Document Blueprint
+# Response tracking and classification document. Defines responder criteria,
+# assessment timepoints, response classification, and non-responder pathways.
+
+slug: responder_tracking
+title_template: "Responder Tracking — {condition_name}"
+doc_type: responder_tracking
+description: >-
+  Response tracking and classification document defining responder criteria,
+  assessment timepoints, response classification thresholds, and non-responder pathways.
+target_audience: clinician
+version: "1.0"
+applicable_tiers: [fellow, partners]
+requires_references: true
+requires_review_summary: true
+template_ref: Responder_Tracking.docx
+
+sections:
+  - slug: document_control
+    title: "Document Control & Clinical Responsibility"
+    purpose: Document governance and version information
+    order: 0
+    content_type: prose
+    knowledge_fields: [display_name, icd10, version]
+    knowledge_source: condition
+    preamble: >-
+      Organization: SOZO Brain Center. All protocols are for authorized SOZO personnel only.
+      No Fellow or Clinical Assistant may independently modify treatment protocols
+      without Doctor authorization.
+
+  - slug: responder_criteria
+    title: "Responder Criteria"
+    purpose: Define operational criteria for treatment response classification
+    order: 1
+    content_type: mixed
+    knowledge_fields: [responder_criteria]
+    preamble: >-
+      Assessment timepoints: Week 4, Week 8-10, End of Block.
+      Medication state must remain consistent.
+
+  - slug: response_classification
+    title: "Response Classification"
+    purpose: Fixed classification thresholds and FNON pathway
+    order: 2
+    content_type: prose
+    knowledge_fields: []
+    preamble: >-
+      Response Classification Thresholds (based on primary outcome measure change from baseline):
+
+      - Responder: >=30% improvement from baseline on primary outcome measure.
+
+      - Partial Responder: 15-29% improvement from baseline on primary outcome measure.
+
+      - Non-Responder: <15% improvement from baseline on primary outcome measure.
+
+      Level 5 FNON Pathway for Non-Responders:
+      1. Verify phenotype classification is correct.
+      2. Re-assess network dysfunction profile (repeat qEEG/functional assessment).
+      3. Consider modality switch (e.g., tDCS to TPS, or add tAVNS adjunct).
+      4. Adjust stimulation parameters (intensity, duration, target region).
+      5. If persistent non-response after two full blocks, escalate to multidisciplinary review
+         and consider alternative or combination interventions.
+    visuals:
+      - visual_type: dose_response
+        caption_template: "{condition_name} — Response Tracking Template"
+
+  - slug: assessments
+    title: "Assessment Tools & Outcome Measures"
+    purpose: Validated clinical scales for baseline and follow-up
+    order: 3
+    content_type: table
+    knowledge_fields: [assessments]
+    table_headers: [Scale, Full Name, Domains, Timing, Evidence PMID]
+    table_row_source: assessments
+
+  - slug: non_responder_pathway
+    title: "Non-Responder Pathway"
+    purpose: Decision pathway for non-responding patients
+    order: 4
+    content_type: prose
+    knowledge_fields: [non_responder_pathway]
+    preamble: >-
+      The non-responder pathway defines clinical decision steps when a patient
+      does not meet responder thresholds after a full treatment block.
+
+  - slug: references
+    title: "References & Evidence Sources"
+    purpose: Formatted bibliography
+    order: 5
+    content_type: reference_list
+    knowledge_fields: [references]

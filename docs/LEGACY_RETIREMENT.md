@@ -9,14 +9,14 @@
 
 | Doc Type | Canonical Status | Legacy Status | Retirement Readiness |
 |----------|-----------------|---------------|---------------------|
-| **Evidence-Based Protocol** | DEFAULT | Fallback only | Ready for deprecation |
-| **Handbook** | DEFAULT | Fallback only | Ready for deprecation |
-| **Clinical Exam** | DEFAULT | Fallback only | Ready for deprecation |
-| All-in-One Protocol | Not available | ACTIVE | Blocked — no blueprint |
-| Phenotype Classification | Not available | ACTIVE | Blocked — no blueprint |
-| Responder Tracking | Not available | ACTIVE | Blocked — no blueprint |
-| Psych Intake | Not available | ACTIVE | Blocked — no blueprint |
-| Network Assessment | Not available | ACTIVE | Blocked — no blueprint |
+| **Evidence-Based Protocol** | DEFAULT | DEPRECATED | Ready for removal |
+| **Handbook** | DEFAULT | DEPRECATED | Ready for removal |
+| **Clinical Exam** | DEFAULT | DEPRECATED | Ready for removal |
+| **All-in-One Protocol** | DEFAULT | DEPRECATED | Ready for removal |
+| **Phenotype Classification** | DEFAULT | DEPRECATED | Ready for removal |
+| **Responder Tracking** | DEFAULT | DEPRECATED | Ready for removal |
+| **Psych Intake** | DEFAULT | DEPRECATED | Ready for removal |
+| **Network Assessment** | DEFAULT (Partners) | DEPRECATED | Ready for removal |
 
 ## Condition Generator Status
 

@@ -1,0 +1,86 @@
+# SOZO 6-Network Bedside Assessment — Document Blueprint
+# Partners-only bedside assessment tool for evaluating functional network involvement.
+# Uses the FNON framework to map symptoms to networks and guide modality selection.
+
+slug: network_assessment
+title_template: "6-Network Bedside Assessment — {condition_name}"
+doc_type: network_assessment
+description: >-
+  Partners-tier bedside assessment tool for evaluating functional network involvement
+  using the FNON framework. Maps symptoms to networks and guides modality selection.
+target_audience: clinician
+version: "1.0"
+applicable_tiers: [partners]
+requires_references: true
+requires_review_summary: true
+template_ref: Network_Assessment.docx
+
+sections:
+  - slug: document_control
+    title: "Document Control & Clinical Responsibility"
+    purpose: Document governance and version information
+    order: 0
+    content_type: prose
+    knowledge_fields: [display_name, icd10, version]
+    knowledge_source: condition
+    preamble: >-
+      Organization: SOZO Brain Center. All protocols are for authorized SOZO personnel only.
+      No Fellow or Clinical Assistant may independently modify treatment protocols
+      without Doctor authorization.
+
+  - slug: patient_info
+    title: "Patient Information"
+    purpose: Capture patient demographics and baseline information
+    order: 1
+    content_type: checklist
+    knowledge_fields: []
+    preamble: >-
+      Fill in patient demographics, referral source, and baseline clinical status.
+      Include date of assessment, referring clinician, and relevant medical history.
+
+  - slug: network_profiles
+    title: "Functional Network Involvement (FNON)"
+    purpose: FNON network dysfunction profile for bedside assessment
+    order: 2
+    content_type: table
+    knowledge_fields: [network_profiles, fnon_rationale]
+    table_headers: [Network, Dysfunction Pattern, Severity, Relevance]
+    table_row_source: network_profiles
+    preamble: >-
+      The Functional Network-Oriented Neuromodulation (FNON) framework emphasizes
+      targeting dysfunctional large-scale brain networks rather than isolated brain regions.
+      Do NOT stimulate symptoms — stimulate dysfunctional NETWORKS.
+    visuals:
+      - visual_type: network_diagram
+        caption_template: "{condition_name} — FNON Network Profile"
+
+  - slug: symptom_network_mapping
+    title: "Symptom-Network-Modality Mapping"
+    purpose: Map symptoms to networks and treatment modalities
+    order: 3
+    content_type: table
+    knowledge_fields: [protocols]
+    table_headers: [Protocol, Modality, Target Region, Network Targets, Evidence Level]
+    table_row_source: protocols
+    preamble: >-
+      Each protocol row shows which networks are targeted. Use this table to match
+      the patient's network dysfunction profile to available treatment protocols.
+
+  - slug: phenotypes
+    title: "Clinical Phenotypes"
+    purpose: Clinical subtype classification with network signatures
+    order: 4
+    content_type: table
+    knowledge_fields: [phenotypes]
+    table_headers: [Phenotype, Description, Key Features, Primary Networks, Preferred Modalities]
+    table_row_source: phenotypes
+    preamble: >-
+      Phenotype identification is the first step in the FNON Five-Level Clinical Pathway.
+      Each phenotype maps to specific brain network targets and preferred stimulation modalities.
+
+  - slug: references
+    title: "References & Evidence Sources"
+    purpose: Formatted bibliography
+    order: 5
+    content_type: reference_list
+    knowledge_fields: [references]

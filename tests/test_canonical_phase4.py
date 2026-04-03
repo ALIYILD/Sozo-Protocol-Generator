@@ -180,11 +180,13 @@ class TestCanonicalRouting:
         assert svc.can_route_canonical("parkinsons", "evidence_based_protocol")
         assert svc.can_route_canonical("depression", "handbook")
 
-    def test_cannot_route_unsupported_doc_type(self):
+    def test_all_8_doc_types_now_routable(self):
+        """Phase 7 expanded: all 8 doc types have blueprints and route to canonical."""
         from sozo_generator.generation.service import GenerationService
         svc = GenerationService()
-        assert not svc.can_route_canonical("parkinsons", "all_in_one_protocol")
-        assert not svc.can_route_canonical("parkinsons", "responder_tracking")
+        assert svc.can_route_canonical("parkinsons", "all_in_one_protocol")
+        assert svc.can_route_canonical("parkinsons", "responder_tracking")
+        assert not svc.can_route_canonical("parkinsons", "nonexistent_type")
 
     def test_cannot_route_unknown_condition(self):
         from sozo_generator.generation.service import GenerationService

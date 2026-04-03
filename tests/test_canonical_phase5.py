@@ -29,12 +29,13 @@ class TestCanonicalByDefault:
         assert results[0].success
         assert results[0].build_id.startswith("canon-")
 
-    def test_generate_keeps_legacy_for_non_canonical_types(self):
+    def test_all_types_now_route_canonical(self):
+        """Phase 7 expanded: all 8 doc types now route to canonical."""
         from sozo_generator.generation.service import GenerationService
         svc = GenerationService(with_visuals=False, with_qa=False)
         results = svc.generate(condition="parkinsons", tier="fellow", doc_type="all_in_one_protocol")
         assert results[0].success
-        assert results[0].build_id.startswith("build-")
+        assert results[0].build_id.startswith("canon-")
 
     def test_canonical_produces_provenance_sidecar(self):
         from sozo_generator.generation.service import GenerationService
@@ -43,12 +44,13 @@ class TestCanonicalByDefault:
         prov_path = Path(results[0].output_path).with_suffix(".provenance.json")
         assert prov_path.exists()
 
-    def test_legacy_does_not_produce_provenance(self):
+    def test_all_types_produce_provenance(self):
+        """Phase 7: all 8 types now produce provenance sidecars."""
         from sozo_generator.generation.service import GenerationService
         svc = GenerationService(with_visuals=False, with_qa=False)
         results = svc.generate(condition="parkinsons", tier="fellow", doc_type="all_in_one_protocol")
         prov_path = Path(results[0].output_path).with_suffix(".provenance.json")
-        assert not prov_path.exists()
+        assert prov_path.exists()
 
 
 # ── Review Workflow ───────────────────────────────────────────────────────

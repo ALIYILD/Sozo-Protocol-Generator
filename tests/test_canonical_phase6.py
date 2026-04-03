@@ -117,8 +117,8 @@ class TestBatchWorkflows:
         from sozo_generator.knowledge.batch import BatchRunner
         runner = BatchRunner()
         report = runner.readiness_report("fellow")
-        assert report.total == 48  # 16 conditions × 3 blueprints
-        assert report.succeeded == 48
+        assert report.total == 128  # 16 conditions × 8 blueprints
+        assert report.succeeded == 128
         assert report.failed == 0
 
     def test_readiness_report_text(self):
@@ -127,14 +127,14 @@ class TestBatchWorkflows:
         report = runner.readiness_report("fellow")
         text = report.to_text()
         assert "BATCH REPORT" in text
-        assert "Succeeded: 48" in text
+        assert "Succeeded: 128" in text
 
     def test_generate_condition(self):
         from sozo_generator.knowledge.batch import BatchRunner
         runner = BatchRunner()
         report = runner.generate_condition("parkinsons", "fellow")
-        assert report.total == 3  # 3 blueprints
-        assert report.succeeded == 3
+        assert report.total == 8  # 8 blueprints
+        assert report.succeeded == 8
 
     def test_generate_blueprint(self):
         from sozo_generator.knowledge.batch import BatchRunner
@@ -174,12 +174,13 @@ class TestRetirementMatrix:
         for dt in ["evidence_based_protocol", "handbook", "clinical_exam"]:
             assert svc.can_route_canonical("parkinsons", dt), f"{dt} should be routable"
 
-    def test_legacy_only_types_not_routed(self):
+    def test_all_8_types_now_routable(self):
+        """All 8 doc types now have canonical blueprints and route to canonical."""
         from sozo_generator.generation.service import GenerationService
         svc = GenerationService()
         for dt in ["all_in_one_protocol", "phenotype_classification", "responder_tracking",
                     "psych_intake", "network_assessment"]:
-            assert not svc.can_route_canonical("parkinsons", dt), f"{dt} should NOT be routable"
+            assert svc.can_route_canonical("parkinsons", dt), f"{dt} should be routable"
 
     def test_all_conditions_routable_for_canonical_types(self):
         from sozo_generator.generation.service import GenerationService

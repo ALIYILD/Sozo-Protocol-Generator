@@ -1,0 +1,86 @@
+# SOZO Phenotype Classification — Document Blueprint
+# Phenotype identification and protocol mapping document. Links clinical subtypes
+# to brain networks and preferred neuromodulation modalities.
+
+slug: phenotype_classification
+title_template: "Phenotype Classification — {condition_name}"
+doc_type: phenotype_classification
+description: >-
+  Phenotype identification and protocol mapping document linking clinical subtypes
+  to brain network profiles and preferred neuromodulation modalities.
+target_audience: clinician
+version: "1.0"
+applicable_tiers: [fellow, partners]
+requires_references: true
+requires_review_summary: true
+template_ref: Phenotype_Classification.docx
+
+sections:
+  - slug: document_control
+    title: "Document Control & Clinical Responsibility"
+    purpose: Document governance and version information
+    order: 0
+    content_type: prose
+    knowledge_fields: [display_name, icd10, version]
+    knowledge_source: condition
+    preamble: >-
+      Organization: SOZO Brain Center. All protocols are for authorized SOZO personnel only.
+      No Fellow or Clinical Assistant may independently modify treatment protocols
+      without Doctor authorization.
+
+  - slug: phenotypes
+    title: "Clinical Phenotypes"
+    purpose: Clinical subtype classification with network signatures
+    order: 1
+    content_type: table
+    knowledge_fields: [phenotypes]
+    table_headers: [Phenotype, Description, Key Features, Primary Networks, Preferred Modalities]
+    table_row_source: phenotypes
+    preamble: >-
+      Phenotype identification is the first step in the FNON Five-Level Clinical Pathway.
+      Each phenotype maps to specific brain network targets and preferred stimulation modalities.
+
+  - slug: brain_anatomy
+    title: "Key Brain Structures & Neuroanatomy"
+    purpose: Anatomical regions relevant to the condition
+    order: 2
+    tier: fellow
+    content_type: table
+    knowledge_fields: [brain_regions, brain_region_details]
+    table_headers: [Brain Region, Functional Role]
+    table_row_source: brain_regions
+    preamble: >-
+      The following brain structures are most relevant to {condition_name} pathophysiology
+      and represent primary or secondary targets for neuromodulation.
+
+  - slug: network_profiles
+    title: "Functional Network Involvement (FNON)"
+    purpose: FNON network dysfunction profile
+    order: 3
+    tier: partners
+    content_type: table
+    knowledge_fields: [network_profiles, fnon_rationale]
+    table_headers: [Network, Dysfunction, Severity, Relevance]
+    table_row_source: network_profiles
+    preamble: >-
+      The Functional Network-Oriented Neuromodulation (FNON) framework emphasizes
+      targeting dysfunctional large-scale brain networks rather than isolated brain regions.
+
+  - slug: protocols
+    title: "All Protocols"
+    purpose: Complete protocol listing across all modalities
+    order: 4
+    content_type: table
+    knowledge_fields: [protocols]
+    table_headers: [ID, Protocol Label, Target Region, Parameters, Evidence Level, Off-Label Status]
+    table_row_source: protocols
+    preamble: >-
+      Complete protocol listing for {condition_name} across all available
+      neuromodulation modalities, mapped to phenotype and network targets.
+
+  - slug: references
+    title: "References & Evidence Sources"
+    purpose: Formatted bibliography
+    order: 5
+    content_type: reference_list
+    knowledge_fields: [references]

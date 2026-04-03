@@ -1,0 +1,88 @@
+# SOZO Psychological Intake & PRS Baseline — Document Blueprint
+# Psychological intake form capturing patient demographics, chief complaints,
+# psychiatric history with safety screening, and SOZO PRS baseline ratings.
+
+slug: psych_intake
+title_template: "Psychological Intake & PRS Baseline — {condition_name}"
+doc_type: psych_intake
+description: >-
+  Psychological intake form capturing patient demographics, chief complaints,
+  psychiatric history with safety screening, and SOZO PRS baseline ratings.
+target_audience: clinician
+version: "1.0"
+applicable_tiers: [fellow, partners]
+requires_references: true
+requires_review_summary: true
+template_ref: Psych_Intake.docx
+
+sections:
+  - slug: document_control
+    title: "Document Control & Clinical Responsibility"
+    purpose: Document governance and version information
+    order: 0
+    content_type: prose
+    knowledge_fields: [display_name, icd10, version]
+    knowledge_source: condition
+    preamble: >-
+      Organization: SOZO Brain Center. All protocols are for authorized SOZO personnel only.
+      No Fellow or Clinical Assistant may independently modify treatment protocols
+      without Doctor authorization.
+
+  - slug: patient_info
+    title: "Patient Information"
+    purpose: Capture patient demographics and referral information
+    order: 1
+    content_type: checklist
+    knowledge_fields: []
+    preamble: >-
+      Record patient demographics including full name, date of birth, sex, handedness,
+      referral source, referring clinician, date of intake, and relevant medical history.
+
+  - slug: chief_complaints
+    title: "Chief Complaints"
+    purpose: Capture patient-reported primary complaints
+    order: 2
+    content_type: checklist
+    knowledge_fields: []
+    preamble: >-
+      Record patient-reported chief complaints. For each complaint, capture a severity
+      rating on a 0-10 scale (0 = absent, 10 = worst imaginable). Document onset,
+      duration, and any exacerbating or relieving factors.
+
+  - slug: psychiatric_history
+    title: "Psychiatric History"
+    purpose: Capture psychiatric and psychological history with safety screening
+    order: 3
+    content_type: checklist
+    knowledge_fields: []
+    preamble: >-
+      Screen for suicidal ideation at this stage. If active, STOP intake and escalate
+      immediately. Record prior psychiatric diagnoses, hospitalisations, medication trials
+      (current and past), psychotherapy history, substance use, and family psychiatric history.
+
+  - slug: prs_baseline
+    title: "SOZO PRS Baseline"
+    purpose: Patient-Reported Symptom baseline ratings
+    order: 4
+    content_type: mixed
+    knowledge_fields: [core_symptoms]
+    preamble: >-
+      SOZO Patient-Reported Symptom (PRS) Baseline. Rate each core symptom on a 0-10
+      scale (0 = absent, 10 = worst imaginable). This baseline is used to calculate
+      treatment response at Week 4 and Week 8-10 follow-up assessments.
+
+  - slug: assessments
+    title: "Assessment Tools & Outcome Measures"
+    purpose: Validated clinical scales for baseline and follow-up
+    order: 5
+    content_type: table
+    knowledge_fields: [assessments]
+    table_headers: [Scale, Full Name, Domains, Timing, Evidence PMID]
+    table_row_source: assessments
+
+  - slug: references
+    title: "References & Evidence Sources"
+    purpose: Formatted bibliography
+    order: 6
+    content_type: reference_list
+    knowledge_fields: [references]

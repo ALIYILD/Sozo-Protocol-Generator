@@ -1,0 +1,138 @@
+# SOZO All-in-One Protocol Compendium — Document Blueprint
+# Condensed protocol reference card combining all modalities (tDCS, TPS, tAVNS, CES)
+# into a single document with inclusion/exclusion criteria, safety rules, and references.
+
+slug: all_in_one_protocol
+title_template: "{condition_name} — All-in-One Protocol Compendium"
+doc_type: all_in_one_protocol
+description: >-
+  Condensed protocol reference card combining all neuromodulation modalities
+  into a single document with eligibility criteria, safety rules, and references.
+target_audience: clinician
+version: "1.0"
+applicable_tiers: [fellow, partners]
+requires_references: true
+requires_review_summary: true
+template_ref: All_In_One_Protocol.docx
+
+sections:
+  - slug: document_control
+    title: "Document Control & Clinical Responsibility"
+    purpose: Document governance and version information
+    order: 0
+    content_type: prose
+    knowledge_fields: [display_name, icd10, version]
+    knowledge_source: condition
+    preamble: >-
+      Organization: SOZO Brain Center. All protocols are for authorized SOZO personnel only.
+      No Fellow or Clinical Assistant may independently modify treatment protocols
+      without Doctor authorization.
+
+  - slug: protocols_tdcs
+    title: "tDCS Protocols"
+    purpose: Transcranial direct current stimulation protocols
+    order: 1
+    content_type: table
+    knowledge_fields: [protocols]
+    table_headers: [ID, Protocol Label, Target Region, Parameters, Evidence Level, Off-Label Status]
+    table_row_source: protocols
+    modality_filter: tdcs
+    requires_evidence: true
+    preamble: >-
+      Low-intensity direct current applied via scalp electrodes to modulate cortical excitability.
+    visuals:
+      - visual_type: qeeg_topomap
+        caption_template: "{condition_name} — tDCS Electrode Montage (10-10 System)"
+        modality_filter: tdcs
+
+  - slug: protocols_tps
+    title: "TPS Protocols"
+    purpose: Transcranial pulse stimulation protocols
+    order: 2
+    content_type: table
+    knowledge_fields: [protocols]
+    table_headers: [ID, Protocol Label, Target Region, Parameters, Evidence Level, Off-Label Status]
+    table_row_source: protocols
+    modality_filter: tps
+    requires_evidence: true
+    preamble: >-
+      TPS (NEUROLITH) delivers focused ultrasound pulses to modulate deep brain structures.
+      TPS is CE-marked for Alzheimer's disease ONLY. Use in all other conditions is
+      INVESTIGATIONAL and OFF-LABEL. Informed consent and Doctor authorization are mandatory.
+    visuals:
+      - visual_type: mri_target_view
+        caption_template: "{condition_name} — TPS Stimulation Targets (Sagittal View)"
+        modality_filter: tps
+
+  - slug: protocols_tavns
+    title: "tAVNS Protocols"
+    purpose: Transcutaneous auricular vagus nerve stimulation protocols
+    order: 3
+    content_type: table
+    knowledge_fields: [protocols]
+    table_headers: [ID, Protocol Label, Target Region, Parameters, Evidence Level, Off-Label Status]
+    table_row_source: protocols
+    modality_filter: tavns
+    requires_evidence: true
+    preamble: >-
+      Transcutaneous auricular vagus nerve stimulation (tAVNS) delivers electrical pulses
+      to the auricular branch of the vagus nerve to modulate autonomic and central circuits.
+
+  - slug: protocols_ces
+    title: "CES Protocols"
+    purpose: Cranial electrotherapy stimulation protocols
+    order: 4
+    content_type: table
+    knowledge_fields: [protocols]
+    table_headers: [ID, Protocol Label, Target Region, Parameters, Evidence Level, Off-Label Status]
+    table_row_source: protocols
+    modality_filter: ces
+    requires_evidence: true
+    preamble: >-
+      Cranial electrotherapy stimulation (CES) applies low-level alternating current
+      via ear-clip electrodes to modulate subcortical and brainstem circuits.
+
+  - slug: inclusion_exclusion
+    title: "Inclusion & Exclusion Criteria"
+    purpose: Define patient eligibility
+    order: 5
+    content_type: mixed
+    knowledge_fields: [inclusion_criteria, exclusion_criteria, contraindications]
+    subsections:
+      - slug: inclusion
+        title: "Inclusion Criteria"
+        order: 0
+        content_type: list
+        knowledge_fields: [inclusion_criteria]
+        fallback_content: "[REVIEW REQUIRED: No inclusion criteria defined]"
+      - slug: exclusion
+        title: "Exclusion Criteria"
+        order: 1
+        content_type: list
+        knowledge_fields: [exclusion_criteria]
+        fallback_content: "[REVIEW REQUIRED: No exclusion criteria defined]"
+      - slug: contraindications
+        title: "Absolute Contraindications"
+        order: 2
+        content_type: list
+        knowledge_fields: [contraindications]
+
+  - slug: safety
+    title: "Safety & Contraindications"
+    purpose: Safety monitoring, adverse event grading, contraindications
+    order: 6
+    content_type: table
+    knowledge_fields: [safety_rules, contraindications]
+    table_headers: [Category, Severity, Description, Source]
+    table_row_source: safety_rules
+    evidence_criticality: critical
+    preamble: >-
+      All neuromodulation treatments must be preceded by comprehensive safety screening.
+      Patients must be monitored throughout each session.
+
+  - slug: references
+    title: "References & Evidence Sources"
+    purpose: Formatted bibliography
+    order: 7
+    content_type: reference_list
+    knowledge_fields: [references]

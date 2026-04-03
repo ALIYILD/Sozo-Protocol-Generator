@@ -811,6 +811,11 @@ class GenerationService:
         "evidence_based_protocol": "evidence_based_protocol",
         "handbook": "handbook",
         "clinical_exam": "clinical_exam",
+        "all_in_one_protocol": "all_in_one_protocol",
+        "phenotype_classification": "phenotype_classification",
+        "responder_tracking": "responder_tracking",
+        "psych_intake": "psych_intake",
+        "network_assessment": "network_assessment",
     }
 
     def can_route_canonical(self, condition: str, doc_type: str) -> bool:
