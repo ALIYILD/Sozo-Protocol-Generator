@@ -241,6 +241,12 @@ class CanonicalDocumentAssembler:
             else "PARTNERS TIER: Full FNON framework. For authorized SOZO Partners."
         )
 
+        audience = (
+            "Fellow clinician" if tier == "fellow"
+            else "Partner clinician" if tier == "partners"
+            else blueprint.target_audience
+        )
+
         spec = DocumentSpec(
             document_type=doc_type_enum,
             tier=tier_enum,
@@ -249,7 +255,7 @@ class CanonicalDocumentAssembler:
             title=title,
             version=condition.version,
             date_label=current_month_year(),
-            audience=blueprint.target_audience,
+            audience=audience,
             confidentiality_mark="CONFIDENTIAL",
             sections=sections,
             references=[r.model_dump() for r in condition.references],
@@ -295,6 +301,26 @@ class CanonicalDocumentAssembler:
             preamble = blueprint.preamble.replace("{condition_name}", condition.display_name)
             content_parts.append(preamble)
 
+        # Special section: document_control gets full governance block
+        if blueprint.slug == "document_control":
+            tier_desc = (
+                "For use by SOZO Fellow clinicians under Doctor supervision"
+                if tier == "fellow"
+                else "PARTNERS TIER: This document contains the complete FNON framework. For authorized SOZO Partners."
+            )
+            content_parts.append(
+                f"Organization: SOZO Brain Center\n"
+                f"Condition: {condition.display_name} ({condition.icd10})\n"
+                f"Version: {condition.version}\n"
+                f"Date: {current_month_year()}\n"
+                f"Tier: {tier.upper()}\n"
+                f"{tier_desc}\n\n"
+                f"\u00a9 2026 SOZO Brain Center. All rights reserved. CONFIDENTIAL.\n\n"
+                f"GOVERNANCE RULE: This document is for authorized SOZO personnel only. "
+                f"No Fellow or Clinical Assistant may independently modify treatment protocols "
+                f"without Doctor authorization."
+            )
+
         # Pull knowledge fields and build content
         for field_name in blueprint.knowledge_fields:
             value = self._resolve_field(condition, field_name)
@@ -306,7 +332,7 @@ class CanonicalDocumentAssembler:
             elif isinstance(value, list) and value:
                 if blueprint.content_type == "list":
                     for item in value:
-                        content_parts.append(f"• {item}")
+                        content_parts.append(f"\u2022 {item}")
                 elif blueprint.content_type == "reference_list":
                     for i, ref in enumerate(value, 1):
                         if isinstance(ref, dict):

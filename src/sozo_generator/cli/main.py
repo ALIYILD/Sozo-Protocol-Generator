@@ -511,5 +511,39 @@ def validate_knowledge_cmd():
     ))
 
 
+@app.command("batch-readiness")
+def batch_readiness_cmd(
+    tier: str = typer.Option("fellow"),
+):
+    """Report readiness status for all canonical combinations."""
+    from ..knowledge.batch import BatchRunner
+
+    runner = BatchRunner()
+    report = runner.readiness_report(tier)
+    typer.echo(report.to_text())
+
+
+@app.command("batch-generate")
+def batch_generate_cmd(
+    condition: str = typer.Option("", help="Single condition (empty = all)"),
+    blueprint: str = typer.Option("", help="Single blueprint (empty = all)"),
+    tier: str = typer.Option("fellow"),
+):
+    """Batch generate canonical documents."""
+    from ..knowledge.batch import BatchRunner
+
+    runner = BatchRunner()
+    conds = [condition] if condition else None
+    bps = [blueprint] if blueprint else None
+    report = runner.generate_all_canonical(conditions=conds, blueprints=bps, tier=tier)
+    typer.echo(report.to_text())
+
+    # Save report
+    from pathlib import Path
+    report_path = Path("outputs") / "batch_report.json"
+    report.save(report_path)
+    typer.echo(f"\nReport saved: {report_path}")
+
+
 if __name__ == "__main__":
     app()

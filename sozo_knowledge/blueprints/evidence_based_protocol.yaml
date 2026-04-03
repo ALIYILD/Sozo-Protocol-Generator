@@ -222,10 +222,21 @@ sections:
       - visual_type: dose_response
         caption_template: "{condition_name} — Response Tracking Template"
 
+  - slug: followup
+    title: "Follow-Up Assessments and Decision-Making"
+    purpose: Assessment timing and response decision workflow
+    order: 13
+    content_type: prose
+    knowledge_fields: []
+    preamble: >-
+      Follow-up assessments are conducted at Week 4 and Week 8-10 using validated
+      outcome measures. Response classification uses SOZO operational criteria.
+      See Responder Tracking document for full decision pathway.
+
   - slug: evidence_summary
     title: "Evidence Summary & Gaps"
     purpose: Summary of evidence quality and identified gaps
-    order: 13
+    order: 14
     content_type: mixed
     knowledge_fields: [evidence_summary, evidence_quality, evidence_gaps]
     requires_evidence: true
@@ -233,6 +244,6 @@ sections:
   - slug: references
     title: "References & Evidence Sources"
     purpose: Formatted bibliography
-    order: 14
+    order: 15
     content_type: reference_list
     knowledge_fields: [references]
