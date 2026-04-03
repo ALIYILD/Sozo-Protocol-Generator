@@ -187,3 +187,15 @@ conditions:
       - patient_training_module
       - benzodiazepine_taper_coordinator
       - combination_strategist
+  - slug: "trd_vns"
+    display_name: "Treatment-Resistant Depression — Implantable VNS"
+    icd10: "F33.9"
+    aliases: ["TRD", "treatment-resistant depression", "VNS TRD", "implantable VNS", "LivaNova TRD", "refractory depression"]
+    template_status: "generated"
+    evidence_quality: "highest"
+    modality: "vns"
+    window: 5
+    device: "LivaNova SenTiva (Model 1000)"
+    fda_approved: true
+    notes: "Window 5 — implantable neuromodulation benchmark; 1:1 RCT vs BMT (RECOVER 2022)"
+

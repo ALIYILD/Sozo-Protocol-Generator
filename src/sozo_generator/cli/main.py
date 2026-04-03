@@ -111,6 +111,7 @@ VALID_SLUGS = [
     "parkinsons", "depression", "anxiety", "adhd", "alzheimers",
     "post_stroke", "tbi", "chronic_pain", "ptsd", "ocd",
     "ms", "autism", "long_covid", "tinnitus", "insomnia",
+    "trd_vns",
 ]
 
 CONDITION_NAMES = {
@@ -129,6 +130,7 @@ CONDITION_NAMES = {
     "long_covid": "Long COVID (Post-COVID Syndrome)",
     "tinnitus": "Tinnitus",
     "insomnia": "Insomnia",
+    "trd_vns": "Treatment-Resistant Depression — Implantable VNS",
 }
 
 

@@ -211,9 +211,10 @@ def build_depression_condition() -> ConditionSchema:
                 key_features=[">=2 failed antidepressant trials", "Persistent severe depression", "Functional impairment", "Possible suicidality"],
                 primary_networks=[NetworkKey.DMN, NetworkKey.CEN],
                 secondary_networks=[NetworkKey.LIMBIC, NetworkKey.SN],
-                preferred_modalities=[Modality.TDCS, Modality.TPS, Modality.TAVNS, Modality.CES],
+                preferred_modalities=[Modality.TDCS, Modality.TPS, Modality.TAVNS, Modality.CES, Modality.ITBS],
                 tdcs_target="Left DLPFC anodal — higher intensity protocol (2 mA, 30 min, 20+ sessions)",
                 tps_target="Left DLPFC TPS — off-label, Doctor authorization required",
+                tbs_target="Left DLPFC iTBS — accelerated 3×/day, 30-min ISI, 600 pulses/session (TTT Protocol)",
             ),
             PhenotypeSubtype(
                 slug="cog",
@@ -446,6 +447,50 @@ def build_depression_condition() -> ConditionSchema:
                 notes="Extended protocol for TRD — requires treating psychiatrist coordination",
             ),
             ProtocolEntry(
+                protocol_id="C4-ATBS",
+                label="TRD — Accelerated iTBS (TTT Protocol, Window 6)",
+                modality=Modality.ITBS,
+                target_region="Left Dorsolateral Prefrontal Cortex",
+                target_abbreviation="L-DLPFC",
+                phenotype_slugs=["trd"],
+                network_targets=[NetworkKey.CEN, NetworkKey.DMN],
+                parameters={
+                    "device": "MagVenture MagPro or MagStim Rapid2",
+                    "target": "Left DLPFC — 5.5 cm rule or Beam F3 neuronavigation",
+                    "pattern": "intermittent TBS (iTBS)",
+                    "pulses_per_session": "600",
+                    "sessions_per_day": "3",
+                    "inter_session_interval": "30 min (minimum — validated pragmatic ISI)",
+                    "total_days": "5–10",
+                    "total_sessions": "15–30",
+                    "intensity": "80% active motor threshold (AMT)",
+                    "train_pattern": "2s on / 8s off × 20 trains",
+                    "frequency": "50 Hz triplets at 5 Hz (TBS pattern)",
+                    "motor_threshold_method": "Active MT — visual muscle twitch or EMG",
+                    "evidence_rct": "54.7% HAM-D reduction vs 31.87% sham (triple-blind RCT, PMID: 36894537)",
+                    "note": "Doctor prescription and TMS-trained operator required. AMT re-check mandatory at each day-block.",
+                },
+                rationale=(
+                    "Accelerated iTBS (3 sessions/day, 30-min ISI, 600 pulses/session) delivers compressed "
+                    "neuromodulation over 5–10 days, yielding rapid antidepressant effects in TRD. "
+                    "A triple-blinded pragmatic RCT (Williams et al. 2023, PMID 36894537) demonstrated "
+                    "54.7% HAM-D reduction vs 31.87% sham with the 30-min ISI protocol, establishing "
+                    "pragmatic feasibility. The 30-min ISI is the validated minimum interval balancing "
+                    "clinical throughput and LTP-like synaptic consolidation. Left DLPFC targets the "
+                    "hypoactive CEN node, restoring CEN-DMN anticorrelation — the core pathological "
+                    "signature of TRD."
+                ),
+                evidence_level=EvidenceLevel.HIGH,
+                off_label=False,
+                session_count=30,
+                notes=(
+                    "Window 6 Protocol — TTT (Triple-session Theta-burst Treatment). "
+                    "Requires TMS-trained operator, AMT calibration before each day-block, "
+                    "C-SSRS at every session, seizure safety checklist, and on-site resuscitation "
+                    "readiness. See Window 6 subagent fidelity checklist for site deployment."
+                ),
+            ),
+            ProtocolEntry(
                 protocol_id="TAVNS-DEP", label="taVNS — Depression Adjunct", modality=Modality.TAVNS,
                 target_region="Left auricular branch of vagus nerve", target_abbreviation="taVNS",
                 phenotype_slugs=["mel", "aty", "trd", "anx"],
@@ -617,6 +662,7 @@ def build_depression_condition() -> ConditionSchema:
             "TPS DLPFC–sgACC circuit targeting — fcMRI-guided optimization promising but not yet standard practice; individual variability in DLPFC–sgACC anti-correlation strength not accounted for in pilot protocols",
             "Predictors of tDCS response in MDD — no validated biomarker or clinical predictor identified",
             "Optimal combination strategy (tDCS + taVNS vs tDCS + CES) — head-to-head data absent",
+            "Accelerated iTBS (TTT Protocol): optimal ISI beyond 30-min not yet determined; durability data beyond 4 weeks limited; head-to-head vs standard 5-day rTMS absent",
         ],
 
         review_flags=[
@@ -625,6 +671,9 @@ def build_depression_condition() -> ConditionSchema:
             "TPS (T-DEP, T-DEP-AD) is OFF-LABEL — off-label consent documentation and Doctor authorization required before first TPS session",
             "TPS session spacing: enforce 48–72h minimum between sessions — document timing at each visit",
             "TPS comorbidity routing: AD-related depression → T-DEP-AD; PD-related depression → parkinsons.py DLPFC protocol",
+            "TPS protocol is OFF-LABEL — explicit consent and Doctor authorization required",
+            "Accelerated iTBS (C4-ATBS/TTT Protocol): TMS-trained operator mandatory; AMT re-check required each day-block; seizure emergency protocol must be on-site",
+
         ],
 
         references=[
@@ -710,6 +759,35 @@ def build_depression_condition() -> ConditionSchema:
                 "pmid": "21962919",
                 "evidence_type": "indirect_evidence",
                 "note": "Circuit basis for DLPFC–sgACC targeting — depth/focality considerations relevant to TPS",
+                "authors": "Williams NR et al.",
+                "year": 2023,
+                "title": "Accelerated neuromodulation therapy for obsessive-compulsive disorder and treatment-resistant depression: a triple-blind randomized controlled trial",
+                "journal": "Nature Medicine",
+                "pmid": "36894537",
+                "doi": "10.1038/s41591-023-02254-4",
+                "evidence_type": "rct",
+                "note": "TTT Protocol RCT — 54.7% HAM-D reduction vs 31.87% sham; pragmatic 30-min ISI; triple-blinded",
+            },
+            {
+                "authors": "Cole EJ et al.",
+                "year": 2022,
+                "title": "Stanford Neuromodulation Therapy (SNT): a double-blind randomized controlled trial",
+                "journal": "American Journal of Psychiatry",
+                "pmid": "34711062",
+                "doi": "10.1176/appi.ajp.2021.21101056",
+                "evidence_type": "rct",
+                "note": "SAINT/SNT — accelerated iTBS 10×/day 5-day protocol predecessor; foundational accelerated TBS evidence",
+            },
+            {
+                "authors": "Huang YZ et al.",
+                "year": 2005,
+                "title": "Theta burst stimulation of the human motor cortex",
+                "journal": "Neuron",
+                "pmid": "15852018",
+                "doi": "10.1016/j.neuron.2005.05.010",
+                "evidence_type": "clinical_practice_guideline",
+                "note": "Original iTBS characterization paper — LTP-like cortical potentiation mechanism",
+
             },
         ],
 

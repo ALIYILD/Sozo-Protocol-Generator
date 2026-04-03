@@ -90,6 +90,8 @@ class Modality(str, Enum):
     CES = "ces"
     TMS = "tms"
     NFB = "nfb"
+    ITBS = "itbs"
+    VNS = "vns"        # Implantable vagus nerve stimulation (LivaNova SenTiva)
     MULTIMODAL = "multimodal"
 
 

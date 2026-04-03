@@ -18,6 +18,7 @@ from .home_tdcs_mdd_anxiety import build_home_tdcs_mdd_anxiety_condition
 from .neuroonica_combo import build_neuroonica_combo_condition
 from .tvns import build_tvns_condition
 from .ces_alphastem import build_ces_alphastem_condition
+from .trd_vns import build_trd_vns_condition
 
 __all__ = [
     "build_parkinsons_condition",
@@ -39,6 +40,7 @@ __all__ = [
     "build_neuroonica_combo_condition",
     "build_tvns_condition",
     "build_ces_alphastem_condition",
+    "build_trd_vns_condition",
 ]
 
 CONDITION_BUILDERS = {
@@ -61,4 +63,5 @@ CONDITION_BUILDERS = {
     "neuroonica_combo": build_neuroonica_combo_condition,
     "tvns": build_tvns_condition,
     "ces_alphastem": build_ces_alphastem_condition,
+    "trd_vns": build_trd_vns_condition,
 }

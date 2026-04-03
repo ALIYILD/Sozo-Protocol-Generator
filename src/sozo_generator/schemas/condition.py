@@ -16,6 +16,7 @@ class PhenotypeSubtype(BaseModel):
     preferred_modalities: list[Modality] = Field(default_factory=list)
     tdcs_target: Optional[str] = None
     tps_target: Optional[str] = None
+    tbs_target: Optional[str] = None
 
 
 class NetworkProfile(BaseModel):
