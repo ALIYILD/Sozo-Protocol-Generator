@@ -13,7 +13,7 @@ from __future__ import annotations
 import io
 import logging
 from dataclasses import asdict
-from typing import Any
+from typing import Any, Optional
 
 # --- Conditional FastAPI import ---------------------------------------------------
 # FastAPI may not be installed in all environments. The module remains valid Python
@@ -38,6 +38,16 @@ class CanonicalGenerateRequest(BaseModel):
     condition: str
     doc_type: str = "evidence_based_protocol"
     tier: str = "fellow"
+
+
+class GraphGenerateRequest(BaseModel):
+    """Request body for graph-based protocol generation."""
+    condition_slug: str
+    modality: Optional[str] = None
+    tier: str = "fellow"
+    doc_type: str = "evidence_based_protocol"
+    prompt: Optional[str] = None
+    patient_id: Optional[str] = None
 
 
 # ── App factory ───────────────────────────────────────────────────────────
@@ -233,15 +243,6 @@ def create_app() -> FastAPI:
         return {"conditions": [asdict(s) for s in summaries]}
 
     # ── Graph-based generation ─────────────────────────────────────────
-
-    class GraphGenerateRequest(BaseModel):
-        """Request body for graph-based protocol generation."""
-        condition_slug: str
-        modality: str | None = None
-        tier: str = "fellow"
-        doc_type: str = "evidence_based_protocol"
-        prompt: str | None = None
-        patient_id: str | None = None
 
     @application.post("/api/generate/graph")
     async def generate_via_graph(body: GraphGenerateRequest) -> dict:
