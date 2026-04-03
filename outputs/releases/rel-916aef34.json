@@ -1,0 +1,80 @@
+{
+  "release_id": "rel-916aef34",
+  "created_at": "2026-04-03T16:07:26Z",
+  "created_by": "Dr. Ali",
+  "scope_condition": "parkinsons",
+  "scope_tier": "fellow",
+  "state": "published",
+  "total_included": 6,
+  "total_excluded": 1,
+  "total_pmids": 235,
+  "approved_by": "Dr. Smith",
+  "approved_at": "2026-04-03T16:07:26Z",
+  "published_at": "2026-04-03T16:07:26Z",
+  "bundle_path": "outputs/releases/rel-916aef34",
+  "notes": "Content reviewed and accurate",
+  "included": [
+    {
+      "condition": "parkinsons",
+      "doc_type": "all_in_one_protocol",
+      "tier": "fellow",
+      "readiness": "ready",
+      "sections": 8,
+      "pmids": 40
+    },
+    {
+      "condition": "parkinsons",
+      "doc_type": "clinical_exam",
+      "tier": "fellow",
+      "readiness": "ready",
+      "sections": 7,
+      "pmids": 35
+    },
+    {
+      "condition": "parkinsons",
+      "doc_type": "evidence_based_protocol",
+      "tier": "fellow",
+      "readiness": "ready",
+      "sections": 14,
+      "pmids": 70
+    },
+    {
+      "condition": "parkinsons",
+      "doc_type": "phenotype_classification",
+      "tier": "fellow",
+      "readiness": "ready",
+      "sections": 5,
+      "pmids": 25
+    },
+    {
+      "condition": "parkinsons",
+      "doc_type": "psych_intake",
+      "tier": "fellow",
+      "readiness": "ready",
+      "sections": 7,
+      "pmids": 35
+    },
+    {
+      "condition": "parkinsons",
+      "doc_type": "responder_tracking",
+      "tier": "fellow",
+      "readiness": "ready",
+      "sections": 6,
+      "pmids": 30
+    }
+  ],
+  "excluded": [
+    {
+      "condition": "parkinsons",
+      "doc_type": "handbook",
+      "tier": "fellow",
+      "readiness": "review_required",
+      "sections": 14,
+      "pmids": 70,
+      "blockers": [
+        "readiness: review_required",
+        "1 placeholders"
+      ]
+    }
+  ]
+}

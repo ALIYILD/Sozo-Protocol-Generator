@@ -1,0 +1,13 @@
+{
+  "releases": [
+    {
+      "release_id": "rel-916aef34",
+      "scope": "parkinsons/fellow",
+      "state": "published",
+      "included": 6,
+      "approved_by": "Dr. Smith",
+      "published_at": "2026-04-03T16:07:26Z",
+      "bundle_path": "outputs/releases/rel-916aef34"
+    }
+  ]
+}

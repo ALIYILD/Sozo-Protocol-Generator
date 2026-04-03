@@ -841,5 +841,56 @@ def cockpit_pack_cmd(
             typer.echo(f"    {bd['doc_type']}: {bd['reason']} ({bd['placeholders']} placeholders)")
 
 
+@app.command("release-create")
+def release_create_cmd(
+    condition: str = typer.Argument(...),
+    tier: str = typer.Option("fellow"),
+    by: str = typer.Option("operator", "--by"),
+):
+    """Create a draft release for a condition/tier pack."""
+    from ..knowledge.publish import ReleaseService
+    svc = ReleaseService()
+    release = svc.create_release(condition, tier, created_by=by)
+    typer.echo(release.to_text())
+
+
+@app.command("release-approve")
+def release_approve_cmd(
+    release_id: str = typer.Argument(...),
+    by: str = typer.Option(..., "--by"),
+    notes: str = typer.Option("", "--notes"),
+):
+    """Approve a release for publication."""
+    from ..knowledge.publish import ReleaseService
+    svc = ReleaseService()
+    release = svc.approve(release_id, by, notes)
+    typer.echo(typer.style(f"Approved: {release_id}", fg=typer.colors.GREEN))
+
+
+@app.command("release-publish")
+def release_publish_cmd(
+    release_id: str = typer.Argument(...),
+):
+    """Publish an approved release (generate bundle)."""
+    from ..knowledge.publish import ReleaseService
+    svc = ReleaseService()
+    release = svc.publish(release_id)
+    typer.echo(typer.style(f"Published: {release.bundle_path}", fg=typer.colors.GREEN))
+    typer.echo(release.to_text())
+
+
+@app.command("release-list")
+def release_list_cmd():
+    """List all releases."""
+    from ..knowledge.publish import ReleaseService
+    svc = ReleaseService()
+    releases = svc.list_releases()
+    if not releases:
+        typer.echo("No releases.")
+        return
+    for r in releases:
+        typer.echo(f"  [{r.get('state', '?')}] {r.get('release_id', '?')}: {r.get('scope', '?')} ({r.get('included', 0)} docs)")
+
+
 if __name__ == "__main__":
     app()
