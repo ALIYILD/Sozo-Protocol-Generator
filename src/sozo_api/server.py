@@ -29,6 +29,8 @@ except ImportError as _exc:
         "Install it with:  pip install fastapi uvicorn"
     ) from _exc
 
+from sqlalchemy import text as sa_text
+
 logger = logging.getLogger(__name__)
 
 # ── Pydantic request models (thin wrappers for non-schema endpoints) ──────
@@ -125,7 +127,27 @@ def create_app() -> FastAPI:
 
     @application.get("/api/health")
     async def health() -> dict:
-        return {"status": "ok"}
+        checks = {"api": "ok"}
+        # DB check
+        try:
+            from sozo_db.engine import get_engine
+            engine = get_engine()
+            async with engine.connect() as conn:
+                await conn.execute(sa_text("SELECT 1"))
+            checks["database"] = "ok"
+        except Exception as e:
+            checks["database"] = f"error: {e}"
+
+        # Graph check
+        try:
+            from sozo_graph.unified_graph import build_unified_graph
+            build_unified_graph()  # compile check
+            checks["graph"] = "ok"
+        except Exception as e:
+            checks["graph"] = f"error: {e}"
+
+        overall = "ok" if all(v == "ok" for v in checks.values()) else "degraded"
+        return {"status": overall, "checks": checks}
 
     # ── Visuals ───────────────────────────────────────────────────────
 
