@@ -719,5 +719,66 @@ def docx_review_regenerate_cmd(
         typer.echo(typer.style(f"\nFailed: {regen.error}", fg=typer.colors.RED))
 
 
+@app.command("docx-review-unresolved")
+def docx_review_unresolved_cmd(
+    docx_file: str = typer.Argument(..., help="Path to reviewed DOCX"),
+):
+    """Show DOCX comments that need manual resolution."""
+    from ..knowledge.revision.docx_comments import extract_docx_comments, map_comments_to_sections
+    from ..knowledge.revision.resolution import ResolutionManager
+
+    result = extract_docx_comments(docx_file)
+    result = map_comments_to_sections(result)
+    mgr = ResolutionManager()
+    typer.echo(mgr.summary(result))
+
+
+@app.command("docx-review-resolve")
+def docx_review_resolve_cmd(
+    docx_file: str = typer.Argument(..., help="Path to reviewed DOCX"),
+    comment_id: str = typer.Option(..., "--comment", "-c", help="Comment ID to resolve"),
+    section: str = typer.Option("", "--section", "-s", help="Target section slug"),
+    target_kind: str = typer.Option("section", "--kind", help="section/document_general/visual/table/blocked"),
+    by: str = typer.Option("operator", "--by", help="Resolver name"),
+    notes: str = typer.Option("", "--notes"),
+):
+    """Manually resolve an ambiguous DOCX comment mapping."""
+    from ..knowledge.revision.resolution import ResolutionManager
+
+    mgr = ResolutionManager()
+    decision = mgr.resolve(
+        comment_id=comment_id,
+        section_slug=section,
+        target_kind=target_kind,
+        decided_by=by,
+        notes=notes,
+    )
+    typer.echo(typer.style(f"Resolved: {comment_id} → {target_kind}:{section}", fg=typer.colors.GREEN))
+
+
+@app.command("docx-review-candidates")
+def docx_review_candidates_cmd(
+    docx_file: str = typer.Argument(..., help="Path to reviewed DOCX"),
+):
+    """Show ranked mapping candidates for each DOCX comment."""
+    from ..knowledge.revision.docx_comments import extract_docx_comments, map_comments_to_sections
+    from ..knowledge.revision.resolution import ResolutionManager
+
+    result = extract_docx_comments(docx_file)
+    result = map_comments_to_sections(result)
+    mgr = ResolutionManager()
+
+    for c in result.comments:
+        candidates = mgr.get_candidates(c)
+        state = c.mapping_state
+        typer.echo(f"\n[{state}] {c.text[:60]}")
+        typer.echo(f"  Comment ID: {c.comment_id}")
+        for i, cand in enumerate(candidates[:5]):
+            marker = " ← top" if i == 0 and cand.section_slug != "(document_general)" else ""
+            typer.echo(f"  {i+1}. {cand.section_slug} (score: {cand.score:.1f}, conf: {cand.confidence:.0%}){marker}")
+            if cand.explanation:
+                typer.echo(f"     {cand.explanation[:80]}")
+
+
 if __name__ == "__main__":
     app()
