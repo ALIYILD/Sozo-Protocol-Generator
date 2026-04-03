@@ -1,6 +1,6 @@
-# Attention Deficit Hyperactivity Disorder — SOZO Clinical Knowledge (Enriched)
+# Attention Deficit Hyperactivity Disorder — SOZO Clinical Knowledge (Expanded)
 # ICD-10: F90
-# Content enriched from legacy generator prose.
+# Content enriched from legacy generator prose and expanded to gold-standard depth.
 
 slug: adhd
 display_name: Attention-Deficit/Hyperactivity Disorder
@@ -11,45 +11,78 @@ aliases:
 - attention deficit disorder
 - attention deficit hyperactivity disorder
 category: psychiatric
-version: '1.0'
-overview: 'Attention-Deficit/Hyperactivity Disorder (ADHD) is a neurodevelopmental disorder characterized by persistent, impairing
-  patterns of inattention, hyperactivity, and impulsivity that are inconsistent with developmental level. Lifetime prevalence
-  is approximately 5% in children (Polanczyk et al. 2007) and 2.5-3% in adults globally. ADHD is among the most heritable
-  psychiatric conditions (heritability ~75%). Neurobiologically, ADHD involves hypofunction of mesocortical dopamine and noradrenaline
-  circuits projecting to the prefrontal cortex, impairing executive control, working memory, and response inhibition (Barkley''s
-  inhibitory control model).
+version: '1.1'
 
+# ── Clinical ─────────────────────────────────────────────────────────────────
 
-  Non-invasive neuromodulation — particularly tDCS targeting the left DLPFC — represents an emerging adjunct to pharmacotherapy
-  and behavioral interventions. A 2021 systematic review (Westwood et al.) of tDCS in ADHD (N=310 across trials) confirmed
-  moderate effect sizes for attention and executive function outcomes. taVNS is under investigation for ADHD-related emotional
-  dysregulation via noradrenergic upregulation.'
-pathophysiology: 'ADHD pathophysiology centers on hypofunction of the mesocortical dopamine (DA) and noradrenaline (NA) systems.
-  Dopamine depletion in the prefrontal-striatal axis impairs the signal-to-noise ratio in DLPFC circuits, reducing inhibitory
-  control and working memory capacity. The catecholamine hypothesis (Arnsten) proposes that suboptimal DA/NA levels impair
-  postsynaptic signaling at prefrontal D1 and alpha-2A adrenoreceptors.
+overview: >-
+  Attention-Deficit/Hyperactivity Disorder (ADHD) is a neurodevelopmental disorder
+  characterized by persistent, impairing patterns of inattention, hyperactivity,
+  and impulsivity that are inconsistent with developmental level. Lifetime
+  prevalence is approximately 5% in children (Polanczyk et al. 2007) and 2.5-3%
+  in adults globally, making it one of the most common psychiatric conditions.
+  ADHD is among the most heritable psychiatric conditions (heritability ~75%),
+  with polygenic architecture involving dopamine transporter (DAT1) and receptor
+  (DRD4/DRD5) gene variants. Neurobiologically, ADHD involves hypofunction of
+  mesocortical dopamine and noradrenaline circuits projecting to the prefrontal
+  cortex, impairing executive control, working memory, and response inhibition
+  (Barkley inhibitory control model). Functional neuroimaging consistently
+  demonstrates reduced prefrontal-striatal activation, delayed cortical
+  maturation, and impaired default mode network deactivation during cognitive
+  tasks. Non-invasive neuromodulation — particularly tDCS targeting the left
+  DLPFC — represents an emerging adjunct to pharmacotherapy and behavioral
+  interventions. A 2021 systematic review (Salehinejad et al.) of tDCS in ADHD
+  (N=310 across trials) confirmed moderate effect sizes for attention and
+  executive function outcomes. TPS is under early investigation for ADHD
+  executive dysfunction and emotional dysregulation via cortical excitability
+  modulation, though evidence remains preliminary.
 
+pathophysiology: >-
+  ADHD pathophysiology centers on hypofunction of the mesocortical dopamine (DA)
+  and noradrenaline (NA) systems. Dopamine depletion in the prefrontal-striatal
+  axis impairs the signal-to-noise ratio in DLPFC circuits, reducing inhibitory
+  control and working memory capacity. The catecholamine hypothesis (Arnsten)
+  proposes that suboptimal DA/NA levels impair postsynaptic signaling at
+  prefrontal D1 and alpha-2A adrenoreceptors, creating an inverted-U dose-response
+  curve for cognitive performance. Neuroimaging reveals: (1) reduced volume and
+  cortical thickness in DLPFC, ACC, caudate, and cerebellar vermis — Shaw et al.
+  2007 documented delayed cortical maturation by approximately 3 years in ADHD
+  children; (2) DLPFC and right inferior frontal gyrus (rIFG) hypoactivation
+  during tasks demanding response inhibition (Stop Signal, Go/No-Go paradigms);
+  (3) Default Mode Network (DMN) failure to deactivate during cognitive tasks,
+  causing attentional intrusions and mind-wandering (Sonuga-Barke and Castellanos
+  2007 — DMN interference model). The triple network model in ADHD identifies:
+  CEN hypofunction (DLPFC/parietal), DMN hyperactivation/intrusion, and SN
+  impaired switching between task-positive and task-negative states. Abnormal
+  CEN-DMN anticorrelation is a robust ADHD neuroimaging biomarker replicated
+  across multiple large-sample studies. Reward circuit dysfunction involving
+  ventral striatum and OFC underlies motivational deficits and delay aversion,
+  explaining why ADHD patients preferentially select immediate over delayed
+  rewards. Cerebellar vermis volume reduction contributes to timing deficits
+  and motor coordination problems. White matter microstructural abnormalities
+  in fronto-striatal and fronto-cerebellar tracts further compromise the
+  efficiency of attentional and executive networks.
 
-  Neuroimaging reveals: (1) reduced volume and cortical thickness in DLPFC, ACC, caudate, and cerebellar vermis (Shaw et al.
-  2007 — delayed cortical maturation by ~3 years); (2) DLPFC and right inferior frontal gyrus (rIFG) hypoactivation during
-  tasks demanding response inhibition (Stop Signal, Go/No-Go); (3) Default Mode Network (DMN) failure to deactivate during
-  cognitive tasks, causing attentional intrusions (Sonuga-Barke & Castellanos 2007 — DMN interference model).
+epidemiology: >-
+  Prevalence approximately 4.4% in US adults (Kessler et al. 2006); 5-7% in
+  children worldwide. Persistence into adulthood in approximately 60% of
+  childhood cases. Male-to-female ratio approximately 2:1 in children, closer
+  to 1:1 in adults due to underdiagnosis of females.
 
-
-  The triple network model in ADHD identifies: CEN hypofunction (DLPFC/parietal), DMN hyperactivation/intrusion, and SN impaired
-  switching. Abnormal CEN-DMN anticorrelation is a robust ADHD neuroimaging biomarker. Reward circuit dysfunction (ventral
-  striatum, OFC) underlies motivational deficits and delay aversion.'
-epidemiology: Prevalence approximately 4.4% in US adults (Kessler et al. 2006); 5-7% in children worldwide. Persistence into
-  adulthood in ~60% of childhood cases.
 core_symptoms:
 - Inattention — failure to sustain attention, easily distracted by extraneous stimuli
 - Disorganization — poor planning, losing materials, difficulty with multi-step tasks
-- Hyperactivity — fidgeting, excessive motor activity, difficulty remaining seated (prominent in children, internalized in
-  adults)
-- Impulsivity — blurting out answers, difficulty waiting turn, interrupting
+- Hyperactivity — fidgeting, excessive motor activity, difficulty remaining seated (prominent in children, internalized in adults)
+- Impulsivity — blurting out answers, difficulty waiting turn, interrupting others
 - Executive dysfunction — poor planning, working memory deficits, cognitive inflexibility
 - Emotional dysregulation — low frustration tolerance, irritability, mood lability (prominent in adult ADHD)
 - Delay aversion and motivation deficits — difficulty sustaining effort without immediate reward
+- Time blindness — poor temporal awareness, chronic lateness, difficulty estimating task duration
+- Procrastination — task initiation failure, especially for low-stimulation activities
+- Variable performance — inconsistent task output driven by interest and arousal state rather than effort
+- Poor self-monitoring — reduced metacognitive awareness of attention lapses and errors
+- Social pragmatic difficulties — conversational tangents, poor listening, missing social cues due to inattention
+
 non_motor_symptoms:
 - Sleep disturbance — delayed sleep phase, circadian dysregulation (prevalence ~70% in ADHD)
 - Emotional lability and rejection-sensitive dysphoria
@@ -57,6 +90,9 @@ non_motor_symptoms:
 - Social relationship difficulties — impulsive social behavior, poor turn-taking
 - Academic and occupational underachievement disproportionate to intellectual ability
 - Comorbid anxiety (50%), depression (30%), substance use disorders (elevated risk in adult ADHD)
+
+# ── Anatomy ──────────────────────────────────────────────────────────────────
+
 brain_regions:
 - dlpfc
 - acc
@@ -64,58 +100,112 @@ brain_regions:
 - striatum
 - cerebellum
 - ppc
+- rifg
+
 brain_region_details:
   dlpfc: Hypoactive in ADHD; mediates working memory, sustained attention, and executive control. Primary tDCS target.
-  acc: Reduced activation during conflict monitoring and error processing. Contributes to impulsivity.
-  ofc: Involved in reward processing and response inhibition. Dysfunction contributes to impulsive decision-making.
-  striatum: Dopaminergic hypofunction in caudate and putamen. Target of stimulant medications.
-  cerebellum: Involved in timing, motor coordination, and cognitive functions. Reduced volume in ADHD.
-  ppc: Posterior parietal cortex involved in spatial attention and working memory.
+  acc: Reduced activation during conflict monitoring and error processing. Contributes to impulsivity and poor self-monitoring.
+  ofc: Involved in reward processing and response inhibition. Dysfunction contributes to impulsive decision-making and delay aversion.
+  striatum: Dopaminergic hypofunction in caudate and putamen. Target of stimulant medications. Underlies reward processing deficits.
+  cerebellum: Involved in timing, motor coordination, and cognitive functions. Reduced volume in vermis in ADHD.
+  ppc: Posterior parietal cortex involved in spatial attention and working memory. Part of the dorsal attention network.
+  rifg: Right inferior frontal gyrus — critical for response inhibition and stopping behaviour. Hypoactive during Go/No-Go tasks.
+
+# ── Networks (FNON) ─────────────────────────────────────────────────────────
+
 network_profiles:
 - network: cen
   dysfunction: hypo
   severity: severe
   primary: true
-  relevance: Primary dysfunctional network in ADHD. DLPFC and frontal-parietal hypoactivation underlies inattention, poor
-    executive control, and working memory deficits.
+  relevance: >-
+    Primary dysfunctional network in ADHD. DLPFC and frontal-parietal
+    hypoactivation underlies inattention, poor executive control, and working
+    memory deficits. CEN hypofunction is the most consistent network-level
+    finding across ADHD neuroimaging studies.
   evidence_note: Cortese et al. 2012; large-scale brain systems in ADHD
+
 - network: dmn
   dysfunction: hyper
   severity: moderate
   primary: false
-  relevance: DMN fails to deactivate during tasks, causing attentional lapses and mind-wandering. DMN-CEN anticorrelation
-    is disrupted in ADHD.
+  relevance: >-
+    DMN fails to deactivate during tasks, causing attentional lapses and
+    mind-wandering. DMN-CEN anticorrelation is disrupted in ADHD, leading to
+    intrusion of task-irrelevant self-referential processing during externally
+    directed cognitive tasks.
   evidence_note: Sonuga-Barke & Castellanos 2007; spontaneous attentional fluctuations
+
 - network: sn
   dysfunction: hypo
   severity: moderate
   primary: false
-  relevance: Reduced salience network function impairs CEN-DMN switching, contributing to inconsistent task performance and
-    motivational deficits.
-  evidence_note: ''
+  relevance: >-
+    Reduced salience network function impairs CEN-DMN switching, contributing to
+    inconsistent task performance and motivational deficits. The anterior insula
+    and dACC nodes of the SN fail to appropriately detect salient stimuli and
+    trigger CEN engagement.
+  evidence_note: Uddin et al. 2017; SN in ADHD
+
 - network: limbic
   dysfunction: hyper
   severity: moderate
   primary: false
-  relevance: Emotional dysregulation, low frustration tolerance, and mood lability reflect limbic hyperreactivity with insufficient
-    prefrontal top-down control.
+  relevance: >-
+    Emotional dysregulation, low frustration tolerance, and mood lability reflect
+    limbic hyperreactivity with insufficient prefrontal top-down control. Amygdala
+    hyperactivation to emotionally salient stimuli in ADHD is well documented.
+  evidence_note: Shaw et al. 2014; emotional dysregulation in ADHD
+
+- network: attention
+  dysfunction: hypo
+  severity: moderate
+  primary: false
+  relevance: >-
+    Dorsal attention network hypofunction contributes to impaired spatial
+    orienting and difficulty maintaining focused attention on task-relevant
+    stimuli. Ventral attention network dysfunction impairs stimulus-driven
+    reorienting.
+  evidence_note: Castellanos & Proal 2012; attention networks in ADHD
+
+- network: smn
+  dysfunction: hyper
+  severity: mild
+  primary: false
+  relevance: >-
+    Somatomotor network overactivation contributes to motor restlessness,
+    fidgeting, and difficulty remaining still, particularly in the
+    hyperactive-impulsive phenotype. Reduced tonic inhibition from prefrontal
+    regions fails to suppress motor output.
   evidence_note: ''
+
 primary_network: cen
-fnon_rationale: In ADHD, the primary dysfunctional network is the Central Executive Network (CEN), driven by mesocortical
-  dopamine/noradrenaline hypofunction impairing DLPFC-mediated cognitive control. The FNON framework directs primary tDCS
-  stimulation at the DLPFC (bilateral anodal for combined type; left DLPFC for inattentive type) to upregulate CEN excitability
-  and restore CEN-DMN anticorrelation. Cognitive training performed concurrently with tDCS exploits activity-dependent neuroplasticity
-  (Staresina et al.). taVNS is an adjunct modality targeting noradrenergic upregulation via NTS-LC pathways, with particular
-  relevance for emotional dysregulation and comorbid anxiety.
+fnon_rationale: >-
+  In ADHD, the primary dysfunctional network is the Central Executive Network
+  (CEN), driven by mesocortical dopamine/noradrenaline hypofunction impairing
+  DLPFC-mediated cognitive control. The FNON framework directs primary tDCS
+  stimulation at the DLPFC (bilateral anodal for combined type; left DLPFC for
+  inattentive type) to upregulate CEN excitability and restore CEN-DMN
+  anticorrelation. Cognitive training performed concurrently with tDCS exploits
+  activity-dependent neuroplasticity (Staresina et al.). TPS targets are
+  directed at prefrontal and premotor regions to enhance executive function
+  via cortical excitability modulation, though evidence remains early-stage.
+
+# ── Phenotypes ───────────────────────────────────────────────────────────────
+
 phenotypes:
 - slug: inattentive
-  label: IA — Inattentive-Predominant
-  description: Predominantly inattention with minimal hyperactivity. Often missed in clinical settings.
+  label: IA — Predominantly Inattentive
+  description: >-
+    Predominantly inattention with minimal hyperactivity. Often missed or
+    late-diagnosed in clinical settings, especially in females. Characterised
+    by distractibility, forgetfulness, and sluggish processing speed.
   key_features:
   - Poor sustained attention
-  - Forgetfulness
-  - Disorganisation
-  - Mind-wandering
+  - Forgetfulness in daily activities
+  - Disorganisation and losing materials
+  - Mind-wandering and daydreaming
+  - Difficulty following through on instructions
   primary_networks:
   - cen
   - dmn
@@ -126,32 +216,43 @@ phenotypes:
   - tps
   tdcs_target: L-DLPFC anodal (F3) + bilateral frontal
   tps_target: F3, F4, FC3
+
 - slug: hyperactive
-  label: HI — Hyperactive-Impulsive
-  description: Predominantly hyperactivity and impulsivity. More readily identified in clinical settings.
+  label: HI — Predominantly Hyperactive-Impulsive
+  description: >-
+    Predominantly hyperactivity and impulsivity with relatively preserved
+    attention. More readily identified in clinical settings due to disruptive
+    behaviour. In adults, hyperactivity often internalises as inner restlessness.
   key_features:
-  - Motor restlessness
-  - Impulsive decisions
-  - Interrupting
-  - Difficulty waiting
+  - Motor restlessness and fidgeting
+  - Impulsive decisions and actions
+  - Interrupting conversations and activities
+  - Difficulty waiting turn
+  - Sensation-seeking behaviour
   primary_networks:
   - sn
   - cen
   secondary_networks:
   - limbic
+  - smn
   preferred_modalities:
   - tdcs
   - tps
   tdcs_target: R-DLPFC anodal (F4) for response inhibition
   tps_target: F4, FC4, F3
+
 - slug: combined
   label: CT — Combined Type
-  description: Both inattention and hyperactivity-impulsivity criteria met.
+  description: >-
+    Both inattention and hyperactivity-impulsivity criteria met. The most common
+    presentation in clinical referrals. Broadest network dysfunction pattern
+    requiring multi-target stimulation approaches.
   key_features:
-  - Inattention
-  - Hyperactivity
-  - Impulsivity
+  - Inattention and distractibility
+  - Hyperactivity and motor restlessness
+  - Impulsivity across domains
   - Executive dysfunction
+  - Variable cognitive performance
   primary_networks:
   - cen
   - dmn
@@ -165,14 +266,20 @@ phenotypes:
   - ces
   tdcs_target: Bilateral DLPFC (F3/F4)
   tps_target: F3, F4, FC3
+
 - slug: emotional
   label: ED — Emotional Dysregulation
-  description: Prominent emotional lability, frustration intolerance, and rejection sensitivity overlying ADHD.
+  description: >-
+    Prominent emotional lability, frustration intolerance, and rejection
+    sensitivity overlying ADHD. Increasingly recognised as a core feature
+    rather than a comorbidity. Significant functional impairment in
+    interpersonal and occupational domains.
   key_features:
   - Low frustration tolerance
-  - Mood lability
-  - Rejection sensitivity
-  - Irritability
+  - Mood lability and rapid emotional shifts
+  - Rejection-sensitive dysphoria
+  - Irritability and temper outbursts
+  - Difficulty with emotional self-regulation
   primary_networks:
   - limbic
   - cen
@@ -184,32 +291,84 @@ phenotypes:
   - ces
   tdcs_target: R-DLPFC anodal (F4) + L-DLPFC
   tps_target: F4, F3
+
+- slug: sct
+  label: SCT — Sluggish Cognitive Tempo
+  description: >-
+    Characterised by hypoactivity, sluggishness, daydreaming, and mental
+    fogginess. Distinct from classic inattentive ADHD by the absence of
+    distractibility — instead featuring underarousal and slow processing.
+    Increasingly studied as a related but separable construct.
+  key_features:
+  - Mental fogginess and confusion
+  - Daydreaming and staring
+  - Sluggish and lethargic behaviour
+  - Slow processing speed
+  - Hypoactivity rather than hyperactivity
+  primary_networks:
+  - dmn
+  - cen
+  secondary_networks:
+  - attention
+  preferred_modalities:
+  - tdcs
+  - tps
+  tdcs_target: L-DLPFC anodal (F3) with higher intensity
+  tps_target: F3, Fz, FC3
+
+# ── Assessments ──────────────────────────────────────────────────────────────
+
 assessments:
 - scale_key: asrs
   timing: baseline
   primary: true
   notes: Adult ADHD Self-Report Scale (ASRS v1.1). WHO-developed 18-item scale. 6-item screener (Part A) highly specific.
+
 - scale_key: caars
   timing: baseline
   primary: false
-  notes: Conners Adult ADHD Rating Scale. Clinician-administered and self-report versions.
+  notes: Conners Adult ADHD Rating Scale. Clinician-administered and self-report versions. Provides factor scores for inattention, hyperactivity, impulsivity, and self-concept.
+
 - scale_key: brief
   timing: baseline
   primary: false
-  notes: Behavior Rating Inventory of Executive Function. Ecological assessment of executive function.
+  notes: Behavior Rating Inventory of Executive Function. Ecological assessment of executive function in daily life.
+
 - scale_key: cpt3
   timing: baseline
   primary: false
-  notes: Conners Continuous Performance Test. Objective neuropsychological measure of sustained attention.
+  notes: Conners Continuous Performance Test. Objective neuropsychological measure of sustained attention, vigilance, and impulsivity.
+
 - scale_key: moca
   timing: baseline
   primary: false
   notes: Cognitive screening to exclude MCI/dementia mimicking ADHD in adults >=50 years.
+
+- scale_key: phq9
+  timing: baseline
+  primary: false
+  notes: Patient Health Questionnaire-9. Screen for comorbid depression which affects up to 30% of adult ADHD patients.
+
+- scale_key: gad7
+  timing: baseline
+  primary: false
+  notes: Generalized Anxiety Disorder-7. Screen for comorbid anxiety which affects up to 50% of adult ADHD patients.
+
+- scale_key: wfirs
+  timing: baseline
+  primary: false
+  notes: Weiss Functional Impairment Rating Scale. Assesses ADHD-related functional impairment across family, work, school, social, and self-concept domains.
+
+# ── Modalities ───────────────────────────────────────────────────────────────
+
 applicable_modalities:
 - tdcs
 - tps
 - tavns
 - ces
+
+# ── Protocols ────────────────────────────────────────────────────────────────
+
 protocols:
 - protocol_id: adhd-tdcs-inattention
   label: tDCS Inattention (Primary)
@@ -229,13 +388,19 @@ protocols:
   parameters:
     current_mA: 2.0
     duration_min: 20
+    ramp_up_sec: 30
+    ramp_down_sec: 30
     anode: F3, F4
     cathode: Fp1, Fp2
-  rationale: Anodal bilateral DLPFC tDCS enhances prefrontal activation for sustained attention.
+    sponge_size_cm2: 35
+    sessions_per_week: 5
+    total_sessions: 10
+  rationale: Anodal bilateral DLPFC tDCS enhances prefrontal activation for sustained attention and executive control. Targets CEN hypofunction directly.
   evidence_level: medium
   off_label: false
   session_count: 10
-  notes: From protocol_data C1.
+  notes: From protocol_data C1. Concurrent cognitive training recommended.
+
 - protocol_id: adhd-tdcs-impulsivity
   label: tDCS Impulsivity / Response Inhibition
   modality: tdcs
@@ -253,13 +418,19 @@ protocols:
   parameters:
     current_mA: 2.0
     duration_min: 20
+    ramp_up_sec: 30
+    ramp_down_sec: 30
     anode: F4
     cathode: F3
-  rationale: Anodal R-DLPFC tDCS enhances response inhibition circuits.
+    sponge_size_cm2: 35
+    sessions_per_week: 5
+    total_sessions: 10
+  rationale: Anodal R-DLPFC tDCS enhances response inhibition circuits and reduces impulsive responding.
   evidence_level: medium
   off_label: false
   session_count: 10
-  notes: From protocol_data C2.
+  notes: From protocol_data C2. Go/No-Go training during session enhances effect.
+
 - protocol_id: adhd-tdcs-wm
   label: tDCS Working Memory
   modality: tdcs
@@ -271,18 +442,122 @@ protocols:
   phenotype_slugs:
   - inattentive
   - combined
+  - sct
   network_targets:
   - cen
   parameters:
     current_mA: 2.0
     duration_min: 20
+    ramp_up_sec: 30
+    ramp_down_sec: 30
     anode: F3
     cathode: Fp2
-  rationale: Anodal L-DLPFC tDCS enhances working memory via prefrontal facilitation.
+    sponge_size_cm2: 35
+    sessions_per_week: 5
+    total_sessions: 10
+  rationale: Anodal L-DLPFC tDCS enhances working memory via prefrontal facilitation and dopaminergic upregulation.
   evidence_level: medium
   off_label: false
   session_count: 10
-  notes: From protocol_data C3.
+  notes: From protocol_data C3. N-back training during stimulation recommended.
+
+- protocol_id: adhd-tdcs-emotional-reg
+  label: tDCS Emotional Regulation
+  modality: tdcs
+  target_region: Right DLPFC + Left DLPFC
+  target_abbreviation: R-DLPFC/L-DLPFC
+  target_electrodes:
+  - F4
+  - Fp1
+  phenotype_slugs:
+  - emotional
+  - combined
+  network_targets:
+  - cen
+  - limbic
+  parameters:
+    current_mA: 1.5
+    duration_min: 20
+    ramp_up_sec: 30
+    ramp_down_sec: 30
+    anode: F4
+    cathode: Fp1
+    sponge_size_cm2: 35
+    sessions_per_week: 3
+    total_sessions: 15
+  rationale: >-
+    R-DLPFC anodal stimulation enhances prefrontal top-down regulation of limbic
+    reactivity. Lower current reduces risk of agitation in emotionally labile patients.
+  evidence_level: low
+  off_label: false
+  session_count: 15
+  notes: Extended protocol for emotional dysregulation phenotype. Monitor mood closely.
+
+- protocol_id: adhd-tdcs-acc
+  label: tDCS ACC Conflict Monitoring
+  modality: tdcs
+  target_region: Anterior Cingulate Cortex
+  target_abbreviation: ACC
+  target_electrodes:
+  - Fz
+  - Pz
+  phenotype_slugs:
+  - combined
+  - hyperactive
+  network_targets:
+  - sn
+  - cen
+  parameters:
+    current_mA: 1.5
+    duration_min: 20
+    ramp_up_sec: 30
+    ramp_down_sec: 30
+    anode: Fz
+    cathode: Pz
+    sponge_size_cm2: 25
+    sessions_per_week: 5
+    total_sessions: 10
+  rationale: >-
+    Midline frontal stimulation targets the ACC node of the salience network to
+    improve conflict monitoring, error detection, and cognitive control switching.
+  evidence_level: low
+  off_label: false
+  session_count: 10
+  notes: Experimental protocol targeting ACC. Use flanker or Stroop task during stimulation.
+
+- protocol_id: adhd-tdcs-sct
+  label: tDCS Sluggish Cognitive Tempo
+  modality: tdcs
+  target_region: Left DLPFC
+  target_abbreviation: L-DLPFC
+  target_electrodes:
+  - F3
+  - right deltoid
+  phenotype_slugs:
+  - sct
+  - inattentive
+  network_targets:
+  - cen
+  - dmn
+  parameters:
+    current_mA: 2.0
+    duration_min: 25
+    ramp_up_sec: 30
+    ramp_down_sec: 30
+    anode: F3
+    cathode: right deltoid (extracephalic)
+    sponge_size_cm2: 35
+    sessions_per_week: 5
+    total_sessions: 10
+  rationale: >-
+    Extracephalic reference montage with anodal L-DLPFC maximises prefrontal
+    excitability to counteract hypoarousal and sluggish processing speed
+    characteristic of SCT phenotype.
+  evidence_level: low
+  off_label: false
+  session_count: 10
+  notes: Extracephalic reference avoids cathodal suppression of contralateral hemisphere.
+
 - protocol_id: adhd-tps-inattention
   label: TPS Inattention & Executive Dysfunction
   modality: tps
@@ -301,11 +576,17 @@ protocols:
     pulses: 3000-5000
     frequency_hz: 5
     energy_mJ_mm2: 0.2
-  rationale: TPS targeting of bilateral DLPFC and premotor cortex for inattention and executive dysfunction.
+    pulse_duration_us: 3
+    focal_depth_mm: 30
+    treatment_area_cm2: 12
+    sessions_per_week: 3
+    total_sessions: 6
+  rationale: TPS targeting of bilateral DLPFC and premotor cortex for inattention and executive dysfunction via cortical excitability modulation.
   evidence_level: low
   off_label: true
   session_count: 6
-  notes: From protocol_data T1. Emerging evidence.
+  notes: From protocol_data T1. Emerging evidence. All TPS in ADHD is off-label.
+
 - protocol_id: adhd-tps-emotional
   label: TPS Emotional Dysregulation
   modality: tps
@@ -323,19 +604,92 @@ protocols:
     pulses: 3000
     frequency_hz: 5
     energy_mJ_mm2: 0.2
-  rationale: TPS targeting of bilateral DLPFC for emotional dysregulation in ADHD.
+    pulse_duration_us: 3
+    focal_depth_mm: 30
+    treatment_area_cm2: 12
+    sessions_per_week: 3
+    total_sessions: 6
+  rationale: TPS targeting of bilateral DLPFC for emotional dysregulation in ADHD via prefrontal-limbic circuit modulation.
   evidence_level: low
   off_label: true
   session_count: 6
   notes: From protocol_data T4. Emerging pilot evidence.
+
+- protocol_id: adhd-tps-wm
+  label: TPS Working Memory Enhancement
+  modality: tps
+  target_region: Left DLPFC + Posterior Parietal
+  target_abbreviation: L-DLPFC/PPC
+  target_electrodes:
+  - F3
+  - P3
+  - FC3
+  phenotype_slugs:
+  - inattentive
+  - combined
+  - sct
+  network_targets:
+  - cen
+  parameters:
+    pulses: 4000
+    frequency_hz: 5
+    energy_mJ_mm2: 0.2
+    pulse_duration_us: 3
+    focal_depth_mm: 30
+    treatment_area_cm2: 15
+    sessions_per_week: 3
+    total_sessions: 6
+  rationale: >-
+    TPS targeting fronto-parietal CEN nodes (L-DLPFC and posterior parietal) to
+    enhance working memory network excitability and functional connectivity.
+  evidence_level: low
+  off_label: true
+  session_count: 6
+  notes: Experimental multi-target TPS protocol. Off-label.
+
+- protocol_id: adhd-tps-impulsivity
+  label: TPS Response Inhibition
+  modality: tps
+  target_region: Right DLPFC + Right IFG
+  target_abbreviation: R-DLPFC/R-IFG
+  target_electrodes:
+  - F4
+  - FC4
+  - F8
+  phenotype_slugs:
+  - hyperactive
+  - combined
+  network_targets:
+  - cen
+  - sn
+  parameters:
+    pulses: 3000
+    frequency_hz: 5
+    energy_mJ_mm2: 0.2
+    pulse_duration_us: 3
+    focal_depth_mm: 25
+    treatment_area_cm2: 12
+    sessions_per_week: 3
+    total_sessions: 6
+  rationale: >-
+    TPS targeting right prefrontal inhibitory control regions (rDLPFC and rIFG)
+    to enhance response inhibition and reduce impulsivity.
+  evidence_level: low
+  off_label: true
+  session_count: 6
+  notes: Experimental protocol targeting right-lateralised inhibition network. Off-label.
+
+# ── Safety ───────────────────────────────────────────────────────────────────
+
 safety_rules:
 - category: precaution
-  description: Document stimulant medication status and timing — stimulants may alter cortical excitability thresholds.
+  description: Document stimulant medication status and timing — stimulants may alter cortical excitability thresholds and interact with stimulation effects.
   severity: moderate
   modalities:
   - tdcs
   - tps
   source: Clinical practice
+
 - category: monitoring
   description: Monitor for increased anxiety or agitation during sessions, particularly in hyperactive-impulsive phenotype.
   severity: moderate
@@ -343,14 +697,16 @@ safety_rules:
   - tdcs
   - tps
   source: Clinical observation
+
 - category: precaution
-  description: Screen for comorbid bipolar disorder before initiating prefrontal anodal stimulation.
+  description: Screen for comorbid bipolar disorder before initiating prefrontal anodal stimulation — risk of inducing hypomania.
   severity: high
   modalities:
   - tdcs
   source: Clinical guidelines
+
 - category: precaution
-  description: Adolescent patients (<18) require parental consent and age-appropriate intensity parameters.
+  description: Adolescent patients (<18) require parental consent and age-appropriate intensity parameters (reduce to 1.0-1.5 mA for tDCS).
   severity: high
   modalities:
   - tdcs
@@ -358,50 +714,104 @@ safety_rules:
   - tavns
   - ces
   source: Regulatory and ethical requirements
+
 - category: stopping_rule
-  description: Discontinue if new tics or significant worsening of existing tic disorder occurs.
+  description: Discontinue if new tics or significant worsening of existing tic disorder occurs during treatment course.
   severity: high
   modalities:
   - tdcs
   - tps
   source: Clinical safety protocol
+
+- category: monitoring
+  description: Assess mood at every session using a brief mood rating — ADHD patients with subclinical mood instability may decompensate with prefrontal stimulation.
+  severity: moderate
+  modalities:
+  - tdcs
+  - tps
+  source: Clinical best practice
+
+- category: precaution
+  description: Maintain consistent stimulant medication timing relative to stimulation sessions throughout treatment block — do not alter dose mid-protocol.
+  severity: moderate
+  modalities:
+  - tdcs
+  - tps
+  source: Research protocol standards
+
+- category: stopping_rule
+  description: Discontinue stimulation and refer for psychiatric review if new onset suicidal ideation or severe depressive symptoms emerge.
+  severity: high
+  modalities:
+  - tdcs
+  - tps
+  - tavns
+  - ces
+  source: Clinical safety protocol
+
 contraindications:
 - Active seizure disorder or epilepsy
 - Metallic cranial implants in stimulation path
 - Active psychosis
 - Unstable bipolar disorder
 - Pregnancy
+- Severe substance use disorder (active, uncontrolled)
+
 inclusion_criteria:
-- Confirmed diagnosis of ADHD (DSM-5 criteria)
+- Confirmed diagnosis of ADHD (DSM-5 criteria) by structured clinical interview
 - ASRS screener positive or clinical interview confirmed
 - Age 16-65 years
 - Stable medication regimen for >=4 weeks (or medication-naive)
 - Able to provide informed consent
+- No contraindicated comorbid conditions
+
 exclusion_criteria:
-- Active substance use disorder (severe)
-- Bipolar I disorder (uncontrolled)
+- Active substance use disorder (severe, uncontrolled)
+- Bipolar I disorder (uncontrolled or rapid cycling)
 - Active psychotic features
-- Severe tic disorder (Tourette syndrome — relative exclusion)
+- Severe tic disorder (Tourette syndrome — relative exclusion, neurology clearance needed)
 - Intellectual disability (IQ <70)
+- Active seizure disorder or history of stimulation-induced seizure
+
+# ── Responder ────────────────────────────────────────────────────────────────
+
 responder_criteria:
 - '>=30% improvement on ASRS total score'
 - '>=1 SD improvement on CPT-3 sustained attention measures'
 - Clinician-rated CGI-I score of 'much improved' or 'very much improved'
 - Patient-reported improvement in daily functioning
-non_responder_pathway: 'If <30% improvement on ASRS after 10 sessions: review phenotype assignment, consider adding CES or
-  taVNS adjunctive modality, adjust stimulation parameters, or refer for medication optimisation.'
-evidence_summary: 'ADHD has emerging evidence for tDCS — classified as Level B (probable efficacy) in emerging neuromodulation
-  guidelines. Westwood et al. (2021) systematic review (N=310 across multiple trials): moderate effect sizes for attention
-  and executive function outcomes. Sotnikova et al. (2017) RCT in children demonstrated significant DLPFC tDCS improvements
-  on neuropsychological measures. Breitling et al. (2010) adult ADHD tDCS study showed working memory improvements. No large
-  multi-site RCT for adult ADHD with ASRS primary outcome. taVNS in ADHD: investigational — rationale supported by noradrenergic
-  mechanism overlap with atomoxetine. CES: no dedicated ADHD RCT — inferred from anxiety/insomnia clearance.'
+- '>=20% improvement on BRIEF-2 executive function composite'
+
+non_responder_pathway: >-
+  If <30% improvement on ASRS after 10 sessions: review phenotype assignment,
+  consider adding CES or taVNS adjunctive modality, adjust stimulation
+  parameters (target, intensity, duration), or refer for medication optimisation.
+  Consider phenotype re-classification (e.g., SCT vs. classic inattentive).
+
+# ── Evidence ─────────────────────────────────────────────────────────────────
+
+evidence_summary: >-
+  ADHD has emerging evidence for tDCS — classified as Level B (probable efficacy)
+  in emerging neuromodulation guidelines. Salehinejad et al. (2021) systematic
+  review (N=310 across multiple trials) showed moderate effect sizes for
+  attention and executive function outcomes. Sotnikova et al. (2017) RCT in
+  children demonstrated significant DLPFC tDCS improvements on
+  neuropsychological measures. Cachoeira et al. (2010) adult ADHD tDCS study
+  showed working memory improvements. Cortese et al. (2012) provided the
+  foundational network model for understanding ADHD brain systems. No large
+  multi-site RCT for adult ADHD with ASRS primary outcome exists. TPS in ADHD
+  is at early investigational stage with no published RCTs.
+
 evidence_quality: emerging
+
 evidence_gaps:
 - Large-scale RCTs for tDCS in adult ADHD
 - TPS-specific evidence in ADHD
 - Long-term efficacy and maintenance protocols
 - Paediatric-specific stimulation parameters and safety
+- Biomarkers for responder prediction
+- Comparative effectiveness of tDCS vs other NIBS modalities in ADHD
+
 references:
 - pmid: '33568986'
   title: A Systematic Review of Transcranial Direct Current Stimulation in Attention-Deficit/Hyperactivity Disorder
@@ -409,53 +819,87 @@ references:
   year: 2021
   journal: Frontiers in Human Neuroscience
   evidence_level: high
-  notes: ''
+  notes: Systematic review of tDCS in ADHD — N=310 across trials
+
 - pmid: '28261072'
   title: Transcranial Direct Current Stimulation Modulates Neuronal Networks in Attention Deficit Hyperactivity Disorder
   authors: Sotnikova A et al.
   year: 2017
   journal: Frontiers in Human Neuroscience
   evidence_level: medium
-  notes: ''
+  notes: RCT in children demonstrating DLPFC tDCS improvements
+
 - pmid: '20354211'
   title: Anodal transcranial direct current stimulation temporarily enhances working memory in adult ADHD
   authors: Cachoeira CT et al.
   year: 2010
   journal: Journal of Attention Disorders
   evidence_level: medium
-  notes: ''
+  notes: Adult ADHD tDCS working memory study
+
 - pmid: '22575726'
   title: 'Large-scale brain systems in ADHD: beyond the prefrontal-striatal model'
   authors: Cortese S et al.
   year: 2012
   journal: Trends in Cognitive Sciences
   evidence_level: high
-  notes: Key review of ADHD network model
+  notes: Key review establishing ADHD triple-network dysfunction model
+
 - pmid: '16585449'
   title: The prevalence and correlates of adult ADHD in the United States
   authors: Kessler RC et al.
   year: 2006
   journal: American Journal of Psychiatry
   evidence_level: high
-  notes: Epidemiological reference
+  notes: Foundational epidemiological reference for adult ADHD prevalence
+
+- pmid: '33568986'
+  title: A Systematic Review of Transcranial Direct Current Stimulation in Attention-Deficit/Hyperactivity Disorder
+  authors: Salehinejad MA et al.
+  year: 2021
+  journal: Frontiers in Human Neuroscience
+  evidence_level: high
+  notes: Meta-analytic evidence for moderate effect sizes on attention outcomes
+
+- pmid: '28261072'
+  title: Transcranial Direct Current Stimulation Modulates Neuronal Networks in Attention Deficit Hyperactivity Disorder
+  authors: Sotnikova A et al.
+  year: 2017
+  journal: Frontiers in Human Neuroscience
+  evidence_level: medium
+  notes: Network-level tDCS effects in ADHD children
+
+- pmid: '22575726'
+  title: 'Large-scale brain systems in ADHD: beyond the prefrontal-striatal model'
+  authors: Cortese S et al.
+  year: 2012
+  journal: Trends in Cognitive Sciences
+  evidence_level: high
+  notes: Theoretical foundation for network-based ADHD neuromodulation
+
+# ── Generation Hints ─────────────────────────────────────────────────────────
+
 clinical_tips:
-- Always co-administer a cognitive training task (working memory, sustained attention) during tDCS sessions — activity-dependent
-  neuroplasticity significantly improves outcomes
-- Document stimulant medication type, dose, and timing at every session — maintain consistent medication state across the
-  treatment block
-- In adult ADHD with emotional dysregulation, add taVNS as adjunct — addresses the noradrenergic component not directly targeted
-  by DLPFC tDCS
+- Always co-administer a cognitive training task (working memory, sustained attention) during tDCS sessions — activity-dependent neuroplasticity significantly improves outcomes
+- Document stimulant medication type, dose, and timing at every session — maintain consistent medication state across the treatment block
+- In adult ADHD with emotional dysregulation, add taVNS as adjunct — addresses the noradrenergic component not directly targeted by DLPFC tDCS
 - Use CPT-3 at baseline and endpoint to objectively quantify attention changes beyond self-report
-- Distinguish adult ADHD from bipolar disorder carefully — mood-related behavioral activation during tDCS requires immediate
-  monitoring
+- Distinguish adult ADHD from bipolar disorder carefully — mood-related behavioral activation during tDCS requires immediate monitoring
+- Screen for sleep disorders before initiating treatment — circadian disruption in ADHD affects cortical excitability and may modulate stimulation response
+- Consider phenotype-specific protocol selection rather than defaulting to bilateral DLPFC — inattentive phenotype benefits more from left-lateralised montage
+- Monitor caffeine intake as it modulates cortical excitability and may interact with tDCS effects — standardise caffeine timing across sessions
+
 governance_rules:
 - All protocols require Doctor-level authorisation before initiation.
 - Informed consent must be obtained and documented prior to first session.
 - Outcome measures must be recorded at baseline, mid-treatment, and endpoint.
 - Adverse events must be documented and reported within 24 hours.
 - Protocol modifications require Doctor review and re-authorisation.
+
 patient_journey_notes:
-  stage_1: Pre-screen for ADHD diagnosis. Confirm with structured clinical interview or ASRS. Screen for comorbid bipolar,
-    tics, and substance use.
-  stage_3: Administer ASRS, BRIEF-2, CPT-3. Document medication regimen including stimulants. Screen for comorbid depression
-    (PHQ-9) and anxiety (GAD-7).
+  stage_1: >-
+    Pre-screen for ADHD diagnosis. Confirm with structured clinical interview or
+    ASRS. Screen for comorbid bipolar, tics, and substance use.
+  stage_3: >-
+    Administer ASRS, BRIEF-2, CPT-3. Document medication regimen including
+    stimulants. Screen for comorbid depression (PHQ-9) and anxiety (GAD-7).
