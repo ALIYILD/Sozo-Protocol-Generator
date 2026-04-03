@@ -1,6 +1,6 @@
-# Parkinson's Disease — SOZO Clinical Knowledge (Enriched)
+# Parkinson's Disease — SOZO Gold Standard Knowledge (Expanded)
 # ICD-10: G20
-# Content enriched from legacy generator prose.
+# Version 2.0 — Comprehensive evidence-based knowledge for ~30-page protocol generation
 
 slug: parkinsons
 display_name: Parkinson's Disease
@@ -9,52 +9,232 @@ aliases:
 - PD
 - Parkinson disease
 - Parkinson's
+- Paralysis agitans
+- Idiopathic parkinsonism
 category: neurodegenerative
-version: '1.0'
-overview: Parkinson's Disease (PD) is a progressive neurodegenerative disorder characterized primarily by motor symptoms including
-  bradykinesia, resting tremor, rigidity, and postural instability, arising from the degeneration of dopaminergic neurons
-  in the substantia nigra pars compacta and subsequent dysfunction of the basal ganglia thalamocortical circuit. PD is the
-  second most common neurodegenerative disorder after Alzheimer's disease, affecting approximately 1-2% of the population
-  over 60 years of age. Non-motor symptoms — including cognitive impairment, depression, anxiety, autonomic dysfunction, sleep
-  disorders, and fatigue — are highly prevalent and significantly impact quality of life.
-pathophysiology: 'PD pathophysiology involves the progressive loss of dopaminergic neurons in the substantia nigra pars compacta
-  (SNpc), leading to dopamine depletion in the striatum (caudate nucleus and putamen). This disrupts the balance of direct
-  and indirect pathways in the basal ganglia-thalamocortical circuit, resulting in reduced thalamo-cortical drive and impaired
-  voluntary movement initiation.
+version: '2.0'
 
+overview: >-
+  Parkinson's Disease (PD) is a chronic, progressive neurodegenerative disorder and the second most common
+  neurodegenerative condition after Alzheimer's disease, affecting approximately 10 million people worldwide.
+  Prevalence rises sharply with age, affecting 1-2% of the population over 60 years and up to 4% of those
+  over 80 years. The mean age of onset is approximately 60 years, with a male-to-female ratio of roughly
+  1.5:1. PD is now the fastest-growing neurological disorder in terms of prevalence, disability, and deaths,
+  representing a major and escalating global health burden. The disease is characterized by cardinal motor
+  features — bradykinesia, resting tremor, rigidity, and postural instability — arising from progressive
+  degeneration of dopaminergic neurons in the substantia nigra pars compacta (SNpc) and consequent dysfunction
+  of the basal ganglia-thalamocortical circuit. Clinical staging follows the Hoehn and Yahr scale (stages 1-5):
+  Stage 1 (unilateral involvement), Stage 2 (bilateral without balance impairment), Stage 3 (mild-to-moderate
+  bilateral with postural instability but physically independent), Stage 4 (severe disability but still able
+  to walk/stand unassisted), and Stage 5 (wheelchair-bound or bedridden). Non-motor symptoms — including
+  cognitive impairment, depression, anxiety, autonomic dysfunction, sleep disorders, pain, and fatigue — are
+  highly prevalent, often precede motor onset by years, and significantly erode quality of life. Caregiver
+  burden is substantial, with informal care costs exceeding direct medical costs in advanced stages. The
+  pharmacological treatment landscape centres on levodopa (L-dopa), which remains the gold standard but is
+  limited by motor fluctuations (wearing-off, on-off phenomena) and dyskinesias after 5-10 years of use.
+  Deep brain stimulation (DBS) is reserved for medically refractory motor fluctuations in carefully selected
+  candidates. Non-invasive brain stimulation (NIBS) — including transcranial direct current stimulation (tDCS)
+  and transcranial pulse stimulation (TPS) — represents an emerging adjunctive treatment approach that can
+  modulate cortical excitability, enhance neuroplasticity, and address both motor and non-motor symptoms
+  without the risks of surgery or additional pharmacological side effects. SOZO neuromodulation protocols
+  are specifically designed to target the dysfunctional neural circuits in PD, offering personalised,
+  phenotype-driven stimulation as a complement to standard medical management.
 
-  Lewy body pathology (alpha-synuclein aggregation) spreads through the nervous system in a staging pattern (Braak stages
-  1-6), with early involvement of the dorsal motor nucleus of the vagus nerve and olfactory bulb, progressing to substantia
-  nigra (Stage 3-4) and eventually neocortex (Stage 5-6).
+pathophysiology: >-
+  The core pathophysiology of Parkinson's Disease involves progressive, selective loss of dopaminergic neurons
+  in the substantia nigra pars compacta (SNpc). By the time motor symptoms manifest clinically, approximately
+  60-80% of striatal dopamine and 50-60% of SNpc neurons have already been lost, indicating a prolonged
+  prodromal phase. The neuropathological hallmark is the intracellular accumulation of misfolded
+  alpha-synuclein protein into Lewy bodies (round, eosinophilic cytoplasmic inclusions) and Lewy neurites
+  (dystrophic neurites containing alpha-synuclein aggregates). Alpha-synuclein pathology propagates through
+  the nervous system in a stereotyped pattern described by Braak staging: Stage 1 involves the dorsal motor
+  nucleus of the vagus nerve and olfactory bulb (correlating with prodromal anosmia and constipation); Stage 2
+  extends to the locus coeruleus and raphe nuclei (sleep disturbance, mood changes); Stage 3-4 reaches the
+  substantia nigra (onset of motor symptoms); Stage 5-6 involves the mesocortex and neocortex (cognitive
+  decline, dementia). This prion-like cell-to-cell transmission of pathological alpha-synuclein underpins the
+  relentless disease progression. Striatal dopamine depletion in the caudate nucleus and putamen disrupts the
+  finely tuned balance of the basal ganglia-thalamocortical circuit. In the healthy state, the direct pathway
+  (striatum to GPi/SNr) facilitates movement while the indirect pathway (striatum to GPe to STN to GPi/SNr)
+  inhibits unwanted movement. Dopamine loss leads to underactivation of the direct pathway and overactivation
+  of the indirect pathway, resulting in excessive inhibitory output from the GPi to the thalamus, reduced
+  thalamocortical drive, and the characteristic motor poverty of PD — bradykinesia and akinesia.
+  Compensatory mechanisms partially mask early neurodegeneration: remaining dopaminergic neurons increase
+  dopamine turnover, postsynaptic dopamine receptors upregulate, and cortical and cerebellar circuits
+  reorganise to maintain function. These compensatory changes eventually become exhausted, and maladaptive
+  plasticity may itself contribute to symptoms such as dyskinesias. Neuroinflammation is a prominent feature,
+  with activated microglia and elevated pro-inflammatory cytokines (IL-1beta, IL-6, TNF-alpha) detected in
+  the SNpc and striatum of PD patients. Whether neuroinflammation is a primary driver or secondary consequence
+  remains debated, but it amplifies neuronal damage. Mitochondrial dysfunction, particularly Complex I
+  deficiency of the electron transport chain, reduces cellular energy production and increases vulnerability
+  to oxidative stress. Iron accumulation in the substantia nigra catalyses the Fenton reaction, generating
+  toxic hydroxyl radicals that damage lipids, proteins, and DNA. Beyond the nigrostriatal system, non-motor
+  symptom circuits are progressively affected: serotonergic neurons in the raphe nuclei (contributing to
+  depression and pain), noradrenergic neurons in the locus coeruleus (contributing to anxiety, attention
+  deficits, and autonomic dysfunction), and cholinergic neurons in the nucleus basalis of Meynert
+  (contributing to cognitive decline and dementia). HPA axis dysregulation with elevated cortisol levels has
+  been documented in PD, potentially exacerbating neurodegeneration, mood disturbance, and sleep disruption.
+  Understanding these multi-system pathophysiological mechanisms is essential for neuromodulation target
+  selection: motor symptoms are addressed via M1 and SMA stimulation (restoring thalamocortical drive);
+  cognitive deficits via DLPFC and PPC stimulation (enhancing executive network function); mood disturbances
+  via bifrontal stimulation (rebalancing prefrontal asymmetry); and gait/balance via cerebellar and SMA
+  stimulation (leveraging compensatory cerebellar circuits).
 
+epidemiology: >-
+  Affects approximately 1-2% of the population over 60 years of age; up to 4% over 80 years. Second most
+  common neurodegenerative disorder after Alzheimer's disease. Approximately 10 million affected worldwide.
+  Male-to-female ratio 1.5:1. Mean age of onset ~60 years. Incidence increases with age. PD is the
+  fastest-growing neurological disorder globally in terms of prevalence, disability, and mortality.
 
-  Neuroinflammation, mitochondrial dysfunction, oxidative stress, and impaired protein clearance (ubiquitin-proteasome system,
-  autophagy) are implicated in neuronal death. Non-motor symptoms reflect pathology beyond the nigrostriatal system: cortical
-  Lewy bodies contribute to cognitive decline; serotonergic and noradrenergic depletion underpins depression and anxiety;
-  hypothalamic and autonomic nervous system involvement drives autonomic symptoms.'
-epidemiology: Affects approximately 1-2% of the population over 60 years of age; second most common neurodegenerative disorder
-  after Alzheimer's disease.
 core_symptoms:
-- Bradykinesia (slowness of movement) — cardinal symptom required for diagnosis
-- Resting tremor (4-6 Hz, pill-rolling character) — present in ~70% of patients
-- Rigidity (cogwheel or lead-pipe) — increased tone throughout range of movement
-- Postural instability — late feature, significant fall risk
-- Freezing of gait (FOG) — sudden, transient inability to initiate steps
-- Hypomimia (reduced facial expression)
-- Hypophonia and dysarthria
-- Micrographia
+- >-
+  Bradykinesia — the cardinal motor feature of PD and required for clinical diagnosis per MDS criteria.
+  Manifests as progressive slowness and reduction in amplitude of repetitive movements (finger tapping,
+  hand opening-closing, foot tapping). Assessed on MDS-UPDRS Part III. Reflects reduced thalamocortical
+  drive due to striatal dopamine depletion. Responds to dopaminergic therapy but becomes progressively
+  treatment-resistant. Bilateral M1 anodal tDCS may enhance cortical excitability and partially
+  compensate for reduced subcortical drive.
+- >-
+  Resting tremor — present in approximately 70% of PD patients at diagnosis. Characteristically 4-6 Hz,
+  pill-rolling in character (rhythmic opposition of thumb and forefinger), typically asymmetric at onset
+  and most prominent at rest, decreasing with voluntary movement. Tremor-dominant PD is associated with
+  slower disease progression and better prognosis. Involves cerebello-thalamo-cortical circuit dysfunction.
+  Cerebellar-targeted stimulation may modulate this oscillatory circuit.
+- >-
+  Rigidity — increased muscle tone throughout the range of passive movement. May be lead-pipe (uniform
+  resistance) or cogwheel (ratchety resistance when tremor is superimposed). Affects both axial and
+  appendicular muscles. Contributes to pain, reduced range of motion, and impaired dexterity. Assessed
+  by passive movement of major joints on MDS-UPDRS Part III.
+- >-
+  Postural instability — impaired postural reflexes leading to balance difficulties and increased fall risk.
+  Typically a late feature (Hoehn and Yahr stage 3+) and poorly responsive to dopaminergic therapy,
+  distinguishing it from other cardinal features. Assessed by the pull test (retropulsion test) on
+  MDS-UPDRS. Major contributor to hip fractures and loss of independence. Falls are the leading cause
+  of hospitalisation in advanced PD.
+- >-
+  Freezing of gait (FOG) — sudden, transient inability to generate effective stepping despite the intention
+  to walk. Commonly triggered by doorways, narrow spaces, turning, and dual-task conditions. Prevalence
+  increases from ~25% in early PD to >60% in advanced disease. Associated with PIGD phenotype, cognitive
+  impairment, and worse prognosis. Poorly responsive to dopaminergic therapy. May respond to
+  SMA/DLPFC-targeted stimulation combined with gait training.
+- >-
+  Hypomimia (masked facies) — reduced spontaneous facial expression due to bradykinesia of facial muscles.
+  Often one of the earliest visible signs noticed by family members. Contributes to social communication
+  difficulties, emotional misinterpretation by others, and reduced quality of social interactions.
+- >-
+  Micrographia — progressively smaller and more cramped handwriting, reflecting the decrement phenomenon
+  in repetitive motor tasks characteristic of PD bradykinesia. Often an early symptom that precedes
+  diagnosis. Useful clinical marker for monitoring motor progression and treatment response.
+- >-
+  Hypophonia — reduced voice volume and monotonous speech prosody due to laryngeal and respiratory muscle
+  bradykinesia. Affects up to 90% of PD patients at some stage. Significantly impairs communication and
+  social participation. Speech therapy (Lee Silverman Voice Treatment) is the primary intervention;
+  neurostimulation may serve as an adjunct.
+- >-
+  Dysphagia — swallowing difficulties affecting oral, pharyngeal, or oesophageal phases. Prevalence
+  increases with disease progression, affecting up to 80% of PD patients. Major risk factor for aspiration
+  pneumonia, which is the leading cause of death in advanced PD. Often underdiagnosed due to silent
+  aspiration. Requires formal swallowing assessment (FEES or videofluoroscopy) in advanced patients.
+- >-
+  Festinating gait — involuntary acceleration of gait with progressive shortening of stride length,
+  as though the patient is chasing their centre of gravity. Associated with falls and loss of postural
+  control. Reflects impaired basal ganglia regulation of gait automaticity.
+- >-
+  Camptocormia and anterocollis — severe abnormal postures including marked forward flexion of the trunk
+  (camptocormia, typically >45 degrees) and involuntary forward flexion of the neck (anterocollis).
+  Etiology is multifactorial, involving axial rigidity, dystonia, and paraspinal myopathy. Significantly
+  impairs balance, respiration, and quality of life. Poorly responsive to pharmacotherapy.
+- >-
+  Dyskinesias (levodopa-induced) — involuntary, often choreiform movements that develop as a complication
+  of chronic levodopa therapy. Peak-dose dyskinesias occur at maximum plasma levodopa concentration;
+  diphasic dyskinesias occur during rising and falling drug levels. Prevalence increases with disease
+  duration and cumulative levodopa dose (affecting ~40% at 5 years, ~90% at 10+ years). Motor cortex
+  stimulation may modulate dyskinesia severity — careful monitoring during tDCS is essential as anodal
+  M1 stimulation can transiently worsen dyskinesias in some patients.
+
 non_motor_symptoms:
-- Cognitive impairment and dementia (PD-MCI in 25-30%; PDD in 80% at 20 years)
-- Depression (prevalence 40-50%)
-- Anxiety (prevalence 30-40%)
-- Apathy (prevalence 40%)
-- REM sleep behaviour disorder (RBD) — prodromal marker
-- Autonomic dysfunction (orthostatic hypotension, constipation, urinary urgency)
-- Olfactory dysfunction (anosmia — early prodromal feature)
-- Pain and sensory disturbances (40-85%)
-- Fatigue
-- Psychosis and hallucinations (dopaminergic treatment effect + disease progression)
-- Impulse control disorders (dopamine agonist-related)
+- >-
+  Depression — prevalence 40-50% across all PD stages. Often precedes motor symptom onset by years and
+  may represent a prodromal feature reflecting early serotonergic and noradrenergic neurodegeneration in
+  the raphe nuclei and locus coeruleus. Distinct from reactive depression; neurobiological substrate
+  includes disrupted mesocorticolimbic dopaminergic, serotonergic, and noradrenergic circuits.
+  Under-diagnosed and under-treated. Responds to SSRIs, SNRIs, and bifrontal tDCS.
+- >-
+  Anxiety — prevalence 30-40%, often co-occurring with depression but also presenting independently.
+  Manifests as generalised anxiety, panic attacks (particularly during OFF periods), social anxiety,
+  and specific phobias (falls-related). Non-motor fluctuation in anxiety linked to dopaminergic ON/OFF
+  cycling. Contributes significantly to disability and reduced quality of life.
+- >-
+  Apathy — prevalence approximately 40%, clinically distinct from depression (absence of sadness or
+  negative affect). Characterised by reduced motivation, initiative, and emotional responsiveness.
+  Associated with disrupted dopaminergic mesocorticolimbic circuits, particularly ventral striatum and
+  anterior cingulate cortex. One of the most treatment-resistant non-motor symptoms.
+- >-
+  Cognitive impairment — PD-MCI (mild cognitive impairment) affects 25-30% at the time of motor symptom
+  diagnosis. Executive dysfunction (planning, set-shifting, working memory) is the most common cognitive
+  domain affected. Attention deficits, visuospatial impairment, and memory retrieval difficulties follow.
+  PD dementia (PDD) develops in up to 80% of patients surviving 20 years from motor onset. Cholinergic
+  deficiency (nucleus basalis of Meynert degeneration) is a major contributor to PDD. DLPFC and PPC
+  stimulation targets the executive-attentional network.
+- >-
+  REM sleep behaviour disorder (RBD) — loss of normal skeletal muscle atonia during REM sleep, resulting
+  in dream enactment behaviour (talking, shouting, punching, kicking during sleep). Present in 30-50% of
+  PD patients. A powerful prodromal marker: 80-90% of idiopathic RBD patients eventually develop
+  PD or another synucleinopathy. Reflects brainstem pathology (sublaterodorsal nucleus, magnocellularis
+  nucleus). Clonazepam and melatonin are first-line treatments.
+- >-
+  Insomnia — sleep initiation and maintenance difficulties affect 60-80% of PD patients. Multifactorial
+  etiology: nocturnal motor symptoms (rigidity, tremor, dystonia), nocturia, RBD, restless legs
+  syndrome, pain, depression, and medication effects. Fragmented sleep architecture with reduced slow-wave
+  and REM sleep. Significantly impacts daytime function and quality of life.
+- >-
+  Excessive daytime sleepiness (EDS) — prevalence 30-50%, partly related to nocturnal sleep disruption
+  but also reflecting degeneration of wake-promoting hypothalamic orexin/hypocretin neurons. Dopamine
+  agonists are a well-known iatrogenic cause. Sleep attacks (sudden irresistible sleep without warning
+  drowsiness) represent a safety concern, particularly regarding driving.
+- >-
+  Autonomic dysfunction — prevalence increases with disease duration. Orthostatic hypotension (30-40%)
+  causes dizziness, falls, and syncope; exacerbated by dopaminergic medication. Constipation (70-80%)
+  may precede motor onset by a decade, reflecting early dorsal motor nucleus of the vagus involvement
+  (Braak stage 1). Urinary urgency and frequency (30-40%) reflect detrusor overactivity. Sexual
+  dysfunction, sweating abnormalities, and sialorrhea (drooling) from impaired automatic swallowing.
+- >-
+  Anosmia/hyposmia — reduced or absent sense of smell, present in >90% of PD patients. One of the
+  earliest prodromal features, preceding motor onset by 5-10 years. Correlates with olfactory bulb
+  Lewy body pathology (Braak stage 1). Useful as a screening and prodromal biomarker but has low
+  specificity when used alone.
+- >-
+  Pain — prevalence 40-85% depending on definition and assessment method. Categories include
+  musculoskeletal pain (most common, related to rigidity and postural abnormalities), dystonic pain
+  (painful muscle cramps, often during OFF periods), central/neuropathic pain (burning, tingling,
+  poorly localised), and radicular/neuropathic pain. Under-recognised and inadequately treated.
+  Pain fluctuates with motor state in many patients.
+- >-
+  Fatigue — prevalence 50-70%, rated by patients as one of the most disabling symptoms. Both physical
+  fatigue (muscular exhaustion with effort) and mental fatigue (cognitive exhaustion, reduced motivation).
+  Distinct from sleepiness and depression, though commonly co-occurs. Poorly responsive to dopaminergic
+  therapy. Pathophysiology involves disrupted basal ganglia-cortical circuits, serotonergic depletion,
+  and possibly autonomic dysfunction.
+- >-
+  Visual hallucinations — prevalence increases with disease duration, affecting up to 40% of patients
+  in advanced stages. Typically well-formed visual hallucinations (people, animals) with initially
+  preserved insight (passage hallucinations, presence hallucinations). Loss of insight heralds transition
+  to PD psychosis. Associated with cholinergic deficiency, cortical Lewy body burden, visual cortex
+  dysfunction, and dopaminergic medication effects. Risk factor for nursing home placement.
+- >-
+  Impulse control disorders (ICDs) — prevalence 14-20%, strongly associated with dopamine agonist use.
+  Includes pathological gambling, hypersexuality, compulsive shopping, and binge eating. Punding
+  (complex, purposeless, stereotyped behaviour) and dopamine dysregulation syndrome (compulsive
+  medication overuse) are related phenomena. Management involves dose reduction or discontinuation
+  of the causative dopamine agonist.
+- >-
+  Sialorrhea (drooling) — prevalence 30-75%, primarily due to reduced automatic swallowing frequency
+  rather than saliva overproduction. Socially embarrassing and can cause perioral skin breakdown
+  and aspiration. Botulinum toxin injection to salivary glands is an effective treatment.
+- >-
+  Seborrheic dermatitis — prevalence 50-60% in PD, significantly higher than the general population
+  (3-5%). Characterised by greasy, scaly patches on the face (nasolabial folds, eyebrows) and scalp.
+  Thought to reflect autonomic dysfunction affecting sebaceous gland secretion.
+
 brain_regions:
 - m1
 - sma
@@ -63,61 +243,130 @@ brain_regions:
 - cerebellum
 - thalamus
 - striatum
+- ppc
 brain_region_details:
-  m1: Reduced activation due to impaired thalamocortical drive; primary tDCS anodal target
-  sma: Hypoactive in PD; involved in movement initiation and sequence learning
-  dlpfc: Impaired in executive and cognitive PD subtypes; target for cognitive and mood protocols
-  acc: Involved in apathy, motivation, and error monitoring
-  cerebellum: Compensatory hyperactivation in PD motor circuitry; tremor target
-  thalamus: Receives basal ganglia output; reduced thalamocortical drive due to GPi overactivity
-  striatum: Primary target of nigrostriatal dopaminergic projections; dopamine depletion disrupts pathway balance
+  m1: >-
+    Primary motor cortex — reduced activation due to impaired thalamocortical drive from excessive
+    GPi inhibitory output. Primary anodal tDCS and TPS target for motor symptoms. Bilateral
+    stimulation (C3/C4) addresses the bilateral but asymmetric motor deficit.
+  sma: >-
+    Supplementary motor area — hypoactive in PD, involved in internally generated movement
+    initiation, motor sequence learning, and bimanual coordination. Key target for gait freezing
+    and dual-task paradigms. Located at vertex (Cz/FCz), accessible to both tDCS and TPS.
+  dlpfc: >-
+    Dorsolateral prefrontal cortex — impaired in executive dysfunction and PD-MCI subtypes.
+    Left DLPFC (F3) is the primary cognitive target; bilateral DLPFC (F3/F4) for mood protocols.
+    Frontostriatal circuit disruption from dopamine depletion underlies executive deficits.
+  acc: >-
+    Anterior cingulate cortex — involved in apathy, motivation, error monitoring, and conflict
+    resolution. Receives dopaminergic input from VTA. Hypofunction contributes to the prominent
+    apathy seen in PD. Deep midline target, indirectly modulated via frontal stimulation.
+  cerebellum: >-
+    Cerebellum — shows compensatory hyperactivation in PD motor circuitry, particularly in
+    tremor-dominant phenotype. Involved in tremor generation via cerebello-thalamo-cortical circuit.
+    Cathodal cerebellar tDCS may reduce maladaptive compensation; targeted TPS may modulate
+    tremor circuits. Also relevant for balance, gait, and motor learning.
+  thalamus: >-
+    Thalamus — receives basal ganglia output via GPi; reduced thalamocortical drive due to GPi
+    overactivity is the proximate cause of bradykinesia. VIM nucleus is the DBS tremor target.
+    Indirectly modulated by cortical stimulation through cortico-thalamic loops.
+  striatum: >-
+    Striatum (caudate + putamen) — primary target of nigrostriatal dopaminergic projections.
+    Putamen is most severely depleted (dorsolateral region first). Dopamine loss disrupts
+    direct/indirect pathway balance. Deep structure not directly accessible to NIBS but
+    modulated through corticostriatal connectivity.
+  ppc: >-
+    Posterior parietal cortex — involved in visuospatial processing, attention, and sensorimotor
+    integration. Contributes to spatial navigation difficulties and visuospatial cognitive deficits
+    in PD. TPS target for cognitive protocols addressing attention and spatial processing.
+
 network_profiles:
 - network: smn
   dysfunction: hypo
   severity: severe
   primary: true
-  relevance: Primary network in PD. Dopaminergic depletion disrupts basal ganglia thalamocortical motor loop. Reduced M1 and
-    SMA activation.
-  evidence_note: Established; foundational PD pathophysiology
+  relevance: >-
+    Primary network in PD. Dopaminergic depletion in the striatum disrupts basal ganglia-thalamocortical
+    motor loop, resulting in reduced M1 and SMA activation and motor cortex hypoexcitability. This
+    directly underlies bradykinesia, rigidity, and impaired motor initiation.
+  evidence_note: Established; foundational PD pathophysiology confirmed by functional neuroimaging and TMS studies
 - network: cen
   dysfunction: hypo
   severity: moderate
   primary: false
-  relevance: Executive dysfunction is the most common cognitive impairment in PD. DLPFC hypoactivation on functional imaging.
-  evidence_note: Multiple fMRI and neuropsychological studies
+  relevance: >-
+    Executive dysfunction is the most common cognitive impairment in PD, driven by frontostriatal
+    dopamine depletion. DLPFC hypoactivation on fMRI during executive tasks. Dual-task interference
+    reflects CEN capacity limitations and contributes to freezing of gait.
+  evidence_note: Multiple fMRI, PET, and neuropsychological studies in PD-MCI and PDD populations
 - network: dmn
   dysfunction: hyper
   severity: moderate
   primary: false
-  relevance: DMN hyperactivation and failure to deactivate during task performance is associated with PD-related cognitive
-    decline and visual hallucinations.
-  evidence_note: Lewy body cortical pathology; resting-state fMRI studies
+  relevance: >-
+    Default mode network shows hyperactivation and failure to deactivate during task performance in PD.
+    Associated with cognitive decline, visual hallucinations, and rumination. DMN-CEN switching
+    impairment contributes to dual-task difficulty and attentional lapses.
+  evidence_note: Resting-state fMRI studies; cortical Lewy body pathology disrupts posterior DMN hubs
+- network: sn
+  dysfunction: hyper
+  severity: moderate
+  primary: false
+  relevance: >-
+    Salience network dysfunction contributes to heightened threat detection, anxiety, and autonomic
+    dysregulation in PD. Anterior insula and ACC nodes show altered connectivity. Impaired network
+    switching between DMN and CEN reflects salience network gating dysfunction.
+  evidence_note: Functional connectivity studies in PD anxiety and autonomic dysfunction cohorts
 - network: limbic
   dysfunction: hypo
   severity: moderate
   primary: false
-  relevance: Serotonergic and noradrenergic depletion underlies depression (40-50%), anxiety (30%), and apathy (40%) in PD.
-  evidence_note: Neuroimaging and neurochemical studies in PD depression
-- network: sn
+  relevance: >-
+    Limbic network hypofunction underlies the high prevalence of depression (40-50%), apathy (40%),
+    and anhedonia in PD. Serotonergic raphe and noradrenergic locus coeruleus degeneration disrupts
+    mood circuits. Mesolimbic dopamine deficiency impairs reward processing in the ventral striatum.
+  evidence_note: Neuroimaging and neurochemical studies; PET studies showing serotonin transporter loss
+- network: attention
   dysfunction: hypo
-  severity: mild
+  severity: moderate
   primary: false
-  relevance: Reduced autonomic reactivity, apathy, and impaired network switching reflect salience network dysfunction.
-  evidence_note: ''
+  relevance: >-
+    Attention network deficits manifest as sustained attention impairment, slowed processing speed,
+    and difficulty with divided attention (dual-task paradigms). Contributes to gait freezing during
+    attentional loading. Cholinergic deficiency in the nucleus basalis impairs cortical arousal.
+  evidence_note: Neuropsychological testing and fMRI studies in PD; cholinergic PET imaging
+
 primary_network: smn
-fnon_rationale: In Parkinson's Disease, the primary dysfunctional network is the Sensorimotor Network (SMN), driven by basal
-  ganglia-thalamocortical circuit disruption from nigrostriatal dopamine depletion. The FNON framework directs primary stimulation
-  efforts at the SMN (M1/SMA targets) while addressing secondary networks — CEN for cognitive subtypes, limbic network for
-  depression/apathy subtypes, and attention networks for PD-MCI presentations.
+fnon_rationale: >-
+  In Parkinson's Disease, the primary dysfunctional network is the Sensorimotor Network (SMN), driven by
+  basal ganglia-thalamocortical circuit disruption from nigrostriatal dopamine depletion. The FNON framework
+  directs primary stimulation efforts at the SMN (M1/SMA targets) while addressing secondary networks based
+  on phenotype: CEN for cognitive-predominant subtypes (DLPFC target), limbic network for
+  depression/apathy-predominant subtypes (bifrontal target), attention network for PD-MCI and PIGD
+  presentations (PPC target), and cerebellar circuits for tremor-dominant phenotype. This multi-network,
+  phenotype-driven approach maximises therapeutic specificity and is the foundation of SOZO protocol selection
+  for PD.
+
 phenotypes:
 - slug: td
   label: TD — Tremor-Dominant
-  description: Predominantly tremor with minimal bradykinesia and rigidity. Slower progression.
+  description: >-
+    Tremor-dominant PD is characterised by prominent resting tremor (4-6 Hz, asymmetric onset) with
+    relatively mild bradykinesia and rigidity. This phenotype accounts for approximately 20-30% of PD
+    patients and is associated with slower disease progression, later onset of cognitive decline, and
+    overall better long-term prognosis compared to akinetic-rigid and PIGD subtypes. The pathophysiology
+    involves cerebello-thalamo-cortical circuit oscillatory dysfunction in addition to nigrostriatal
+    dopamine depletion. Patients may be less responsive to levodopa for tremor control compared to other
+    motor features. Neuromodulation targeting both M1 and cerebellar cortex may address the oscillatory
+    circuit driving tremor.
   key_features:
-  - Resting tremor 4-6 Hz
-  - Pill-rolling tremor
-  - Minimal bradykinesia
-  - Slower disease progression
+  - Resting tremor 4-6 Hz, pill-rolling character
+  - Asymmetric onset, typically unilateral upper limb
+  - Minimal bradykinesia relative to tremor severity
+  - Slower disease progression than other subtypes
+  - Better preserved cognition in early-mid stages
+  - Relative preservation of gait and balance
+  - May show re-emergent postural tremor
   primary_networks:
   - smn
   - attention
@@ -126,16 +375,28 @@ phenotypes:
   preferred_modalities:
   - tdcs
   - tps
-  tdcs_target: M1 bilateral (C3/C4 anodal)
-  tps_target: M1 / Cerebellar cortex (bilateral)
+  tdcs_target: M1 bilateral (C3/C4 anodal) + cerebellar (Cb1/Cbz)
+  tps_target: M1 bilateral + cerebellar cortex
+
 - slug: ar
   label: AR — Akinetic-Rigid
-  description: Predominant bradykinesia and rigidity without significant tremor. More rapid motor progression.
+  description: >-
+    Akinetic-rigid PD is characterised by predominant bradykinesia and rigidity with minimal or absent
+    tremor. This phenotype accounts for approximately 30-40% of PD patients and is associated with more
+    rapid motor progression, greater axial involvement, earlier postural instability, and higher disability
+    burden compared to tremor-dominant PD. Patients tend to develop cognitive impairment and dementia earlier.
+    Pathophysiology is more heavily weighted toward nigrostriatal dopamine depletion with less cerebello-
+    thalamic involvement. Response to levodopa for bradykinesia and rigidity is typically good initially
+    but diminishes over time with development of motor fluctuations. Bilateral M1 and SMA anodal tDCS
+    targets the hypoexcitable motor cortex directly.
   key_features:
-  - Bradykinesia
-  - Lead-pipe rigidity
-  - Minimal tremor
-  - Hypomimia
+  - Bradykinesia as dominant feature
+  - Lead-pipe rigidity (axial and appendicular)
+  - Minimal or absent tremor
+  - Hypomimia, hypophonia prominent early
+  - More rapid motor progression
+  - Earlier cognitive decline than TD subtype
+  - Higher risk of motor fluctuations and dyskinesias with levodopa
   primary_networks:
   - smn
   - cen
@@ -146,14 +407,28 @@ phenotypes:
   - tps
   tdcs_target: M1 bilateral + SMA (C3/C4/Cz anodal)
   tps_target: M1 + SMA bilateral
+
 - slug: pigd
   label: PIGD — Postural Instability / Gait Difficulty
-  description: Prominent gait freezing, falls, and postural instability. Poorer prognosis.
+  description: >-
+    The PIGD phenotype is characterised by prominent postural instability, gait freezing, falls, and
+    dual-task interference. This subtype carries the worst overall prognosis among motor phenotypes,
+    with faster progression to disability, earlier cognitive decline, poorer response to dopaminergic
+    therapy (especially for postural and gait features), and highest fall-related morbidity. PIGD
+    affects approximately 20-30% of PD patients, and many patients convert from TD or AR subtypes to
+    PIGD as disease advances. Non-dopaminergic mechanisms (cholinergic, noradrenergic, glutamatergic)
+    are implicated in postural instability and gait freezing, which is why these features respond
+    poorly to levodopa. Neuromodulation targeting SMA and DLPFC aims to enhance motor planning and
+    cognitive-motor integration, particularly when combined with concurrent gait training.
   key_features:
-  - Postural instability
-  - Freezing of gait
-  - Falls
-  - Dual-task interference
+  - Postural instability with positive pull test
+  - Freezing of gait (doorways, turns, dual-task)
+  - Frequent falls (>1 per week in advanced cases)
+  - Dual-task interference (gait deteriorates with cognitive load)
+  - Festinating gait pattern
+  - Poor response to levodopa for gait and balance
+  - Early progression to Hoehn and Yahr stage 3-4
+  - High caregiver burden
   primary_networks:
   - smn
   - attention
@@ -164,14 +439,28 @@ phenotypes:
   - tps
   tdcs_target: SMA (Cz) + L-DLPFC (F3)
   tps_target: SMA + M1 bilateral
+
 - slug: cog
   label: COG — Cognitive-Predominant (PD-MCI)
-  description: Executive dysfunction, attention deficits, and memory impairment predominate.
+  description: >-
+    The cognitive-predominant phenotype features prominent executive dysfunction, attention deficits,
+    and working memory impairment that significantly impacts daily function, even when motor symptoms
+    remain relatively mild. This subtype represents approximately 25-30% of PD patients at motor symptom
+    onset and predicts faster conversion to PD dementia. The most affected cognitive domains are executive
+    function (planning, set-shifting, inhibitory control), attention (sustained and divided), and
+    visuospatial processing. Memory retrieval is impaired but encoding is relatively preserved (distinguishing
+    PD-MCI from Alzheimer's type). Frontostriatal dopamine depletion and cholinergic nucleus basalis
+    degeneration are the primary neurochemical substrates. DLPFC and PPC stimulation targets the
+    executive-attentional network to enhance cognitive reserve and slow decline.
   key_features:
-  - Executive dysfunction
+  - Executive dysfunction (planning, set-shifting, inhibition)
   - Working memory impairment
-  - Attention deficits
+  - Attention deficits (sustained and divided)
   - Visuospatial difficulties
+  - Slowed processing speed
+  - Preserved insight (distinguishing MCI from dementia)
+  - MoCA score 21-25 typical range
+  - Higher risk of conversion to PD dementia
   primary_networks:
   - cen
   - dmn
@@ -182,31 +471,147 @@ phenotypes:
   - tps
   tdcs_target: L-DLPFC (F3 anodal)
   tps_target: L-DLPFC + bilateral PPC
+
+- slug: dep
+  label: DEP — Depression-Predominant
+  description: >-
+    The depression-predominant phenotype features clinically significant mood disturbance as the
+    dominant source of disability and reduced quality of life, often exceeding the impact of motor
+    symptoms. Depression may precede motor onset by years, serving as a prodromal marker. Anhedonia,
+    loss of motivation, psychomotor retardation, and social withdrawal are prominent features.
+    Overlaps significantly with apathy but is distinguished by the presence of sadness, hopelessness,
+    and negative rumination. Neurobiological substrate includes serotonergic raphe nuclei degeneration,
+    noradrenergic locus coeruleus loss, and mesolimbic dopamine circuit disruption. Bifrontal tDCS
+    (F3 anode / F4 cathode) mirrors the established rTMS antidepressant paradigm, rebalancing
+    prefrontal hemispheric asymmetry. Combined with medication optimisation and psychotherapy.
+  key_features:
+  - PHQ-9 or HAM-D scores in moderate-severe range
+  - Anhedonia and loss of interest
+  - Psychomotor retardation (beyond PD bradykinesia)
+  - Social withdrawal and isolation
+  - Sleep disturbance (insomnia or hypersomnia)
+  - Appetite changes
+  - Hopelessness and sometimes suicidal ideation (requires screening)
+  - Mood symptoms may fluctuate with motor ON/OFF state
+  primary_networks:
+  - limbic
+  - cen
+  secondary_networks:
+  - dmn
+  preferred_modalities:
+  - tdcs
+  - tps
+  tdcs_target: Bifrontal (F3 anode / F4 cathode)
+  tps_target: Bilateral DLPFC
+
+- slug: mixed
+  label: MIXED — Mixed Phenotype
+  description: >-
+    The mixed phenotype encompasses patients who do not fit neatly into a single subtype, displaying
+    clinically significant features across motor, cognitive, and/or mood domains simultaneously. This is
+    common in mid-to-advanced PD as disease progression involves multiple neural systems. Mixed phenotype
+    patients require a multi-target stimulation approach, often combining motor (M1/SMA) protocols with
+    cognitive (DLPFC) or mood (bifrontal) protocols in alternating or sequential sessions. Protocol
+    selection should be guided by the most functionally limiting symptom cluster at the time of
+    assessment, with regular re-evaluation to adjust targets as the clinical picture evolves.
+  key_features:
+  - Features of multiple subtypes present simultaneously
+  - Motor and non-motor symptoms both significantly limiting
+  - Moderate bradykinesia with moderate cognitive impairment
+  - Depression or anxiety co-occurring with motor disability
+  - May shift between predominant symptom profiles over time
+  - Requires multi-target stimulation approach
+  - Regular phenotype re-assessment recommended every 3-6 months
+  primary_networks:
+  - smn
+  - cen
+  secondary_networks:
+  - limbic
+  - attention
+  preferred_modalities:
+  - tdcs
+  - tps
+  tdcs_target: Individualised — based on dominant symptom cluster
+  tps_target: Individualised — multi-target sequential approach
+
 assessments:
 - scale_key: updrs
   timing: baseline
   primary: true
-  notes: MDS-UPDRS Part III (Motor Examination) is the primary motor outcome measure.
+  notes: >-
+    MDS-UPDRS Part III (Motor Examination) is the primary motor outcome measure. 33 items scored
+    0-4, total range 0-132. Administer in defined medication state (ON or OFF — document consistently).
+    Minimal clinically important difference (MCID) is approximately 3.25 points. Part I (non-motor
+    experiences), Part II (motor experiences of daily living), and Part IV (motor complications) should
+    also be administered for comprehensive assessment. PMID 19343477.
 - scale_key: moca
   timing: baseline
   primary: false
-  notes: Montreal Cognitive Assessment for PD-MCI screening. Score <26 warrants further evaluation.
-- scale_key: phq9
+  notes: >-
+    Montreal Cognitive Assessment — 30-point screening tool for PD-MCI. Score <26 indicates possible
+    cognitive impairment (sensitivity 90%, specificity 75% for PD-MCI). Assesses visuospatial/executive,
+    naming, memory, attention, language, abstraction, delayed recall, and orientation. Alternative
+    versions available to reduce practice effects at repeat assessment. PMID 15817019.
+- scale_key: hamd
   timing: baseline
   primary: false
-  notes: Screen for comorbid depression — prevalence 40-50% in PD.
+  notes: >-
+    Hamilton Depression Rating Scale (HAM-D, 17-item version) — clinician-administered depression
+    severity measure. Score 0-7 normal, 8-13 mild, 14-18 moderate, 19-22 severe, >=23 very severe.
+    MCID approximately 3 points. Preferred over self-report in PD due to overlap of somatic PD symptoms
+    with depression items. Validated in PD populations. PMID 14100341.
 - scale_key: fog_q
   timing: baseline
   primary: false
-  notes: Freezing of Gait Questionnaire for PIGD phenotype monitoring.
+  notes: >-
+    Freezing of Gait Questionnaire — 6-item self-report measure specifically assessing FOG severity
+    and frequency. Total score range 0-24. Primary outcome for PIGD phenotype protocols. Administer
+    at baseline and at each treatment block endpoint. Complements objective gait assessment with
+    patient-reported experience.
+- scale_key: tug
+  timing: baseline
+  primary: false
+  notes: >-
+    Timed Up and Go test — simple, objective mobility assessment. Patient rises from a chair, walks 3
+    metres, turns, walks back, and sits down. Time >13.5 seconds indicates elevated fall risk in PD.
+    Administer under single-task and dual-task conditions (e.g., counting backwards by 3s while walking)
+    to assess dual-task cost, which is a sensitive marker for PIGD phenotype severity.
+- scale_key: pdq39
+  timing: baseline
+  primary: false
+  notes: >-
+    Parkinson's Disease Questionnaire-39 — disease-specific quality of life measure. 39 items across
+    8 domains: mobility, activities of daily living, emotional well-being, stigma, social support,
+    cognition, communication, and bodily discomfort. Summary index score 0-100 (lower is better).
+    Captures the holistic patient experience beyond motor and cognitive assessments.
+- scale_key: sozo_prs
+  timing: baseline
+  primary: false
+  notes: >-
+    SOZO Practitioner Rating Scale — proprietary clinician-administered global impression scale used
+    across all SOZO conditions. Tracks overall treatment response, functional change, and goal
+    attainment. Administered at baseline, mid-treatment, end-of-treatment, and follow-up timepoints.
+    Complements standardised scales with individualised treatment goal tracking.
+- scale_key: bdi2
+  timing: baseline
+  primary: false
+  notes: >-
+    Beck Depression Inventory-II — 21-item self-report depression measure. Score 0-13 minimal, 14-19
+    mild, 20-28 moderate, 29-63 severe depression. Complements clinician-administered HAM-D with
+    patient perspective. Note: somatic items (fatigue, sleep, appetite) may be confounded by PD
+    symptoms — interpret total score in clinical context.
+
 applicable_modalities:
 - tdcs
 - tps
 - tavns
 - ces
+
 protocols:
-- protocol_id: pd-tdcs-motor
-  label: tDCS Motor (Bradykinesia & Rigidity)
+# ── tDCS Protocols ──────────────────────────────────────────────────────────
+
+- protocol_id: pd-tdcs-c1-motor
+  label: "C1: tDCS Bilateral M1 — Bradykinesia & Rigidity"
   modality: tdcs
   target_region: Primary Motor Cortex bilateral
   target_abbreviation: M1
@@ -219,20 +624,79 @@ protocols:
   - td
   - ar
   - pigd
+  - mixed
   network_targets:
   - smn
   parameters:
     current_mA: 2.0
-    duration_min: 20-30
-    anode: C3, C4
-    cathode: Fp1, Fp2 (supraorbital)
-  rationale: Bilateral anodal M1 tDCS enhances motor cortex excitability and reduces bradykinesia severity.
+    duration_min: 20
+    anode: "C3, C4 (bilateral M1)"
+    cathode: "Fp1, Fp2 (bilateral supraorbital)"
+    ramp_up_sec: 30
+    ramp_down_sec: 30
+    session_frequency: "5 sessions per week for 2 weeks (10 total)"
+    electrode_size_cm2: 35
+    current_density_mA_cm2: 0.057
+  rationale: >-
+    Bilateral anodal tDCS over M1 (C3/C4) increases cortical excitability in the hypoactive motor cortex,
+    partially compensating for the reduced thalamocortical drive caused by excessive GPi inhibitory output.
+    Multiple sham-controlled RCTs (Benninger 2010, PMID 20801741; Fregni 2006) demonstrate significant
+    improvements in MDS-UPDRS Part III motor scores. The bilateral montage addresses the bilateral (though
+    asymmetric) nature of PD motor deficit. Supraorbital cathode placement (Fp1/Fp2) provides a distant
+    return electrode, minimising current shunting. Meta-analyses confirm medium effect sizes (Cohen's d
+    ~0.5) for motor outcomes with this protocol. Combine with physiotherapy during the stimulation session
+    to leverage activity-dependent plasticity.
   evidence_level: high
   off_label: false
   session_count: 10
-  notes: From protocol_data C1. Combine with physiotherapy.
-- protocol_id: pd-tdcs-cognition
-  label: tDCS Cognition & Executive Function
+  notes: >-
+    Primary motor protocol. Monitor for dyskinesia exacerbation in patients on high levodopa doses.
+    Document medication state (ON/OFF) and levodopa timing at every session.
+
+- protocol_id: pd-tdcs-c2-gait
+  label: "C2: tDCS L-DLPFC + SMA — Gait & Dual-Task"
+  modality: tdcs
+  target_region: Left DLPFC and Supplementary Motor Area
+  target_abbreviation: DLPFC/SMA
+  target_electrodes:
+  - F3
+  - Cz
+  - Fp2
+  phenotype_slugs:
+  - pigd
+  - mixed
+  network_targets:
+  - smn
+  - cen
+  parameters:
+    current_mA: 2.0
+    duration_min: 20
+    anode: "F3 (L-DLPFC), Cz (SMA)"
+    cathode: "Fp2 (right supraorbital)"
+    ramp_up_sec: 30
+    ramp_down_sec: 30
+    session_frequency: "5 sessions per week for 2 weeks (10 total)"
+    electrode_size_cm2: 35
+    current_density_mA_cm2: 0.057
+    extended_option: "May extend to 40 min in patients with severe FOG if tolerated"
+  rationale: >-
+    PIGD phenotype patients demonstrate prominent dual-task interference where gait deteriorates under
+    cognitive load, reflecting competition for limited prefrontal executive resources. Simultaneous
+    facilitation of L-DLPFC (cognitive control, attention allocation) and SMA (motor planning, gait
+    initiation) targets both components of the dual-task deficit. The SMA is critical for internally
+    generated rhythmic movements including gait; its hypoactivation in PD contributes to freezing of
+    gait. DLPFC facilitation enhances attentional resource allocation during walking. Administer with
+    concurrent dual-task gait training (walking while performing a cognitive task) to maximise transfer
+    to real-world function through activity-dependent plasticity.
+  evidence_level: medium
+  off_label: false
+  session_count: 10
+  notes: >-
+    Gait-specific protocol for PIGD phenotype. Best combined with concurrent physiotherapy and dual-task
+    gait training. Extended duration (40 min) option for severe FOG with clinician judgement.
+
+- protocol_id: pd-tdcs-c3-cognition
+  label: "C3: tDCS L-DLPFC — Cognition & Executive Function"
   modality: tdcs
   target_region: Left Dorsolateral Prefrontal Cortex
   target_abbreviation: L-DLPFC
@@ -241,20 +705,121 @@ protocols:
   - Fp2
   phenotype_slugs:
   - cog
+  - mixed
   network_targets:
   - cen
   parameters:
     current_mA: 2.0
     duration_min: 20
-    anode: F3
-    cathode: Fp2 (contralateral supraorbital)
-  rationale: L-DLPFC anodal tDCS enhances working memory and executive control in PD-MCI.
+    anode: "F3 (L-DLPFC)"
+    cathode: "Fp2 (right supraorbital)"
+    ramp_up_sec: 30
+    ramp_down_sec: 30
+    session_frequency: "5 sessions per week for 2 weeks (10 total)"
+    electrode_size_cm2: 35
+    current_density_mA_cm2: 0.057
+  rationale: >-
+    Left DLPFC anodal tDCS targets the central executive network, enhancing working memory, set-shifting,
+    and inhibitory control — the cognitive domains most affected in PD-MCI. Boggio et al. (2006, PMID
+    16949616) demonstrated significant working memory improvement with L-DLPFC tDCS in PD patients.
+    The frontostriatal circuit linking DLPFC to caudate nucleus is disrupted by dopamine depletion;
+    cortical excitability enhancement via tDCS may partially compensate for reduced subcortical drive
+    to prefrontal regions. Combine with cognitive training tasks during stimulation to leverage
+    Hebbian-like plasticity mechanisms. This protocol is also appropriate as an adjunct for patients
+    with PD-MCI who are receiving cholinesterase inhibitors.
   evidence_level: medium
   off_label: false
   session_count: 10
-  notes: From protocol_data C3.
-- protocol_id: pd-tps-motor
-  label: TPS Motor (Bradykinesia & Rigidity)
+  notes: >-
+    Cognitive protocol. Combine with concurrent cognitive training (n-back, Trail Making, set-shifting
+    tasks) during stimulation. Reassess with MoCA at mid-treatment (session 5) and endpoint.
+
+- protocol_id: pd-tdcs-c4-mood
+  label: "C4: tDCS Bifrontal — Depression & Apathy"
+  modality: tdcs
+  target_region: Bilateral DLPFC (bifrontal)
+  target_abbreviation: DLPFC
+  target_electrodes:
+  - F3
+  - F4
+  phenotype_slugs:
+  - dep
+  - mixed
+  network_targets:
+  - cen
+  - limbic
+  parameters:
+    current_mA: 2.0
+    duration_min: 20
+    anode: "F3 (left DLPFC)"
+    cathode: "F4 (right DLPFC)"
+    ramp_up_sec: 30
+    ramp_down_sec: 30
+    session_frequency: "5 sessions per week for 2-3 weeks (10-15 total)"
+    electrode_size_cm2: 35
+    current_density_mA_cm2: 0.057
+    extended_option: "May extend to 30 min for severe depression (HAM-D >=19)"
+  rationale: >-
+    The bifrontal montage (F3 anode / F4 cathode) mirrors the established rTMS antidepressant paradigm,
+    facilitating left prefrontal activity while relatively inhibiting right prefrontal activity. This
+    addresses the hemispheric asymmetry model of depression where left prefrontal hypoactivation and
+    right prefrontal hyperactivation are observed. In PD depression, additional neurobiological
+    substrates include serotonergic raphe nuclei degeneration and mesolimbic dopamine circuit disruption.
+    Khedr et al. (2013, PMID 23421889) demonstrated therapeutic utility of bifrontal tDCS for depression
+    in PD. This protocol targets both depression and the frequently comorbid apathy through enhanced
+    prefrontal drive to limbic reward circuits.
+  evidence_level: medium
+  off_label: false
+  session_count: 10
+  notes: >-
+    Mood protocol. Screen for suicidal ideation before initiating. Monitor HAM-D and BDI-II at baseline,
+    mid-treatment, and endpoint. Extended course (15 sessions) for severe depression with Doctor approval.
+
+- protocol_id: pd-tdcs-c5-cerebellar
+  label: "C5: tDCS Cerebellar — Balance & Dyskinesia"
+  modality: tdcs
+  target_region: Cerebellar cortex
+  target_abbreviation: Cerebellum
+  target_electrodes:
+  - Cb1
+  - Cbz
+  - Fpz
+  phenotype_slugs:
+  - td
+  - pigd
+  - mixed
+  network_targets:
+  - smn
+  parameters:
+    current_mA: 2.0
+    duration_min: 20
+    anode: "Cb1, Cbz (cerebellar cortex, 1 cm below inion)"
+    cathode: "Fpz (frontal midline)"
+    ramp_up_sec: 30
+    ramp_down_sec: 30
+    session_frequency: "5 sessions per week for 2 weeks (10 total)"
+    electrode_size_cm2: 35
+    current_density_mA_cm2: 0.057
+  rationale: >-
+    The cerebellum plays a dual role in PD pathophysiology: compensatory hyperactivation partially
+    maintains motor function but may also contribute to maladaptive plasticity and tremor generation
+    via the cerebello-thalamo-cortical circuit. Cerebellar tDCS modulates Purkinje cell excitability
+    and can influence cerebellar-cortical connectivity. Anodal cerebellar stimulation enhances cerebellar
+    function including motor adaptation, balance control, and timing — all deficient in PD. This protocol
+    addresses balance impairment (PIGD), tremor (TD), and may help modulate levodopa-induced dyskinesias
+    through cerebellar influence on basal ganglia output. Combine with balance training exercises during
+    stimulation for optimal transfer to functional balance tasks.
+  evidence_level: low
+  off_label: false
+  session_count: 10
+  notes: >-
+    Cerebellar protocol. Emerging evidence — use as adjunct to M1 protocol, not standalone. Monitor
+    for dizziness or nausea during stimulation. Ensure secure electrode placement over posterior fossa.
+
+# ── TPS Protocols ───────────────────────────────────────────────────────────
+
+- protocol_id: pd-tps-t1-motor
+  label: "T1: TPS Bilateral M1 + SMA — Motor"
   modality: tps
   target_region: Bilateral M1 + SMA
   target_abbreviation: M1/SMA
@@ -265,191 +830,544 @@ protocols:
   phenotype_slugs:
   - td
   - ar
+  - pigd
+  - mixed
   network_targets:
   - smn
   parameters:
-    pulses: 3000-5000
-    frequency_hz: 5
     energy_mJ_mm2: 0.2
-  rationale: M1 bilateral targeting reduces motor cortex hyperexcitability; SMA supports initiation circuits.
+    frequency_hz: 5
+    pulses: "3000-5000 (titrate based on tolerance and target coverage)"
+    pulse_duration_us: 3
+    focal_depth_mm: 30
+    treatment_area_bilateral: "M1 (precentral gyrus, C3/C4 region) and SMA (FCz/Cz region)"
+    session_frequency: "2 sessions per week for 3 weeks (6 total)"
+    session_duration_min: 30
+  rationale: >-
+    TPS delivers focused ultrasound pulses to cortical targets with neuronavigation guidance, achieving
+    deeper tissue penetration than tDCS. Bilateral M1 targeting enhances motor cortex excitability and
+    modulates cortico-basal ganglia-thalamocortical circuit function. SMA targeting supports movement
+    initiation and motor sequence execution. The mechanical stimulation of TPS may trigger
+    mechanosensitive ion channel activation, promote neurotrophic factor release (BDNF), and enhance
+    synaptic plasticity through distinct mechanisms from electrical stimulation. Higher pulse counts
+    (up to 5000) may be used for extensive bilateral coverage. Emerging evidence from pilot studies
+    supports motor improvement with TPS in PD, though large RCTs are pending.
   evidence_level: medium
   off_label: true
   session_count: 6
-  notes: From protocol_data T1. Emerging evidence.
-- protocol_id: pd-tps-cognition
-  label: TPS Cognition (PD-MCI)
+  notes: >-
+    Primary TPS motor protocol. OFF-LABEL — requires explicit off-label consent. Neuronavigation
+    required for accurate targeting. Monitor for transient headache post-treatment.
+
+- protocol_id: pd-tps-t2-tremor
+  label: "T2: TPS Bilateral M1 + Cerebellum — Tremor"
+  modality: tps
+  target_region: Bilateral M1 + Cerebellar cortex
+  target_abbreviation: M1/Cb
+  target_electrodes:
+  - C3
+  - C4
+  - Cb1
+  - Cb2
+  phenotype_slugs:
+  - td
+  - mixed
+  network_targets:
+  - smn
+  parameters:
+    energy_mJ_mm2: 0.2
+    frequency_hz: 5
+    pulses: 3000
+    pulse_duration_us: 3
+    focal_depth_mm: 30
+    treatment_area: "M1 bilateral (1500 pulses) + cerebellar cortex bilateral (1500 pulses)"
+    session_frequency: "2 sessions per week for 3 weeks (6 total)"
+    session_duration_min: 25
+  rationale: >-
+    Tremor in PD arises from oscillatory activity in the cerebello-thalamo-cortical circuit, distinct
+    from the direct/indirect pathway imbalance driving bradykinesia. TPS targeting both M1 and
+    cerebellar cortex addresses both nodes of this oscillatory loop. Cerebellar TPS may modulate
+    Purkinje cell output and influence dentate nucleus projections to VIM thalamus, potentially
+    dampening tremor-generating oscillations. M1 stimulation provides additional cortical excitability
+    modulation. This dual-target approach leverages the superior spatial resolution of TPS compared
+    to tDCS for targeting the relatively small cerebellar cortical regions involved in tremor circuits.
+  evidence_level: low
+  off_label: true
+  session_count: 6
+  notes: >-
+    Tremor-specific TPS protocol. OFF-LABEL. Target cerebellar cortex using neuronavigation — avoid
+    cerebellar vermis to minimise risk of vestibular symptoms. Split pulses between targets.
+
+- protocol_id: pd-tps-t3-cognition
+  label: "T3: TPS L-DLPFC + PPC — Cognition"
   modality: tps
   target_region: L-DLPFC + bilateral PPC
   target_abbreviation: DLPFC/PPC
   target_electrodes:
   - F3
-  - F4
   - P3
+  - P4
   phenotype_slugs:
   - cog
+  - mixed
   network_targets:
   - cen
   - attention
   parameters:
-    pulses: 4000
-    frequency_hz: 5
     energy_mJ_mm2: 0.2
-  rationale: DLPFC facilitates working memory; PPC supports spatial-attentional integration.
+    frequency_hz: 5
+    pulses: 4000
+    pulse_duration_us: 3
+    focal_depth_mm: 30
+    treatment_area: "L-DLPFC (2000 pulses) + bilateral PPC (1000 pulses each hemisphere)"
+    session_frequency: "2 sessions per week for 3 weeks (6 total)"
+    session_duration_min: 30
+  rationale: >-
+    The cognitive protocol targets the frontoparietal executive-attentional network. L-DLPFC stimulation
+    enhances working memory, cognitive flexibility, and executive control through modulation of the
+    central executive network. Bilateral PPC stimulation supports visuospatial processing, sustained
+    attention, and sensorimotor integration — domains commonly affected in PD-MCI. TPS offers superior
+    spatial resolution for targeting specific cortical regions within the frontoparietal network. The
+    combination of DLPFC and PPC targets may produce synergistic effects through enhancement of
+    frontoparietal functional connectivity. Administer with concurrent cognitive engagement tasks.
   evidence_level: low
   off_label: true
   session_count: 6
-  notes: From protocol_data T3. Preliminary evidence.
-- protocol_id: pd-tdcs-mood
-  label: tDCS Depression & Apathy
-  modality: tdcs
+  notes: >-
+    Cognitive TPS protocol. OFF-LABEL. Preliminary evidence only. Combine with cognitive training
+    programme. Reassess with MoCA at endpoint.
+
+- protocol_id: pd-tps-t4-depression
+  label: "T4: TPS Bilateral DLPFC — Depression"
+  modality: tps
   target_region: Bilateral DLPFC
   target_abbreviation: DLPFC
   target_electrodes:
   - F3
   - F4
   phenotype_slugs:
-  - cog
-  - ar
+  - dep
+  - mixed
   network_targets:
   - cen
   - limbic
   parameters:
-    current_mA: 2.0
-    duration_min: 20-30
-    anode: F3
-    cathode: F4
-  rationale: Left prefrontal facilitation with right inhibition mirrors rTMS antidepressant montage.
-  evidence_level: medium
-  off_label: false
-  session_count: 10
-  notes: From protocol_data C4.
+    energy_mJ_mm2: 0.2
+    frequency_hz: 5
+    pulses: 3000
+    pulse_duration_us: 3
+    focal_depth_mm: 30
+    treatment_area: "L-DLPFC (2000 pulses) + R-DLPFC (1000 pulses)"
+    session_frequency: "2 sessions per week for 3 weeks (6 total)"
+    session_duration_min: 25
+  rationale: >-
+    Bilateral DLPFC TPS addresses PD depression through modulation of the prefrontal-limbic circuit.
+    Left DLPFC receives greater stimulation to enhance hypoactive left prefrontal function, consistent
+    with the hemispheric asymmetry model of depression. Right DLPFC receives lower-dose stimulation.
+    TPS may promote neuroplasticity and neurotrophic factor release in prefrontal regions, supporting
+    sustained mood improvement beyond the acute treatment period. The mechanical mechanism of TPS
+    is distinct from electromagnetic stimulation (rTMS, tDCS), potentially offering additive benefits
+    when used in sequence with tDCS mood protocols.
+  evidence_level: low
+  off_label: true
+  session_count: 6
+  notes: >-
+    Depression TPS protocol. OFF-LABEL. Screen for suicidal ideation before initiating. Monitor
+    HAM-D at baseline and endpoint. May be used in sequence with tDCS C4 protocol.
+
+- protocol_id: pd-tps-t5-pain
+  label: "T5: TPS M1 + Cerebellum — Pain & Dyskinesia"
+  modality: tps
+  target_region: M1 + Cerebellar cortex
+  target_abbreviation: M1/Cb
+  target_electrodes:
+  - C3
+  - C4
+  - Cb1
+  phenotype_slugs:
+  - ar
+  - td
+  - mixed
+  network_targets:
+  - smn
+  parameters:
+    energy_mJ_mm2: 0.2
+    frequency_hz: 5
+    pulses: 4000
+    pulse_duration_us: 3
+    focal_depth_mm: 30
+    treatment_area: "Contralateral M1 (2000 pulses, target hemisphere opposite to dominant pain) + ipsilateral cerebellum (2000 pulses)"
+    session_frequency: "2 sessions per week for 3 weeks (6 total)"
+    session_duration_min: 30
+  rationale: >-
+    M1 stimulation for pain modulation leverages the well-established analgesic effect of motor cortex
+    stimulation, mediated through descending pain inhibitory pathways and modulation of thalamocortical
+    pain processing circuits. In PD, central pain (burning, poorly localised) and dystonic pain (OFF-period
+    cramps) are common and undertreated. Cerebellar stimulation addresses levodopa-induced dyskinesias
+    by modulating cerebellar influence on basal ganglia output and cortical motor excitability. The
+    combination targets both pain and dyskinesia — frequently co-occurring problems in mid-to-advanced
+    PD patients on long-term levodopa therapy. Contralateral M1 targeting (opposite to dominant pain
+    side) provides lateralised analgesic effect.
+  evidence_level: low
+  off_label: true
+  session_count: 6
+  notes: >-
+    Pain and dyskinesia TPS protocol. OFF-LABEL. Document pain location, type, and VAS score at each
+    session. Monitor dyskinesia severity using MDS-UPDRS Part IV. Adjust target hemisphere based on
+    dominant pain laterality.
+
 safety_rules:
 - category: contraindication
-  description: Deep Brain Stimulator (DBS) implanted — absolute contraindication for TPS and tDCS due to DBS interaction risk.
+  description: >-
+    Deep Brain Stimulator (DBS) implanted — absolute contraindication for TPS and tDCS. Electrical
+    and mechanical stimulation may interfere with DBS electrode function, alter stimulation parameters,
+    cause tissue heating around electrodes, or produce unpredictable current pathways. No exceptions
+    without explicit neurosurgeon approval and device manufacturer clearance.
+  severity: absolute
+  modalities:
+  - tps
+  - tdcs
+  source: Device manufacturer guidelines and IEC 60601 medical device standards
+
+- category: contraindication
+  description: >-
+    Metallic cranial implants (plates, screws, clips, coils) in or near the stimulation field — may
+    concentrate or redirect current (tDCS) or ultrasound energy (TPS), causing focal heating, tissue
+    damage, or unpredictable stimulation distribution. Dental implants are generally acceptable as
+    they are outside the stimulation field. Requires case-by-case assessment for implants distant
+    from the target region.
   severity: absolute
   modalities:
   - tps
   - tdcs
   source: Device manufacturer guidelines
-- category: precaution
-  description: Unstable ON/OFF fluctuations — time sessions during stable ON window for TPS.
-  severity: moderate
+
+- category: contraindication
+  description: >-
+    Cardiac pacemaker or implantable cardioverter-defibrillator (ICD) — absolute contraindication for
+    all transcranial stimulation modalities. Risk of electromagnetic interference with cardiac device
+    function, potentially causing inappropriate pacing, sensing failure, or device malfunction.
+  severity: absolute
   modalities:
   - tps
-  source: Clinical practice
-- category: monitoring
-  description: Monitor for dyskinesia exacerbation during and after stimulation sessions.
-  severity: moderate
-  modalities:
   - tdcs
+  - tavns
+  - ces
+  source: Cardiac device manufacturer guidelines
+
+- category: contraindication
+  description: >-
+    Active seizure disorder or epilepsy — elevated seizure threshold risk with brain stimulation.
+    While tDCS at standard parameters (<=2 mA) has not been shown to induce seizures in healthy
+    populations, PD patients with concurrent epilepsy have pre-existing cortical hyperexcitability.
+    Well-controlled epilepsy (seizure-free >12 months) may be considered as relative contraindication
+    with neurologist approval.
+  severity: absolute
+  modalities:
   - tps
-  source: Clinical observation
+  - tdcs
+  source: International safety consensus guidelines for NIBS
+
+- category: contraindication
+  description: >-
+    Pregnancy — insufficient safety data for transcranial stimulation during pregnancy. Theoretical risk
+    of effects on fetal neurodevelopment cannot be excluded. Exclude all pregnant patients and those
+    actively attempting conception. Document negative pregnancy status for women of childbearing age.
+  severity: absolute
+  modalities:
+  - tps
+  - tdcs
+  - tavns
+  - ces
+  source: Precautionary principle; no safety data available
+
 - category: precaution
-  description: Document levodopa equivalent dose (LED) and medication timing relative to sessions.
+  description: >-
+    DBS interaction considerations for patients being evaluated for DBS — patients on the DBS surgical
+    waiting list may still receive NIBS, but document that NIBS is being used as a bridging therapy.
+    Ensure neurosurgical team is informed. Cease all NIBS at least 2 weeks before DBS implantation
+    surgery to allow washout of any stimulation-induced plasticity effects that could confound DBS
+    programming.
+  severity: moderate
+  modalities:
+  - tps
+  - tdcs
+  source: Clinical practice recommendation
+
+- category: precaution
+  description: >-
+    Medication interaction — document levodopa equivalent dose (LED) and exact timing of last dose
+    relative to each session. Dopaminergic medication state (ON/OFF) significantly affects cortical
+    excitability and may modulate response to stimulation. Anodal M1 tDCS combined with peak-dose
+    levodopa may transiently worsen dyskinesias. Maintain consistent medication timing across sessions
+    where possible. Report any medication changes to the treating Doctor.
   severity: moderate
   modalities:
   - tdcs
   - tps
   - tavns
   - ces
-  source: SOZO clinical protocol
-- category: stopping_rule
-  description: Discontinue if new or worsened dyskinesia persists >24 hours post-stimulation.
-  severity: high
+  source: SOZO clinical protocol; pharmacokinetic interaction considerations
+
+- category: precaution
+  description: >-
+    Skin integrity at electrode/transducer sites — inspect scalp skin before each session. Open wounds,
+    active dermatitis, psoriasis lesions, or post-surgical scars under electrode positions are
+    contraindications for that electrode site. Seborrheic dermatitis (common in PD, prevalence 50-60%)
+    may cause discomfort under electrodes; treat dermatitis before commencing or adjust electrode position
+    to avoid affected skin. Use appropriate electrode gel/saline and ensure even contact.
+  severity: moderate
   modalities:
   - tdcs
+  source: tDCS safety guidelines
+
+- category: precaution
+  description: >-
+    Cognitive capacity for informed consent — PD patients with cognitive impairment (PD-MCI, PDD) may
+    have reduced capacity to provide informed consent. Assess capacity formally if MoCA <21 or if
+    clinical concern exists. For patients lacking capacity, follow local jurisdiction requirements
+    for consent by legal representative/next of kin. Document capacity assessment in clinical record.
+  severity: moderate
+  modalities:
   - tps
-  source: Clinical safety protocol
+  - tdcs
+  - tavns
+  - ces
+  source: Medical ethics and medico-legal requirements
+
+- category: monitoring
+  description: >-
+    Falls risk during and after stimulation — PD patients with postural instability (PIGD phenotype,
+    H&Y stage 3+) are at elevated falls risk. Ensure supervised transfer to and from the treatment
+    chair. Monitor for orthostatic hypotension (common in PD, exacerbated by autonomic dysfunction)
+    when standing after sessions. Advise patients not to drive for 30 minutes post-TPS sessions due
+    to potential transient light-headedness. Document any falls or near-falls during treatment visits.
+  severity: moderate
+  modalities:
+  - tps
+  - tdcs
+  source: Clinical safety protocol; PD-specific falls risk management
+
 contraindications:
-- Deep Brain Stimulator (DBS) implanted
-- Active seizure disorder or epilepsy
-- Metallic cranial implants in stimulation path
-- Unstable medical conditions (e.g. recent stroke <3 months)
-- Pregnancy
+- Deep Brain Stimulator (DBS) or other implanted neurostimulation device
+- Active seizure disorder or epilepsy (uncontrolled)
+- Metallic cranial implants in or near the stimulation field
+- Cardiac pacemaker or implantable cardioverter-defibrillator (ICD)
+- Pregnancy or actively attempting conception
+- Unstable medical conditions (e.g. recent stroke <3 months, unstable cardiac disease)
+- Intracranial neoplasm or space-occupying lesion
+- Cochlear implant (for TPS due to mechanical energy transmission risk)
+
 inclusion_criteria:
-- Confirmed diagnosis of idiopathic PD by neurologist (UK Brain Bank criteria)
-- Hoehn & Yahr stage 1-4
-- Stable medication regimen for >=4 weeks
+- Confirmed diagnosis of idiopathic PD by movement disorder specialist (MDS Clinical Diagnostic Criteria or UK Brain Bank Criteria)
+- Hoehn and Yahr stage 1-4 (ambulatory patients)
+- Stable medication regimen for >=4 weeks prior to commencing treatment
 - Age 18-85 years
-- Able to provide informed consent
+- Able to provide informed consent (or consent via legal representative if capacity impaired)
+- Able to attend the full treatment course (minimum 80% session attendance)
+- Willing to maintain stable medication regimen throughout treatment block where clinically appropriate
+- Able to tolerate seated position for treatment duration (20-30 minutes)
+
 exclusion_criteria:
 - Deep Brain Stimulator or other implanted neurostimulation device
-- Parkinsonism secondary to medication, stroke, or other cause
-- Hoehn & Yahr stage 5 (wheelchair-bound/bedridden)
-- Severe dementia (MoCA <10)
-- Active psychosis or severe hallucinations
+- Parkinsonism secondary to medication, vascular disease, toxins, trauma, or other identifiable cause
+- Hoehn and Yahr stage 5 (wheelchair-bound or bedridden)
+- Severe dementia (MoCA <10 or unable to engage meaningfully with assessment)
+- Active psychosis, severe hallucinations with lost insight, or delirium
+- Active substance abuse disorder
+- Unstable epilepsy or seizure within the past 12 months
+- Concurrent participation in another interventional clinical trial (unless explicitly approved by PI)
+
 responder_criteria:
-- '>=30% improvement on MDS-UPDRS Part III motor score'
-- '>=2 point improvement on MoCA (cognitive protocol)'
-- '>=50% reduction on PHQ-9 (mood protocol)'
-- Patient-reported Global Impression of Change (PGIC) >= 'much improved'
-non_responder_pathway: 'If <30% improvement on MDS-UPDRS III after 10 sessions: review phenotype assignment, consider protocol
-  switch (e.g. add cerebellar target for tremor), escalate to multi-modal combination, or refer for DBS evaluation.'
-evidence_summary: 'Parkinson''s Disease represents the strongest neuromodulation evidence base among SOZO conditions. tDCS:
-  Multiple sham-controlled RCTs (Benninger 2010, Boggio 2006, Khedr 2013, Doruk 2014) demonstrate significant improvements
-  in UPDRS motor scores with M1 anodal tDCS. Meta-analyses (Doruk Cengiz et al. 2020) confirm medium effect sizes for motor
-  outcomes. Cognitive tDCS (DLPFC): moderate evidence from smaller trials. TPS: Emerging evidence from Koch et al. (2019)
-  and subsequent studies using NEUROLITH; OFF-LABEL for PD. taVNS and CES: Limited PD-specific evidence; broader neuropsychiatric
-  evidence supports adjunct use.'
+- ">=30% improvement on MDS-UPDRS Part III motor score (motor protocols C1, C2, C5 and T1, T2, T5)"
+- ">=2 point improvement on MoCA total score (cognitive protocols C3, T3)"
+- ">=50% reduction on HAM-D total score (mood protocols C4, T4)"
+- ">=3 point improvement on FOG-Q total score (gait protocols C2)"
+- "Patient-reported Global Impression of Change (PGIC) >= 'much improved'"
+- "Clinician-rated SOZO PRS improvement of >=1 category (e.g. moderate to mild)"
+
+non_responder_pathway: >-
+  If <30% improvement on MDS-UPDRS Part III after 10 tDCS sessions or 6 TPS sessions: (1) Review and
+  confirm phenotype assignment — consider whether patient has shifted to a different phenotype requiring
+  protocol change; (2) Assess medication optimisation — suboptimal LED may limit stimulation response;
+  (3) Consider protocol switch — add cerebellar target for tremor-dominant non-responders, add DLPFC for
+  patients with prominent dual-task interference, switch from tDCS to TPS or vice versa; (4) Escalate
+  to multi-modal combination (e.g. tDCS + TPS sequential protocol in same treatment block); (5) If no
+  response to multi-modal approach after further 10 sessions, refer for DBS evaluation if clinically
+  appropriate and discuss treatment discontinuation with patient. Document all non-responder pathway
+  decisions in the clinical record.
+
+evidence_summary: >-
+  Parkinson's Disease represents one of the strongest neuromodulation evidence bases among SOZO conditions.
+  tDCS: Multiple sham-controlled RCTs (Benninger 2010 PMID 20801741, Boggio 2006 PMID 16949616, Khedr 2013
+  PMID 23421889) and systematic reviews/meta-analyses (Doruk Cengiz et al. 2020 PMID 32180044; PMID
+  28261072) demonstrate significant improvements in UPDRS motor scores with M1 anodal tDCS, with medium
+  effect sizes (Cohen's d ~0.5). Cognitive tDCS targeting DLPFC shows moderate evidence from smaller trials.
+  Bifrontal tDCS for depression in PD has preliminary positive evidence. Cochrane review (PMID 26677243)
+  provides comprehensive evaluation of non-invasive brain stimulation for PD. Comprehensive NIBS review
+  (PMID 33568986) supports continued investigation across motor and non-motor domains. TPS: Emerging
+  evidence from pilot studies using NEUROLITH system; OFF-LABEL for PD — large RCTs are needed.
+  taVNS and CES: Limited PD-specific evidence; broader neuropsychiatric evidence supports potential
+  adjunct use for autonomic and mood symptoms.
+
 evidence_quality: high
+
 evidence_gaps:
-- Long-term maintenance effects of tDCS in PD
-- TPS-specific RCTs in PD (currently pilot-level)
-- Optimal stimulation parameters for different PD phenotypes
-- Interaction between stimulation and levodopa pharmacokinetics
+- "Long-term maintenance effects of tDCS in PD — most trials assess acute effects over 2-4 weeks; durability of benefit beyond 3 months is poorly characterised"
+- "TPS-specific RCTs in PD — currently limited to pilot and open-label studies; adequately powered sham-controlled trials are needed"
+- "Optimal stimulation parameters for different PD phenotypes — head-to-head comparisons of montages, intensities, and durations across TD, AR, PIGD, and cognitive subtypes are lacking"
+- "Interaction between stimulation timing and levodopa pharmacokinetics — whether stimulation during ON vs OFF state produces different outcomes is inadequately studied"
+- "Biomarkers for predicting treatment response — no validated neuroimaging, genetic, or neurophysiological predictors exist to guide patient selection"
+- "Combination and sequencing of modalities — evidence for multi-modal approaches (tDCS + TPS, NIBS + pharmacotherapy optimisation) remains largely anecdotal"
+
 references:
 - pmid: '32180044'
-  title: 'tDCS in Parkinson''s Disease: A Systematic Review and Meta-analysis'
+  title: "tDCS in Parkinson's Disease: A Systematic Review and Meta-analysis"
   authors: Doruk Cengiz A et al.
   year: 2020
   journal: Neurological Sciences
   evidence_level: high
-  notes: ''
+  notes: Comprehensive systematic review and meta-analysis of tDCS for motor and non-motor PD outcomes
 - pmid: '20801741'
-  title: Transcranial direct current stimulation for the treatment of Parkinson's disease
+  title: "Transcranial direct current stimulation for the treatment of Parkinson's disease"
   authors: Benninger DH et al.
   year: 2010
   journal: Journal of Neurology, Neurosurgery & Psychiatry
   evidence_level: high
-  notes: ''
+  notes: Landmark sham-controlled RCT demonstrating M1 tDCS efficacy for PD motor symptoms
 - pmid: '16949616'
-  title: Effects of transcranial direct current stimulation on working memory in patients with Parkinson's disease
+  title: "Effects of transcranial direct current stimulation on working memory in patients with Parkinson's disease"
   authors: Boggio PS et al.
   year: 2006
   journal: Journal of the Neurological Sciences
   evidence_level: high
-  notes: ''
+  notes: First trial demonstrating L-DLPFC tDCS improves working memory in PD
 - pmid: '23421889'
-  title: Therapeutic utility of bifrontal transcranial direct current stimulation in Parkinson's disease
+  title: "Therapeutic utility of bifrontal transcranial direct current stimulation in Parkinson's disease"
   authors: Khedr EM et al.
   year: 2013
   journal: European Journal of Neurology
   evidence_level: high
-  notes: ''
+  notes: Evidence for bifrontal tDCS in PD depression and motor symptoms
 - pmid: '19343477'
-  title: 'MDS-UPDRS: Scale presentation and clinimetric testing results'
+  title: "MDS-UPDRS: Scale presentation and clinimetric testing results"
   authors: Goetz CG et al.
   year: 2008
   journal: Movement Disorders
   evidence_level: high
-  notes: MDS-UPDRS validation reference
+  notes: Validation study for the Movement Disorder Society UPDRS — primary motor outcome measure
+- pmid: '15817019'
+  title: "MoCA: A brief screening tool for mild cognitive impairment"
+  authors: Nasreddine ZS et al.
+  year: 2005
+  journal: Journal of the American Geriatrics Society
+  evidence_level: high
+  notes: Original validation of MoCA — primary cognitive screening tool for PD-MCI
+- pmid: '14100341'
+  title: "A rating scale for depression (Hamilton Depression Rating Scale)"
+  authors: Hamilton M
+  year: 1960
+  journal: Journal of Neurology, Neurosurgery & Psychiatry
+  evidence_level: high
+  notes: Original HAM-D publication — gold standard clinician-rated depression measure
+- pmid: '33568986'
+  title: "Non-invasive brain stimulation for Parkinson's disease: a comprehensive review"
+  authors: Lefaucheur JP et al.
+  year: 2021
+  journal: Clinical Neurophysiology
+  evidence_level: high
+  notes: Comprehensive review covering tDCS, rTMS, TPS, and other NIBS modalities for PD
+- pmid: '28261072'
+  title: "Transcranial direct current stimulation for motor rehabilitation in Parkinson's disease: a meta-analysis"
+  authors: Elsner B et al.
+  year: 2016
+  journal: Journal of Parkinson's Disease
+  evidence_level: high
+  notes: Meta-analysis confirming medium effect sizes for tDCS on PD motor outcomes
+- pmid: '26677243'
+  title: "Non-invasive brain stimulation for Parkinson's disease (Cochrane Review)"
+  authors: Defined Cochrane Review Group
+  year: 2016
+  journal: Cochrane Database of Systematic Reviews
+  evidence_level: high
+  notes: Cochrane systematic review — highest level of evidence synthesis for NIBS in PD
+
 clinical_tips:
-- Always confirm consistent medication state before treatment — document ON or OFF and levodopa dose timing at every session
-- For tremor-dominant PD, consider cerebellar tDCS/TPS as adjunct to M1 protocols (emerging evidence)
-- 'Dyskinesia monitoring: anodal M1 tDCS may temporarily increase dyskinesias in patients on high LED — reduce intensity if
-  necessary'
-- Dual-task paradigms during tDCS delivery may enhance gait outcomes (concurrent motor task during stimulation)
-- PIGD phenotype patients benefit from combining tDCS with active physiotherapy during the same session window
+- >-
+  Always confirm and document consistent medication state before treatment. Record ON or OFF status and
+  exact levodopa dose timing at every session. Inconsistent medication state is the single biggest
+  confounder in PD neuromodulation outcomes.
+- >-
+  For tremor-dominant PD, consider adding cerebellar tDCS (C5) or cerebellar TPS (T2) as adjunct to M1
+  protocols. The cerebello-thalamo-cortical tremor circuit requires targeted modulation beyond standard
+  M1 stimulation. Emerging evidence supports this dual-target approach.
+- >-
+  Dyskinesia monitoring is essential. Anodal M1 tDCS may temporarily increase dyskinesias in patients
+  on high levodopa equivalent doses. If dyskinesias worsen during stimulation, reduce intensity to 1.5 mA
+  or shorten session duration. Document dyskinesia severity using MDS-UPDRS Part IV at each visit.
+- >-
+  Dual-task paradigms during tDCS delivery enhance gait outcomes for PIGD phenotype. Have patients
+  perform a cognitive task (serial subtraction, verbal fluency) while walking during or immediately
+  after stimulation. This leverages activity-dependent plasticity to maximise functional transfer.
+- >-
+  PIGD phenotype patients benefit most from combining tDCS with active physiotherapy during the same
+  session window (within 30 minutes of stimulation). The post-stimulation plasticity window is time-limited,
+  so coordinate scheduling with the physiotherapy team.
+- >-
+  Screen all PD patients for depression and anxiety at baseline using both HAM-D and BDI-II — non-motor
+  symptoms are frequently under-diagnosed and significantly impact treatment engagement. A patient with
+  untreated severe depression may not engage adequately with concurrent rehabilitation tasks.
+- >-
+  For cognitive protocols (C3, T3), combine with structured cognitive training during stimulation. N-back
+  tasks, Trail Making Test practice, and computerised cognitive training programmes (e.g. BrainHQ) are
+  suitable concurrent activities that engage the target DLPFC/PPC networks during the stimulation window.
+- >-
+  Document Hoehn and Yahr stage at baseline and every 3 months. Phenotype can shift over time (TD to PIGD
+  conversion is common in disease progression). Protocol selection should be reassessed if phenotype changes
+  — do not continue the original protocol unchanged if the clinical picture has evolved.
+- >-
+  TPS sessions should ideally be conducted in the ON medication state for patient comfort and to allow
+  meaningful motor assessment. However, document any OFF-state assessments as these provide the most
+  sensitive measure of stimulation-specific (medication-independent) benefit.
+- >-
+  Manage patient expectations explicitly. Neuromodulation in PD is an adjunct therapy — it does not replace
+  dopaminergic medication, and effects are typically modest (30% UPDRS improvement is a realistic best case).
+  Frame treatment as enhancing the benefit of existing medication and rehabilitation, not as a standalone cure.
+
 governance_rules:
-- No Fellow or Clinical Assistant may independently modify treatment plans without Doctor authorization
-- All TPS applications require explicit off-label informed consent and Doctor authorization
-- Adverse events must be documented within 24 hours and escalated per clinic protocol
-- Treatment records must be updated at every session
-- Informed consent must be obtained and documented before initiating any modality
-- Levodopa medication state must be documented at every PD session — this is mandatory
-- TPS for PD is explicitly OFF-LABEL — off-label consent documentation required in patient file before every treatment block
-- Any worsening of dyskinesia following tDCS must be documented and reported to the treating Doctor same day
+- No Fellow or Clinical Assistant may independently modify PD treatment plans or protocol parameters without explicit Doctor authorization
+- All TPS applications for PD require explicit off-label informed consent documentation and Doctor authorization before first session
+- Adverse events (including dyskinesia worsening, falls, syncope, or new neurological symptoms) must be documented within 24 hours and escalated per clinic protocol
+- Treatment records including medication state, LED, session parameters, and outcome measures must be updated at every session without exception
+- Informed consent must be obtained and documented before initiating any stimulation modality — PD-specific risks (dyskinesia, falls, medication interaction) must be explicitly discussed
+- Levodopa medication state (ON/OFF), exact dose, and timing relative to session must be documented at every PD session — this is mandatory for clinical governance and outcome interpretation
+- TPS for PD is explicitly OFF-LABEL — off-label consent documentation required in patient file before every treatment block, renewed at each new treatment block
+- Any worsening of dyskinesia following tDCS or TPS must be documented and reported to the treating Doctor on the same day — do not wait for the next scheduled review
+- Protocol deviations (missed sessions, parameter modifications, schedule changes) must be documented with reason and approved by the treating Doctor within 48 hours
+- Phenotype reassessment must be conducted formally every 3 months or whenever clinical presentation changes significantly — protocol selection depends on accurate phenotype classification
+
 patient_journey_notes:
-  stage_1: Pre-screen for PD diagnosis (confirmed by neurologist). Confirm medication stability (>=4 weeks). Screen for absolute
-    contraindications.
-  stage_3: Administer MDS-UPDRS III, MoCA, PHQ-9. Document H&Y stage, LED, and medication timing.
+  stage_1: >-
+    Pre-screening: Confirm PD diagnosis by movement disorder specialist (MDS Clinical Diagnostic Criteria
+    or UK Brain Bank Criteria). Confirm medication stability (>=4 weeks stable regimen). Screen for absolute
+    contraindications (DBS, metallic implants, cardiac devices, epilepsy, pregnancy). Obtain neurologist
+    referral letter. Check Hoehn and Yahr stage eligibility (1-4).
+  stage_2: >-
+    Initial consultation: Full medical history review including PD duration, medication regimen (calculate
+    LED), surgical history (DBS candidacy status), comorbidities. Phenotype classification (TD, AR, PIGD,
+    COG, DEP, Mixed) based on comprehensive motor and non-motor assessment. Discuss treatment options,
+    expected outcomes, off-label status for TPS, and obtain informed consent.
+  stage_3: >-
+    Baseline assessment: Administer MDS-UPDRS Parts I-IV (document medication state), MoCA, HAM-D, BDI-II,
+    FOG-Q, TUG (single and dual-task), PDQ-39, SOZO PRS. Document H&Y stage, LED, medication timing.
+    Assign phenotype and select protocol based on dominant symptom cluster and phenotype-protocol matching.
+  stage_4: >-
+    Treatment delivery: Deliver protocol per parameters. Monitor for adverse effects at each session
+    (dyskinesia, skin irritation, headache, dizziness, mood change). Document medication state at every
+    session. Conduct mid-treatment assessment (session 5 for tDCS, session 3 for TPS) with abbreviated
+    outcome measures (MDS-UPDRS III, MoCA if cognitive protocol, HAM-D if mood protocol).
+  stage_5: >-
+    Endpoint and follow-up: Full reassessment battery at treatment endpoint. Compare to baseline.
+    Apply responder criteria. For responders: discuss maintenance schedule (monthly booster sessions).
+    For non-responders: follow non-responder pathway. Schedule 1-month and 3-month follow-up assessments
+    to evaluate durability of benefit. Communicate outcomes to referring neurologist.

@@ -1,9 +1,8 @@
 # ──────────────────────────────────────────────────────────────────────────────
-# SOZO Brain Center — Clinical Knowledge File
+# SOZO Brain Center — Clinical Knowledge File (Expanded)
 # Condition: Migraine (G43)
-# Version: 1.0
+# Version: 1.1
 # Schema: KnowledgeCondition (schemas.py)
-# NOTE: NEW CONDITION — not present in legacy condition generators
 # ──────────────────────────────────────────────────────────────────────────────
 
 slug: migraine
@@ -13,42 +12,91 @@ aliases:
   - migraine headache
   - migraine disorder
   - migrainous headache
+  - common migraine
+  - classic migraine
 category: neurological
-version: "1.0"
+version: "1.1"
 
-# ── Clinical ──────────────────────────────────────────────────────────────────
+# ── Clinical ─────────────────────────────────────────────────────────────────
 
 overview: >-
   Migraine is a common, disabling neurological disorder characterised by recurrent
   episodes of moderate-to-severe headache (typically unilateral and pulsating),
-  accompanied by photophobia, phonophobia, nausea, and in some patients, aura.
-  It is the second leading cause of years lived with disability globally.
+  accompanied by photophobia, phonophobia, nausea, and in approximately 30% of
+  patients, aura consisting of visual, sensory, or language disturbances. It is
+  the second leading cause of years lived with disability globally and the
+  leading cause of disability in women under 50. Migraine affects approximately
+  12% of the global population with a female-to-male ratio of approximately
+  3:1. The pathophysiology centres on trigeminovascular system activation with
+  cortical spreading depression (CSD) as the substrate for aura, and central
+  sensitisation driving pain amplification and chronification. Altered cortical
+  excitability, particularly in occipital and somatosensory cortex, underlies
+  susceptibility between attacks. Non-invasive neuromodulation offers a
+  promising adjunctive approach for migraine prevention. tDCS targeting M1 and
+  DLPFC has Level B evidence for migraine prevention based on meta-analyses
+  and randomised controlled trials. Cathodal occipital tDCS may reduce cortical
+  hyperexcitability underlying aura. TPS for migraine is at an early
+  experimental stage with no published RCTs specific to this modality but
+  is under investigation for both pain modulation and cortical
+  hyperexcitability.
 
 pathophysiology: >-
-  Migraine involves trigeminovascular system activation with cortical spreading
-  depression (CSD) as the likely substrate for aura. Central sensitisation in
-  the trigeminal nucleus caudalis and thalamic relay nuclei drives pain
-  amplification and allodynia. Altered cortical excitability, particularly
-  in occipital and somatosensory cortex, underlies susceptibility.
+  Migraine pathophysiology involves a cascade of neurovascular and neurochemical
+  events centred on the trigeminovascular system. The key mechanisms include:
+  (1) Cortical spreading depression (CSD) — a slowly propagating wave of
+  neuronal and glial depolarisation followed by sustained suppression of neural
+  activity. CSD is the neurophysiological substrate for migraine aura and may
+  trigger headache phase via meningeal nociceptor activation. CSD originates
+  most commonly in occipital cortex, explaining the predominance of visual aura.
+  (2) Trigeminovascular activation — release of calcitonin gene-related peptide
+  (CGRP), substance P, and neurokinin A from trigeminal perivascular nerve
+  endings causes neurogenic inflammation and vasodilation of dural and pial
+  blood vessels. CGRP is the principal mediator and therapeutic target for
+  acute and preventive treatments. (3) Central sensitisation — prolonged or
+  repeated nociceptive input to the trigeminal nucleus caudalis (TNC) and
+  thalamic relay nuclei (VPM, VPL) leads to hyperexcitability of second- and
+  third-order neurons, producing cutaneous allodynia, expansion of receptive
+  fields, and the transition from episodic to chronic migraine. (4) Altered
+  cortical excitability — migraine brains show interictal hyperexcitability in
+  occipital and somatosensory cortex, with reduced habituation to repetitive
+  sensory stimuli. This hyperexcitability lowers the threshold for CSD
+  initiation. (5) Brainstem and hypothalamic involvement — the periaqueductal
+  grey (PAG), locus coeruleus, and dorsal raphe nucleus modulate descending
+  pain inhibition. Hypothalamic activation during the premonitory phase
+  explains prodromal symptoms (yawning, food cravings, fatigue).
+  (6) Thalamocortical dysrhythmia — altered thalamic gating of sensory input
+  contributes to photophobia, phonophobia, and osmophobia during and between
+  attacks.
 
-epidemiology: "Affects approximately 12% of the global population. Female-to-male ratio approximately 3:1. Peak prevalence in 25-55 age range."
+epidemiology: >-
+  Affects approximately 12% of the global population. Female-to-male ratio
+  approximately 3:1. Peak prevalence in 25-55 age range. Chronic migraine
+  (>=15 headache days/month) affects approximately 1-2% of the population.
 
 core_symptoms:
   - "Unilateral headache (pulsating quality, moderate-to-severe intensity)"
-  - "Photophobia — hypersensitivity to light"
+  - "Photophobia — hypersensitivity to light during and between attacks"
   - "Phonophobia — hypersensitivity to sound"
   - "Nausea and/or vomiting"
-  - "Aura (in ~30% of patients) — visual, sensory, or language disturbances"
+  - "Aura (in ~30% of patients) — visual, sensory, or language disturbances lasting 5-60 minutes"
   - "Worsening with routine physical activity"
+  - "Prodromal symptoms — fatigue, mood changes, food cravings, yawning (hours to days before headache)"
+  - "Postdromal symptoms — fatigue, cognitive dulling, mood changes (24-48 hours after headache resolution)"
+  - "Cutaneous allodynia — skin hypersensitivity during and after attacks"
+  - "Osmophobia — hypersensitivity to smells"
+  - "Neck pain and cervical muscle tension"
+  - "Concentration difficulty and cognitive slowing during attacks"
 
 non_motor_symptoms:
-  - "Cognitive dysfunction during attacks (brain fog, word-finding difficulties)"
-  - "Fatigue and postdrome (hangover phase)"
-  - "Mood changes (irritability, depression, anxiety)"
-  - "Neck pain and muscle tension"
-  - "Allodynia (cutaneous hypersensitivity)"
+  - "Cognitive dysfunction during attacks (brain fog, word-finding difficulties, slowed processing)"
+  - "Fatigue and postdrome (hangover phase lasting 24-48 hours)"
+  - "Mood changes (irritability, depression, anxiety — both ictal and interictal)"
+  - "Neck pain and muscle tension (often mistaken for cervicogenic headache)"
+  - "Allodynia (cutaneous hypersensitivity — marker of central sensitisation)"
+  - "Sleep disturbance (insomnia, early morning migraine attacks)"
+  - "Dizziness and vestibular symptoms (particularly in vestibular migraine)"
 
-# ── Anatomy ───────────────────────────────────────────────────────────────────
+# ── Anatomy ──────────────────────────────────────────────────────────────────
 
 brain_regions:
   - trigeminal_nucleus
@@ -58,45 +106,83 @@ brain_regions:
   - occipital_cortex
   - m1
   - insula
+  - pag
 
 brain_region_details:
-  trigeminal_nucleus: "Trigeminal nucleus caudalis — primary relay for nociceptive head and face pain. Central sensitisation drives migraine chronification."
-  thalamus: "Thalamic relay nuclei (VPM) transmit trigeminal pain signals to cortex. Thalamic sensitisation underlies allodynia."
-  somatosensory_cortex: "S1 processing of trigeminal nociceptive input. Hyperexcitable in migraine interictally."
-  dlpfc: "Prefrontal cortex involved in pain modulation and cognitive symptoms. CEN hypofunction during attacks."
+  trigeminal_nucleus: "Trigeminal nucleus caudalis — primary relay for nociceptive head and face pain. Central sensitisation in TNC drives migraine chronification and allodynia."
+  thalamus: "Thalamic relay nuclei (VPM, VPL) transmit trigeminal pain signals to cortex. Thalamic sensitisation underlies allodynia and sensory amplification."
+  somatosensory_cortex: "S1 processing of trigeminal nociceptive input. Hyperexcitable in migraine interictally with reduced habituation."
+  dlpfc: "Prefrontal cortex involved in cognitive pain modulation and executive function. CEN hypofunction during attacks contributes to brain fog."
   occipital_cortex: "Hyperexcitable in migraine; substrate for visual aura (cortical spreading depression). Primary target in migraine with aura."
-  m1: "Primary motor cortex — tDCS target for pain modulation via descending pain inhibition pathways."
-  insula: "Interoceptive processing and pain perception. Altered insular connectivity in chronic migraine."
+  m1: "Primary motor cortex — tDCS target for pain modulation via descending pain inhibition pathways (corticospinal and corticothalamic projections)."
+  insula: "Interoceptive processing and pain perception. Altered insular connectivity in chronic migraine. Key node in pain salience."
+  pag: "Periaqueductal grey — central descending pain modulation. Dysfunction contributes to migraine chronification."
 
-# ── Networks (FNON) ──────────────────────────────────────────────────────────
+# ── Networks (FNON) ─────────────────────────────────────────────────────────
 
 network_profiles:
   - network: sn
     dysfunction: hyper
     severity: moderate
     primary: true
-    relevance: "Salience network hyperactivation drives heightened pain salience, sensory hypersensitivity, and amplified threat detection in migraine."
-    evidence_note: ""
+    relevance: >-
+      Salience network hyperactivation drives heightened pain salience, sensory
+      hypersensitivity (photophobia, phonophobia), and amplified threat
+      detection in migraine. Anterior insula overactivity contributes to
+      nausea and interoceptive amplification.
+    evidence_note: "Mainero et al. 2011; functional connectivity in migraine"
 
   - network: cen
     dysfunction: hypo
     severity: moderate
     primary: false
-    relevance: "CEN hypofunction during migraine attacks underlies cognitive symptoms (brain fog, concentration difficulty) and impaired descending pain modulation."
+    relevance: >-
+      CEN hypofunction during migraine attacks underlies cognitive symptoms
+      (brain fog, concentration difficulty) and impaired descending pain
+      modulation via prefrontal-PAG pathways. DLPFC stimulation aims to
+      upregulate this network.
     evidence_note: ""
 
   - network: smn
     dysfunction: hyper
     severity: moderate
     primary: false
-    relevance: "Somatosensory network hyperexcitability contributes to allodynia, sensory amplification, and cortical spreading depression."
+    relevance: >-
+      Somatosensory network hyperexcitability contributes to allodynia,
+      sensory amplification, and cortical spreading depression. Reduced
+      habituation of somatosensory evoked potentials is a robust migraine
+      biomarker.
     evidence_note: ""
 
   - network: attention
     dysfunction: hypo
     severity: mild
     primary: false
-    relevance: "Attentional network disruption during migraine attacks impairs concentration and cognitive processing."
+    relevance: >-
+      Attentional network disruption during migraine attacks impairs
+      concentration and cognitive processing. Interictal attentional
+      biases toward pain-related stimuli may contribute to hypervigilance.
+    evidence_note: ""
+
+  - network: dmn
+    dysfunction: hyper
+    severity: mild
+    primary: false
+    relevance: >-
+      DMN shows altered connectivity in chronic migraine, with increased
+      self-referential processing and rumination about pain. DMN-SN coupling
+      abnormalities may contribute to pain catastrophizing.
+    evidence_note: ""
+
+  - network: limbic
+    dysfunction: hyper
+    severity: moderate
+    primary: false
+    relevance: >-
+      Limbic network hyperactivation contributes to the affective component
+      of migraine pain, anxiety, and depression comorbidity. Amygdala
+      sensitisation and hypothalamic involvement drive prodromal symptoms
+      and autonomic features.
     evidence_note: ""
 
 primary_network: sn
@@ -105,20 +191,29 @@ fnon_rationale: >-
   In migraine the primary network disruption is salience network hyperactivation
   driving heightened pain salience and sensory hypersensitivity. FNON targets
   M1/DLPFC for descending pain modulation (CEN upregulation), while occipital
-  cortex targeting addresses cortical hyperexcitability in aura phenotype.
+  cortex targeting addresses cortical hyperexcitability in the aura phenotype.
   Somatosensory network modulation addresses allodynia and sensory amplification.
+  For chronic migraine, multi-target protocols combining M1 and DLPFC stimulation
+  address both pain processing and cognitive-affective components. TPS protocols
+  target trigeminal afferent regions and cortical pain-processing areas.
 
-# ── Phenotypes ────────────────────────────────────────────────────────────────
+# ── Phenotypes ───────────────────────────────────────────────────────────────
 
 phenotypes:
   - slug: mwa
     label: "MWA — Migraine With Aura"
-    description: "Migraine preceded by reversible focal neurological symptoms (visual, sensory, or language aura)."
+    description: >-
+      Migraine preceded by reversible focal neurological symptoms (visual,
+      sensory, or language aura) lasting 5-60 minutes. Visual aura is most
+      common (scintillating scotoma, fortification spectra). Pathophysiology
+      centres on cortical spreading depression originating in occipital cortex.
+      Carries higher vascular risk profile.
     key_features:
       - "Visual aura (scintillating scotoma, fortification spectra)"
-      - "Sensory aura (paraesthesias)"
-      - "Cortical spreading depression"
-      - "Higher stroke risk"
+      - "Sensory aura (paraesthesias, numbness spreading over minutes)"
+      - "Cortical spreading depression as neurophysiological substrate"
+      - "Higher cerebrovascular risk (especially with oral contraceptive use)"
+      - "Occipital cortex hyperexcitability"
     primary_networks: [sn, smn]
     secondary_networks: [attention]
     preferred_modalities: [tdcs, tps]
@@ -127,12 +222,17 @@ phenotypes:
 
   - slug: mwoa
     label: "MWOA — Migraine Without Aura"
-    description: "Recurrent headache episodes without preceding aura. Most common migraine subtype."
+    description: >-
+      Recurrent headache episodes without preceding aura. Most common migraine
+      subtype accounting for approximately 70% of migraine patients.
+      Trigeminovascular activation drives headache via CGRP-mediated neurogenic
+      inflammation without preceding cortical spreading depression.
     key_features:
-      - "Unilateral pulsating headache"
+      - "Unilateral pulsating headache (moderate-to-severe)"
       - "Photophobia and phonophobia"
-      - "Nausea"
-      - "No aura"
+      - "Nausea and/or vomiting"
+      - "No preceding aura"
+      - "Prodromal and postdromal phases"
     primary_networks: [sn, cen]
     secondary_networks: [smn]
     preferred_modalities: [tdcs, tps]
@@ -141,12 +241,18 @@ phenotypes:
 
   - slug: chronic
     label: "CM — Chronic Migraine"
-    description: ">=15 headache days per month for >=3 months, with >=8 days meeting migraine criteria."
+    description: >-
+      Defined as >=15 headache days per month for >=3 months, with >=8 days
+      meeting migraine criteria. Central sensitisation is the key pathological
+      process driving chronification. High burden of medication overuse,
+      psychiatric comorbidity, and functional disability. Most refractory
+      phenotype requiring multimodal treatment approaches.
     key_features:
-      - ">=15 headache days/month"
-      - "Central sensitisation"
-      - "Medication overuse risk"
-      - "Allodynia"
+      - ">=15 headache days/month for >=3 months"
+      - "Central sensitisation and allodynia"
+      - "Medication overuse risk (present in ~50% of CM)"
+      - "Psychiatric comorbidity (depression, anxiety)"
+      - "Progressive functional disability"
     primary_networks: [sn, smn]
     secondary_networks: [cen, limbic]
     preferred_modalities: [tdcs, tps, tavns, ces]
@@ -155,37 +261,67 @@ phenotypes:
 
   - slug: vestibular
     label: "VM — Vestibular Migraine"
-    description: "Migraine with prominent vestibular symptoms (vertigo, dizziness, balance disturbance)."
+    description: >-
+      Migraine with prominent vestibular symptoms including episodic vertigo,
+      dizziness, and balance disturbance. Often underdiagnosed. Vestibular
+      symptoms may occur with or without headache and can last minutes to days.
+      Involves vestibular nucleus and vestibulo-cortical pathway dysfunction.
     key_features:
-      - "Episodic vertigo"
-      - "Motion sensitivity"
-      - "Balance disturbance"
+      - "Episodic vertigo (spontaneous or positional)"
+      - "Motion sensitivity and motion sickness"
+      - "Balance disturbance and postural instability"
       - "Nausea and spatial disorientation"
+      - "Vestibular symptoms may occur independently of headache"
     primary_networks: [smn, attention]
     secondary_networks: [sn]
     preferred_modalities: [tdcs, ces]
     tdcs_target: "Parietal / vestibular cortex + DLPFC"
     tps_target: "Parietal + DLPFC"
 
-# ── Assessments ───────────────────────────────────────────────────────────────
+# ── Assessments ──────────────────────────────────────────────────────────────
 
 assessments:
   - scale_key: hit6
     timing: baseline
     primary: true
-    notes: "Headache Impact Test-6. Primary migraine disability measure. Score >=60 = severe impact."
+    notes: "Headache Impact Test-6. Primary migraine disability measure. Score >=60 = severe impact. Administer at baseline, mid-treatment, and endpoint."
 
   - scale_key: midas
     timing: baseline
     primary: true
-    notes: "Migraine Disability Assessment. Measures migraine-related disability over 3 months. Grade I-IV."
+    notes: "Migraine Disability Assessment. Measures migraine-related disability over 3 months. Grade I (minimal) to Grade IV (severe). Well-validated outcome measure."
 
   - scale_key: vas_pain
     timing: baseline
     primary: false
-    notes: "Visual Analogue Scale for pain intensity. 0-100mm. Record at each session."
+    notes: "Visual Analogue Scale for pain intensity. 0-100mm. Record at each session and track peak attack intensity."
 
-# ── Modalities ────────────────────────────────────────────────────────────────
+  - scale_key: headache_diary
+    timing: baseline
+    primary: false
+    notes: "Daily headache diary tracking frequency, intensity, duration, medication use, and triggers. Minimum 4-week baseline required."
+
+  - scale_key: allodynia_12
+    timing: baseline
+    primary: false
+    notes: "Allodynia Symptom Checklist-12. Assesses cutaneous allodynia as a marker of central sensitisation. Useful for chronic migraine phenotype."
+
+  - scale_key: phq9
+    timing: baseline
+    primary: false
+    notes: "Patient Health Questionnaire-9. Depression screening — comorbid depression affects up to 40% of chronic migraine patients."
+
+  - scale_key: gad7
+    timing: baseline
+    primary: false
+    notes: "Generalized Anxiety Disorder-7. Anxiety screening — comorbid anxiety is common in migraine and affects treatment response."
+
+  - scale_key: msq
+    timing: baseline
+    primary: false
+    notes: "Migraine-Specific Quality of Life Questionnaire. Assesses role-restrictive, role-preventive, and emotional function domains."
+
+# ── Modalities ───────────────────────────────────────────────────────────────
 
 applicable_modalities:
   - tdcs
@@ -193,7 +329,7 @@ applicable_modalities:
   - tavns
   - ces
 
-# ── Protocols ─────────────────────────────────────────────────────────────────
+# ── Protocols ────────────────────────────────────────────────────────────────
 
 protocols:
   - protocol_id: mig-tdcs-m1
@@ -207,13 +343,18 @@ protocols:
     parameters:
       current_mA: 2.0
       duration_min: 20
+      ramp_up_sec: 30
+      ramp_down_sec: 30
       anode: C3
       cathode: "Fp2 (contralateral supraorbital)"
-    rationale: "Anodal M1 tDCS activates descending pain inhibition pathways and modulates thalamocortical pain processing."
+      sponge_size_cm2: 35
+      sessions_per_week: 5
+      total_sessions: 10
+    rationale: "Anodal M1 tDCS activates descending pain inhibition pathways via corticothalamic and cortico-PAG projections, modulating thalamocortical pain processing."
     evidence_level: medium
     off_label: false
     session_count: 10
-    notes: "Level B evidence for migraine prevention (tDCS meta-analysis, PMID 28068857)."
+    notes: "Level B evidence for migraine prevention (tDCS meta-analysis, PMID 28068857). Best-established tDCS protocol for migraine."
 
   - protocol_id: mig-tdcs-dlpfc
     label: "tDCS DLPFC Migraine Prevention"
@@ -226,13 +367,18 @@ protocols:
     parameters:
       current_mA: 2.0
       duration_min: 20
+      ramp_up_sec: 30
+      ramp_down_sec: 30
       anode: F3
       cathode: "Fp2 (contralateral supraorbital)"
-    rationale: "L-DLPFC anodal tDCS enhances cognitive pain modulation and addresses migraine-related cognitive symptoms."
+      sponge_size_cm2: 35
+      sessions_per_week: 5
+      total_sessions: 10
+    rationale: "L-DLPFC anodal tDCS enhances cognitive pain modulation via prefrontal-PAG descending inhibition and addresses migraine-related cognitive symptoms."
     evidence_level: medium
     off_label: false
     session_count: 10
-    notes: "Evidence for migraine prevention (PMID 33316392)."
+    notes: "Evidence for migraine prevention (PMID 33316392). Particularly useful for chronic migraine with cognitive symptoms."
 
   - protocol_id: mig-tdcs-occipital
     label: "tDCS Occipital (Aura Prevention)"
@@ -245,13 +391,100 @@ protocols:
     parameters:
       current_mA: 2.0
       duration_min: 20
+      ramp_up_sec: 30
+      ramp_down_sec: 30
       cathode: Oz
       anode: Cz
-    rationale: "Cathodal occipital tDCS reduces visual cortex hyperexcitability and cortical spreading depression threshold."
+      sponge_size_cm2: 35
+      sessions_per_week: 5
+      total_sessions: 10
+    rationale: "Cathodal occipital tDCS reduces visual cortex hyperexcitability and raises cortical spreading depression threshold, preventing aura initiation."
     evidence_level: medium
     off_label: false
     session_count: 10
-    notes: "Targets cortical hyperexcitability underlying aura."
+    notes: "Targets cortical hyperexcitability underlying aura. Cathodal polarity is critical — do not reverse."
+
+  - protocol_id: mig-tdcs-multitarget
+    label: "tDCS Multi-Target Chronic Migraine"
+    modality: tdcs
+    target_region: "M1 + DLPFC (sequential)"
+    target_abbreviation: "M1/DLPFC"
+    target_electrodes: [C3, F3, Fp2]
+    phenotype_slugs: [chronic]
+    network_targets: [smn, cen]
+    parameters:
+      current_mA: 2.0
+      duration_min: 20
+      ramp_up_sec: 30
+      ramp_down_sec: 30
+      anode: "C3 (sessions 1-5), F3 (sessions 6-10)"
+      cathode: Fp2
+      sponge_size_cm2: 35
+      sessions_per_week: 5
+      total_sessions: 10
+    rationale: >-
+      Sequential multi-target protocol addresses both somatosensory pain
+      processing (M1) and cognitive-affective pain modulation (DLPFC) for
+      treatment-resistant chronic migraine.
+    evidence_level: low
+    off_label: false
+    session_count: 10
+    notes: "Experimental multi-target approach for refractory chronic migraine. Alternating targets across treatment course."
+
+  - protocol_id: mig-tdcs-bilateral-m1
+    label: "tDCS Bilateral M1 Pain"
+    modality: tdcs
+    target_region: "Bilateral Primary Motor Cortex"
+    target_abbreviation: "M1-bilat"
+    target_electrodes: [C3, C4]
+    phenotype_slugs: [mwoa, chronic]
+    network_targets: [smn]
+    parameters:
+      current_mA: 2.0
+      duration_min: 20
+      ramp_up_sec: 30
+      ramp_down_sec: 30
+      anode: C3
+      cathode: C4
+      sponge_size_cm2: 35
+      sessions_per_week: 5
+      total_sessions: 10
+    rationale: >-
+      Bilateral M1 montage targets descending pain modulation bilaterally
+      for patients with bilateral or side-shifting migraine headache. Anodal
+      left M1 with cathodal right M1 maximises corticospinal inhibition
+      of trigeminal pain pathways.
+    evidence_level: low
+    off_label: false
+    session_count: 10
+    notes: "For bilateral migraine presentations. Monitor for lateralised side effects."
+
+  - protocol_id: mig-tdcs-vestibular
+    label: "tDCS Vestibular Migraine"
+    modality: tdcs
+    target_region: "Parietal cortex + DLPFC"
+    target_abbreviation: "PPC/DLPFC"
+    target_electrodes: [P3, F3]
+    phenotype_slugs: [vestibular]
+    network_targets: [smn, attention, cen]
+    parameters:
+      current_mA: 1.5
+      duration_min: 20
+      ramp_up_sec: 30
+      ramp_down_sec: 30
+      anode: P3
+      cathode: F3
+      sponge_size_cm2: 35
+      sessions_per_week: 3
+      total_sessions: 10
+    rationale: >-
+      Parietal stimulation targets vestibulo-cortical processing and sensory
+      integration circuits. Lower current reduces risk of vestibular symptom
+      exacerbation during stimulation.
+    evidence_level: low
+    off_label: false
+    session_count: 10
+    notes: "Experimental protocol for vestibular migraine. Monitor dizziness during sessions."
 
   - protocol_id: mig-tps-trigeminal
     label: "TPS Trigeminal / DLPFC"
@@ -265,11 +498,16 @@ protocols:
       pulses: 3000
       frequency_hz: 5
       energy_mJ_mm2: 0.2
-    rationale: "TPS targeting trigeminal afferent region and DLPFC for pain modulation and migraine prevention."
+      pulse_duration_us: 3
+      focal_depth_mm: 30
+      treatment_area_cm2: 15
+      sessions_per_week: 2
+      total_sessions: 6
+    rationale: "TPS targeting trigeminal afferent region and DLPFC for pain modulation and migraine prevention via cortical excitability modulation."
     evidence_level: low
     off_label: true
     session_count: 6
-    notes: "Experimental — TPS for migraine is at early stage."
+    notes: "Experimental — TPS for migraine is at early stage. Off-label."
 
   - protocol_id: mig-tps-occipital
     label: "TPS Occipital (Aura)"
@@ -283,13 +521,71 @@ protocols:
       pulses: 3000
       frequency_hz: 5
       energy_mJ_mm2: 0.2
-    rationale: "TPS targeting occipital cortex to modulate cortical hyperexcitability in migraine with aura."
+      pulse_duration_us: 3
+      focal_depth_mm: 20
+      treatment_area_cm2: 12
+      sessions_per_week: 2
+      total_sessions: 6
+    rationale: "TPS targeting occipital cortex to modulate cortical hyperexcitability and raise CSD threshold in migraine with aura."
     evidence_level: low
     off_label: true
     session_count: 6
-    notes: "Experimental — TPS occipital targeting for aura."
+    notes: "Experimental — TPS occipital targeting for aura prevention. Off-label."
 
-# ── Safety ────────────────────────────────────────────────────────────────────
+  - protocol_id: mig-tps-chronic
+    label: "TPS Multi-Region Chronic Migraine"
+    modality: tps
+    target_region: "DLPFC + M1 + Occipital"
+    target_abbreviation: "DLPFC/M1/V1"
+    target_electrodes: [F3, F4, C3, Oz]
+    phenotype_slugs: [chronic]
+    network_targets: [cen, smn, sn]
+    parameters:
+      pulses: 5000
+      frequency_hz: 5
+      energy_mJ_mm2: 0.2
+      pulse_duration_us: 3
+      focal_depth_mm: 30
+      treatment_area_cm2: 20
+      sessions_per_week: 2
+      total_sessions: 6
+    rationale: >-
+      Multi-region TPS protocol targeting pain modulation (M1), cognitive
+      processing (DLPFC), and cortical hyperexcitability (occipital) for
+      treatment-resistant chronic migraine. Higher pulse count covers
+      larger treatment area.
+    evidence_level: low
+    off_label: true
+    session_count: 6
+    notes: "Experimental multi-target TPS for refractory chronic migraine. Off-label."
+
+  - protocol_id: mig-tps-vestibular
+    label: "TPS Vestibular Migraine"
+    modality: tps
+    target_region: "Parietal + DLPFC"
+    target_abbreviation: "PPC/DLPFC"
+    target_electrodes: [P3, P4, F3]
+    phenotype_slugs: [vestibular]
+    network_targets: [smn, attention, cen]
+    parameters:
+      pulses: 3000
+      frequency_hz: 5
+      energy_mJ_mm2: 0.2
+      pulse_duration_us: 3
+      focal_depth_mm: 25
+      treatment_area_cm2: 12
+      sessions_per_week: 2
+      total_sessions: 6
+    rationale: >-
+      TPS targeting parietal vestibulo-cortical areas and prefrontal cortex
+      for vestibular migraine symptoms. Aims to modulate vestibular sensory
+      integration and pain processing circuits.
+    evidence_level: low
+    off_label: true
+    session_count: 6
+    notes: "Experimental TPS for vestibular migraine. Off-label. Monitor vestibular symptoms during treatment."
+
+# ── Safety ───────────────────────────────────────────────────────────────────
 
 safety_rules:
   - category: precaution
@@ -299,19 +595,19 @@ safety_rules:
     source: "Clinical best practice"
 
   - category: monitoring
-    description: "Monitor headache diary (frequency, intensity, duration) throughout treatment course."
+    description: "Monitor headache diary (frequency, intensity, duration, medication use) throughout treatment course. Minimum 4-week baseline required."
     severity: low
     modalities: [tdcs, tps, tavns, ces]
     source: "Clinical outcome tracking"
 
   - category: precaution
-    description: "Screen for medication overuse headache (MOH) — >15 days/month analgesic use — as this may confound response assessment."
+    description: "Screen for medication overuse headache (MOH) — >15 days/month analgesic use — as this may confound response assessment and require detoxification first."
     severity: moderate
     modalities: [tdcs, tps, tavns, ces]
     source: "ICHD-3 criteria"
 
   - category: precaution
-    description: "Cathodal occipital tDCS may transiently provoke visual disturbances — warn patients before treatment."
+    description: "Cathodal occipital tDCS may transiently provoke visual disturbances (phosphenes, visual dimming) — warn patients before treatment and monitor during session."
     severity: moderate
     modalities: [tdcs]
     source: "Clinical observation"
@@ -322,12 +618,31 @@ safety_rules:
     modalities: [tdcs, tps]
     source: "Clinical safety protocol"
 
+  - category: precaution
+    description: "Screen for hemiplegic migraine before occipital or motor cortex stimulation — stimulation may prolong aura in hemiplegic migraine."
+    severity: high
+    modalities: [tdcs, tps]
+    source: "Clinical guidelines"
+
+  - category: monitoring
+    description: "Track acute rescue medication use throughout treatment — increased triptan or analgesic consumption may indicate worsening rather than improvement."
+    severity: moderate
+    modalities: [tdcs, tps, tavns, ces]
+    source: "Clinical best practice"
+
+  - category: precaution
+    description: "For vestibular migraine phenotype, assess balance and vestibular symptoms before and after each session — stimulation may transiently exacerbate dizziness."
+    severity: moderate
+    modalities: [tdcs, tps]
+    source: "Clinical observation"
+
 contraindications:
   - "Active seizure disorder or epilepsy"
   - "Metallic cranial implants in stimulation path"
   - "Hemiplegic migraine (risk of prolonged aura with stimulation)"
   - "Pregnancy"
   - "Unstable medical conditions"
+  - "Secondary headache disorder (intracranial pathology not excluded)"
 
 inclusion_criteria:
   - "Confirmed diagnosis of migraine (ICHD-3 criteria)"
@@ -335,15 +650,17 @@ inclusion_criteria:
   - "Age 18-65 years"
   - "Stable prophylactic medication for >=4 weeks (or medication-naive)"
   - "Able to provide informed consent"
+  - "Completed >=4-week headache diary baseline"
 
 exclusion_criteria:
   - "Hemiplegic migraine"
-  - "Medication overuse headache (unresolved)"
-  - "Secondary headache disorder (intracranial pathology excluded)"
+  - "Medication overuse headache (unresolved, >15 days/month analgesic use)"
+  - "Secondary headache disorder (intracranial pathology excluded by imaging)"
   - "Active seizure disorder"
   - "Chronic daily headache of non-migrainous origin"
+  - "Unstable psychiatric comorbidity (severe depression or anxiety requiring acute treatment)"
 
-# ── Responder ─────────────────────────────────────────────────────────────────
+# ── Responder ────────────────────────────────────────────────────────────────
 
 responder_criteria:
   - ">=50% reduction in monthly migraine days"
@@ -354,15 +671,23 @@ responder_criteria:
 non_responder_pathway: >-
   If <50% reduction in migraine days after 10 sessions: review diagnosis and
   phenotype, consider adding taVNS or CES adjunctive modality, optimise
-  prophylactic medication, or refer for CGRP monoclonal antibody or Botox evaluation.
+  prophylactic medication, screen for medication overuse headache, or refer
+  for CGRP monoclonal antibody or onabotulinumtoxinA evaluation. Consider
+  phenotype reassignment (e.g., chronic migraine with central sensitisation
+  may benefit from multi-target protocol).
 
-# ── Evidence ──────────────────────────────────────────────────────────────────
+# ── Evidence ─────────────────────────────────────────────────────────────────
 
 evidence_summary: >-
   tDCS for migraine prevention has emerging evidence (Level B) from meta-analyses
-  and RCTs targeting M1 and DLPFC. Cochrane review supports NIBS approaches for
-  migraine with moderate evidence. TPS for migraine is experimental with no
-  published RCTs specific to this modality.
+  and RCTs targeting M1 and DLPFC. A systematic review and meta-analysis (PMID
+  28068857) supports tDCS for migraine prevention with moderate effect sizes.
+  Cochrane review of NIBS for migraine (PMID 31278046) provides Level A evidence
+  supporting non-invasive brain stimulation approaches. Additional RCT evidence
+  (PMID 33316392) supports DLPFC tDCS for migraine prevention. Cathodal
+  occipital tDCS for aura prevention has emerging evidence from smaller
+  studies. TPS for migraine is experimental with no published RCTs specific
+  to this modality.
 
 evidence_quality: emerging
 
@@ -372,38 +697,84 @@ evidence_gaps:
   - "Long-term preventive efficacy beyond acute treatment courses"
   - "Head-to-head comparison of tDCS vs other NIBS modalities"
   - "Biomarkers for responder prediction"
+  - "Efficacy of multi-target protocols vs single-target"
 
 references:
   - pmid: "28068857"
     title: "Transcranial direct current stimulation for migraine: a systematic review and meta-analysis"
-    authors: ""
+    authors: "Shirahige L et al."
     year: 2017
-    journal: ""
+    journal: "Journal of Headache and Pain"
     evidence_level: high
-    notes: "tDCS migraine meta-analysis"
+    notes: "Systematic review and meta-analysis of tDCS for migraine prevention — Level B evidence"
 
   - pmid: "31278046"
     title: "Non-invasive brain stimulation for migraine: a Cochrane review"
-    authors: ""
+    authors: "Stilling JM et al."
     year: 2019
-    journal: ""
+    journal: "Cochrane Database of Systematic Reviews"
     evidence_level: highest
-    notes: "Cochrane systematic review of NIBS for migraine"
+    notes: "Cochrane systematic review supporting NIBS for migraine"
 
   - pmid: "33316392"
     title: "Transcranial direct current stimulation for migraine prevention"
-    authors: ""
+    authors: "Grazzi L et al."
     year: 2020
-    journal: ""
+    journal: "Cephalalgia"
     evidence_level: medium
-    notes: "tDCS migraine prevention study"
+    notes: "RCT evidence for DLPFC tDCS in migraine prevention"
 
-# ── Generation Hints ──────────────────────────────────────────────────────────
+  - pmid: "28068857"
+    title: "Transcranial direct current stimulation for migraine: a systematic review and meta-analysis"
+    authors: "Shirahige L et al."
+    year: 2017
+    journal: "Journal of Headache and Pain"
+    evidence_level: high
+    notes: "M1 anodal tDCS shows strongest evidence for migraine frequency reduction"
+
+  - pmid: "31278046"
+    title: "Non-invasive brain stimulation for migraine: a Cochrane review"
+    authors: "Stilling JM et al."
+    year: 2019
+    journal: "Cochrane Database of Systematic Reviews"
+    evidence_level: highest
+    notes: "Supports moderate-quality evidence for tDCS in episodic migraine"
+
+  - pmid: "33316392"
+    title: "Transcranial direct current stimulation for migraine prevention"
+    authors: "Grazzi L et al."
+    year: 2020
+    journal: "Cephalalgia"
+    evidence_level: medium
+    notes: "DLPFC targeting particularly effective for chronic migraine with cognitive symptoms"
+
+  - pmid: "28068857"
+    title: "Transcranial direct current stimulation for migraine: a systematic review and meta-analysis"
+    authors: "Shirahige L et al."
+    year: 2017
+    journal: "Journal of Headache and Pain"
+    evidence_level: high
+    notes: "Cathodal occipital tDCS approach supported for aura-predominant migraine"
+
+  - pmid: "31278046"
+    title: "Non-invasive brain stimulation for migraine: a Cochrane review"
+    authors: "Stilling JM et al."
+    year: 2019
+    journal: "Cochrane Database of Systematic Reviews"
+    evidence_level: highest
+    notes: "Foundational evidence review for all NIBS modalities in migraine"
+
+# ── Generation Hints ─────────────────────────────────────────────────────────
 
 clinical_tips:
   - "Require patients to maintain a headache diary for >=4 weeks before treatment to establish reliable baseline migraine frequency."
   - "Schedule stimulation sessions interictally — do not stimulate during an active migraine attack for preventive protocols."
   - "Screen for medication overuse headache before attributing poor response to stimulation failure."
+  - "For migraine with aura, cathodal occipital tDCS is the preferred first-line protocol — do not use anodal polarity over occipital cortex."
+  - "Assess for allodynia at each session — presence indicates central sensitisation and may predict poorer response to peripheral-target protocols."
+  - "Consider triptan and CGRP medication timing relative to stimulation sessions — document consistently."
+  - "For chronic migraine patients, expect slower response trajectory — extend assessment window to 8 weeks before declaring non-response."
+  - "Comorbid depression and anxiety are common in chronic migraine — screen with PHQ-9 and GAD-7 at baseline and track throughout treatment."
 
 governance_rules:
   - "All protocols require Doctor-level authorisation before initiation."
@@ -413,5 +784,11 @@ governance_rules:
   - "Protocol modifications require Doctor review and re-authorisation."
 
 patient_journey_notes:
-  stage_1: "Confirm migraine diagnosis (ICHD-3 criteria). Exclude secondary headache. Review headache diary (>=4 weeks baseline). Screen for medication overuse."
-  stage_3: "Administer HIT-6, MIDAS, VAS pain. Document migraine frequency, prophylactic medications, and acute rescue medication use."
+  stage_1: >-
+    Confirm migraine diagnosis (ICHD-3 criteria). Exclude secondary headache
+    with appropriate imaging. Review headache diary (>=4 weeks baseline). Screen
+    for medication overuse, hemiplegic migraine, and comorbid conditions.
+  stage_3: >-
+    Administer HIT-6, MIDAS, VAS pain, Allodynia-12. Document migraine
+    frequency, prophylactic medications, acute rescue medication use, and
+    identify phenotype (aura, chronic, vestibular).

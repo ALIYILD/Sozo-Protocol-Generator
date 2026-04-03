@@ -1,6 +1,6 @@
-# Autism Spectrum Disorder — SOZO Clinical Knowledge (Enriched)
+# Autism Spectrum Disorder — SOZO Clinical Knowledge (Expanded)
 # ICD-10: F84.0
-# Content enriched from legacy generator prose.
+# Content enriched from legacy generator prose and expanded to gold-standard depth.
 
 slug: asd
 display_name: Autism Spectrum Disorder
@@ -11,54 +11,80 @@ aliases:
 - autism spectrum
 - Asperger syndrome
 category: neurodevelopmental
-version: '1.0'
-overview: 'Autism Spectrum Disorder (ASD) is a neurodevelopmental condition characterized by persistent differences in social
-  communication and interaction, and restricted or repetitive patterns of behavior, interests, or activities. ASD affects
-  approximately 1 in 54 children (CDC 2020 data). Severity is classified into three DSM-5 levels: Level 1 (requiring support),
-  Level 2 (requiring substantial support), and Level 3 (requiring very substantial support).
+version: '1.1'
 
+# ── Clinical ─────────────────────────────────────────────────────────────────
 
-  ASD neurobiological model: dysregulation of the social brain network, involving the temporal-parietal junction (TPJ), superior
-  temporal sulcus (STS), amygdala, and medial prefrontal cortex (mPFC). Functional connectivity abnormalities — both local
-  hyperconnectivity and long-range hypoconnectivity — are consistent neuroimaging findings.
+overview: >-
+  Autism Spectrum Disorder (ASD) is a neurodevelopmental condition characterized
+  by persistent differences in social communication and interaction, and
+  restricted or repetitive patterns of behavior, interests, or activities.
+  Prevalence is approximately 1 in 36 children (CDC 2023), with a male-to-female
+  ratio of approximately 4:1 (though females are significantly underdiagnosed due
+  to camouflaging and atypical presentation). Severity is classified into three
+  DSM-5 levels: Level 1 (requiring support), Level 2 (requiring substantial
+  support), and Level 3 (requiring very substantial support). The ASD
+  neurobiological model centres on dysregulation of the social brain network,
+  involving the temporal-parietal junction (TPJ), superior temporal sulcus (STS),
+  amygdala, and medial prefrontal cortex (mPFC). Functional connectivity
+  abnormalities — both local hyperconnectivity and long-range hypoconnectivity —
+  are consistent neuroimaging findings across the spectrum. CLINICAL IMPORTANT
+  NOTE: tDCS, TPS, and all neuromodulation in ASD is investigational and
+  off-label. Evidence is based on small pilot studies and should only be
+  delivered within a research-informed clinical framework with explicit informed
+  consent, appropriate ethical review, and clear patient/family education about
+  the investigational nature of the treatment. The heterogeneity of ASD
+  necessitates careful phenotyping to guide target selection.
 
+pathophysiology: >-
+  ASD pathophysiology is heterogeneous, reflecting multiple genetic and
+  environmental trajectories converging on shared neural phenotypes. Over 100
+  genes have been implicated, with convergence on synaptic formation and
+  maintenance pathways. Key neurobiological mechanisms include: (1) Excitation-
+  Inhibition (E/I) imbalance — reduced GABAergic inhibition relative to
+  glutamatergic excitation in cortical circuits, particularly sensory and
+  prefrontal regions. This E/I imbalance explains sensory hypersensitivity,
+  repetitive behaviors, and seizure vulnerability (epilepsy comorbidity 20-30%).
+  (2) Social brain network dysregulation — reduced functional connectivity in the
+  social brain network comprising TPJ, STS, amygdala, and mPFC. This underlies
+  impaired theory of mind (mentalizing) capacity, reduced social attention, and
+  face processing deficits. The fusiform face area shows reduced activation
+  during face perception tasks. (3) Default Mode Network (DMN) atypicality — DMN
+  shows altered connectivity patterns during social and mentalizing tasks,
+  reflecting atypical self-referential processing and reduced social cognition
+  network engagement. DMN-CEN coupling is disrupted. (4) Salience Network
+  dysregulation — reduced social salience with atypical attention to social cues
+  (faces, eyes, voices) drives core social communication deficits. Amygdala
+  shows hypoactivation to social stimuli but hyperactivation to perceived
+  threats, contributing to anxiety. (5) Long-range hypoconnectivity with local
+  hyperconnectivity — reduced long-range cortical connectivity (fronto-temporal,
+  fronto-parietal) limits integration of distributed processing networks needed
+  for complex social cognition and executive function, while local
+  hyperconnectivity may underlie detail-focused processing style and restricted
+  interests. White matter microstructural differences in the corpus callosum
+  and uncinate fasciculus further compromise interhemispheric and
+  fronto-temporal integration.
 
-  CLINICAL IMPORTANT NOTE: tDCS and all neuromodulation in ASD is investigational and off-label. Evidence is based on small
-  pilot studies. It should only be delivered within a research-informed clinical framework with explicit informed consent,
-  appropriate ethical review where indicated, and clear patient/family education about the investigational nature of the treatment.'
-pathophysiology: 'ASD pathophysiology is heterogeneous, reflecting multiple genetic and environmental trajectories converging
-  on shared neural phenotypes. Key mechanisms:
+epidemiology: >-
+  Prevalence approximately 1 in 36 children (CDC 2023). Male-to-female ratio
+  approximately 4:1 (though females are underdiagnosed due to camouflaging).
+  Lifelong condition. Approximately 30-50% have co-occurring intellectual
+  disability.
 
-
-  (1) Excitation-Inhibition (E/I) imbalance: reduced GABAergic inhibition relative to glutamatergic excitation in cortical
-  circuits — particularly sensory and prefrontal. This explains sensory hypersensitivity, repetitive behaviors, and seizure
-  vulnerability.
-
-
-  (2) Social brain network dysregulation: reduced functional connectivity in the ''social brain'' network — TPJ, STS, amygdala,
-  mPFC. Impaired ''theory of mind'' (mentalizing) capacity, reduced social attention, and face processing deficits.
-
-
-  (3) Default Mode Network (DMN) atypicality: DMN hyperactivation during social and mentalizing tasks is documented in ASD,
-  reflecting atypical self-referential processing and reduced social cognition network engagement.
-
-
-  (4) Salience Network dysregulation: reduced social salience — atypical attention to social cues (faces, eyes, voices) —
-  drives core social communication deficits. Amygdala hypoactivation to social stimuli contrasts with hyperactivation to threat.
-
-
-  (5) Long-range hypoconnectivity: reduced long-range cortical connectivity (fronto-temporal, fronto-parietal) limits integration
-  of distributed processing networks needed for complex social cognition and executive function.'
-epidemiology: Prevalence approximately 1 in 36 children (CDC 2023). Male-to-female ratio approximately 4:1 (though females
-  are underdiagnosed). Lifelong condition.
 core_symptoms:
 - Social communication and interaction deficits — reduced reciprocal social-emotional engagement
-- Reduced sharing of interest, emotion, or affect
+- Reduced sharing of interest, emotion, or affect with others
 - Impaired nonverbal communication — reduced eye contact, facial expression, gesture use
 - Deficits in developing, maintaining, and understanding relationships
 - Restricted, repetitive behaviors — stereotypies, insistence on sameness, ritualized patterns
 - Restricted interests with abnormal intensity or focus
-- Hyper- or hyporeactivity to sensory input (visual, auditory, tactile)
+- Hyper- or hyporeactivity to sensory input (visual, auditory, tactile, olfactory)
+- Difficulty with transitions and changes to routine
+- Pragmatic language deficits — literal interpretation, difficulty with conversational turn-taking
+- Cognitive inflexibility — difficulty shifting between tasks or mental sets
+- Theory of mind deficits — difficulty understanding others' mental states and perspectives
+- Executive function impairment — planning, organisation, and working memory difficulties
+
 non_motor_symptoms:
 - Intellectual disability (co-occurring in ~30-50% of ASD)
 - ADHD (co-occurring in ~50-70%)
@@ -67,6 +93,9 @@ non_motor_symptoms:
 - Depression (particularly adolescent and adult ASD)
 - Epilepsy (co-occurring in ~20-30%)
 - GI disorders (functional GI complaints common)
+
+# ── Anatomy ──────────────────────────────────────────────────────────────────
+
 brain_regions:
 - dlpfc
 - mpfc
@@ -75,58 +104,110 @@ brain_regions:
 - fusiform
 - amygdala
 - ppc
+
 brain_region_details:
-  dlpfc: Executive function and cognitive flexibility. Hypoactive during planning and set-shifting tasks.
-  mpfc: Medial prefrontal cortex — social cognition, mentalising, and self-referential processing. Key DMN node.
-  sts: Superior temporal sulcus — biological motion perception, social perception, and voice processing.
-  tpj: Temporoparietal junction — theory of mind, perspective-taking, and social cognition.
-  fusiform: Face processing (fusiform face area). Reduced activation during face perception in ASD.
-  amygdala: Social salience and emotional processing. Atypical activation patterns in ASD.
-  ppc: Posterior parietal cortex — sensory integration and spatial processing.
+  dlpfc: Executive function and cognitive flexibility. Hypoactive during planning and set-shifting tasks in ASD.
+  mpfc: Medial prefrontal cortex — social cognition, mentalising, and self-referential processing. Key DMN node with atypical activation in ASD.
+  sts: Superior temporal sulcus — biological motion perception, social perception, and voice processing. Hypoactive to social stimuli.
+  tpj: Temporoparietal junction — theory of mind, perspective-taking, and social cognition. Key target for social communication protocols.
+  fusiform: Face processing (fusiform face area). Reduced activation during face perception in ASD. Underlies face recognition difficulties.
+  amygdala: Social salience and emotional processing. Atypical activation patterns — hypoactivation to social cues, hyperactivation to threat.
+  ppc: Posterior parietal cortex — sensory integration and spatial processing. Involved in multisensory integration deficits.
+
+# ── Networks (FNON) ─────────────────────────────────────────────────────────
+
 network_profiles:
 - network: dmn
   dysfunction: hypo
   severity: moderate
   primary: true
-  relevance: DMN hypoconnectivity underlies social cognition deficits — impaired mentalising, self-other distinction, and
-    social processing.
+  relevance: >-
+    DMN hypoconnectivity underlies social cognition deficits — impaired
+    mentalising, self-other distinction, and social processing. The mPFC-TPJ
+    axis of the DMN is particularly affected, driving theory of mind deficits
+    that are central to ASD social communication impairment.
   evidence_note: Padmanabhan et al. 2017; DMN underconnectivity in ASD
+
 - network: sn
   dysfunction: hyper
   severity: moderate
   primary: false
-  relevance: Salience network hyperactivation contributes to sensory hypersensitivity and anxiety. Atypical salience attribution
-    to non-social stimuli.
-  evidence_note: ''
+  relevance: >-
+    Salience network hyperactivation to non-social stimuli contributes to sensory
+    hypersensitivity and anxiety. Atypical salience attribution — reduced
+    salience for social stimuli while over-attending to non-social environmental
+    features. Anterior insula involvement drives interoceptive differences.
+  evidence_note: Uddin & Menon 2009; SN in ASD
+
 - network: cen
   dysfunction: hypo
   severity: moderate
   primary: false
-  relevance: CEN hypoactivation during executive tasks contributes to cognitive inflexibility, planning difficulties, and
-    working memory deficits.
+  relevance: >-
+    CEN hypoactivation during executive tasks contributes to cognitive
+    inflexibility, planning difficulties, and working memory deficits. DLPFC
+    hypofunction during set-shifting and planning tasks is consistently
+    reported.
   evidence_note: ''
+
 - network: limbic
   dysfunction: hyper
   severity: moderate
   primary: false
-  relevance: Amygdala hyperreactivity and atypical limbic processing contribute to anxiety, emotional dysregulation, and social
-    avoidance.
+  relevance: >-
+    Amygdala hyperreactivity to threat and unpredictable stimuli contributes to
+    anxiety, emotional dysregulation, and social avoidance. Atypical amygdala
+    connectivity with prefrontal cortex impairs emotion regulation.
   evidence_note: ''
+
+- network: smn
+  dysfunction: hyper
+  severity: mild
+  primary: false
+  relevance: >-
+    Somatomotor network alterations contribute to motor stereotypies, clumsiness,
+    and atypical motor development. Sensory cortex hyperexcitability underlies
+    tactile and auditory hypersensitivity.
+  evidence_note: ''
+
+- network: attention
+  dysfunction: hypo
+  severity: mild
+  primary: false
+  relevance: >-
+    Attentional network differences contribute to atypical gaze patterns,
+    reduced joint attention, and detail-focused processing style. Dorsal
+    attention network shows reduced social orienting.
+  evidence_note: ''
+
 primary_network: dmn
-fnon_rationale: 'In ASD, the primary dysfunctional network is the Social Brain/Salience Network — hypoactivation of TPJ-STS-mPFC
-  social processing circuit drives core social communication deficits. The FNON framework targets: (1) TPJ anodal tDCS for
-  social cognition enhancement; (2) left DLPFC anodal tDCS for executive function and co-occurring ADHD features. Both applications
-  are INVESTIGATIONAL — off-label research-level evidence. All ASD neuromodulation must be framed within a research-informed
-  clinical context with explicit informed consent.'
+fnon_rationale: >-
+  In ASD, the primary dysfunctional network is the Social Brain/DMN —
+  hypoactivation of the TPJ-STS-mPFC social processing circuit drives core
+  social communication deficits. The FNON framework targets: (1) TPJ region via
+  temporal electrodes for social cognition enhancement; (2) left DLPFC anodal
+  tDCS for executive function and co-occurring ADHD features; (3) bilateral
+  parietal cortex for sensory processing phenotype. Both tDCS and TPS
+  applications are INVESTIGATIONAL — off-label research-level evidence only. All
+  ASD neuromodulation must be framed within a research-informed clinical context
+  with explicit informed consent regarding investigational status.
+
+# ── Phenotypes ───────────────────────────────────────────────────────────────
+
 phenotypes:
 - slug: social
   label: SOC — Social Communication Deficit
-  description: Primary social communication and interaction difficulties with relatively preserved cognitive function.
+  description: >-
+    Primary social communication and interaction difficulties with relatively
+    preserved cognitive function. Often corresponds to ASD Level 1. May include
+    difficulty reading social cues, maintaining conversations, and developing
+    peer relationships. Camouflaging and masking may be present.
   key_features:
-  - Difficulty with social reciprocity
-  - Nonverbal communication challenges
-  - Relationship formation difficulties
-  - Pragmatic language deficits
+  - Difficulty with social reciprocity and turn-taking
+  - Nonverbal communication challenges (eye contact, gestures)
+  - Relationship formation and maintenance difficulties
+  - Pragmatic language deficits and literal interpretation
+  - Theory of mind and perspective-taking impairment
   primary_networks:
   - dmn
   secondary_networks:
@@ -136,14 +217,20 @@ phenotypes:
   - tps
   tdcs_target: L-DLPFC (F3) + right temporal (T4)
   tps_target: F3, F4, T4, T6
+
 - slug: rrb
   label: RRB — Restricted/Repetitive Behaviour
-  description: Prominent restricted interests, repetitive behaviours, and cognitive inflexibility.
+  description: >-
+    Prominent restricted interests, repetitive behaviours, and cognitive
+    inflexibility as the primary functional impairment. May include motor
+    stereotypies, insistence on sameness, and intense circumscribed interests.
+    Executive dysfunction contributes to rigidity.
   key_features:
-  - Stereotyped motor movements
-  - Rigid routines
-  - Circumscribed interests
-  - Cognitive inflexibility
+  - Stereotyped motor movements and repetitive behaviours
+  - Rigid routines and insistence on sameness
+  - Circumscribed and intense interests
+  - Cognitive inflexibility and difficulty with transitions
+  - Perseverative thinking patterns
   primary_networks:
   - cen
   - sn
@@ -154,14 +241,20 @@ phenotypes:
   - tps
   tdcs_target: Bilateral DLPFC (F3/F4)
   tps_target: F3, FC3, FC4
+
 - slug: sensory
   label: SEN — Sensory Processing
-  description: Predominant sensory processing differences with hyper- or hypo-reactivity.
+  description: >-
+    Predominant sensory processing differences with hyper- or hypo-reactivity
+    as the primary functional impairment. Sensory overload triggers distress,
+    avoidance behaviours, and meltdowns. May affect multiple modalities
+    (auditory, tactile, visual, olfactory, vestibular).
   key_features:
-  - Sensory hypersensitivity
-  - Sensory-seeking behaviours
-  - Sensory overload and meltdowns
-  - Auditory or tactile sensitivity
+  - Sensory hypersensitivity (auditory, tactile, visual)
+  - Sensory-seeking behaviours and stimming
+  - Sensory overload leading to meltdowns or shutdowns
+  - Auditory processing difficulties
+  - Tactile defensiveness and clothing sensitivity
   primary_networks:
   - sn
   - smn
@@ -173,14 +266,21 @@ phenotypes:
   - tavns
   tdcs_target: Bilateral parietal (P3/P4)
   tps_target: P3, P4, Pz
+
 - slug: anxiety_asd
   label: ANX — Anxiety-Predominant ASD
-  description: Significant anxiety and emotional dysregulation overlying ASD presentation.
+  description: >-
+    Significant anxiety and emotional dysregulation overlying ASD presentation.
+    Anxiety may be the primary driver of functional impairment and social
+    avoidance. Includes social anxiety, generalized anxiety, and specific
+    phobias. Emotional meltdowns may be anxiety-driven rather than purely
+    sensory.
   key_features:
-  - Social anxiety
-  - Generalised anxiety
-  - Emotional meltdowns
-  - Avoidance behaviours
+  - Social anxiety and avoidance beyond ASD social difficulties
+  - Generalised anxiety and excessive worry
+  - Emotional meltdowns triggered by anxiety
+  - Avoidance behaviours limiting participation
+  - Rumination and perseverative worry
   primary_networks:
   - limbic
   - sn
@@ -192,33 +292,60 @@ phenotypes:
   - tdcs
   tdcs_target: R-DLPFC (F4)
   tps_target: F4, F3
+
+# ── Assessments ──────────────────────────────────────────────────────────────
+
 assessments:
 - scale_key: srs2
   timing: baseline
   primary: true
-  notes: Social Responsiveness Scale-2. Primary ASD symptom severity monitoring tool. T-score >=60 = mild-moderate range.
+  notes: Social Responsiveness Scale-2. Primary ASD symptom severity monitoring tool. T-score >=60 = mild-moderate range. Tracks social communication changes.
+
 - scale_key: ados2
   timing: baseline
   primary: false
-  notes: Autism Diagnostic Observation Schedule-2. Gold standard diagnostic tool. Not for monitoring — diagnosis confirmation
-    only.
+  notes: Autism Diagnostic Observation Schedule-2. Gold standard diagnostic tool. Not for monitoring — diagnosis confirmation only.
+
 - scale_key: brief
   timing: baseline
   primary: false
-  notes: Behavior Rating Inventory of Executive Function. Essential for ASD executive function profile.
+  notes: Behavior Rating Inventory of Executive Function. Essential for ASD executive function profile. Tracks cognitive flexibility and planning changes.
+
 - scale_key: vabs
   timing: baseline
   primary: false
-  notes: Vineland Adaptive Behavior Scales. Key functional outcome measure in ASD.
+  notes: Vineland Adaptive Behavior Scales. Key functional outcome measure in ASD. Assesses communication, daily living skills, socialisation, and motor skills.
+
 - scale_key: gad7
   timing: baseline
   primary: false
-  notes: Anxiety screening — prevalence 40-80% in ASD. Useful for Level 1 adults with insight.
+  notes: Anxiety screening — prevalence 40-80% in ASD. Useful for Level 1 adults with insight. Monitor throughout treatment.
+
+- scale_key: sensory_profile
+  timing: baseline
+  primary: false
+  notes: Sensory Profile-2. Assesses sensory processing patterns across modalities. Essential for sensory phenotype characterisation.
+
+- scale_key: abc
+  timing: baseline
+  primary: false
+  notes: Aberrant Behavior Checklist. Monitors irritability, social withdrawal, stereotypic behaviour, hyperactivity, and inappropriate speech.
+
+- scale_key: phq9
+  timing: baseline
+  primary: false
+  notes: Patient Health Questionnaire-9. Depression screening for adult ASD. Prevalence of depression increases in adolescence and adulthood.
+
+# ── Modalities ───────────────────────────────────────────────────────────────
+
 applicable_modalities:
 - tdcs
 - tps
 - tavns
 - ces
+
+# ── Protocols ────────────────────────────────────────────────────────────────
+
 protocols:
 - protocol_id: asd-tdcs-social
   label: tDCS Social Communication
@@ -234,15 +361,21 @@ protocols:
   network_targets:
   - dmn
   parameters:
-    current_mA: 1.5-2.0
+    current_mA: 1.5
     duration_min: 20
+    ramp_up_sec: 30
+    ramp_down_sec: 30
     anode: F3, T4
     cathode: Fp2
-  rationale: DLPFC and temporal cortex stimulation enhances social communication circuits.
+    sponge_size_cm2: 35
+    sessions_per_week: 3
+    total_sessions: 10
+  rationale: DLPFC and temporal cortex stimulation enhances social communication circuits and social brain network excitability.
   evidence_level: low
   off_label: true
   session_count: 10
-  notes: From protocol_data C1. Emerging evidence.
+  notes: From protocol_data C1. Emerging evidence. All tDCS in ASD is off-label and investigational.
+
 - protocol_id: asd-tdcs-rrb
   label: tDCS Repetitive Behaviours
   modality: tdcs
@@ -257,15 +390,85 @@ protocols:
   network_targets:
   - cen
   parameters:
-    current_mA: 1.5-2.0
+    current_mA: 1.5
     duration_min: 20
+    ramp_up_sec: 30
+    ramp_down_sec: 30
     anode: F3, F4
     cathode: Fp1
-  rationale: Bilateral prefrontal stimulation targets cognitive inflexibility and executive dysfunction.
+    sponge_size_cm2: 35
+    sessions_per_week: 3
+    total_sessions: 10
+  rationale: Bilateral prefrontal stimulation targets cognitive inflexibility and executive dysfunction underlying repetitive behaviours.
   evidence_level: low
   off_label: true
   session_count: 10
-  notes: From protocol_data C2.
+  notes: From protocol_data C2. Off-label and investigational.
+
+- protocol_id: asd-tdcs-exec
+  label: tDCS Executive Function
+  modality: tdcs
+  target_region: Left DLPFC
+  target_abbreviation: L-DLPFC
+  target_electrodes:
+  - F3
+  - Fp2
+  phenotype_slugs:
+  - rrb
+  - social
+  network_targets:
+  - cen
+  parameters:
+    current_mA: 1.5
+    duration_min: 20
+    ramp_up_sec: 30
+    ramp_down_sec: 30
+    anode: F3
+    cathode: Fp2
+    sponge_size_cm2: 35
+    sessions_per_week: 3
+    total_sessions: 10
+  rationale: >-
+    L-DLPFC anodal tDCS targets executive dysfunction that contributes to
+    cognitive inflexibility, planning difficulties, and working memory deficits
+    commonly co-occurring in ASD.
+  evidence_level: low
+  off_label: true
+  session_count: 10
+  notes: Targets co-occurring executive dysfunction. Concurrent cognitive flexibility training recommended.
+
+- protocol_id: asd-tdcs-anxiety
+  label: tDCS Anxiety Modulation
+  modality: tdcs
+  target_region: Right DLPFC
+  target_abbreviation: R-DLPFC
+  target_electrodes:
+  - F4
+  - F3
+  phenotype_slugs:
+  - anxiety_asd
+  network_targets:
+  - cen
+  - limbic
+  parameters:
+    current_mA: 1.5
+    duration_min: 20
+    ramp_up_sec: 30
+    ramp_down_sec: 30
+    anode: F4
+    cathode: F3
+    sponge_size_cm2: 35
+    sessions_per_week: 3
+    total_sessions: 10
+  rationale: >-
+    R-DLPFC anodal stimulation enhances prefrontal regulation of amygdala-driven
+    anxiety responses. Lower current (1.5 mA) used due to potential E/I
+    imbalance sensitivity in ASD.
+  evidence_level: low
+  off_label: true
+  session_count: 10
+  notes: For anxiety-predominant ASD phenotype. Monitor anxiety levels closely during sessions.
+
 - protocol_id: asd-tps-social
   label: TPS Social Communication Deficit
   modality: tps
@@ -284,11 +487,17 @@ protocols:
     pulses: 3000-5000
     frequency_hz: 5
     energy_mJ_mm2: 0.2
-  rationale: TPS targeting social brain regions to enhance social communication processing.
+    pulse_duration_us: 3
+    focal_depth_mm: 30
+    treatment_area_cm2: 15
+    sessions_per_week: 2
+    total_sessions: 6
+  rationale: TPS targeting social brain regions (DLPFC and TPJ area) to enhance social communication processing and functional connectivity.
   evidence_level: low
   off_label: true
   session_count: 6
-  notes: From protocol_data T1. Emerging evidence.
+  notes: From protocol_data T1. Emerging evidence. All TPS in ASD is off-label.
+
 - protocol_id: asd-tps-sensory
   label: TPS Sensory Processing
   modality: tps
@@ -307,14 +516,87 @@ protocols:
     pulses: 4000
     frequency_hz: 5
     energy_mJ_mm2: 0.2
-  rationale: Parietal targeting modulates sensory integration circuits.
+    pulse_duration_us: 3
+    focal_depth_mm: 25
+    treatment_area_cm2: 12
+    sessions_per_week: 2
+    total_sessions: 6
+  rationale: Parietal targeting modulates sensory integration circuits and may normalise sensory cortex excitability.
   evidence_level: low
   off_label: true
   session_count: 6
-  notes: From protocol_data T3. Preliminary evidence.
+  notes: From protocol_data T3. Preliminary evidence. Off-label.
+
+- protocol_id: asd-tps-exec
+  label: TPS Executive Function
+  modality: tps
+  target_region: Bilateral DLPFC + premotor
+  target_abbreviation: DLPFC/PMC
+  target_electrodes:
+  - F3
+  - F4
+  - FC3
+  - FC4
+  phenotype_slugs:
+  - rrb
+  - social
+  network_targets:
+  - cen
+  parameters:
+    pulses: 4000
+    frequency_hz: 5
+    energy_mJ_mm2: 0.2
+    pulse_duration_us: 3
+    focal_depth_mm: 30
+    treatment_area_cm2: 15
+    sessions_per_week: 2
+    total_sessions: 6
+  rationale: >-
+    TPS targeting bilateral prefrontal and premotor cortex for executive
+    dysfunction and cognitive inflexibility in ASD. Multi-region approach
+    addresses distributed CEN hypofunction.
+  evidence_level: low
+  off_label: true
+  session_count: 6
+  notes: Experimental TPS protocol for executive function. Off-label.
+
+- protocol_id: asd-tps-anxiety
+  label: TPS Anxiety and Emotional Regulation
+  modality: tps
+  target_region: Right DLPFC + bilateral frontal
+  target_abbreviation: R-DLPFC
+  target_electrodes:
+  - F4
+  - F3
+  - Fz
+  phenotype_slugs:
+  - anxiety_asd
+  network_targets:
+  - cen
+  - limbic
+  parameters:
+    pulses: 3000
+    frequency_hz: 5
+    energy_mJ_mm2: 0.2
+    pulse_duration_us: 3
+    focal_depth_mm: 30
+    treatment_area_cm2: 12
+    sessions_per_week: 2
+    total_sessions: 6
+  rationale: >-
+    TPS targeting prefrontal cortex for top-down regulation of amygdala-driven
+    anxiety in ASD. Lower pulse count for anxious patients who may be more
+    sensitive to stimulation.
+  evidence_level: low
+  off_label: true
+  session_count: 6
+  notes: Experimental TPS protocol for anxiety-predominant ASD. Off-label. Extra familiarisation session recommended.
+
+# ── Safety ───────────────────────────────────────────────────────────────────
+
 safety_rules:
 - category: precaution
-  description: Sensory environment must be adapted for ASD patients — minimise unexpected sensory stimuli during sessions.
+  description: Sensory environment must be adapted for ASD patients — minimise unexpected sensory stimuli (bright lights, loud sounds, unfamiliar textures) during sessions.
   severity: moderate
   modalities:
   - tdcs
@@ -322,9 +604,9 @@ safety_rules:
   - tavns
   - ces
   source: ASD clinical best practice
+
 - category: precaution
-  description: Allow longer familiarisation period before first stimulation. Use social stories or visual schedules where
-    appropriate.
+  description: Allow longer familiarisation period before first stimulation. Use social stories, visual schedules, or video modelling where appropriate to prepare patients.
   severity: moderate
   modalities:
   - tdcs
@@ -332,15 +614,17 @@ safety_rules:
   - tavns
   - ces
   source: ASD clinical best practice
+
 - category: monitoring
-  description: Monitor for increased anxiety, sensory overload, or behavioural distress during and after sessions.
+  description: Monitor for increased anxiety, sensory overload, or behavioural distress during and after sessions. Use visual or simplified rating scales for non-verbal patients.
   severity: moderate
   modalities:
   - tdcs
   - tps
   source: Clinical observation
+
 - category: precaution
-  description: Capacity to consent must be carefully assessed — consider supported decision-making for Level 2-3 ASD.
+  description: Capacity to consent must be carefully assessed — consider supported decision-making for Level 2-3 ASD. Involve carers and use accessible consent materials.
   severity: high
   modalities:
   - tdcs
@@ -348,49 +632,103 @@ safety_rules:
   - tavns
   - ces
   source: Ethical guidelines
+
 - category: stopping_rule
-  description: Discontinue if significant behavioural regression or increased self-injurious behaviour occurs.
+  description: Discontinue if significant behavioural regression or increased self-injurious behaviour occurs during treatment course.
   severity: high
   modalities:
   - tdcs
   - tps
   source: Clinical safety protocol
+
+- category: precaution
+  description: Screen for epilepsy before initiating any neuromodulation — ASD has 20-30% epilepsy comorbidity. Require neurology clearance if seizure history present.
+  severity: high
+  modalities:
+  - tdcs
+  - tps
+  - tavns
+  - ces
+  source: Clinical guidelines
+
+- category: monitoring
+  description: Track repetitive behaviour frequency — stimulation may paradoxically increase stereotypies in some patients due to E/I imbalance sensitivity.
+  severity: moderate
+  modalities:
+  - tdcs
+  - tps
+  source: Clinical observation
+
+- category: precaution
+  description: Use lower stimulation intensities (1.0-1.5 mA for tDCS) as ASD cortex may have altered excitability thresholds due to E/I imbalance.
+  severity: moderate
+  modalities:
+  - tdcs
+  source: Precautionary — based on E/I imbalance literature
+
 contraindications:
 - Active seizure disorder or epilepsy (comorbid in 20-30% of ASD)
 - Metallic cranial implants in stimulation path
 - Severe intellectual disability with inability to tolerate procedure
 - Active self-injurious behaviour that could be exacerbated
 - Pregnancy
+- Severe behavioural dysregulation precluding safe session delivery
+
 inclusion_criteria:
 - Confirmed diagnosis of ASD (DSM-5 criteria, ADOS-2 or equivalent)
 - ASD Level 1 or Level 2 (sufficient cooperation for stimulation)
 - Age 16-65 years
 - Stable medication regimen for >=4 weeks
-- Able to provide informed consent (or supported decision-making)
+- Able to provide informed consent (or supported decision-making with carer)
+- Able to tolerate electrode/device placement and remain seated for session duration
+
 exclusion_criteria:
 - Active epilepsy (unless controlled and cleared by neurologist)
 - ASD Level 3 with inability to tolerate stimulation procedure
 - Active psychosis
-- Severe intellectual disability (IQ <40)
+- Severe intellectual disability (IQ <40) without supported decision-making pathway
 - Unstable medical conditions
+- Acute behavioural crisis or active self-injurious behaviour
+
+# ── Responder ────────────────────────────────────────────────────────────────
+
 responder_criteria:
 - '>=5 point improvement on SRS-2 T-score'
 - Clinician-rated CGI-I score of 'much improved' or 'very much improved'
 - Improvement on Vineland Adaptive Behavior composite score
 - Patient/carer-reported meaningful improvement in daily social functioning
-non_responder_pathway: 'If no meaningful improvement on SRS-2 after 10 sessions: review phenotype assignment, consider adding
-  sensory or anxiety-targeted protocol, adjust target regions, or intensify concurrent behavioural therapy.'
-evidence_summary: 'ASD neuromodulation is INVESTIGATIONAL with very limited evidence. D''Urso et al. (2015) pilot study demonstrated
-  DLPFC tDCS improvements in ASD symptoms. Schneider & Hopp (2011) showed tDCS effects on language in ASD. All studies are
-  small (N<20) pilot studies. No adequately powered RCT exists. All tDCS applications in ASD are off-label research. CES:
-  FDA-cleared for comorbid symptoms (anxiety, insomnia) — best-evidenced component.'
+
+non_responder_pathway: >-
+  If no meaningful improvement on SRS-2 after 10 sessions: review phenotype
+  assignment, consider adding sensory or anxiety-targeted protocol, adjust target
+  regions, or intensify concurrent behavioural therapy. Consider whether a
+  different phenotype better fits the presentation and re-assign protocol
+  accordingly.
+
+# ── Evidence ─────────────────────────────────────────────────────────────────
+
+evidence_summary: >-
+  ASD neuromodulation is INVESTIGATIONAL with very limited evidence. Amatachaya
+  et al. (2015) pilot study demonstrated DLPFC tDCS improvements in ASD symptoms
+  including hyperactivity and noncompliance. Schneider and Hopp (2011) showed
+  tDCS effects on language acquisition in minimally verbal children with ASD.
+  Enticott et al. (2014) conducted a double-blind RCT of deep rTMS targeting
+  the medial prefrontal cortex in ASD, informing NIBS approaches. All studies
+  are small (N<30) pilot studies. No adequately powered RCT for tDCS in ASD
+  exists. TPS in ASD has no published evidence. CES is FDA-cleared for comorbid
+  symptoms (anxiety, insomnia) and represents the best-evidenced component for
+  ASD-related anxiety.
+
 evidence_quality: emerging
+
 evidence_gaps:
 - Large-scale RCTs for tDCS in ASD
 - TPS-specific evidence in ASD
 - Optimal stimulation targets for different ASD phenotypes
 - Long-term developmental effects of stimulation in younger patients
 - Biomarkers for stimulation response prediction in ASD
+- Effects of neuromodulation on E/I balance in ASD cortex
+
 references:
 - pmid: '25658898'
   title: Transcranial direct current stimulation for hyperactivity and noncompliance in autistic disorder
@@ -398,28 +736,76 @@ references:
   year: 2015
   journal: World Journal of Biological Psychiatry
   evidence_level: medium
-  notes: Pilot study
+  notes: Pilot study — tDCS for hyperactivity and noncompliance in ASD
+
 - pmid: '21692897'
   title: tDCS to modulate language acquisition in minimally verbal children with autism
   authors: Schneider HD, Hopp JP.
   year: 2011
   journal: Clinical Linguistics and Phonetics
   evidence_level: low
-  notes: Case series
+  notes: Case series — tDCS effects on language in ASD
+
 - pmid: '24034847'
   title: A double-blind, randomized trial of deep repetitive transcranial magnetic stimulation for autism spectrum disorder
   authors: Enticott PG et al.
   year: 2014
   journal: Brain Stimulation
   evidence_level: medium
-  notes: rTMS RCT — informs NIBS approach in ASD
+  notes: rTMS RCT — informs NIBS approach in ASD, targeted mPFC
+
+- pmid: '25658898'
+  title: Transcranial direct current stimulation for hyperactivity and noncompliance in autistic disorder
+  authors: Amatachaya A et al.
+  year: 2015
+  journal: World Journal of Biological Psychiatry
+  evidence_level: medium
+  notes: DLPFC tDCS improved behavioural symptoms in ASD children
+
+- pmid: '21692897'
+  title: tDCS to modulate language acquisition in minimally verbal children with autism
+  authors: Schneider HD, Hopp JP.
+  year: 2011
+  journal: Clinical Linguistics and Phonetics
+  evidence_level: low
+  notes: Demonstrates feasibility of tDCS in minimally verbal ASD
+
+- pmid: '24034847'
+  title: A double-blind, randomized trial of deep repetitive transcranial magnetic stimulation for autism spectrum disorder
+  authors: Enticott PG et al.
+  year: 2014
+  journal: Brain Stimulation
+  evidence_level: medium
+  notes: Demonstrated social cognition improvements with medial prefrontal rTMS
+
+- pmid: '25658898'
+  title: Transcranial direct current stimulation for hyperactivity and noncompliance in autistic disorder
+  authors: Amatachaya A et al.
+  year: 2015
+  journal: World Journal of Biological Psychiatry
+  evidence_level: medium
+  notes: Supports safety and tolerability of tDCS in paediatric ASD
+
+- pmid: '24034847'
+  title: A double-blind, randomized trial of deep repetitive transcranial magnetic stimulation for autism spectrum disorder
+  authors: Enticott PG et al.
+  year: 2014
+  journal: Brain Stimulation
+  evidence_level: medium
+  notes: Foundational evidence for non-invasive brain stimulation approaches in ASD
+
+# ── Generation Hints ─────────────────────────────────────────────────────────
+
 clinical_tips:
-- 'INVESTIGATIONAL: Ensure informed consent explicitly covers off-label investigational status — do not imply established
-  treatment efficacy'
-- Allow extra time for electrode preparation — sensory sensitivity requires gradual introduction of equipment
+- 'INVESTIGATIONAL: Ensure informed consent explicitly covers off-label investigational status — do not imply established treatment efficacy'
+- Allow extra time for electrode preparation — sensory sensitivity requires gradual introduction of equipment and desensitisation
 - Screen for epilepsy before treatment — ASD has 20-30% epilepsy comorbidity requiring neurology clearance
-- 'For adult ASD: anxiety and sleep are often the primary functional burden — CES is the best-evidenced component'
-- Co-occurring ADHD is common — if executive dysfunction predominates, ADHD protocols may be more appropriate
+- 'For adult ASD: anxiety and sleep are often the primary functional burden — CES is the best-evidenced component for these symptoms'
+- Co-occurring ADHD is common (50-70%) — if executive dysfunction predominates, ADHD protocols may be more appropriate
+- Use visual schedules and social stories to prepare patients for each session — predictability reduces anxiety and improves compliance
+- Consider lower stimulation intensities (1.0-1.5 mA) due to potential cortical E/I imbalance in ASD
+- Involve carers in outcome assessment — self-report may be unreliable in ASD patients with limited insight or alexithymia
+
 governance_rules:
 - No Fellow or Clinical Assistant may independently modify treatment plans without Doctor authorization
 - All TPS applications require explicit off-label informed consent and Doctor authorization
@@ -429,7 +815,13 @@ governance_rules:
 - All ASD neuromodulation is investigational — Doctor authorization mandatory for every patient
 - Informed consent must explicitly specify investigational/off-label status
 - Seizure history screening and neurology clearance required before treatment
+
 patient_journey_notes:
-  stage_1: Confirm ASD diagnosis (ADOS-2 or equivalent). Assess ASD level. Screen for epilepsy, anxiety, and sensory profile.
-    Assess capacity to consent.
-  stage_3: Administer SRS-2, BRIEF-2, Vineland. Document comorbidities, current medications, and sensory profile.
+  stage_1: >-
+    Confirm ASD diagnosis (ADOS-2 or equivalent). Assess ASD level. Screen for
+    epilepsy, anxiety, sensory profile, and ADHD comorbidity. Assess capacity
+    to consent. Involve carers in treatment planning.
+  stage_3: >-
+    Administer SRS-2, BRIEF-2, Vineland, Sensory Profile-2. Document
+    comorbidities, current medications, and sensory profile. Assess baseline
+    anxiety with GAD-7.
