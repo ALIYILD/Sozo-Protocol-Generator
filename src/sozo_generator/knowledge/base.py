@@ -28,6 +28,7 @@ from .loader import (
     load_evidence_maps,
     load_contraindications,
     load_shared_rules,
+    load_blueprints,
     KNOWLEDGE_ROOT,
 )
 from .linker import validate_links, LinkReport
@@ -40,6 +41,7 @@ from .schemas import (
     KnowledgeContraindication,
     SharedClinicalRule,
 )
+from .specs import DocumentBlueprint
 
 logger = logging.getLogger(__name__)
 
@@ -60,6 +62,7 @@ class KnowledgeBase:
         self.evidence_maps: list[KnowledgeEvidenceMap] = []
         self.contraindications: dict[str, KnowledgeContraindication] = {}
         self.shared_rules: dict[str, SharedClinicalRule] = {}
+        self.blueprints: dict[str, DocumentBlueprint] = {}
         self._loaded = False
         self._link_report: Optional[LinkReport] = None
 
@@ -73,6 +76,7 @@ class KnowledgeBase:
         self.evidence_maps = load_evidence_maps(self.knowledge_dir)
         self.contraindications = load_contraindications(self.knowledge_dir)
         self.shared_rules = load_shared_rules(self.knowledge_dir)
+        self.blueprints = load_blueprints()
         self._loaded = True
 
         logger.info(
@@ -148,6 +152,16 @@ class KnowledgeBase:
             return list(self.shared_rules.values())
         return [r for r in self.shared_rules.values() if r.category == category]
 
+    # ── Blueprint queries ──────────────────────────────────────────────
+
+    def get_blueprint(self, doc_type_slug: str) -> Optional[DocumentBlueprint]:
+        """Get a document blueprint by doc type slug."""
+        return self.blueprints.get(doc_type_slug)
+
+    def list_blueprints(self) -> list[str]:
+        """List all blueprint slugs."""
+        return sorted(self.blueprints.keys())
+
     # ── Summary ────────────────────────────────────────────────────────
 
     def summary(self) -> dict:
@@ -160,6 +174,7 @@ class KnowledgeBase:
             "evidence_maps": len(self.evidence_maps),
             "contraindications": len(self.contraindications),
             "shared_rules": len(self.shared_rules),
+            "blueprints": len(self.blueprints),
             "loaded": self._loaded,
             "valid": self._link_report.valid if self._link_report else None,
         }

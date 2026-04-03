@@ -22,6 +22,7 @@ from .schemas import (
     KnowledgeContraindication,
     SharedClinicalRule,
 )
+from .specs import DocumentBlueprint
 
 logger = logging.getLogger(__name__)
 
@@ -182,3 +183,39 @@ def load_shared_rules(knowledge_dir: Path | None = None) -> dict[str, SharedClin
         except Exception as e:
             logger.error(f"Failed to load shared rule {path.name}: {e}")
     return rules
+
+
+# ── Blueprint loaders ─────────────────────────────────────────────────────
+
+BLUEPRINTS_ROOT = KNOWLEDGE_ROOT.parent / "blueprints"
+
+
+def load_blueprints(blueprints_dir: Path | None = None) -> dict[str, DocumentBlueprint]:
+    """Load all document blueprints."""
+    base = blueprints_dir or BLUEPRINTS_ROOT
+    blueprints = {}
+    if not base.exists():
+        return blueprints
+    for path in sorted(base.glob("*.yaml")):
+        if path.stem.startswith("_"):
+            continue
+        try:
+            bp = _load_and_validate(path, DocumentBlueprint)
+            blueprints[bp.slug] = bp
+            logger.debug(f"Loaded blueprint: {bp.slug}")
+        except Exception as e:
+            logger.error(f"Failed to load blueprint {path.name}: {e}")
+    return blueprints
+
+
+def load_blueprint(slug: str, blueprints_dir: Path | None = None) -> DocumentBlueprint | None:
+    """Load a single document blueprint by slug."""
+    base = blueprints_dir or BLUEPRINTS_ROOT
+    path = base / f"{slug}.yaml"
+    if not path.exists():
+        return None
+    try:
+        return _load_and_validate(path, DocumentBlueprint)
+    except Exception as e:
+        logger.error(f"Failed to load blueprint {slug}: {e}")
+        return None

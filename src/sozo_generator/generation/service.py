@@ -274,6 +274,73 @@ class GenerationService:
             "knowledge_base_summary": kb.summary(),
         }
 
+    def generate_canonical(
+        self,
+        condition: str,
+        doc_type: str = "evidence_based_protocol",
+        tier: str = "fellow",
+    ) -> GenerationResult:
+        """Generate a document using the canonical blueprint-driven path.
+
+        This uses the KnowledgeBase + DocumentBlueprint to assemble
+        documents without hardcoded dispatch logic.
+
+        Args:
+            condition: Condition slug (must exist in knowledge base)
+            doc_type: Blueprint slug (e.g. "evidence_based_protocol")
+            tier: "fellow" or "partners"
+        """
+        import uuid
+        result = GenerationResult(
+            condition_slug=condition,
+            tier=tier,
+            doc_type=doc_type,
+            success=False,
+            build_id=f"canon-{uuid.uuid4().hex[:8]}",
+        )
+
+        try:
+            kb = self.knowledge_base
+            if not kb:
+                result.error = "Knowledge base not available"
+                return result
+
+            # Assemble document from blueprint + knowledge
+            from ..knowledge.assembler import CanonicalDocumentAssembler
+            assembler = CanonicalDocumentAssembler(kb)
+            spec = assembler.assemble(condition, doc_type, tier)
+
+            # Render using existing renderer
+            output_path = self.exporter.renderer.render(spec)
+            result.output_path = str(output_path)
+            result.success = True
+
+            # Visuals
+            if self.with_visuals:
+                cond_schema = self.registry.get(condition) if self.registry.exists(condition) else None
+                if cond_schema:
+                    visuals = self._generate_visuals(cond_schema, GenerationRequest(
+                        condition_slug=condition,
+                        tier=Tier(tier),
+                        doc_type=DocumentType(doc_type) if doc_type in [dt.value for dt in DocumentType] else DocumentType.EVIDENCE_BASED_PROTOCOL,
+                        with_visuals=True, with_qa=False,
+                    ))
+                    result.visuals_generated = visuals
+
+            # PDF
+            if self.with_pdf:
+                pdf = self._convert_to_pdf(Path(result.output_path))
+                if pdf:
+                    result.pdf_path = str(pdf)
+
+            logger.info(f"Canonical generation: {condition}/{doc_type}/{tier} → {output_path}")
+
+        except Exception as e:
+            result.error = str(e)
+            logger.error(f"Canonical generation failed: {e}", exc_info=True)
+
+        return result
+
     def generate_from_template(
         self,
         template_path: Optional[str] = None,

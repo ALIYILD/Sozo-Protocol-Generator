@@ -432,5 +432,33 @@ def knowledge_inspect(
             typer.echo(f"    {p.protocol_id}: {p.label} ({p.modality}){ol}")
 
 
+@app.command("generate-canonical")
+def generate_canonical_cmd(
+    condition: str = typer.Argument(..., help="Condition slug from knowledge base"),
+    doc_type: str = typer.Option("evidence_based_protocol", "--doc-type", "-d", help="Blueprint slug"),
+    tier: str = typer.Option("fellow", help="fellow or partners"),
+    no_visuals: bool = typer.Option(False, "--no-visuals"),
+):
+    """Generate a document using the canonical blueprint-driven path.
+
+    This uses the KnowledgeBase + DocumentBlueprint instead of legacy builders.
+    Supports conditions that exist only in the knowledge system (e.g., migraine).
+
+    Examples:
+        sozo generate-canonical parkinsons
+        sozo generate-canonical migraine --tier partners
+        sozo generate-canonical depression --doc-type evidence_based_protocol
+    """
+    from ..generation.service import GenerationService
+
+    svc = GenerationService(with_visuals=not no_visuals, with_qa=False)
+    result = svc.generate_canonical(condition, doc_type, tier)
+
+    if result.success:
+        typer.echo(typer.style(f"OK: {result.output_path}", fg=typer.colors.GREEN))
+    else:
+        typer.echo(typer.style(f"FAILED: {result.error}", fg=typer.colors.RED))
+
+
 if __name__ == "__main__":
     app()

@@ -1,0 +1,227 @@
+# SOZO Evidence-Based Protocol — Document Blueprint
+# This is the canonical specification for the Evidence-Based Protocol document type.
+# The assembler reads this to build the document for any condition.
+
+slug: evidence_based_protocol
+title_template: "SOZO Evidence-Based Protocol — {condition_name}"
+doc_type: evidence_based_protocol
+description: >-
+  Comprehensive evidence-graded protocol document with full clinical content,
+  PMID citations, confidence labels, and review flags.
+target_audience: clinician
+version: "1.0"
+applicable_tiers: [fellow, partners]
+requires_references: true
+requires_review_summary: true
+template_ref: Evidence_Based_Protocol.docx
+
+sections:
+  - slug: document_control
+    title: "Document Control & Clinical Responsibility"
+    purpose: Document governance and version information
+    order: 0
+    content_type: prose
+    knowledge_fields: [display_name, icd10, version]
+    knowledge_source: condition
+    preamble: >-
+      Organization: SOZO Brain Center. All protocols are for authorized SOZO personnel only.
+      No Fellow or Clinical Assistant may independently modify treatment protocols
+      without Doctor authorization.
+
+  - slug: inclusion_exclusion
+    title: "Inclusion & Exclusion Criteria"
+    purpose: Define patient eligibility
+    order: 1
+    content_type: mixed
+    knowledge_fields: [inclusion_criteria, exclusion_criteria, contraindications]
+    subsections:
+      - slug: inclusion
+        title: "Inclusion Criteria"
+        order: 0
+        content_type: list
+        knowledge_fields: [inclusion_criteria]
+        fallback_content: "[REVIEW REQUIRED: No inclusion criteria defined]"
+      - slug: exclusion
+        title: "Exclusion Criteria"
+        order: 1
+        content_type: list
+        knowledge_fields: [exclusion_criteria]
+        fallback_content: "[REVIEW REQUIRED: No exclusion criteria defined]"
+      - slug: contraindications
+        title: "Absolute Contraindications"
+        order: 2
+        content_type: list
+        knowledge_fields: [contraindications]
+
+  - slug: clinical_overview
+    title: "Clinical Overview"
+    purpose: Condition overview with epidemiology and presentation
+    order: 2
+    content_type: prose
+    knowledge_fields: [overview]
+    requires_evidence: true
+    citation_density: medium
+
+  - slug: pathophysiology
+    title: "Pathophysiology"
+    purpose: Neural mechanisms and circuit dysfunction
+    order: 3
+    content_type: mixed
+    knowledge_fields: [pathophysiology, core_symptoms, non_motor_symptoms]
+    requires_evidence: true
+    citation_density: high
+    visuals:
+      - visual_type: brain_map
+        caption_template: "{condition_name} — Key Brain Regions"
+        placement: after_content
+    subsections:
+      - slug: core_symptoms
+        title: "Core Symptoms"
+        order: 0
+        content_type: list
+        knowledge_fields: [core_symptoms]
+      - slug: non_motor_symptoms
+        title: "Non-Motor Symptoms"
+        order: 1
+        content_type: list
+        knowledge_fields: [non_motor_symptoms]
+
+  - slug: brain_anatomy
+    title: "Key Brain Structures & Neuroanatomy"
+    purpose: Anatomical regions relevant to the condition
+    order: 4
+    content_type: table
+    knowledge_fields: [brain_regions, brain_region_details]
+    table_headers: [Brain Region, Functional Role & Relevance]
+    table_row_source: brain_regions
+    preamble: >-
+      The following brain structures are most relevant to {condition_name} pathophysiology
+      and represent primary or secondary targets for neuromodulation.
+
+  - slug: network_profiles
+    title: "Functional Network Involvement (FNON)"
+    purpose: FNON network dysfunction profile
+    order: 5
+    tier: partners
+    content_type: table
+    knowledge_fields: [network_profiles, fnon_rationale]
+    table_headers: [Network, Dysfunction Pattern, Severity, Relevance]
+    table_row_source: network_profiles
+    requires_evidence: true
+    preamble: >-
+      The Functional Network-Oriented Neuromodulation (FNON) framework emphasizes
+      targeting dysfunctional large-scale brain networks rather than isolated brain regions.
+      Do NOT stimulate symptoms — stimulate dysfunctional NETWORKS.
+    visuals:
+      - visual_type: network_diagram
+        caption_template: "{condition_name} — FNON Network Profile"
+      - visual_type: connectivity_map
+        caption_template: "{condition_name} — Network Connectivity"
+
+  - slug: phenotypes
+    title: "Clinical Phenotypes"
+    purpose: Clinical subtype classification with network signatures
+    order: 6
+    content_type: table
+    knowledge_fields: [phenotypes]
+    table_headers: [Phenotype, Description, Key Features, Primary Networks, Preferred Modalities]
+    table_row_source: phenotypes
+    preamble: >-
+      Phenotype identification is the first step in the FNON Five-Level Clinical Pathway.
+      Each phenotype maps to specific brain network targets and preferred stimulation modalities.
+
+  - slug: symptom_network_mapping
+    title: "Symptom-Network-Modality Mapping"
+    purpose: Map symptoms to networks and treatment modalities
+    order: 7
+    tier: partners
+    content_type: table
+    knowledge_fields: [protocols]
+    table_headers: [Protocol, Modality, Target Region, Network Targets, Evidence Level]
+    table_row_source: protocols
+    visuals:
+      - visual_type: symptom_flow
+        caption_template: "{condition_name} — Symptom-Network-Modality Flow"
+
+  - slug: protocols_tdcs
+    title: "tDCS Protocols"
+    purpose: Transcranial direct current stimulation protocols
+    order: 8
+    content_type: table
+    knowledge_fields: [protocols]
+    table_headers: [ID, Protocol Label, Target Region, Parameters, Evidence Level, Off-Label Status]
+    table_row_source: protocols
+    modality_filter: tdcs
+    preamble: >-
+      Low-intensity direct current applied via scalp electrodes to modulate cortical excitability.
+    visuals:
+      - visual_type: qeeg_topomap
+        caption_template: "{condition_name} — tDCS Electrode Montage (10-10 System)"
+        modality_filter: tdcs
+      - visual_type: protocol_panel
+        caption_template: "{condition_name} — tDCS Protocol Panels"
+        modality_filter: tdcs
+
+  - slug: protocols_tps
+    title: "TPS Protocols"
+    purpose: Transcranial pulse stimulation protocols
+    order: 9
+    content_type: table
+    knowledge_fields: [protocols]
+    table_headers: [ID, Protocol Label, Target Region, Parameters, Evidence Level, Off-Label Status]
+    table_row_source: protocols
+    modality_filter: tps
+    preamble: >-
+      TPS (NEUROLITH) delivers focused ultrasound pulses to modulate deep brain structures.
+      TPS is CE-marked for Alzheimer's disease ONLY. Use in all other conditions is
+      INVESTIGATIONAL and OFF-LABEL. Informed consent and Doctor authorization are mandatory.
+    visuals:
+      - visual_type: mri_target_view
+        caption_template: "{condition_name} — TPS Stimulation Targets (Sagittal View)"
+        modality_filter: tps
+
+  - slug: safety
+    title: "Safety & Contraindications"
+    purpose: Safety monitoring, adverse event grading, contraindications
+    order: 10
+    content_type: table
+    knowledge_fields: [safety_rules, contraindications]
+    table_headers: [Category, Severity, Description, Source]
+    table_row_source: safety_rules
+    preamble: >-
+      All neuromodulation treatments must be preceded by comprehensive safety screening.
+      Patients must be monitored throughout each session.
+
+  - slug: assessments
+    title: "Assessment Tools & Outcome Measures"
+    purpose: Validated clinical scales for baseline and follow-up
+    order: 11
+    content_type: table
+    knowledge_fields: [assessments]
+    table_headers: [Scale, Full Name, Domains, Timing, Evidence PMID]
+    table_row_source: assessments
+
+  - slug: responder_criteria
+    title: "Responder Criteria & Tracking"
+    purpose: Define response classification and non-responder pathway
+    order: 12
+    content_type: mixed
+    knowledge_fields: [responder_criteria, non_responder_pathway]
+    visuals:
+      - visual_type: dose_response
+        caption_template: "{condition_name} — Response Tracking Template"
+
+  - slug: evidence_summary
+    title: "Evidence Summary & Gaps"
+    purpose: Summary of evidence quality and identified gaps
+    order: 13
+    content_type: mixed
+    knowledge_fields: [evidence_summary, evidence_quality, evidence_gaps]
+    requires_evidence: true
+
+  - slug: references
+    title: "References & Evidence Sources"
+    purpose: Formatted bibliography
+    order: 14
+    content_type: reference_list
+    knowledge_fields: [references]
