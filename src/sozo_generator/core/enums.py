@@ -88,6 +88,8 @@ class Modality(str, Enum):
     TPS = "tps"
     TAVNS = "tavns"
     CES = "ces"
+    TMS = "tms"
+    NFB = "nfb"
     MULTIMODAL = "multimodal"
 
 

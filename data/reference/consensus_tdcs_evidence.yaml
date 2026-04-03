@@ -1,0 +1,446 @@
+# tDCS Evidence Base — Consensus.app + Google Scholar / PubMed
+# Sourced: 2026-04-03 / 2026-04-04
+# Used by: evidence ingestion pipeline, condition generators, document generation
+
+meta:
+  source: "consensus.app + google_scholar + pubmed"
+  pulled_date: "2026-04-04"
+  total_papers: 38
+  search_queries:
+    - "tDCS neurofeedback combination synergy cortical excitability plasticity"
+    - "tDCS neurofeedback ADHD theta beta SMR combined protocol"
+    - "transcranial direct current stimulation tDCS clinical protocol parameters intensity duration efficacy"
+    - "tDCS depression MDD treatment randomized controlled trial DLPFC"
+    - "tDCS PTSD anxiety amygdala prefrontal cortex treatment"
+
+papers:
+
+  # ── tDCS PROTOCOL PARAMETERS ──────────────────────────────────────────────
+
+  - id: "lefaucheur_2017_guidelines"
+    title: "Evidence-based guidelines on the therapeutic use of transcranial direct current stimulation (tDCS)"
+    authors: "Lefaucheur J et al."
+    year: 2017
+    journal: "Clinical Neurophysiology"
+    citations: 1468
+    evidence_type: "clinical_practice_guideline"
+    url: "https://consensus.app/papers/details/2953ad33bda05262a4f4a199ee84650e/?utm_source=claude_desktop"
+    conditions: [depression, ptsd, chronic_pain, parkinsons, stroke_rehab, ms, tinnitus, alzheimers]
+    key_finding: >
+      Level B (probable efficacy): anodal left DLPFC tDCS for MDD without drug resistance.
+      Level B (probable efficacy): anodal right DLPFC for addiction/craving.
+      Level C (possible efficacy): anodal left M1 for chronic neuropathic pain.
+      Level B (probable INEfficacy): left DLPFC tDCS in drug-RESISTANT MDD.
+    protocol_parameters:
+      standard_montage: "Anodal L-DLPFC + cathodal right orbitofrontal"
+    notes: "Gold standard reference — cite in all tDCS condition generators."
+
+  - id: "agboada_2019_parameter_space"
+    title: "Expanding the parameter space of anodal transcranial direct current stimulation of the primary motor cortex"
+    authors: "Agboada D et al."
+    year: 2019
+    journal: "Scientific Reports"
+    citations: 109
+    evidence_type: "rct"
+    url: "https://consensus.app/papers/details/f98b4de5ee9358fcad5475506ce60ba3/?utm_source=claude_desktop"
+    conditions: [stroke_rehab, parkinsons, neuroonica_combo]
+    key_finding: >
+      Anodal tDCS 1-3 mA for 15-30 min all enhanced motor cortex excitability within 2h.
+      No significant difference between intensities/durations — effects are robust.
+      Trend for larger effects with higher intensity (3 mA > 1 mA).
+      Excitability enhancement lasts until next evening post-stimulation.
+    protocol_parameters:
+      intensity_range: "1-3 mA"
+      duration_range: "15-30 min"
+      plasticity_window: "up to 120 min post-stimulation"
+
+  - id: "tapsell_2025_optimal_parameters"
+    title: "What are the optimal transcranial direct current stimulation parameters and design elements to modulate corticospinal excitability?"
+    authors: "Tapsell LC et al."
+    year: 2025
+    journal: "Neurological Research and Practice"
+    citations: 0
+    evidence_type: "systematic_review"
+    url: "https://consensus.app/papers/details/91f2b466f00f53faa7c3a7f79ece79dc/?utm_source=claude_desktop"
+    conditions: [stroke_rehab, neuroonica_combo, parkinsons]
+    key_finding: >
+      Anodal tDCS increases MEP size; effects last up to 120 min.
+      Consistent effects require: duration >=20 min AND intensity >=1.5 mA.
+      35 cm² rectangular electrodes over M1 or DLPFC produce greatest effects.
+      Cathodal tDCS inhibits excitability for ~15 min (shorter, weaker effect).
+    protocol_parameters:
+      minimum_duration: "20 min"
+      minimum_intensity: "1.5 mA"
+      optimal_electrode_size: "35 cm²"
+
+  - id: "sabe_2024_dose_response_nibs"
+    title: "Transcranial Magnetic Stimulation and Transcranial Direct Current Stimulation Across Mental Disorders"
+    authors: "Sabe M et al."
+    year: 2024
+    journal: "JAMA Network Open"
+    citations: 36
+    evidence_type: "meta_analysis"
+    url: "https://consensus.app/papers/details/25eea30e3b2d55ca918108ea6e037599/?utm_source=claude_desktop"
+    conditions: [depression, ptsd, ocd, trd]
+    key_finding: >
+      Significant dose-response: L-DLPFC tDCS for treatment-resistant depression (p<0.001).
+      L-DLPFC tDCS for substance use disorder (p<0.001).
+      Bell-shaped dose-response curves — not monotonic; over-stimulation reduces efficacy.
+      Optimal: targeted L-DLPFC stimulation for TRD and addiction.
+
+  # ── DEPRESSION ────────────────────────────────────────────────────────────
+
+  - id: "zhang_2021_tdcs_mdd_meta"
+    title: "Efficacy and acceptability of transcranial direct current stimulation for treating depression: A meta-analysis of randomized controlled trials"
+    authors: "Zhang R et al."
+    year: 2021
+    journal: "Neuroscience & Biobehavioral Reviews"
+    citations: 60
+    evidence_type: "meta_analysis"
+    url: "https://consensus.app/papers/details/0d565aaab1055677a81fcbd926907ef7/?utm_source=claude_desktop"
+    conditions: [depression, home_tdcs_mdd_anxiety]
+    key_finding: >
+      27 RCTs (N=1204). Active tDCS superior to sham (g=0.46, 95% CI 0.15-0.76).
+      2 mA intensity and 30-min sessions augment efficacy.
+      Antidepressant-free patients show greater response.
+      Comparable dropout rates active vs sham — good tolerability.
+    protocol_parameters:
+      optimal_intensity: "2 mA"
+      optimal_duration: "30 min"
+
+  - id: "woodham_2024_home_tdcs_mdd"
+    title: "Home-based transcranial direct current stimulation treatment for major depressive disorder: a fully remote phase 2 randomized sham-controlled trial"
+    authors: "Woodham R et al."
+    year: 2024
+    journal: "Nature Medicine"
+    citations: 49
+    evidence_type: "rct"
+    url: "https://consensus.app/papers/details/5b3e199e44165f93a2b4d916cc8c613a/?utm_source=claude_desktop"
+    conditions: [depression, home_tdcs_mdd_anxiety]
+    key_finding: >
+      N=174 (87 active, 87 sham). 10-week home tDCS, 5 sessions/week x3 weeks then 3/week.
+      Active: 9.41 point HDRS improvement vs sham 7.14 (p=0.012).
+      Anode left DLPFC, cathode right DLPFC, 2 mA, 30 min/session.
+      High safety, acceptability and remote supervision feasibility confirmed.
+    protocol_parameters:
+      anode: "left DLPFC"
+      cathode: "right DLPFC"
+      intensity: "2 mA"
+      duration: "30 min"
+      schedule: "5 sessions/week x3 weeks, then 3/week x7 weeks"
+      total_weeks: 10
+      delivery: "home"
+
+  # ── STROKE / MOTOR REHABILITATION ─────────────────────────────────────────
+
+  - id: "van_hoornweder_2021_stroke_meta"
+    title: "The effects of transcranial direct current stimulation on upper-limb function post-stroke: A meta-analysis of multiple-session studies"
+    authors: "Van Hoornweder S et al."
+    year: 2021
+    journal: "Clinical Neurophysiology"
+    citations: 51
+    evidence_type: "meta_analysis"
+    url: "https://consensus.app/papers/details/8421a447ed315bfaa53339b724774b92/?utm_source=claude_desktop"
+    conditions: [stroke_rehab, neuroonica_combo]
+    key_finding: >
+      18 RCTs (N=507). tDCS applied DURING therapy (not before) yields significant results.
+      Chronic stroke stage benefits more than acute/subacute.
+      Positive dose-response for current density and stimulation duration.
+      Number of sessions does NOT show dose-response — quality > quantity.
+    protocol_parameters:
+      timing: "During therapy (not before)"
+      stage: "Chronic stroke preferred"
+
+  # ── ADHD ──────────────────────────────────────────────────────────────────
+
+  - id: "enriquez_geppert_2019_nfb_adhd_review"
+    title: "Neurofeedback as a Treatment Intervention in ADHD: Current Evidence and Practice"
+    authors: "Enriquez-Geppert S et al."
+    year: 2019
+    journal: "Current Psychiatry Reports"
+    citations: 145
+    evidence_type: "narrative_review"
+    url: "https://consensus.app/papers/details/94f7dd9c4ad451efbbdc4c3e782c7f8b/?utm_source=claude_desktop"
+    conditions: [adhd, neuroonica_combo]
+    key_finding: >
+      Three standard NFB protocols are efficacious and specific: theta/beta (TBR), SMR, SCP.
+      Based on meta-analyses and large multicenter RCTs.
+      Clinical implementation not yet regulated — standardisation needed.
+      NFB should be considered a viable treatment alternative for ADHD.
+
+  - id: "courrèges_2025_nfb_tdcs_tms_adhd_meta"
+    title: "Comparative efficacy of neurofeedback, tDCS, and TMS: The future of therapy for adults with ADHD"
+    authors: "Courrèges M et al."
+    year: 2025
+    journal: "Journal of Affective Disorders"
+    citations: 0
+    evidence_type: "meta_analysis"
+    url: "https://consensus.app/papers/details/ffb94e60963c5f5c92508b7f2e0c246b/?utm_source=claude_desktop"
+    conditions: [adhd, neuroonica_combo]
+    key_finding: >
+      tDCS most effective with anode F3, cathode F4 at 2 mA.
+      Meta-analysis did not reach significance for any technique — small samples limit conclusions.
+      Combination of tDCS with other therapies holds significant therapeutic potential.
+      NFB lacks significant study quality but remains viable for neuromodulation-reluctant patients.
+    protocol_parameters:
+      tdcs_anode: "F3"
+      tdcs_cathode: "F4"
+      tdcs_intensity: "2 mA"
+
+  - id: "rego_2022_tdcs_nfb_attention"
+    title: "Attention neuroenhancement through tDCS or neurofeedback: a randomized, single-blind, controlled trial"
+    authors: "Rego GG et al."
+    year: 2022
+    journal: "Scientific Reports"
+    citations: 7
+    evidence_type: "rct"
+    url: "https://consensus.app/papers/details/bc953394ed605255bd86cbcfc03032ef/?utm_source=claude_desktop"
+    conditions: [adhd, neuroonica_combo]
+    key_finding: >
+      N=80 healthy volunteers. tDCS (right DLPFC anodal) vs NFB (SMR Cz) vs sham.
+      No significant difference between groups on Attention Network Task.
+      Both groups reported subjective attentional improvements (possible placebo).
+      Null result — neuromodulation effects more complex than expected.
+      Caution: right DLPFC (not left) targeted; SMR protocol without tDCS priming.
+    notes: "Important null result — highlights need for combined tDCS+NFB with left DLPFC target."
+
+  - id: "salehinejad_2020_tdcs_adhd_syst_review"
+    title: "Transcranial Direct Current Stimulation in ADHD: A Systematic Review of Efficacy, Safety, and Protocol-induced Electrical Field Modeling Results"
+    authors: "Salehinejad M et al."
+    year: 2020
+    journal: "Neuroscience Bulletin"
+    citations: 86
+    evidence_type: "systematic_review"
+    url: "https://consensus.app/papers/details/5805eb59c08b50d4abffd8ee83e92860/?utm_source=claude_desktop"
+    conditions: [adhd, neuroonica_combo]
+    key_finding: >
+      14 studies. L-DLPFC and R-DLPFC most targeted; anodal most used.
+      2 mA stronger electrical field than 1 mA in adults — significant behavioral changes.
+      Children: 1 mA sufficient (smaller head size amplifies field).
+      No serious adverse effects in 747 sessions.
+      Partial improvements in inhibitory control, WM, attention, cognitive flexibility.
+    protocol_parameters:
+      adult_intensity: "2 mA"
+      child_intensity: "1 mA"
+      primary_target: "L-DLPFC or R-DLPFC (bilateral)"
+
+  - id: "salehinejad_2019_tdcs_adhd_meta"
+    title: "Transcranial direct current stimulation in attention-deficit hyperactivity disorder: A meta-analysis of neuropsychological deficits"
+    authors: "Salehinejad M et al."
+    year: 2019
+    journal: "PLoS ONE"
+    citations: 106
+    evidence_type: "meta_analysis"
+    url: "https://consensus.app/papers/details/ca66fcea3ec056f9b0a6f32bead8cc04/?utm_source=claude_desktop"
+    conditions: [adhd, neuroonica_combo]
+    key_finding: >
+      10 RCTs. Anodal dlPFC tDCS significantly improved inhibitory control (small-medium ES).
+      DLPFC (not right IFG) tDCS and anodal (not cathodal) significantly improved inhibition.
+      WM speed improved; WM accuracy did not.
+      Dissociation between neuropsychological deficits and clinical symptoms — limits clinical translation.
+
+  - id: "mauche_2023_stim_adhd_protocol"
+    title: "Treatment of adult ADHD with tDCS (Stim-ADHD): study protocol"
+    authors: "Mauche N et al."
+    year: 2023
+    journal: "European Archives of Psychiatry and Clinical Neuroscience"
+    citations: 5
+    evidence_type: "rct"
+    url: "https://consensus.app/papers/details/87e92bd5f848565584449986cf168c98/?utm_source=claude_desktop"
+    conditions: [adhd]
+    key_finding: >
+      Multi-center RCT protocol for adult ADHD tDCS (DRKS00028148).
+      Primary endpoint: Conners' CAARS total score at day 14 post-intervention.
+      Low risk of side effects; alternative/add-on to psychostimulants.
+    notes: "Ongoing trial — results pending. Confirms regulatory interest in tDCS for adult ADHD."
+
+  - id: "bernadotte_2025_tdcs_nfb_adhd_review"
+    title: "tDCS and neurofeedback in ADHD treatment"
+    authors: "Bernadotte A et al."
+    year: 2025
+    journal: "Frontiers in Systems Neuroscience"
+    citations: 0
+    evidence_type: "narrative_review"
+    url: "https://consensus.app/papers/details/ba610d87d6ad5aa7ade5008fe6e55443/?utm_source=claude_desktop"
+    conditions: [adhd, neuroonica_combo]
+    key_finding: >
+      Most recent (2025) synthesis of tDCS AND neurofeedback in ADHD.
+      Both modalities address multifaceted ADHD challenges.
+      tDCS and NFB as adjunct/alternative to pharmacological interventions.
+    notes: "Key reference for Neuroonica ADHD protocol rationale."
+
+  - id: "arns_2014_nfb_adhd_road"
+    title: "Evaluation of neurofeedback in ADHD: the long and winding road"
+    authors: "Arns M et al."
+    year: 2014
+    journal: "Biological Psychology"
+    citations: 372
+    evidence_type: "narrative_review"
+    url: "https://consensus.app/papers/details/3b5b109158d155fa9e648455b2c9d2e8/?utm_source=claude_desktop"
+    conditions: [adhd, neuroonica_combo]
+    key_finding: >
+      Meta-analysis (2009): large ES for inattention/impulsivity, medium for hyperactivity.
+      Standard protocols (theta/beta, SMR, SCP) are well-investigated and specific.
+      Placebo-controlled studies confirm specificity of standard protocols.
+      Future trials should focus on known protocols with learning-theory designs.
+
+  - id: "westwood_2020_tdcs_rtms_adhd_meta"
+    title: "Noninvasive brain stimulation in children and adults with ADHD: a systematic review and meta-analysis"
+    authors: "Westwood S et al."
+    year: 2020
+    journal: "Journal of Psychiatry & Neuroscience"
+    citations: 77
+    evidence_type: "meta_analysis"
+    url: "https://consensus.app/papers/details/1afbb290b3445f228f78d607c27b4c71/?utm_source=claude_desktop"
+    conditions: [adhd]
+    key_finding: >
+      12 anodal tDCS studies (N=232). Trend-level improvement inhibition and processing speed.
+      No improvement in attention.
+      1-5 sessions insufficient — multi-session studies with combined cognitive training needed.
+      Heterogeneity in parameters limits interpretation.
+    notes: "Supports multi-session + cognitive training (NFB) combination approach."
+
+  - id: "rubia_2021_neurotherapeutics_adhd"
+    title: "Neurotherapeutics for Attention Deficit/Hyperactivity Disorder (ADHD): A Review"
+    authors: "Rubia K et al."
+    year: 2021
+    journal: "Cells"
+    citations: 51
+    evidence_type: "narrative_review"
+    url: "https://consensus.app/papers/details/2e831d0d22dc590c9bf40f9154fe1a85/?utm_source=claude_desktop"
+    conditions: [adhd]
+    key_finding: >
+      NFB: latest meta-analyses of RCTs show small/medium effects vs non-active controls only.
+      tDCS meta-analyses: small effects on cognitive improvements; 2/3 studies show clinical improvement.
+      Trigeminal nerve stimulation: medium effect in one RCT.
+      All neurotherapeutics need larger, better-controlled studies.
+
+  # ── PTSD / ANXIETY ────────────────────────────────────────────────────────
+
+  - id: "tseng_2024_nibs_ptsd_network_meta"
+    title: "Efficacy and acceptability of noninvasive brain stimulation for treating posttraumatic stress disorder symptoms: A network meta-analysis of randomized controlled trials"
+    authors: "Tseng P et al."
+    year: 2024
+    journal: "Acta Psychiatrica Scandinavica"
+    citations: 7
+    evidence_type: "meta_analysis"
+    url: "https://consensus.app/papers/details/c69b1eef6ae65debac0e9fb7db0dbd56/?utm_source=claude_desktop"
+    conditions: [ptsd, anxiety]
+    key_finding: >
+      14 RCTs (N=686). High-frequency rTMS bilateral DLPFC most effective for PTSD.
+      Excitatory R-DLPFC (with or without L-DLPFC) significantly reduces PTSD severity.
+      tDCS effects on PTSD: excitatory DLPFC stimulation reduces PTSD, depression, anxiety.
+    protocol_parameters:
+      ptsd_target: "Right DLPFC excitatory (with or without left DLPFC)"
+
+  - id: "ahmadizadeh_2019_tdcs_ptsd_rct"
+    title: "Transcranial direct current stimulation (tDCS) for post-traumatic stress disorder (PTSD): A randomized, double-blinded, controlled trial"
+    authors: "Ahmadizadeh M et al."
+    year: 2019
+    journal: "Brain Research Bulletin"
+    citations: 43
+    evidence_type: "rct"
+    url: "https://consensus.app/papers/details/e0a4df2fda7d5e4cbcbfd9cc2f7ad28d/?utm_source=claude_desktop"
+    conditions: [ptsd]
+    key_finding: >
+      N=40. 10 sessions bilateral DLPFC tDCS at 2 mA.
+      Significant reduction in PTSD symptoms, hyper-arousal, negative cognition, depression, anxiety.
+      Re-experiencing reduced post-treatment. Avoidance not significantly changed.
+      Active vs sham superiority confirmed at post-treatment AND 1-month follow-up.
+    protocol_parameters:
+      anode: "Left DLPFC"
+      cathode: "Right DLPFC"
+      intensity: "2 mA"
+      sessions: 10
+
+  - id: "ironside_2019_dlpfc_amygdala_anxiety"
+    title: "Effect of Prefrontal Cortex Stimulation on Regulation of Amygdala Response to Threat in Individuals With Trait Anxiety"
+    authors: "Ironside M et al."
+    year: 2019
+    journal: "JAMA Psychiatry"
+    citations: 100
+    evidence_type: "rct"
+    url: "https://consensus.app/papers/details/cf60fef3ed7e5cf5a0c2ef52435b4105/?utm_source=claude_desktop"
+    conditions: [anxiety, ptsd, depression]
+    key_finding: >
+      Active DLPFC tDCS significantly reduced bilateral amygdala threat reactivity (z=3.30, p=0.04).
+      Simultaneously increased activity in attentional control cortical regions (p<0.001).
+      12.2% mean improvement in task accuracy after active stimulation.
+      Causal evidence for prefrontal regulation of amygdala in anxiety.
+
+  - id: "wout_frank_2024_tdcs_vr_ptsd_rct"
+    title: "Virtual Reality and Transcranial Direct Current Stimulation for Posttraumatic Stress Disorder: A Randomized Clinical Trial"
+    authors: "van't Wout-Frank M et al."
+    year: 2024
+    journal: "JAMA Psychiatry"
+    citations: 23
+    evidence_type: "rct"
+    url: "https://consensus.app/papers/details/fef37aab0ecb5f6fa6353b8e1ba717c9/?utm_source=claude_desktop"
+    conditions: [ptsd]
+    key_finding: >
+      N=54 veterans. tDCS + VR vs sham + VR for PTSD.
+      Active tDCS superior PTSD symptom reduction at 1 month (Cohen d=-0.82).
+      tDCS significantly accelerated psychophysiological habituation to VR events.
+      vmPFC targeted (2 mA anodal, 6 sessions x 25 min over 2-3 weeks).
+    protocol_parameters:
+      target: "vmPFC (ventromedial prefrontal cortex)"
+      intensity: "2 mA"
+      sessions: 6
+      duration_per_session: "25 min"
+
+  - id: "rezaei_2023_tdcs_ptsd_open_label"
+    title: "Clinical effects of anodal tDCS and identifying response markers in PTSD: An open-label study"
+    authors: "Rezaei M et al."
+    year: 2023
+    journal: "Behavioural Brain Research"
+    citations: 3
+    evidence_type: "cohort_study"
+    url: "https://consensus.app/papers/details/c5b88e2ec6e656c59736a1c2aa6fe2aa/?utm_source=claude_desktop"
+    conditions: [ptsd]
+    key_finding: >
+      N=103 PTSD patients. 10 sessions tDCS at 2 mA, 20 min.
+      Significant improvement in PTSD, depression, anxiety, and anhedonia.
+      Non-responders: higher baseline depression, anxiety, anhedonia severity.
+      Anodal L-DLPFC (F3) + cathodal right supra-orbital (Fp2) montage.
+    protocol_parameters:
+      anode: "F3 (left DLPFC)"
+      cathode: "Fp2 (right supra-orbital)"
+      intensity: "2 mA"
+      duration: "20 min"
+      sessions: 10
+
+  - id: "xie_2024_tdcs_ocd_ptsd_anxiety_meta"
+    title: "Immediate and long-term efficacy of tDCS in obsessive-compulsive disorder, PTSD and anxiety disorders"
+    authors: "Xie L et al."
+    year: 2024
+    journal: "Translational Psychiatry"
+    citations: 14
+    evidence_type: "meta_analysis"
+    url: "https://consensus.app/papers/details/e463e93d106f5247bc2830c192467128/?utm_source=claude_desktop"
+    conditions: [ptsd, ocd, anxiety]
+    key_finding: >
+      15 papers. tDCS high effect on specific symptoms (SMD=-0.73) and general anxiety (SMD=-0.75).
+      Effects last up to 1 month (moderate effect size at follow-up).
+      tDCS shows significant alleviation of comorbid depressive symptoms.
+      Covers OCD, PTSD, and anxiety disorders — broadest scope meta-analysis.
+
+  # ── SPORTS / PERFORMANCE (cross-condition) ────────────────────────────────
+
+  - id: "jiang_2025_tdcs_sports_meta"
+    title: "Meta-analysis of the acute effects of anodal tDCS on athletic performance"
+    authors: "Jiang M et al."
+    year: 2025
+    journal: "Frontiers in Physiology"
+    citations: 0
+    evidence_type: "meta_analysis"
+    url: "https://consensus.app/papers/details/d6ce7d8762495720913bd458c79d6da3/?utm_source=claude_desktop"
+    conditions: [neuroonica_combo]
+    key_finding: >
+      31 studies (N=473 athletes). Acute a-tDCS significantly improved sports performance (SMD=0.39).
+      M1 stimulation most consistent (SMD=0.32). PFC also significant (SMD=0.39).
+      Optimal: 1.6-2.0 mA, 16-20 min stimulation duration.
+      Endurance and competitive-collaborative skill tasks most responsive.
+    protocol_parameters:
+      optimal_intensity: "1.6-2.0 mA"
+      optimal_duration: "16-20 min"
+      best_targets: ["M1", "PFC"]

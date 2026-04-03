@@ -103,3 +103,87 @@ conditions:
     aliases: ["insomnia", "sleep disorder", "chronic insomnia", "sleep disturbance"]
     template_status: "generated"
     evidence_quality: "medium"
+
+  - slug: "home_tdcs_mdd_anxiety"
+    display_name: "Home-Based tDCS — MDD + Comorbid Anxiety"
+    icd10: "F32 + F41.1"
+    aliases: ["home tDCS depression anxiety", "home-based tDCS MDD", "remote tDCS depression", "app-supervised tDCS", "MDD anxiety tDCS home"]
+    template_status: "generated"
+    evidence_quality: "medium"
+    window: 2
+    modality: "tDCS"
+    delivery: "home"
+    subagents:
+      - electrode_montage_generator
+      - home_safety_checklist
+      - adherence_monitoring
+      - anxiety_comorbidity_adapter
+      - evidence_grade_annotator
+      - adverse_event_tracker
+      - app_integration_spec
+      - sham_control_comparator
+      - patient_training_module
+      - remote_supervision_workflow
+
+  - slug: "neuroonica_combo"
+    display_name: "Neuroonica tDCS + Neurofeedback Combination Protocol"
+    icd10: "Z13.88"
+    aliases: ["Neuroonica", "tDCS neurofeedback", "tDCS NFB", "NFB combo", "neurofeedback tDCS", "combined neuromodulation", "tDCS priming NFB"]
+    template_status: "generated"
+    evidence_quality: "medium"
+    window: 3
+    modality: "tDCS + NFB"
+    delivery: "clinic"
+    subagents:
+      - sequence_optimizer
+      - target_co_localizer
+      - eeg_band_selector
+      - priming_dose_calculator
+      - feedback_modality_designer
+      - synergy_evidence_aggregator
+      - threshold_adaptation_engine
+      - session_progression_planner
+      - outcome_metric_formatter
+      - platform_integration_agent
+
+  - slug: "tvns"
+    display_name: "tVNS — Anxiety, Stress & Preventive Protocol"
+    icd10: "F41.9"
+    aliases: ["tVNS", "taVNS", "auricular VNS", "transcutaneous VNS", "vagus nerve stimulation"]
+    template_status: "generated"
+    evidence_quality: "medium"
+    window: 4
+    modality: "tVNS"
+    delivery: "home_and_clinic"
+    subagents:
+      - electrode_placement_optimizer
+      - intensity_titrator
+      - waveform_validator
+      - preventive_protocol_designer
+      - stress_biomarker_tracker
+      - anxiety_evidence_aggregator
+      - age_adapter
+      - sham_controller
+      - home_use_safety_agent
+      - device_spec_extractor
+
+  - slug: "ces_alphastem"
+    display_name: "Alpha-Stim CES — Anxiety, Insomnia & Comorbid Depression"
+    icd10: "F41.1"
+    aliases: ["CES", "Alpha-Stim", "cranial electrotherapy stimulation", "Alpha-Stim AID", "CES anxiety", "CES insomnia"]
+    template_status: "generated"
+    evidence_quality: "medium"
+    window: 5
+    modality: "CES"
+    delivery: "home"
+    subagents:
+      - waveform_validator
+      - intensity_titrator
+      - insomnia_protocol_designer
+      - anxiety_protocol_designer
+      - comorbidity_adapter
+      - nice_evidence_grader
+      - adverse_event_logger
+      - patient_training_module
+      - benzodiazepine_taper_coordinator
+      - combination_strategist

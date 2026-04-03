@@ -1,0 +1,75 @@
+condition_slug: neuroonica_combo
+condition_name: "Neuroonica tDCS + Neurofeedback Combination Protocol"
+icd10: Z13.88
+
+search_profiles:
+  tdcs_nfb_synergy:
+    query: >
+      transcranial direct current stimulation[Title/Abstract] AND
+      neurofeedback[Title/Abstract] AND
+      (combination[Title/Abstract] OR synergy[Title/Abstract] OR priming[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  adhd_nfb:
+    query: >
+      ADHD[Title/Abstract] AND
+      neurofeedback[Title/Abstract] AND
+      (theta beta[Title/Abstract] OR SMR[Title/Abstract] OR sensorimotor rhythm[Title/Abstract])
+    filters: [Randomized Controlled Trial, Meta-Analysis, Systematic Review]
+    max_results: 25
+
+  adhd_tdcs:
+    query: >
+      ADHD[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract] AND
+      (DLPFC[Title/Abstract] OR prefrontal[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  mdd_alpha_asymmetry_nfb:
+    query: >
+      depression[Title/Abstract] AND
+      neurofeedback[Title/Abstract] AND
+      (alpha asymmetry[Title/Abstract] OR frontal alpha[Title/Abstract])
+    filters: [Randomized Controlled Trial, Controlled Clinical Trial]
+    max_results: 15
+
+  motor_imagery_tdcs_nfb:
+    query: >
+      motor imagery[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract] AND
+      (neurofeedback[Title/Abstract] OR EEG[Title/Abstract] OR mu rhythm[Title/Abstract] OR ERD[Title/Abstract])
+    filters: [Randomized Controlled Trial, Non-RCT Experimental]
+    max_results: 15
+
+  cognitive_tdcs_enhancement:
+    query: >
+      transcranial direct current stimulation[Title/Abstract] AND
+      (working memory[Title/Abstract] OR cognitive enhancement[Title/Abstract]) AND
+      DLPFC[Title/Abstract]
+    filters: [Randomized Controlled Trial, Meta-Analysis]
+    max_results: 15
+
+  safety:
+    query: >
+      (transcranial direct current stimulation[Title/Abstract] OR neurofeedback[Title/Abstract]) AND
+      safety[Title/Abstract] AND
+      (adverse effects[Title/Abstract] OR tolerability[Title/Abstract])
+    max_results: 10
+
+priority_pmids:
+  - "19715144"   # Arns 2009 — NFB meta-analysis ADHD
+  - "25693607"   # Kim 2015 — tDCS + NFB motor imagery J Neural Eng
+  - "19207632"   # Gevensleben 2009 — NFB RCT ADHD
+  - "28588473"   # Enriquez-Geppert 2017 — NFB cognitive review
+  - "26652570"   # Ros 2016 — NFB reporting consensus
+  - "28299499"   # Soff 2017 — tDCS ADHD adolescents
+  - "23945780"   # Brunoni 2013 SELECT-TDCS
+
+notes: >
+  Primary evidence gap: no large RCT of tDCS+NFB combined vs monotherapy for ADHD or MDD.
+  Prioritise studies with sequential (tDCS-then-NFB) vs synchronous designs.
+  Key biomarkers: mu-ERD, theta/beta ratio, SMR, frontal alpha asymmetry.
+  All protocols use tDCS as primary modality (Modality.TDCS) with NFB as
+  the adjunct training phase within the plasticity window.

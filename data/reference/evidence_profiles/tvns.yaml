@@ -1,0 +1,171 @@
+# Evidence search profile — Window 4: tVNS — Anxiety, Stress & Preventive Protocol
+# Slug: tvns
+# Used by: python -m sozo_generator.cli.main ingest-evidence --condition tvns
+
+condition_slug: tvns
+condition_name: "tVNS — Transcutaneous Vagus Nerve Stimulation (Anxiety, Stress & Preventive)"
+icd10: "F41.9"
+
+search_profiles:
+
+  tvns_anxiety_rct:
+    query: >
+      (transcutaneous auricular vagus nerve stimulation[Title/Abstract] OR
+       taVNS[Title/Abstract] OR tVNS[Title/Abstract]) AND
+      (anxiety[Title/Abstract] OR "generalized anxiety"[Title/Abstract] OR
+       worry[Title/Abstract] OR GAD[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review, Meta-Analysis]
+    max_results: 25
+
+  tvns_depression_meta:
+    query: >
+      (transcutaneous auricular vagus nerve stimulation[Title/Abstract] OR
+       taVNS[Title/Abstract] OR "auricular VNS"[Title/Abstract]) AND
+      (depression[Title/Abstract] OR "major depressive disorder"[Title/Abstract] OR
+       "depressive disorder"[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review, Meta-Analysis]
+    max_results: 30
+
+  tvns_safety_systematic:
+    query: >
+      (transcutaneous auricular vagus nerve stimulation[Title/Abstract] OR
+       taVNS[Title/Abstract] OR tVNS[Title/Abstract]) AND
+      (safety[Title/Abstract] OR "adverse events"[Title/Abstract] OR
+       tolerability[Title/Abstract] OR "side effects"[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis]
+    max_results: 15
+
+  tvns_site_parameters:
+    query: >
+      (transcutaneous auricular vagus nerve stimulation[Title/Abstract] OR taVNS[Title/Abstract]) AND
+      (cymba[Title/Abstract] OR tragus[Title/Abstract] OR "stimulation parameters"[Title/Abstract] OR
+       frequency[Title/Abstract] OR "pulse width"[Title/Abstract] OR intensity[Title/Abstract])
+    filters: [Randomized Controlled Trial, Controlled Clinical Trial]
+    max_results: 25
+
+  tvns_hrv_biomarker:
+    query: >
+      (taVNS[Title/Abstract] OR "transcutaneous vagus nerve stimulation"[Title/Abstract] OR
+       "auricular vagus"[Title/Abstract]) AND
+      ("heart rate variability"[Title/Abstract] OR HRV[Title/Abstract] OR
+       RMSSD[Title/Abstract] OR parasympathetic[Title/Abstract])
+    filters: [Randomized Controlled Trial, Controlled Clinical Trial]
+    max_results: 20
+
+  tvns_stress_preventive:
+    query: >
+      (taVNS[Title/Abstract] OR "transcutaneous vagus nerve stimulation"[Title/Abstract]) AND
+      (stress[Title/Abstract] OR "stress resilience"[Title/Abstract] OR
+       "perceived stress"[Title/Abstract] OR prevention[Title/Abstract] OR
+       "subthreshold depression"[Title/Abstract] OR "stress reduction"[Title/Abstract])
+    max_results: 20
+
+  tvns_fmri_mechanism:
+    query: >
+      (taVNS[Title/Abstract] OR "transcutaneous auricular vagus"[Title/Abstract]) AND
+      (fMRI[Title/Abstract] OR "functional MRI"[Title/Abstract] OR
+       "locus coeruleus"[Title/Abstract] OR "nucleus tractus solitarius"[Title/Abstract] OR
+       NTS[Title/Abstract] OR norepinephrine[Title/Abstract] OR noradrenaline[Title/Abstract])
+    max_results: 15
+
+  tvns_home_use:
+    query: >
+      (taVNS[Title/Abstract] OR "transcutaneous vagus nerve stimulation"[Title/Abstract]) AND
+      (home[Title/Abstract] OR "home-based"[Title/Abstract] OR self-administered[Title/Abstract] OR
+       "home use"[Title/Abstract] OR portable[Title/Abstract])
+    max_results: 15
+
+  tvns_sleep_insomnia:
+    query: >
+      (taVNS[Title/Abstract] OR "transcutaneous auricular vagus nerve stimulation"[Title/Abstract]) AND
+      (sleep[Title/Abstract] OR insomnia[Title/Abstract] OR "sleep quality"[Title/Abstract] OR
+       PSQI[Title/Abstract])
+    filters: [Randomized Controlled Trial]
+    max_results: 10
+
+  tvns_cognition:
+    query: >
+      (taVNS[Title/Abstract] OR "transcutaneous vagus nerve stimulation"[Title/Abstract]) AND
+      (cognition[Title/Abstract] OR "cognitive performance"[Title/Abstract] OR
+       "executive function"[Title/Abstract] OR memory[Title/Abstract] OR attention[Title/Abstract])
+    filters: [Randomized Controlled Trial, Meta-Analysis]
+    max_results: 15
+
+  tvns_trd_adjunct:
+    query: >
+      (taVNS[Title/Abstract] OR "transcutaneous vagus nerve stimulation"[Title/Abstract] OR
+       "Monarch eTNS"[Title/Abstract]) AND
+      ("treatment-resistant depression"[Title/Abstract] OR TRD[Title/Abstract] OR
+       "adjunct"[Title/Abstract] OR augmentation[Title/Abstract])
+    max_results: 10
+
+  tvns_combination_tdcs:
+    query: >
+      ("vagus nerve stimulation"[Title/Abstract] OR VNS[Title/Abstract] OR taVNS[Title/Abstract]) AND
+      ("transcranial direct current stimulation"[Title/Abstract] OR tDCS[Title/Abstract]) AND
+      (combination[Title/Abstract] OR adjunct[Title/Abstract] OR synergy[Title/Abstract])
+    max_results: 10
+
+  tvns_sham_blinding:
+    query: >
+      (taVNS[Title/Abstract] OR "transcutaneous auricular vagus nerve stimulation"[Title/Abstract]) AND
+      (sham[Title/Abstract] OR blinding[Title/Abstract] OR "earlobe"[Title/Abstract] OR
+       "sham control"[Title/Abstract] OR "placebo"[Title/Abstract])
+    filters: [Randomized Controlled Trial]
+    max_results: 10
+
+# ── Priority PMIDs — curated from Consensus evidence search (April 2025) ─────
+priority_pmids:
+  # Efficacy — Depression
+  - "36336092"   # Tan 2023 — meta-analysis 12 RCTs N=838; taVNS for depression GRADE LOW–MODERATE
+  - "33973320"   # Li 2021 — taVNS vs citalopram RCT N=107; comparable efficacy
+  - "23754493"   # Hein 2013 — first RCT auricular tVNS for depression; BDI improvement vs sham
+  - "26707088"   # Rong 2016 — home taVNS N=160; HAMD-17 improvement; non-randomized controlled
+  - "29967578"   # Kong 2018 — state of art review; mechanism hypotheses; symptom subscale analysis
+
+  # Efficacy — Anxiety
+  - "31786127"   # Burger 2020 — taVNS reduces anxious thinking; amygdala connectivity; sham-controlled RCT
+  - "32116503"   # Yap 2020 — critical review; effect size g=0.60 vs sham for anxiety outcomes
+  - "39864471"   # Austelle 2025 — iWAVE pilot; accelerated taVNS inpatient; GAD-7 −5.9 PHQ-9 −6.0
+
+  # Safety
+  - "35236887"   # Kim 2022 — safety SR/meta N=6322; AE rate 12.84/100k person-min; no serious AEs
+  - "29289458"   # Redgrave 2018 — safety SR N=1322; skin irritation 18.2%; 2.6% dropout
+  - "39882501"   # Giraudier 2025 — pooled safety analysis N=488; interval stimulation fewer AEs
+
+  # Site Optimization
+  - "27535566"   # Yakunina 2017 — fMRI: cymba concha strongest NTS/LC activation (N=37)
+  - "38551133"   # Gerges 2024 — scoping review 109 studies 21 populations; site/parameter variability
+  - "33892191"   # Kreisberg 2021 — computational modeling; cymba concha selective for ABVN
+
+  # Parameter Optimization
+  - "29174580"   # Badran 2018 — 500μs/10Hz and 500μs/25Hz optimal for HR reduction (N=35)
+  - "34243032"   # Machetanz 2021 — cymba concha + fossa triangularis; charge-dependent HRV; left ear
+  - "40002776"   # Atanackov 2025 — 10Hz/250μs and 25Hz/100μs for SDNN increase (N=78)
+  - "31107453"   # Badran 2019 — taVNS technique, targeting, and titration protocol (JoVE)
+
+  # HRV Biomarker
+  - "24909661"   # Clancy 2014 — tVNS increases HRV in healthy adults; sympathetic suppression
+  - "32153454"   # Ylikoski 2020 — N=171 tinnitus/stress; 80% parasympathetic HRV shift with taVNS
+  - "36806124"   # Austelle 2023 — taVNS attenuates HR in cold pressor test (N=24; p=0.044)
+  - "39843766"   # Drost 2025 — taVNS HRV during mental stress (N=41); improved autonomic regulation
+
+  # Cognition
+  - "34309394"   # Ridgewell 2021 — meta-analysis 19 studies; g=0.21 cognition; executive function
+  - "34313965"   # Gerges 2024 — cortical excitability; 60 min needed for GABAergic modulation
+
+  # Sleep
+  - "39879804"   # Yeom 2025 — RCT N=40; taVNS for insomnia; PSQI −4.5 vs −1.9 sham; Cohen's d=−1.21
+
+notes: >
+  Window 4 — tVNS Anxiety, Stress & Preventive Protocol.
+  Primary site: cymba concha (left ear) — confirmed optimal by fMRI (Yakunina 2017) and HRV (Machetanz 2021).
+  Standard clinical parameters: 25 Hz, 250–500 μs, sensory threshold (0.5–3.0 mA), 30–60 min/session.
+  Parameter optimization emerging: 10 Hz/250–500 μs shows strong HRV effects (Atanackov 2025, Badran 2018).
+  60 min required for cortical excitability changes; 30 min adequate for HRV/autonomic effects.
+  Sham protocol: earlobe placement at identical intensity — validated but incomplete blinding.
+  Interval stimulation (on/off cycles) preferred over continuous — fewer AEs (Giraudier 2025).
+  GRADE for safety: HIGH. GRADE for depression: LOW–MODERATE. GRADE for anxiety: LOW.
+  Priority evidence gap: no powered GAD-specific RCT (Lai 2025 trial registered but results pending).
+  Distinguish taVNS (auricular) from transcervical tVNS (gammaCore device — neck placement).
+  Monarch eTNS: FDA Breakthrough Device designation for MDD — mastoid/auricular placement.

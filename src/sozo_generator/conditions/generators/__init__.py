@@ -14,6 +14,10 @@ from .asd import build_asd_condition
 from .long_covid import build_long_covid_condition
 from .tinnitus import build_tinnitus_condition
 from .insomnia import build_insomnia_condition
+from .home_tdcs_mdd_anxiety import build_home_tdcs_mdd_anxiety_condition
+from .neuroonica_combo import build_neuroonica_combo_condition
+from .tvns import build_tvns_condition
+from .ces_alphastem import build_ces_alphastem_condition
 
 __all__ = [
     "build_parkinsons_condition",
@@ -31,6 +35,10 @@ __all__ = [
     "build_long_covid_condition",
     "build_tinnitus_condition",
     "build_insomnia_condition",
+    "build_home_tdcs_mdd_anxiety_condition",
+    "build_neuroonica_combo_condition",
+    "build_tvns_condition",
+    "build_ces_alphastem_condition",
 ]
 
 CONDITION_BUILDERS = {
@@ -49,4 +57,8 @@ CONDITION_BUILDERS = {
     "long_covid": build_long_covid_condition,
     "tinnitus": build_tinnitus_condition,
     "insomnia": build_insomnia_condition,
+    "home_tdcs_mdd_anxiety": build_home_tdcs_mdd_anxiety_condition,
+    "neuroonica_combo": build_neuroonica_combo_condition,
+    "tvns": build_tvns_condition,
+    "ces_alphastem": build_ces_alphastem_condition,
 }

@@ -1,0 +1,30 @@
+{
+  "condition_slug": "depression",
+  "condition_name": "Major Depressive Disorder",
+  "modalities_covered": [],
+  "total_papers_fetched": 0,
+  "total_included": 0,
+  "total_excluded": 0,
+  "records": [],
+  "build_date": "2026-04-03T22:59:24.766993+00:00",
+  "query_config_version": "",
+  "sources_breakdown": {
+    "openalex": 0,
+    "semantic_scholar": 0,
+    "pubmed": 0,
+    "manual": 0
+  },
+  "evidence_grade_breakdown": {
+    "A": 0,
+    "B": 0,
+    "C": 0,
+    "D": 0,
+    "expert_opinion": 0
+  },
+  "rob_breakdown": {
+    "low": 0,
+    "unclear": 0,
+    "high": 0
+  },
+  "pipeline_version": "phase8_v1"
+}

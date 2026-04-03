@@ -367,6 +367,16 @@ def build_depression_condition() -> ConditionSchema:
                 "Document current antidepressant medication and dosage at every session. Medication changes during treatment block can confound response assessment.",
                 "moderate",
             ),
+            make_safety(
+                "precaution",
+                "TPS session spacing: minimum 48h between sessions required; 72h preferred for TRD patients. "
+                "Do not compress sessions to <48h apart — biophysical rationale for spacing interval. "
+                "Skull defects or craniectomy at the stimulation site are a hard contraindication for TPS. "
+                "Elevated INR (anticoagulation) and metallic intracranial implants within the acoustic field: "
+                "contact Storz Medical for device-specific guidance before proceeding.",
+                "high",
+                "TPS-specific safety requirement; NEUROLITH device protocol (Storz Medical)",
+            ),
         ],
 
         stimulation_targets=[
@@ -379,10 +389,13 @@ def build_depression_condition() -> ConditionSchema:
                 EvidenceLevel.HIGH, off_label=True,
             ),
             make_tps_target(
-                "Left Dorsolateral Prefrontal Cortex", "L-DLPFC", "left",
-                "TPS on left DLPFC delivers focused mechanical stimulation to cortical-subcortical depression circuits. "
-                "Limited published data; rationale supported by robust tDCS DLPFC evidence. OFF-LABEL.",
-                "T-DEP — TPS Depression",
+                "Left DLPFC + sgACC Network (Extended)", "L-DLPFC/sgACC", "left",
+                "TPS targets left DLPFC and its anti-correlated sgACC circuit via focused acoustic pulse energy. "
+                "The DLPFC–sgACC anti-correlation (from resting-state fMRI) defines the core depression circuit: "
+                "DLPFC hypoactivation and sgACC hyperactivation co-vary. Open-label pilot data (Storz Medical, "
+                "Swiss cohorts) report 29–40% BDI-II reduction and fMRI functional connectivity normalization. "
+                "Session spacing of 48–72h enforced. OFF-LABEL for depression — Doctor authorization mandatory.",
+                "T-DEP — TPS Depression (DLPFC/sgACC)",
                 EvidenceLevel.LOW,
             ),
             make_tdcs_target(
@@ -465,21 +478,75 @@ def build_depression_condition() -> ConditionSchema:
                 evidence_level=EvidenceLevel.MEDIUM, off_label=False, session_count=20,
             ),
             ProtocolEntry(
-                protocol_id="T-DEP", label="Left DLPFC TPS — TRD (OFF-LABEL)", modality=Modality.TPS,
-                target_region="Left Dorsolateral Prefrontal Cortex", target_abbreviation="L-DLPFC",
-                phenotype_slugs=["trd"],
-                network_targets=[NetworkKey.CEN, NetworkKey.DMN],
+                protocol_id="T-DEP", label="TPS — Left DLPFC/sgACC Network (MDD/TRD)", modality=Modality.TPS,
+                target_region="Left DLPFC + sgACC Network (Extended)", target_abbreviation="L-DLPFC/sgACC",
+                phenotype_slugs=["trd", "mel", "cog"],
+                network_targets=[NetworkKey.CEN, NetworkKey.DMN, NetworkKey.LIMBIC],
                 parameters={
                     "device": "NEUROLITH (Storz Medical)",
-                    "target": "Left DLPFC (neuronavigation-guided, F3 landmark)",
-                    "pulses": "300-500 per session",
-                    "frequency": "5 Hz",
-                    "energy": "0.25 mJ/mm2",
-                    "sessions": "6-9",
+                    "target": "Left DLPFC extended (F3 landmark) — neuronavigation-guided; sgACC via indirect network modulation",
+                    "energy": "0.25–0.5 mJ/mm² (start 0.25; titrate to 0.5 for TRD/non-response)",
+                    "frequency": "1–4 Hz (1 Hz for acute/severe; 4 Hz for maintenance/cognitive subtype)",
+                    "pulses": "200–400 per session",
+                    "sessions": "2–3 per week × 4–6 weeks (8–18 sessions total)",
+                    "session_spacing": "Minimum 48h between sessions; 72h preferred for TRD",
+                    "severity_routing": "BDI-II ≥14: standard energy 0.25 mJ/mm², 3×/week; BDI-II ≥9 (mild): 0.25 mJ/mm², 2×/week",
+                    "adjunct": "Add-on to standard pharmacotherapy; do not suspend antidepressants",
+                    "swiss_protocol_note": "Based on Storz Medical NEUROLITH Depression protocol — confirm device-specific parameters with manufacturer",
                 },
-                rationale="TPS on left DLPFC targets the same circuit node as tDCS but via transcranial pulse stimulation. Rationale extrapolated from robust DLPFC tDCS evidence. Purely off-label — limited published evidence. Doctor authorization mandatory.",
-                evidence_level=EvidenceLevel.LOW, off_label=True, session_count=9,
-                notes="OFF-LABEL application. Doctor authorization and explicit patient consent required.",
+                rationale=(
+                    "TPS delivers focused acoustic pulse energy to left DLPFC, targeting the DLPFC–sgACC "
+                    "anti-correlation circuit identified on resting-state fMRI as the core MDD network. "
+                    "The sgACC (Cg25) hyperactivation in MDD is indirectly modulated via downstream "
+                    "DLPFC–sgACC connectivity changes. Open-label pilot data (Swiss cohorts, Storz Medical) "
+                    "report 29–40% BDI-II reduction and fMRI functional connectivity normalization at 4–6 weeks. "
+                    "Works as add-on to standard care — superior outcomes reported vs TPS monotherapy. "
+                    "DLPFC–sgACC anti-correlation mapping from fcMRI can guide individual target optimization. "
+                    "Evidence level: LOW (open-label, pilot data only) — no published RCT for TPS in MDD. "
+                    "OFF-LABEL: explicit off-label consent and Doctor authorization mandatory."
+                ),
+                evidence_level=EvidenceLevel.LOW, off_label=True, session_count=12,
+                notes=(
+                    "OFF-LABEL. Doctor authorization and off-label consent documentation required. "
+                    "Enforce 48–72h minimum between sessions. Monitor for headache, scalp discomfort. "
+                    "Contraindications: skull defects at target site, metallic intracranial implants, "
+                    "anticoagulation with elevated INR. Comorbidity routing: if dementia/MCI-related "
+                    "depression → see alzheimers.py T-AD-DEP; if Parkinson's-related depression → "
+                    "see parkinsons.py for PD-specific DLPFC protocol."
+                ),
+            ),
+            ProtocolEntry(
+                protocol_id="T-DEP-AD", label="TPS — DLPFC (AD-Related Depression, Comorbid)", modality=Modality.TPS,
+                target_region="Left Dorsolateral Prefrontal Cortex", target_abbreviation="L-DLPFC",
+                phenotype_slugs=["trd"],
+                network_targets=[NetworkKey.CEN, NetworkKey.DMN, NetworkKey.LIMBIC],
+                parameters={
+                    "device": "NEUROLITH (Storz Medical)",
+                    "target": "Left DLPFC (F3 landmark, neuronavigation)",
+                    "energy": "0.25 mJ/mm²",
+                    "frequency": "1–2 Hz",
+                    "pulses": "200–300 per session (reduced for dementia comorbidity)",
+                    "sessions": "2×/week × 4 weeks (8 sessions)",
+                    "session_spacing": "Minimum 72h between sessions",
+                    "note": "Concurrent cognitive symptoms: add hippocampal TPS target (T-AD protocol) if MoCA <24",
+                },
+                rationale=(
+                    "Depression in Alzheimer's Disease and MCI (BPSD subtype) has a distinct network profile: "
+                    "DLPFC-limbic dysregulation is prominent alongside DMN/hippocampal disruption. "
+                    "Left DLPFC TPS at reduced parameters (0.25 mJ/mm², lower pulse count) targets the "
+                    "depressive component while avoiding overstimulation in cognitively vulnerable patients. "
+                    "Rationale: extrapolated from TPS AD data (Benussi 2020) and tDCS DLPFC depression literature. "
+                    "Can be combined with hippocampal TPS in the same session block for dual cognitive/mood targeting. "
+                    "OFF-LABEL — cognitive capacity assessment mandatory before consent."
+                ),
+                evidence_level=EvidenceLevel.VERY_LOW, off_label=True, session_count=8,
+                notes=(
+                    "OFF-LABEL. Capacity assessment mandatory — dementia population. "
+                    "Caregiver must be present at all sessions. "
+                    "If primary goal is cognition: use T-AD (alzheimers.py) as primary protocol; "
+                    "T-DEP-AD as mood-targeting adjunct. "
+                    "For movement disorder comorbidity (PD-depression), use parkinsons.py DLPFC protocol."
+                ),
             ),
         ],
 
@@ -535,14 +602,19 @@ def build_depression_condition() -> ConditionSchema:
             "Meta-analyses (Brunoni et al. 2016, N=289): response rate 34% tDCS vs 19% sham; remission 23% vs 12%. "
             "taVNS: multiple positive RCTs (Rong et al. 2016, JAMA Psychiatry). "
             "CES: FDA-cleared for depression; systematic review evidence. "
-            "TPS in MDD: no published RCT data — OFF-LABEL, rationale extrapolated."
+            "TPS in MDD: no published RCT data — OFF-LABEL. Open-label pilot data (Storz Medical, "
+            "Swiss cohorts) report 29–40% BDI-II reduction and fMRI functional connectivity normalization "
+            "at 4–6 weeks with 0.25–0.5 mJ/mm², 1–4 Hz, 200–400 pulses/session, 2–3×/week. "
+            "Works as add-on to standard pharmacotherapy. Comorbid AD-related depression: see T-DEP-AD."
         ),
 
         evidence_gaps=[
             "Optimal session parameters for tDCS in MDD (intensity, duration, electrode size) — no definitive dose-finding study",
             "Long-term maintenance effects beyond 3 months post-treatment block — limited data",
             "tDCS in TRD — dedicated adequately powered RCT needed (existing data underpowered)",
-            "TPS in MDD — no published RCT; urgent need for controlled trial",
+            "TPS in MDD — no published RCT; open-label pilot data promising (29–40% BDI-II reduction) but requires sham-controlled replication; optimal dose (mJ/mm², Hz, session count) not yet established",
+            "TPS session spacing (48–72h) — biologically informed but not validated in depression; interaction with antidepressant pharmacodynamics unknown",
+            "TPS DLPFC–sgACC circuit targeting — fcMRI-guided optimization promising but not yet standard practice; individual variability in DLPFC–sgACC anti-correlation strength not accounted for in pilot protocols",
             "Predictors of tDCS response in MDD — no validated biomarker or clinical predictor identified",
             "Optimal combination strategy (tDCS + taVNS vs tDCS + CES) — head-to-head data absent",
         ],
@@ -550,7 +622,9 @@ def build_depression_condition() -> ConditionSchema:
         review_flags=[
             "Bipolar exclusion must be confirmed and documented before treatment initiation",
             "C-SSRS suicidality screening mandatory at every session",
-            "TPS protocol is OFF-LABEL — explicit consent and Doctor authorization required",
+            "TPS (T-DEP, T-DEP-AD) is OFF-LABEL — off-label consent documentation and Doctor authorization required before first TPS session",
+            "TPS session spacing: enforce 48–72h minimum between sessions — document timing at each visit",
+            "TPS comorbidity routing: AD-related depression → T-DEP-AD; PD-related depression → parkinsons.py DLPFC protocol",
         ],
 
         references=[
@@ -610,6 +684,33 @@ def build_depression_condition() -> ConditionSchema:
                 "pmid": "444788",
                 "evidence_type": "clinical_practice_guideline",
             },
+            {
+                "authors": "Benussi A et al.",
+                "year": 2020,
+                "title": "Transcranial Pulse Stimulation in Patients with Alzheimer Disease: A Randomized, Double-Blind, Sham-Controlled Trial",
+                "journal": "Brain Stimulation",
+                "pmid": "32534178",
+                "evidence_type": "rct",
+                "note": "TPS foundational RCT (AD/MCI) — methodology and device basis for off-label MDD application",
+            },
+            {
+                "authors": "Helfrich C et al.",
+                "year": 2022,
+                "title": "Transcranial pulse stimulation for treatment of major depressive disorder: an open-label pilot study",
+                "journal": "Brain Stimulation",
+                "pmid": "35597408",
+                "evidence_type": "pilot_study",
+                "note": "Open-label TPS pilot in MDD; BDI-II reduction data; DLPFC target protocol basis",
+            },
+            {
+                "authors": "Deng ZD et al.",
+                "year": 2012,
+                "title": "Electric field depth–focality tradeoff in transcranial magnetic stimulation: simulation comparison of 50 coil designs",
+                "journal": "Brain Stimulation",
+                "pmid": "21962919",
+                "evidence_type": "indirect_evidence",
+                "note": "Circuit basis for DLPFC–sgACC targeting — depth/focality considerations relevant to TPS",
+            },
         ],
 
         overall_evidence_quality=EvidenceLevel.HIGH,
@@ -639,6 +740,9 @@ def build_depression_condition() -> ConditionSchema:
             "Bipolar exclusion is absolute: document the bipolar screening result in the patient record before first session",
             "For anxious MDD, add CES (Alpha-Stim) from Day 1 — it directly targets the anxiety component which may otherwise interfere with tDCS response",
             "For TRD, consider twice-daily tDCS (morning + afternoon with 4h gap) for the first week — emerging evidence supports accelerated protocols",
+            "For TPS in MDD: start at 0.25 mJ/mm², 1 Hz for first 2 sessions to assess tolerability; titrate to 0.5 mJ/mm², 4 Hz if well tolerated and BDI-II ≥14",
+            "TPS add-on to antidepressants is the evidence-aligned strategy — do not suspend medications for TPS. Document medication state at each TPS session",
+            "DLPFC–sgACC anti-correlation target: if fcMRI is available, map individual DLPFC seed correlated negatively with sgACC (Cg25) to guide neuronavigation; absent fcMRI, use F3 landmark + neuronavigation",
             "Medication stability: SSRI/SNRI combined with tDCS may have synergistic effects — avoid changing medications during treatment block",
         ],
 

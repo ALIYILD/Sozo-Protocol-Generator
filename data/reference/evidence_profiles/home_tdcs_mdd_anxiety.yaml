@@ -1,0 +1,111 @@
+# Evidence search profile — Window 2: Home-Based tDCS for MDD + Comorbid Anxiety
+# Slug: home_tdcs_mdd_anxiety
+# Used by: python -m sozo_generator.cli.main ingest-evidence --condition home_tdcs_mdd_anxiety
+
+condition_slug: home_tdcs_mdd_anxiety
+condition_name: "Home-Based tDCS — Major Depressive Disorder + Comorbid Anxiety"
+icd10: "F32 + F41.1"
+
+search_profiles:
+
+  home_tdcs_protocols:
+    query: >
+      (depression[Title/Abstract] OR "major depressive disorder"[Title/Abstract]) AND
+      transcranial direct current stimulation[Title/Abstract] AND
+      (home[Title/Abstract] OR remote[Title/Abstract] OR unsupervised[Title/Abstract] OR
+       "home-based"[Title/Abstract] OR "home use"[Title/Abstract])
+    filters: [Randomized Controlled Trial, Feasibility Study, Pilot Study]
+    max_results: 25
+
+  dlpfc_tdcs_mdd:
+    query: >
+      "major depressive disorder"[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract] AND
+      (DLPFC[Title/Abstract] OR "dorsolateral prefrontal"[Title/Abstract] OR
+       F3[Title/Abstract] OR "left prefrontal"[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review, Meta-Analysis]
+    max_results: 30
+
+  anxious_depression_tdcs:
+    query: >
+      (depression[Title/Abstract] OR "major depressive disorder"[Title/Abstract]) AND
+      anxiety[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 20
+
+  remote_supervision:
+    query: >
+      transcranial direct current stimulation[Title/Abstract] AND
+      (remote[Title/Abstract] OR telemedicine[Title/Abstract] OR
+       "app-supervised"[Title/Abstract] OR "digital health"[Title/Abstract] OR
+       "remote monitoring"[Title/Abstract])
+    max_results: 20
+
+  adherence_home_neuromodulation:
+    query: >
+      (neuromodulation[Title/Abstract] OR "brain stimulation"[Title/Abstract]) AND
+      (adherence[Title/Abstract] OR compliance[Title/Abstract] OR
+       "patient engagement"[Title/Abstract]) AND
+      (home[Title/Abstract] OR remote[Title/Abstract])
+    max_results: 15
+
+  tdcs_safety_home:
+    query: >
+      transcranial direct current stimulation[Title/Abstract] AND
+      (safety[Title/Abstract] OR "adverse events"[Title/Abstract] OR
+       tolerability[Title/Abstract]) AND
+      (home[Title/Abstract] OR remote[Title/Abstract] OR outpatient[Title/Abstract])
+    max_results: 20
+
+  app_digital_supervision_tdcs:
+    query: >
+      transcranial direct current stimulation[Title/Abstract] AND
+      (app[Title/Abstract] OR smartphone[Title/Abstract] OR
+       "digital supervision"[Title/Abstract] OR "mobile health"[Title/Abstract])
+    max_results: 15
+
+  sham_control_blinding:
+    query: >
+      transcranial direct current stimulation[Title/Abstract] AND
+      (sham[Title/Abstract] OR blinding[Title/Abstract] OR
+       "active sham"[Title/Abstract] OR placebo[Title/Abstract]) AND
+      (depression[Title/Abstract] OR anxiety[Title/Abstract])
+    max_results: 15
+
+  assessment_scales_mdd_anxiety:
+    query: >
+      (depression[Title/Abstract] OR anxiety[Title/Abstract]) AND
+      (PHQ-9[Title/Abstract] OR GAD-7[Title/Abstract] OR MADRS[Title/Abstract] OR
+       "C-SSRS"[Title/Abstract] OR "Columbia Suicide"[Title/Abstract]) AND
+      validation[Title/Abstract]
+    max_results: 10
+
+  patient_training_neuromodulation:
+    query: >
+      (neuromodulation[Title/Abstract] OR transcranial[Title/Abstract]) AND
+      (patient education[Title/Abstract] OR "patient training"[Title/Abstract] OR
+       "patient engagement"[Title/Abstract] OR psychoeducation[Title/Abstract]) AND
+      (home[Title/Abstract] OR remote[Title/Abstract])
+    max_results: 10
+
+# High-priority landmark PMIDs to always include
+priority_pmids:
+  - "24077291"   # Brunoni 2013 SELECT-TDCS (F3-Fp2 montage, landmark RCT)
+  - "28805473"   # Blumberger 2018 ELECT-TDCS (tDCS vs escitalopram vs sham)
+  - "27793510"   # Bikson 2016 Safety of tDCS — evidence-based update
+  - "22110557"   # Ambrus 2012 Sham validation — active ramp blinding
+  - "16868819"   # Fregni 2006 tDCS depression (foundational RCT)
+  - "22562094"   # Boggio 2007 tDCS MDD
+  - "16717171"   # Spitzer 2006 GAD-7 validation
+  - "11556941"   # Kroenke 2001 PHQ-9 validation
+  - "21199897"   # Posner 2011 C-SSRS validation
+
+notes: >
+  Window 2 — Home-Based tDCS for MDD + Comorbid Anxiety.
+  Primary montage: F3 anode (left DLPFC), F4 cathode (right DLPFC) — 2 mA, 30 min, 18-21 sessions.
+  Anxiety-adapted variant: F3 anode, Fp2 cathode (Brunoni SELECT-TDCS montage) — when GAD-7 ≥10.
+  Key evidence gap: no dedicated RCT for home tDCS in MDD + comorbid anxiety as co-primary targets.
+  Focus search on home delivery feasibility, remote supervision models, and adherence data.
+  Include GRADE assessment for all retrieved evidence.
+  Priority trials: SELECT-TDCS (Brunoni 2013), ELECT-TDCS (Blumberger 2018), Razza 2020 home feasibility.
