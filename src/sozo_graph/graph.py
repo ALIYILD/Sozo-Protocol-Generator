@@ -31,6 +31,9 @@ from .nodes.contraindication_gate import contraindication_gate
 from .nodes.protocol_template_selector import protocol_template_selector
 from .nodes.protocol_composer import protocol_composer
 from .nodes.grounding_validator import grounding_validator
+from .nodes.eeg_feature_loader import eeg_feature_loader
+from .nodes.eeg_interpreter import eeg_interpreter
+from .nodes.eeg_personalizer import eeg_personalizer
 from .nodes.review_processor import review_processor
 from .nodes.protocol_reporter import protocol_reporter
 from .nodes.audit_logger import audit_logger
@@ -67,6 +70,14 @@ def route_after_contraindication(state: SozoGraphState) -> str:
 
 
 MAX_REVISION_CYCLES = 3
+
+
+def route_after_grounding(state: SozoGraphState) -> str:
+    """Route to EEG personalization if EEG data is available, else straight to review."""
+    eeg = state.get("eeg")
+    if eeg and eeg.get("data_available"):
+        return "eeg_feature_loader"
+    return "review_processor"
 
 
 def route_after_review(state: SozoGraphState) -> str:
@@ -122,6 +133,9 @@ def build_sozo_graph(checkpointer=None):
     graph.add_node("protocol_template_selector", protocol_template_selector)
     graph.add_node("protocol_composer", protocol_composer)
     graph.add_node("grounding_validator", grounding_validator)
+    graph.add_node("eeg_feature_loader", eeg_feature_loader)
+    graph.add_node("eeg_interpreter", eeg_interpreter)
+    graph.add_node("eeg_personalizer", eeg_personalizer)
     graph.add_node("review_processor", review_processor)
     graph.add_node("protocol_reporter", protocol_reporter)
     graph.add_node("audit_logger", audit_logger)
@@ -168,8 +182,20 @@ def build_sozo_graph(checkpointer=None):
     graph.add_edge("protocol_template_selector", "protocol_composer")
     graph.add_edge("protocol_composer", "grounding_validator")
 
+    # ── Edges: EEG personalization (optional) ─────────────────
+    graph.add_conditional_edges(
+        "grounding_validator",
+        route_after_grounding,
+        {
+            "eeg_feature_loader": "eeg_feature_loader",
+            "review_processor": "review_processor",
+        },
+    )
+    graph.add_edge("eeg_feature_loader", "eeg_interpreter")
+    graph.add_edge("eeg_interpreter", "eeg_personalizer")
+    graph.add_edge("eeg_personalizer", "review_processor")
+
     # ── Edges: Review (interrupt before review_processor) ─────
-    graph.add_edge("grounding_validator", "review_processor")
 
     graph.add_conditional_edges(
         "review_processor",

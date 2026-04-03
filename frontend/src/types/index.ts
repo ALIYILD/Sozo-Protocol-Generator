@@ -258,6 +258,134 @@ export interface RegisterRequest {
   role?: UserRole;
 }
 
+// ── Graph Pipeline Types ────────────────────────────────────────────
+
+export interface GraphGenerateRequest {
+  condition_slug: string;
+  modality?: string;
+  tier?: string;
+  doc_type?: string;
+  prompt?: string;
+  patient_context?: {
+    age?: number;
+    sex?: string;
+    current_medications?: string[];
+    contraindications?: string[];
+  };
+}
+
+export interface GraphGenerateResponse {
+  success: boolean;
+  thread_id: string;
+  status: string;
+  condition: {
+    slug: string;
+    display_name: string;
+    valid: boolean;
+  };
+  evidence_summary: {
+    total_articles: number;
+    sufficient: boolean;
+    grade_distribution: Record<string, number>;
+  };
+  safety: {
+    cleared: boolean;
+    blocking: string[];
+    off_label: string[];
+  };
+  protocol: {
+    sections_count: number;
+    grounding_score: number | null;
+    qa_passed: boolean | null;
+  };
+  audit: {
+    nodes_executed: number;
+    errors: number;
+  };
+}
+
+export interface GraphStatusResponse {
+  thread_id: string;
+  status: string;
+  review_status: string;
+  revision_number: number;
+  condition: {
+    slug: string;
+    display_name: string;
+  };
+  evidence: {
+    sufficient: boolean;
+    article_count: number;
+    grade_distribution: Record<string, number>;
+    gaps: string[];
+  };
+  safety: {
+    cleared: boolean;
+    blocking: string[];
+    off_label: string[];
+    consent: string[];
+  };
+  protocol: {
+    sections: Array<{
+      section_id: string;
+      title: string;
+      content: string;
+      cited_evidence_ids: string[];
+      confidence: string;
+    }>;
+    grounding_score: number | null;
+    grounding_issues: Array<{
+      severity: string;
+      section_id: string;
+      message: string;
+    }>;
+  };
+  evidence_articles: Array<{
+    pmid: string;
+    doi: string;
+    title: string;
+    year: number;
+    grade: string;
+    authors: string[];
+  }>;
+  node_history: Array<{
+    node_id: string;
+    duration_ms: number;
+    status: string;
+  }>;
+  output: Record<string, unknown>;
+}
+
+export interface GraphReviewRequest {
+  thread_id: string;
+  decision: 'approve' | 'reject' | 'edit';
+  reviewer_id: string;
+  reviewer_credentials?: string;
+  review_notes?: string;
+  section_edits?: Array<{
+    section_id: string;
+    field: string;
+    new_value: string;
+    edit_reason: string;
+  }>;
+  parameter_overrides?: Array<{
+    parameter: string;
+    old_value: string;
+    new_value: string;
+    override_reason: string;
+  }>;
+}
+
+export interface GraphReviewResponse {
+  success: boolean;
+  thread_id: string;
+  decision: string;
+  status: string;
+  revision_number: number;
+  output: Record<string, unknown>;
+  audit_record_id: string | null;
+}
+
 // ── Generic Types ───────────────────────────────────────────────────
 
 export interface PaginatedResponse<T> {

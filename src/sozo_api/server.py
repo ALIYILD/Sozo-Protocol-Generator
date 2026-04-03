@@ -48,6 +48,18 @@ class GraphGenerateRequest(BaseModel):
     doc_type: str = "evidence_based_protocol"
     prompt: Optional[str] = None
     patient_id: Optional[str] = None
+    patient_context: Optional[dict] = None
+
+
+class GraphReviewRequest(BaseModel):
+    """Request body for clinician review action on a graph run."""
+    thread_id: str
+    decision: str  # approve | reject | edit
+    reviewer_id: str
+    reviewer_credentials: str = ""
+    review_notes: str = ""
+    section_edits: Optional[list] = None
+    parameter_overrides: Optional[list] = None
 
 
 # ── App factory ───────────────────────────────────────────────────────────
@@ -92,6 +104,22 @@ def create_app() -> FastAPI:
     @application.on_event("startup")
     async def _on_startup() -> None:
         logger.info("SOZO API started")
+        # Auto-run Alembic migration on startup (SQLite safe)
+        try:
+            import os
+            from pathlib import Path
+            alembic_ini = Path(__file__).resolve().parents[2] / "alembic.ini"
+            if alembic_ini.exists():
+                from alembic.config import Config
+                from alembic import command
+                config = Config(str(alembic_ini))
+                db_url = os.environ.get("DATABASE_URL", "sqlite:///sozo.db")
+                sync_url = db_url.replace("+aiosqlite", "").replace("+asyncpg", "")
+                config.set_main_option("sqlalchemy.url", sync_url)
+                command.upgrade(config, "head")
+                logger.info("Database migration complete")
+        except Exception as exc:
+            logger.warning("Auto-migration skipped: %s", exc)
 
     # ── Health ────────────────────────────────────────────────────────
 
@@ -242,50 +270,243 @@ def create_app() -> FastAPI:
         summaries = svc.conditions_summary()
         return {"conditions": [asdict(s) for s in summaries]}
 
+    # ── Shared graph checkpointer ────────────────────────────────────────
+
+    _graph_checkpointer = None
+
+    def _get_checkpointer():
+        """Lazy-init a shared MemorySaver checkpointer.
+
+        In production, replace with PostgresSaver for persistence across restarts.
+        """
+        nonlocal _graph_checkpointer
+        if _graph_checkpointer is None:
+            from langgraph.checkpoint.memory import MemorySaver
+            _graph_checkpointer = MemorySaver()
+        return _graph_checkpointer
+
     # ── Graph-based generation ─────────────────────────────────────────
 
-    @application.post("/api/generate/graph")
+    @application.post("/api/graph/generate")
     async def generate_via_graph(body: GraphGenerateRequest) -> dict:
-        """Generate a protocol using the unified LangGraph pipeline.
+        """Start a protocol generation pipeline via LangGraph.
 
-        This is the production generation path that runs:
-        intake -> condition -> evidence -> safety -> personalization ->
-        composition -> grounding -> QA -> [review interrupt] -> render
+        The pipeline runs through evidence search, safety checks, and
+        composition, then pauses at the clinician review interrupt.
+
+        Returns the thread_id needed to resume after review.
         """
         from sozo_graph.unified_graph import (
             build_unified_graph,
             create_initial_state,
-            run_unified_generation,
         )
 
         try:
-            # Build prompt from condition_slug and optional user prompt
             effective_prompt = body.prompt or f"Generate {body.doc_type} for {body.condition_slug}"
 
-            result = run_unified_generation(
+            checkpointer = _get_checkpointer()
+            graph = build_unified_graph(checkpointer=checkpointer)
+
+            initial_state = create_initial_state(
+                source_mode="prompt",
                 user_prompt=effective_prompt,
+                patient_context=body.patient_context,
                 tier=body.tier,
             )
 
+            thread_id = initial_state["request_id"]
+            config = {"configurable": {"thread_id": thread_id}}
+
+            # Run until clinician review interrupt
+            result = graph.invoke(initial_state, config=config)
+
             return {
                 "success": True,
-                "status": result.get("review", {}).get("status", "pending_review"),
-                "protocol": result.get("protocol", {}),
-                "evidence_summary": {
-                    "total_articles": result.get("evidence", {}).get("total_articles", 0),
-                    "sufficiency": result.get("evidence", {}).get("evidence_sufficient", False),
+                "thread_id": thread_id,
+                "status": result.get("status", "pending_review"),
+                "condition": {
+                    "slug": result.get("condition", {}).get("slug"),
+                    "display_name": result.get("condition", {}).get("display_name"),
+                    "valid": result.get("condition", {}).get("condition_valid"),
                 },
-                "safety": result.get("safety", {}),
-                "qa_summary": result.get("protocol", {}).get("qa_summary", {}),
-                "output": result.get("output", {}),
+                "evidence_summary": {
+                    "total_articles": result.get("evidence", {}).get("screened_article_count", 0),
+                    "sufficient": result.get("evidence", {}).get("evidence_sufficient", False),
+                    "grade_distribution": result.get("evidence", {}).get("evidence_summary", {}).get("grade_distribution", {}),
+                },
+                "safety": {
+                    "cleared": result.get("safety", {}).get("safety_cleared"),
+                    "blocking": result.get("safety", {}).get("blocking_contraindications", []),
+                    "off_label": result.get("safety", {}).get("off_label_flags", []),
+                },
+                "protocol": {
+                    "sections_count": len(result.get("protocol", {}).get("composed_sections", [])),
+                    "grounding_score": result.get("protocol", {}).get("grounding_score"),
+                    "qa_passed": result.get("protocol", {}).get("qa_passed"),
+                },
                 "audit": {
-                    "node_count": len(result.get("node_history", [])),
+                    "nodes_executed": len(result.get("node_history", [])),
                     "errors": len(result.get("errors", [])),
                 },
             }
         except Exception as exc:
             logger.exception("Graph generation failed")
             raise HTTPException(status_code=500, detail=str(exc))
+
+    @application.get("/api/graph/status/{thread_id}")
+    async def graph_status(thread_id: str) -> dict:
+        """Get the current status of a graph execution by thread_id.
+
+        Returns the full review payload if the graph is paused at the
+        clinician review interrupt.
+        """
+        from sozo_graph.unified_graph import build_unified_graph
+
+        try:
+            checkpointer = _get_checkpointer()
+            graph = build_unified_graph(checkpointer=checkpointer)
+            config = {"configurable": {"thread_id": thread_id}}
+
+            state = graph.get_state(config)
+            if not state or not state.values:
+                raise HTTPException(status_code=404, detail=f"Thread {thread_id} not found")
+
+            values = state.values
+            review = values.get("review", {})
+            evidence = values.get("evidence", {})
+            safety = values.get("safety", {})
+            protocol = values.get("protocol", {})
+
+            return {
+                "thread_id": thread_id,
+                "status": values.get("status", "unknown"),
+                "review_status": review.get("status", "pending"),
+                "revision_number": review.get("revision_number", 0),
+                "condition": {
+                    "slug": values.get("condition", {}).get("slug"),
+                    "display_name": values.get("condition", {}).get("display_name"),
+                },
+                "evidence": {
+                    "sufficient": evidence.get("evidence_sufficient"),
+                    "article_count": len(evidence.get("articles", [])),
+                    "grade_distribution": evidence.get("evidence_summary", {}).get("grade_distribution", {}),
+                    "gaps": evidence.get("evidence_gaps", []),
+                },
+                "safety": {
+                    "cleared": safety.get("safety_cleared"),
+                    "blocking": safety.get("blocking_contraindications", []),
+                    "off_label": safety.get("off_label_flags", []),
+                    "consent": safety.get("consent_requirements", []),
+                },
+                "protocol": {
+                    "sections": [
+                        {
+                            "section_id": s.get("section_id"),
+                            "title": s.get("title"),
+                            "content": s.get("content", "")[:500],
+                            "cited_evidence_ids": s.get("cited_evidence_ids", []),
+                            "confidence": s.get("confidence"),
+                        }
+                        for s in protocol.get("composed_sections", [])
+                    ],
+                    "grounding_score": protocol.get("grounding_score"),
+                    "grounding_issues": protocol.get("grounding_issues", []),
+                },
+                "evidence_articles": [
+                    {
+                        "pmid": a.get("pmid"),
+                        "doi": a.get("doi"),
+                        "title": a.get("title"),
+                        "year": a.get("year"),
+                        "grade": a.get("evidence_grade"),
+                        "authors": a.get("authors", [])[:3],
+                    }
+                    for a in evidence.get("articles", [])[:20]
+                ],
+                "node_history": [
+                    {
+                        "node_id": n.get("node_id"),
+                        "duration_ms": n.get("duration_ms"),
+                        "status": n.get("status"),
+                    }
+                    for n in values.get("node_history", [])
+                ],
+                "output": values.get("output", {}),
+            }
+
+        except HTTPException:
+            raise
+        except Exception as exc:
+            logger.exception("Graph status check failed")
+            raise HTTPException(status_code=500, detail=str(exc))
+
+    @application.post("/api/graph/review")
+    async def submit_graph_review(body: GraphReviewRequest) -> dict:
+        """Submit a clinician review decision and resume the graph.
+
+        The graph will:
+        - On approve: render output documents and write audit record
+        - On reject: terminate (or re-compose if under max revisions)
+        - On edit: apply edits and loop back to review
+        """
+        from sozo_graph.unified_graph import build_unified_graph
+        from datetime import datetime, timezone
+
+        try:
+            checkpointer = _get_checkpointer()
+            graph = build_unified_graph(checkpointer=checkpointer)
+            config = {"configurable": {"thread_id": body.thread_id}}
+
+            # Verify thread exists
+            state = graph.get_state(config)
+            if not state or not state.values:
+                raise HTTPException(status_code=404, detail=f"Thread {body.thread_id} not found")
+
+            now = datetime.now(timezone.utc).isoformat()
+            current_revision = state.values.get("review", {}).get("revision_number", 0)
+
+            # Map decision to status
+            status_map = {"approve": "approved", "reject": "rejected", "edit": "edited"}
+            review_status = status_map.get(body.decision, body.decision)
+
+            # Update state with review decision
+            graph.update_state(config, {
+                "review": {
+                    "status": review_status,
+                    "reviewer_id": body.reviewer_id,
+                    "reviewer_credentials": body.reviewer_credentials,
+                    "review_timestamp": now,
+                    "review_notes": body.review_notes,
+                    "revision_number": current_revision,
+                    "edits_applied": body.section_edits or [],
+                    "parameter_overrides": body.parameter_overrides or [],
+                },
+            })
+
+            # Resume graph execution
+            result = graph.invoke(None, config=config)
+
+            return {
+                "success": True,
+                "thread_id": body.thread_id,
+                "decision": body.decision,
+                "status": result.get("status", "unknown"),
+                "revision_number": result.get("review", {}).get("revision_number", 0),
+                "output": result.get("output", {}),
+                "audit_record_id": result.get("output", {}).get("audit_record_id"),
+            }
+
+        except HTTPException:
+            raise
+        except Exception as exc:
+            logger.exception("Graph review submission failed")
+            raise HTTPException(status_code=500, detail=str(exc))
+
+    # Keep legacy endpoint as alias
+    @application.post("/api/generate/graph")
+    async def generate_via_graph_legacy(body: GraphGenerateRequest) -> dict:
+        """Legacy alias for /api/graph/generate."""
+        return await generate_via_graph(body)
 
     # ── Evidence staleness ─────────────────────────────────────────────
 
@@ -383,6 +604,54 @@ def create_app() -> FastAPI:
             "warnings": result.safety_warnings,
             "explanation": result.explanation,
         }
+
+    # ── Serve React frontend (static files) ──────────────────────────
+    # Must be LAST — catch-all for non-API routes serves index.html
+    import os
+    from pathlib import Path
+
+    frontend_dir = Path(__file__).resolve().parents[2] / "frontend" / "dist"
+    if not frontend_dir.exists():
+        # Try Fly.io build path
+        frontend_dir = Path("/app/frontend/dist")
+
+    if frontend_dir.exists():
+        from fastapi.staticfiles import StaticFiles
+        from fastapi.responses import FileResponse
+
+        # Serve static assets (JS, CSS, images)
+        assets_dir = frontend_dir / "assets"
+        if assets_dir.exists():
+            application.mount(
+                "/assets",
+                StaticFiles(directory=str(assets_dir)),
+                name="frontend-assets",
+            )
+
+        # Serve other static files (favicon, etc.)
+        @application.get("/favicon.ico")
+        async def favicon():
+            fav = frontend_dir / "favicon.ico"
+            if fav.exists():
+                return FileResponse(str(fav))
+            return JSONResponse(status_code=404, content={})
+
+        # SPA catch-all — any non-API route serves index.html
+        @application.get("/{full_path:path}")
+        async def serve_spa(full_path: str):
+            # Don't intercept API routes
+            if full_path.startswith("api/"):
+                raise HTTPException(status_code=404, detail="Not found")
+            # Try to serve actual file first
+            file_path = frontend_dir / full_path
+            if file_path.is_file():
+                return FileResponse(str(file_path))
+            # Otherwise serve index.html for client-side routing
+            return FileResponse(str(frontend_dir / "index.html"))
+
+        logger.info("Serving React frontend from %s", frontend_dir)
+    else:
+        logger.warning("Frontend dist not found at %s — SPA not served", frontend_dir)
 
     return application
 

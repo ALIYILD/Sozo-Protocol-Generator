@@ -3,6 +3,11 @@ primary_region = "lhr"
 
 [build]
 
+[env]
+  PYTHONPATH = "/app/src"
+  DATABASE_URL = "sqlite+aiosqlite:///app/data/sozo.db"
+  PYTHONUNBUFFERED = "1"
+
 [http_service]
   internal_port = 8080
   force_https = true

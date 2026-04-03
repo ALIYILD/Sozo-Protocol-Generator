@@ -18,11 +18,7 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem('sozo_token');
-      localStorage.removeItem('sozo_refresh_token');
-      window.location.href = '/login';
-    }
+    // Don't redirect on 401 in dev mode — auth is bypassed
     return Promise.reject(error);
   },
 );

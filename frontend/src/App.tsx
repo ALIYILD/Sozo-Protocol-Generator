@@ -15,10 +15,7 @@ import AuditLogPage from './pages/AuditLogPage';
 import PlaceholderPage from './pages/PlaceholderPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated, isLoading } = useAuth();
-
-  if (isLoading) return <LoadingSpinner size="lg" className="mt-20" />;
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  // Auth bypass for development — all routes accessible without login
   return <>{children}</>;
 }
 
@@ -39,6 +36,7 @@ export default function App() {
         <Route path="protocols/new" element={<ProtocolBuilderPage />} />
         <Route path="protocols/:id" element={<ProtocolDetailPage />} />
         <Route path="protocols/:id/review" element={<ProtocolReviewPage />} />
+        <Route path="review/:threadId" element={<ProtocolReviewPage />} />
         <Route path="evidence" element={<EvidenceExplorerPage />} />
         <Route path="safety" element={<SafetyCheckPage />} />
         <Route path="personalization" element={<PersonalizationPage />} />
