@@ -75,3 +75,80 @@ pubmed_search:
     - "Clinical Trial"
   years_back: 10
   min_abstract_length: 100
+
+# ── Multi-source search ─────────────────────────────────────────────
+multi_source_search:
+  sources:
+    pubmed: true
+    crossref: true
+    semantic_scholar: true
+  max_results_per_source: 30
+  crossref_rate_limit_seconds: 1.0
+  semantic_scholar_rate_limit_seconds: 3.1
+
+# ── Fuzzy deduplication ─────────────────────────────────────────────
+deduplication:
+  title_similarity_threshold: 0.85
+  methods:
+    - pmid_exact
+    - doi_exact
+    - title_fuzzy
+
+# ── Screening ───────────────────────────────────────────────────────
+screening:
+  min_confidence_for_auto_decision: 0.7
+  include_uncertain_in_pipeline: true
+  llm_screening_enabled: false  # set to true when API key available
+
+# ── Parameter extraction ────────────────────────────────────────────
+parameter_extraction:
+  method: regex  # regex | llm | hybrid
+  min_fields_for_inclusion: 1
+  key_parameters:
+    - modality
+    - brain_target
+    - intensity
+    - frequency
+    - duration
+    - sessions
+    - montage
+    - outcome_measure
+
+# ── Evidence scoring (multi-dimensional) ────────────────────────────
+evidence_scoring:
+  quality_weights:
+    design: 0.30
+    sample_size: 0.20
+    bias_risk: 0.20
+    reporting: 0.10
+    replication: 0.20
+  relevance_weights:
+    parameter_match: 0.40
+    population_match: 0.25
+    recency: 0.15
+    parameter_completeness: 0.20
+  grade_thresholds:
+    A: { quality_min: 75, relevance_min: 70 }
+    B: { quality_min: 55, relevance_min: 50 }
+    C: { quality_min: 35, relevance_min: 35 }
+    D: { quality_min: 0, relevance_min: 0 }
+
+# ── Citation grounding ──────────────────────────────────────────────
+citation_grounding:
+  max_citations_per_claim: 5
+  citation_types:
+    - supports
+    - informs
+    - contradicts
+    - safety_note
+  flag_contradictions: true
+  require_grade_a_for_params: false
+
+# ── PRISMA pipeline ─────────────────────────────────────────────────
+prisma_pipeline:
+  track_all_decisions: true
+  persist_pipeline_log: true
+  generate_flow_diagram: true
+  output_format:
+    - text
+    - mermaid

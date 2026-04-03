@@ -35,6 +35,21 @@ class SozoSettings(BaseSettings):
     openai_api_key: str = Field(default="")
     anthropic_api_key: str = Field(default="", description="Anthropic API key for Claude-powered chat")
 
+    # Multi-source search
+    use_crossref: bool = Field(default=True, description="Enable Crossref search")
+    use_semantic_scholar: bool = Field(default=True, description="Enable Semantic Scholar search")
+    semantic_scholar_api_key: str = Field(default="", description="S2 API key for higher rate limits")
+
+    # Research pipeline
+    enable_research_pipeline: bool = Field(
+        default=True,
+        description="Use full PRISMA-style research pipeline for evidence",
+    )
+    pipeline_logs_dir: Path = Field(
+        default=Path("data/evidence_pipeline_logs/"),
+        description="Directory for PRISMA pipeline audit logs",
+    )
+
     # Logging
     log_level: str = Field(default="INFO")
 
