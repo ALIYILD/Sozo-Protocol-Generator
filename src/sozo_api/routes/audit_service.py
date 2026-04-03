@@ -18,17 +18,6 @@ from typing import Any, Optional
 logger = logging.getLogger(__name__)
 
 
-def _db_path() -> str:
-    """Resolve SQLite database path from DATABASE_URL or default."""
-    db_url = os.environ.get("DATABASE_URL", "")
-    if "sqlite" in db_url and "///" in db_url:
-        return db_url.split("///")[-1]
-    return os.path.join(
-        os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))),
-        "sozo_dev.db",
-    )
-
-
 class AuditService:
     """Append-only audit event service backed by SQLite.
 
@@ -38,9 +27,8 @@ class AuditService:
     """
 
     def _get_db(self) -> sqlite3.Connection:
-        conn = sqlite3.connect(_db_path())
-        conn.row_factory = sqlite3.Row
-        return conn
+        from sozo_api.routes.db_helper import get_db
+        return get_db()
 
     # -- Core write method -------------------------------------------------------
 

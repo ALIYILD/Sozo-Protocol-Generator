@@ -5,7 +5,7 @@ primary_region = "lhr"
 
 [env]
   PYTHONPATH = "/app/src"
-  DATABASE_URL = "sqlite+aiosqlite:///app/data/sozo.db"
+  DATABASE_URL = "sqlite+aiosqlite:////app/data/sozo.db"
   PYTHONUNBUFFERED = "1"
 
 [http_service]

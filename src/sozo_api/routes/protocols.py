@@ -140,17 +140,9 @@ class GenerationStatusResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 def _get_db() -> sqlite3.Connection:
-    """Get a SQLite connection using DATABASE_URL or fallback to sozo_dev.db."""
-    db_url = os.environ.get("DATABASE_URL", "")
-    if "sqlite" in db_url:
-        path = db_url.split("///")[-1]
-    else:
-        path = "sozo_dev.db"
-    conn = sqlite3.connect(path)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA foreign_keys=ON")
-    return conn
+    """Get a SQLite connection using shared db_helper."""
+    from sozo_api.routes.db_helper import get_db
+    return get_db()
 
 
 def _ensure_tables(conn: sqlite3.Connection) -> None:

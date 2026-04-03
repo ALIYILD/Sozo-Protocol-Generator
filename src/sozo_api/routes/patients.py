@@ -28,14 +28,8 @@ router = APIRouter(prefix="/api/patients", tags=["patients"])
 # ---------------------------------------------------------------------------
 
 def _get_db() -> sqlite3.Connection:
-    db_url = os.environ.get("DATABASE_URL", "")
-    if "sqlite" in db_url:
-        path = db_url.split("///")[-1]
-    else:
-        path = "sozo_dev.db"
-    conn = sqlite3.connect(path)
-    conn.row_factory = sqlite3.Row
-    return conn
+    from sozo_api.routes.db_helper import get_db
+    return get_db()
 
 
 def _ensure_tables(conn: sqlite3.Connection) -> None:

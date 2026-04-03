@@ -35,22 +35,15 @@ def _find_user_by_email(email: str) -> dict[str, Any] | None:
     """Look up user by email — database first, then in-memory fallback."""
     # Try database
     try:
-        import os
-        import sqlite3
-        db_url = os.environ.get("DATABASE_URL", "")
-        if "sqlite" in db_url:
-            db_path = db_url.split("///")[-1]
-        else:
-            db_path = "sozo_dev.db"
-        if os.path.exists(db_path):
-            conn = sqlite3.connect(db_path)
-            conn.row_factory = sqlite3.Row
-            row = conn.execute(
-                "SELECT id, email, name, role, credentials_hash, active, created_at "
-                "FROM users WHERE email = ? AND active = 1",
-                (email,),
-            ).fetchone()
-            conn.close()
+        from sozo_api.routes.db_helper import get_db
+        conn = get_db()
+        row = conn.execute(
+            "SELECT id, email, name, role, credentials_hash, active, created_at "
+            "FROM users WHERE email = ? AND active = 1",
+            (email,),
+        ).fetchone()
+        conn.close()
+        if True:
             if row:
                 return {
                     "id": row["id"],
@@ -76,21 +69,15 @@ def _find_user_by_id(user_id: str) -> dict[str, Any] | None:
     try:
         import os
         import sqlite3
-        db_url = os.environ.get("DATABASE_URL", "")
-        if "sqlite" in db_url:
-            db_path = db_url.split("///")[-1]
-        else:
-            db_path = "sozo_dev.db"
-        if os.path.exists(db_path):
-            conn = sqlite3.connect(db_path)
-            conn.row_factory = sqlite3.Row
-            row = conn.execute(
-                "SELECT id, email, name, role, credentials_hash, active, created_at "
-                "FROM users WHERE id = ?",
-                (user_id,),
-            ).fetchone()
-            conn.close()
-            if row:
+        from sozo_api.routes.db_helper import get_db
+        conn = get_db()
+        row = conn.execute(
+            "SELECT id, email, name, role, credentials_hash, active, created_at "
+            "FROM users WHERE id = ?",
+            (user_id,),
+        ).fetchone()
+        conn.close()
+        if row:
                 return {
                     "id": row["id"],
                     "email": row["email"],
