@@ -1,0 +1,43 @@
+# SOZO Brain Center — Responder Classification Framework
+# Defines operational response definitions, assessment timepoints,
+# and the Level 5 FNON non-responder escalation pathway.
+# Source: responder_logic.py (migrated to canonical knowledge)
+
+rules:
+  - slug: responder_classification
+    name: SOZO Operational Response Classification
+    category: responder
+    description: Standardized response classification for all neuromodulation treatment blocks
+    applies_to: [all]
+    mandatory: true
+    rule_text: >-
+      Assessment timepoints: Week 4, Week 8-10, End of Block.
+      Medication state must remain consistent throughout the treatment block.
+
+      Responder: >=30% improvement on primary outcome measure with clinically meaningful
+      functional change. Action: Continue current protocol and plan maintenance phase.
+
+      Partial Responder: 15-29% improvement on primary outcome measure, OR improvement
+      on secondary outcomes only. Action: Reassess phenotype classification; consider
+      protocol adjustment at Week 8.
+
+      Non-Responder: <15% improvement across all outcome domains at BOTH Week 4 AND
+      Week 8. Action: Initiate FNON Level 5 reassessment pathway. Doctor review mandatory.
+    source: SOZO Brain Center Operational Response Definition
+
+  - slug: fnon_level5_pathway
+    name: FNON Level 5 Non-Responder Reassessment Pathway
+    category: responder
+    description: Structured 6-step reassessment for confirmed non-responders
+    applies_to: [all]
+    mandatory: true
+    rule_text: >-
+      When a patient is classified as Non-Responder at both Week 4 AND Week 8:
+
+      1. Repeat the 6-Network Bedside Assessment to re-evaluate network dysfunction profile.
+      2. Re-evaluate phenotype classification — original phenotype assignment may be incorrect.
+      3. Identify secondary and tertiary network targets not addressed in the initial protocol.
+      4. Adjust tDCS montage and/or TPS target based on revised network profile.
+      5. Consider adjunct modality addition (taVNS for autonomic regulation, CES for sleep/anxiety).
+      6. Doctor review is MANDATORY before any protocol change. Document rationale.
+    source: SOZO Brain Center FNON Framework — Level 5 Protocol

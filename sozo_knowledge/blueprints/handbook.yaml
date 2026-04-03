@@ -1,0 +1,166 @@
+# SOZO Clinical Handbook — Document Blueprint
+# 8-stage patient journey format with clinical governance.
+
+slug: handbook
+title_template: "SOZO Clinical Handbook — {condition_name}"
+doc_type: handbook
+description: >-
+  Clinician reference handbook covering the complete 8-stage patient journey
+  from intake to discharge, with condition-specific clinical guidance.
+target_audience: clinician
+version: "1.0"
+applicable_tiers: [fellow, partners]
+requires_references: true
+requires_review_summary: true
+template_ref: Clinical_Handbook.docx
+
+sections:
+  - slug: document_control
+    title: "Document Control & Clinical Responsibility"
+    order: 0
+    content_type: prose
+    knowledge_fields: [display_name, icd10, version]
+    preamble: >-
+      Organization: SOZO Brain Center. This handbook is for authorized SOZO personnel only.
+
+  - slug: introduction
+    title: "Introduction & Available Modalities"
+    order: 1
+    content_type: prose
+    knowledge_fields: [overview, applicable_modalities]
+    preamble: >-
+      This clinical handbook provides step-by-step guidance for the evidence-based
+      neuromodulation treatment of {condition_name} at SOZO Brain Center.
+      It integrates tDCS, TPS, taVNS, and CES within a structured 8-stage patient journey.
+
+  - slug: fnon_framework
+    title: "FNON Framework Overview"
+    order: 2
+    tier: partners
+    content_type: mixed
+    knowledge_fields: [network_profiles, fnon_rationale]
+    preamble: >-
+      This handbook incorporates the Functional Network-Oriented Neuromodulation (FNON)
+      framework. Core principle: Do NOT stimulate symptoms — stimulate dysfunctional NETWORKS.
+    visuals:
+      - visual_type: network_diagram
+        caption_template: "{condition_name} — FNON Network Profile"
+
+  - slug: modalities
+    title: "Available Modalities & Off-Label Disclosure"
+    order: 3
+    content_type: table
+    knowledge_source: modality
+    knowledge_fields: [applicable_modalities]
+    table_headers: [Modality, Device, Regulatory Status, Evidence Level]
+    table_row_source: applicable_modalities
+
+  - slug: stage_1
+    title: "Stage 1: Appointment Scheduling & Pre-Screening"
+    order: 4
+    content_type: prose
+    knowledge_source: shared_rules
+    knowledge_fields: []
+    preamble: >-
+      Screen for basic eligibility and contraindications before the first visit.
+      Collect medical history, current medications, and prior neuromodulation experience.
+
+  - slug: stage_2
+    title: "Stage 2: Informed Consent & Off-Label Disclosure"
+    order: 5
+    content_type: prose
+    knowledge_source: shared_rules
+    knowledge_fields: [safety_rules]
+    preamble: >-
+      Obtain written informed consent before any diagnostic or therapeutic procedures.
+      For TPS and other off-label modalities, complete the SOZO Off-Label Disclosure Form.
+
+  - slug: stage_3
+    title: "Stage 3: Psychological Intake & SOZO PRS Baseline"
+    order: 6
+    content_type: mixed
+    knowledge_fields: [core_symptoms, assessments]
+    preamble: >-
+      Administer the SOZO Patient Rating System (PRS) to establish baseline symptom severity.
+
+  - slug: stage_4
+    title: "Stage 4: Clinical Examination & Phenotype Identification"
+    order: 7
+    content_type: mixed
+    knowledge_fields: [phenotypes]
+    table_headers: [Phenotype, Key Features, Primary Networks]
+    table_row_source: phenotypes
+    preamble: >-
+      Conduct the Clinical Examination Checklist. Identify the clinical phenotype
+      using the SOZO Phenotype Classification system.
+    visuals:
+      - visual_type: brain_map
+        caption_template: "{condition_name} — Stimulation Target Map"
+
+  - slug: stage_5
+    title: "Stage 5: Protocol Selection & Assignment"
+    order: 8
+    content_type: table
+    knowledge_fields: [protocols]
+    table_headers: [Protocol, Modality, Target Region, Evidence Level, Off-Label]
+    table_row_source: protocols
+    preamble: >-
+      Apply the phenotype-to-protocol mapping. Doctor must authorize the final assignment.
+    visuals:
+      - visual_type: protocol_panel
+        caption_template: "{condition_name} — Protocol Montage Panels"
+
+  - slug: stage_6
+    title: "Stage 6: Treatment Delivery & Session Monitoring"
+    order: 9
+    content_type: prose
+    knowledge_source: shared_rules
+    knowledge_fields: [safety_rules]
+    preamble: >-
+      Deliver the assigned protocol using the SOZO S-O-Z-O multimodal session sequence.
+      Monitor for adverse events. Document session parameters and patient state.
+    visuals:
+      - visual_type: treatment_timeline
+        caption_template: "{condition_name} — SOZO Session Timeline"
+
+  - slug: stage_7
+    title: "Stage 7: Response Tracking & Outcome Assessment"
+    order: 10
+    content_type: mixed
+    knowledge_fields: [responder_criteria, non_responder_pathway]
+    preamble: >-
+      Administer outcome measures at Week 4 and Week 8-10. Apply the SOZO Operational
+      Response Classification. For Non-Responders, initiate FNON Level 5 reassessment.
+    visuals:
+      - visual_type: dose_response
+        caption_template: "{condition_name} — Response Tracking Template"
+
+  - slug: stage_8
+    title: "Stage 8: Maintenance Planning & Discharge"
+    order: 11
+    content_type: prose
+    knowledge_fields: []
+    preamble: >-
+      For Responders, plan maintenance protocol with reduced session frequency.
+      For Partial Responders with continued improvement, consider extended treatment block.
+      Document final outcomes and follow-up recommendations.
+
+  - slug: safety
+    title: "Safety & Contraindications"
+    order: 12
+    content_type: table
+    knowledge_fields: [safety_rules, contraindications]
+    table_headers: [Category, Severity, Description]
+    table_row_source: safety_rules
+
+  - slug: governance
+    title: "Governance Rules"
+    order: 13
+    content_type: list
+    knowledge_fields: [governance_rules]
+
+  - slug: references
+    title: "References"
+    order: 14
+    content_type: reference_list
+    knowledge_fields: [references]

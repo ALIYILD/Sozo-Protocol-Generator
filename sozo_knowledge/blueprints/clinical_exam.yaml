@@ -1,0 +1,87 @@
+# SOZO Clinical Examination Checklist — Document Blueprint
+# Structured intake assessment with condition-specific scales and phenotyping.
+
+slug: clinical_exam
+title_template: "Clinical Examination Checklist — {condition_name}"
+doc_type: clinical_exam
+description: >-
+  Structured clinical examination checklist for intake assessment,
+  including validated screening scales, phenotype identification,
+  and safety screening.
+target_audience: clinician
+version: "1.0"
+applicable_tiers: [fellow, partners]
+requires_references: true
+requires_review_summary: false
+template_ref: Clinical_Examination_Checklist.docx
+
+sections:
+  - slug: document_control
+    title: "Document Control"
+    order: 0
+    content_type: prose
+    knowledge_fields: [display_name, icd10, version]
+
+  - slug: patient_info
+    title: "Patient Information"
+    order: 1
+    content_type: checklist
+    knowledge_fields: []
+    preamble: >-
+      Complete all fields. Assessment type: Baseline / Follow-Up / End of Block.
+
+  - slug: network_assessment
+    title: "FNON Network Assessment"
+    order: 2
+    tier: partners
+    content_type: table
+    knowledge_fields: [network_profiles, fnon_rationale]
+    table_headers: [Network, Dysfunction, Severity, Relevance]
+    table_row_source: network_profiles
+    preamble: >-
+      FNON 6-Network assessment. Rate each network based on clinical presentation.
+    visuals:
+      - visual_type: network_diagram
+        caption_template: "{condition_name} — Network Profile"
+
+  - slug: screening_scales
+    title: "Screening Scales & Validated Assessments"
+    order: 3
+    content_type: table
+    knowledge_fields: [assessments]
+    table_headers: [Scale, Full Name, Domains, Timing, Evidence PMID]
+    table_row_source: assessments
+
+  - slug: clinical_examination
+    title: "Clinical Examination Domains"
+    order: 4
+    content_type: mixed
+    knowledge_fields: [core_symptoms, brain_regions]
+    preamble: >-
+      Rate each domain using the 0-4 scale (0=Absent, 1=Mild, 2=Moderate, 3=Marked, 4=Severe).
+
+  - slug: phenotype_identification
+    title: "Phenotype Identification"
+    order: 5
+    content_type: table
+    knowledge_fields: [phenotypes]
+    table_headers: [Phenotype, Key Features, Primary Networks, Preferred Modalities]
+    table_row_source: phenotypes
+    preamble: >-
+      Based on clinical examination findings, identify the primary clinical phenotype.
+
+  - slug: safety_screening
+    title: "Safety Screening Checklist"
+    order: 6
+    content_type: table
+    knowledge_fields: [safety_rules, contraindications]
+    table_headers: [Safety Item, Status, Notes]
+    table_row_source: safety_rules
+    preamble: >-
+      Complete safety screening before initiating any neuromodulation treatment.
+
+  - slug: references
+    title: "References"
+    order: 7
+    content_type: reference_list
+    knowledge_fields: [references]

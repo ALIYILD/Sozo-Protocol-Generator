@@ -17,6 +17,8 @@ Usage:
 from __future__ import annotations
 
 import logging
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Any, Optional
 
 from ..schemas.documents import DocumentSpec, SectionContent
@@ -25,6 +27,77 @@ from ..core.utils import current_month_year
 from .base import KnowledgeBase
 from .schemas import KnowledgeCondition
 from .specs import DocumentBlueprint, SectionBlueprint
+
+
+# ── Provenance Models ──────────────────────────────────────────────────────
+
+
+@dataclass
+class SectionProvenance:
+    """Provenance trace for one assembled section."""
+
+    section_slug: str
+    blueprint_slug: str
+    knowledge_fields_used: list[str] = field(default_factory=list)
+    evidence_pmids: list[str] = field(default_factory=list)
+    visual_types_requested: list[str] = field(default_factory=list)
+    table_row_source: str = ""
+    tier: str = ""
+    content_type: str = ""
+    has_content: bool = False
+    has_tables: bool = False
+    is_placeholder: bool = False
+    warnings: list[str] = field(default_factory=list)
+
+
+@dataclass
+class AssemblyProvenance:
+    """Complete provenance trace for a document assembly."""
+
+    condition_slug: str
+    blueprint_slug: str
+    tier: str
+    assembled_at: str = ""
+    sections: list[SectionProvenance] = field(default_factory=list)
+    total_sections: int = 0
+    populated_sections: int = 0
+    placeholder_sections: int = 0
+    total_evidence_pmids: int = 0
+    total_visuals_requested: int = 0
+    warnings: list[str] = field(default_factory=list)
+
+    def __post_init__(self):
+        if not self.assembled_at:
+            self.assembled_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    def to_dict(self) -> dict:
+        """Serialize to dict for JSON export."""
+        return {
+            "condition_slug": self.condition_slug,
+            "blueprint_slug": self.blueprint_slug,
+            "tier": self.tier,
+            "assembled_at": self.assembled_at,
+            "total_sections": self.total_sections,
+            "populated_sections": self.populated_sections,
+            "placeholder_sections": self.placeholder_sections,
+            "total_evidence_pmids": self.total_evidence_pmids,
+            "total_visuals_requested": self.total_visuals_requested,
+            "warnings": self.warnings,
+            "sections": [
+                {
+                    "section_slug": s.section_slug,
+                    "blueprint_slug": s.blueprint_slug,
+                    "knowledge_fields_used": s.knowledge_fields_used,
+                    "evidence_pmids": s.evidence_pmids,
+                    "visual_types_requested": s.visual_types_requested,
+                    "has_content": s.has_content,
+                    "has_tables": s.has_tables,
+                    "is_placeholder": s.is_placeholder,
+                    "warnings": s.warnings,
+                }
+                for s in self.sections
+            ],
+        }
 
 logger = logging.getLogger(__name__)
 
@@ -65,7 +138,7 @@ class CanonicalDocumentAssembler:
         condition_slug: str,
         blueprint_slug: str,
         tier: str = "fellow",
-    ) -> DocumentSpec:
+    ) -> tuple[DocumentSpec, AssemblyProvenance]:
         """Assemble a complete document from blueprint + knowledge.
 
         Args:
@@ -74,7 +147,7 @@ class CanonicalDocumentAssembler:
             tier: "fellow" or "partners"
 
         Returns:
-            DocumentSpec ready for rendering
+            Tuple of (DocumentSpec ready for rendering, AssemblyProvenance trace)
         """
         # Resolve inputs
         condition = self.kb.get_condition(condition_slug)
@@ -88,11 +161,32 @@ class CanonicalDocumentAssembler:
         # Get tier-appropriate sections
         section_blueprints = blueprint.get_sections_for_tier(tier)
 
+        # Provenance tracking
+        provenance = AssemblyProvenance(
+            condition_slug=condition_slug,
+            blueprint_slug=blueprint_slug,
+            tier=tier,
+        )
+
         # Build sections
         sections = []
         for sb in section_blueprints:
-            section = self._build_section(condition, sb, tier)
+            section, sec_prov = self._build_section(condition, sb, tier)
             sections.append(section)
+            provenance.sections.append(sec_prov)
+
+        # Finalize provenance
+        provenance.total_sections = len(sections)
+        provenance.populated_sections = sum(
+            1 for s in sections if s.content or s.tables or s.subsections
+        )
+        provenance.placeholder_sections = sum(1 for s in sections if s.is_placeholder)
+        provenance.total_evidence_pmids = sum(
+            len(sp.evidence_pmids) for sp in provenance.sections
+        )
+        provenance.total_visuals_requested = sum(
+            len(sp.visual_types_requested) for sp in provenance.sections
+        )
 
         # Build document spec
         title = blueprint.title_template.replace("{condition_name}", condition.display_name)
@@ -126,16 +220,17 @@ class CanonicalDocumentAssembler:
 
         logger.info(
             f"Canonical assembly: {condition_slug}/{blueprint_slug}/{tier} "
-            f"→ {len(sections)} sections"
+            f"→ {provenance.populated_sections}/{provenance.total_sections} sections populated, "
+            f"{provenance.placeholder_sections} placeholders"
         )
-        return spec
+        return spec, provenance
 
     def _build_section(
         self,
         condition: KnowledgeCondition,
         blueprint: SectionBlueprint,
         tier: str,
-    ) -> SectionContent:
+    ) -> tuple[SectionContent, SectionProvenance]:
         """Build one section from its blueprint and condition knowledge."""
 
         content_parts = []
@@ -145,6 +240,17 @@ class CanonicalDocumentAssembler:
         evidence_pmids = []
         figures = []
         is_placeholder = False
+
+        # Provenance tracking
+        prov = SectionProvenance(
+            section_slug=blueprint.slug,
+            blueprint_slug=blueprint.slug,
+            knowledge_fields_used=list(blueprint.knowledge_fields),
+            visual_types_requested=[v.visual_type for v in blueprint.visuals],
+            table_row_source=blueprint.table_row_source,
+            tier=blueprint.tier,
+            content_type=blueprint.content_type,
+        )
 
         # Preamble
         if blueprint.preamble:
@@ -185,7 +291,7 @@ class CanonicalDocumentAssembler:
         for sub_bp in blueprint.subsections:
             if sub_bp.tier not in ("both", tier):
                 continue
-            sub_section = self._build_section(condition, sub_bp, tier)
+            sub_section, _ = self._build_section(condition, sub_bp, tier)
             subsections.append(sub_section)
 
         # Collect evidence PMIDs from references
@@ -210,6 +316,14 @@ class CanonicalDocumentAssembler:
         elif blueprint.requires_evidence and not evidence_pmids:
             confidence = "low_confidence"
 
+        # Finalize provenance
+        prov.evidence_pmids = evidence_pmids[:10]
+        prov.has_content = bool(content)
+        prov.has_tables = bool(tables)
+        prov.is_placeholder = is_placeholder
+        if is_placeholder:
+            prov.warnings.append(f"Section '{blueprint.title}' is a placeholder — needs data")
+
         return SectionContent(
             section_id=blueprint.slug,
             title=blueprint.title,
@@ -221,7 +335,7 @@ class CanonicalDocumentAssembler:
             evidence_pmids=evidence_pmids[:10],
             confidence_label=confidence,
             is_placeholder=is_placeholder,
-        )
+        ), prov
 
     def _resolve_field(self, condition: KnowledgeCondition, field_name: str) -> Any:
         """Resolve a knowledge field from the condition object."""

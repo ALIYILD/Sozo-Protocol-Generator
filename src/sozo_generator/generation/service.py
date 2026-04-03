@@ -308,12 +308,19 @@ class GenerationService:
             # Assemble document from blueprint + knowledge
             from ..knowledge.assembler import CanonicalDocumentAssembler
             assembler = CanonicalDocumentAssembler(kb)
-            spec = assembler.assemble(condition, doc_type, tier)
+            spec, provenance = assembler.assemble(condition, doc_type, tier)
 
             # Render using existing renderer
             output_path = self.exporter.renderer.render(spec)
             result.output_path = str(output_path)
             result.success = True
+
+            # Save provenance sidecar
+            import json
+            prov_path = Path(str(output_path)).with_suffix(".provenance.json")
+            prov_path.write_text(json.dumps(provenance.to_dict(), indent=2))
+
+            result.qa_issues = provenance.warnings
 
             # Visuals
             if self.with_visuals:

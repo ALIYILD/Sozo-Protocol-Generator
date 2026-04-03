@@ -1,0 +1,80 @@
+# SOZO Brain Center — 8-Stage Patient Journey Framework
+# Defines the canonical patient journey stages for clinical handbooks.
+# Source: handbook_logic.py PATIENT_JOURNEY_STAGES + STAGE_DEFAULTS (migrated)
+
+rules:
+  - slug: patient_journey_stage_1
+    name: "Stage 1: Appointment Scheduling & Pre-Screening"
+    category: patient_journey
+    applies_to: [all]
+    rule_text: >-
+      Screen for basic eligibility and contraindications before the first visit.
+      Collect medical history, current medications, and prior neuromodulation experience.
+      Schedule intake assessment appointment.
+
+  - slug: patient_journey_stage_2
+    name: "Stage 2: Informed Consent & Off-Label Disclosure"
+    category: patient_journey
+    applies_to: [all]
+    mandatory: true
+    rule_text: >-
+      Obtain written informed consent before any diagnostic or therapeutic procedures.
+      For TPS and other off-label modalities, complete the SOZO Off-Label Disclosure Form
+      with Doctor sign-off. Ensure the patient understands investigational status.
+
+  - slug: patient_journey_stage_3
+    name: "Stage 3: Psychological Intake & SOZO PRS Baseline"
+    category: patient_journey
+    applies_to: [all]
+    rule_text: >-
+      Administer the SOZO Patient Rating System (PRS) to establish baseline symptom severity.
+      Complete structured psychological intake covering psychiatric history, medication compliance,
+      risk factors, and comorbidities. Flag any suicidal ideation for immediate escalation.
+
+  - slug: patient_journey_stage_4
+    name: "Stage 4: Clinical Examination & Phenotype Identification"
+    category: patient_journey
+    applies_to: [all]
+    rule_text: >-
+      Conduct the full Clinical Examination Checklist appropriate to the condition.
+      Administer validated screening scales. Identify the clinical phenotype using the
+      SOZO Phenotype Classification system. Document severity scores.
+
+  - slug: patient_journey_stage_5
+    name: "Stage 5: Protocol Selection & Assignment"
+    category: patient_journey
+    applies_to: [all]
+    mandatory: true
+    rule_text: >-
+      Apply the phenotype-to-protocol mapping algorithm to select the optimal stimulation
+      protocol. Doctor must authorize the final protocol assignment. Document rationale
+      for protocol selection including network targets and modality choices.
+
+  - slug: patient_journey_stage_6
+    name: "Stage 6: Treatment Delivery & Session Monitoring"
+    category: patient_journey
+    applies_to: [all]
+    rule_text: >-
+      Deliver the assigned protocol using the SOZO S-O-Z-O multimodal session sequence.
+      Monitor for adverse events throughout each session using the graded AE protocol.
+      Document session parameters, patient state, and any protocol deviations.
+
+  - slug: patient_journey_stage_7
+    name: "Stage 7: Response Tracking & Outcome Assessment"
+    category: patient_journey
+    applies_to: [all]
+    rule_text: >-
+      Administer outcome measures at Week 4 and Week 8-10 assessment timepoints.
+      Apply the SOZO Operational Response Classification to categorize as Responder,
+      Partial Responder, or Non-Responder. For Non-Responders at both timepoints,
+      initiate the FNON Level 5 reassessment pathway.
+
+  - slug: patient_journey_stage_8
+    name: "Stage 8: Maintenance Planning & Discharge"
+    category: patient_journey
+    applies_to: [all]
+    rule_text: >-
+      For Responders, plan a maintenance protocol with reduced session frequency.
+      For Partial Responders with continued improvement, consider an extended treatment block.
+      Document final outcomes, treatment response, and follow-up recommendations.
+      Complete discharge summary.
