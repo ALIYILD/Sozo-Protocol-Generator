@@ -604,5 +604,51 @@ def review_regenerate_cmd(
         typer.echo(typer.style(f"\nFailed: {result.error}", fg=typer.colors.RED))
 
 
+@app.command("promotion-detect")
+def promotion_detect_cmd():
+    """Detect reusable override patterns from revision history."""
+    from ..knowledge.revision.promotion import PromotionEngine
+    engine = PromotionEngine()
+    candidates = engine.detect_candidates()
+    if not candidates:
+        typer.echo("No promotion candidates detected.")
+        return
+    typer.echo(f"Found {len(candidates)} candidates:")
+    for c in candidates:
+        ev = " [EVIDENCE]" if c.evidence_sensitive else ""
+        typer.echo(f"  [{c.candidate_id}] {c.pattern_summary} (×{c.repeat_count}, conf={c.confidence:.0%}){ev}")
+
+
+@app.command("promotion-propose")
+def promotion_propose_cmd(
+    candidate_id: str = typer.Argument(..., help="Candidate ID from detection"),
+    change: str = typer.Option("", help="Proposed change description"),
+):
+    """Create a promotion proposal from a detected candidate."""
+    from ..knowledge.revision.promotion import PromotionEngine
+    engine = PromotionEngine()
+    candidates = engine.detect_candidates()
+    match = next((c for c in candidates if c.candidate_id == candidate_id), None)
+    if not match:
+        typer.echo(typer.style(f"Candidate not found: {candidate_id}", fg=typer.colors.RED))
+        return
+    proposal = engine.create_proposal(match, proposed_change=change)
+    engine._save_proposal(proposal)
+    typer.echo(proposal.to_text())
+
+
+@app.command("promotion-list")
+def promotion_list_cmd():
+    """List all promotion proposals."""
+    from ..knowledge.revision.promotion import PromotionEngine
+    engine = PromotionEngine()
+    proposals = engine.list_proposals()
+    if not proposals:
+        typer.echo("No promotion proposals.")
+        return
+    for p in proposals:
+        typer.echo(f"  [{p.get('status', '?')}] {p.get('proposal_id', '?')}: {p.get('proposed_change_summary', '')[:60]}")
+
+
 if __name__ == "__main__":
     app()
