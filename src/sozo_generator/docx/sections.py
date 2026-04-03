@@ -78,7 +78,14 @@ def render_section(doc: Document, section: SectionContent, level: int = 1, depth
 
 
 def _add_section_heading(doc: Document, title: str, level: int) -> None:
-    """Add a styled section heading."""
+    """Add a styled section heading using proper Word heading styles.
+
+    Uses doc.add_heading() for proper Heading 1/2/3/4 styles which enables:
+    - Table of contents generation in Word
+    - Navigation pane in Word
+    - Correct outline levels for PDF export
+    - Professional document structure
+    """
     heading_colors = {
         1: COLOR_DARK_BLUE,
         2: COLOR_PRIMARY_BLUE,
@@ -87,12 +94,16 @@ def _add_section_heading(doc: Document, title: str, level: int) -> None:
     }
     heading_sizes = {1: 14, 2: 12, 3: 11, 4: 10}
 
-    p = doc.add_paragraph()
-    run = p.add_run(title)
-    run.bold = True
-    run.font.name = FONT_HEADING
-    run.font.size = Pt(heading_sizes.get(level, 11))
-    run.font.color.rgb = heading_colors.get(level, COLOR_PRIMARY_BLUE)
+    # Use proper Word heading style (enables TOC, navigation pane, outline)
+    clamped_level = min(max(level, 1), 4)
+    p = doc.add_heading(title, level=clamped_level)
+
+    # Apply SOZO branding on top of the heading style
+    for run in p.runs:
+        run.font.name = FONT_HEADING
+        run.font.size = Pt(heading_sizes.get(level, 11))
+        run.font.color.rgb = heading_colors.get(level, COLOR_PRIMARY_BLUE)
+
     p.paragraph_format.space_before = Pt(12 if level == 1 else 8)
     p.paragraph_format.space_after = Pt(4)
 

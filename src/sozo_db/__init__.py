@@ -26,12 +26,14 @@ from .models import (
     Review,
     AuditEvent,
     TreatmentSession,
+    GraphRun,
 )
 from .repositories import (
     ProtocolRepository,
     EvidenceRepository,
     PatientRepository,
     AuditRepository,
+    GraphRunRepository,
 )
 
 __all__ = [
@@ -59,10 +61,12 @@ __all__ = [
     "Review",
     "AuditEvent",
     "TreatmentSession",
+    "GraphRun",
     # Repositories
     "BaseRepository",
     "ProtocolRepository",
     "EvidenceRepository",
     "PatientRepository",
     "AuditRepository",
+    "GraphRunRepository",
 ]

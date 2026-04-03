@@ -1,24 +1,24 @@
 {
-  "request_id": "1fbafc31-b69c-4aa7-bfbd-a3b8b20ad193",
+  "request_id": "c47474cf-0caf-491f-aef9-ac8572d9d75c",
   "condition": {
     "slug": "depression",
     "display_name": "Major Depressive Disorder",
     "icd10": "F32"
   },
   "base_sequence": {
-    "sequence_id": "seq-db83d6d7",
+    "sequence_id": "seq-2b3740e0",
     "name": "SOZO Session \u2014 depression",
     "condition_slug": "depression",
     "tier": "fellow",
     "version": "1.0",
     "phases": [
       {
-        "phase_id": "phase-3f9d1a08",
+        "phase_id": "phase-13f9d9e1",
         "sozo_phase": "pre",
         "label": "Pre-Session Preparation",
         "steps": [
           {
-            "step_id": "step-5c05d71e",
+            "step_id": "step-90ec045c",
             "step_type": "monitoring",
             "modality": "eeg",
             "label": "Pre-session impedance check",
@@ -47,18 +47,18 @@
         "target_duration_min": null
       },
       {
-        "phase_id": "phase-c1e9cf44",
+        "phase_id": "phase-ab5ee1ab",
         "sozo_phase": "O1",
         "label": "O \u2014 Optimize (prime target networks)",
         "steps": [
           {
-            "step_id": "step-b14cf99d",
+            "step_id": "step-3dab476d",
             "step_type": "pulse",
             "modality": "tdcs",
-            "label": "tDCS Core Depression (Primary Protocol)",
+            "label": "tDCS C1: L-DLPFC Anode / R-DLPFC Cathode (Core Antidepressant)",
             "electrodes_source": [
               "F3",
-              "Fp2"
+              "F4"
             ],
             "electrodes_sink": [
               "Fp2"
@@ -70,7 +70,7 @@
             "pulse_width_us": null,
             "pulse_count": null,
             "duration_ms": 0,
-            "duration_min": 20.0,
+            "duration_min": 30.0,
             "repetitions": 1,
             "inter_rep_pause_ms": 0,
             "max_impedance_kohm": 10.0,
@@ -79,17 +79,19 @@
             "evidence_level": "high",
             "off_label": false,
             "requires_consent": true,
-            "rationale": "Standard tDCS antidepressant montage: L-DLPFC anodal facilitates hypofrontal left hemisphere.",
+            "rationale": "Gold-standard tDCS antidepressant montage. Anodal F3 upregulates hypoactive L-DLPFC (CEN node), restoring prefrontal excitability and top-down emotional regulation. Cathodal F4 reduces relative right frontal hyperactivation associated with withdrawal motivation and negative affect. This bilateral montage normalises the frontal alpha asymmetry pattern characteristic of MDD. Supported by SELECT-TDCS (N=120), ELECT-TDCS (N=245), and IPD meta-analysis (N=289).",
             "extra_params": {}
           },
           {
-            "step_id": "step-a64cec11",
+            "step_id": "step-0d046c3e",
             "step_type": "pulse",
             "modality": "tdcs",
-            "label": "tDCS Rumination Reduction",
+            "label": "tDCS C2: Bifrontal DLPFC (Bilateral Activation)",
             "electrodes_source": [
               "F3",
-              "P3"
+              "F4",
+              "Fp1",
+              "Fp2"
             ],
             "electrodes_sink": [],
             "laterality": "bilateral",
@@ -108,21 +110,19 @@
             "evidence_level": "medium",
             "off_label": false,
             "requires_consent": true,
-            "rationale": "Cathodal parietal placement inhibits posterior DMN; reduces ruminative self-referential processing.",
+            "rationale": "Bifrontal anodal montage simultaneously upregulates bilateral DLPFC, addressing the bilateral prefrontal hypoactivation seen in severe and treatment-resistant MDD. Supraorbital cathodal return avoids contralateral DLPFC inhibition. Targets bilateral CEN deficits without suppressing either hemisphere. Useful when unilateral L-DLPFC montage has produced partial response.",
             "extra_params": {}
           },
           {
-            "step_id": "step-71487adf",
+            "step_id": "step-85e5e2fd",
             "step_type": "pulse",
             "modality": "tdcs",
-            "label": "tDCS Anxiety & Hyperarousal",
+            "label": "tDCS C3: L-DLPFC + OFC (Reward Processing)",
             "electrodes_source": [
-              "F4",
-              "F3"
+              "F3",
+              "Fp2"
             ],
-            "electrodes_sink": [
-              "Fp1"
-            ],
+            "electrodes_sink": [],
             "laterality": "bilateral",
             "intensity_ma": 2.0,
             "intensity_mj": null,
@@ -139,36 +139,91 @@
             "evidence_level": "medium",
             "off_label": false,
             "requires_consent": true,
-            "rationale": "Asymmetric frontal montage targets anxiety-predominant presentation; reverses standard depression montage.",
+            "rationale": "Targets both executive control (L-DLPFC) and reward processing (OFC proximity) circuits. The Fp2 cathodal placement influences current flow through the orbitofrontal cortex, modulating reward valuation and hedonic processing. Particularly relevant for anhedonic presentations where reward circuit dysfunction is prominent. This montage was used in several early tDCS depression trials.",
+            "extra_params": {}
+          },
+          {
+            "step_id": "step-9c21d11c",
+            "step_type": "pulse",
+            "modality": "tdcs",
+            "label": "tDCS C4: DLPFC Sleep Protocol (Insomnia-Depression)",
+            "electrodes_source": [
+              "F3",
+              "Fp2"
+            ],
+            "electrodes_sink": [],
+            "laterality": "bilateral",
+            "intensity_ma": 2.0,
+            "intensity_mj": null,
+            "frequency_hz": null,
+            "pulse_width_us": null,
+            "pulse_count": null,
+            "duration_ms": 0,
+            "duration_min": 20.0,
+            "repetitions": 1,
+            "inter_rep_pause_ms": 0,
+            "max_impedance_kohm": 10.0,
+            "ramp_up_ms": 30000,
+            "ramp_down_ms": 30000,
+            "evidence_level": "low",
+            "off_label": false,
+            "requires_consent": true,
+            "rationale": "Reduced intensity (1.5mA) evening protocol designed for insomnia-predominant depression. Lower current avoids excessive cortical arousal while maintaining antidepressant neuromodulation. Evening timing leverages the circadian window for sleep-related neuroplasticity and avoids stimulation-induced insomnia that can occur with higher-intensity morning sessions. Prefrontal modulation reduces pre-sleep rumination and hyperarousal.",
+            "extra_params": {}
+          },
+          {
+            "step_id": "step-b7590493",
+            "step_type": "pulse",
+            "modality": "tdcs",
+            "label": "tDCS C5: Cerebellar (Emotional Regulation)",
+            "electrodes_source": [
+              "Cb1",
+              "Fpz"
+            ],
+            "electrodes_sink": [],
+            "laterality": "bilateral",
+            "intensity_ma": 2.0,
+            "intensity_mj": null,
+            "frequency_hz": null,
+            "pulse_width_us": null,
+            "pulse_count": null,
+            "duration_ms": 0,
+            "duration_min": 20.0,
+            "repetitions": 1,
+            "inter_rep_pause_ms": 0,
+            "max_impedance_kohm": 10.0,
+            "ramp_up_ms": 30000,
+            "ramp_down_ms": 30000,
+            "evidence_level": "low",
+            "off_label": true,
+            "requires_consent": true,
+            "rationale": "Cerebellar tDCS modulates cerebello-thalamo-cortical circuits involved in emotional regulation and affective processing. Cerebellar Crus I/II projects to prefrontal association cortex via the dentate nucleus and thalamus. Anodal cerebellar stimulation enhances cerebellar modulation of limbic responses, potentially reducing emotional reactivity and improving affect regulation. Emerging evidence in anxiety and emotional dysregulation.",
             "extra_params": {}
           }
         ],
         "target_duration_min": null
       },
       {
-        "phase_id": "phase-d8950354",
+        "phase_id": "phase-c2df323d",
         "sozo_phase": "Z",
         "label": "Z \u2014 Zone Target (deep network modulation)",
         "steps": [
           {
-            "step_id": "step-47c76a7a",
+            "step_id": "step-cce35b3c",
             "step_type": "pulse",
             "modality": "tps",
-            "label": "TPS Core Depression",
+            "label": "TPS T1: Bilateral DLPFC (Mood Regulation)",
             "electrodes_source": [
               "F3",
               "F4"
             ],
-            "electrodes_sink": [
-              "Fp1",
-              "Fp2"
-            ],
+            "electrodes_sink": [],
             "laterality": "bilateral",
             "intensity_ma": null,
             "intensity_mj": 0.25,
             "frequency_hz": 5.0,
             "pulse_width_us": null,
-            "pulse_count": 3000,
+            "pulse_count": 1000,
             "duration_ms": 0,
             "duration_min": 20.0,
             "repetitions": 1,
@@ -179,27 +234,25 @@
             "evidence_level": "medium",
             "off_label": true,
             "requires_consent": true,
-            "rationale": "Bilateral DLPFC modulation targets hypofrontality in MDD; L>R asymmetry is primary treatment target.",
+            "rationale": "Core TPS protocol for MDD targeting bilateral DLPFC with left-dominant pulse distribution. Focused ultrasound pulses penetrate cortex to modulate prefrontal activity. Mechanical stimulation promotes BDNF release and synaptic plasticity via mechanotransduction. Higher energy density (0.25 mJ/mm2) at 5Hz provides excitatory neuromodulation of hypoactive prefrontal cortex.",
             "extra_params": {}
           },
           {
-            "step_id": "step-f10f6668",
+            "step_id": "step-0d1328a7",
             "step_type": "pulse",
             "modality": "tps",
-            "label": "TPS Treatment-Resistant Depression",
+            "label": "TPS T2: sgACC/mPFC (Anhedonia)",
             "electrodes_source": [
-              "F3",
-              "F4",
-              "FC3",
-              "FC4"
+              "Fz",
+              "Fpz"
             ],
             "electrodes_sink": [],
             "laterality": "bilateral",
             "intensity_ma": null,
             "intensity_mj": 0.25,
-            "frequency_hz": 5.0,
+            "frequency_hz": 3.0,
             "pulse_width_us": null,
-            "pulse_count": 5000,
+            "pulse_count": 800,
             "duration_ms": 0,
             "duration_min": 20.0,
             "repetitions": 1,
@@ -210,19 +263,109 @@
             "evidence_level": "low",
             "off_label": true,
             "requires_consent": true,
-            "rationale": "Extended bilateral approach for TRD targets broader prefrontal network including sgACC connectivity.",
+            "rationale": "Targets the sgACC (Brodmann area 25) and medial prefrontal cortex \u2014 deep structures inaccessible to tDCS but reachable by TPS focused ultrasound. sgACC hyperactivation is a robust marker of MDD severity and treatment resistance. Inhibitory 3Hz stimulation at moderate energy aims to reduce sgACC hyperactivity. This target is validated by deep brain stimulation studies showing antidepressant effects of sgACC modulation.",
+            "extra_params": {}
+          },
+          {
+            "step_id": "step-fff2235c",
+            "step_type": "pulse",
+            "modality": "tps",
+            "label": "TPS T3: OFC/vmPFC (Reward Circuit)",
+            "electrodes_source": [
+              "Fp1",
+              "Fp2",
+              "Fpz"
+            ],
+            "electrodes_sink": [],
+            "laterality": "bilateral",
+            "intensity_ma": null,
+            "intensity_mj": 0.25,
+            "frequency_hz": 3.0,
+            "pulse_width_us": null,
+            "pulse_count": 800,
+            "duration_ms": 0,
+            "duration_min": 20.0,
+            "repetitions": 1,
+            "inter_rep_pause_ms": 0,
+            "max_impedance_kohm": 10.0,
+            "ramp_up_ms": 0,
+            "ramp_down_ms": 0,
+            "evidence_level": "low",
+            "off_label": true,
+            "requires_consent": true,
+            "rationale": "Targets the orbitofrontal and ventromedial prefrontal cortex \u2014 key nodes in the reward processing and hedonic valuation circuit. OFC hypoactivation underlies anhedonia and impaired reward-based decision making in MDD. TPS can reach these ventral prefrontal structures with better spatial resolution than tDCS. Moderate energy at 3Hz aims to normalise reward circuit activity without excessive excitation.",
+            "extra_params": {}
+          },
+          {
+            "step_id": "step-85a415f9",
+            "step_type": "pulse",
+            "modality": "tps",
+            "label": "TPS T4: Multisite Prefrontal (Treatment-Resistant)",
+            "electrodes_source": [
+              "F3",
+              "F4",
+              "Fpz",
+              "Fz"
+            ],
+            "electrodes_sink": [],
+            "laterality": "bilateral",
+            "intensity_ma": null,
+            "intensity_mj": 0.25,
+            "frequency_hz": 5.0,
+            "pulse_width_us": null,
+            "pulse_count": 1200,
+            "duration_ms": 0,
+            "duration_min": 20.0,
+            "repetitions": 1,
+            "inter_rep_pause_ms": 0,
+            "max_impedance_kohm": 10.0,
+            "ramp_up_ms": 0,
+            "ramp_down_ms": 0,
+            "evidence_level": "low",
+            "off_label": true,
+            "requires_consent": true,
+            "rationale": "Intensive multisite TPS protocol for treatment-resistant depression. Targets three key circuit nodes: DLPFC (executive control and emotion regulation), sgACC (mood circuit hub), and OFC (reward processing). The rationale is that TRD involves more widespread network dysfunction requiring broader neuromodulation coverage. Higher pulse count (1200) and multisite targeting aim to address the greater neurobiological burden in TRD.",
+            "extra_params": {}
+          },
+          {
+            "step_id": "step-e3b9e81f",
+            "step_type": "pulse",
+            "modality": "tps",
+            "label": "TPS T5: Hippocampal (HPA Axis Modulation)",
+            "electrodes_source": [
+              "T5",
+              "T6"
+            ],
+            "electrodes_sink": [],
+            "laterality": "bilateral",
+            "intensity_ma": null,
+            "intensity_mj": 0.25,
+            "frequency_hz": 3.0,
+            "pulse_width_us": null,
+            "pulse_count": 600,
+            "duration_ms": 0,
+            "duration_min": 20.0,
+            "repetitions": 1,
+            "inter_rep_pause_ms": 0,
+            "max_impedance_kohm": 10.0,
+            "ramp_up_ms": 0,
+            "ramp_down_ms": 0,
+            "evidence_level": "low",
+            "off_label": true,
+            "requires_consent": true,
+            "rationale": "Targets the hippocampus \u2014 a deep structure critically affected by MDD-related glucocorticoid toxicity and neuroplasticity impairment. Hippocampal volume loss (3-8%) is one of the most robust structural findings in recurrent MDD. TPS mechanical stimulation may promote hippocampal neuroplasticity and BDNF expression through mechanotransduction, potentially reversing stress-induced hippocampal damage. Additionally, hippocampal modulation may help restore HPA axis negative feedback regulation.",
             "extra_params": {}
           }
         ],
         "target_duration_min": null
       },
       {
-        "phase_id": "phase-45af1084",
+        "phase_id": "phase-7913c630",
         "sozo_phase": "post",
         "label": "Post-Session Assessment",
         "steps": [
           {
-            "step_id": "step-a3a467a7",
+            "step_id": "step-8d4c4f06",
             "step_type": "monitoring",
             "modality": "eeg",
             "label": "Post-session outcome assessment",
@@ -330,7 +473,7 @@
     "approval_stamp": {
       "reviewer_id": "dr_test",
       "reviewer_credentials": "MD, Neurologist",
-      "approved_at": "2026-04-03T22:45:08.143277+00:00",
+      "approved_at": "2026-04-03T23:00:26.368345+00:00",
       "revision_number": 0,
       "protocol_version": "1.0.0"
     },

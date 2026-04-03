@@ -7,6 +7,7 @@ from .eeg import EEGRecord
 from .review import Review
 from .audit import AuditEvent
 from .session import TreatmentSession
+from .graph_run import GraphRun
 
 __all__ = [
     "User",
@@ -22,4 +23,5 @@ __all__ = [
     "Review",
     "AuditEvent",
     "TreatmentSession",
+    "GraphRun",
 ]

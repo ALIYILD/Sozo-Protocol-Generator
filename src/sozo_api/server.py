@@ -320,6 +320,23 @@ def create_app() -> FastAPI:
             # Run until clinician review interrupt
             result = graph.invoke(initial_state, config=config)
 
+            # Persist GraphRun to database (non-blocking)
+            try:
+                from sozo_db.repositories.graph_run_repo import GraphRunRepository
+                from sozo_db.engine import get_session_factory
+                import asyncio
+
+                async def _persist():
+                    factory = get_session_factory()
+                    async with factory() as session:
+                        repo = GraphRunRepository(session)
+                        await repo.create(result)
+                        await session.commit()
+
+                asyncio.get_event_loop().run_until_complete(_persist())
+            except Exception as db_err:
+                logger.warning("GraphRun DB persist skipped: %s", db_err)
+
             return {
                 "success": True,
                 "thread_id": thread_id,

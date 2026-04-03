@@ -5,6 +5,8 @@ import logging
 from pathlib import Path
 from docx import Document
 from docx.shared import Pt, RGBColor
+from docx.oxml.ns import qn
+from docx.oxml import OxmlElement
 from ..schemas.documents import DocumentSpec
 from ..schemas.branding import BrandingConfig
 from ..core.enums import Tier
@@ -75,9 +77,35 @@ class DocumentRenderer:
             confidentiality=spec.confidentiality_mark,
         )
 
-        # Render sections (with optional inline images)
-        for section in spec.sections:
-            render_section(doc, section, level=1, image_manifest=image_manifest)
+        # Table of Contents placeholder
+        self._add_toc_placeholder(doc)
+
+        # Page break before content sections
+        doc.add_page_break()
+
+        # Render sections with section numbering
+        for idx, section in enumerate(spec.sections, 1):
+            # Add section number to title for main sections
+            if section.title and not section.section_id.startswith("document_"):
+                section_title_numbered = f"{idx}. {section.title}" if section.title else section.title
+            else:
+                section_title_numbered = section.title
+
+            # Create a modified section with numbered title
+            from ..schemas.documents import SectionContent
+            numbered_section = SectionContent(
+                section_id=section.section_id,
+                title=section_title_numbered,
+                content=section.content,
+                subsections=section.subsections,
+                tables=section.tables,
+                figures=section.figures,
+                review_flags=section.review_flags,
+                evidence_pmids=section.evidence_pmids,
+                confidence_label=section.confidence_label,
+                is_placeholder=section.is_placeholder,
+            )
+            render_section(doc, numbered_section, level=1, image_manifest=image_manifest)
 
         # Top-level figures list
         if spec.figures:
@@ -173,6 +201,41 @@ class DocumentRenderer:
             run_flag.font.size = Pt(10)
             run_flag.font.color.rgb = COLOR_ACCENT_RED
             run_flag.font.name = FONT_BODY
+
+    def _add_toc_placeholder(self, doc: Document) -> None:
+        """Add a Table of Contents field that Word will populate on open."""
+        p_title = doc.add_heading("Table of Contents", level=1)
+        for run in p_title.runs:
+            run.font.name = FONT_HEADING
+            run.font.size = Pt(14)
+            run.font.color.rgb = COLOR_DARK_BLUE
+
+        # Add TOC field code — Word renders this when document is opened
+        p_toc = doc.add_paragraph()
+        run = p_toc.add_run()
+        fldChar_begin = OxmlElement("w:fldChar")
+        fldChar_begin.set(qn("w:fldCharType"), "begin")
+        run._r.append(fldChar_begin)
+
+        instrText = OxmlElement("w:instrText")
+        instrText.set(qn("xml:space"), "preserve")
+        instrText.text = ' TOC \\o "1-3" \\h \\z \\u '
+        run._r.append(instrText)
+
+        fldChar_separate = OxmlElement("w:fldChar")
+        fldChar_separate.set(qn("w:fldCharType"), "separate")
+        run._r.append(fldChar_separate)
+
+        # Placeholder text (visible until Word updates the field)
+        run2 = p_toc.add_run("[Right-click and select 'Update Field' to generate Table of Contents]")
+        run2.font.size = Pt(10)
+        run2.font.italic = True
+        run2.font.color.rgb = RGBColor(0x99, 0x99, 0x99)
+
+        run3 = p_toc.add_run()
+        fldChar_end = OxmlElement("w:fldChar")
+        fldChar_end.set(qn("w:fldCharType"), "end")
+        run3._r.append(fldChar_end)
 
     def _render_disclaimer(self, doc: Document) -> None:
         """Add Clinical Decision Support disclaimer."""
