@@ -108,7 +108,7 @@ class TestKnowledgeLoader:
     def test_load_conditions(self, kb_dir):
         from sozo_generator.knowledge.loader import load_conditions
         conditions = load_conditions(kb_dir)
-        assert len(conditions) == 5
+        assert len(conditions) == 16
         assert "parkinsons" in conditions
         assert "depression" in conditions
         assert "adhd" in conditions
@@ -202,7 +202,7 @@ class TestKnowledgeBase:
 
     def test_list_conditions(self, kb):
         conditions = kb.list_conditions()
-        assert len(conditions) == 5
+        assert len(conditions) == 16
         assert "parkinsons" in conditions
         assert "migraine" in conditions
 
@@ -239,7 +239,7 @@ class TestKnowledgeBase:
 
     def test_summary(self, kb):
         s = kb.summary()
-        assert s["conditions"] == 5
+        assert s["conditions"] == 16
         assert s["modalities"] == 4
         assert s["loaded"] is True
 

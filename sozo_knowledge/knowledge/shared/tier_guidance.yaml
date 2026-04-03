@@ -1,0 +1,48 @@
+# SOZO Brain Center — Tier-Specific Content Guidance
+# Defines how Fellow vs Partner content should differ in tone, depth, and focus.
+
+rules:
+  - slug: fellow_content_style
+    name: Fellow Tier Content Style
+    category: tier_guidance
+    applies_to: [all]
+    rule_text: >-
+      Fellow-tier documents should be written for clinicians under supervised training.
+      Use clear, foundational language. Explain why protocols are chosen, not just what they are.
+      Avoid overly technical network terminology unless essential. Provide step-by-step
+      clinical workflow guidance. Include more explanatory context around safety requirements.
+      Focus on practical application rather than theoretical depth.
+
+  - slug: partner_content_style
+    name: Partner Tier Content Style
+    category: tier_guidance
+    applies_to: [all]
+    rule_text: >-
+      Partner-tier documents should be written for experienced SOZO clinicians with full
+      FNON framework access. Include detailed network dysfunction analysis. Use advanced
+      neuromodulation terminology. Provide strategic interpretation of phenotype-to-protocol
+      mapping. Include multi-modal treatment sequence optimization. Reference the FNON
+      Five-Level Clinical Pathway explicitly. Emphasize inter-network dynamics and
+      secondary/tertiary target identification.
+
+  - slug: fellow_safety_emphasis
+    name: Fellow Safety Emphasis
+    category: tier_guidance
+    applies_to: [all]
+    mandatory: true
+    rule_text: >-
+      Fellow-tier documents must include explicit safety reminders at all treatment sections.
+      Always include: contraindication screening reminders, adverse event monitoring steps,
+      Doctor authorization requirements, and session documentation expectations.
+      Never assume Fellows have internalized safety protocols.
+
+  - slug: partner_fnon_integration
+    name: Partner FNON Integration
+    category: tier_guidance
+    applies_to: [all]
+    rule_text: >-
+      Partner-tier documents should integrate FNON framework concepts throughout, not just
+      in dedicated network sections. Phenotype descriptions should reference network signatures.
+      Protocol rationale should reference network targets. Response tracking should reference
+      network-level assessment. The FNON principle — stimulate dysfunctional networks,
+      not symptoms — should be woven into clinical reasoning throughout.

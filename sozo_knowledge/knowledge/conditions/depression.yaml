@@ -1,452 +1,480 @@
-# ──────────────────────────────────────────────────────────────────────────────
-# SOZO Brain Center — Clinical Knowledge File
-# Condition: Major Depressive Disorder (F32/F33)
-# Version: 1.0
-# Schema: KnowledgeCondition (schemas.py)
-# ──────────────────────────────────────────────────────────────────────────────
+# Major Depressive Disorder — SOZO Clinical Knowledge (Enriched)
+# ICD-10: F32
+# Content enriched from legacy generator prose.
 
 slug: depression
-display_name: "Major Depressive Disorder"
-icd10: "F32"
+display_name: Major Depressive Disorder
+icd10: F32
 aliases:
-  - MDD
-  - major depression
-  - unipolar depression
-  - clinical depression
+- MDD
+- major depression
+- unipolar depression
+- clinical depression
 category: psychiatric
-version: "1.0"
+version: '1.0'
+overview: Major Depressive Disorder (MDD) is a highly prevalent, recurrent psychiatric disorder characterized by persistent
+  low mood, anhedonia, and a range of cognitive, somatic, and neurovegetative symptoms. MDD affects approximately 264 million
+  people globally (WHO), with lifetime prevalence of 15-20% in high-income countries. It is a leading cause of disability
+  worldwide. Approximately 30-40% of MDD patients fail to respond to two or more adequate antidepressant trials, meeting criteria
+  for Treatment-Resistant Depression (TRD). tDCS targeting the left DLPFC represents one of the best-evidenced non-invasive
+  neuromodulation approaches in psychiatry, supported by multiple sham-controlled RCTs and meta-analyses.
+pathophysiology: 'MDD involves dysfunction across multiple neurobiological systems. The monoaminergic hypothesis implicates
+  serotonin, noradrenaline, and dopamine deficits, forming the basis of pharmacological treatment. Neuroimaging studies reveal
+  a consistent pattern of left DLPFC hypoactivation and subgenual anterior cingulate cortex (sgACC/Cg25) hyperactivation in
+  MDD. The sgACC serves as a critical node linking cortical and limbic circuits; its hyperactivity propagates depressogenic
+  tone throughout the default mode network.
 
-# ── Clinical ──────────────────────────────────────────────────────────────────
 
-overview: >-
-  Major Depressive Disorder (MDD) is a highly prevalent psychiatric disorder
-  characterised by persistent low mood, anhedonia, and cognitive-somatic symptoms.
-  Approximately 30-40% of MDD patients are treatment-resistant, making tDCS
-  targeting the left DLPFC one of the best-evidenced non-invasive neuromodulation
-  approaches in psychiatry.
+  The network-level model of MDD identifies three core network disruptions: (1) Default Mode Network (DMN) hyperactivation
+  — excessive self-referential rumination; (2) Central Executive Network (CEN/FPN) hypoactivation — impaired cognitive control
+  and emotion regulation; (3) Salience Network (SN) dysregulation — aberrant switching between networks.
 
-pathophysiology: >-
-  MDD involves left DLPFC hypoactivation and subgenual ACC hyperactivation, with
-  DMN hyperactivation driving pathological rumination, CEN hypofunction impairing
-  cognitive control, and salience network dysregulation disrupting network switching.
-  Neuroplasticity impairment (reduced BDNF, hippocampal volume loss) and HPA axis
-  hyperactivity further compound the disorder.
 
-epidemiology: "Affects approximately 264 million people globally (WHO); lifetime prevalence 15-20% in high-income countries. Leading cause of disability worldwide."
-
+  Neuroplasticity impairment is increasingly recognized: reduced BDNF signaling, hippocampal volume loss (particularly in
+  recurrent MDD), and impaired synaptic plasticity in prefrontal circuits. HPA axis hyperactivity drives glucocorticoid-mediated
+  prefrontal and hippocampal damage. Neuroinflammatory markers (elevated IL-6, TNF-alpha, CRP) are elevated in a significant
+  subset of MDD patients.'
+epidemiology: Affects approximately 264 million people globally (WHO); lifetime prevalence 15-20% in high-income countries.
+  Leading cause of disability worldwide.
 core_symptoms:
-  - "Persistent depressed mood (most of the day, nearly every day)"
-  - "Anhedonia — markedly diminished interest or pleasure in activities"
-  - "Significant weight change or appetite disturbance"
-  - "Insomnia or hypersomnia"
-  - "Psychomotor agitation or retardation"
-  - "Fatigue or loss of energy nearly every day"
-  - "Feelings of worthlessness or excessive guilt"
-  - "Diminished ability to think, concentrate, or make decisions"
-  - "Recurrent thoughts of death or suicidal ideation"
-
+- Persistent depressed mood (most of the day, nearly every day)
+- Anhedonia — markedly diminished interest or pleasure in activities
+- Significant weight change or appetite disturbance
+- Insomnia or hypersomnia
+- Psychomotor agitation or retardation
+- Fatigue or loss of energy nearly every day
+- Feelings of worthlessness or excessive guilt
+- Diminished ability to think, concentrate, or make decisions
+- Recurrent thoughts of death or suicidal ideation
 non_motor_symptoms:
-  - "Cognitive impairment (attention, working memory, executive function)"
-  - "Anxiety symptoms (comorbid anxiety in 60-70% of MDD patients)"
-  - "Somatic complaints (headache, chronic pain, GI symptoms)"
-  - "Social withdrawal and functional impairment"
-
-# ── Anatomy ───────────────────────────────────────────────────────────────────
-
+- Cognitive impairment (attention, working memory, executive function)
+- Anxiety symptoms (comorbid anxiety in 60-70% of MDD patients)
+- Somatic complaints (headache, chronic pain, GI symptoms)
+- Social withdrawal and functional impairment
+- Irritability (more prevalent in younger patients and males)
+- Emotional blunting (common with antidepressant treatment)
 brain_regions:
-  - dlpfc
-  - sgacc
-  - acc
-  - amygdala
-  - hippocampus
-  - vmpfc
-  - insula
-
+- dlpfc
+- sgacc
+- acc
+- amygdala
+- hippocampus
+- vmpfc
+- insula
 brain_region_details:
-  dlpfc: "Consistently hypoactive in MDD; primary tDCS anodal target. Mediates cognitive control and emotion regulation."
-  sgacc: "Hyperactive hub in MDD; downstream target of DLPFC stimulation. sgACC hyperactivity correlates with rumination."
-  acc: "Involved in error monitoring, conflict processing, and mood regulation. Dorsal ACC activity predicts antidepressant response."
-  amygdala: "Hyperreactive to negative stimuli in MDD. Reduced DLPFC-amygdala connectivity underlies emotion dysregulation."
-  hippocampus: "Volume loss in recurrent MDD; impaired neurogenesis."
-  vmpfc: "Part of DMN; involved in self-referential processing. Hyperactive in ruminative MDD."
-  insula: "Key SN node; interoceptive processing. Hyperactive in MDD, contributing to somatic complaints."
-
-# ── Networks (FNON) ──────────────────────────────────────────────────────────
-
+  dlpfc: Consistently hypoactive in MDD; primary tDCS anodal target. Mediates cognitive control and emotion regulation.
+  sgacc: Hyperactive hub in MDD; downstream target of DLPFC stimulation. sgACC hyperactivity correlates with rumination.
+  acc: Involved in error monitoring, conflict processing, and mood regulation. Dorsal ACC activity predicts antidepressant
+    response.
+  amygdala: Hyperreactive to negative stimuli in MDD. Reduced DLPFC-amygdala connectivity underlies emotion dysregulation.
+  hippocampus: Volume loss in recurrent MDD; impaired neurogenesis.
+  vmpfc: Part of DMN; involved in self-referential processing. Hyperactive in ruminative MDD.
+  insula: Key SN node; interoceptive processing. Hyperactive in MDD, contributing to somatic complaints.
 network_profiles:
-  - network: dmn
-    dysfunction: hyper
-    severity: severe
-    primary: true
-    relevance: "Primary dysfunctional network in MDD. DMN hyperactivation underlies pathological self-referential rumination and failure to task-disengage."
-    evidence_note: "Most replicated finding in MDD neuroimaging; Greicius et al. 2007, Hamilton et al. 2011"
-
-  - network: cen
-    dysfunction: hypo
-    severity: severe
-    primary: false
-    relevance: "Left DLPFC hypoactivation impairs cognitive control and top-down emotion regulation. CEN upregulation via anodal tDCS is the primary treatment mechanism."
-    evidence_note: "Robust fMRI evidence; foundational basis for DLPFC tDCS in MDD"
-
-  - network: sn
-    dysfunction: hyper
-    severity: moderate
-    primary: false
-    relevance: "Anterior insula and dACC hyperactivity drives aberrant salience attribution to negative stimuli. Impaired network switching perpetuates DMN hyperactivation."
-    evidence_note: "Menon (2011) triple network model"
-
-  - network: limbic
-    dysfunction: hyper
-    severity: severe
-    primary: false
-    relevance: "Amygdala hyperreactivity and reduced prefrontal-limbic connectivity underpin emotional dysregulation and persistent negative mood."
-    evidence_note: "Drevets et al., multiple meta-analyses of MDD neuroimaging"
-
-  - network: attention
-    dysfunction: hypo
-    severity: moderate
-    primary: false
-    relevance: "Attention and concentration impairment are core cognitive features of MDD, reflecting frontal dopamine depletion."
-    evidence_note: ""
-
+- network: dmn
+  dysfunction: hyper
+  severity: severe
+  primary: true
+  relevance: Primary dysfunctional network in MDD. DMN hyperactivation underlies pathological self-referential rumination
+    and failure to task-disengage.
+  evidence_note: Most replicated finding in MDD neuroimaging; Greicius et al. 2007, Hamilton et al. 2011
+- network: cen
+  dysfunction: hypo
+  severity: severe
+  primary: false
+  relevance: Left DLPFC hypoactivation impairs cognitive control and top-down emotion regulation. CEN upregulation via anodal
+    tDCS is the primary treatment mechanism.
+  evidence_note: Robust fMRI evidence; foundational basis for DLPFC tDCS in MDD
+- network: sn
+  dysfunction: hyper
+  severity: moderate
+  primary: false
+  relevance: Anterior insula and dACC hyperactivity drives aberrant salience attribution to negative stimuli. Impaired network
+    switching perpetuates DMN hyperactivation.
+  evidence_note: Menon (2011) triple network model
+- network: limbic
+  dysfunction: hyper
+  severity: severe
+  primary: false
+  relevance: Amygdala hyperreactivity and reduced prefrontal-limbic connectivity underpin emotional dysregulation and persistent
+    negative mood.
+  evidence_note: Drevets et al., multiple meta-analyses of MDD neuroimaging
+- network: attention
+  dysfunction: hypo
+  severity: moderate
+  primary: false
+  relevance: Attention and concentration impairment are core cognitive features of MDD, reflecting frontal dopamine depletion.
+  evidence_note: ''
 primary_network: dmn
-
-fnon_rationale: >-
-  In MDD the triple network model identifies DMN hyperactivation and CEN
-  hypoactivation as the core pathological network pattern. FNON targets left
-  DLPFC (CEN node) for anodal upregulation, with right DLPFC cathodal placement
-  to reduce relative right hemispheric hyperactivation. Secondary limbic network
-  targeting addresses treatment-resistant and melancholic subtypes.
-
-# ── Phenotypes ────────────────────────────────────────────────────────────────
-
+fnon_rationale: In MDD, the triple network model identifies DMN hyperactivation and CEN hypoactivation as the core pathological
+  network pattern. FNON framework targets left DLPFC (CEN node) for anodal upregulation to restore CEN-DMN balance, while
+  right DLPFC cathodal placement reduces relative right hemispheric hyperactivation. Secondary limbic network targeting addresses
+  treatment-resistant and melancholic subtypes. All network interventions aim to restore the physiological CEN-SN-DMN anticorrelated
+  balance.
 phenotypes:
-  - slug: mel
-    label: "MEL — Melancholic Depression"
-    description: "Severe anhedonia, psychomotor changes, diurnal variation, early awakening, and marked weight loss."
-    key_features:
-      - "Anhedonia"
-      - "Psychomotor retardation or agitation"
-      - "Diurnal variation (worse in morning)"
-      - "Early awakening"
-    primary_networks: [limbic, cen]
-    secondary_networks: [dmn, sn]
-    preferred_modalities: [tdcs, ces, tavns]
-    tdcs_target: "L-DLPFC anodal (F3) + R-DLPFC cathodal (F4)"
-    tps_target: "Left DLPFC targeting (off-label)"
-
-  - slug: aty
-    label: "ATY — Atypical Depression"
-    description: "Mood reactivity, hypersomnia, leaden paralysis, hyperphagia, and rejection sensitivity."
-    key_features:
-      - "Mood reactivity"
-      - "Hypersomnia"
-      - "Hyperphagia"
-      - "Rejection sensitivity"
-    primary_networks: [limbic, sn]
-    secondary_networks: [dmn, attention]
-    preferred_modalities: [tdcs, ces, tavns]
-    tdcs_target: "L-DLPFC anodal + R-supraorbital cathodal"
-    tps_target: "L-DLPFC / insula targeting"
-
-  - slug: anx
-    label: "ANX — Anxious Depression"
-    description: "Prominent anxiety, tension, worry, and psychomotor agitation superimposed on depressive syndrome."
-    key_features:
-      - "Prominent anxiety"
-      - "Psychomotor agitation"
-      - "Tension and worry"
-      - "Somatic symptoms"
-    primary_networks: [sn, limbic]
-    secondary_networks: [cen, dmn]
-    preferred_modalities: [tdcs, ces, tavns]
-    tdcs_target: "R-DLPFC anodal (F4) — anxiety-calming montage"
-    tps_target: "R-DLPFC + L-DLPFC"
-
-  - slug: trd
-    label: "TRD — Treatment-Resistant Depression"
-    description: "Failed >=2 adequate antidepressant trials. Requires intensive multi-modal approach."
-    key_features:
-      - "Medication resistance"
-      - "Chronic course"
-      - "Functional impairment"
-      - "Often comorbid anxiety"
-    primary_networks: [cen, dmn, limbic]
-    secondary_networks: [sn]
-    preferred_modalities: [tdcs, tps, ces, tavns]
-    tdcs_target: "L-DLPFC extended 30 min + bilateral prefrontal"
-    tps_target: "DLPFC + OFC bilateral (5,000 pulses)"
-
-# ── Assessments ───────────────────────────────────────────────────────────────
-
+- slug: mel
+  label: MEL — Melancholic Depression
+  description: Severe anhedonia, psychomotor changes, diurnal variation, early awakening, and marked weight loss.
+  key_features:
+  - Anhedonia
+  - Psychomotor retardation or agitation
+  - Diurnal variation (worse in morning)
+  - Early awakening
+  primary_networks:
+  - limbic
+  - cen
+  secondary_networks:
+  - dmn
+  - sn
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: L-DLPFC anodal (F3) + R-DLPFC cathodal (F4)
+  tps_target: Left DLPFC targeting (off-label)
+- slug: aty
+  label: ATY — Atypical Depression
+  description: Mood reactivity, hypersomnia, leaden paralysis, hyperphagia, and rejection sensitivity.
+  key_features:
+  - Mood reactivity
+  - Hypersomnia
+  - Hyperphagia
+  - Rejection sensitivity
+  primary_networks:
+  - limbic
+  - sn
+  secondary_networks:
+  - dmn
+  - attention
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: L-DLPFC anodal + R-supraorbital cathodal
+  tps_target: L-DLPFC / insula targeting
+- slug: anx
+  label: ANX — Anxious Depression
+  description: Prominent anxiety, tension, worry, and psychomotor agitation superimposed on depressive syndrome.
+  key_features:
+  - Prominent anxiety
+  - Psychomotor agitation
+  - Tension and worry
+  - Somatic symptoms
+  primary_networks:
+  - sn
+  - limbic
+  secondary_networks:
+  - cen
+  - dmn
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: R-DLPFC anodal (F4) — anxiety-calming montage
+  tps_target: R-DLPFC + L-DLPFC
+- slug: trd
+  label: TRD — Treatment-Resistant Depression
+  description: Failed >=2 adequate antidepressant trials. Requires intensive multi-modal approach.
+  key_features:
+  - Medication resistance
+  - Chronic course
+  - Functional impairment
+  - Often comorbid anxiety
+  primary_networks:
+  - cen
+  - dmn
+  - limbic
+  secondary_networks:
+  - sn
+  preferred_modalities:
+  - tdcs
+  - tps
+  - ces
+  - tavns
+  tdcs_target: L-DLPFC extended 30 min + bilateral prefrontal
+  tps_target: DLPFC + OFC bilateral (5,000 pulses)
 assessments:
-  - scale_key: phq9
-    timing: baseline
-    primary: true
-    notes: "Primary self-report depression severity measure. Score >=10 = moderate depression."
-
-  - scale_key: hdrs
-    timing: baseline
-    primary: true
-    notes: "Hamilton Depression Rating Scale (HDRS-17). Clinician-administered gold standard."
-
-  - scale_key: bdi
-    timing: baseline
-    primary: false
-    notes: "Beck Depression Inventory-II. Self-report for symptom tracking."
-
-  - scale_key: gad7
-    timing: baseline
-    primary: false
-    notes: "Screen for comorbid anxiety — comorbid in 60-70% of MDD."
-
-  - scale_key: cssrs
-    timing: baseline
-    primary: false
-    notes: "Columbia Suicide Severity Rating Scale — MANDATORY at every visit."
-
-# ── Modalities ────────────────────────────────────────────────────────────────
-
+- scale_key: phq9
+  timing: baseline
+  primary: true
+  notes: Primary self-report depression severity measure. Score >=10 = moderate depression.
+- scale_key: hdrs
+  timing: baseline
+  primary: true
+  notes: Hamilton Depression Rating Scale (HDRS-17). Clinician-administered gold standard.
+- scale_key: bdi
+  timing: baseline
+  primary: false
+  notes: Beck Depression Inventory-II. Self-report for symptom tracking.
+- scale_key: gad7
+  timing: baseline
+  primary: false
+  notes: Screen for comorbid anxiety — comorbid in 60-70% of MDD.
+- scale_key: cssrs
+  timing: baseline
+  primary: false
+  notes: Columbia Suicide Severity Rating Scale — MANDATORY at every visit.
 applicable_modalities:
+- tdcs
+- tps
+- tavns
+- ces
+protocols:
+- protocol_id: mdd-tdcs-core
+  label: tDCS Core Depression (Primary Protocol)
+  modality: tdcs
+  target_region: Left Dorsolateral Prefrontal Cortex
+  target_abbreviation: L-DLPFC
+  target_electrodes:
+  - F3
+  - Fp2
+  phenotype_slugs:
+  - mel
+  - aty
+  - trd
+  network_targets:
+  - cen
+  parameters:
+    current_mA: 2.0
+    duration_min: 20-30
+    anode: F3
+    cathode: Fp2 (R-supraorbital)
+  rationale: 'Standard tDCS antidepressant montage: L-DLPFC anodal facilitates hypofrontal left hemisphere.'
+  evidence_level: high
+  off_label: false
+  session_count: 15
+  notes: From protocol_data C1. Supported by SELECT-TDCS and multiple meta-analyses.
+- protocol_id: mdd-tdcs-rumination
+  label: tDCS Rumination Reduction
+  modality: tdcs
+  target_region: L-DLPFC to L-parietal
+  target_abbreviation: DLPFC/PPC
+  target_electrodes:
+  - F3
+  - P3
+  phenotype_slugs:
+  - mel
+  - aty
+  network_targets:
+  - cen
+  - dmn
+  parameters:
+    current_mA: 2.0
+    duration_min: 20
+    anode: F3
+    cathode: P3
+  rationale: Cathodal parietal placement inhibits posterior DMN; reduces ruminative self-referential processing.
+  evidence_level: medium
+  off_label: false
+  session_count: 10
+  notes: From protocol_data C3.
+- protocol_id: mdd-tdcs-anxiety
+  label: tDCS Anxiety & Hyperarousal
+  modality: tdcs
+  target_region: Right DLPFC to Left DLPFC
+  target_abbreviation: R-DLPFC
+  target_electrodes:
+  - F4
+  - F3
+  phenotype_slugs:
+  - anx
+  network_targets:
+  - sn
+  - cen
+  parameters:
+    current_mA: 2.0
+    duration_min: 20
+    anode: F4
+    cathode: F3
+  rationale: Asymmetric frontal montage targets anxiety-predominant presentation; reverses standard depression montage.
+  evidence_level: medium
+  off_label: false
+  session_count: 10
+  notes: From protocol_data C4.
+- protocol_id: mdd-tps-core
+  label: TPS Core Depression
+  modality: tps
+  target_region: Bilateral DLPFC
+  target_abbreviation: DLPFC
+  target_electrodes:
+  - F3
+  - F4
+  phenotype_slugs:
+  - mel
+  - aty
+  - trd
+  network_targets:
+  - cen
+  parameters:
+    pulses: 3000-5000
+    frequency_hz: 5
+    energy_mJ_mm2: 0.2
+  rationale: Bilateral DLPFC modulation targets hypofrontality in MDD; L>R asymmetry is primary treatment target.
+  evidence_level: medium
+  off_label: true
+  session_count: 6
+  notes: From protocol_data T1. Emerging evidence.
+- protocol_id: mdd-tps-trd
+  label: TPS Treatment-Resistant Depression
+  modality: tps
+  target_region: DLPFC + OFC bilateral
+  target_abbreviation: DLPFC/OFC
+  target_electrodes:
+  - F3
+  - F4
+  - FC3
+  - FC4
+  phenotype_slugs:
+  - trd
+  network_targets:
+  - cen
+  - limbic
+  parameters:
+    pulses: 5000
+    frequency_hz: 5
+    energy_mJ_mm2: 0.2
+  rationale: Extended bilateral approach for TRD targets broader prefrontal network including sgACC connectivity.
+  evidence_level: low
+  off_label: true
+  session_count: 6
+  notes: From protocol_data T5. Experimental evidence.
+safety_rules:
+- category: contraindication
+  description: Bipolar disorder — risk of manic switch with L-DLPFC anodal tDCS. Screen carefully with MDQ or structured interview.
+  severity: high
+  modalities:
+  - tdcs
+  source: ELECT-TDCS safety data; Brunoni et al.
+- category: stopping_rule
+  description: Active suicidal ideation — HOLD all modalities. Immediate safety assessment and Doctor clearance required.
+  severity: absolute
+  modalities:
   - tdcs
   - tps
   - tavns
   - ces
-
-# ── Protocols ─────────────────────────────────────────────────────────────────
-
-protocols:
-  - protocol_id: mdd-tdcs-core
-    label: "tDCS Core Depression (Primary Protocol)"
-    modality: tdcs
-    target_region: "Left Dorsolateral Prefrontal Cortex"
-    target_abbreviation: L-DLPFC
-    target_electrodes: [F3, Fp2]
-    phenotype_slugs: [mel, aty, trd]
-    network_targets: [cen]
-    parameters:
-      current_mA: 2.0
-      duration_min: 20-30
-      anode: F3
-      cathode: "Fp2 (R-supraorbital)"
-    rationale: "Standard tDCS antidepressant montage: L-DLPFC anodal facilitates hypofrontal left hemisphere."
-    evidence_level: high
-    off_label: false
-    session_count: 15
-    notes: "From protocol_data C1. Supported by SELECT-TDCS and multiple meta-analyses."
-
-  - protocol_id: mdd-tdcs-rumination
-    label: "tDCS Rumination Reduction"
-    modality: tdcs
-    target_region: "L-DLPFC to L-parietal"
-    target_abbreviation: "DLPFC/PPC"
-    target_electrodes: [F3, P3]
-    phenotype_slugs: [mel, aty]
-    network_targets: [cen, dmn]
-    parameters:
-      current_mA: 2.0
-      duration_min: 20
-      anode: F3
-      cathode: P3
-    rationale: "Cathodal parietal placement inhibits posterior DMN; reduces ruminative self-referential processing."
-    evidence_level: medium
-    off_label: false
-    session_count: 10
-    notes: "From protocol_data C3."
-
-  - protocol_id: mdd-tdcs-anxiety
-    label: "tDCS Anxiety & Hyperarousal"
-    modality: tdcs
-    target_region: "Right DLPFC to Left DLPFC"
-    target_abbreviation: "R-DLPFC"
-    target_electrodes: [F4, F3]
-    phenotype_slugs: [anx]
-    network_targets: [sn, cen]
-    parameters:
-      current_mA: 2.0
-      duration_min: 20
-      anode: F4
-      cathode: F3
-    rationale: "Asymmetric frontal montage targets anxiety-predominant presentation; reverses standard depression montage."
-    evidence_level: medium
-    off_label: false
-    session_count: 10
-    notes: "From protocol_data C4."
-
-  - protocol_id: mdd-tps-core
-    label: "TPS Core Depression"
-    modality: tps
-    target_region: "Bilateral DLPFC"
-    target_abbreviation: "DLPFC"
-    target_electrodes: [F3, F4]
-    phenotype_slugs: [mel, aty, trd]
-    network_targets: [cen]
-    parameters:
-      pulses: 3000-5000
-      frequency_hz: 5
-      energy_mJ_mm2: 0.2
-    rationale: "Bilateral DLPFC modulation targets hypofrontality in MDD; L>R asymmetry is primary treatment target."
-    evidence_level: medium
-    off_label: true
-    session_count: 6
-    notes: "From protocol_data T1. Emerging evidence."
-
-  - protocol_id: mdd-tps-trd
-    label: "TPS Treatment-Resistant Depression"
-    modality: tps
-    target_region: "DLPFC + OFC bilateral"
-    target_abbreviation: "DLPFC/OFC"
-    target_electrodes: [F3, F4, FC3, FC4]
-    phenotype_slugs: [trd]
-    network_targets: [cen, limbic]
-    parameters:
-      pulses: 5000
-      frequency_hz: 5
-      energy_mJ_mm2: 0.2
-    rationale: "Extended bilateral approach for TRD targets broader prefrontal network including sgACC connectivity."
-    evidence_level: low
-    off_label: true
-    session_count: 6
-    notes: "From protocol_data T5. Experimental evidence."
-
-# ── Safety ────────────────────────────────────────────────────────────────────
-
-safety_rules:
-  - category: contraindication
-    description: "Bipolar disorder — risk of manic switch with L-DLPFC anodal tDCS. Screen carefully with MDQ or structured interview."
-    severity: high
-    modalities: [tdcs]
-    source: "ELECT-TDCS safety data; Brunoni et al."
-
-  - category: stopping_rule
-    description: "Active suicidal ideation — HOLD all modalities. Immediate safety assessment and Doctor clearance required."
-    severity: absolute
-    modalities: [tdcs, tps, tavns, ces]
-    source: "SOZO clinical safety protocol"
-
-  - category: monitoring
-    description: "Administer C-SSRS (Columbia Suicide Severity Rating Scale) at every session for the first 4 weeks."
-    severity: high
-    modalities: [tdcs, tps, tavns, ces]
-    source: "Clinical practice guidelines"
-
-  - category: precaution
-    description: "Document current antidepressant regimen and ensure medication stability (>=4 weeks) before initiating stimulation."
-    severity: moderate
-    modalities: [tdcs, tps, tavns, ces]
-    source: "SOZO clinical protocol"
-
-  - category: precaution
-    description: "Monitor for hypomania symptoms during and between sessions, especially in patients with family history of bipolar disorder."
-    severity: moderate
-    modalities: [tdcs, tps]
-    source: "Clinical observation; Brunoni safety review"
-
+  source: SOZO clinical safety protocol
+- category: monitoring
+  description: Administer C-SSRS (Columbia Suicide Severity Rating Scale) at every session for the first 4 weeks.
+  severity: high
+  modalities:
+  - tdcs
+  - tps
+  - tavns
+  - ces
+  source: Clinical practice guidelines
+- category: precaution
+  description: Document current antidepressant regimen and ensure medication stability (>=4 weeks) before initiating stimulation.
+  severity: moderate
+  modalities:
+  - tdcs
+  - tps
+  - tavns
+  - ces
+  source: SOZO clinical protocol
+- category: precaution
+  description: Monitor for hypomania symptoms during and between sessions, especially in patients with family history of bipolar
+    disorder.
+  severity: moderate
+  modalities:
+  - tdcs
+  - tps
+  source: Clinical observation; Brunoni safety review
 contraindications:
-  - "Bipolar disorder (manic risk with prefrontal anodal stimulation)"
-  - "Active psychosis"
-  - "Active seizure disorder or epilepsy"
-  - "Metallic cranial implants in stimulation path"
-  - "Pregnancy"
-
+- Bipolar disorder (manic risk with prefrontal anodal stimulation)
+- Active psychosis
+- Active seizure disorder or epilepsy
+- Metallic cranial implants in stimulation path
+- Pregnancy
 inclusion_criteria:
-  - "Confirmed diagnosis of MDD (DSM-5 criteria)"
-  - "PHQ-9 score >=10 (moderate severity or above)"
-  - "Age 18-75 years"
-  - "Stable medication regimen for >=4 weeks"
-  - "Able to provide informed consent"
-
+- Confirmed diagnosis of MDD (DSM-5 criteria)
+- PHQ-9 score >=10 (moderate severity or above)
+- Age 18-75 years
+- Stable medication regimen for >=4 weeks
+- Able to provide informed consent
 exclusion_criteria:
-  - "Bipolar I or II disorder"
-  - "Active psychotic features"
-  - "Active suicidal ideation with plan or intent"
-  - "Substance use disorder (active, severe)"
-  - "Unstable medical conditions"
-
-# ── Responder ─────────────────────────────────────────────────────────────────
-
+- Bipolar I or II disorder
+- Active psychotic features
+- Active suicidal ideation with plan or intent
+- Substance use disorder (active, severe)
+- Unstable medical conditions
 responder_criteria:
-  - ">=50% reduction on PHQ-9 from baseline (response)"
-  - "PHQ-9 score <5 (remission)"
-  - ">=50% reduction on HDRS-17 from baseline"
-  - "Patient-reported PGIC >= 'much improved'"
-
-non_responder_pathway: >-
-  If <50% improvement on PHQ-9 after 15 sessions: review phenotype assignment,
-  consider montage switch (e.g. bilateral vs unilateral), add taVNS or CES
-  adjunctive modality, escalate to TRD protocol, or refer for rTMS/ECT evaluation.
-
-# ── Evidence ──────────────────────────────────────────────────────────────────
-
-evidence_summary: >-
-  tDCS targeting L-DLPFC for MDD is supported by Level A evidence from multiple
-  large RCTs (SELECT-TDCS, ELECT-TDCS) and meta-analyses. Effect sizes are
-  moderate (comparable to pharmacotherapy in some trials). TPS for depression
-  is emerging. taVNS has growing pilot evidence.
-
+- '>=50% reduction on PHQ-9 from baseline (response)'
+- PHQ-9 score <5 (remission)
+- '>=50% reduction on HDRS-17 from baseline'
+- Patient-reported PGIC >= 'much improved'
+non_responder_pathway: 'If <50% improvement on PHQ-9 after 15 sessions: review phenotype assignment, consider montage switch
+  (e.g. bilateral vs unilateral), add taVNS or CES adjunctive modality, escalate to TRD protocol, or refer for rTMS/ECT evaluation.'
+evidence_summary: 'MDD has the second-strongest tDCS evidence base after stroke rehabilitation. SELECT-TDCS (Brunoni et al.
+  2013, JAMA Psychiatry, N=120): tDCS + sertraline > either alone; tDCS monotherapy significantly superior to sham. ELECT-TDCS
+  (Blumberger et al. 2018, JAMA Psychiatry, N=245): non-inferior to escitalopram. Meta-analyses (Brunoni et al. 2016, N=289):
+  response rate 34% tDCS vs 19% sham; remission 23% vs 12%. taVNS: multiple positive RCTs (Rong et al. 2016, JAMA Psychiatry).
+  CES: FDA-cleared for depression; systematic review evidence. TPS in MDD: no published RCT data — OFF-LABEL, rationale extrapolated.'
 evidence_quality: high
-
 evidence_gaps:
-  - "Optimal duration and frequency of maintenance tDCS"
-  - "Predictive biomarkers for tDCS response in MDD"
-  - "TPS-specific RCTs for MDD"
-  - "Head-to-head comparison of tDCS vs rTMS"
-
+- Optimal duration and frequency of maintenance tDCS
+- Predictive biomarkers for tDCS response in MDD
+- TPS-specific RCTs for MDD
+- Head-to-head comparison of tDCS vs rTMS
 references:
-  - pmid: "23945780"
-    title: "A randomized, double-blind clinical trial on non-invasive brain stimulation for depression (SELECT-TDCS)"
-    authors: "Brunoni AR et al."
-    year: 2013
-    journal: "JAMA Psychiatry"
-    evidence_level: high
-    notes: ""
-
-  - pmid: "29516106"
-    title: "Effectiveness of theta burst versus high-frequency repetitive transcranial magnetic stimulation in patients with depression (THREE-D)"
-    authors: "Blumberger DM et al."
-    year: 2018
-    journal: "JAMA Psychiatry"
-    evidence_level: high
-    notes: ""
-
-  - pmid: "26677243"
-    title: "Transcranial direct current stimulation for acute major depressive episodes: meta-analysis of individual patient data"
-    authors: "Brunoni AR et al."
-    year: 2016
-    journal: "British Journal of Psychiatry"
-    evidence_level: highest
-    notes: ""
-
-  - pmid: "27372845"
-    title: "Safety of transcranial direct current stimulation: evidence based update 2016"
-    authors: "Bikson M et al."
-    year: 2016
-    journal: "Brain Stimulation"
-    evidence_level: high
-    notes: "Consensus safety statement"
-
-  - pmid: "26868434"
-    title: "Transcutaneous vagus nerve stimulation for the treatment of depression"
-    authors: "Rong PJ et al."
-    year: 2016
-    journal: "BMC Complementary and Alternative Medicine"
-    evidence_level: medium
-    notes: "taVNS for MDD"
-
-# ── Generation Hints ──────────────────────────────────────────────────────────
-
+- pmid: '23945780'
+  title: A randomized, double-blind clinical trial on non-invasive brain stimulation for depression (SELECT-TDCS)
+  authors: Brunoni AR et al.
+  year: 2013
+  journal: JAMA Psychiatry
+  evidence_level: high
+  notes: ''
+- pmid: '29516106'
+  title: Effectiveness of theta burst versus high-frequency repetitive transcranial magnetic stimulation in patients with
+    depression (THREE-D)
+  authors: Blumberger DM et al.
+  year: 2018
+  journal: JAMA Psychiatry
+  evidence_level: high
+  notes: ''
+- pmid: '26677243'
+  title: 'Transcranial direct current stimulation for acute major depressive episodes: meta-analysis of individual patient
+    data'
+  authors: Brunoni AR et al.
+  year: 2016
+  journal: British Journal of Psychiatry
+  evidence_level: highest
+  notes: ''
+- pmid: '27372845'
+  title: 'Safety of transcranial direct current stimulation: evidence based update 2016'
+  authors: Bikson M et al.
+  year: 2016
+  journal: Brain Stimulation
+  evidence_level: high
+  notes: Consensus safety statement
+- pmid: '26868434'
+  title: Transcutaneous vagus nerve stimulation for the treatment of depression
+  authors: Rong PJ et al.
+  year: 2016
+  journal: BMC Complementary and Alternative Medicine
+  evidence_level: medium
+  notes: taVNS for MDD
 clinical_tips:
-  - "Screen for bipolar disorder before initiating L-DLPFC anodal tDCS — this is an ABSOLUTE requirement."
-  - "Administer C-SSRS at every session for the first 4 weeks; suicidality monitoring is mandatory."
-  - "Combine tDCS with concurrent psychotherapy (CBT, behavioural activation) for synergistic effects."
-
+- C-SSRS must be administered at every session — non-negotiable safety requirement
+- 'Bipolar exclusion is absolute: document the bipolar screening result in the patient record before first session'
+- For anxious MDD, add CES (Alpha-Stim) from Day 1 — it directly targets the anxiety component which may otherwise interfere
+  with tDCS response
+- For TRD, consider twice-daily tDCS (morning + afternoon with 4h gap) for the first week — emerging evidence supports accelerated
+  protocols
+- 'Medication stability: SSRI/SNRI combined with tDCS may have synergistic effects — avoid changing medications during treatment
+  block'
 governance_rules:
-  - "All protocols require Doctor-level authorisation before initiation."
-  - "Informed consent must be obtained and documented prior to first session."
-  - "Outcome measures must be recorded at baseline, mid-treatment, and endpoint."
-  - "Adverse events must be documented and reported within 24 hours."
-  - "Protocol modifications require Doctor review and re-authorisation."
-
+- No Fellow or Clinical Assistant may independently modify treatment plans without Doctor authorization
+- All TPS applications require explicit off-label informed consent and Doctor authorization
+- Adverse events must be documented within 24 hours and escalated per clinic protocol
+- Treatment records must be updated at every session
+- Informed consent must be obtained and documented before initiating any modality
+- Bipolar disorder must be screened and exclusion documented in patient record before first session
+- C-SSRS suicidality assessment is mandatory at every session — failure to administer is a protocol violation
+- Any active suicidal ideation with intent or plan requires same-day Doctor review and crisis protocol activation
+- TPS for MDD is explicitly OFF-LABEL — off-label consent documentation required
 patient_journey_notes:
-  stage_1: "Pre-screen for MDD diagnosis. Screen for bipolar disorder — ABSOLUTE EXCLUSION. Administer PHQ-2 for preliminary severity. Check for active suicidality."
-  stage_3: "Administer C-SSRS (suicidality — mandatory). Complete structured clinical interview. Administer PHQ-9, HDRS-17, GAD-7."
+  stage_1: Pre-screen for MDD diagnosis. Screen for bipolar disorder — ABSOLUTE EXCLUSION. Administer PHQ-2 for preliminary
+    severity. Check for active suicidality.
+  stage_3: Administer C-SSRS (suicidality — mandatory). Complete structured clinical interview. Administer PHQ-9, HDRS-17,
+    GAD-7.

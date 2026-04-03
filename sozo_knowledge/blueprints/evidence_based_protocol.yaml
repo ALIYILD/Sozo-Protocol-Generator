@@ -63,6 +63,9 @@ sections:
     citation_density: medium
     evidence_criticality: recommended
     min_pmid_count: 2
+    preamble: >-
+      This section provides a clinical overview including epidemiology, diagnostic criteria,
+      disease burden, and relevance to non-invasive neuromodulation treatment at SOZO Brain Center.
 
   - slug: pathophysiology
     title: "Pathophysiology"
