@@ -1,0 +1,543 @@
+# Chronic Pain / Fibromyalgia — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["chronic_pain"]
+# Auto-extracted during platform migration.
+
+display_name: Chronic Pain / Fibromyalgia
+icd10: G89.29 / M79.3
+short_name: Chronic Pain
+tps:
+- code: T1
+  symptom: Central Sensitisation
+  evidence: Emerging
+  targets:
+  - C3
+  - C4
+  - Cz
+  params_text: 'TPS: C3, C4, Cz · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of C3, C4, Cz for central sensitisation in Chronic Pain / Fibromyalgia.
+- code: T2
+  symptom: Fibromyalgia Widespread Pain
+  evidence: Emerging
+  targets:
+  - C3
+  - C4
+  - F3
+  params_text: 'TPS: C3, C4, F3 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of C3, C4, F3 for fibromyalgia widespread pain in Chronic Pain / Fibromyalgia.
+- code: T3
+  symptom: Neuropathic Pain
+  evidence: Preliminary
+  targets:
+  - C3
+  - C4
+  params_text: 'TPS: C3, C4 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of C3, C4 for neuropathic pain in Chronic Pain / Fibromyalgia.
+- code: T4
+  symptom: Pain Catastrophising / Psychological
+  evidence: Emerging Pilot
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for pain catastrophising / psychological in Chronic Pain / Fibromyalgia.
+- code: T5
+  symptom: Fatigue & Sleep in Pain
+  evidence: Experimental
+  targets:
+  - F3
+  - Fz
+  params_text: 'TPS: F3, Fz · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, Fz for fatigue & sleep in pain in Chronic Pain / Fibromyalgia.
+tdcs:
+- code: C1
+  symptom: Central Pain (Primary)
+  anodes: &id001
+  - C3
+  - C4
+  cathodes:
+  - Fp1
+  - Fp2
+  params_text: 2 mA · 20 min | C3, C4 anode → Fp1, Fp2 cathode
+  rationale: Anodal C3, C4 tDCS for central pain (primary) in Chronic Pain / Fibromyalgia.
+- code: C2
+  symptom: Fibromyalgia
+  anodes: &id002
+  - C3
+  - C4
+  - Cz
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | C3, C4, Cz anode → Fp1 cathode
+  rationale: Anodal C3, C4, Cz tDCS for fibromyalgia in Chronic Pain / Fibromyalgia.
+- code: C3
+  symptom: Neuropathic Pain
+  anodes: &id003
+  - C3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | C3 anode → Fp2 cathode
+  rationale: Anodal C3 tDCS for neuropathic pain in Chronic Pain / Fibromyalgia.
+- code: C4
+  symptom: Low Back Pain
+  anodes: &id004
+  - C4
+  - C3
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | C4, C3 anode → Fp1 cathode
+  rationale: Anodal C4, C3 tDCS for low back pain in Chronic Pain / Fibromyalgia.
+- code: C5
+  symptom: Pain Catastrophising
+  anodes: &id005
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for pain catastrophising in Chronic Pain / Fibromyalgia.
+- code: C6
+  symptom: Fatigue in Pain
+  anodes: &id006
+  - Fz
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Fz anode → Pz cathode
+  rationale: Anodal Fz tDCS for fatigue in pain in Chronic Pain / Fibromyalgia.
+- code: C7
+  symptom: Depression-Pain Comorbidity
+  anodes: &id007
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for depression-pain comorbidity in Chronic Pain / Fibromyalgia.
+- code: C8
+  symptom: Maintenance / Home Pain
+  anodes: &id008
+  - C3
+  - C4
+  cathodes:
+  - Fp1
+  - Fp2
+  params_text: 2 mA · 20 min | C3, C4 anode → Fp1, Fp2 cathode
+  rationale: Anodal C3, C4 tDCS for maintenance / home pain in Chronic Pain / Fibromyalgia.
+plato:
+- code: C1-PS
+  symptom: Central Pain (Primary)
+  anodes: *id001
+  cathodes:
+  - Fp1
+  params_text: Variant · C3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at C3
+- code: C2-PS
+  symptom: Fibromyalgia
+  anodes: *id002
+  cathodes:
+  - Fp1
+  params_text: Variant · C3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at C3
+- code: C3-PS
+  symptom: Neuropathic Pain
+  anodes: *id003
+  cathodes:
+  - Fp2
+  params_text: Variant · C3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at C3
+- code: C4-PS
+  symptom: Low Back Pain
+  anodes: *id004
+  cathodes:
+  - Fp1
+  params_text: Variant · C4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at C4
+- code: C5-PS
+  symptom: Pain Catastrophising
+  anodes: *id005
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C6-PS
+  symptom: Fatigue in Pain
+  anodes: *id006
+  cathodes:
+  - Pz
+  params_text: Variant · Fz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Fz
+- code: C7-PS
+  symptom: Depression-Pain Comorbidity
+  anodes: *id007
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C8-PS
+  symptom: Maintenance / Home Pain
+  anodes: *id008
+  cathodes:
+  - Fp1
+  params_text: Variant · C3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at C3
+contraindications_extra: []
+key_outcome_measures: VAS, NRS, BPI, FIQR (fibromyalgia), MFI-20 (fatigue), PHQ-9
+phenotypes:
+- code: F1
+  name: Central Sensitisation Syndrome
+  sozo_seq:
+  - CES 30 min · Stabilise central sensitisation syndrome presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Central Sensitisation Syndrome
+    - tDCS 20 min before TPS
+    - Central Sensitisation Syndrome phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Central Sensitisation Syndrome with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Central Sensitisation Syndrome with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Central Sensitisation Syndrome
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Central Sensitisation Syndrome with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Central Sensitisation Syndrome with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Central Sensitisation Syndrome phenotype of Chronic Pain / Fibromyalgia.'
+- code: F2
+  name: Fibromyalgia
+  sozo_seq:
+  - CES 30 min · Stabilise fibromyalgia presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Fibromyalgia
+    - tDCS 20 min before TPS
+    - Fibromyalgia phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Fibromyalgia with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Fibromyalgia with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Fibromyalgia
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Fibromyalgia with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Fibromyalgia with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Fibromyalgia phenotype of Chronic Pain / Fibromyalgia.'
+- code: F3
+  name: Neuropathic Pain
+  sozo_seq:
+  - CES 30 min · Stabilise neuropathic pain presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Neuropathic Pain
+    - tDCS 20 min before TPS
+    - Neuropathic Pain phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Neuropathic Pain with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Neuropathic Pain with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Neuropathic Pain
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Neuropathic Pain with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Neuropathic Pain with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Neuropathic Pain phenotype of Chronic Pain / Fibromyalgia.'
+- code: F4
+  name: Musculoskeletal Chronic Pain
+  sozo_seq:
+  - CES 30 min · Stabilise musculoskeletal chronic pain presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Musculoskeletal Chronic Pain
+    - tDCS 20 min before TPS
+    - Musculoskeletal Chronic Pain phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Musculoskeletal Chronic Pain with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Musculoskeletal Chronic Pain with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Musculoskeletal Chronic Pain
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Musculoskeletal Chronic Pain with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Musculoskeletal Chronic Pain with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Musculoskeletal Chronic Pain phenotype of Chronic Pain / Fibromyalgia.'
+- code: F5
+  name: Low Back Pain
+  sozo_seq:
+  - CES 30 min · Stabilise low back pain presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Low Back Pain
+    - tDCS 20 min before TPS
+    - Low Back Pain phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Low Back Pain with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Low Back Pain with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Low Back Pain
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Low Back Pain with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Low Back Pain with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Low Back Pain phenotype of Chronic Pain / Fibromyalgia.'
+- code: F6
+  name: CRPS
+  sozo_seq:
+  - CES 30 min · Stabilise crps presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for CRPS
+    - tDCS 20 min before TPS
+    - CRPS phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - CRPS with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - CRPS with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - CRPS
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - CRPS with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - CRPS with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for CRPS phenotype of Chronic Pain / Fibromyalgia.'
+- code: F7
+  name: Headache / Migraine
+  sozo_seq:
+  - CES 30 min · Stabilise headache / migraine presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Headache / Migraine
+    - tDCS 20 min before TPS
+    - Headache / Migraine phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Headache / Migraine with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Headache / Migraine with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Headache / Migraine
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Headache / Migraine with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Headache / Migraine with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Headache / Migraine phenotype of Chronic Pain / Fibromyalgia.'
+- code: F8
+  name: Pain-Depression Comorbidity
+  sozo_seq:
+  - CES 30 min · Stabilise pain-depression comorbidity presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Pain-Depression Comorbidity
+    - tDCS 20 min before TPS
+    - Pain-Depression Comorbidity phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Pain-Depression Comorbidity with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Pain-Depression Comorbidity with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Pain-Depression Comorbidity
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Pain-Depression Comorbidity with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Pain-Depression Comorbidity with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Pain-Depression Comorbidity phenotype of Chronic Pain / Fibromyalgia.'
+- code: F9
+  name: Pain-Sleep Comorbidity
+  sozo_seq:
+  - CES 30 min · Stabilise pain-sleep comorbidity presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Pain-Sleep Comorbidity
+    - tDCS 20 min before TPS
+    - Pain-Sleep Comorbidity phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Pain-Sleep Comorbidity with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Pain-Sleep Comorbidity with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Pain-Sleep Comorbidity
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Pain-Sleep Comorbidity with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Pain-Sleep Comorbidity with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Pain-Sleep Comorbidity phenotype of Chronic Pain / Fibromyalgia.'

@@ -1,0 +1,543 @@
+# Obsessive-Compulsive Disorder — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["ocd"]
+# Auto-extracted during platform migration.
+
+display_name: Obsessive-Compulsive Disorder
+icd10: F42
+short_name: OCD
+tps:
+- code: T1
+  symptom: Obsessions & Compulsions
+  evidence: Emerging
+  targets:
+  - FC3
+  - FC4
+  - F3
+  params_text: 'TPS: FC3, FC4, F3 · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of FC3, FC4, F3 for obsessions & compulsions in Obsessive-Compulsive Disorder.
+- code: T2
+  symptom: Contamination / Washing Compulsions
+  evidence: Emerging
+  targets:
+  - F3
+  - FC3
+  params_text: 'TPS: F3, FC3 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, FC3 for contamination / washing compulsions in Obsessive-Compulsive Disorder.
+- code: T3
+  symptom: Checking Compulsions
+  evidence: Preliminary
+  targets:
+  - F3
+  - F4
+  - FC3
+  params_text: 'TPS: F3, F4, FC3 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4, FC3 for checking compulsions in Obsessive-Compulsive Disorder.
+- code: T4
+  symptom: Hoarding Variant
+  evidence: Emerging Pilot
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for hoarding variant in Obsessive-Compulsive Disorder.
+- code: T5
+  symptom: Pure-O / Intrusive Thoughts
+  evidence: Experimental
+  targets:
+  - F3
+  - F4
+  - Fz
+  params_text: 'TPS: F3, F4, Fz · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4, Fz for pure-o / intrusive thoughts in Obsessive-Compulsive Disorder.
+tdcs:
+- code: C1
+  symptom: Primary OCD Protocol
+  anodes: &id001
+  - FC3
+  - FC4
+  cathodes:
+  - Fpz
+  params_text: 2 mA · 20 min | FC3, FC4 anode → Fpz cathode
+  rationale: Anodal FC3, FC4 tDCS for primary ocd protocol in Obsessive-Compulsive Disorder.
+- code: C2
+  symptom: Contamination / Washing
+  anodes: &id002
+  - F3
+  - FC3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3, FC3 anode → Fp2 cathode
+  rationale: Anodal F3, FC3 tDCS for contamination / washing in Obsessive-Compulsive Disorder.
+- code: C3
+  symptom: Checking
+  anodes: &id003
+  - F4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | F4 anode → Fp1 cathode
+  rationale: Anodal F4 tDCS for checking in Obsessive-Compulsive Disorder.
+- code: C4
+  symptom: Symmetry / Ordering
+  anodes: &id004
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for symmetry / ordering in Obsessive-Compulsive Disorder.
+- code: C5
+  symptom: Hoarding
+  anodes: &id005
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for hoarding in Obsessive-Compulsive Disorder.
+- code: C6
+  symptom: Pure-O Intrusive Thoughts
+  anodes: &id006
+  - F3
+  - Fz
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | F3, Fz anode → Pz cathode
+  rationale: Anodal F3, Fz tDCS for pure-o intrusive thoughts in Obsessive-Compulsive Disorder.
+- code: C7
+  symptom: OCD-Depression Comorbidity
+  anodes: &id007
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for ocd-depression comorbidity in Obsessive-Compulsive Disorder.
+- code: C8
+  symptom: Maintenance Post-ERP
+  anodes: &id008
+  - FC3
+  cathodes:
+  - Fpz
+  params_text: 2 mA · 20 min | FC3 anode → Fpz cathode
+  rationale: Anodal FC3 tDCS for maintenance post-erp in Obsessive-Compulsive Disorder.
+plato:
+- code: C1-PS
+  symptom: Primary OCD Protocol
+  anodes: *id001
+  cathodes:
+  - Fpz
+  params_text: Variant · FC3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at FC3
+- code: C2-PS
+  symptom: Contamination / Washing
+  anodes: *id002
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C3-PS
+  symptom: Checking
+  anodes: *id003
+  cathodes:
+  - Fp1
+  params_text: Variant · F4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F4
+- code: C4-PS
+  symptom: Symmetry / Ordering
+  anodes: *id004
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C5-PS
+  symptom: Hoarding
+  anodes: *id005
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C6-PS
+  symptom: Pure-O Intrusive Thoughts
+  anodes: *id006
+  cathodes:
+  - Pz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C7-PS
+  symptom: OCD-Depression Comorbidity
+  anodes: *id007
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C8-PS
+  symptom: Maintenance Post-ERP
+  anodes: *id008
+  cathodes:
+  - Fpz
+  params_text: Variant · FC3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at FC3
+contraindications_extra:
+- - Tic disorder comorbidity (Tourette's)
+  - TPS (pre-SMA)
+  - RELATIVE — lower intensity
+key_outcome_measures: Y-BOCS / CY-BOCS, OCI-R, PHQ-9, EQ-5D
+phenotypes:
+- code: F1
+  name: Contamination / Washing
+  sozo_seq:
+  - CES 30 min · Stabilise contamination / washing presentation
+  - tDCS FC3, FC4 · 2 mA × 20 min
+  - TPS FC3, FC4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Contamination / Washing
+    - tDCS 20 min before TPS
+    - Contamination / Washing phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Contamination / Washing with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Contamination / Washing with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Contamination / Washing
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Contamination / Washing with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Contamination / Washing with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Contamination / Washing phenotype of Obsessive-Compulsive Disorder.'
+- code: F2
+  name: Checking / Doubt
+  sozo_seq:
+  - CES 30 min · Stabilise checking / doubt presentation
+  - tDCS FC3, FC4 · 2 mA × 20 min
+  - TPS FC3, FC4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Checking / Doubt
+    - tDCS 20 min before TPS
+    - Checking / Doubt phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Checking / Doubt with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Checking / Doubt with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Checking / Doubt
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Checking / Doubt with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Checking / Doubt with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Checking / Doubt phenotype of Obsessive-Compulsive Disorder.'
+- code: F3
+  name: Symmetry / Ordering
+  sozo_seq:
+  - CES 30 min · Stabilise symmetry / ordering presentation
+  - tDCS FC3, FC4 · 2 mA × 20 min
+  - TPS FC3, FC4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Symmetry / Ordering
+    - tDCS 20 min before TPS
+    - Symmetry / Ordering phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Symmetry / Ordering with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Symmetry / Ordering with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Symmetry / Ordering
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Symmetry / Ordering with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Symmetry / Ordering with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Symmetry / Ordering phenotype of Obsessive-Compulsive Disorder.'
+- code: F4
+  name: Hoarding
+  sozo_seq:
+  - CES 30 min · Stabilise hoarding presentation
+  - tDCS FC3, FC4 · 2 mA × 20 min
+  - TPS FC3, FC4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Hoarding
+    - tDCS 20 min before TPS
+    - Hoarding phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Hoarding with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Hoarding with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Hoarding
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Hoarding with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Hoarding with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Hoarding phenotype of Obsessive-Compulsive Disorder.'
+- code: F5
+  name: Pure-O / Intrusive Thoughts
+  sozo_seq:
+  - CES 30 min · Stabilise pure-o / intrusive thoughts presentation
+  - tDCS FC3, FC4 · 2 mA × 20 min
+  - TPS FC3, FC4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Pure-O / Intrusive Thoughts
+    - tDCS 20 min before TPS
+    - Pure-O / Intrusive Thoughts phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Pure-O / Intrusive Thoughts with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Pure-O / Intrusive Thoughts with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Pure-O / Intrusive Thoughts
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Pure-O / Intrusive Thoughts with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Pure-O / Intrusive Thoughts with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Pure-O / Intrusive Thoughts phenotype of Obsessive-Compulsive Disorder.'
+- code: F6
+  name: Sexual / Aggressive Obsessions
+  sozo_seq:
+  - CES 30 min · Stabilise sexual / aggressive obsessions presentation
+  - tDCS FC3, FC4 · 2 mA × 20 min
+  - TPS FC3, FC4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Sexual / Aggressive Obsessions
+    - tDCS 20 min before TPS
+    - Sexual / Aggressive Obsessions phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Sexual / Aggressive Obsessions with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Sexual / Aggressive Obsessions with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Sexual / Aggressive Obsessions
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Sexual / Aggressive Obsessions with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Sexual / Aggressive Obsessions with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Sexual / Aggressive Obsessions phenotype of Obsessive-Compulsive Disorder.'
+- code: F7
+  name: Religious / Scrupulosity
+  sozo_seq:
+  - CES 30 min · Stabilise religious / scrupulosity presentation
+  - tDCS FC3, FC4 · 2 mA × 20 min
+  - TPS FC3, FC4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Religious / Scrupulosity
+    - tDCS 20 min before TPS
+    - Religious / Scrupulosity phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Religious / Scrupulosity with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Religious / Scrupulosity with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Religious / Scrupulosity
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Religious / Scrupulosity with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Religious / Scrupulosity with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Religious / Scrupulosity phenotype of Obsessive-Compulsive Disorder.'
+- code: F8
+  name: OCD + Depression
+  sozo_seq:
+  - CES 30 min · Stabilise ocd + depression presentation
+  - tDCS FC3, FC4 · 2 mA × 20 min
+  - TPS FC3, FC4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for OCD + Depression
+    - tDCS 20 min before TPS
+    - OCD + Depression phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - OCD + Depression with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - OCD + Depression with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - OCD + Depression
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - OCD + Depression with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - OCD + Depression with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for OCD + Depression phenotype of Obsessive-Compulsive Disorder.'
+- code: F9
+  name: OCD + Tic Disorder
+  sozo_seq:
+  - CES 30 min · Stabilise ocd + tic disorder presentation
+  - tDCS FC3, FC4 · 2 mA × 20 min
+  - TPS FC3, FC4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for OCD + Tic Disorder
+    - tDCS 20 min before TPS
+    - OCD + Tic Disorder phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - OCD + Tic Disorder with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - OCD + Tic Disorder with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - OCD + Tic Disorder
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - OCD + Tic Disorder with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - OCD + Tic Disorder with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for OCD + Tic Disorder phenotype of Obsessive-Compulsive Disorder.'

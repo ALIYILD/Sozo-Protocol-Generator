@@ -1,0 +1,541 @@
+# ADHD — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["adhd"]
+# Auto-extracted during platform migration.
+
+display_name: ADHD
+icd10: F90.0
+short_name: ADHD
+tps:
+- code: T1
+  symptom: Inattention & Executive Dysfunction
+  evidence: Emerging
+  targets:
+  - F3
+  - F4
+  - FC3
+  params_text: 'TPS: F3, F4, FC3 · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4, FC3 for inattention & executive dysfunction in ADHD.
+- code: T2
+  symptom: Hyperactivity & Impulsivity
+  evidence: Emerging
+  targets:
+  - F4
+  - FC4
+  - F3
+  params_text: 'TPS: F4, FC4, F3 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F4, FC4, F3 for hyperactivity & impulsivity in ADHD.
+- code: T3
+  symptom: Working Memory Deficit
+  evidence: Preliminary
+  targets:
+  - F3
+  - P3
+  - P4
+  params_text: 'TPS: F3, P3, P4 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, P3, P4 for working memory deficit in ADHD.
+- code: T4
+  symptom: Emotional Dysregulation
+  evidence: Emerging Pilot
+  targets:
+  - F4
+  - F3
+  params_text: 'TPS: F4, F3 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F4, F3 for emotional dysregulation in ADHD.
+- code: T5
+  symptom: Learning & Processing Speed
+  evidence: Experimental
+  targets:
+  - F3
+  - F4
+  - Pz
+  params_text: 'TPS: F3, F4, Pz · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4, Pz for learning & processing speed in ADHD.
+tdcs:
+- code: C1
+  symptom: Inattention (Primary)
+  anodes: &id001
+  - F3
+  - F4
+  cathodes:
+  - Fp1
+  - Fp2
+  params_text: 2 mA · 20 min | F3, F4 anode → Fp1, Fp2 cathode
+  rationale: Anodal F3, F4 tDCS for inattention (primary) in ADHD.
+- code: C2
+  symptom: Impulsivity / Response Inhibition
+  anodes: &id002
+  - F4
+  cathodes:
+  - F3
+  params_text: 2 mA · 20 min | F4 anode → F3 cathode
+  rationale: Anodal F4 tDCS for impulsivity / response inhibition in ADHD.
+- code: C3
+  symptom: Working Memory
+  anodes: &id003
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for working memory in ADHD.
+- code: C4
+  symptom: Emotional Dysregulation
+  anodes: &id004
+  - F4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | F4 anode → Fp1 cathode
+  rationale: Anodal F4 tDCS for emotional dysregulation in ADHD.
+- code: C5
+  symptom: Processing Speed
+  anodes: &id005
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for processing speed in ADHD.
+- code: C6
+  symptom: Reading & Learning
+  anodes: &id006
+  - F3
+  - P3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3, P3 anode → Fp2 cathode
+  rationale: Anodal F3, P3 tDCS for reading & learning in ADHD.
+- code: C7
+  symptom: Sleep & Arousal Regulation
+  anodes: &id007
+  - Fz
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Fz anode → Pz cathode
+  rationale: Anodal Fz tDCS for sleep & arousal regulation in ADHD.
+- code: C8
+  symptom: Maintenance / Home
+  anodes: &id008
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for maintenance / home in ADHD.
+plato:
+- code: C1-PS
+  symptom: Inattention (Primary)
+  anodes: *id001
+  cathodes:
+  - Fp1
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C2-PS
+  symptom: Impulsivity / Response Inhibition
+  anodes: *id002
+  cathodes:
+  - F3
+  params_text: Variant · F4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F4
+- code: C3-PS
+  symptom: Working Memory
+  anodes: *id003
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C4-PS
+  symptom: Emotional Dysregulation
+  anodes: *id004
+  cathodes:
+  - Fp1
+  params_text: Variant · F4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F4
+- code: C5-PS
+  symptom: Processing Speed
+  anodes: *id005
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C6-PS
+  symptom: Reading & Learning
+  anodes: *id006
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C7-PS
+  symptom: Sleep & Arousal Regulation
+  anodes: *id007
+  cathodes:
+  - Pz
+  params_text: Variant · Fz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Fz
+- code: C8-PS
+  symptom: Maintenance / Home
+  anodes: *id008
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+contraindications_extra: []
+key_outcome_measures: ASRS, BRIEF-A (adults), CPT-3, CAARS, PSQI
+phenotypes:
+- code: F1
+  name: Inattentive-Predominant
+  sozo_seq:
+  - CES 30 min · Stabilise inattentive-predominant presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Inattentive-Predominant
+    - tDCS 20 min before TPS
+    - Inattentive-Predominant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Inattentive-Predominant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Inattentive-Predominant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Inattentive-Predominant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Inattentive-Predominant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Inattentive-Predominant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Inattentive-Predominant phenotype of ADHD.'
+- code: F2
+  name: Hyperactive-Impulsive
+  sozo_seq:
+  - CES 30 min · Stabilise hyperactive-impulsive presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Hyperactive-Impulsive
+    - tDCS 20 min before TPS
+    - Hyperactive-Impulsive phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Hyperactive-Impulsive with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Hyperactive-Impulsive with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Hyperactive-Impulsive
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Hyperactive-Impulsive with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Hyperactive-Impulsive with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Hyperactive-Impulsive phenotype of ADHD.'
+- code: F3
+  name: Combined Type
+  sozo_seq:
+  - CES 30 min · Stabilise combined type presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Combined Type
+    - tDCS 20 min before TPS
+    - Combined Type phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Combined Type with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Combined Type with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Combined Type
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Combined Type with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Combined Type with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Combined Type phenotype of ADHD.'
+- code: F4
+  name: Emotional Dysregulation
+  sozo_seq:
+  - CES 30 min · Stabilise emotional dysregulation presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Emotional Dysregulation
+    - tDCS 20 min before TPS
+    - Emotional Dysregulation phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Emotional Dysregulation with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Emotional Dysregulation with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Emotional Dysregulation
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Emotional Dysregulation with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Emotional Dysregulation with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Emotional Dysregulation phenotype of ADHD.'
+- code: F5
+  name: Working Memory Deficit
+  sozo_seq:
+  - CES 30 min · Stabilise working memory deficit presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Working Memory Deficit
+    - tDCS 20 min before TPS
+    - Working Memory Deficit phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Working Memory Deficit with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Working Memory Deficit with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Working Memory Deficit
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Working Memory Deficit with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Working Memory Deficit with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Working Memory Deficit phenotype of ADHD.'
+- code: F6
+  name: Executive Dysfunction
+  sozo_seq:
+  - CES 30 min · Stabilise executive dysfunction presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Executive Dysfunction
+    - tDCS 20 min before TPS
+    - Executive Dysfunction phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Executive Dysfunction with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Executive Dysfunction with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Executive Dysfunction
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Executive Dysfunction with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Executive Dysfunction with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Executive Dysfunction phenotype of ADHD.'
+- code: F7
+  name: Learning Disability Overlay
+  sozo_seq:
+  - CES 30 min · Stabilise learning disability overlay presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Learning Disability Overlay
+    - tDCS 20 min before TPS
+    - Learning Disability Overlay phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Learning Disability Overlay with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Learning Disability Overlay with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Learning Disability Overlay
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Learning Disability Overlay with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Learning Disability Overlay with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Learning Disability Overlay phenotype of ADHD.'
+- code: F8
+  name: Sleep-ADHD
+  sozo_seq:
+  - CES 30 min · Stabilise sleep-adhd presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Sleep-ADHD
+    - tDCS 20 min before TPS
+    - Sleep-ADHD phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Sleep-ADHD with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Sleep-ADHD with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Sleep-ADHD
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Sleep-ADHD with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Sleep-ADHD with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Sleep-ADHD phenotype of ADHD.'
+- code: F9
+  name: Social-Communication Difficulties
+  sozo_seq:
+  - CES 30 min · Stabilise social-communication difficulties presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Social-Communication Difficulties
+    - tDCS 20 min before TPS
+    - Social-Communication Difficulties phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Social-Communication Difficulties with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Social-Communication Difficulties with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Social-Communication Difficulties
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Social-Communication Difficulties with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Social-Communication Difficulties with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Social-Communication Difficulties phenotype of ADHD.'

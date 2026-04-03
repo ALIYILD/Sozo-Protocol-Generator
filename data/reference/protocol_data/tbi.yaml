@@ -1,0 +1,548 @@
+# Traumatic Brain Injury — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["tbi"]
+# Auto-extracted during platform migration.
+
+display_name: Traumatic Brain Injury
+icd10: S06
+short_name: TBI
+tps:
+- code: T1
+  symptom: Post-Concussive Cognitive Symptoms
+  evidence: Emerging
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for post-concussive cognitive symptoms in Traumatic Brain Injury.
+- code: T2
+  symptom: Memory & Attention Deficits
+  evidence: Emerging
+  targets:
+  - F3
+  - F4
+  - P3
+  params_text: 'TPS: F3, F4, P3 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4, P3 for memory & attention deficits in Traumatic Brain Injury.
+- code: T3
+  symptom: Emotional Dysregulation / PTSD Overlap
+  evidence: Preliminary
+  targets:
+  - F4
+  - F3
+  params_text: 'TPS: F4, F3 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F4, F3 for emotional dysregulation / ptsd overlap in Traumatic Brain Injury.
+- code: T4
+  symptom: Chronic Headache & Pain
+  evidence: Emerging Pilot
+  targets:
+  - C3
+  - C4
+  - Cz
+  params_text: 'TPS: C3, C4, Cz · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of C3, C4, Cz for chronic headache & pain in Traumatic Brain Injury.
+- code: T5
+  symptom: Executive Function Recovery
+  evidence: Experimental
+  targets:
+  - F3
+  - FC3
+  params_text: 'TPS: F3, FC3 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, FC3 for executive function recovery in Traumatic Brain Injury.
+tdcs:
+- code: C1
+  symptom: Cognitive Recovery (Primary)
+  anodes: &id001
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for cognitive recovery (primary) in Traumatic Brain Injury.
+- code: C2
+  symptom: Attention & Concentration
+  anodes: &id002
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for attention & concentration in Traumatic Brain Injury.
+- code: C3
+  symptom: Memory Rehabilitation
+  anodes: &id003
+  - F3
+  - P3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3, P3 anode → Fp2 cathode
+  rationale: Anodal F3, P3 tDCS for memory rehabilitation in Traumatic Brain Injury.
+- code: C4
+  symptom: Emotional Dysregulation
+  anodes: &id004
+  - F4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | F4 anode → Fp1 cathode
+  rationale: Anodal F4 tDCS for emotional dysregulation in Traumatic Brain Injury.
+- code: C5
+  symptom: Chronic Pain / Headache
+  anodes: &id005
+  - C3
+  - C4
+  cathodes:
+  - Fp1
+  - Fp2
+  params_text: 2 mA · 20 min | C3, C4 anode → Fp1, Fp2 cathode
+  rationale: Anodal C3, C4 tDCS for chronic pain / headache in Traumatic Brain Injury.
+- code: C6
+  symptom: Executive Function
+  anodes: &id006
+  - F3
+  - FC3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3, FC3 anode → Fp2 cathode
+  rationale: Anodal F3, FC3 tDCS for executive function in Traumatic Brain Injury.
+- code: C7
+  symptom: Sleep Rehabilitation
+  anodes: &id007
+  - Fz
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Fz anode → Pz cathode
+  rationale: Anodal Fz tDCS for sleep rehabilitation in Traumatic Brain Injury.
+- code: C8
+  symptom: Maintenance / Community Reintegration
+  anodes: &id008
+  - F3
+  - F4
+  cathodes:
+  - Fp1
+  - Fp2
+  params_text: 2 mA · 20 min | F3, F4 anode → Fp1, Fp2 cathode
+  rationale: Anodal F3, F4 tDCS for maintenance / community reintegration in Traumatic Brain Injury.
+plato:
+- code: C1-PS
+  symptom: Cognitive Recovery (Primary)
+  anodes: *id001
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C2-PS
+  symptom: Attention & Concentration
+  anodes: *id002
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C3-PS
+  symptom: Memory Rehabilitation
+  anodes: *id003
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C4-PS
+  symptom: Emotional Dysregulation
+  anodes: *id004
+  cathodes:
+  - Fp1
+  params_text: Variant · F4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F4
+- code: C5-PS
+  symptom: Chronic Pain / Headache
+  anodes: *id005
+  cathodes:
+  - Fp1
+  params_text: Variant · C3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at C3
+- code: C6-PS
+  symptom: Executive Function
+  anodes: *id006
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C7-PS
+  symptom: Sleep Rehabilitation
+  anodes: *id007
+  cathodes:
+  - Pz
+  params_text: Variant · Fz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Fz
+- code: C8-PS
+  symptom: Maintenance / Community Reintegration
+  anodes: *id008
+  cathodes:
+  - Fp1
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+contraindications_extra:
+- - Acute TBI < 3 months (severe)
+  - TPS
+  - RELATIVE — Doctor clearance required
+- - Skull fracture / craniotomy site
+  - TPS · tDCS
+  - ABSOLUTE at fracture site
+key_outcome_measures: GOSE, RPQ, MoCA, PCSS (concussion), PCL-5 (PTSD overlay)
+phenotypes:
+- code: F1
+  name: Mild TBI / Concussion
+  sozo_seq:
+  - CES 30 min · Stabilise mild tbi / concussion presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Mild TBI / Concussion
+    - tDCS 20 min before TPS
+    - Mild TBI / Concussion phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Mild TBI / Concussion with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Mild TBI / Concussion with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Mild TBI / Concussion
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Mild TBI / Concussion with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Mild TBI / Concussion with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Mild TBI / Concussion phenotype of Traumatic Brain Injury.'
+- code: F2
+  name: Moderate TBI Recovery
+  sozo_seq:
+  - CES 30 min · Stabilise moderate tbi recovery presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Moderate TBI Recovery
+    - tDCS 20 min before TPS
+    - Moderate TBI Recovery phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Moderate TBI Recovery with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Moderate TBI Recovery with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Moderate TBI Recovery
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Moderate TBI Recovery with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Moderate TBI Recovery with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Moderate TBI Recovery phenotype of Traumatic Brain Injury.'
+- code: F3
+  name: Severe TBI Rehabilitation
+  sozo_seq:
+  - CES 30 min · Stabilise severe tbi rehabilitation presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Severe TBI Rehabilitation
+    - tDCS 20 min before TPS
+    - Severe TBI Rehabilitation phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Severe TBI Rehabilitation with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Severe TBI Rehabilitation with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Severe TBI Rehabilitation
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Severe TBI Rehabilitation with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Severe TBI Rehabilitation with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Severe TBI Rehabilitation phenotype of Traumatic Brain Injury.'
+- code: F4
+  name: Post-Concussive Syndrome
+  sozo_seq:
+  - CES 30 min · Stabilise post-concussive syndrome presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Post-Concussive Syndrome
+    - tDCS 20 min before TPS
+    - Post-Concussive Syndrome phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Post-Concussive Syndrome with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Post-Concussive Syndrome with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Post-Concussive Syndrome
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Post-Concussive Syndrome with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Post-Concussive Syndrome with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Post-Concussive Syndrome phenotype of Traumatic Brain Injury.'
+- code: F5
+  name: Cognitive-Dominant
+  sozo_seq:
+  - CES 30 min · Stabilise cognitive-dominant presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Cognitive-Dominant
+    - tDCS 20 min before TPS
+    - Cognitive-Dominant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Cognitive-Dominant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Cognitive-Dominant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Cognitive-Dominant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Cognitive-Dominant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Cognitive-Dominant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Cognitive-Dominant phenotype of Traumatic Brain Injury.'
+- code: F6
+  name: Emotional-Behavioural
+  sozo_seq:
+  - CES 30 min · Stabilise emotional-behavioural presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Emotional-Behavioural
+    - tDCS 20 min before TPS
+    - Emotional-Behavioural phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Emotional-Behavioural with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Emotional-Behavioural with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Emotional-Behavioural
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Emotional-Behavioural with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Emotional-Behavioural with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Emotional-Behavioural phenotype of Traumatic Brain Injury.'
+- code: F7
+  name: PTSD-TBI Overlap
+  sozo_seq:
+  - CES 30 min · Stabilise ptsd-tbi overlap presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for PTSD-TBI Overlap
+    - tDCS 20 min before TPS
+    - PTSD-TBI Overlap phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - PTSD-TBI Overlap with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - PTSD-TBI Overlap with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - PTSD-TBI Overlap
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - PTSD-TBI Overlap with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - PTSD-TBI Overlap with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for PTSD-TBI Overlap phenotype of Traumatic Brain Injury.'
+- code: F8
+  name: Chronic Pain Overlay
+  sozo_seq:
+  - CES 30 min · Stabilise chronic pain overlay presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Chronic Pain Overlay
+    - tDCS 20 min before TPS
+    - Chronic Pain Overlay phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Chronic Pain Overlay with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Chronic Pain Overlay with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Chronic Pain Overlay
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Chronic Pain Overlay with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Chronic Pain Overlay with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Chronic Pain Overlay phenotype of Traumatic Brain Injury.'
+- code: F9
+  name: Fatigue-Dominant
+  sozo_seq:
+  - CES 30 min · Stabilise fatigue-dominant presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Fatigue-Dominant
+    - tDCS 20 min before TPS
+    - Fatigue-Dominant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Fatigue-Dominant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Fatigue-Dominant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Fatigue-Dominant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Fatigue-Dominant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Fatigue-Dominant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Fatigue-Dominant phenotype of Traumatic Brain Injury.'

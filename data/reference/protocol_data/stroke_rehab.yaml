@@ -1,0 +1,550 @@
+# Post-Stroke Rehabilitation — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["stroke_rehab"]
+# Auto-extracted during platform migration.
+
+display_name: Post-Stroke Rehabilitation
+icd10: I69
+short_name: Stroke Rehab
+tps:
+- code: T1
+  symptom: Motor Recovery (Hemiplegia)
+  evidence: Emerging
+  targets:
+  - C3
+  - C4
+  params_text: 'TPS: C3, C4 · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of C3, C4 for motor recovery (hemiplegia) in Post-Stroke Rehabilitation.
+- code: T2
+  symptom: Spasticity Management
+  evidence: Emerging
+  targets:
+  - C3
+  - C4
+  - Cz
+  params_text: 'TPS: C3, C4, Cz · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of C3, C4, Cz for spasticity management in Post-Stroke Rehabilitation.
+- code: T3
+  symptom: Aphasia & Language Recovery
+  evidence: Preliminary
+  targets:
+  - F3
+  - T5
+  - FC3
+  params_text: 'TPS: F3, T5, FC3 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, T5, FC3 for aphasia & language recovery in Post-Stroke Rehabilitation.
+- code: T4
+  symptom: Cognitive Rehabilitation
+  evidence: Emerging Pilot
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for cognitive rehabilitation in Post-Stroke Rehabilitation.
+- code: T5
+  symptom: Neglect & Hemispatial Attention
+  evidence: Experimental
+  targets:
+  - P4
+  - P3
+  - T6
+  params_text: 'TPS: P4, P3, T6 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of P4, P3, T6 for neglect & hemispatial attention in Post-Stroke Rehabilitation.
+tdcs:
+- code: C1
+  symptom: Upper Limb Motor Recovery
+  anodes: &id001
+  - C3
+  - C4
+  cathodes:
+  - Fp1
+  - Fp2
+  params_text: 2 mA · 20 min | C3, C4 anode → Fp1, Fp2 cathode
+  rationale: Anodal C3, C4 tDCS for upper limb motor recovery in Post-Stroke Rehabilitation.
+- code: C2
+  symptom: Gait & Lower Limb Recovery
+  anodes: &id002
+  - Cz
+  - C3
+  - C4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | Cz, C3, C4 anode → Fp1 cathode
+  rationale: Anodal Cz, C3, C4 tDCS for gait & lower limb recovery in Post-Stroke Rehabilitation.
+- code: C3
+  symptom: Spasticity Reduction
+  anodes: &id003
+  - C4
+  cathodes:
+  - C3
+  params_text: 2 mA · 20 min | C4 anode → C3 cathode
+  rationale: Anodal C4 tDCS for spasticity reduction in Post-Stroke Rehabilitation.
+- code: C4
+  symptom: Aphasia / Language
+  anodes: &id004
+  - F3
+  - T5
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3, T5 anode → Fp2 cathode
+  rationale: Anodal F3, T5 tDCS for aphasia / language in Post-Stroke Rehabilitation.
+- code: C5
+  symptom: Cognitive Rehabilitation
+  anodes: &id005
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for cognitive rehabilitation in Post-Stroke Rehabilitation.
+- code: C6
+  symptom: Neglect (Right Hemisphere Stroke)
+  anodes: &id006
+  - P4
+  - P3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | P4, P3 anode → Fp2 cathode
+  rationale: Anodal P4, P3 tDCS for neglect (right hemisphere stroke) in Post-Stroke Rehabilitation.
+- code: C7
+  symptom: Dysphagia / Swallowing
+  anodes: &id007
+  - FC3
+  - FC4
+  cathodes:
+  - Fpz
+  params_text: 2 mA · 20 min | FC3, FC4 anode → Fpz cathode
+  rationale: Anodal FC3, FC4 tDCS for dysphagia / swallowing in Post-Stroke Rehabilitation.
+- code: C8
+  symptom: Fatigue & Mood Post-Stroke
+  anodes: &id008
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for fatigue & mood post-stroke in Post-Stroke Rehabilitation.
+plato:
+- code: C1-PS
+  symptom: Upper Limb Motor Recovery
+  anodes: *id001
+  cathodes:
+  - Fp1
+  params_text: Variant · C3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at C3
+- code: C2-PS
+  symptom: Gait & Lower Limb Recovery
+  anodes: *id002
+  cathodes:
+  - Fp1
+  params_text: Variant · Cz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Cz
+- code: C3-PS
+  symptom: Spasticity Reduction
+  anodes: *id003
+  cathodes:
+  - C3
+  params_text: Variant · C4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at C4
+- code: C4-PS
+  symptom: Aphasia / Language
+  anodes: *id004
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C5-PS
+  symptom: Cognitive Rehabilitation
+  anodes: *id005
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C6-PS
+  symptom: Neglect (Right Hemisphere Stroke)
+  anodes: *id006
+  cathodes:
+  - Fp2
+  params_text: Variant · P4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at P4
+- code: C7-PS
+  symptom: Dysphagia / Swallowing
+  anodes: *id007
+  cathodes:
+  - Fpz
+  params_text: Variant · FC3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at FC3
+- code: C8-PS
+  symptom: Fatigue & Mood Post-Stroke
+  anodes: *id008
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+contraindications_extra:
+- - Haemorrhagic stroke
+  - TPS
+  - ABSOLUTE contraindication
+- - Active anticoagulation
+  - tDCS
+  - RELATIVE — Doctor decision
+key_outcome_measures: FMA, NIHSS, MBI, mRS, BBS (balance), WAB (aphasia)
+phenotypes:
+- code: F1
+  name: Acute Rehabilitation (< 3 months)
+  sozo_seq:
+  - CES 30 min · Stabilise acute rehabilitation (< 3 months) presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Acute Rehabilitation (< 3 months)
+    - tDCS 20 min before TPS
+    - Acute Rehabilitation (< 3 months) phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Acute Rehabilitation (< 3 months) with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Acute Rehabilitation (< 3 months) with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Acute Rehabilitation (< 3 months)
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Acute Rehabilitation (< 3 months) with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Acute Rehabilitation (< 3 months) with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Acute Rehabilitation (< 3 months) phenotype of Post-Stroke Rehabilitation.'
+- code: F2
+  name: Sub-acute (3–6 months)
+  sozo_seq:
+  - CES 30 min · Stabilise sub-acute (3–6 months) presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Sub-acute (3–6 months)
+    - tDCS 20 min before TPS
+    - Sub-acute (3–6 months) phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Sub-acute (3–6 months) with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Sub-acute (3–6 months) with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Sub-acute (3–6 months)
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Sub-acute (3–6 months) with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Sub-acute (3–6 months) with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Sub-acute (3–6 months) phenotype of Post-Stroke Rehabilitation.'
+- code: F3
+  name: Chronic Motor Deficit
+  sozo_seq:
+  - CES 30 min · Stabilise chronic motor deficit presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Chronic Motor Deficit
+    - tDCS 20 min before TPS
+    - Chronic Motor Deficit phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Chronic Motor Deficit with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Chronic Motor Deficit with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Chronic Motor Deficit
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Chronic Motor Deficit with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Chronic Motor Deficit with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Chronic Motor Deficit phenotype of Post-Stroke Rehabilitation.'
+- code: F4
+  name: Aphasia-Dominant
+  sozo_seq:
+  - CES 30 min · Stabilise aphasia-dominant presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Aphasia-Dominant
+    - tDCS 20 min before TPS
+    - Aphasia-Dominant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Aphasia-Dominant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Aphasia-Dominant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Aphasia-Dominant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Aphasia-Dominant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Aphasia-Dominant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Aphasia-Dominant phenotype of Post-Stroke Rehabilitation.'
+- code: F5
+  name: Cognitive-Dominant
+  sozo_seq:
+  - CES 30 min · Stabilise cognitive-dominant presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Cognitive-Dominant
+    - tDCS 20 min before TPS
+    - Cognitive-Dominant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Cognitive-Dominant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Cognitive-Dominant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Cognitive-Dominant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Cognitive-Dominant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Cognitive-Dominant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Cognitive-Dominant phenotype of Post-Stroke Rehabilitation.'
+- code: F6
+  name: Neglect Syndrome
+  sozo_seq:
+  - CES 30 min · Stabilise neglect syndrome presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Neglect Syndrome
+    - tDCS 20 min before TPS
+    - Neglect Syndrome phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Neglect Syndrome with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Neglect Syndrome with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Neglect Syndrome
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Neglect Syndrome with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Neglect Syndrome with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Neglect Syndrome phenotype of Post-Stroke Rehabilitation.'
+- code: F7
+  name: Spasticity-Dominant
+  sozo_seq:
+  - CES 30 min · Stabilise spasticity-dominant presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Spasticity-Dominant
+    - tDCS 20 min before TPS
+    - Spasticity-Dominant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Spasticity-Dominant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Spasticity-Dominant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Spasticity-Dominant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Spasticity-Dominant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Spasticity-Dominant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Spasticity-Dominant phenotype of Post-Stroke Rehabilitation.'
+- code: F8
+  name: Depression Post-Stroke
+  sozo_seq:
+  - CES 30 min · Stabilise depression post-stroke presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Depression Post-Stroke
+    - tDCS 20 min before TPS
+    - Depression Post-Stroke phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Depression Post-Stroke with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Depression Post-Stroke with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Depression Post-Stroke
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Depression Post-Stroke with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Depression Post-Stroke with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Depression Post-Stroke phenotype of Post-Stroke Rehabilitation.'
+- code: F9
+  name: Balance & Gait Deficit
+  sozo_seq:
+  - CES 30 min · Stabilise balance & gait deficit presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Balance & Gait Deficit
+    - tDCS 20 min before TPS
+    - Balance & Gait Deficit phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Balance & Gait Deficit with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Balance & Gait Deficit with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Balance & Gait Deficit
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Balance & Gait Deficit with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Balance & Gait Deficit with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Balance & Gait Deficit phenotype of Post-Stroke Rehabilitation.'

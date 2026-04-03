@@ -19,9 +19,10 @@ PLACEHOLDER_MARKER = "[REVIEW REQUIRED"
 REVIEW_FLAG_MARKER = "\u26a0"
 
 
-def render_section(doc: Document, section: SectionContent, level: int = 1, depth: int = None) -> None:
+def render_section(doc: Document, section: SectionContent, level: int = 1, depth: int = None, image_manifest=None) -> None:
     """Render a SectionContent object into the document.
     Accepts both 'level' and 'depth' parameter names for compatibility.
+    If image_manifest is provided, inserts curated images after section content.
     """
     if depth is not None:
         level = depth
@@ -64,9 +65,13 @@ def render_section(doc: Document, section: SectionContent, level: int = 1, depth
     for fig_path in section.figures:
         _add_figure_placeholder(doc, fig_path)
 
+    # Curated images for this section (from web search / pre-curated library)
+    if image_manifest is not None:
+        _insert_curated_images(doc, section.section_id, image_manifest)
+
     # Subsections (recursive)
     for subsection in section.subsections:
-        render_section(doc, subsection, level=min(level + 1, 4))
+        render_section(doc, subsection, level=min(level + 1, 4), image_manifest=image_manifest)
 
     # Spacing after section
     doc.add_paragraph().paragraph_format.space_after = Pt(6)
@@ -188,3 +193,29 @@ def _add_figure_placeholder(doc: Document, fig_path: str) -> None:
     run.font.italic = True
     run.font.name = FONT_BODY
     run.font.size = Pt(10)
+
+
+def _insert_curated_images(doc: Document, section_id: str, image_manifest) -> None:
+    """Insert curated images for a section inline, with captions and attribution."""
+    try:
+        images = image_manifest.images_for_section(section_id)
+    except Exception:
+        return
+
+    if not images:
+        return
+
+    for img in images:
+        img_path = Path(str(img.local_path))
+        if not img_path.exists():
+            logger.debug(f"Curated image not found: {img_path}")
+            continue
+
+        try:
+            from .images import insert_figure
+            caption = img.caption
+            if img.attribution and img.source != "precurated":
+                caption += f" (Source: {img.attribution})"
+            insert_figure(doc, str(img_path), caption=caption, width_inches=img.width_inches or 5.0)
+        except Exception as e:
+            logger.debug(f"Failed to insert curated image {img_path}: {e}")

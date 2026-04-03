@@ -1,0 +1,551 @@
+# Multiple Sclerosis — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["ms"]
+# Auto-extracted during platform migration.
+
+display_name: Multiple Sclerosis
+icd10: G35
+short_name: MS
+tps:
+- code: T1
+  symptom: Motor Fatigue & Weakness
+  evidence: Emerging
+  targets:
+  - C3
+  - C4
+  - Cz
+  params_text: 'TPS: C3, C4, Cz · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of C3, C4, Cz for motor fatigue & weakness in Multiple Sclerosis.
+- code: T2
+  symptom: Cognitive Impairment (Cog Fog)
+  evidence: Emerging
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for cognitive impairment (cog fog) in Multiple Sclerosis.
+- code: T3
+  symptom: Spasticity
+  evidence: Preliminary
+  targets:
+  - C3
+  - C4
+  params_text: 'TPS: C3, C4 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of C3, C4 for spasticity in Multiple Sclerosis.
+- code: T4
+  symptom: Depression & Mood
+  evidence: Emerging Pilot
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for depression & mood in Multiple Sclerosis.
+- code: T5
+  symptom: Pain & Sensory Symptoms
+  evidence: Experimental
+  targets:
+  - C3
+  - C4
+  - P3
+  - P4
+  params_text: 'TPS: C3, C4, P3, P4 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of C3, C4, P3, P4 for pain & sensory symptoms in Multiple Sclerosis.
+tdcs:
+- code: C1
+  symptom: Motor Fatigue (Primary)
+  anodes: &id001
+  - C3
+  - C4
+  cathodes:
+  - Fp1
+  - Fp2
+  params_text: 2 mA · 20 min | C3, C4 anode → Fp1, Fp2 cathode
+  rationale: Anodal C3, C4 tDCS for motor fatigue (primary) in Multiple Sclerosis.
+- code: C2
+  symptom: Cognitive Rehabilitation
+  anodes: &id002
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for cognitive rehabilitation in Multiple Sclerosis.
+- code: C3
+  symptom: Spasticity Management
+  anodes: &id003
+  - C4
+  - C3
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | C4, C3 anode → Fp1 cathode
+  rationale: Anodal C4, C3 tDCS for spasticity management in Multiple Sclerosis.
+- code: C4
+  symptom: Depression
+  anodes: &id004
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for depression in Multiple Sclerosis.
+- code: C5
+  symptom: Upper Limb Function
+  anodes: &id005
+  - C3
+  - C4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | C3, C4 anode → Fp1 cathode
+  rationale: Anodal C3, C4 tDCS for upper limb function in Multiple Sclerosis.
+- code: C6
+  symptom: Balance & Gait
+  anodes: &id006
+  - Cz
+  - Cb1
+  - Cb2
+  cathodes:
+  - Fpz
+  params_text: 2 mA · 20 min | Cz, Cb1, Cb2 anode → Fpz cathode
+  rationale: Anodal Cz, Cb1, Cb2 tDCS for balance & gait in Multiple Sclerosis.
+- code: C7
+  symptom: Pain & Neuropathic
+  anodes: &id007
+  - C3
+  - C4
+  cathodes:
+  - Fpz
+  params_text: 2 mA · 20 min | C3, C4 anode → Fpz cathode
+  rationale: Anodal C3, C4 tDCS for pain & neuropathic in Multiple Sclerosis.
+- code: C8
+  symptom: Fatigue Management
+  anodes: &id008
+  - F3
+  - Fz
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | F3, Fz anode → Pz cathode
+  rationale: Anodal F3, Fz tDCS for fatigue management in Multiple Sclerosis.
+plato:
+- code: C1-PS
+  symptom: Motor Fatigue (Primary)
+  anodes: *id001
+  cathodes:
+  - Fp1
+  params_text: Variant · C3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at C3
+- code: C2-PS
+  symptom: Cognitive Rehabilitation
+  anodes: *id002
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C3-PS
+  symptom: Spasticity Management
+  anodes: *id003
+  cathodes:
+  - Fp1
+  params_text: Variant · C4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at C4
+- code: C4-PS
+  symptom: Depression
+  anodes: *id004
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C5-PS
+  symptom: Upper Limb Function
+  anodes: *id005
+  cathodes:
+  - Fp1
+  params_text: Variant · C3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at C3
+- code: C6-PS
+  symptom: Balance & Gait
+  anodes: *id006
+  cathodes:
+  - Fpz
+  params_text: Variant · Cz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Cz
+- code: C7-PS
+  symptom: Pain & Neuropathic
+  anodes: *id007
+  cathodes:
+  - Fpz
+  params_text: Variant · C3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at C3
+- code: C8-PS
+  symptom: Fatigue Management
+  anodes: *id008
+  cathodes:
+  - Pz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+contraindications_extra:
+- - Active MS relapse
+  - All modalities
+  - POSTPONE — wait until stable × 4 weeks
+- - Immunomodulatory therapy interaction
+  - tDCS
+  - RELATIVE — Doctor review
+key_outcome_measures: EDSS, T25FW, SDMT (cognition), MFIS (fatigue), MBI
+phenotypes:
+- code: F1
+  name: Relapsing-Remitting MS (RRMS)
+  sozo_seq:
+  - CES 30 min · Stabilise relapsing-remitting ms (rrms) presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Relapsing-Remitting MS (RRMS)
+    - tDCS 20 min before TPS
+    - Relapsing-Remitting MS (RRMS) phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Relapsing-Remitting MS (RRMS) with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Relapsing-Remitting MS (RRMS) with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Relapsing-Remitting MS (RRMS)
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Relapsing-Remitting MS (RRMS) with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Relapsing-Remitting MS (RRMS) with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Relapsing-Remitting MS (RRMS) phenotype of Multiple Sclerosis.'
+- code: F2
+  name: Secondary Progressive MS (SPMS)
+  sozo_seq:
+  - CES 30 min · Stabilise secondary progressive ms (spms) presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Secondary Progressive MS (SPMS)
+    - tDCS 20 min before TPS
+    - Secondary Progressive MS (SPMS) phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Secondary Progressive MS (SPMS) with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Secondary Progressive MS (SPMS) with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Secondary Progressive MS (SPMS)
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Secondary Progressive MS (SPMS) with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Secondary Progressive MS (SPMS) with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Secondary Progressive MS (SPMS) phenotype of Multiple Sclerosis.'
+- code: F3
+  name: Primary Progressive MS (PPMS)
+  sozo_seq:
+  - CES 30 min · Stabilise primary progressive ms (ppms) presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Primary Progressive MS (PPMS)
+    - tDCS 20 min before TPS
+    - Primary Progressive MS (PPMS) phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Primary Progressive MS (PPMS) with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Primary Progressive MS (PPMS) with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Primary Progressive MS (PPMS)
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Primary Progressive MS (PPMS) with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Primary Progressive MS (PPMS) with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Primary Progressive MS (PPMS) phenotype of Multiple Sclerosis.'
+- code: F4
+  name: Motor-Dominant
+  sozo_seq:
+  - CES 30 min · Stabilise motor-dominant presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Motor-Dominant
+    - tDCS 20 min before TPS
+    - Motor-Dominant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Motor-Dominant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Motor-Dominant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Motor-Dominant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Motor-Dominant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Motor-Dominant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Motor-Dominant phenotype of Multiple Sclerosis.'
+- code: F5
+  name: Cognitive-Dominant (Cog Fog)
+  sozo_seq:
+  - CES 30 min · Stabilise cognitive-dominant (cog fog) presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Cognitive-Dominant (Cog Fog)
+    - tDCS 20 min before TPS
+    - Cognitive-Dominant (Cog Fog) phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Cognitive-Dominant (Cog Fog) with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Cognitive-Dominant (Cog Fog) with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Cognitive-Dominant (Cog Fog)
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Cognitive-Dominant (Cog Fog) with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Cognitive-Dominant (Cog Fog) with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Cognitive-Dominant (Cog Fog) phenotype of Multiple Sclerosis.'
+- code: F6
+  name: Fatigue-Dominant
+  sozo_seq:
+  - CES 30 min · Stabilise fatigue-dominant presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Fatigue-Dominant
+    - tDCS 20 min before TPS
+    - Fatigue-Dominant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Fatigue-Dominant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Fatigue-Dominant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Fatigue-Dominant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Fatigue-Dominant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Fatigue-Dominant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Fatigue-Dominant phenotype of Multiple Sclerosis.'
+- code: F7
+  name: Pain-Dominant
+  sozo_seq:
+  - CES 30 min · Stabilise pain-dominant presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Pain-Dominant
+    - tDCS 20 min before TPS
+    - Pain-Dominant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Pain-Dominant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Pain-Dominant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Pain-Dominant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Pain-Dominant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Pain-Dominant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Pain-Dominant phenotype of Multiple Sclerosis.'
+- code: F8
+  name: Depression Comorbidity
+  sozo_seq:
+  - CES 30 min · Stabilise depression comorbidity presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Depression Comorbidity
+    - tDCS 20 min before TPS
+    - Depression Comorbidity phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Depression Comorbidity with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Depression Comorbidity with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Depression Comorbidity
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Depression Comorbidity with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Depression Comorbidity with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Depression Comorbidity phenotype of Multiple Sclerosis.'
+- code: F9
+  name: Balance & Gait Deficit
+  sozo_seq:
+  - CES 30 min · Stabilise balance & gait deficit presentation
+  - tDCS C3, C4 · 2 mA × 20 min
+  - TPS C3, C4, Cz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Balance & Gait Deficit
+    - tDCS 20 min before TPS
+    - Balance & Gait Deficit phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Balance & Gait Deficit with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Balance & Gait Deficit with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Balance & Gait Deficit
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Balance & Gait Deficit with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Balance & Gait Deficit with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Balance & Gait Deficit phenotype of Multiple Sclerosis.'

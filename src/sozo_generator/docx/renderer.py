@@ -31,10 +31,11 @@ class DocumentRenderer:
         ensure_dir(self.output_dir)
         self.branding = branding or BrandingConfig()
 
-    def render(self, spec: DocumentSpec, output_path=None) -> Path:
+    def render(self, spec: DocumentSpec, output_path=None, image_manifest=None) -> Path:
         """
         Render a DocumentSpec to a .docx file. Returns output path.
         output_path is optional — if omitted, a path is built from spec fields.
+        image_manifest: optional DocumentImageManifest for inline image insertion.
         """
         doc = Document()
         configure_page_layout(doc)
@@ -74,9 +75,9 @@ class DocumentRenderer:
             confidentiality=spec.confidentiality_mark,
         )
 
-        # Render sections
+        # Render sections (with optional inline images)
         for section in spec.sections:
-            render_section(doc, section, level=1)
+            render_section(doc, section, level=1, image_manifest=image_manifest)
 
         # Top-level figures list
         if spec.figures:

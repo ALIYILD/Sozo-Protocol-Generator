@@ -1,0 +1,550 @@
+# Autism Spectrum Disorder — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["asd"]
+# Auto-extracted during platform migration.
+
+display_name: Autism Spectrum Disorder
+icd10: F84.0
+short_name: ASD
+tps:
+- code: T1
+  symptom: Social Communication Deficit
+  evidence: Emerging
+  targets:
+  - F3
+  - F4
+  - T4
+  - T6
+  params_text: 'TPS: F3, F4, T4, T6 · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4, T4, T6 for social communication deficit in Autism Spectrum Disorder.
+- code: T2
+  symptom: Repetitive Behaviours & Restricted Interests
+  evidence: Emerging
+  targets:
+  - F3
+  - FC3
+  - FC4
+  params_text: 'TPS: F3, FC3, FC4 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, FC3, FC4 for repetitive behaviours & restricted interests in Autism Spectrum Disorder.
+- code: T3
+  symptom: Sensory Processing Difficulties
+  evidence: Preliminary
+  targets:
+  - P3
+  - P4
+  - Pz
+  params_text: 'TPS: P3, P4, Pz · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of P3, P4, Pz for sensory processing difficulties in Autism Spectrum Disorder.
+- code: T4
+  symptom: Anxiety & Emotional Regulation
+  evidence: Emerging Pilot
+  targets:
+  - F4
+  - F3
+  params_text: 'TPS: F4, F3 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F4, F3 for anxiety & emotional regulation in Autism Spectrum Disorder.
+- code: T5
+  symptom: Attention & Executive Function
+  evidence: Experimental
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for attention & executive function in Autism Spectrum Disorder.
+tdcs:
+- code: C1
+  symptom: Social Communication (Primary)
+  anodes: &id001
+  - F3
+  - T4
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3, T4 anode → Fp2 cathode
+  rationale: Anodal F3, T4 tDCS for social communication (primary) in Autism Spectrum Disorder.
+- code: C2
+  symptom: Language & Communication
+  anodes: &id002
+  - F3
+  - T5
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3, T5 anode → Fp2 cathode
+  rationale: Anodal F3, T5 tDCS for language & communication in Autism Spectrum Disorder.
+- code: C3
+  symptom: Repetitive Behaviours
+  anodes: &id003
+  - FC3
+  - FC4
+  cathodes:
+  - Fpz
+  params_text: 2 mA · 20 min | FC3, FC4 anode → Fpz cathode
+  rationale: Anodal FC3, FC4 tDCS for repetitive behaviours in Autism Spectrum Disorder.
+- code: C4
+  symptom: Sensory Sensitivity
+  anodes: &id004
+  - P3
+  - P4
+  cathodes:
+  - Fz
+  params_text: 2 mA · 20 min | P3, P4 anode → Fz cathode
+  rationale: Anodal P3, P4 tDCS for sensory sensitivity in Autism Spectrum Disorder.
+- code: C5
+  symptom: Anxiety in ASD
+  anodes: &id005
+  - F4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | F4 anode → Fp1 cathode
+  rationale: Anodal F4 tDCS for anxiety in asd in Autism Spectrum Disorder.
+- code: C6
+  symptom: Attention & Executive Function
+  anodes: &id006
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for attention & executive function in Autism Spectrum Disorder.
+- code: C7
+  symptom: Social Anxiety Overlay
+  anodes: &id007
+  - F4
+  - FC4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | F4, FC4 anode → Fp1 cathode
+  rationale: Anodal F4, FC4 tDCS for social anxiety overlay in Autism Spectrum Disorder.
+- code: C8
+  symptom: Adaptive Behaviour & Independence
+  anodes: &id008
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for adaptive behaviour & independence in Autism Spectrum Disorder.
+plato:
+- code: C1-PS
+  symptom: Social Communication (Primary)
+  anodes: *id001
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C2-PS
+  symptom: Language & Communication
+  anodes: *id002
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C3-PS
+  symptom: Repetitive Behaviours
+  anodes: *id003
+  cathodes:
+  - Fpz
+  params_text: Variant · FC3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at FC3
+- code: C4-PS
+  symptom: Sensory Sensitivity
+  anodes: *id004
+  cathodes:
+  - Fz
+  params_text: Variant · P3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at P3
+- code: C5-PS
+  symptom: Anxiety in ASD
+  anodes: *id005
+  cathodes:
+  - Fp1
+  params_text: Variant · F4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F4
+- code: C6-PS
+  symptom: Attention & Executive Function
+  anodes: *id006
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C7-PS
+  symptom: Social Anxiety Overlay
+  anodes: *id007
+  cathodes:
+  - Fp1
+  params_text: Variant · F4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F4
+- code: C8-PS
+  symptom: Adaptive Behaviour & Independence
+  anodes: *id008
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+contraindications_extra:
+- - Seizure disorder (common in ASD)
+  - All modalities
+  - ABSOLUTE if uncontrolled seizures
+- - Severe sensory sensitivity to electrodes
+  - tDCS
+  - ADAPT — use minimal gel, desensitisation protocol
+key_outcome_measures: SRS-2, ABC, VABS-3, ADOS-2 (diagnostic), PSQI
+phenotypes:
+- code: F1
+  name: Social Communication Deficit
+  sozo_seq:
+  - CES 30 min · Stabilise social communication deficit presentation
+  - tDCS F3, T4 · 2 mA × 20 min
+  - TPS F3, F4, T4, T6 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Social Communication Deficit
+    - tDCS 20 min before TPS
+    - Social Communication Deficit phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Social Communication Deficit with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Social Communication Deficit with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Social Communication Deficit
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Social Communication Deficit with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Social Communication Deficit with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Social Communication Deficit phenotype of Autism Spectrum Disorder.'
+- code: F2
+  name: Rigid / Repetitive Behaviours
+  sozo_seq:
+  - CES 30 min · Stabilise rigid / repetitive behaviours presentation
+  - tDCS F3, T4 · 2 mA × 20 min
+  - TPS F3, F4, T4, T6 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Rigid / Repetitive Behaviours
+    - tDCS 20 min before TPS
+    - Rigid / Repetitive Behaviours phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Rigid / Repetitive Behaviours with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Rigid / Repetitive Behaviours with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Rigid / Repetitive Behaviours
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Rigid / Repetitive Behaviours with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Rigid / Repetitive Behaviours with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Rigid / Repetitive Behaviours phenotype of Autism Spectrum Disorder.'
+- code: F3
+  name: Sensory Overresponsivity
+  sozo_seq:
+  - CES 30 min · Stabilise sensory overresponsivity presentation
+  - tDCS F3, T4 · 2 mA × 20 min
+  - TPS F3, F4, T4, T6 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Sensory Overresponsivity
+    - tDCS 20 min before TPS
+    - Sensory Overresponsivity phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Sensory Overresponsivity with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Sensory Overresponsivity with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Sensory Overresponsivity
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Sensory Overresponsivity with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Sensory Overresponsivity with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Sensory Overresponsivity phenotype of Autism Spectrum Disorder.'
+- code: F4
+  name: Sensory Underresponsivity
+  sozo_seq:
+  - CES 30 min · Stabilise sensory underresponsivity presentation
+  - tDCS F3, T4 · 2 mA × 20 min
+  - TPS F3, F4, T4, T6 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Sensory Underresponsivity
+    - tDCS 20 min before TPS
+    - Sensory Underresponsivity phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Sensory Underresponsivity with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Sensory Underresponsivity with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Sensory Underresponsivity
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Sensory Underresponsivity with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Sensory Underresponsivity with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Sensory Underresponsivity phenotype of Autism Spectrum Disorder.'
+- code: F5
+  name: Anxiety Comorbidity
+  sozo_seq:
+  - CES 30 min · Stabilise anxiety comorbidity presentation
+  - tDCS F3, T4 · 2 mA × 20 min
+  - TPS F3, F4, T4, T6 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Anxiety Comorbidity
+    - tDCS 20 min before TPS
+    - Anxiety Comorbidity phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Anxiety Comorbidity with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Anxiety Comorbidity with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Anxiety Comorbidity
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Anxiety Comorbidity with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Anxiety Comorbidity with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Anxiety Comorbidity phenotype of Autism Spectrum Disorder.'
+- code: F6
+  name: ADHD Comorbidity
+  sozo_seq:
+  - CES 30 min · Stabilise adhd comorbidity presentation
+  - tDCS F3, T4 · 2 mA × 20 min
+  - TPS F3, F4, T4, T6 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for ADHD Comorbidity
+    - tDCS 20 min before TPS
+    - ADHD Comorbidity phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - ADHD Comorbidity with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - ADHD Comorbidity with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - ADHD Comorbidity
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - ADHD Comorbidity with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - ADHD Comorbidity with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for ADHD Comorbidity phenotype of Autism Spectrum Disorder.'
+- code: F7
+  name: Language-Dominant (Verbal)
+  sozo_seq:
+  - CES 30 min · Stabilise language-dominant (verbal) presentation
+  - tDCS F3, T4 · 2 mA × 20 min
+  - TPS F3, F4, T4, T6 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Language-Dominant (Verbal)
+    - tDCS 20 min before TPS
+    - Language-Dominant (Verbal) phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Language-Dominant (Verbal) with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Language-Dominant (Verbal) with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Language-Dominant (Verbal)
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Language-Dominant (Verbal) with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Language-Dominant (Verbal) with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Language-Dominant (Verbal) phenotype of Autism Spectrum Disorder.'
+- code: F8
+  name: Minimal Verbal ASD
+  sozo_seq:
+  - CES 30 min · Stabilise minimal verbal asd presentation
+  - tDCS F3, T4 · 2 mA × 20 min
+  - TPS F3, F4, T4, T6 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Minimal Verbal ASD
+    - tDCS 20 min before TPS
+    - Minimal Verbal ASD phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Minimal Verbal ASD with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Minimal Verbal ASD with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Minimal Verbal ASD
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Minimal Verbal ASD with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Minimal Verbal ASD with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Minimal Verbal ASD phenotype of Autism Spectrum Disorder.'
+- code: F9
+  name: High-Functioning ASD / Autism
+  sozo_seq:
+  - CES 30 min · Stabilise high-functioning asd / autism presentation
+  - tDCS F3, T4 · 2 mA × 20 min
+  - TPS F3, F4, T4, T6 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for High-Functioning ASD / Autism
+    - tDCS 20 min before TPS
+    - High-Functioning ASD / Autism phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - High-Functioning ASD / Autism with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - High-Functioning ASD / Autism with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - High-Functioning ASD / Autism
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - High-Functioning ASD / Autism with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - High-Functioning ASD / Autism with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for High-Functioning ASD / Autism phenotype of Autism Spectrum Disorder.'

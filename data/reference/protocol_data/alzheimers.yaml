@@ -1,0 +1,546 @@
+# Alzheimer's Disease / MCI — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["alzheimers"]
+# Auto-extracted during platform migration.
+
+display_name: Alzheimer's Disease / MCI
+icd10: G30 / F06.70
+short_name: AD/MCI
+tps:
+- code: T1
+  symptom: Episodic Memory Loss
+  evidence: Emerging
+  targets:
+  - F3
+  - F4
+  - P3
+  - P4
+  params_text: 'TPS: F3, F4, P3, P4 · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4, P3, P4 for episodic memory loss in Alzheimer's Disease / MCI.
+- code: T2
+  symptom: Language & Naming Deficits
+  evidence: Emerging
+  targets:
+  - F3
+  - T5
+  - T6
+  params_text: 'TPS: F3, T5, T6 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, T5, T6 for language & naming deficits in Alzheimer's Disease / MCI.
+- code: T3
+  symptom: Visuospatial Dysfunction
+  evidence: Preliminary
+  targets:
+  - P3
+  - P4
+  - Pz
+  params_text: 'TPS: P3, P4, Pz · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of P3, P4, Pz for visuospatial dysfunction in Alzheimer's Disease / MCI.
+- code: T4
+  symptom: Executive Dysfunction
+  evidence: Emerging Pilot
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for executive dysfunction in Alzheimer's Disease / MCI.
+- code: T5
+  symptom: Behavioural & Neuropsychiatric Symptoms
+  evidence: Experimental
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for behavioural & neuropsychiatric symptoms in Alzheimer's Disease / MCI.
+tdcs:
+- code: C1
+  symptom: Episodic Memory (Primary)
+  anodes: &id001
+  - F3
+  - P3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3, P3 anode → Fp2 cathode
+  rationale: Anodal F3, P3 tDCS for episodic memory (primary) in Alzheimer's Disease / MCI.
+- code: C2
+  symptom: Language & Naming
+  anodes: &id002
+  - F3
+  - T5
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3, T5 anode → Fp2 cathode
+  rationale: Anodal F3, T5 tDCS for language & naming in Alzheimer's Disease / MCI.
+- code: C3
+  symptom: Working Memory
+  anodes: &id003
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for working memory in Alzheimer's Disease / MCI.
+- code: C4
+  symptom: Attention & Processing
+  anodes: &id004
+  - Fz
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Fz anode → Pz cathode
+  rationale: Anodal Fz tDCS for attention & processing in Alzheimer's Disease / MCI.
+- code: C5
+  symptom: Behavioural Symptoms (Agitation)
+  anodes: &id005
+  - F4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | F4 anode → Fp1 cathode
+  rationale: Anodal F4 tDCS for behavioural symptoms (agitation) in Alzheimer's Disease / MCI.
+- code: C6
+  symptom: Visuospatial Skills
+  anodes: &id006
+  - P3
+  - P4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | P3, P4 anode → Oz cathode
+  rationale: Anodal P3, P4 tDCS for visuospatial skills in Alzheimer's Disease / MCI.
+- code: C7
+  symptom: Verbal Fluency
+  anodes: &id007
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for verbal fluency in Alzheimer's Disease / MCI.
+- code: C8
+  symptom: Maintenance (MCI Stage)
+  anodes: &id008
+  - F3
+  - F4
+  cathodes:
+  - Fp1
+  - Fp2
+  params_text: 2 mA · 20 min | F3, F4 anode → Fp1, Fp2 cathode
+  rationale: Anodal F3, F4 tDCS for maintenance (mci stage) in Alzheimer's Disease / MCI.
+plato:
+- code: C1-PS
+  symptom: Episodic Memory (Primary)
+  anodes: *id001
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C2-PS
+  symptom: Language & Naming
+  anodes: *id002
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C3-PS
+  symptom: Working Memory
+  anodes: *id003
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C4-PS
+  symptom: Attention & Processing
+  anodes: *id004
+  cathodes:
+  - Pz
+  params_text: Variant · Fz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Fz
+- code: C5-PS
+  symptom: Behavioural Symptoms (Agitation)
+  anodes: *id005
+  cathodes:
+  - Fp1
+  params_text: Variant · F4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F4
+- code: C6-PS
+  symptom: Visuospatial Skills
+  anodes: *id006
+  cathodes:
+  - Oz
+  params_text: Variant · P3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at P3
+- code: C7-PS
+  symptom: Verbal Fluency
+  anodes: *id007
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C8-PS
+  symptom: Maintenance (MCI Stage)
+  anodes: *id008
+  cathodes:
+  - Fp1
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+contraindications_extra:
+- - Cholinesterase inhibitor interaction
+  - tDCS (temporal)
+  - RELATIVE — monitor carefully
+key_outcome_measures: ADAS-Cog, MoCA, MMSE, NPI (neuropsychiatric), CDR
+phenotypes:
+- code: F1
+  name: Amnestic MCI (Single Domain)
+  sozo_seq:
+  - CES 30 min · Stabilise amnestic mci (single domain) presentation
+  - tDCS F3, P3 · 2 mA × 20 min
+  - TPS F3, F4, P3, P4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Amnestic MCI (Single Domain)
+    - tDCS 20 min before TPS
+    - Amnestic MCI (Single Domain) phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Amnestic MCI (Single Domain) with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Amnestic MCI (Single Domain) with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Amnestic MCI (Single Domain)
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Amnestic MCI (Single Domain) with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Amnestic MCI (Single Domain) with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Amnestic MCI (Single Domain) phenotype of Alzheimer''s Disease / MCI.'
+- code: F2
+  name: Amnestic MCI (Multi-Domain)
+  sozo_seq:
+  - CES 30 min · Stabilise amnestic mci (multi-domain) presentation
+  - tDCS F3, P3 · 2 mA × 20 min
+  - TPS F3, F4, P3, P4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Amnestic MCI (Multi-Domain)
+    - tDCS 20 min before TPS
+    - Amnestic MCI (Multi-Domain) phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Amnestic MCI (Multi-Domain) with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Amnestic MCI (Multi-Domain) with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Amnestic MCI (Multi-Domain)
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Amnestic MCI (Multi-Domain) with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Amnestic MCI (Multi-Domain) with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Amnestic MCI (Multi-Domain) phenotype of Alzheimer''s Disease / MCI.'
+- code: F3
+  name: Language-Dominant MCI
+  sozo_seq:
+  - CES 30 min · Stabilise language-dominant mci presentation
+  - tDCS F3, P3 · 2 mA × 20 min
+  - TPS F3, F4, P3, P4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Language-Dominant MCI
+    - tDCS 20 min before TPS
+    - Language-Dominant MCI phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Language-Dominant MCI with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Language-Dominant MCI with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Language-Dominant MCI
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Language-Dominant MCI with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Language-Dominant MCI with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Language-Dominant MCI phenotype of Alzheimer''s Disease / MCI.'
+- code: F4
+  name: Executive-Predominant MCI
+  sozo_seq:
+  - CES 30 min · Stabilise executive-predominant mci presentation
+  - tDCS F3, P3 · 2 mA × 20 min
+  - TPS F3, F4, P3, P4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Executive-Predominant MCI
+    - tDCS 20 min before TPS
+    - Executive-Predominant MCI phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Executive-Predominant MCI with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Executive-Predominant MCI with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Executive-Predominant MCI
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Executive-Predominant MCI with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Executive-Predominant MCI with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Executive-Predominant MCI phenotype of Alzheimer''s Disease / MCI.'
+- code: F5
+  name: Mixed AD Dementia
+  sozo_seq:
+  - CES 30 min · Stabilise mixed ad dementia presentation
+  - tDCS F3, P3 · 2 mA × 20 min
+  - TPS F3, F4, P3, P4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Mixed AD Dementia
+    - tDCS 20 min before TPS
+    - Mixed AD Dementia phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Mixed AD Dementia with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Mixed AD Dementia with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Mixed AD Dementia
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Mixed AD Dementia with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Mixed AD Dementia with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Mixed AD Dementia phenotype of Alzheimer''s Disease / MCI.'
+- code: F6
+  name: Behavioural Variant
+  sozo_seq:
+  - CES 30 min · Stabilise behavioural variant presentation
+  - tDCS F3, P3 · 2 mA × 20 min
+  - TPS F3, F4, P3, P4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Behavioural Variant
+    - tDCS 20 min before TPS
+    - Behavioural Variant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Behavioural Variant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Behavioural Variant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Behavioural Variant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Behavioural Variant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Behavioural Variant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Behavioural Variant phenotype of Alzheimer''s Disease / MCI.'
+- code: F7
+  name: Posterior Cortical Atrophy
+  sozo_seq:
+  - CES 30 min · Stabilise posterior cortical atrophy presentation
+  - tDCS F3, P3 · 2 mA × 20 min
+  - TPS F3, F4, P3, P4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Posterior Cortical Atrophy
+    - tDCS 20 min before TPS
+    - Posterior Cortical Atrophy phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Posterior Cortical Atrophy with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Posterior Cortical Atrophy with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Posterior Cortical Atrophy
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Posterior Cortical Atrophy with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Posterior Cortical Atrophy with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Posterior Cortical Atrophy phenotype of Alzheimer''s Disease / MCI.'
+- code: F8
+  name: Lewy Body Overlap
+  sozo_seq:
+  - CES 30 min · Stabilise lewy body overlap presentation
+  - tDCS F3, P3 · 2 mA × 20 min
+  - TPS F3, F4, P3, P4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Lewy Body Overlap
+    - tDCS 20 min before TPS
+    - Lewy Body Overlap phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Lewy Body Overlap with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Lewy Body Overlap with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Lewy Body Overlap
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Lewy Body Overlap with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Lewy Body Overlap with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Lewy Body Overlap phenotype of Alzheimer''s Disease / MCI.'
+- code: F9
+  name: Vascular Overlay
+  sozo_seq:
+  - CES 30 min · Stabilise vascular overlay presentation
+  - tDCS F3, P3 · 2 mA × 20 min
+  - TPS F3, F4, P3, P4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Vascular Overlay
+    - tDCS 20 min before TPS
+    - Vascular Overlay phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Vascular Overlay with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Vascular Overlay with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Vascular Overlay
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Vascular Overlay with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Vascular Overlay with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Vascular Overlay phenotype of Alzheimer''s Disease / MCI.'

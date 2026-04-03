@@ -1,0 +1,554 @@
+# Major Depressive Disorder — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["depression"]
+# Auto-extracted during platform migration.
+
+display_name: Major Depressive Disorder
+icd10: F32 / F33
+short_name: MDD
+tps:
+- code: T1
+  symptom: 'Core Depression: Anhedonia & Low Mood'
+  evidence: Emerging
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: Bilateral DLPFC · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: Bilateral DLPFC modulation targets hypofrontality in MDD; L>R asymmetry is primary treatment target.
+- code: T2
+  symptom: Rumination & Default Mode Overactivation
+  evidence: Emerging
+  targets:
+  - F3
+  - Fz
+  - Pz
+  params_text: 'TPS: L-DLPFC + posterior DMN · 4,000 pulses · 5 Hz'
+  rationale: Targeting both DLPFC and posterior DMN nodes disrupts ruminative DMN hyperactivity.
+- code: T3
+  symptom: Cognitive Impairment (Depression-Related)
+  evidence: Preliminary
+  targets:
+  - F3
+  - P3
+  - P4
+  params_text: 'TPS: L-DLPFC + PPC · 4,000 pulses · 5 Hz'
+  rationale: Prefrontal-parietal network enhancement addresses concentration and working memory deficits.
+- code: T4
+  symptom: Anxiety Comorbidity
+  evidence: Emerging Pilot
+  targets:
+  - F4
+  - F3
+  params_text: 'TPS: R-DLPFC (primary) + L-DLPFC · 3,000 pulses · 5 Hz'
+  rationale: R-DLPFC down-regulation may reduce anxiety hyperarousal; complementary to antidepressant effect.
+- code: T5
+  symptom: Treatment-Resistant Depression (TRD)
+  evidence: Experimental
+  targets:
+  - F3
+  - F4
+  - FC3
+  - FC4
+  params_text: 'TPS: DLPFC + OFC bilateral · 5,000 pulses · 5 Hz'
+  rationale: Extended bilateral approach for TRD targets broader prefrontal network including sgACC connectivity.
+tdcs:
+- code: C1
+  symptom: Core Depression (Primary Protocol)
+  anodes:
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20–30 min | L-DLPFC (F3) → R-supraorbital
+  rationale: 'Standard tDCS antidepressant montage: L-DLPFC anodal facilitates hypofrontal left hemisphere.'
+- code: C2
+  symptom: Anhedonia & Reward Processing
+  anodes:
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | Bilateral DLPFC → occipital cathode
+  rationale: Bilateral prefrontal engagement targets reward circuitry and motivational systems.
+- code: C3
+  symptom: Rumination Reduction
+  anodes:
+  - F3
+  cathodes:
+  - P3
+  params_text: 2 mA · 20 min | L-DLPFC anode → L-parietal cathode
+  rationale: Cathodal parietal placement inhibits posterior DMN; reduces ruminative self-referential processing.
+- code: C4
+  symptom: Anxiety & Hyperarousal
+  anodes:
+  - F4
+  cathodes:
+  - F3
+  params_text: 2 mA · 20 min | R-DLPFC anode → L-DLPFC cathode
+  rationale: Asymmetric frontal montage targets anxiety predominant presentation; reverses standard depression montage.
+- code: C5
+  symptom: Sleep & Fatigue
+  anodes:
+  - F3
+  - F4
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Bilateral DLPFC → parietal; evening session
+  rationale: Evening bilateral prefrontal tDCS may enhance slow-wave sleep and reduce fatigue via thalamic modulation.
+- code: C6
+  symptom: Cognitive Symptoms (Brain Fog)
+  anodes:
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | L-DLPFC · concurrent with cognitive tasks
+  rationale: Cognitive task performance during tDCS (online stimulation) enhances neuroplastic effects.
+- code: C7
+  symptom: Treatment-Resistant Depression Augmentation
+  anodes:
+  - F3
+  - FC3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 30 min | Extended L-prefrontal montage
+  rationale: Extended 30-min sessions and larger anode field for TRD; combine with psychotherapy.
+- code: C8
+  symptom: Maintenance / Relapse Prevention
+  anodes:
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 1.5–2 mA · 20 min | Twice-weekly maintenance
+  rationale: Maintenance tDCS at reduced frequency for sustained antidepressant effect post-acute course.
+plato:
+- code: C1-PS
+  symptom: Core Depression
+  anodes:
+  - F3
+  cathodes:
+  - Fp2
+  params_text: Variant 3 · L-DLPFC (F3) | 1.2–1.6 mA · 20 min
+  variant_note: 'Variant 3: F3 (L-DLPFC) — standard antidepressant montage'
+- code: C2-PS
+  symptom: Anhedonia
+  anodes:
+  - F3
+  cathodes:
+  - Fp2
+  params_text: Variant 3 · L-DLPFC | 1.6 mA · 20 min
+  variant_note: Higher intensity (1.6 mA) for anhedonia; paired with reward-based tasks
+- code: C3-PS
+  symptom: Rumination
+  anodes:
+  - F3
+  cathodes:
+  - Pz
+  params_text: Variant 3A · L-DLPFC → parietal | 1.2–1.6 mA
+  variant_note: Parietal reference reduces posterior DMN activity
+- code: C4-PS
+  symptom: Anxiety Comorbidity
+  anodes:
+  - F4
+  cathodes:
+  - Fpz
+  params_text: Variant 4 · R-DLPFC (F4) | 1.2 mA · 20 min
+  variant_note: Lower intensity for anxiety; R-DLPFC calming effect
+- code: C5-PS
+  symptom: Sleep & Fatigue
+  anodes:
+  - Fz
+  cathodes:
+  - Oz
+  params_text: Variant 5 · Frontal | 1.2–1.6 mA · Evening
+  variant_note: Evening session only; Fz anode for frontal-occipital modulation
+- code: C6-PS
+  symptom: Cognitive Symptoms
+  anodes:
+  - F3
+  cathodes:
+  - Fp2
+  params_text: Variant 3 · L-DLPFC | 1.6 mA · 20 min with tasks
+  variant_note: Online stimulation during cognitive training tasks
+- code: C7-PS
+  symptom: TRD Augmentation
+  anodes:
+  - F3
+  cathodes:
+  - Fp2
+  params_text: Variant 3 · 30 min extended | 1.6 mA
+  variant_note: Extended 30-min session for TRD; Doctor-authorised only
+- code: C8-PS
+  symptom: Maintenance
+  anodes:
+  - F3
+  cathodes:
+  - Fp2
+  params_text: Variant 3 · Maintenance | 1.2 mA · 2×/week
+  variant_note: Reduced frequency home maintenance; weekly Doctor check
+contraindications_extra:
+- - Bipolar disorder (manic risk)
+  - tDCS (L-DLPFC anodal)
+  - RELATIVE — screen carefully; use lower intensity
+- - Active suicidal ideation
+  - All modalities
+  - HOLD — safety assessment first; Doctor clearance required
+key_outcome_measures: PHQ-9, HDRS-17, BDI-II, GAD-7 (if anxiety), PSQI (sleep)
+phenotypes:
+- code: F1
+  name: Anhedonic / Reward-Deficit
+  sozo_seq:
+  - CES 30–45 min · Baseline mood stabilisation
+  - tDCS L-DLPFC · 2 mA × 20 min
+  - TPS DLPFC bilateral · 3,000 pulses
+  - Behavioural activation + pleasant activity scheduling · 45 min
+  tps_combos:
+  - - TPS DLPFC + tDCS
+    - Sequential prefrontal facilitation
+    - tDCS 20 min before TPS
+    - Anhedonia, reward deficit
+    - Emerging
+  - - TPS + CES
+    - CES primary daily; TPS 2×/week
+    - CES morning; TPS afternoon
+    - Mood + sleep
+    - Emerging
+  - - TPS + taVNS
+    - taVNS enhances serotonergic pathways
+    - taVNS pre-TPS
+    - Autonomic-mood coupling
+    - Experimental
+  nontps_combos:
+  - - tDCS + behavioural activation
+    - Anhedonia, apathy
+    - Prefrontal facilitation + reward tasks
+    - tDCS before pleasurable activities
+    - Moderate adjunctive
+  - - CES daily + psychotherapy
+    - Depression, sleep disturbance
+    - CES adjunctive to CBT
+    - Evening CES
+    - Moderate adjunctive
+  - - taVNS + mindfulness-based CBT
+    - Rumination, stress-reactivity
+    - Parasympathetic + cognitive
+    - taVNS during mindfulness
+    - Emerging
+  rationale: 'Clinical Target: Restore reward processing and motivational drive via prefrontal-striatal circuits.'
+- code: F2
+  name: Rumination / Worry-Dominant
+  sozo_seq:
+  - CES 30 min · Reduce hyperarousal
+  - tDCS L-DLPFC → L-parietal cathode · 2 mA × 20 min
+  - TPS L-DLPFC + posterior DMN · 4,000 pulses
+  - Mindfulness + CBT-R · 45 min
+  tps_combos:
+  - - TPS posterior DMN + tDCS
+    - DMN node disruption
+    - tDCS 20 min; TPS posterior DMN after
+    - Rumination, self-referential
+    - Emerging
+  - - TPS + taVNS
+    - taVNS reduces DMN connectivity
+    - taVNS concurrent TPS
+    - Anxiety-rumination
+    - Experimental
+  - - TPS + CES
+    - CES reduces arousal enabling TPS effect
+    - CES before TPS
+    - Hyperarousal-rumination
+    - Emerging
+  nontps_combos:
+  - - tDCS parietal cathode + CBT-R
+    - Rumination, worry
+    - DMN inhibition + rumination-focused CBT
+    - tDCS during/before CBT
+    - Moderate adjunctive
+  - - CES + CBT
+    - Anxiety-depression comorbidity
+    - Arousal reduction + cognitive restructuring
+    - CES daily
+    - Moderate adjunctive
+  - - taVNS + mindfulness
+    - Rumination, threat-detection bias
+    - Parasympathetic downregulation
+    - taVNS during mindfulness
+    - Emerging
+  rationale: 'Clinical Target: Disrupt pathological DMN hyperactivation; reduce ruminative thought patterns.'
+- code: F3
+  name: Psychomotor Retardation
+  sozo_seq:
+  - taVNS 10–15 min · Motor-autonomic priming
+  - tDCS bilateral DLPFC + M1 · 2 mA × 20 min
+  - TPS bilateral DLPFC · 3,000 pulses
+  - Graded activity + exercise · 30–45 min
+  tps_combos:
+  - - TPS DLPFC bilateral + tDCS
+    - Motor-prefrontal facilitation
+    - tDCS 20 min before TPS
+    - Retardation, akinesia
+    - Emerging
+  - - TPS + exercise
+    - Post-TPS neuroplasticity + BDNF
+    - Exercise immediately post-TPS
+    - Physical inactivity
+    - Moderate adjunctive
+  - - TPS + taVNS
+    - Autonomic activation for motor drive
+    - taVNS pre-TPS
+    - Autonomic blunting
+    - Experimental
+  nontps_combos:
+  - - tDCS bilateral + exercise
+    - Psychomotor slowing
+    - Motor cortex + aerobic BDNF
+    - tDCS before exercise
+    - Moderate adjunctive
+  - - taVNS + graded activity
+    - Fatigue, low drive
+    - Autonomic activation
+    - taVNS pre-activity
+    - Emerging
+  - - CES + exercise programme
+    - Fatigue, sleep deficit
+    - Sleep + energy restoration
+    - Evening CES
+    - Weak / supportive
+  rationale: 'Clinical Target: Restore motor drive and physical activation through prefrontal-motor facilitation.'
+- code: F4
+  name: Anxious Depression
+  sozo_seq:
+  - CES 45 min · Primary anxiety-sleep stabilisation
+  - tDCS R-DLPFC anode · 2 mA × 20 min
+  - TPS R-DLPFC + L-DLPFC · 3,000 pulses
+  - Anxiety-focused CBT + relaxation · 45 min
+  tps_combos:
+  - - TPS R-DLPFC + CES
+    - Anxiety reduction via right prefrontal
+    - CES 30 min; TPS R-DLPFC after
+    - Anxious depression
+    - Emerging
+  - - TPS + taVNS
+    - taVNS primary anxiolytic; TPS mood
+    - taVNS 15 min; TPS after
+    - Anxiety comorbidity
+    - Emerging
+  - - TPS + DLPFC bilateral
+    - Balanced bilateral approach
+    - Bilateral TPS
+    - Mixed depression-anxiety
+    - Experimental
+  nontps_combos:
+  - - tDCS R-DLPFC + CBT
+    - Anxious depression
+    - Right frontal calming
+    - tDCS before CBT sessions
+    - Moderate adjunctive
+  - - CES + pharmacotherapy
+    - Anxiety + sleep disturbance
+    - CES adjunctive to SSRI/SNRI
+    - Evening CES
+    - Moderate adjunctive
+  - - taVNS + progressive relaxation
+    - Somatic anxiety
+    - Parasympathetic dominance
+    - taVNS during relaxation
+    - Emerging
+  rationale: 'Clinical Target: Balance prefrontal asymmetry; reduce anxiety hyperarousal while lifting mood.'
+- code: F5
+  name: Cognitive / Concentration Impairment
+  sozo_seq:
+  - CES 20 min · Clear cognitive fog
+  - tDCS L-DLPFC · 2 mA × 20 min with tasks
+  - TPS L-DLPFC + PPC · 4,000 pulses
+  - Cognitive training · 45 min
+  tps_combos:
+  - - TPS DLPFC + PPC + tDCS
+    - Prefrontal-parietal cognitive enhancement
+    - tDCS 20 min; TPS after
+    - Concentration, memory
+    - Emerging
+  - - TPS + cognitive training
+    - Post-plasticity cognitive practice
+    - TPS then cognitive tasks
+    - Working memory
+    - Moderate adjunctive
+  - - TPS + CES
+    - Sleep-cognition link
+    - CES evening; TPS morning
+    - Sleep-dependent cognition
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS DLPFC + cognitive training
+    - Concentration, working memory
+    - Online stimulation during tasks
+    - tDCS during training
+    - Moderate adjunctive
+  - - CES + sleep hygiene
+    - Sleep-dependent cognition
+    - Sleep quality improvement
+    - Evening CES
+    - Moderate adjunctive
+  - - taVNS + attention training
+    - Sustained attention deficit
+    - Cholinergic enhancement
+    - taVNS during training
+    - Experimental
+  rationale: 'Clinical Target: Restore prefrontal cognitive control impaired by depressive episode.'
+- code: F6
+  name: Somatic / Vegetative Symptoms
+  sozo_seq:
+  - taVNS 20 min · Autonomic-somatic regulation
+  - tDCS bilateral frontal · 2 mA × 20 min
+  - TPS DLPFC + insula · 3,000 pulses
+  - Body-focused therapy + relaxation · 45 min
+  tps_combos:
+  - - TPS DLPFC + taVNS
+    - Prefrontal-autonomic coupling
+    - taVNS concurrent TPS
+    - Somatic anxiety
+    - Experimental
+  - - TPS + CES
+    - Sleep + somatic symptoms
+    - CES evening; TPS morning
+    - Insomnia, fatigue
+    - Emerging
+  - - TPS + body scan mindfulness
+    - Somatic awareness + cortical modulation
+    - TPS before mindfulness
+    - Bodily dissociation
+    - Experimental
+  nontps_combos:
+  - - taVNS + somatic therapy
+    - Somatic depression
+    - Autonomic regulation
+    - taVNS daily
+    - Emerging
+  - - CES + sleep intervention
+    - Vegetative symptoms, insomnia
+    - Sleep-autonomic restoration
+    - Evening CES
+    - Moderate adjunctive
+  - - tDCS + exercise
+    - Fatigue, psychomotor
+    - BDNF + motor activation
+    - tDCS before exercise
+    - Moderate adjunctive
+  rationale: 'Clinical Target: Address autonomic-somatic dysfunction and vegetative features of MDD.'
+- code: F7
+  name: Melancholic Depression
+  sozo_seq:
+  - CES 45 min · Stabilise diurnal mood variation
+  - tDCS L-DLPFC · 2 mA × 30 min
+  - TPS DLPFC bilateral · 5,000 pulses
+  - Structured activity + light therapy · 45 min
+  tps_combos:
+  - - TPS DLPFC bilateral + tDCS
+    - Intensive bilateral prefrontal approach
+    - tDCS 20 min; extended TPS
+    - Melancholia, anhedonia
+    - Emerging
+  - - TPS + light therapy
+    - Circadian-prefrontal coupling
+    - Light therapy morning; TPS afternoon
+    - Diurnal variation
+    - Emerging
+  - - TPS + CES
+    - CES daily; TPS 3×/week
+    - Morning TPS; evening CES
+    - Sleep-melancholic coupling
+    - Emerging
+  nontps_combos:
+  - - tDCS 30 min + psychotherapy
+    - Melancholic features
+    - Extended tDCS for severity
+    - tDCS before therapy
+    - Moderate adjunctive
+  - - CES + antidepressant
+    - Melancholic severity
+    - CES augments pharmacotherapy
+    - Daily evening CES
+    - Moderate adjunctive
+  - - Light therapy + standard care
+    - Circadian disruption
+    - Circadian normalisation
+    - Morning light therapy
+    - Moderate adjunctive
+  rationale: 'Clinical Target: Intensive bilateral prefrontal engagement for melancholic severity.'
+- code: F8
+  name: Atypical Depression
+  sozo_seq:
+  - taVNS 15 min · Mood-reactivity regulation
+  - tDCS L-DLPFC · 2 mA × 20 min
+  - TPS L-DLPFC + limbic · 3,000 pulses
+  - Interpersonal therapy + social activation · 45 min
+  tps_combos:
+  - - TPS L-DLPFC + limbic + taVNS
+    - Limbic-prefrontal circuit approach
+    - taVNS; then TPS
+    - Mood reactivity, rejection sensitivity
+    - Experimental
+  - - TPS + IPT
+    - Interpersonal + neuroplasticity
+    - TPS before IPT sessions
+    - Social withdrawal
+    - Experimental
+  - - TPS + CES
+    - Sleep hypersomnia + mood
+    - CES in morning; TPS afternoon
+    - Hypersomnia
+    - Emerging
+  nontps_combos:
+  - - tDCS + interpersonal therapy
+    - Rejection sensitivity, mood reactivity
+    - Prefrontal facilitation + IPT
+    - tDCS before IPT
+    - Moderate adjunctive
+  - - taVNS + social activation
+    - Social withdrawal, mood reactivity
+    - Autonomic-social coupling
+    - taVNS before social activities
+    - Emerging
+  - - CES + sleep scheduling
+    - Hypersomnia, fatigue
+    - Circadian + sleep regulation
+    - Morning CES to reduce hypersomnia
+    - Weak / supportive
+  rationale: 'Clinical Target: Modulate mood reactivity and atypical neurovegetative features.'
+- code: F9
+  name: TRD — Treatment Resistant Depression
+  sozo_seq:
+  - CES 60 min daily · Baseline mood stabilisation (primary)
+  - tDCS L-DLPFC · 2 mA × 30 min
+  - TPS DLPFC + OFC bilateral · 5,000 pulses
+  - Intensive psychotherapy · 60 min
+  tps_combos:
+  - - TPS bilateral DLPFC/OFC + tDCS
+    - Intensive multi-site approach
+    - tDCS 30 min; TPS extended
+    - TRD, chronic depression
+    - Experimental
+  - - TPS + ketamine protocol
+    - Post-ketamine plasticity window
+    - TPS 24h post-ketamine infusion
+    - TRD with ketamine access
+    - Experimental
+  - - TPS + ECT preparation
+    - Pre-ECT neuroplasticity
+    - TPS during wait period
+    - TRD escalation
+    - Experimental
+  nontps_combos:
+  - - tDCS 30 min + intensive CBT
+    - TRD
+    - Extended sessions + psychotherapy
+    - tDCS 5×/week
+    - Moderate adjunctive
+  - - CES + antidepressant augmentation
+    - TRD with medication partial response
+    - CES daily + medication review
+    - Daily CES
+    - Moderate adjunctive
+  - - taVNS + standard care
+    - TRD with anxiety comorbidity
+    - Daily taVNS home device
+    - taVNS daily home
+    - Emerging
+  rationale: 'Clinical Target: Maximise prefrontal network engagement for treatment-resistant presentations.'

@@ -1,0 +1,542 @@
+# Chronic Tinnitus — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["tinnitus"]
+# Auto-extracted during platform migration.
+
+display_name: Chronic Tinnitus
+icd10: H93.1
+short_name: Tinnitus
+tps:
+- code: T1
+  symptom: Auditory Cortex Hyperactivity
+  evidence: Emerging
+  targets:
+  - T5
+  - T6
+  - FC3
+  params_text: 'TPS: T5, T6, FC3 · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of T5, T6, FC3 for auditory cortex hyperactivity in Chronic Tinnitus.
+- code: T2
+  symptom: Thalamocortical Dysrhythmia
+  evidence: Emerging
+  targets:
+  - T5
+  - T6
+  params_text: 'TPS: T5, T6 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of T5, T6 for thalamocortical dysrhythmia in Chronic Tinnitus.
+- code: T3
+  symptom: Distress & Limbic Involvement
+  evidence: Preliminary
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for distress & limbic involvement in Chronic Tinnitus.
+- code: T4
+  symptom: Attentional Capture
+  evidence: Emerging Pilot
+  targets:
+  - F3
+  - F4
+  - P3
+  params_text: 'TPS: F3, F4, P3 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4, P3 for attentional capture in Chronic Tinnitus.
+- code: T5
+  symptom: Sleep & Hyperarousal Overlay
+  evidence: Experimental
+  targets:
+  - Fz
+  - F3
+  params_text: 'TPS: Fz, F3 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of Fz, F3 for sleep & hyperarousal overlay in Chronic Tinnitus.
+tdcs:
+- code: C1
+  symptom: Auditory Cortex Inhibition (Primary)
+  anodes: &id001
+  - T5
+  - T6
+  cathodes:
+  - FC3
+  params_text: 2 mA · 20 min | T5, T6 anode → FC3 cathode
+  rationale: Anodal T5, T6 tDCS for auditory cortex inhibition (primary) in Chronic Tinnitus.
+- code: C2
+  symptom: Left Temporal Cathodal
+  anodes: &id002
+  - FC3
+  cathodes:
+  - T5
+  params_text: 2 mA · 20 min | FC3 anode → T5 cathode
+  rationale: Anodal FC3 tDCS for left temporal cathodal in Chronic Tinnitus.
+- code: C3
+  symptom: Right Temporal Cathodal
+  anodes: &id003
+  - FC4
+  cathodes:
+  - T6
+  params_text: 2 mA · 20 min | FC4 anode → T6 cathode
+  rationale: Anodal FC4 tDCS for right temporal cathodal in Chronic Tinnitus.
+- code: C4
+  symptom: Prefrontal Distress Modulation
+  anodes: &id004
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for prefrontal distress modulation in Chronic Tinnitus.
+- code: C5
+  symptom: Sleep & Arousal
+  anodes: &id005
+  - Fz
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Fz anode → Pz cathode
+  rationale: Anodal Fz tDCS for sleep & arousal in Chronic Tinnitus.
+- code: C6
+  symptom: Attention Network Modulation
+  anodes: &id006
+  - F3
+  - P3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3, P3 anode → Fp2 cathode
+  rationale: Anodal F3, P3 tDCS for attention network modulation in Chronic Tinnitus.
+- code: C7
+  symptom: Depression-Tinnitus Comorbidity
+  anodes: &id007
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for depression-tinnitus comorbidity in Chronic Tinnitus.
+- code: C8
+  symptom: Maintenance Auditory
+  anodes: &id008
+  - T5
+  - T6
+  cathodes:
+  - FC3
+  params_text: 2 mA · 20 min | T5, T6 anode → FC3 cathode
+  rationale: Anodal T5, T6 tDCS for maintenance auditory in Chronic Tinnitus.
+plato:
+- code: C1-PS
+  symptom: Auditory Cortex Inhibition (Primary)
+  anodes: *id001
+  cathodes:
+  - FC3
+  params_text: Variant · T5 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at T5
+- code: C2-PS
+  symptom: Left Temporal Cathodal
+  anodes: *id002
+  cathodes:
+  - T5
+  params_text: Variant · FC3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at FC3
+- code: C3-PS
+  symptom: Right Temporal Cathodal
+  anodes: *id003
+  cathodes:
+  - T6
+  params_text: Variant · FC4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at FC4
+- code: C4-PS
+  symptom: Prefrontal Distress Modulation
+  anodes: *id004
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C5-PS
+  symptom: Sleep & Arousal
+  anodes: *id005
+  cathodes:
+  - Pz
+  params_text: Variant · Fz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Fz
+- code: C6-PS
+  symptom: Attention Network Modulation
+  anodes: *id006
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C7-PS
+  symptom: Depression-Tinnitus Comorbidity
+  anodes: *id007
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C8-PS
+  symptom: Maintenance Auditory
+  anodes: *id008
+  cathodes:
+  - FC3
+  params_text: Variant · T5 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at T5
+contraindications_extra:
+- - Cochlear implant (ipsilateral)
+  - All modalities
+  - ABSOLUTE — consult audiologist
+key_outcome_measures: THI, TFI, NRS (loudness), VAS (distress), PSQI
+phenotypes:
+- code: F1
+  name: Unilateral Tonal Tinnitus
+  sozo_seq:
+  - CES 30 min · Stabilise unilateral tonal tinnitus presentation
+  - tDCS T5, T6 · 2 mA × 20 min
+  - TPS T5, T6, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Unilateral Tonal Tinnitus
+    - tDCS 20 min before TPS
+    - Unilateral Tonal Tinnitus phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Unilateral Tonal Tinnitus with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Unilateral Tonal Tinnitus with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Unilateral Tonal Tinnitus
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Unilateral Tonal Tinnitus with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Unilateral Tonal Tinnitus with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Unilateral Tonal Tinnitus phenotype of Chronic Tinnitus.'
+- code: F2
+  name: Bilateral Tonal Tinnitus
+  sozo_seq:
+  - CES 30 min · Stabilise bilateral tonal tinnitus presentation
+  - tDCS T5, T6 · 2 mA × 20 min
+  - TPS T5, T6, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Bilateral Tonal Tinnitus
+    - tDCS 20 min before TPS
+    - Bilateral Tonal Tinnitus phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Bilateral Tonal Tinnitus with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Bilateral Tonal Tinnitus with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Bilateral Tonal Tinnitus
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Bilateral Tonal Tinnitus with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Bilateral Tonal Tinnitus with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Bilateral Tonal Tinnitus phenotype of Chronic Tinnitus.'
+- code: F3
+  name: Pulsatile Tinnitus
+  sozo_seq:
+  - CES 30 min · Stabilise pulsatile tinnitus presentation
+  - tDCS T5, T6 · 2 mA × 20 min
+  - TPS T5, T6, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Pulsatile Tinnitus
+    - tDCS 20 min before TPS
+    - Pulsatile Tinnitus phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Pulsatile Tinnitus with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Pulsatile Tinnitus with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Pulsatile Tinnitus
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Pulsatile Tinnitus with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Pulsatile Tinnitus with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Pulsatile Tinnitus phenotype of Chronic Tinnitus.'
+- code: F4
+  name: Noise-Sensitive / Hyperacusis
+  sozo_seq:
+  - CES 30 min · Stabilise noise-sensitive / hyperacusis presentation
+  - tDCS T5, T6 · 2 mA × 20 min
+  - TPS T5, T6, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Noise-Sensitive / Hyperacusis
+    - tDCS 20 min before TPS
+    - Noise-Sensitive / Hyperacusis phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Noise-Sensitive / Hyperacusis with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Noise-Sensitive / Hyperacusis with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Noise-Sensitive / Hyperacusis
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Noise-Sensitive / Hyperacusis with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Noise-Sensitive / Hyperacusis with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Noise-Sensitive / Hyperacusis phenotype of Chronic Tinnitus.'
+- code: F5
+  name: Tinnitus + Depression
+  sozo_seq:
+  - CES 30 min · Stabilise tinnitus + depression presentation
+  - tDCS T5, T6 · 2 mA × 20 min
+  - TPS T5, T6, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Tinnitus + Depression
+    - tDCS 20 min before TPS
+    - Tinnitus + Depression phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Tinnitus + Depression with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Tinnitus + Depression with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Tinnitus + Depression
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Tinnitus + Depression with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Tinnitus + Depression with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Tinnitus + Depression phenotype of Chronic Tinnitus.'
+- code: F6
+  name: Tinnitus + Anxiety
+  sozo_seq:
+  - CES 30 min · Stabilise tinnitus + anxiety presentation
+  - tDCS T5, T6 · 2 mA × 20 min
+  - TPS T5, T6, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Tinnitus + Anxiety
+    - tDCS 20 min before TPS
+    - Tinnitus + Anxiety phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Tinnitus + Anxiety with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Tinnitus + Anxiety with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Tinnitus + Anxiety
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Tinnitus + Anxiety with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Tinnitus + Anxiety with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Tinnitus + Anxiety phenotype of Chronic Tinnitus.'
+- code: F7
+  name: High-Frequency Tinnitus
+  sozo_seq:
+  - CES 30 min · Stabilise high-frequency tinnitus presentation
+  - tDCS T5, T6 · 2 mA × 20 min
+  - TPS T5, T6, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for High-Frequency Tinnitus
+    - tDCS 20 min before TPS
+    - High-Frequency Tinnitus phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - High-Frequency Tinnitus with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - High-Frequency Tinnitus with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - High-Frequency Tinnitus
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - High-Frequency Tinnitus with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - High-Frequency Tinnitus with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for High-Frequency Tinnitus phenotype of Chronic Tinnitus.'
+- code: F8
+  name: Low-Frequency Tinnitus
+  sozo_seq:
+  - CES 30 min · Stabilise low-frequency tinnitus presentation
+  - tDCS T5, T6 · 2 mA × 20 min
+  - TPS T5, T6, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Low-Frequency Tinnitus
+    - tDCS 20 min before TPS
+    - Low-Frequency Tinnitus phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Low-Frequency Tinnitus with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Low-Frequency Tinnitus with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Low-Frequency Tinnitus
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Low-Frequency Tinnitus with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Low-Frequency Tinnitus with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Low-Frequency Tinnitus phenotype of Chronic Tinnitus.'
+- code: F9
+  name: Tinnitus + Sleep Disorder
+  sozo_seq:
+  - CES 30 min · Stabilise tinnitus + sleep disorder presentation
+  - tDCS T5, T6 · 2 mA × 20 min
+  - TPS T5, T6, FC3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Tinnitus + Sleep Disorder
+    - tDCS 20 min before TPS
+    - Tinnitus + Sleep Disorder phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Tinnitus + Sleep Disorder with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Tinnitus + Sleep Disorder with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Tinnitus + Sleep Disorder
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Tinnitus + Sleep Disorder with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Tinnitus + Sleep Disorder with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Tinnitus + Sleep Disorder phenotype of Chronic Tinnitus.'

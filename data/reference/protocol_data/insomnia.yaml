@@ -1,0 +1,544 @@
+# Insomnia Disorder — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["insomnia"]
+# Auto-extracted during platform migration.
+
+display_name: Insomnia Disorder
+icd10: G47.00
+short_name: Insomnia
+tps:
+- code: T1
+  symptom: Sleep Onset Insomnia (DSWPD)
+  evidence: Emerging
+  targets:
+  - F3
+  - F4
+  - Fz
+  params_text: 'TPS: F3, F4, Fz · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4, Fz for sleep onset insomnia (dswpd) in Insomnia Disorder.
+- code: T2
+  symptom: Sleep Maintenance Insomnia
+  evidence: Emerging
+  targets:
+  - Fz
+  - F3
+  params_text: 'TPS: Fz, F3 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of Fz, F3 for sleep maintenance insomnia in Insomnia Disorder.
+- code: T3
+  symptom: Early Morning Awakening
+  evidence: Preliminary
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for early morning awakening in Insomnia Disorder.
+- code: T4
+  symptom: Hyperarousal & Pre-sleep Worry
+  evidence: Emerging Pilot
+  targets:
+  - F4
+  - F3
+  params_text: 'TPS: F4, F3 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F4, F3 for hyperarousal & pre-sleep worry in Insomnia Disorder.
+- code: T5
+  symptom: Comorbid Depression-Insomnia
+  evidence: Experimental
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for comorbid depression-insomnia in Insomnia Disorder.
+tdcs:
+- code: C1
+  symptom: Sleep Onset (Primary)
+  anodes: &id001
+  - Fz
+  - F3
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Fz, F3 anode → Pz cathode
+  rationale: Anodal Fz, F3 tDCS for sleep onset (primary) in Insomnia Disorder.
+- code: C2
+  symptom: Sleep Maintenance
+  anodes: &id002
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for sleep maintenance in Insomnia Disorder.
+- code: C3
+  symptom: Sleep Quality & Architecture
+  anodes: &id003
+  - Fz
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Fz anode → Pz cathode
+  rationale: Anodal Fz tDCS for sleep quality & architecture in Insomnia Disorder.
+- code: C4
+  symptom: Hyperarousal Reduction
+  anodes: &id004
+  - F4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | F4 anode → Fp1 cathode
+  rationale: Anodal F4 tDCS for hyperarousal reduction in Insomnia Disorder.
+- code: C5
+  symptom: Circadian Rhythm Alignment
+  anodes: &id005
+  - Fz
+  - Fpz
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Fz, Fpz anode → Pz cathode
+  rationale: Anodal Fz, Fpz tDCS for circadian rhythm alignment in Insomnia Disorder.
+- code: C6
+  symptom: Stress-Related Insomnia
+  anodes: &id006
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for stress-related insomnia in Insomnia Disorder.
+- code: C7
+  symptom: Comorbid Depression-Insomnia
+  anodes: &id007
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for comorbid depression-insomnia in Insomnia Disorder.
+- code: C8
+  symptom: Maintenance Home Sleep
+  anodes: &id008
+  - Fz
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Fz anode → Pz cathode
+  rationale: Anodal Fz tDCS for maintenance home sleep in Insomnia Disorder.
+plato:
+- code: C1-PS
+  symptom: Sleep Onset (Primary)
+  anodes: *id001
+  cathodes:
+  - Pz
+  params_text: Variant · Fz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Fz
+- code: C2-PS
+  symptom: Sleep Maintenance
+  anodes: *id002
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C3-PS
+  symptom: Sleep Quality & Architecture
+  anodes: *id003
+  cathodes:
+  - Pz
+  params_text: Variant · Fz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Fz
+- code: C4-PS
+  symptom: Hyperarousal Reduction
+  anodes: *id004
+  cathodes:
+  - Fp1
+  params_text: Variant · F4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F4
+- code: C5-PS
+  symptom: Circadian Rhythm Alignment
+  anodes: *id005
+  cathodes:
+  - Pz
+  params_text: Variant · Fz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Fz
+- code: C6-PS
+  symptom: Stress-Related Insomnia
+  anodes: *id006
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C7-PS
+  symptom: Comorbid Depression-Insomnia
+  anodes: *id007
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C8-PS
+  symptom: Maintenance Home Sleep
+  anodes: *id008
+  cathodes:
+  - Pz
+  params_text: Variant · Fz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Fz
+contraindications_extra:
+- - Severe OSA (undiagnosed)
+  - CES · tDCS
+  - RELATIVE — sleep study first
+- - CES use during pregnancy
+  - CES
+  - RELATIVE — Doctor decision
+key_outcome_measures: ISI, PSQI, ESS (daytime sleepiness), DBAS-16, PHQ-9
+phenotypes:
+- code: F1
+  name: Sleep Onset Insomnia
+  sozo_seq:
+  - CES 30 min · Stabilise sleep onset insomnia presentation
+  - tDCS Fz, F3 · 2 mA × 20 min
+  - TPS F3, F4, Fz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Sleep Onset Insomnia
+    - tDCS 20 min before TPS
+    - Sleep Onset Insomnia phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Sleep Onset Insomnia with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Sleep Onset Insomnia with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Sleep Onset Insomnia
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Sleep Onset Insomnia with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Sleep Onset Insomnia with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Sleep Onset Insomnia phenotype of Insomnia Disorder.'
+- code: F2
+  name: Sleep Maintenance Insomnia
+  sozo_seq:
+  - CES 30 min · Stabilise sleep maintenance insomnia presentation
+  - tDCS Fz, F3 · 2 mA × 20 min
+  - TPS F3, F4, Fz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Sleep Maintenance Insomnia
+    - tDCS 20 min before TPS
+    - Sleep Maintenance Insomnia phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Sleep Maintenance Insomnia with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Sleep Maintenance Insomnia with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Sleep Maintenance Insomnia
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Sleep Maintenance Insomnia with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Sleep Maintenance Insomnia with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Sleep Maintenance Insomnia phenotype of Insomnia Disorder.'
+- code: F3
+  name: Early Morning Awakening
+  sozo_seq:
+  - CES 30 min · Stabilise early morning awakening presentation
+  - tDCS Fz, F3 · 2 mA × 20 min
+  - TPS F3, F4, Fz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Early Morning Awakening
+    - tDCS 20 min before TPS
+    - Early Morning Awakening phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Early Morning Awakening with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Early Morning Awakening with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Early Morning Awakening
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Early Morning Awakening with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Early Morning Awakening with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Early Morning Awakening phenotype of Insomnia Disorder.'
+- code: F4
+  name: Hyperarousal-Driven Insomnia
+  sozo_seq:
+  - CES 30 min · Stabilise hyperarousal-driven insomnia presentation
+  - tDCS Fz, F3 · 2 mA × 20 min
+  - TPS F3, F4, Fz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Hyperarousal-Driven Insomnia
+    - tDCS 20 min before TPS
+    - Hyperarousal-Driven Insomnia phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Hyperarousal-Driven Insomnia with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Hyperarousal-Driven Insomnia with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Hyperarousal-Driven Insomnia
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Hyperarousal-Driven Insomnia with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Hyperarousal-Driven Insomnia with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Hyperarousal-Driven Insomnia phenotype of Insomnia Disorder.'
+- code: F5
+  name: Circadian Rhythm Disorder
+  sozo_seq:
+  - CES 30 min · Stabilise circadian rhythm disorder presentation
+  - tDCS Fz, F3 · 2 mA × 20 min
+  - TPS F3, F4, Fz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Circadian Rhythm Disorder
+    - tDCS 20 min before TPS
+    - Circadian Rhythm Disorder phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Circadian Rhythm Disorder with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Circadian Rhythm Disorder with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Circadian Rhythm Disorder
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Circadian Rhythm Disorder with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Circadian Rhythm Disorder with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Circadian Rhythm Disorder phenotype of Insomnia Disorder.'
+- code: F6
+  name: Comorbid Depression-Insomnia
+  sozo_seq:
+  - CES 30 min · Stabilise comorbid depression-insomnia presentation
+  - tDCS Fz, F3 · 2 mA × 20 min
+  - TPS F3, F4, Fz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Comorbid Depression-Insomnia
+    - tDCS 20 min before TPS
+    - Comorbid Depression-Insomnia phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Comorbid Depression-Insomnia with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Comorbid Depression-Insomnia with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Comorbid Depression-Insomnia
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Comorbid Depression-Insomnia with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Comorbid Depression-Insomnia with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Comorbid Depression-Insomnia phenotype of Insomnia Disorder.'
+- code: F7
+  name: Comorbid Anxiety-Insomnia
+  sozo_seq:
+  - CES 30 min · Stabilise comorbid anxiety-insomnia presentation
+  - tDCS Fz, F3 · 2 mA × 20 min
+  - TPS F3, F4, Fz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Comorbid Anxiety-Insomnia
+    - tDCS 20 min before TPS
+    - Comorbid Anxiety-Insomnia phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Comorbid Anxiety-Insomnia with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Comorbid Anxiety-Insomnia with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Comorbid Anxiety-Insomnia
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Comorbid Anxiety-Insomnia with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Comorbid Anxiety-Insomnia with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Comorbid Anxiety-Insomnia phenotype of Insomnia Disorder.'
+- code: F8
+  name: Insomnia in Elderly
+  sozo_seq:
+  - CES 30 min · Stabilise insomnia in elderly presentation
+  - tDCS Fz, F3 · 2 mA × 20 min
+  - TPS F3, F4, Fz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Insomnia in Elderly
+    - tDCS 20 min before TPS
+    - Insomnia in Elderly phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Insomnia in Elderly with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Insomnia in Elderly with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Insomnia in Elderly
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Insomnia in Elderly with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Insomnia in Elderly with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Insomnia in Elderly phenotype of Insomnia Disorder.'
+- code: F9
+  name: Medication-Dependent Insomnia
+  sozo_seq:
+  - CES 30 min · Stabilise medication-dependent insomnia presentation
+  - tDCS Fz, F3 · 2 mA × 20 min
+  - TPS F3, F4, Fz · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Medication-Dependent Insomnia
+    - tDCS 20 min before TPS
+    - Medication-Dependent Insomnia phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Medication-Dependent Insomnia with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Medication-Dependent Insomnia with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Medication-Dependent Insomnia
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Medication-Dependent Insomnia with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Medication-Dependent Insomnia with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Medication-Dependent Insomnia phenotype of Insomnia Disorder.'

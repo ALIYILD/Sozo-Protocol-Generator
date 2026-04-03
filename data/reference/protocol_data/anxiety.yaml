@@ -1,0 +1,551 @@
+# Generalised Anxiety Disorder — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["anxiety"]
+# Auto-extracted during platform migration.
+
+display_name: Generalised Anxiety Disorder
+icd10: F41.1
+short_name: GAD
+tps:
+- code: T1
+  symptom: Generalised Worry & Hyperarousal
+  evidence: Emerging
+  targets:
+  - F4
+  - F3
+  params_text: 'TPS: R-DLPFC (primary) + L-DLPFC · 3,000 pulses · 5 Hz'
+  rationale: R-DLPFC facilitation shifts prefrontal balance away from threat-hypervigilance.
+- code: T2
+  symptom: Panic & Autonomic Dysregulation
+  evidence: Emerging
+  targets:
+  - F4
+  - FC4
+  params_text: 'TPS: R-DLPFC + R-FC · 3,000 pulses · 5 Hz'
+  rationale: Right prefrontal targeting reduces amygdala hyperreactivity via top-down inhibition.
+- code: T3
+  symptom: Cognitive Worry / Intrusive Thoughts
+  evidence: Preliminary
+  targets:
+  - F3
+  - F4
+  - Pz
+  params_text: 'TPS: Bilateral DLPFC + posterior · 4,000 pulses · 5 Hz'
+  rationale: DMN-CEN balance restoration reduces cognitive worry loops.
+- code: T4
+  symptom: Insomnia Comorbidity
+  evidence: Emerging Pilot
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: Bilateral DLPFC · 3,000 pulses · evening session'
+  rationale: Evening prefrontal modulation may reduce pre-sleep hyperarousal.
+- code: T5
+  symptom: Social Anxiety Overlay
+  evidence: Experimental
+  targets:
+  - F4
+  - F3
+  - T4
+  params_text: 'TPS: R-DLPFC + temporal · 3,000 pulses · 5 Hz'
+  rationale: Temporal lobe involvement addresses social threat appraisal circuits.
+tdcs:
+- code: C1
+  symptom: Generalised Anxiety (Primary Protocol)
+  anodes:
+  - F4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | R-DLPFC (F4) → L-supraorbital cathode
+  rationale: R-DLPFC anodal tDCS increases right prefrontal inhibitory control of amygdala.
+- code: C2
+  symptom: Worry & Cognitive Anxiety
+  anodes:
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | Bilateral DLPFC → occipital cathode
+  rationale: Bilateral prefrontal engagement reduces worry network hyperactivity.
+- code: C3
+  symptom: Panic Disorder Overlay
+  anodes:
+  - F4
+  cathodes:
+  - F3
+  params_text: 2 mA · 20 min | R-DLPFC anode → L-DLPFC cathode
+  rationale: Right facilitation/left inhibition reduces panic threshold via prefrontal-amygdala top-down.
+- code: C4
+  symptom: Sleep & Hyperarousal
+  anodes:
+  - Fz
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Frontal-parietal; evening session
+  rationale: Frontal-parietal montage in the evening reduces cortical hyperarousal for sleep onset.
+- code: C5
+  symptom: Somatic Anxiety
+  anodes:
+  - F4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | R-DLPFC → interoceptive awareness tasks
+  rationale: Right prefrontal facilitation during body-scan exercises reduces somatic anxiety amplification.
+- code: C6
+  symptom: Social Anxiety
+  anodes:
+  - F4
+  - FC4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | R-prefrontal extended before social exposure
+  rationale: Right prefrontal enhancement before social exposure tasks reduces anticipatory anxiety.
+- code: C7
+  symptom: Health Anxiety / OCD Features
+  anodes:
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | L-DLPFC during ERP tasks
+  rationale: L-DLPFC facilitation during exposure-response prevention exercises (OCD overlay).
+- code: C8
+  symptom: Maintenance / Generalisation
+  anodes:
+  - F4
+  cathodes:
+  - Fp1
+  params_text: 1.5 mA · 20 min | Maintenance twice-weekly home
+  rationale: Maintenance R-DLPFC stimulation sustains anxiety reduction gains post-intensive programme.
+plato:
+- code: C1-PS
+  symptom: Generalised Anxiety
+  anodes:
+  - F4
+  cathodes:
+  - Fpz
+  params_text: Variant 4 · R-DLPFC (F4) | 1.2–1.6 mA · 20 min
+  variant_note: 'Variant 4: F4 (R-DLPFC) — primary anxiolytic montage'
+- code: C2-PS
+  symptom: Worry & Cognitive Anxiety
+  anodes:
+  - F4
+  cathodes:
+  - Fpz
+  params_text: Variant 4 · R-DLPFC | 1.2 mA · 20 min with worry postponement
+  variant_note: Pair with worry postponement technique during stimulation
+- code: C3-PS
+  symptom: Panic
+  anodes:
+  - F4
+  cathodes:
+  - Fp1
+  params_text: Variant 4 · R-DLPFC | 1.2 mA · 20 min
+  variant_note: Use lower intensity (1.2 mA) for high sensitivity patients
+- code: C4-PS
+  symptom: Sleep & Hyperarousal
+  anodes:
+  - Fz
+  cathodes:
+  - Oz
+  params_text: Variant 5 · Frontal | 1.2 mA · Evening only
+  variant_note: Evening session only; may reduce sleep-onset anxiety
+- code: C5-PS
+  symptom: Somatic Anxiety
+  anodes:
+  - F4
+  cathodes:
+  - Fpz
+  params_text: Variant 4 · R-DLPFC | 1.2 mA · 20 min with body scan
+  variant_note: Pair with interoceptive awareness or body-scan mindfulness
+- code: C6-PS
+  symptom: Social Anxiety
+  anodes:
+  - F4
+  cathodes:
+  - Fpz
+  params_text: Variant 4 · R-DLPFC | 1.6 mA before social exposure
+  variant_note: Administer 30 min before planned social exposure session
+- code: C7-PS
+  symptom: Health Anxiety
+  anodes:
+  - F3
+  cathodes:
+  - Fp2
+  params_text: Variant 3 · L-DLPFC | 1.2–1.6 mA with ERP
+  variant_note: L-DLPFC for ERP tasks (health anxiety / OCD features)
+- code: C8-PS
+  symptom: Maintenance
+  anodes:
+  - F4
+  cathodes:
+  - Fpz
+  params_text: Variant 4 · Maintenance | 1.2 mA · 2×/week
+  variant_note: Home maintenance programme; weekly clinician review
+contraindications_extra:
+- - Acute panic attack during session
+  - All modalities
+  - PAUSE — grounding first; reassess
+- - Benzodiazepine intoxication
+  - tDCS · TPS
+  - POSTPONE session
+key_outcome_measures: GAD-7, HAMA, Penn State Worry Questionnaire, PSQI, PHQ-9
+phenotypes:
+- code: F1
+  name: Chronic Worry / Generalised
+  sozo_seq:
+  - CES 30–45 min · Primary anxiolytic
+  - tDCS R-DLPFC · 2 mA × 20 min
+  - TPS R-DLPFC · 3,000 pulses
+  - CBT worry postponement + relaxation · 45 min
+  tps_combos:
+  - - TPS R-DLPFC + tDCS
+    - Sequential right prefrontal facilitation
+    - tDCS 20 min before TPS
+    - Chronic worry
+    - Emerging
+  - - TPS + CES
+    - CES daily; TPS adjunctive
+    - CES morning; TPS 2×/week
+    - GAD with sleep comorbidity
+    - Emerging
+  - - TPS + taVNS
+    - taVNS parasympathetic; TPS prefrontal
+    - taVNS pre-TPS
+    - Autonomic hyperarousal
+    - Experimental
+  nontps_combos:
+  - - tDCS R-DLPFC + CBT
+    - Generalised worry
+    - Right prefrontal + worry exposure
+    - tDCS before CBT
+    - Moderate adjunctive
+  - - CES + GAD management
+    - Sleep + anxiety
+    - Daily CES adjunctive
+    - Evening CES
+    - Moderate adjunctive
+  - - taVNS + relaxation training
+    - Autonomic anxiety
+    - Parasympathetic upregulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Restore prefrontal top-down control over pathological worry circuits.'
+- code: F2
+  name: Panic Disorder
+  sozo_seq:
+  - taVNS 15 min · Acute autonomic stabilisation
+  - tDCS R-DLPFC → L-DLPFC cathode · 2 mA × 20 min
+  - TPS R-DLPFC + FC · 3,000 pulses
+  - Interoceptive exposure + breathing training · 45 min
+  tps_combos:
+  - - TPS R-DLPFC + taVNS
+    - Prefrontal-vagal dual approach
+    - taVNS 15 min; TPS after
+    - Panic, palpitations
+    - Emerging
+  - - TPS + CES
+    - CES reduces inter-panic anxiety
+    - CES daily; TPS 2×/week
+    - Anticipatory anxiety
+    - Emerging
+  - - TPS + breathing biofeedback
+    - Respiratory-cardiac-prefrontal loop
+    - TPS then biofeedback
+    - Somatic panic
+    - Experimental
+  nontps_combos:
+  - - tDCS R-DLPFC + interoceptive exposure
+    - Panic disorder
+    - Prefrontal facilitation + exposure
+    - tDCS before exposure
+    - Moderate adjunctive
+  - - CES + pharmacotherapy
+    - Panic with medication partial response
+    - CES augments anxiolytics
+    - Evening CES
+    - Moderate adjunctive
+  - - taVNS + breathing training
+    - Autonomic panic
+    - Parasympathetic + respiratory
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Reduce panic threshold via prefrontal-amygdala modulation and autonomic stabilisation.'
+- code: F3
+  name: Social Anxiety
+  sozo_seq:
+  - CES 30 min · Reduce anticipatory anxiety
+  - tDCS R-DLPFC + FC4 · 2 mA × 20 min
+  - TPS R-DLPFC + temporal · 3,000 pulses
+  - Social exposure + video feedback · 45 min
+  tps_combos:
+  - - TPS R-DLPFC + temporal + tDCS
+    - Social threat appraisal circuit
+    - tDCS 20 min; TPS before exposure
+    - Social fear, embarrassment
+    - Experimental
+  - - TPS + social exposure therapy
+    - Post-TPS plasticity for exposure
+    - TPS then graduated exposure
+    - Social avoidance
+    - Emerging
+  - - TPS + CES
+    - Pre-event anxiety
+    - CES 60 min before social event
+    - Anticipatory anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS R-prefrontal + CBT-SA
+    - Social anxiety disorder
+    - Right prefrontal + exposure
+    - tDCS before exposure sessions
+    - Moderate adjunctive
+  - - taVNS + social skills training
+    - Autonomic social anxiety
+    - Parasympathetic + skills
+    - taVNS before practice
+    - Emerging
+  - - CES + confidence building
+    - Anticipatory anxiety
+    - Arousal reduction
+    - CES before social engagement
+    - Weak / supportive
+  rationale: 'Clinical Target: Reduce social threat appraisal; facilitate exposure therapy engagement.'
+- code: F4
+  name: Health Anxiety / Illness Phobia
+  sozo_seq:
+  - CES 30 min · Reduce checking urge anxiety
+  - tDCS L-DLPFC · 2 mA × 20 min with ERP
+  - TPS L-DLPFC + OFC · 3,000 pulses
+  - ERP + ACT · 45 min
+  tps_combos:
+  - - TPS L-DLPFC + OFC + tDCS
+    - OFC-DLPFC loop for health anxiety
+    - tDCS 20 min; TPS OFC area
+    - Checking behaviour, reassurance seeking
+    - Experimental
+  - - TPS + ACT
+    - Acceptance-based approach post-TPS
+    - TPS then ACT session
+    - Illness preoccupation
+    - Experimental
+  - - TPS + CES
+    - CES reduces hyperarousal driving checking
+    - CES daily; TPS 2×/week
+    - Anxiety-checking cycle
+    - Emerging
+  nontps_combos:
+  - - tDCS L-DLPFC + ERP
+    - Health anxiety, checking
+    - Prefrontal facilitation + ERP
+    - tDCS during ERP
+    - Moderate adjunctive
+  - - CES + ACT
+    - Illness preoccupation
+    - Arousal + acceptance approach
+    - Daily CES
+    - Moderate adjunctive
+  - - taVNS + mindfulness-ACT
+    - Somatic checking
+    - Parasympathetic + acceptance
+    - taVNS during mindfulness
+    - Emerging
+  rationale: 'Clinical Target: Modulate OFC-DLPFC circuit mediating health-threat appraisal.'
+- code: F5
+  name: PTSD / Trauma Anxiety
+  sozo_seq:
+  - CES 45 min · Safety and stabilisation
+  - tDCS R-DLPFC · 2 mA × 20 min
+  - TPS R-DLPFC + bilateral · 3,000 pulses
+  - Trauma-focused CBT · 45 min
+  tps_combos:
+  - - TPS R-DLPFC + taVNS
+    - Trauma-autonomic coupling
+    - taVNS 15 min; TPS after
+    - Hypervigilance, startle
+    - Emerging
+  - - TPS + EMDR
+    - Post-TPS plasticity for trauma processing
+    - TPS before EMDR session
+    - Trauma memory
+    - Experimental
+  - - TPS + CES
+    - CES stabilises trauma-related sleep disruption
+    - CES evening; TPS morning
+    - Trauma + insomnia
+    - Emerging
+  nontps_combos:
+  - - tDCS R-DLPFC + trauma-CBT
+    - PTSD hyperarousal
+    - Prefrontal facilitation + CBT
+    - tDCS before trauma session
+    - Moderate adjunctive
+  - - CES + sleep hygiene
+    - Trauma nightmares, sleep disruption
+    - CES sleep restoration
+    - Evening CES
+    - Moderate adjunctive
+  - - taVNS + grounding techniques
+    - Dissociation, hyperarousal
+    - Parasympathetic + grounding
+    - taVNS during stabilisation
+    - Emerging
+  rationale: 'Clinical Target: Reduce hypervigilance and facilitate trauma memory processing.'
+- code: F6
+  name: OCD Spectrum Anxiety
+  sozo_seq:
+  - CES 30 min · Reduce obsessional arousal
+  - tDCS L-DLPFC / pre-SMA · 2 mA × 20 min
+  - TPS pre-SMA + OFC · 3,000 pulses
+  - ERP + OCD-CBT · 60 min
+  tps_combos:
+  - - TPS pre-SMA + OFC + tDCS
+    - OCD circuit disruption
+    - tDCS 20 min; TPS OFC/SMA
+    - Obsessions, compulsions
+    - Emerging
+  - - TPS + ERP
+    - Post-TPS ERP engagement
+    - TPS then ERP practice
+    - Compulsive rituals
+    - Emerging
+  - - TPS + CES
+    - CES reduces OCD anxiety baseline
+    - CES daily; TPS 2×/week
+    - Anxiety-OCD loop
+    - Emerging
+  nontps_combos:
+  - - tDCS pre-SMA + ERP
+    - OCD compulsions
+    - Motor inhibition + exposure
+    - tDCS during ERP
+    - Moderate adjunctive
+  - - CES + OCD management
+    - OCD anxiety
+    - Arousal reduction + ERP
+    - Daily CES
+    - Moderate adjunctive
+  - - taVNS + mindfulness-OCD
+    - OCD with autonomic arousal
+    - Parasympathetic + defusion
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Disrupt cortico-striato-thalamo-cortical loop driving OCD anxiety.'
+- code: F7
+  name: Sleep-Anxiety Comorbidity
+  sozo_seq:
+  - CES 60 min evening · Primary sleep-anxiety intervention
+  - tDCS frontal · 2 mA × 20 min evening
+  - TPS DLPFC bilateral · 3,000 pulses (afternoon)
+  - Sleep CBT-I + relaxation · 45 min
+  tps_combos:
+  - - TPS (afternoon) + CES (evening)
+    - Temporal separation for sleep-anxiety
+    - TPS 2 PM; CES 8 PM
+    - Insomnia + anxiety
+    - Emerging
+  - - TPS + sleep restriction therapy
+    - CBT-I integration
+    - TPS before sleep restriction
+    - Sleep anxiety
+    - Experimental
+  - - TPS + taVNS
+    - Evening parasympathetic priming
+    - taVNS 30 min pre-sleep
+    - Pre-sleep hyperarousal
+    - Experimental
+  nontps_combos:
+  - - tDCS frontal + CBT-I
+    - Sleep anxiety
+    - Prefrontal + sleep restriction
+    - Evening tDCS with CBT-I
+    - Moderate adjunctive
+  - - CES + sleep hygiene
+    - Chronic insomnia-anxiety
+    - CES primary sleep intervention
+    - Evening CES 60 min
+    - Moderate adjunctive
+  - - taVNS + progressive relaxation
+    - Pre-sleep anxiety
+    - Parasympathetic + relaxation
+    - taVNS 30 min before bed
+    - Emerging
+  rationale: 'Clinical Target: Break anxiety-sleep disruption cycle via evening frontal modulation.'
+- code: F8
+  name: Generalised Physical Anxiety
+  sozo_seq:
+  - taVNS 20 min · Somatic anxiety stabilisation
+  - tDCS R-DLPFC · 2 mA × 20 min
+  - TPS R-DLPFC · 3,000 pulses
+  - Physiotherapy + relaxation + biofeedback · 45 min
+  tps_combos:
+  - - TPS + taVNS + biofeedback
+    - Full autonomic-prefrontal approach
+    - taVNS 20 min; TPS; biofeedback
+    - Physical tension, hyperventilation
+    - Experimental
+  - - TPS + physiotherapy
+    - Somatic tension release post-TPS
+    - TPS then stretching/physio
+    - Muscular tension anxiety
+    - Experimental
+  - - TPS + CES
+    - Physical anxiety + sleep
+    - CES evening; TPS morning
+    - Fatigue-anxiety
+    - Emerging
+  nontps_combos:
+  - - tDCS + progressive muscle relaxation
+    - Physical tension
+    - Prefrontal + somatic relaxation
+    - tDCS then relaxation
+    - Moderate adjunctive
+  - - taVNS + physiotherapy
+    - Somatic anxiety
+    - Autonomic + somatic release
+    - taVNS pre-physio
+    - Emerging
+  - - CES + exercise
+    - Physical anxiety, fatigue
+    - Sleep + BDNF restoration
+    - Evening CES
+    - Weak / supportive
+  rationale: 'Clinical Target: Reduce physical manifestations of anxiety through autonomic-cortical regulation.'
+- code: F9
+  name: Medication-Resistant Anxiety
+  sozo_seq:
+  - CES 60 min daily · Intensive stabilisation
+  - tDCS bilateral DLPFC · 2 mA × 20 min
+  - TPS DLPFC bilateral · 5,000 pulses
+  - Intensive CBT + ACT · 60 min
+  tps_combos:
+  - - TPS bilateral DLPFC + tDCS + taVNS
+    - Multi-modal intensive approach
+    - taVNS 15 min; tDCS 20 min; TPS
+    - Medication-resistant GAD
+    - Experimental
+  - - TPS + intensive CBT
+    - Post-TPS intensive therapy window
+    - TPS 5×/week; CBT daily
+    - Treatment-resistant anxiety
+    - Experimental
+  - - TPS + ketamine exploration
+    - Glutamatergic anxiety approach
+    - TPS post-ketamine (if prescribed)
+    - TRD-style anxiety
+    - Experimental
+  nontps_combos:
+  - - tDCS intensive + CBT
+    - Medication-resistant anxiety
+    - Extended sessions + daily CBT
+    - 5×/week tDCS
+    - Moderate adjunctive
+  - - CES intensive + pharmacotherapy review
+    - Medication-resistant GAD
+    - CES daily + medication optimisation
+    - Daily CES
+    - Moderate adjunctive
+  - - taVNS home device + therapy
+    - Chronic anxiety
+    - Daily home taVNS + weekly therapy
+    - Home taVNS programme
+    - Emerging
+  rationale: 'Clinical Target: Intensive multi-modal approach for medication-resistant anxiety presentations.'

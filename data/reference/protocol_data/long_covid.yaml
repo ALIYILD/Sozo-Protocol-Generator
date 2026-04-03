@@ -1,0 +1,544 @@
+# Long COVID / Brain Fog — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["long_covid"]
+# Auto-extracted during platform migration.
+
+display_name: Long COVID / Brain Fog
+icd10: U09.9
+short_name: Long COVID
+tps:
+- code: T1
+  symptom: Cognitive Impairment / Brain Fog
+  evidence: Emerging
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for cognitive impairment / brain fog in Long COVID / Brain Fog.
+- code: T2
+  symptom: Fatigue & Post-Exertional Malaise
+  evidence: Emerging
+  targets:
+  - F3
+  - Fz
+  params_text: 'TPS: F3, Fz · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, Fz for fatigue & post-exertional malaise in Long COVID / Brain Fog.
+- code: T3
+  symptom: Autonomic Dysfunction (POTS)
+  evidence: Preliminary
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for autonomic dysfunction (pots) in Long COVID / Brain Fog.
+- code: T4
+  symptom: Depression & Mood Dysregulation
+  evidence: Emerging Pilot
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for depression & mood dysregulation in Long COVID / Brain Fog.
+- code: T5
+  symptom: Headache & Neuropathic Pain
+  evidence: Experimental
+  targets:
+  - C3
+  - C4
+  - Fz
+  params_text: 'TPS: C3, C4, Fz · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of C3, C4, Fz for headache & neuropathic pain in Long COVID / Brain Fog.
+tdcs:
+- code: C1
+  symptom: Cognitive Rehabilitation (Primary)
+  anodes: &id001
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for cognitive rehabilitation (primary) in Long COVID / Brain Fog.
+- code: C2
+  symptom: Fatigue Management
+  anodes: &id002
+  - Fz
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Fz anode → Pz cathode
+  rationale: Anodal Fz tDCS for fatigue management in Long COVID / Brain Fog.
+- code: C3
+  symptom: Attention & Working Memory
+  anodes: &id003
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for attention & working memory in Long COVID / Brain Fog.
+- code: C4
+  symptom: Autonomic Stabilisation
+  anodes: &id004
+  - F4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | F4 anode → Fp1 cathode
+  rationale: Anodal F4 tDCS for autonomic stabilisation in Long COVID / Brain Fog.
+- code: C5
+  symptom: Depression & Mood
+  anodes: &id005
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for depression & mood in Long COVID / Brain Fog.
+- code: C6
+  symptom: Sleep Dysfunction
+  anodes: &id006
+  - Fz
+  - F3
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Fz, F3 anode → Pz cathode
+  rationale: Anodal Fz, F3 tDCS for sleep dysfunction in Long COVID / Brain Fog.
+- code: C7
+  symptom: Executive Function
+  anodes: &id007
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for executive function in Long COVID / Brain Fog.
+- code: C8
+  symptom: Maintenance / Pacing Programme
+  anodes: &id008
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for maintenance / pacing programme in Long COVID / Brain Fog.
+plato:
+- code: C1-PS
+  symptom: Cognitive Rehabilitation (Primary)
+  anodes: *id001
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C2-PS
+  symptom: Fatigue Management
+  anodes: *id002
+  cathodes:
+  - Pz
+  params_text: Variant · Fz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Fz
+- code: C3-PS
+  symptom: Attention & Working Memory
+  anodes: *id003
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C4-PS
+  symptom: Autonomic Stabilisation
+  anodes: *id004
+  cathodes:
+  - Fp1
+  params_text: Variant · F4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F4
+- code: C5-PS
+  symptom: Depression & Mood
+  anodes: *id005
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C6-PS
+  symptom: Sleep Dysfunction
+  anodes: *id006
+  cathodes:
+  - Pz
+  params_text: Variant · Fz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Fz
+- code: C7-PS
+  symptom: Executive Function
+  anodes: *id007
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C8-PS
+  symptom: Maintenance / Pacing Programme
+  anodes: *id008
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+contraindications_extra:
+- - Post-exertional malaise (PEM)
+  - All modalities
+  - REDUCE intensity; strict energy pacing protocol
+- - Active infection / fever
+  - All modalities
+  - POSTPONE until recovered
+key_outcome_measures: MoCA, MFI-20, COMPASS-31 (autonomic), PHQ-9, PSQI, SF-36
+phenotypes:
+- code: F1
+  name: Cognitive-Dominant (Brain Fog)
+  sozo_seq:
+  - CES 30 min · Stabilise cognitive-dominant (brain fog) presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Cognitive-Dominant (Brain Fog)
+    - tDCS 20 min before TPS
+    - Cognitive-Dominant (Brain Fog) phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Cognitive-Dominant (Brain Fog) with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Cognitive-Dominant (Brain Fog) with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Cognitive-Dominant (Brain Fog)
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Cognitive-Dominant (Brain Fog) with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Cognitive-Dominant (Brain Fog) with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Cognitive-Dominant (Brain Fog) phenotype of Long COVID / Brain Fog.'
+- code: F2
+  name: Fatigue-Dominant (PEM)
+  sozo_seq:
+  - CES 30 min · Stabilise fatigue-dominant (pem) presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Fatigue-Dominant (PEM)
+    - tDCS 20 min before TPS
+    - Fatigue-Dominant (PEM) phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Fatigue-Dominant (PEM) with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Fatigue-Dominant (PEM) with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Fatigue-Dominant (PEM)
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Fatigue-Dominant (PEM) with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Fatigue-Dominant (PEM) with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Fatigue-Dominant (PEM) phenotype of Long COVID / Brain Fog.'
+- code: F3
+  name: Autonomic Dysfunction (POTS)
+  sozo_seq:
+  - CES 30 min · Stabilise autonomic dysfunction (pots) presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Autonomic Dysfunction (POTS)
+    - tDCS 20 min before TPS
+    - Autonomic Dysfunction (POTS) phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Autonomic Dysfunction (POTS) with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Autonomic Dysfunction (POTS) with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Autonomic Dysfunction (POTS)
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Autonomic Dysfunction (POTS) with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Autonomic Dysfunction (POTS) with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Autonomic Dysfunction (POTS) phenotype of Long COVID / Brain Fog.'
+- code: F4
+  name: Pain-Dominant
+  sozo_seq:
+  - CES 30 min · Stabilise pain-dominant presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Pain-Dominant
+    - tDCS 20 min before TPS
+    - Pain-Dominant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Pain-Dominant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Pain-Dominant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Pain-Dominant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Pain-Dominant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Pain-Dominant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Pain-Dominant phenotype of Long COVID / Brain Fog.'
+- code: F5
+  name: Depression / Mood Comorbidity
+  sozo_seq:
+  - CES 30 min · Stabilise depression / mood comorbidity presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Depression / Mood Comorbidity
+    - tDCS 20 min before TPS
+    - Depression / Mood Comorbidity phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Depression / Mood Comorbidity with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Depression / Mood Comorbidity with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Depression / Mood Comorbidity
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Depression / Mood Comorbidity with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Depression / Mood Comorbidity with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Depression / Mood Comorbidity phenotype of Long COVID / Brain Fog.'
+- code: F6
+  name: Sleep Dysfunction
+  sozo_seq:
+  - CES 30 min · Stabilise sleep dysfunction presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Sleep Dysfunction
+    - tDCS 20 min before TPS
+    - Sleep Dysfunction phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Sleep Dysfunction with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Sleep Dysfunction with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Sleep Dysfunction
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Sleep Dysfunction with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Sleep Dysfunction with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Sleep Dysfunction phenotype of Long COVID / Brain Fog.'
+- code: F7
+  name: Respiratory Overlay
+  sozo_seq:
+  - CES 30 min · Stabilise respiratory overlay presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Respiratory Overlay
+    - tDCS 20 min before TPS
+    - Respiratory Overlay phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Respiratory Overlay with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Respiratory Overlay with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Respiratory Overlay
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Respiratory Overlay with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Respiratory Overlay with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Respiratory Overlay phenotype of Long COVID / Brain Fog.'
+- code: F8
+  name: Multi-System
+  sozo_seq:
+  - CES 30 min · Stabilise multi-system presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Multi-System
+    - tDCS 20 min before TPS
+    - Multi-System phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Multi-System with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Multi-System with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Multi-System
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Multi-System with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Multi-System with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Multi-System phenotype of Long COVID / Brain Fog.'
+- code: F9
+  name: Mild / Recovering
+  sozo_seq:
+  - CES 30 min · Stabilise mild / recovering presentation
+  - tDCS F3, F4 · 2 mA × 20 min
+  - TPS F3, F4 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Mild / Recovering
+    - tDCS 20 min before TPS
+    - Mild / Recovering phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Mild / Recovering with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Mild / Recovering with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Mild / Recovering
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Mild / Recovering with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Mild / Recovering with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Mild / Recovering phenotype of Long COVID / Brain Fog.'

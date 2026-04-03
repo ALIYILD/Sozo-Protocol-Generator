@@ -63,6 +63,7 @@ class GenerationResult:
     qa_issues: list[str] = field(default_factory=list)
     visuals_generated: list[str] = field(default_factory=list)
     images_inserted: int = 0
+    pdf_path: Optional[str] = None
     error: Optional[str] = None
     build_id: str = ""
 
@@ -85,12 +86,14 @@ class GenerationService:
         with_visuals: bool = True,
         with_qa: bool = True,
         with_images: bool = False,
+        with_pdf: bool = False,
     ):
         settings = get_settings()
         self.output_dir = Path(output_dir) if output_dir else settings.output_dir / "documents"
         self.with_visuals = with_visuals
         self.with_qa = with_qa
         self.with_images = with_images
+        self.with_pdf = with_pdf
         self._registry = None
         self._exporter = None
         self._image_curator = None
@@ -256,10 +259,14 @@ class GenerationService:
 
             # 4. Curate and insert web images if requested
             if self.with_images:
-                n_inserted = self._curate_and_insert_images(
-                    schema, request, output_path
-                )
+                n_inserted = self._curate_and_insert_images(schema, request, output_path)
                 result.images_inserted = n_inserted
+
+            # 5. Convert to PDF if requested
+            if self.with_pdf:
+                pdf = self._convert_to_pdf(output_path)
+                if pdf:
+                    result.pdf_path = str(pdf)
 
             logger.info(
                 f"Generated: {request.condition_slug}/{request.tier.value}/"
@@ -317,6 +324,19 @@ class GenerationService:
         except Exception as e:
             logger.warning(f"Image curation failed: {e}")
             return 0
+
+    @staticmethod
+    def _convert_to_pdf(docx_path: Path) -> Optional[Path]:
+        """Convert DOCX to PDF if converter is available."""
+        try:
+            from ..docx.pdf_export import convert_to_pdf
+            return convert_to_pdf(docx_path)
+        except ImportError:
+            logger.debug("PDF export module not available")
+            return None
+        except Exception as e:
+            logger.debug(f"PDF conversion failed: {e}")
+            return None
 
     def _run_qa(self, schema: ConditionSchema, request: GenerationRequest) -> Optional[dict]:
         """Run QA checks on a generated document. Returns summary dict or None."""

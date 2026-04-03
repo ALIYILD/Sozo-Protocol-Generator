@@ -1,0 +1,543 @@
+# Post-Traumatic Stress Disorder — Fellow All-in-One Protocol Data
+# Source: scripts/protocol_data.py CONDITIONS["ptsd"]
+# Auto-extracted during platform migration.
+
+display_name: Post-Traumatic Stress Disorder
+icd10: F43.1
+short_name: PTSD
+tps:
+- code: T1
+  symptom: Hypervigilance & Hyperarousal
+  evidence: Emerging
+  targets:
+  - F4
+  - F3
+  params_text: 'TPS: F4, F3 · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F4, F3 for hypervigilance & hyperarousal in Post-Traumatic Stress Disorder.
+- code: T2
+  symptom: Intrusions & Flashbacks
+  evidence: Emerging
+  targets:
+  - F4
+  - FC4
+  params_text: 'TPS: F4, FC4 · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F4, FC4 for intrusions & flashbacks in Post-Traumatic Stress Disorder.
+- code: T3
+  symptom: Avoidance Behaviour
+  evidence: Preliminary
+  targets:
+  - F3
+  - F4
+  params_text: 'TPS: F3, F4 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4 for avoidance behaviour in Post-Traumatic Stress Disorder.
+- code: T4
+  symptom: Emotional Numbing / Dissociation
+  evidence: Emerging Pilot
+  targets:
+  - F3
+  - Fz
+  params_text: 'TPS: F3, Fz · 3,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, Fz for emotional numbing / dissociation in Post-Traumatic Stress Disorder.
+- code: T5
+  symptom: Cognitive Symptoms (Memory, Concentration)
+  evidence: Experimental
+  targets:
+  - F3
+  - F4
+  - P3
+  params_text: 'TPS: F3, F4, P3 · 4,000 pulses · 5 Hz · 0.2 mJ/mm²'
+  rationale: TPS targeting of F3, F4, P3 for cognitive symptoms (memory, concentration) in Post-Traumatic Stress Disorder.
+tdcs:
+- code: C1
+  symptom: Hyperarousal (Primary)
+  anodes: &id001
+  - F4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | F4 anode → Fp1 cathode
+  rationale: Anodal F4 tDCS for hyperarousal (primary) in Post-Traumatic Stress Disorder.
+- code: C2
+  symptom: Intrusions / Flashbacks
+  anodes: &id002
+  - F4
+  - FC4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | F4, FC4 anode → Fp1 cathode
+  rationale: Anodal F4, FC4 tDCS for intrusions / flashbacks in Post-Traumatic Stress Disorder.
+- code: C3
+  symptom: Avoidance
+  anodes: &id003
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for avoidance in Post-Traumatic Stress Disorder.
+- code: C4
+  symptom: Emotional Numbing
+  anodes: &id004
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for emotional numbing in Post-Traumatic Stress Disorder.
+- code: C5
+  symptom: Cognitive Symptoms
+  anodes: &id005
+  - F3
+  - F4
+  cathodes:
+  - Oz
+  params_text: 2 mA · 20 min | F3, F4 anode → Oz cathode
+  rationale: Anodal F3, F4 tDCS for cognitive symptoms in Post-Traumatic Stress Disorder.
+- code: C6
+  symptom: Sleep Disturbance
+  anodes: &id006
+  - Fz
+  cathodes:
+  - Pz
+  params_text: 2 mA · 20 min | Fz anode → Pz cathode
+  rationale: Anodal Fz tDCS for sleep disturbance in Post-Traumatic Stress Disorder.
+- code: C7
+  symptom: Depression Comorbidity
+  anodes: &id007
+  - F3
+  cathodes:
+  - Fp2
+  params_text: 2 mA · 20 min | F3 anode → Fp2 cathode
+  rationale: Anodal F3 tDCS for depression comorbidity in Post-Traumatic Stress Disorder.
+- code: C8
+  symptom: Maintenance / Relapse Prevention
+  anodes: &id008
+  - F4
+  cathodes:
+  - Fp1
+  params_text: 2 mA · 20 min | F4 anode → Fp1 cathode
+  rationale: Anodal F4 tDCS for maintenance / relapse prevention in Post-Traumatic Stress Disorder.
+plato:
+- code: C1-PS
+  symptom: Hyperarousal (Primary)
+  anodes: *id001
+  cathodes:
+  - Fp1
+  params_text: Variant · F4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F4
+- code: C2-PS
+  symptom: Intrusions / Flashbacks
+  anodes: *id002
+  cathodes:
+  - Fp1
+  params_text: Variant · F4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F4
+- code: C3-PS
+  symptom: Avoidance
+  anodes: *id003
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C4-PS
+  symptom: Emotional Numbing
+  anodes: *id004
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C5-PS
+  symptom: Cognitive Symptoms
+  anodes: *id005
+  cathodes:
+  - Oz
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C6-PS
+  symptom: Sleep Disturbance
+  anodes: *id006
+  cathodes:
+  - Pz
+  params_text: Variant · Fz | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at Fz
+- code: C7-PS
+  symptom: Depression Comorbidity
+  anodes: *id007
+  cathodes:
+  - Fp2
+  params_text: Variant · F3 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F3
+- code: C8-PS
+  symptom: Maintenance / Relapse Prevention
+  anodes: *id008
+  cathodes:
+  - Fp1
+  params_text: Variant · F4 | 1.2–1.6 mA · 20 min
+  variant_note: Single-channel placement at F4
+contraindications_extra:
+- - Active suicidal ideation / self-harm
+  - All modalities
+  - HOLD — safety protocol first
+- - Acute trauma reactivation during session
+  - All modalities
+  - STOP — stabilisation protocol
+key_outcome_measures: CAPS-5, PCL-5, IES-R, PHQ-9, PSQI
+phenotypes:
+- code: F1
+  name: Hyperarousal-Dominant
+  sozo_seq:
+  - CES 30 min · Stabilise hyperarousal-dominant presentation
+  - tDCS F4 · 2 mA × 20 min
+  - TPS F4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Hyperarousal-Dominant
+    - tDCS 20 min before TPS
+    - Hyperarousal-Dominant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Hyperarousal-Dominant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Hyperarousal-Dominant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Hyperarousal-Dominant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Hyperarousal-Dominant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Hyperarousal-Dominant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Hyperarousal-Dominant phenotype of Post-Traumatic Stress Disorder.'
+- code: F2
+  name: Intrusion-Dominant
+  sozo_seq:
+  - CES 30 min · Stabilise intrusion-dominant presentation
+  - tDCS F4 · 2 mA × 20 min
+  - TPS F4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Intrusion-Dominant
+    - tDCS 20 min before TPS
+    - Intrusion-Dominant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Intrusion-Dominant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Intrusion-Dominant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Intrusion-Dominant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Intrusion-Dominant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Intrusion-Dominant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Intrusion-Dominant phenotype of Post-Traumatic Stress Disorder.'
+- code: F3
+  name: Avoidance-Dominant
+  sozo_seq:
+  - CES 30 min · Stabilise avoidance-dominant presentation
+  - tDCS F4 · 2 mA × 20 min
+  - TPS F4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Avoidance-Dominant
+    - tDCS 20 min before TPS
+    - Avoidance-Dominant phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Avoidance-Dominant with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Avoidance-Dominant with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Avoidance-Dominant
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Avoidance-Dominant with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Avoidance-Dominant with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Avoidance-Dominant phenotype of Post-Traumatic Stress Disorder.'
+- code: F4
+  name: Emotional Numbing / Dissociative
+  sozo_seq:
+  - CES 30 min · Stabilise emotional numbing / dissociative presentation
+  - tDCS F4 · 2 mA × 20 min
+  - TPS F4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Emotional Numbing / Dissociative
+    - tDCS 20 min before TPS
+    - Emotional Numbing / Dissociative phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Emotional Numbing / Dissociative with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Emotional Numbing / Dissociative with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Emotional Numbing / Dissociative
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Emotional Numbing / Dissociative with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Emotional Numbing / Dissociative with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Emotional Numbing / Dissociative phenotype of Post-Traumatic Stress Disorder.'
+- code: F5
+  name: Complex PTSD
+  sozo_seq:
+  - CES 30 min · Stabilise complex ptsd presentation
+  - tDCS F4 · 2 mA × 20 min
+  - TPS F4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Complex PTSD
+    - tDCS 20 min before TPS
+    - Complex PTSD phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Complex PTSD with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Complex PTSD with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Complex PTSD
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Complex PTSD with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Complex PTSD with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Complex PTSD phenotype of Post-Traumatic Stress Disorder.'
+- code: F6
+  name: PTSD-Depression Comorbid
+  sozo_seq:
+  - CES 30 min · Stabilise ptsd-depression comorbid presentation
+  - tDCS F4 · 2 mA × 20 min
+  - TPS F4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for PTSD-Depression Comorbid
+    - tDCS 20 min before TPS
+    - PTSD-Depression Comorbid phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - PTSD-Depression Comorbid with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - PTSD-Depression Comorbid with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - PTSD-Depression Comorbid
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - PTSD-Depression Comorbid with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - PTSD-Depression Comorbid with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for PTSD-Depression Comorbid phenotype of Post-Traumatic Stress Disorder.'
+- code: F7
+  name: PTSD-Substance Use
+  sozo_seq:
+  - CES 30 min · Stabilise ptsd-substance use presentation
+  - tDCS F4 · 2 mA × 20 min
+  - TPS F4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for PTSD-Substance Use
+    - tDCS 20 min before TPS
+    - PTSD-Substance Use phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - PTSD-Substance Use with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - PTSD-Substance Use with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - PTSD-Substance Use
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - PTSD-Substance Use with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - PTSD-Substance Use with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for PTSD-Substance Use phenotype of Post-Traumatic Stress Disorder.'
+- code: F8
+  name: Military / Combat PTSD
+  sozo_seq:
+  - CES 30 min · Stabilise military / combat ptsd presentation
+  - tDCS F4 · 2 mA × 20 min
+  - TPS F4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Military / Combat PTSD
+    - tDCS 20 min before TPS
+    - Military / Combat PTSD phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Military / Combat PTSD with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Military / Combat PTSD with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Military / Combat PTSD
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Military / Combat PTSD with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Military / Combat PTSD with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Military / Combat PTSD phenotype of Post-Traumatic Stress Disorder.'
+- code: F9
+  name: Childhood Trauma PTSD
+  sozo_seq:
+  - CES 30 min · Stabilise childhood trauma ptsd presentation
+  - tDCS F4 · 2 mA × 20 min
+  - TPS F4, F3 · 3,000–5,000 pulses
+  - Condition-specific rehabilitation · 30–45 min
+  tps_combos:
+  - - TPS + tDCS
+    - Sequential modulation for Childhood Trauma PTSD
+    - tDCS 20 min before TPS
+    - Childhood Trauma PTSD phenotype
+    - Emerging
+  - - TPS + taVNS
+    - Autonomic + cortical dual approach
+    - taVNS 15 min pre-TPS
+    - Childhood Trauma PTSD with autonomic features
+    - Experimental
+  - - TPS + CES
+    - CES stabilisation + TPS modulation
+    - CES before TPS sessions
+    - Childhood Trauma PTSD with sleep/anxiety
+    - Weak / supportive
+  nontps_combos:
+  - - tDCS + rehabilitation
+    - Childhood Trauma PTSD
+    - Cortical priming + specific rehab
+    - tDCS before rehab
+    - Moderate adjunctive
+  - - CES + standard care
+    - Childhood Trauma PTSD with sleep disturbance
+    - Sleep restoration adjunct
+    - Evening CES
+    - Weak / supportive
+  - - taVNS + therapy
+    - Childhood Trauma PTSD with autonomic features
+    - Parasympathetic modulation
+    - taVNS daily
+    - Emerging
+  rationale: 'Clinical Target: Optimise outcomes for Childhood Trauma PTSD phenotype of Post-Traumatic Stress Disorder.'

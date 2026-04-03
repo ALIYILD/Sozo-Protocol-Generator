@@ -201,6 +201,7 @@ def generate(
     no_visuals: bool = typer.Option(False, "--no-visuals", help="Skip visual generation"),
     no_qa: bool = typer.Option(False, "--no-qa", help="Skip QA checks"),
     with_images: bool = typer.Option(False, "--with-images", help="Search and insert web images from PMC/Wikimedia"),
+    with_pdf: bool = typer.Option(False, "--with-pdf", help="Also generate PDF alongside DOCX"),
 ):
     """Generate documents using the canonical GenerationService.
 
@@ -222,6 +223,7 @@ def generate(
         with_visuals=not no_visuals,
         with_qa=not no_qa,
         with_images=with_images,
+        with_pdf=with_pdf,
     )
 
     if condition == "all":
