@@ -30,7 +30,7 @@
 
 | Knowledge Type | Count | Coverage |
 |---------------|-------|----------|
-| Conditions | 5 | PD, Depression, ADHD, ASD, Migraine |
+| Conditions | 16 | ALL 15 original + Migraine (NEW) |
 | Modalities | 4 | tDCS, TPS, taVNS, CES |
 | Contraindications | 7 | Universal set |
 | Shared Rules | 15+ | Governance, safety, patient journey, responder classification |

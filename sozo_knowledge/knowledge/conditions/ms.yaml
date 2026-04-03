@@ -1,0 +1,481 @@
+# Multiple Sclerosis — SOZO Clinical Knowledge
+# Auto-extracted from condition generator. ICD-10: G35
+
+slug: ms
+display_name: Multiple Sclerosis
+icd10: G35
+aliases:
+- MS
+- multiple sclerosis
+- RRMS
+- SPMS
+- PPMS
+- relapsing-remitting MS
+category: neurological
+version: '1.0'
+overview: 'Multiple Sclerosis (MS) is a chronic, inflammatory, demyelinating disease of the central nervous system affecting
+  approximately 2.8 million people worldwide. MS is characterized by inflammatory demyelination and axonal damage, producing
+  a wide range of neurological deficits. The most common form — Relapsing-Remitting MS (RRMS) — affects 85% of patients at
+  onset, with discrete clinical relapses followed by partial or complete recovery.
+
+
+  MS-related neurological symptoms include motor dysfunction, sensory impairment, fatigue, cognitive impairment (''cog-fog''),
+  depression, spasticity, and pain. Fatigue (prevalence >80%) and cognitive impairment (~65%) are among the most disabling
+  non-motor symptoms.
+
+
+  Neuromodulation in MS targets cognitive and fatigue symptoms. tDCS applied to M1 (motor impairment and spasticity) and DLPFC
+  (cognitive impairment and fatigue) has emerging evidence. Charvet et al. (2017) demonstrated remote-supervised home tDCS
+  is feasible and beneficial for MS cognitive symptoms. taVNS is under investigation for MS fatigue.'
+pathophysiology: 'MS pathophysiology involves T-cell mediated autoimmune attack on CNS myelin. CD4+ Th17 and Th1 cells breach
+  the blood-brain barrier and activate inflammatory cascades, leading to: demyelination (slowing/blocking nerve conduction),
+  axonal damage (permanent structural injury), oligodendrocyte loss, and gliosis. In RRMS, relapses represent acute inflammatory
+  episodes; remission reflects edema resolution and partial remyelination.
+
+
+  Progressive MS (SPMS, PPMS) is characterized by diffuse neurodegeneration with less active focal inflammation — progressive
+  axonal loss leads to irreversible disability accumulation. Neuroinflammatory mediators (IL-17, TNF-alpha), oxidative stress,
+  and mitochondrial dysfunction drive progressive neurodegeneration.
+
+
+  MS cognitive impairment (''cog-fog''): white matter lesion burden in frontal-subcortical tracts, gray matter atrophy (particularly
+  thalamus and cortex), and network-level connectivity disruption drive CEN hypofunction. MS fatigue: complex mechanism involving
+  thalamo-cortical pathway disruption, basal ganglia involvement, and possibly reduced corticomotor drive efficiency.'
+core_symptoms:
+- Motor dysfunction — weakness, spasticity, coordination impairment
+- Sensory impairment — paresthesia, numbness, Lhermitte's sign
+- Fatigue — MS-related fatigue (prevalence >80%); exacerbated by heat (Uhthoff's phenomenon)
+- Visual disturbance — optic neuritis (reduced acuity, color desaturation)
+- Bladder and bowel dysfunction
+- Pain — neuropathic (central sensitization), spasticity-related, Lhermitte's
+- Gait and balance impairment
+non_motor_symptoms:
+- Cognitive impairment (cog-fog) — processing speed, working memory, attention affected (65%)
+- Depression (prevalence 50%)
+- Anxiety (prevalence 40%)
+- Sleep disturbance — restless legs, fatigue-sleep interaction
+- Sexual dysfunction
+- Pseudobulbar affect (emotional lability) in advanced disease
+brain_regions:
+- Primary Motor Cortex (M1) — bilateral
+- Dorsolateral Prefrontal Cortex (DLPFC)
+- Thalamus
+- Cerebellum
+- White Matter Tracts (corpus callosum, corticospinal tract)
+- Anterior Cingulate Cortex (ACC)
+brain_region_details:
+  Primary Motor Cortex (M1) — bilateral: Corticomotor drive efficiency reduced by MS lesions and white matter injury. Compensatory
+    cortical reorganization documented. tDCS anodal target for motor function and spasticity.
+  Dorsolateral Prefrontal Cortex (DLPFC): CEN hypofunction — MS-related cognitive impairment correlates with DLPFC-thalamic
+    connectivity disruption. Primary tDCS anodal target for MS cog-fog.
+  Thalamus: Central relay for motor, sensory, and cognitive circuits. Thalamic atrophy in MS correlates with global cognitive
+    impairment and fatigue severity.
+  Cerebellum: Cerebellar demyelination contributes to ataxia, intention tremor, and gait disturbance. Compensatory cerebellar
+    hyperactivation documented in early MS.
+  White Matter Tracts (corpus callosum, corticospinal tract): Primary site of demyelinating lesion burden. Interhemispheric
+    and motor pathway lesions drive most clinical deficits.
+  Anterior Cingulate Cortex (ACC): Involved in MS fatigue and motivational deficits. Reduced ACC activity correlates with
+    fatigue severity in MS.
+network_profiles:
+- network: smn
+  dysfunction: hypo
+  severity: severe
+  primary: true
+  relevance: PRIMARY NETWORK IN MS. SMN hypofunction from corticospinal tract demyelination and M1 cortical reorganization.
+    Motor slowing, spasticity, and coordination impairment reflect SMN dysfunction. Compensatory SMN hyperactivation in early
+    MS; progressive hypofunction as disease advances.
+  evidence_note: Corticospinal tract MS pathology; SMN reorganization in RRMS
+- network: cen
+  dysfunction: hypo
+  severity: moderate-severe
+  primary: false
+  relevance: CEN hypofunction correlates with MS cognitive impairment. DLPFC-thalamic connectivity disruption from white matter
+    lesion burden impairs working memory, processing speed, and executive function. Primary target for MS cognitive neuromodulation
+    protocols.
+  evidence_note: Charvet et al. 2017 — remote tDCS for MS cognitive symptoms
+- network: attention
+  dysfunction: hypo
+  severity: moderate
+  primary: false
+  relevance: Sustained and selective attention deficits are among the most prevalent MS cognitive complaints. Thalamo-cortical
+    pathway disruption impairs attentional alerting and orienting. Correlates with processing speed impairment.
+  evidence_note: ''
+- network: dmn
+  dysfunction: hyper
+  severity: mild-moderate
+  primary: false
+  relevance: DMN hyperactivation and failure to deactivate during cognitive tasks documented in MS — parallel to TBI and ADHD
+    patterns. May underlie cognitive fatigue and inefficient neural resource allocation.
+  evidence_note: ''
+- network: limbic
+  dysfunction: hypo
+  severity: moderate
+  primary: false
+  relevance: Depression (50%) and anxiety (40%) in MS reflect limbic network involvement, psychosocial adjustment burden,
+    and direct lesion effects on limbic structures. MS fatigue has a distinct limbic component.
+  evidence_note: MS depression and anxiety — high prevalence; psychosocial and neurobiological mechanisms
+primary_network: smn
+fnon_rationale: 'In MS, the primary network target depends on dominant symptom burden: SMN (motor) or CEN (cognitive/fatigue).
+  For motor-predominant MS: M1 bilateral anodal tDCS. For cognitive/fatigue-predominant: DLPFC bilateral anodal tDCS. taVNS
+  is an emerging adjunct specifically for MS fatigue via autonomic and noradrenergic mechanisms. All protocols must avoid
+  stimulation during active MS relapse/exacerbation.'
+phenotypes:
+- slug: rrms
+  label: RRMS — Relapsing-Remitting MS
+  description: Discrete relapses with full or partial recovery. Most common MS subtype (85%). Neuromodulation indicated during
+    stable/remission phase only.
+  key_features:
+  - Discrete relapses
+  - Partial or complete recovery
+  - Normal or near-normal between relapses
+  - Stable EDSS between relapses
+  primary_networks:
+  - smn
+  - cen
+  secondary_networks:
+  - attention
+  - limbic
+  preferred_modalities:
+  - tdcs
+  - tavns
+  tdcs_target: M1 bilateral anodal (motor) OR DLPFC bilateral anodal (cognitive)
+  tps_target: ''
+- slug: spms
+  label: SPMS — Secondary Progressive MS
+  description: Following RRMS, progressive disability accumulation with or without superimposed relapses. Greater motor and
+    cognitive deficits.
+  key_features:
+  - Progressive disability
+  - May have superimposed relapses
+  - Higher EDSS
+  - More prominent cognitive impairment
+  primary_networks:
+  - smn
+  - cen
+  secondary_networks:
+  - attention
+  - limbic
+  preferred_modalities:
+  - tdcs
+  - ces
+  tdcs_target: DLPFC bilateral anodal for cognition; M1 for motor
+  tps_target: ''
+- slug: ppms
+  label: PPMS — Primary Progressive MS
+  description: Steady neurological decline from disease onset without discrete relapses. Older onset, equal gender ratio,
+    prominent motor/spinal cord involvement.
+  key_features:
+  - Progressive disability from onset
+  - No discrete relapses
+  - Spinal cord predominant
+  - Progressive gait impairment
+  primary_networks:
+  - smn
+  - cen
+  secondary_networks:
+  - attention
+  preferred_modalities:
+  - tdcs
+  tdcs_target: M1 bilateral anodal for motor function
+  tps_target: ''
+- slug: cogms
+  label: COG-MS — Cognitive MS
+  description: MS with prominent cognitive impairment as primary functional burden — processing speed, working memory, executive
+    function deficits ('cog-fog').
+  key_features:
+  - Processing speed impairment
+  - Working memory deficit
+  - Attention deficits
+  - Functional cognitive impact
+  - SDMT impairment
+  primary_networks:
+  - cen
+  - attention
+  secondary_networks:
+  - dmn
+  - smn
+  preferred_modalities:
+  - tdcs
+  - tavns
+  - ces
+  tdcs_target: DLPFC bilateral anodal — cognitive protocol
+  tps_target: ''
+assessments:
+- scale_key: edss
+  timing: baseline
+  primary: false
+  notes: Standard MS disability staging. Score 0-10. EDSS 0-4.5 = ambulatory without aid. Document EDSS at baseline for eligibility
+    and tracking.
+- scale_key: sdmt
+  timing: baseline
+  primary: false
+  notes: Most sensitive single test for MS cognitive impairment. Highly sensitive to MS white matter burden. Primary MS cognitive
+    outcome measure. Score <55 indicates impairment.
+- scale_key: fss
+  timing: baseline
+  primary: false
+  notes: Primary MS fatigue measure. 9 items, 1-7 scale. Score >=36 = clinically significant fatigue. Critical for fatigue
+    protocol selection.
+- scale_key: moca
+  timing: baseline
+  primary: false
+  notes: Global cognitive screen. Less sensitive to MS-specific processing speed deficits than SDMT — use both.
+- scale_key: phq9
+  timing: baseline
+  primary: false
+  notes: Depression screening — 50% MS prevalence. Monitor at every session.
+- scale_key: bdi2
+  timing: baseline
+  primary: false
+  notes: Alternative depression measure. Distinguishes somatic vs cognitive depression in MS.
+applicable_modalities:
+- tdcs
+- tps
+- tavns
+- ces
+protocols:
+- protocol_id: C-MS-MOTOR
+  label: Motor Function — M1 Bilateral tDCS
+  modality: tdcs
+  target_region: Primary Motor Cortex (bilateral)
+  target_abbreviation: M1
+  target_electrodes: []
+  phenotype_slugs:
+  - rrms
+  - spms
+  - ppms
+  network_targets:
+  - smn
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    anode: C3 + C4 (bilateral M1)
+    cathode: Fp1 + Fp2 (bilateral supraorbital) or shoulder
+    intensity: 2.0 mA
+    duration: 20 min
+    sessions: 10-15, concurrent with physiotherapy
+    note: Schedule at patient's peak energy time. Cool room temperature essential (Uhthoff).
+  rationale: 'M1 bilateral anodal tDCS compensates for corticospinal demyelination by enhancing remaining motor pathway efficiency.
+    Mori et al. (2013) Brain Stimulation: M1 tDCS improved lower limb motor function in RRMS. Concurrent physiotherapy essential.
+    OFF-LABEL.'
+  evidence_level: medium
+  off_label: true
+  session_count: 15
+  notes: ''
+- protocol_id: C-MS-COG
+  label: Cognitive & Fatigue — DLPFC Bilateral tDCS
+  modality: tdcs
+  target_region: Dorsolateral Prefrontal Cortex (bilateral)
+  target_abbreviation: DLPFC
+  target_electrodes: []
+  phenotype_slugs:
+  - cogms
+  - rrms
+  - spms
+  network_targets:
+  - cen
+  - attention
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    anode: F3 + F4 (bilateral DLPFC)
+    cathode: Right shoulder or Oz
+    intensity: 2.0 mA
+    duration: 20 min
+    sessions: 10-20 over 4 weeks
+    note: 'Charvet et al. remote supervision protocol: 20 sessions over 4 weeks. Concurrent cognitive training recommended.'
+  rationale: 'DLPFC bilateral anodal tDCS targets CEN hypofunction underlying MS cog-fog. Charvet et al. (2017) Multiple Sclerosis
+    journal: remotely supervised 20-session DLPFC tDCS protocol demonstrated cognitive improvements. Palm et al. (2014): DLPFC
+    tDCS reduced MS fatigue severity. OFF-LABEL.'
+  evidence_level: medium
+  off_label: true
+  session_count: 20
+  notes: ''
+- protocol_id: TAVNS-MS
+  label: taVNS — Fatigue Adjunct
+  modality: tavns
+  target_region: Left auricular branch of vagus nerve
+  target_abbreviation: taVNS
+  target_electrodes: []
+  phenotype_slugs:
+  - cogms
+  - rrms
+  network_targets:
+  - sn
+  - limbic
+  parameters:
+    device: NEMOS (tVNS Technologies) or Parasym
+    frequency: 25 Hz
+    pulse_width: 250 us
+    intensity: Below pain threshold
+    duration: 30 min
+    sessions: Daily adjunct
+    electrode_placement: Left cymba conchae
+  rationale: taVNS modulates autonomic and noradrenergic tone. MS fatigue may have autonomic component — HRV reduction documented
+    in MS. Investigational for MS fatigue. Adjunct to DLPFC tDCS cognitive/fatigue protocol.
+  evidence_level: low
+  off_label: true
+  session_count: 20
+  notes: Investigational for MS fatigue. Adjunct only.
+- protocol_id: CES-MS
+  label: CES — Sleep, Depression & Anxiety Adjunct
+  modality: ces
+  target_region: Bilateral earlobe electrodes
+  target_abbreviation: CES
+  target_electrodes: []
+  phenotype_slugs:
+  - rrms
+  - spms
+  - cogms
+  network_targets:
+  - limbic
+  - sn
+  parameters:
+    device: Alpha-Stim AID
+    frequency: 0.5 Hz
+    intensity: 100-300 uA
+    duration: 40-60 min
+    sessions: Daily during treatment block
+  rationale: Alpha-Stim CES addresses comorbid depression, anxiety, and insomnia — all highly prevalent in MS. Non-pharmacological
+    — avoids pharmacological burden with DMT interactions. FDA-cleared for anxiety, depression, insomnia.
+  evidence_level: medium
+  off_label: false
+  session_count: 20
+  notes: ''
+safety_rules:
+- category: contraindication
+  description: Active implanted electronic devices in the head/neck region
+  severity: absolute
+  modalities: []
+  source: Manufacturer guidelines and consensus safety statements
+- category: stopping_rule
+  description: 'Discontinue immediately for Grade 3 adverse events: new seizure, severe headache, syncope, skin burn, worsening
+    of psychiatric symptoms requiring acute intervention'
+  severity: high
+  modalities: []
+  source: ''
+- category: monitoring
+  description: Assess and document adverse events at every session using a standardized monitoring checklist
+  severity: moderate
+  modalities: []
+  source: ''
+- category: precaution
+  description: Ensure consistent medication state (ON or OFF) throughout treatment blocks to avoid false responder/non-responder
+    classification
+  severity: moderate
+  modalities: []
+  source: ''
+- category: contraindication
+  description: 'ACTIVE MS RELAPSE: tDCS and all neuromodulation are absolutely contraindicated during active clinical relapse
+    or exacerbation. Postpone until clinical stability is confirmed (minimum 4 weeks post-relapse resolution). Resume with
+    updated neurological assessment.'
+  severity: high
+  modalities: []
+  source: Clinical safety principle for MS neuromodulation
+- category: precaution
+  description: Monitor MS fatigue carefully — post-session fatigue exacerbation can occur, especially in patients with high
+    baseline FSS. Start with shorter sessions (15-20 min) and extend based on tolerance. Schedule sessions at patient's peak
+    energy time of day.
+  severity: moderate
+  modalities: []
+  source: MS fatigue and Uhthoff phenomenon — heat sensitivity; clinical MS practice
+- category: precaution
+  description: 'Heat sensitivity (Uhthoff''s phenomenon): keep treatment room cool. tDCS electrode contact may generate slight
+    warmth — monitor closely in patients with severe heat sensitivity. Ensure adequate hydration before sessions.'
+  severity: moderate
+  modalities: []
+  source: Uhthoff phenomenon and electrode heat sensitivity in MS
+contraindications:
+- Active implanted devices (cochlear implants, deep brain stimulators, cardiac pacemakers/defibrillators) unless explicitly
+  cleared by device manufacturer
+- Metallic implants in the head or neck region within the stimulation field
+- Active epilepsy with uncontrolled seizures (relative contraindication — requires neurologist clearance)
+- Skull defects or craniectomy at stimulation sites
+- Skin lesions, wounds, or dermatological conditions at electrode placement sites
+- Active malignancy of the central nervous system
+- Pregnancy (precautionary contraindication — insufficient safety data)
+- Severe psychiatric crisis requiring immediate hospitalization
+inclusion_criteria:
+- Confirmed diagnosis of MS per McDonald 2017 criteria
+- EDSS 0-7.0 (ambulatory with or without aid — can participate in sessions)
+- Clinically stable — no relapse within 4 weeks
+- Age 18-65 years
+- Capacity to provide informed consent
+- Stable disease-modifying therapy (DMT) for >=3 months
+exclusion_criteria:
+- Active MS relapse or clinical exacerbation — absolute exclusion during relapse
+- Recent IV methylprednisolone (within 4 weeks)
+- EDSS >7.5 — insufficient motor capacity for active rehabilitation tasks
+- Severe cognitive impairment precluding informed consent
+- Active psychiatric crisis
+responder_criteria:
+- FSS score reduction >=7 points (fatigue protocol)
+- SDMT score improvement >=4 points (cognitive protocol)
+- Clinically meaningful SOZO PRS improvement in relevant domains (>=3 points)
+non_responder_pathway: 'For non-responders:
+
+  1. Rule out relapse — any new neurological symptoms warrant pause and neurological review
+
+  2. Assess fatigue timing — sessions at wrong time of day reduce response
+
+  3. Optimize sleep with CES before cognitive tDCS escalation
+
+  4. Switch from motor to cognitive protocol if different domain predominates
+
+  5. Add taVNS for fatigue-dominant non-responders
+
+  6. Neurology review for DMT optimization and relapse activity assessment'
+evidence_summary: 'MS neuromodulation has emerging-to-moderate evidence. Mori et al. (2013) Brain Stimulation: M1 tDCS improved
+  motor function in RRMS. Charvet et al. (2017) Multiple Sclerosis journal: remote-supervised DLPFC tDCS improved cognitive
+  performance in RRMS. Palm et al. (2014): DLPFC tDCS reduced fatigue. All studies are small (N=10-30). Larger multi-site
+  RCTs needed.'
+evidence_quality: medium
+evidence_gaps:
+- No large multi-site tDCS RCT for MS with validated primary cognitive or motor endpoint
+- Optimal tDCS protocol for progressive MS (SPMS/PPMS) — limited data
+- taVNS for MS fatigue — investigational, no published RCT
+- Long-term maintenance of tDCS effects in MS — limited follow-up data
+references:
+- pmid: '23587438'
+  title: Cortical plasticity predicts recovery from relapse in multiple sclerosis
+  authors: Mori F et al.
+  year: 2013
+  journal: Brain Stimulation
+  evidence_level: medium
+  notes: ''
+- pmid: '24662123'
+  title: 'Transcranial direct current stimulation in treatment resistant depression: a randomized double-blind, placebo-controlled
+    study'
+  authors: Palm U et al.
+  year: 2014
+  journal: Restorative Neurology and Neuroscience
+  evidence_level: medium
+  notes: ''
+- pmid: '28220699'
+  title: Remotely-supervised transcranial direct current stimulation increases the benefit of at-home cognitive training in
+    multiple sclerosis
+  authors: Charvet LE et al.
+  year: 2017
+  journal: Multiple Sclerosis Journal
+  evidence_level: medium
+  notes: ''
+- pmid: '6685237'
+  title: 'Rating neurologic impairment in multiple sclerosis: an expanded disability status scale (EDSS)'
+  authors: Kurtzke JF
+  year: 1983
+  journal: Neurology
+  evidence_level: medium
+  notes: ''
+clinical_tips:
+- NEVER treat during active relapse — postpone until neurologically stable for minimum 4 weeks
+- Schedule sessions at patient's peak energy time of day — MS fatigue has diurnal variation
+- Keep treatment room cool — Uhthoff phenomenon means heat exacerbates all MS symptoms including during stimulation
+- Use SDMT as the primary MS cognitive measure — more sensitive than MoCA for MS processing speed deficits
+- Monitor FSS at every session — fatigue exacerbation is the most common adverse effect requiring session modification
+governance_rules:
+- No Fellow or Clinical Assistant may independently modify treatment plans without Doctor authorization
+- All TPS applications require explicit off-label informed consent and Doctor authorization
+- Adverse events must be documented within 24 hours and escalated per clinic protocol
+- Treatment records must be updated at every session
+- Informed consent must be obtained and documented before initiating any modality
+- Active relapse is an absolute exclusion — document relapse status at each session
+- Neurology treating team must be informed of neuromodulation — document communication
+patient_journey_notes: {}

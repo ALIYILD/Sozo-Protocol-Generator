@@ -1,0 +1,458 @@
+# Chronic Tinnitus — SOZO Clinical Knowledge
+# Auto-extracted from condition generator. ICD-10: H93.1
+
+slug: tinnitus
+display_name: Chronic Tinnitus
+icd10: H93.1
+aliases:
+- tinnitus
+- chronic tinnitus
+- ringing in ears
+- tinnitus aurium
+category: neurological
+version: '1.0'
+overview: 'Chronic tinnitus is the persistent perception of sound in the absence of an external acoustic stimulus, lasting
+  more than 3 months. Prevalence is 10-15% in adults, with severe/disabling tinnitus affecting 1-3%. Tinnitus generates significant
+  psychological and functional burden: 25-45% of patients report anxiety, depression, sleep disturbance, and concentration
+  difficulties.
+
+
+  Tinnitus neuroscience model: aberrant synchronous neural activity in auditory cortex and associated networks generates the
+  phantom sound perception. Tinnitus involves maladaptive neuroplasticity — cortical reorganization following peripheral hearing
+  loss or cochlear damage leads to central auditory hyperactivity. Non-auditory networks (attention, salience, limbic) modulate
+  tinnitus distress and perception.
+
+
+  tDCS targeting auditory cortex (cathodal inhibition) and frontal regions (anodal) represents an emerging non-pharmacological
+  approach. taVNS offers potential for vagal-auditory cortex modulation. Evidence is moderate but inconsistent — electrode
+  placement and protocol standardization remain challenges.'
+pathophysiology: 'Tinnitus pathophysiology involves multiple levels of the auditory pathway and central nervous system:
+
+
+  (1) Peripheral trigger: cochlear hair cell damage (noise exposure, ototoxicity, aging) disrupts frequency-specific auditory
+  input, producing ''deafferentation'' in corresponding tonotopic auditory cortex regions.
+
+
+  (2) Central gain increase: loss of peripheral input triggers central gain upregulation — spontaneous auditory nerve firing
+  and synchronous bursting in auditory cortex ''fills in'' the frequency gap, generating phantom sound perception (analogous
+  to phantom limb pain).
+
+
+  (3) Cross-modal plasticity: adjacent cortical regions expand into deafferented auditory cortex, reinforcing aberrant activity
+  and entraining tinnitus frequency representation.
+
+
+  (4) Non-auditory network involvement: tinnitus distress correlates with attention network hyperactivation (enhancing awareness
+  of tinnitus), salience network hyperactivation (assigning threat/distress value), and limbic network involvement (anxiety,
+  depression, rumination on tinnitus).
+
+
+  (5) Thalamocortical dysrhythmia: De Ridder et al. model — abnormal theta-gamma coupling in thalamo-auditory cortex circuit
+  generates oscillatory tinnitus percept.'
+core_symptoms:
+- Persistent phantom sound perception — ringing, buzzing, hissing, whistling, or pulsatile
+- Tinnitus loudness variability — influenced by quiet environments, fatigue, stress
+- Audiological symptoms — associated hearing loss (most cases), hyperacusis
+- Sleep disturbance — tinnitus-related insomnia
+- Concentration difficulties — tinnitus competing for attentional resources
+non_motor_symptoms:
+- Anxiety (25-45% comorbid in tinnitus)
+- Depression (25-40% comorbid)
+- Reduced quality of life and social participation
+- Phonophobia (sound sensitivity — associated with hyperacusis)
+brain_regions:
+- Primary Auditory Cortex (A1) — Heschl's Gyrus
+- Secondary Auditory Cortex (Wernicke's area, superior temporal gyrus)
+- Dorsolateral Prefrontal Cortex (DLPFC)
+- Anterior Cingulate Cortex (ACC)
+- Thalamus (medial geniculate nucleus)
+- Anterior Insula
+brain_region_details:
+  Primary Auditory Cortex (A1) — Heschl's Gyrus: Site of maladaptive plasticity in tinnitus — cortical reorganization following
+    deafferentation generates hyperactive spontaneous activity perceived as tinnitus. Primary cathodal tDCS target to reduce
+    auditory cortex hyperexcitability.
+  Secondary Auditory Cortex (Wernicke's area, superior temporal gyrus): Involved in tinnitus persistence and perception complexity.
+    Cathodal tDCS over left temporal cortex (T3) targets this region.
+  Dorsolateral Prefrontal Cortex (DLPFC): Cognitive and emotional gating of tinnitus perception. DLPFC modulates top-down
+    suppression of tinnitus awareness. Anodal tDCS upregulates attention control over tinnitus.
+  Anterior Cingulate Cortex (ACC): Affective-emotional processing of tinnitus distress. ACC hyperactivation drives distress
+    response to tinnitus. Correlated with tinnitus-related anxiety.
+  Thalamus (medial geniculate nucleus): Central auditory relay; thalamocortical dysrhythmia model of tinnitus (De Ridder).
+    Abnormal gating allows persistent auditory cortex activation.
+  Anterior Insula: SN hub; evaluates salience and threat value of tinnitus percept. Insula hyperactivation drives tinnitus-related
+    distress and hypervigilance.
+network_profiles:
+- network: attention
+  dysfunction: hyper
+  severity: severe
+  primary: true
+  relevance: PRIMARY NETWORK IN TINNITUS. Auditory attention network hyperactivation maintains awareness of and attention
+    to tinnitus signal. Dorsal attention network over-engagement amplifies tinnitus perception by directing sustained attentional
+    resources toward the phantom sound. Breaking the attention-tinnitus cycle is a key therapeutic target.
+  evidence_note: Attention network model of tinnitus; Rauschecker et al. 2010
+- network: sn
+  dysfunction: hyper
+  severity: moderate-severe
+  primary: false
+  relevance: SN hyperactivation assigns threat and distress salience to tinnitus percept, converting a benign phantom sound
+    into a severe disability. Anterior insula and ACC hyperactivation drive the tinnitus distress syndrome. SN hyperactivity
+    predicts tinnitus-related anxiety and depression.
+  evidence_note: SN model of tinnitus distress; De Ridder et al.
+- network: dmn
+  dysfunction: hyper
+  severity: moderate
+  primary: false
+  relevance: 'DMN involvement in tinnitus: ruminative processing of tinnitus, negative self-referential thoughts about tinnitus
+    persistence, and catastrophizing. DMN hyperactivation contributes to tinnitus-related anxiety and depression.'
+  evidence_note: ''
+- network: limbic
+  dysfunction: hyper
+  severity: moderate
+  primary: false
+  relevance: Limbic hyperactivation drives tinnitus-related anxiety (25-45%), depression (25-40%), and emotional distress.
+    Amygdala hyperreactivity amplifies the emotional component of tinnitus perception.
+  evidence_note: ''
+primary_network: attention
+fnon_rationale: 'In tinnitus, the primary mechanism is auditory attention network hyperactivation — excess attention directed
+  to the tinnitus phantom sound. The FNON framework deploys: (1) left temporal cortex cathodal tDCS to reduce auditory cortex
+  hyperexcitability; (2) DLPFC anodal tDCS to upregulate top-down attentional suppression of tinnitus; (3) taVNS for vagal-auditory
+  modulation and limbic comorbidities. Combined temporal-frontal montages (cathodal temporal + anodal frontal) represent the
+  most rational dual-target approach.'
+phenotypes:
+- slug: pure_tone
+  label: PURE-TONE — Pure Tone Tinnitus
+  description: Single-frequency tonal tinnitus. Most common type. Clear frequency match possible. Audiological assessment
+    with pitch matching recommended.
+  key_features:
+  - Single-frequency tone
+  - Clear pitch
+  - Pitch match possible
+  - Often associated with hearing loss at tinnitus frequency
+  primary_networks:
+  - attention
+  - sn
+  secondary_networks:
+  - limbic
+  preferred_modalities:
+  - tdcs
+  - tavns
+  tdcs_target: Left temporal cathodal (T3) + left DLPFC anodal
+  tps_target: ''
+- slug: tinnitus_anx
+  label: TIN-ANX — Tinnitus with Anxiety
+  description: Tinnitus with clinically significant comorbid anxiety. SN hyperactivation dominant. High distress. THI severe
+    range.
+  key_features:
+  - Severe tinnitus distress (THI >56)
+  - Anxiety (GAD-7 >=10)
+  - Sleep-onset difficulty
+  - Hypervigilance to sounds
+  primary_networks:
+  - sn
+  - limbic
+  secondary_networks:
+  - attention
+  - dmn
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: Left DLPFC anodal + CES adjunct for anxiety
+  tps_target: ''
+- slug: somatic
+  label: SOMATIC — Somatic Tinnitus
+  description: Tinnitus modulated by jaw, neck, or head movements. Somatosensory network involvement. Cervicogenic or TMJ
+    contribution.
+  key_features:
+  - Modulated by jaw/neck movement
+  - Variable pitch
+  - Cervicogenic component
+  - TMJ involvement
+  primary_networks:
+  - attention
+  - smn
+  secondary_networks:
+  - sn
+  preferred_modalities:
+  - tdcs
+  tdcs_target: Temporal-frontal bilateral montage with concurrent somatic treatment
+  tps_target: ''
+- slug: hl_tinnitus
+  label: HL-TIN — Tinnitus with Hearing Loss
+  description: Tinnitus with clinically significant associated sensorineural hearing loss. Deafferentation-driven central
+    gain. Hearing aid may reduce tinnitus by restoring peripheral input.
+  key_features:
+  - Tinnitus
+  - SNHL on audiogram
+  - Deafferentation-driven
+  - Hearing aid may benefit
+  primary_networks:
+  - attention
+  - sn
+  secondary_networks:
+  - limbic
+  preferred_modalities:
+  - tdcs
+  tdcs_target: Left temporal cathodal + DLPFC anodal
+  tps_target: ''
+assessments:
+- scale_key: thi
+  timing: baseline
+  primary: false
+  notes: Gold standard tinnitus distress measure. 25 items. Score 0-100. Score 0-16=slight; 18-36=mild; 38-56=moderate; 58-76=severe;
+    78-100=catastrophic. MCID = 20 points.
+- scale_key: vas_tinnitus
+  timing: baseline
+  primary: false
+  notes: Primary session-level tinnitus monitoring. 0-10 scale for loudness and distress separately. Administer at every session.
+- scale_key: gad7
+  timing: baseline
+  primary: false
+  notes: Anxiety comorbidity monitoring — 25-45% prevalence in tinnitus. Particularly important for tinnitus-anxiety phenotype.
+- scale_key: phq9
+  timing: baseline
+  primary: false
+  notes: Depression comorbidity screen — 25-40% prevalence in tinnitus.
+- scale_key: psqi
+  timing: baseline
+  primary: false
+  notes: Tinnitus-related insomnia monitoring.
+applicable_modalities:
+- tdcs
+- tps
+- tavns
+- ces
+protocols:
+- protocol_id: C-TIN-BIFRONTAL
+  label: Bifrontal-Temporal — Dual Target Tinnitus
+  modality: tdcs
+  target_region: Left Temporal + Left DLPFC
+  target_abbreviation: T3+F3
+  target_electrodes: []
+  phenotype_slugs:
+  - pure_tone
+  - tinnitus_anx
+  - hl_tinnitus
+  network_targets:
+  - attention
+  - sn
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    cathode: T3 (left temporal — auditory cortex inhibition)
+    anode: F3 (left DLPFC) or Fp1
+    intensity: 1.5-2.0 mA
+    duration: 20-30 min
+    sessions: 10-15 over 3 weeks
+    note: 'Dual-target montage: cathodal T3 (auditory) + anodal F3 (frontal). Vanneste & De Ridder montage.'
+  rationale: Combined temporal cathodal (auditory cortex inhibition) + DLPFC anodal (top-down suppression) addresses both
+    the auditory source and the attention/distress amplifiers of tinnitus. Vanneste & De Ridder (2011) demonstrated this dual-target
+    approach reduces tinnitus loudness and distress. Shekhawat et al. (2013) systematic review supports this montage. OFF-LABEL.
+  evidence_level: medium
+  off_label: true
+  session_count: 15
+  notes: ''
+- protocol_id: C-TIN-AC
+  label: Auditory Cortex Cathodal — Tinnitus Suppression
+  modality: tdcs
+  target_region: Left Temporal Cortex (Auditory Cortex)
+  target_abbreviation: T3/AC
+  target_electrodes: []
+  phenotype_slugs:
+  - pure_tone
+  - hl_tinnitus
+  - somatic
+  network_targets:
+  - attention
+  - sn
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    cathode: T3 (left temporal cortex)
+    anode: Right shoulder or Fp2
+    intensity: 1.5-2.0 mA
+    duration: 20 min
+    sessions: 10-15
+  rationale: 'Temporal cortex cathodal tDCS reduces auditory cortex hyperexcitability. Vanneste & De Ridder (2011): temporal
+    cathodal tDCS reduced tinnitus loudness in controlled study. Lehtimaki et al. (2013) confirmed effect. Results inconsistent
+    across studies — electrode placement precision critical. OFF-LABEL.'
+  evidence_level: medium
+  off_label: true
+  session_count: 15
+  notes: ''
+- protocol_id: TAVNS-TIN
+  label: taVNS — Auditory & Anxiety Adjunct
+  modality: tavns
+  target_region: Left auricular branch of vagus nerve
+  target_abbreviation: taVNS
+  target_electrodes: []
+  phenotype_slugs:
+  - tinnitus_anx
+  - pure_tone
+  network_targets:
+  - limbic
+  - sn
+  - attention
+  parameters:
+    device: NEMOS (tVNS Technologies) or Parasym
+    frequency: 25 Hz
+    pulse_width: 250 us
+    intensity: Below pain threshold
+    duration: 30 min
+    sessions: Daily adjunct
+    electrode_placement: Left cymba conchae
+  rationale: taVNS modulates auditory cortex excitability via vagal-NTS-auditory pathways. Lehtimaki et al. (2013) early evidence
+    for taVNS auditory modulation. Also addresses tinnitus-related anxiety and limbic distress. Investigational.
+  evidence_level: low
+  off_label: true
+  session_count: 20
+  notes: Investigational for tinnitus. Adjunct to tDCS protocol.
+- protocol_id: CES-TIN
+  label: CES — Sleep & Anxiety Adjunct
+  modality: ces
+  target_region: Bilateral earlobe electrodes
+  target_abbreviation: CES
+  target_electrodes: []
+  phenotype_slugs:
+  - tinnitus_anx
+  network_targets:
+  - limbic
+  - sn
+  parameters:
+    device: Alpha-Stim AID
+    frequency: 0.5 Hz
+    intensity: 100-200 uA
+    duration: 40-60 min
+    sessions: Nightly before sleep
+  rationale: Alpha-Stim CES FDA-cleared for anxiety and insomnia. In tinnitus-anxiety phenotype, addresses the highly prevalent
+    anxiety and sleep disturbance that amplify tinnitus distress. Sleep restoration reduces tinnitus-related distress cycle.
+  evidence_level: medium
+  off_label: false
+  session_count: 20
+  notes: ''
+safety_rules:
+- category: contraindication
+  description: Active implanted electronic devices in the head/neck region
+  severity: absolute
+  modalities: []
+  source: Manufacturer guidelines and consensus safety statements
+- category: stopping_rule
+  description: 'Discontinue immediately for Grade 3 adverse events: new seizure, severe headache, syncope, skin burn, worsening
+    of psychiatric symptoms requiring acute intervention'
+  severity: high
+  modalities: []
+  source: ''
+- category: monitoring
+  description: Assess and document adverse events at every session using a standardized monitoring checklist
+  severity: moderate
+  modalities: []
+  source: ''
+- category: precaution
+  description: Ensure consistent medication state (ON or OFF) throughout treatment blocks to avoid false responder/non-responder
+    classification
+  severity: moderate
+  modalities: []
+  source: ''
+- category: monitoring
+  description: Monitor tinnitus loudness and distress at every session using VAS. Temporary tinnitus exacerbation can occur
+    in initial sessions. If persistent worsening after 3 sessions, reduce intensity to 1.5 mA or modify electrode position.
+  severity: moderate
+  modalities: []
+  source: Tinnitus variability with neuromodulation; clinical monitoring requirement
+- category: precaution
+  description: Pulsatile tinnitus (rhythmic, heartbeat-synchronized) requires urgent vascular investigation (MRI/MRA) to exclude
+    arteriovenous malformation, dural arteriovenous fistula, or glomus tumor before any neuromodulation.
+  severity: high
+  modalities: []
+  source: Pulsatile tinnitus — vascular cause exclusion mandatory
+contraindications:
+- Active implanted devices (cochlear implants, deep brain stimulators, cardiac pacemakers/defibrillators) unless explicitly
+  cleared by device manufacturer
+- Metallic implants in the head or neck region within the stimulation field
+- Active epilepsy with uncontrolled seizures (relative contraindication — requires neurologist clearance)
+- Skull defects or craniectomy at stimulation sites
+- Skin lesions, wounds, or dermatological conditions at electrode placement sites
+- Active malignancy of the central nervous system
+- Pregnancy (precautionary contraindication — insufficient safety data)
+- Severe psychiatric crisis requiring immediate hospitalization
+inclusion_criteria:
+- Chronic tinnitus — persistent for >3 months
+- THI score >=18 (at least mild disability)
+- Age 18-75 years
+- Capacity to provide informed consent
+- Medically stable — no acute otological emergency
+exclusion_criteria:
+- Pulsatile tinnitus with suspected vascular etiology — requires urgent vascular investigation first
+- Tinnitus from active acute otitis media or Meniere's disease in acute phase
+- Unilateral sudden tinnitus with hearing loss (<4 weeks) — requires urgent audiological assessment
+- Active cochlear implant or hearing implant on stimulation side
+responder_criteria:
+- '>=20-point improvement in THI score (minimal clinically important difference for tinnitus)'
+- '>=30% reduction in VAS tinnitus distress from baseline'
+- Clinically meaningful SOZO PRS improvement in tinnitus and mood domains
+non_responder_pathway: 'For non-responders at Week 4:
+
+  1. Reassess electrode placement — T3 accuracy is critical; skull anatomy variation affects targeting
+
+  2. Switch from unilateral temporal to dual-target (bifrontal-temporal) protocol
+
+  3. Add CES for anxiety/insomnia component if anxiety score elevated
+
+  4. Audiological review — hearing aid may reduce tinnitus by restoring peripheral input
+
+  5. Cognitive-behavioral therapy for tinnitus (CBT-T) referral — best-evidenced non-pharmacological approach'
+evidence_summary: 'Tinnitus tDCS has moderate but inconsistent evidence. Vanneste & De Ridder (2011) demonstrated temporal
+  cathodal + frontal anodal tDCS reduced tinnitus loudness. Shekhawat et al. (2013) systematic review confirmed evidence for
+  tDCS in tinnitus but noted inconsistency in electrode placement findings. Lehtimaki et al. (2013) confirmed effect of temporal
+  tDCS. Key challenge: inconsistent electrode placement findings across studies — standardized protocols needed. taVNS: investigational.
+  CES: FDA-cleared for comorbid symptoms.'
+evidence_quality: medium
+evidence_gaps:
+- Inconsistent electrode placement findings — optimal montage not definitively established
+- Need for standardized tinnitus tDCS protocols with pitch-matching-guided electrode placement
+- Long-term tinnitus relief after treatment block — limited follow-up data
+- taVNS for tinnitus — limited published data
+- Combined tDCS + psychoacoustic training (notched music therapy) — no controlled trial
+references:
+- pmid: '23141262'
+  title: 'Role of tDCS in the management of tinnitus: a scoping review'
+  authors: Shekhawat GS et al.
+  year: 2013
+  journal: Clinical Neurophysiology
+  evidence_level: medium
+  notes: ''
+- pmid: '21071284'
+  title: 'Noninvasive and invasive neuromodulation for the treatment of tinnitus: an overview'
+  authors: Vanneste S & De Ridder D
+  year: 2011
+  journal: Neuromodulation
+  evidence_level: medium
+  notes: ''
+- pmid: '23423668'
+  title: Retuning the misfiring sensorimotor circuits in tinnitus using transcranial direct current stimulation
+  authors: Lehtimaki J et al.
+  year: 2013
+  journal: Journal of Neuroscience
+  evidence_level: medium
+  notes: ''
+- pmid: '8630207'
+  title: Development of the Tinnitus Handicap Inventory
+  authors: Newman CW et al.
+  year: 1996
+  journal: Archives of Otolaryngology — Head and Neck Surgery
+  evidence_level: medium
+  notes: ''
+clinical_tips:
+- Electrode placement precision is critical — T3 approximates left auditory cortex but skull anatomy variation affects accuracy
+- Monitor VAS tinnitus at start and end of every session — tinnitus loudness fluctuates and session-level tracking builds
+  confidence
+- 'For tinnitus-anxiety phenotype: address anxiety first with CES — anxiety amplifies tinnitus distress disproportionately'
+- 'Audiological assessment before starting: hearing aid prescription may reduce tinnitus by restoring peripheral auditory
+  input'
+- Pulsatile tinnitus is a red flag — vascular investigation mandatory before any neuromodulation
+governance_rules:
+- No Fellow or Clinical Assistant may independently modify treatment plans without Doctor authorization
+- All TPS applications require explicit off-label informed consent and Doctor authorization
+- Adverse events must be documented within 24 hours and escalated per clinic protocol
+- Treatment records must be updated at every session
+- Informed consent must be obtained and documented before initiating any modality
+- Pulsatile tinnitus requires vascular investigation before treatment — document exclusion of vascular cause
+patient_journey_notes: {}

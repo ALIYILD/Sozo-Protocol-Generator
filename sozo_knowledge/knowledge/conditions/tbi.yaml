@@ -1,0 +1,499 @@
+# Traumatic Brain Injury / Post-Concussion Syndrome — SOZO Clinical Knowledge
+# Auto-extracted from condition generator. ICD-10: S09.90
+
+slug: tbi
+display_name: Traumatic Brain Injury / Post-Concussion Syndrome
+icd10: S09.90
+aliases:
+- TBI
+- mTBI
+- concussion
+- post-concussion syndrome
+- PCS
+- mild TBI
+- brain injury
+category: neurological
+version: '1.0'
+overview: 'Traumatic Brain Injury (TBI) encompasses a spectrum from mild concussion (mTBI) to severe injury, caused by external
+  mechanical force to the head. Mild TBI (mTBI/concussion) is the most prevalent form, with 60-90% of all TBIs classified
+  as mild. Post-Concussion Syndrome (PCS) describes persistent symptoms beyond the expected recovery window (>4 weeks), including
+  cognitive impairment (brain fog, memory difficulties), headache, fatigue, sleep disturbance, emotional dysregulation, and
+  mood disorders. PCS affects 10-30% of mTBI patients and is highly disabling.
+
+
+  Neuromodulation in TBI/PCS targets the DLPFC to address cognitive and emotional sequelae. tDCS shows emerging evidence in
+  several pilot studies for improving cognitive function, reducing fatigue, and improving mood post-TBI. taVNS is under investigation
+  for vagal-mediated neuroplasticity and autonomic dysregulation (common in TBI).'
+pathophysiology: 'TBI pathophysiology involves two injury phases. Primary injury occurs at impact: mechanical deformation
+  causes neuronal cell death, axonal shear injury (diffuse axonal injury — DAI), vascular disruption, and contusions. Secondary
+  injury cascade follows: excitotoxicity (glutamate release), calcium influx, mitochondrial dysfunction, oxidative stress,
+  neuroinflammation (microglial activation), cerebral edema, and axonal degeneration.
+
+
+  Mild TBI/concussion produces neurometabolic dysfunction without structural damage visible on standard MRI: ionic flux disturbance,
+  impaired glucose metabolism (FDG-PET hypometabolism), and disruption of white matter connectivity (detectable on DTI). These
+  metabolic changes explain the clinical symptom cluster.
+
+
+  Chronic TBI pathophysiology involves: persistent neuroinflammation; white matter tract degeneration (reduced fractional
+  anisotropy on DTI); cholinergic and dopaminergic disruption (particularly basal forebrain and frontal circuits); and network-level
+  connectivity changes — CEN hypofunction, DMN hyperactivation, and impaired SN network switching. Post-TBI depression and
+  anxiety reflect HPA axis dysregulation, limbic network changes, and adjustment disorder components.'
+core_symptoms:
+- Cognitive impairment — brain fog, slowed processing speed, working memory difficulties
+- Headache — tension-type, migraine-like, or pressure-quality post-concussive
+- Fatigue — disproportionate physical and mental fatigability
+- Sleep disturbance — insomnia, hypersomnia, sleep architecture changes
+- Dizziness and vestibular symptoms
+- Sensory sensitivity — photophobia, phonophobia
+- Concentration and attention difficulties
+non_motor_symptoms:
+- Depression (25-50% post-TBI)
+- Anxiety and irritability
+- Emotional dysregulation — low threshold for emotional reactions
+- Apathy and reduced motivation
+- Pain hypersensitivity (central sensitization component)
+- Social and occupational functional impairment
+brain_regions:
+- Dorsolateral Prefrontal Cortex (DLPFC)
+- Anterior Cingulate Cortex (ACC)
+- Hippocampus
+- White Matter Tracts (corpus callosum, uncinate fasciculus)
+- Thalamus
+- Anterior Insula / Salience Network Hubs
+brain_region_details:
+  Dorsolateral Prefrontal Cortex (DLPFC): Highly vulnerable to TBI-related white matter disruption and CEN hypofunction. Working
+    memory, executive function, and emotion regulation impaired. Primary tDCS anodal target.
+  Anterior Cingulate Cortex (ACC): Impaired conflict monitoring, error detection, and arousal regulation post-TBI. Contributes
+    to attention deficits and emotional dysregulation.
+  Hippocampus: Vulnerable to TBI excitotoxicity and corticosteroid-mediated damage. Memory encoding and contextual processing
+    impaired. Volume reduction documented in moderate-severe TBI.
+  White Matter Tracts (corpus callosum, uncinate fasciculus): Primary site of diffuse axonal injury (DAI) in mTBI. DTI fractional
+    anisotropy reduction correlates with cognitive and emotional symptom severity.
+  Thalamus: Thalamic involvement in moderate-severe TBI disrupts sensory gating, arousal, and cortical connectivity. Central
+    to fatigue and sensory sensitivity post-TBI.
+  Anterior Insula / Salience Network Hubs: Impaired interoceptive processing and network switching. Contributes to fatigue,
+    pain sensitivity, and emotional dysregulation in PCS.
+network_profiles:
+- network: cen
+  dysfunction: hypo
+  severity: severe
+  primary: true
+  relevance: PRIMARY NETWORK IN TBI. CEN hypofunction — DLPFC and parietal — is the most consistent network finding in TBI
+    neuroimaging. Impairs working memory, attention, executive function, and top-down emotional regulation. Correlates with
+    post-concussive cognitive symptoms. Primary tDCS target for cognitive rehabilitation.
+  evidence_note: Multiple resting-state fMRI studies of mTBI; CEN hypofunction correlates with PCS severity
+- network: dmn
+  dysfunction: hyper
+  severity: moderate
+  primary: false
+  relevance: DMN hyperactivation and failure to deactivate during task performance is documented in mTBI. Abnormal CEN-DMN
+    anticorrelation mirrors ADHD-like network pattern. Contributes to attentional intrusions, rumination, and cognitive fatigability.
+  evidence_note: DMN disruption post-TBI; Mayer et al. — altered resting-state connectivity
+- network: sn
+  dysfunction: hypo
+  severity: moderate
+  primary: false
+  relevance: SN dysregulation — reduced network switching efficiency — impairs the transition from DMN to CEN states. Anterior
+    insula involvement drives fatigue, pain sensitivity, and altered interoceptive processing. Autonomic dysfunction reflects
+    SN disruption.
+  evidence_note: ''
+- network: attention
+  dysfunction: hypo
+  severity: severe
+  primary: false
+  relevance: Sustained and divided attention deficits are core PCS complaints. Dorsal and ventral attention networks disrupted
+    by frontal white matter tract injury. Correlates with occupational disability and return-to-sport/work delays.
+  evidence_note: Attention network dysfunction in PCS; cognitive-fatigue interaction
+- network: limbic
+  dysfunction: hyper
+  severity: moderate
+  primary: false
+  relevance: Post-TBI depression and anxiety reflect limbic hyperreactivity, HPA axis dysregulation, and reduced prefrontal
+    inhibitory control. Amygdala hyperreactivity documented in TBI. Emotional dysregulation is one of the most disabling PCS
+    consequences.
+  evidence_note: Post-TBI limbic dysregulation; HPA axis disruption in TBI
+primary_network: cen
+fnon_rationale: In TBI/PCS, the primary dysfunctional network is the Central Executive Network (CEN), disrupted by diffuse
+  axonal injury to prefrontal-parietal white matter tracts and DLPFC cortical metabolic dysfunction. The FNON framework targets
+  left DLPFC anodal tDCS to upregulate CEN excitability and restore CEN-DMN anticorrelation, addressing cognitive-fatigue
+  symptoms. taVNS provides complementary noradrenergic upregulation and autonomic regulation. CES addresses sleep disturbance
+  and anxiety/mood components via limbic and SN modulation.
+phenotypes:
+- slug: cog_fat
+  label: COG-FAT — Cognitive-Fatigue Subtype
+  description: Predominant cognitive slowing, brain fog, disproportionate mental and physical fatigue. CEN hypofunction and
+    metabolic dysfunction dominant.
+  key_features:
+  - Brain fog
+  - Slowed processing
+  - Working memory deficit
+  - Mental fatigue
+  - Concentration impairment
+  primary_networks:
+  - cen
+  - attention
+  secondary_networks:
+  - dmn
+  - sn
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: Left DLPFC anodal (F3) + right shoulder/supraorbital cathode
+  tps_target: ''
+- slug: emo_beh
+  label: EMO-BEH — Emotional-Behavioral Subtype
+  description: Prominent emotional dysregulation, irritability, depression, anxiety, or personality change. Limbic-frontal
+    network disruption.
+  key_features:
+  - Irritability
+  - Emotional lability
+  - Depression
+  - Anxiety
+  - Reduced frustration tolerance
+  primary_networks:
+  - limbic
+  - cen
+  secondary_networks:
+  - sn
+  - dmn
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: Left DLPFC anodal; add CES for mood/sleep
+  tps_target: ''
+- slug: pcs
+  label: PCS — Post-Concussion Syndrome
+  description: Persistent multi-symptom syndrome >4 weeks after mTBI. Mixed cognitive, emotional, somatic, and sleep symptoms.
+    Most common neuromodulation indication in TBI.
+  key_features:
+  - Headache
+  - Brain fog
+  - Sleep disturbance
+  - Dizziness
+  - Mood changes
+  - Fatigue
+  primary_networks:
+  - cen
+  - sn
+  secondary_networks:
+  - limbic
+  - attention
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: Left DLPFC anodal — comprehensive PCS protocol
+  tps_target: ''
+- slug: chronic_tbi
+  label: CHRONIC-TBI — Chronic TBI Sequelae
+  description: Moderate-severe TBI with chronic cognitive, behavioral, and motor deficits. Multi-network dysfunction. Longer
+    treatment blocks required.
+  key_features:
+  - Persistent cognitive impairment
+  - Behavioral dysregulation
+  - Motor sequelae
+  - Chronic pain
+  - Reduced independence
+  primary_networks:
+  - cen
+  - dmn
+  secondary_networks:
+  - limbic
+  - attention
+  preferred_modalities:
+  - tdcs
+  - ces
+  tdcs_target: DLPFC bilateral anodal — extended protocol
+  tps_target: ''
+assessments:
+- scale_key: pcss
+  timing: baseline
+  primary: false
+  notes: Primary PCS symptom burden measure. 22 items, 0-6 Likert scale. Total score /132. Administer at baseline, weekly
+    monitoring.
+- scale_key: moca
+  timing: baseline
+  primary: false
+  notes: Global cognitive screen. Score <26 = possible impairment in TBI. Administer at baseline and endpoint.
+- scale_key: phq9
+  timing: baseline
+  primary: false
+  notes: Post-TBI depression screen. Score >=10 = moderate depression. Monitor at every session.
+- scale_key: psqi
+  timing: baseline
+  primary: false
+  notes: Sleep assessment critical in TBI — sleep disturbance worsens all PCS symptoms. Score >5 = poor sleep quality.
+- scale_key: brief2
+  timing: baseline
+  primary: false
+  notes: Ecological executive function assessment. Captures TBI executive deficits in daily functioning. Compare with self-report
+    vs informant versions.
+- scale_key: gad7
+  timing: baseline
+  primary: false
+  notes: Anxiety screen — high comorbidity in PCS. Score >=10 = moderate anxiety.
+applicable_modalities:
+- tdcs
+- tps
+- tavns
+- ces
+protocols:
+- protocol_id: C-TBI-COG
+  label: Cognitive Rehabilitation — DLPFC tDCS
+  modality: tdcs
+  target_region: Dorsolateral Prefrontal Cortex
+  target_abbreviation: DLPFC
+  target_electrodes: []
+  phenotype_slugs:
+  - cog_fat
+  - pcs
+  - chronic_tbi
+  network_targets:
+  - cen
+  - attention
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    anode: F3 (left DLPFC) or bilateral F3+F4
+    cathode: Fp2 (right supraorbital) or right shoulder
+    intensity: 1.5-2.0 mA (start 1.5 mA for first 2-3 sessions in TBI)
+    duration: 20 min
+    sessions: 10-15 over 3 weeks
+    electrode_size: 35 cm2
+    note: Concurrent cognitive training (working memory, attention) recommended during tDCS.
+  rationale: DLPFC anodal tDCS targets CEN hypofunction — the primary cognitive mechanism in TBI. Pape et al. (2015) pilot
+    study demonstrated improved attention in TBI. McIntire et al. (2017) demonstrated cognitive improvements in mTBI. Start
+    at 1.5 mA due to TBI-related altered cortical excitability. OFF-LABEL.
+  evidence_level: medium
+  off_label: true
+  session_count: 15
+  notes: ''
+- protocol_id: TAVNS-TBI
+  label: taVNS — Autonomic & Fatigue Adjunct
+  modality: tavns
+  target_region: Left auricular branch of vagus nerve
+  target_abbreviation: taVNS
+  target_electrodes: []
+  phenotype_slugs:
+  - cog_fat
+  - pcs
+  network_targets:
+  - sn
+  - cen
+  - limbic
+  parameters:
+    device: NEMOS (tVNS Technologies) or Parasym
+    frequency: 25 Hz
+    pulse_width: 200-250 us
+    intensity: Below pain threshold (0.5-4.0 mA)
+    duration: 30 min
+    sessions: Daily adjunct during tDCS block
+    electrode_placement: Left cymba conchae
+  rationale: taVNS modulates autonomic tone and noradrenergic upregulation in TBI. Autonomic dysfunction (reduced HRV) is
+    prevalent in TBI and correlates with symptom severity. Vagal-mediated BDNF upregulation may enhance neuroplasticity. Investigational
+    in TBI — rationale from autonomic dysfunction and noradrenergic literature.
+  evidence_level: low
+  off_label: true
+  session_count: 20
+  notes: Investigational in TBI. Monitor heart rate during initial sessions — autonomic sensitivity in TBI.
+- protocol_id: CES-TBI
+  label: CES — Sleep, Anxiety & Mood Adjunct
+  modality: ces
+  target_region: Bilateral earlobe electrodes
+  target_abbreviation: CES
+  target_electrodes: []
+  phenotype_slugs:
+  - pcs
+  - emo_beh
+  - cog_fat
+  network_targets:
+  - limbic
+  - sn
+  parameters:
+    device: Alpha-Stim AID
+    frequency: 0.5 Hz
+    intensity: 100-300 uA
+    duration: 40-60 min
+    sessions: Daily during treatment block
+  rationale: Alpha-Stim CES FDA-cleared for anxiety, depression, and insomnia. In TBI/PCS, targets the highly prevalent triad
+    of sleep disturbance, anxiety, and mood symptoms. Non-pharmacological intervention that reduces medication burden in TBI
+    patients. Adjunct to DLPFC tDCS for comprehensive PCS treatment.
+  evidence_level: medium
+  off_label: false
+  session_count: 20
+  notes: ''
+- protocol_id: C-TBI-MOOD
+  label: Post-TBI Depression — DLPFC tDCS
+  modality: tdcs
+  target_region: Left Dorsolateral Prefrontal Cortex
+  target_abbreviation: L-DLPFC
+  target_electrodes: []
+  phenotype_slugs:
+  - emo_beh
+  network_targets:
+  - limbic
+  - cen
+  - dmn
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    anode: F3 (left DLPFC)
+    cathode: Fp2 (right supraorbital)
+    intensity: 2.0 mA
+    duration: 30 min
+    sessions: 10-15
+  rationale: Post-TBI depression is treated with left DLPFC anodal tDCS using MDD protocol rationale. Restores CEN-DMN balance,
+    reducing limbic hyperactivity and depressive tone. PHQ-9 monitoring mandatory. C-SSRS at every session. OFF-LABEL.
+  evidence_level: medium
+  off_label: true
+  session_count: 15
+  notes: 'Mandatory: C-SSRS suicidality monitoring at every session. PHQ-9 at each visit.'
+safety_rules:
+- category: contraindication
+  description: Active implanted electronic devices in the head/neck region
+  severity: absolute
+  modalities: []
+  source: Manufacturer guidelines and consensus safety statements
+- category: stopping_rule
+  description: 'Discontinue immediately for Grade 3 adverse events: new seizure, severe headache, syncope, skin burn, worsening
+    of psychiatric symptoms requiring acute intervention'
+  severity: high
+  modalities: []
+  source: ''
+- category: monitoring
+  description: Assess and document adverse events at every session using a standardized monitoring checklist
+  severity: moderate
+  modalities: []
+  source: ''
+- category: precaution
+  description: Ensure consistent medication state (ON or OFF) throughout treatment blocks to avoid false responder/non-responder
+    classification
+  severity: moderate
+  modalities: []
+  source: ''
+- category: contraindication
+  description: 'ACUTE TBI: Neuromodulation is contraindicated within 3 months of TBI. Neurometabolic dysfunction phase makes
+    the brain more susceptible to stimulation-related adverse effects. Wait minimum 3 months for mTBI/PCS; consult neurologist
+    for moderate-severe TBI timing.'
+  severity: high
+  modalities: []
+  source: Consensus safety principles for neuromodulation post-TBI
+- category: precaution
+  description: Review neuroimaging before treatment initiation. Confirm no active intracranial pathology (hemorrhage, contusion,
+    subdural, epidural). Rule out skull fracture or metallic fragments that would alter current distribution.
+  severity: high
+  modalities: []
+  source: Neuroimaging safety review mandatory for TBI neuromodulation
+- category: precaution
+  description: Start at lower stimulation intensity (1.5 mA) in TBI patients — may demonstrate increased sensitivity to stimulation
+    due to neurometabolic disruption. Titrate to 2.0 mA only after confirmed tolerance across 2-3 sessions.
+  severity: moderate
+  modalities: []
+  source: Clinical precaution for TBI population — altered cortical excitability threshold
+- category: monitoring
+  description: Monitor for headache worsening during or after sessions. Post-TBI headache exacerbation is common and may indicate
+    need to reduce intensity or duration. Document headache VAS at start and end of each session.
+  severity: moderate
+  modalities: []
+  source: Post-TBI headache exacerbation monitoring
+contraindications:
+- Active implanted devices (cochlear implants, deep brain stimulators, cardiac pacemakers/defibrillators) unless explicitly
+  cleared by device manufacturer
+- Metallic implants in the head or neck region within the stimulation field
+- Active epilepsy with uncontrolled seizures (relative contraindication — requires neurologist clearance)
+- Skull defects or craniectomy at stimulation sites
+- Skin lesions, wounds, or dermatological conditions at electrode placement sites
+- Active malignancy of the central nervous system
+- Pregnancy (precautionary contraindication — insufficient safety data)
+- Severe psychiatric crisis requiring immediate hospitalization
+- Acute TBI (<3 months) — neurometabolic vulnerability window; avoid neuromodulation
+- Skull fractures or cranial metallic fragments — altered current distribution risk
+- Raised intracranial pressure — any clinical signs require immediate exclusion
+inclusion_criteria:
+- Confirmed diagnosis of mild-to-moderate TBI with persistent PCS symptoms
+- Minimum 3 months post-injury (subacute recovery window complete)
+- Age 18-65 years
+- PCSS total score >=20 (clinically significant symptom burden)
+- Medically stable — no active intracranial pathology on neuroimaging
+- No skull fracture or metallic intracranial fragments
+- Capacity to provide informed consent
+exclusion_criteria:
+- Acute TBI (<3 months post-injury) — neurometabolic dysfunction phase; risk of worsening
+- Skull fracture at electrode placement site
+- Intracranial metallic fragments from penetrating TBI
+- Active intracranial hypertension or unresolved subdural collection
+- Severe TBI with significant structural damage (CDR equivalent) limiting cooperation
+- Active alcohol or substance use disorder
+- Current anticoagulation therapy (TPS contraindication if applicable)
+responder_criteria:
+- '>=30% reduction in PCSS total score from baseline'
+- '>=50% reduction in PHQ-9 score (depression subtype)'
+- Clinically meaningful improvement in SOZO PRS cognitive domain (>=3 points)
+- MoCA score stabilization or improvement
+non_responder_pathway: 'For non-responders at Week 4:
+
+  1. Re-evaluate TBI severity — confirm not acute window (<3 months)
+
+  2. Screen for untreated sleep disorder — severe insomnia limits all cognitive outcomes
+
+  3. Optimize CES for sleep/anxiety before escalating tDCS
+
+  4. Add taVNS for autonomic dysregulation and fatigue component
+
+  5. Check headache worsening — reduce to 1.5 mA if exacerbating post-TBI headache
+
+  6. Neurological review — rule out new pathology or missed moderate TBI diagnosis
+
+  7. Doctor psychiatric review for post-TBI depression/anxiety management'
+evidence_summary: 'TBI/PCS has emerging evidence for tDCS. Pape et al. (2015) pilot study (J Head Trauma Rehab) demonstrated
+  attention improvements with DLPFC tDCS in chronic TBI. McIntire et al. (2017) confirmed cognitive improvements in mTBI.
+  Multiple small studies support feasibility and safety. No large multi-site RCT completed. taVNS: investigational — rationale
+  from autonomic dysfunction and noradrenergic deficiency in TBI. CES: FDA-cleared for comorbid symptoms; useful adjunct.'
+evidence_quality: medium
+evidence_gaps:
+- No adequately powered multi-site RCT of tDCS for PCS with validated primary cognitive endpoint
+- Optimal timing of neuromodulation post-TBI — early vs late intervention window
+- Stimulation parameters for TBI — altered threshold due to neurometabolic dysfunction
+- taVNS in TBI — no published RCT; mechanism-based rationale only
+- TPS in TBI — no published controlled data
+- Distinguishing neurometabolic vs psychological contributions to PCS — affects optimal treatment targeting
+references:
+- pmid: '24535078'
+  title: Preliminary findings of a feasibility study on the effects of transcranial direct current stimulation on attention
+    and concentration in persons with traumatic brain injury
+  authors: Pape TL et al.
+  year: 2015
+  journal: Journal of Head Trauma Rehabilitation
+  evidence_level: medium
+  notes: ''
+- pmid: '22088972'
+  title: Noninvasive brain stimulation in traumatic brain injury
+  authors: Demirtas-Tatlidede A et al.
+  year: 2012
+  journal: Journal of Head Trauma Rehabilitation
+  evidence_level: medium
+  notes: ''
+- pmid: '19038066'
+  title: Reliability, sensitivity and specificity of the Standardized Assessment of Concussion and the post-concussion symptom
+    scale
+  authors: McCrea M et al.
+  year: 2009
+  journal: Journal of the International Neuropsychological Society
+  evidence_level: medium
+  notes: ''
+clinical_tips:
+- Always review neuroimaging before treatment — rule out intracranial metallic fragments, skull fractures, and active hematoma
+- Start at 1.5 mA and monitor for headache exacerbation at each early session — TBI patients may have altered cortical excitability
+- Prioritize sleep optimization before cognitive tDCS — severe insomnia limits neuroplasticity and cognitive treatment response
+- Document time since injury clearly — exclude patients <3 months post-injury regardless of symptom severity
+- Monitor post-TBI depression at every session (PHQ-9) — highly prevalent and severely impairs rehabilitation engagement
+governance_rules:
+- No Fellow or Clinical Assistant may independently modify treatment plans without Doctor authorization
+- All TPS applications require explicit off-label informed consent and Doctor authorization
+- Adverse events must be documented within 24 hours and escalated per clinic protocol
+- Treatment records must be updated at every session
+- Informed consent must be obtained and documented before initiating any modality
+- Neuroimaging review mandatory before treatment initiation — rule out intracranial metallic fragments and active pathology
+- Minimum 3 months post-TBI before neuromodulation — document injury date in clinical record
+patient_journey_notes: {}

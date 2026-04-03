@@ -1,0 +1,487 @@
+# Long COVID / Post-Acute Sequelae SARS-CoV-2 — SOZO Clinical Knowledge
+# Auto-extracted from condition generator. ICD-10: U09.9
+
+slug: long_covid
+display_name: Long COVID / Post-Acute Sequelae SARS-CoV-2
+icd10: U09.9
+aliases:
+- Long COVID
+- PASC
+- post-COVID
+- post-COVID-19
+- post-acute COVID
+- COVID brain fog
+category: mixed
+version: '1.0'
+overview: 'Long COVID (Post-Acute Sequelae SARS-CoV-2, PASC) describes a range of persistent symptoms lasting beyond 4-12
+  weeks after acute SARS-CoV-2 infection, not explained by an alternative diagnosis. Estimated prevalence is 10-30% of COVID-19
+  survivors. The most prevalent and disabling symptoms include: brain fog/cognitive impairment, fatigue, dyspnea, post-exertional
+  malaise (PEM), sleep disturbance, and dysautonomia.
+
+
+  Neurological manifestations affect 30-80% of long COVID patients. Taquet et al. (2021, Lancet Psychiatry) documented 6-month
+  neurological and psychiatric sequelae in 236,379 COVID-19 survivors. Neuroimaging studies (FDG-PET, MRI) reveal widespread
+  metabolic hypometabolism in frontal-parietal regions consistent with CEN hypofunction.
+
+
+  IMPORTANT: Long COVID is a new condition (2020-present) with rapidly evolving evidence. Neuromodulation evidence is limited
+  to case series and small pilot studies. Clinical approach should be cautious, individualized, and involve treating physician.'
+pathophysiology: 'Long COVID pathophysiology is multifactorial and incompletely understood. Proposed mechanisms include:
+
+
+  (1) Persistent viral reservoir/antigen: SARS-CoV-2 RNA detected in GI tract, lymph nodes, and potentially CNS months after
+  acute infection — driving ongoing immune activation.
+
+
+  (2) Neuroinflammation: microglial activation and neuroinflammatory mediators (IL-6, TNF-alpha, IL-1beta) documented in CNS
+  via CSF and PET studies. Similar pattern to post-infectious encephalitis.
+
+
+  (3) Autonomic dysregulation (dysautonomia): autonomic nervous system dysfunction produces POTS (postural orthostatic tachycardia),
+  orthostatic intolerance, and impaired HRV. Small fiber neuropathy documented in subset.
+
+
+  (4) Vascular endothelial dysfunction: persistent micro-thrombi and endothelial damage impair cerebral microvascular perfusion,
+  contributing to cognitive symptoms.
+
+
+  (5) Mitochondrial dysfunction and bioenergetic failure: impaired cellular energy production drives the disproportionate
+  post-exertional fatigue and exercise intolerance.
+
+
+  (6) Immune dysregulation: T-cell exhaustion, NK cell dysfunction, B-cell and antibody abnormalities, and autoantibody formation
+  (ACE2, beta-adrenergic receptor antibodies) documented in long COVID.'
+core_symptoms:
+- Brain fog — cognitive slowing, memory difficulties, concentration impairment
+- Post-exertional malaise (PEM) — symptom worsening after physical or cognitive exertion
+- Fatigue — disproportionate, not relieved by rest
+- Dyspnea — breathlessness at rest or on exertion
+- Sleep disturbance — insomnia, hypersomnia, non-restorative sleep
+- Headache
+- Sensory changes — tinnitus, parosmia, taste disturbance
+non_motor_symptoms:
+- Depression and anxiety (highly prevalent)
+- PTSD-like symptoms from acute COVID hospitalization (ICU patients)
+- Dysautonomia / POTS — orthostatic intolerance, palpitations, sweating
+- Chest pain and cardiac symptoms
+- GI symptoms (nausea, diarrhea, dyspepsia)
+- Pain hypersensitivity and fibromyalgia-like features
+brain_regions:
+- Dorsolateral Prefrontal Cortex (DLPFC)
+- Anterior Cingulate Cortex (ACC)
+- Thalamus
+- Hippocampus
+- Olfactory Bulb
+- Brainstem
+brain_region_details:
+  Dorsolateral Prefrontal Cortex (DLPFC): FDG-PET and fMRI hypometabolism in frontal regions correlates with brain fog and
+    cognitive impairment. Primary tDCS target for long COVID cognitive rehabilitation.
+  Anterior Cingulate Cortex (ACC): ACC hypometabolism documented in long COVID imaging. Contributes to fatigue, motivational
+    impairment, and attention dysfunction.
+  Thalamus: Thalamic hypometabolism documented in long COVID FDG-PET. Thalamo-cortical connectivity disruption drives fatigue
+    and cognitive impairment.
+  Hippocampus: Potential direct SARS-CoV-2 neurotropism via ACE2 receptors in hippocampus. Contributes to memory impairment.
+    Stress-induced hippocampal volume loss from prolonged illness.
+  Olfactory Bulb: Direct SARS-CoV-2 infection and olfactory epithelium degeneration — explains parosmia/anosmia. Potential
+    central spread via olfactory pathway.
+  Brainstem: Brainstem involvement in SARS-CoV-2 — autonomic dysregulation, autonomic reflex abnormalities, and cardiorespiratory
+    symptoms may reflect brainstem pathology.
+network_profiles:
+- network: dmn
+  dysfunction: hyper
+  severity: severe
+  primary: true
+  relevance: PRIMARY NETWORK IN LONG COVID BRAIN FOG. DMN hyperactivation and failure to suppress during cognitive demands
+    drives brain fog, mental fatigue, and intrusive thoughts. Abnormal DMN-CEN anticorrelation parallels ADHD, TBI, and MDD
+    patterns. DMN hyperactivation correlates with cognitive symptom severity.
+  evidence_note: Long COVID neuroimaging studies; resting-state fMRI in PASC
+- network: cen
+  dysfunction: hypo
+  severity: severe
+  primary: false
+  relevance: CEN hypofunction correlates with brain fog severity. FDG-PET hypometabolism in frontal-parietal regions — particularly
+    DLPFC — is among the most consistent neuroimaging findings in long COVID. DLPFC anodal tDCS is the primary cognitive rehabilitation
+    target.
+  evidence_note: Frontal-parietal hypometabolism in long COVID PET studies
+- network: sn
+  dysfunction: hyper
+  severity: moderate-severe
+  primary: false
+  relevance: SN hyperactivation drives dysautonomia, interoceptive hypersensitivity, and fatigue in long COVID. Anterior insula
+    hyperactivation may contribute to bodily symptom amplification. taVNS targets vagal-SN modulation for autonomic regulation.
+  evidence_note: Autonomic dysregulation (dysautonomia/POTS) prevalent in long COVID
+- network: attention
+  dysfunction: hypo
+  severity: severe
+  primary: false
+  relevance: Sustained and divided attention deficits are core brain fog complaints. Attention network hypofunction parallels
+    TBI and ADHD patterns. Correlates with occupational disability and return-to-work barriers.
+  evidence_note: Neuropsychological testing in long COVID; attention deficits documented
+- network: limbic
+  dysfunction: hyper
+  severity: moderate
+  primary: false
+  relevance: High prevalence of depression, anxiety, and PTSD-like symptoms in long COVID. Neuroinflammatory mediators directly
+    modulate limbic circuits. Illness-related psychological distress amplifies limbic hyperactivity. HPA axis dysregulation.
+  evidence_note: Psychiatric sequelae of long COVID; Taquet et al. 2021
+primary_network: dmn
+fnon_rationale: In long COVID, the primary neurological mechanism is brain fog — driven by CEN hypofunction (frontal-parietal
+  hypometabolism) and DMN hyperactivation, paralleling TBI and ADHD network patterns. The FNON framework targets left DLPFC
+  anodal tDCS to upregulate CEN and restore CEN-DMN anticorrelation. taVNS addresses dysautonomia and autonomic hyperarousal
+  via vagal-NTS-mediated autonomic regulation. CES addresses comorbid sleep disturbance and mood symptoms.
+phenotypes:
+- slug: brain_fog
+  label: BRAIN-FOG — Cognitive / Brain Fog Dominant
+  description: 'Dominant cognitive symptoms: brain fog, memory difficulties, processing speed impairment, word-finding difficulties.
+    Most common long COVID neuromodulation presentation.'
+  key_features:
+  - Brain fog
+  - Memory difficulties
+  - Slowed processing
+  - Word-finding problems
+  - Cognitive fatigue
+  primary_networks:
+  - cen
+  - dmn
+  secondary_networks:
+  - attention
+  - sn
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: Left DLPFC anodal (F3) — cognitive rehabilitation protocol
+  tps_target: ''
+- slug: fatigue
+  label: FATIGUE — Fatigue-Dominant
+  description: Severe post-exertional malaise and fatigue as primary burden. Disproportionate exhaustion after minimal exertion.
+    Similar to myalgic encephalomyelitis/chronic fatigue syndrome (ME/CFS) presentation.
+  key_features:
+  - Post-exertional malaise
+  - Disproportionate fatigue
+  - Not relieved by rest
+  - Exercise intolerance
+  - Reduced activity
+  primary_networks:
+  - sn
+  - cen
+  secondary_networks:
+  - limbic
+  - dmn
+  preferred_modalities:
+  - ces
+  - tavns
+  - tdcs
+  tdcs_target: 'Left DLPFC anodal — low-intensity protocol. IMPORTANT: avoid exertion models during stimulation in PEM-prone
+    patients'
+  tps_target: ''
+- slug: dysauto
+  label: DYSAUTO — Dysautonomia / POTS
+  description: Autonomic nervous system dysregulation — POTS (postural orthostatic tachycardia), orthostatic intolerance,
+    palpitations, sweating. taVNS primary modality.
+  key_features:
+  - Orthostatic intolerance
+  - POTS
+  - Palpitations
+  - Dizziness on standing
+  - Heat intolerance
+  primary_networks:
+  - sn
+  - limbic
+  secondary_networks:
+  - attention
+  preferred_modalities:
+  - tavns
+  - ces
+  tdcs_target: Adjunct DLPFC if cognitive symptoms present
+  tps_target: ''
+- slug: mixed_lc
+  label: MIXED-LC — Mixed Neurological Long COVID
+  description: 'Multiple concurrent long COVID symptom domains: cognitive, fatigue, autonomic, and mood. Most complex presentation
+    requiring multi-modal approach.'
+  key_features:
+  - Brain fog
+  - Fatigue
+  - Autonomic symptoms
+  - Mood changes
+  - Sleep disturbance
+  primary_networks:
+  - dmn
+  - sn
+  secondary_networks:
+  - cen
+  - limbic
+  preferred_modalities:
+  - tdcs
+  - tavns
+  - ces
+  tdcs_target: Left DLPFC anodal for cognitive and mood symptoms
+  tps_target: ''
+- slug: mh_lc
+  label: MH-LC — Mental Health Long COVID
+  description: Long COVID with dominant depression, anxiety, or PTSD-like features from acute illness trauma.
+  key_features:
+  - Depression
+  - Anxiety
+  - Sleep disturbance
+  - PTSD-like symptoms (ICU survivors)
+  - Social withdrawal
+  primary_networks:
+  - limbic
+  - dmn
+  secondary_networks:
+  - sn
+  - cen
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: Left DLPFC anodal — MDD protocol adapted for long COVID depression
+  tps_target: ''
+assessments:
+- scale_key: moca
+  timing: baseline
+  primary: false
+  notes: Primary cognitive screen. Score <26 = possible impairment. Useful for tracking brain fog trajectory.
+- scale_key: fss
+  timing: baseline
+  primary: false
+  notes: Primary fatigue measure in long COVID. Score >=36 = clinically significant fatigue.
+- scale_key: cfq11
+  timing: baseline
+  primary: false
+  notes: Validated fatigue scale used extensively in long COVID research. Bimodal scoring. Widely used in long COVID clinical
+    trials.
+- scale_key: phq9
+  timing: baseline
+  primary: false
+  notes: Depression monitoring — highly prevalent in long COVID.
+- scale_key: psqi
+  timing: baseline
+  primary: false
+  notes: Sleep disturbance monitoring — prevalent in long COVID. Score >5 = poor sleep quality.
+- scale_key: gad7
+  timing: baseline
+  primary: false
+  notes: Anxiety comorbidity monitoring in long COVID.
+applicable_modalities:
+- tdcs
+- tps
+- tavns
+- ces
+protocols:
+- protocol_id: C-LC-COG
+  label: Cognitive Brain Fog — DLPFC tDCS
+  modality: tdcs
+  target_region: Dorsolateral Prefrontal Cortex
+  target_abbreviation: DLPFC
+  target_electrodes: []
+  phenotype_slugs:
+  - brain_fog
+  - mixed_lc
+  network_targets:
+  - cen
+  - attention
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    anode: F3 (left DLPFC) or F3+F4 bilateral
+    cathode: Fp2 (right supraorbital) or right shoulder
+    intensity: '1.5-2.0 mA (start 1.5 mA; PEM-caution: no concurrent cognitive tasks initially)'
+    duration: 15-20 min (start 15 min — PEM management)
+    sessions: 10-15 over 3-4 weeks
+    note: Monitor for PEM 24-48h post-session. Avoid cognitive exertion during early sessions. Gradual protocol escalation.
+  rationale: Left DLPFC anodal tDCS targets CEN hypofunction documented in long COVID neuroimaging. Rationale extrapolated
+    from TBI, ADHD, and fatigue tDCS evidence with similar network pattern. No dedicated long COVID tDCS RCT published as
+    of 2024. Emerging case series support feasibility. OFF-LABEL.
+  evidence_level: low
+  off_label: true
+  session_count: 15
+  notes: Investigational for long COVID. Monitor PEM carefully. Gradual escalation protocol recommended.
+- protocol_id: TAVNS-LC
+  label: taVNS — Autonomic & Dysautonomia Protocol
+  modality: tavns
+  target_region: Left auricular branch of vagus nerve
+  target_abbreviation: taVNS
+  target_electrodes: []
+  phenotype_slugs:
+  - dysauto
+  - fatigue
+  - mixed_lc
+  network_targets:
+  - sn
+  - limbic
+  parameters:
+    device: NEMOS (tVNS Technologies) or Parasym
+    frequency: 25 Hz
+    pulse_width: 250 us
+    intensity: Below pain threshold (0.5-3.0 mA)
+    duration: 30-60 min
+    sessions: Daily during treatment block
+    electrode_placement: Left cymba conchae
+    note: Seated or supine position during stimulation. Monitor BP before session.
+  rationale: taVNS restores vagal tone and autonomic regulation in long COVID dysautonomia. Parasympathetic upregulation addresses
+    POTS-related sympathetic hyperactivation. VNS anti-inflammatory mechanism may reduce neuroinflammatory burden. Investigational
+    in long COVID — rationale from autonomic medicine literature.
+  evidence_level: low
+  off_label: true
+  session_count: 20
+  notes: Investigational. Dysautonomia patients must have BP checked before each session.
+- protocol_id: CES-LC
+  label: CES — Sleep, Anxiety & Mood
+  modality: ces
+  target_region: Bilateral earlobe electrodes
+  target_abbreviation: CES
+  target_electrodes: []
+  phenotype_slugs:
+  - brain_fog
+  - mh_lc
+  - fatigue
+  - mixed_lc
+  network_targets:
+  - limbic
+  - sn
+  parameters:
+    device: Alpha-Stim AID
+    frequency: 0.5 Hz
+    intensity: 100-200 uA
+    duration: 40-60 min
+    sessions: Daily during treatment block
+  rationale: Alpha-Stim CES FDA-cleared for anxiety, depression, and insomnia — all highly prevalent in long COVID. Addresses
+    sleep disturbance (which worsens brain fog and fatigue), anxiety, and mood symptoms. Non-pharmacological adjunct.
+  evidence_level: medium
+  off_label: false
+  session_count: 20
+  notes: ''
+safety_rules:
+- category: contraindication
+  description: Active implanted electronic devices in the head/neck region
+  severity: absolute
+  modalities: []
+  source: Manufacturer guidelines and consensus safety statements
+- category: stopping_rule
+  description: 'Discontinue immediately for Grade 3 adverse events: new seizure, severe headache, syncope, skin burn, worsening
+    of psychiatric symptoms requiring acute intervention'
+  severity: high
+  modalities: []
+  source: ''
+- category: monitoring
+  description: Assess and document adverse events at every session using a standardized monitoring checklist
+  severity: moderate
+  modalities: []
+  source: ''
+- category: precaution
+  description: Ensure consistent medication state (ON or OFF) throughout treatment blocks to avoid false responder/non-responder
+    classification
+  severity: moderate
+  modalities: []
+  source: ''
+- category: precaution
+  description: 'POST-EXERTIONAL MALAISE (PEM): Monitor carefully for symptom worsening in the 12-48 hours following sessions.
+    PEM is a characteristic long COVID feature. If PEM is triggered, reduce session duration (start with 15 min tDCS) and
+    intensity (1.5 mA) and avoid concurrent cognitive tasks that increase exertion.'
+  severity: high
+  modalities: []
+  source: PEM is a defining long COVID feature; exertion-based protocols must be adapted
+- category: precaution
+  description: 'DYSAUTONOMIA MONITORING: Measure sitting and standing blood pressure and heart rate before each session (POTS
+    screening). Patients with orthostatic hypotension should remain seated or supine during stimulation. Avoid prolonged standing
+    immediately after sessions.'
+  severity: moderate
+  modalities: []
+  source: POTS and dysautonomia in long COVID — safety monitoring for hypotension
+- category: monitoring
+  description: Long COVID is a new condition — monitor for any unexpected adverse effects and report to treating physician.
+    This is an evolving clinical field; case observations should inform clinical practice development.
+  severity: moderate
+  modalities: []
+  source: New condition — ongoing clinical observation required
+contraindications:
+- Active implanted devices (cochlear implants, deep brain stimulators, cardiac pacemakers/defibrillators) unless explicitly
+  cleared by device manufacturer
+- Metallic implants in the head or neck region within the stimulation field
+- Active epilepsy with uncontrolled seizures (relative contraindication — requires neurologist clearance)
+- Skull defects or craniectomy at stimulation sites
+- Skin lesions, wounds, or dermatological conditions at electrode placement sites
+- Active malignancy of the central nervous system
+- Pregnancy (precautionary contraindication — insufficient safety data)
+- Severe psychiatric crisis requiring immediate hospitalization
+inclusion_criteria:
+- Confirmed or probable COVID-19 (PCR, antigen, or clinical diagnosis) with persistent symptoms >12 weeks
+- Symptoms not explained by alternative diagnosis
+- Age 18-70 years
+- Capacity to provide informed consent
+- Medically stable — no active acute COVID-19 or severe organ dysfunction
+- Treating physician aware of and supportive of neuromodulation trial
+exclusion_criteria:
+- Active acute COVID-19 infection
+- Severe cardiorespiratory long COVID complications (active heart failure, severe pulmonary fibrosis)
+- Active thrombotic complications from COVID-19
+- Severe myalgic encephalomyelitis/CFS (bedbound) — insufficient capacity for sessions
+- Active psychiatric crisis
+responder_criteria:
+- '>=30% reduction in CFQ-11 total score from baseline'
+- MoCA score improvement or stabilization
+- Clinically meaningful SOZO PRS improvement (>=3 points) in primary symptom domains
+- PHQ-9 >=50% reduction (mental health subtype)
+non_responder_pathway: 'For non-responders at Week 4:
+
+  1. Review PEM management — reduce session intensity if post-exertional worsening documented
+
+  2. Optimize sleep with CES before escalating tDCS
+
+  3. Add taVNS for dysautonomia and fatigue components
+
+  4. Treating physician review — assess for treatable medical contributors
+
+  5. Extend treatment block cautiously — avoid triggering PEM cycle
+
+  6. Consider ME/CFS specialist referral if PEM-dominant presentation'
+evidence_summary: 'Long COVID neuromodulation has very limited evidence — this is an emerging field. Taquet et al. (2021)
+  documented neurological sequelae at scale. Neuroimaging studies confirm frontal hypometabolism. tDCS for long COVID cognitive
+  symptoms: emerging case series and pilot studies only — no published RCT as of 2024. taVNS for dysautonomia: investigational
+  — rationale from autonomic medicine literature. CES: best-evidenced component via FDA clearance for comorbid symptoms.'
+evidence_quality: low
+evidence_gaps:
+- No published RCT of tDCS or any neuromodulation specifically for long COVID as of early 2024
+- Most evidence from case series — selection bias and absence of control conditions
+- Long-term outcomes and safety in long COVID population — entirely unknown
+- Optimal dose and frequency in PEM-prone patients — risk of symptom exacerbation
+- taVNS for long COVID dysautonomia/POTS — no published controlled data
+references:
+- pmid: '33836148'
+  title: 6-month neurological and psychiatric outcomes in 236,379 survivors of COVID-19
+  authors: Taquet M et al.
+  year: 2021
+  journal: The Lancet Psychiatry
+  evidence_level: medium
+  notes: ''
+- pmid: '34023307'
+  title: Prevalence of post-COVID-19 symptoms in hospitalized and non-hospitalized COVID-19 survivors
+  authors: Fernandez-de-las-Penas C et al.
+  year: 2021
+  journal: Journal of Infection
+  evidence_level: medium
+  notes: ''
+- pmid: '8463991'
+  title: Development of a fatigue scale
+  authors: Chalder T et al.
+  year: 1993
+  journal: Journal of Psychosomatic Research
+  evidence_level: medium
+  notes: ''
+clinical_tips:
+- Post-exertional malaise (PEM) monitoring is critical — assess for symptom worsening 24-48h after each session
+- Start with shorter, lower-intensity sessions (15 min, 1.5 mA) and escalate gradually based on tolerance
+- Screen for POTS before every session — measure sitting and standing BP and HR
+- Treating physician must be involved — long COVID is complex, multisystem, and rapidly evolving
+- Inform patients this is investigational — limited evidence exists and outcomes are uncertain
+governance_rules:
+- No Fellow or Clinical Assistant may independently modify treatment plans without Doctor authorization
+- All TPS applications require explicit off-label informed consent and Doctor authorization
+- Adverse events must be documented within 24 hours and escalated per clinic protocol
+- Treatment records must be updated at every session
+- Informed consent must be obtained and documented before initiating any modality
+- Treating physician coordination mandatory for long COVID cases
+- Post-exertional malaise (PEM) monitoring protocol must be documented and followed
+- Informed consent must acknowledge investigational status and evolving evidence
+patient_journey_notes: {}

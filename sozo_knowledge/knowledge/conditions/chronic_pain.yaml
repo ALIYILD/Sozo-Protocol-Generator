@@ -1,0 +1,474 @@
+# Chronic Pain / Fibromyalgia — SOZO Clinical Knowledge
+# Auto-extracted from condition generator. ICD-10: M79.3
+
+slug: chronic_pain
+display_name: Chronic Pain / Fibromyalgia
+icd10: M79.3
+aliases:
+- fibromyalgia
+- FMS
+- chronic pain
+- chronic widespread pain
+- central sensitization
+- CLBP
+- chronic low back pain
+category: mixed
+version: '1.0'
+overview: 'Chronic pain encompasses persistent pain lasting more than 3 months, including Fibromyalgia Syndrome (FMS), Chronic
+  Low Back Pain (CLBP), and other central sensitization conditions. FMS affects 2-8% of the general population, predominantly
+  women (7:1 ratio). Chronic pain represents a leading cause of disability globally.
+
+
+  The transition from acute to chronic pain involves central sensitization — amplification of pain signals within the CNS
+  — making neuromodulation particularly relevant. tDCS targeting M1 (motor cortex anodal — analgesic mechanism) and left DLPFC
+  (emotional and cognitive aspects of pain) has the strongest evidence base among non-invasive neuromodulation for chronic
+  pain. Fregni et al. (2006, Arthritis & Rheumatism) demonstrated significant pain reduction in fibromyalgia with M1 anodal
+  tDCS in an RCT. CES (Alpha-Stim) provides complementary mood, anxiety, and sleep support.'
+pathophysiology: 'Chronic pain involves central sensitization: amplification of nociceptive signals at spinal and supraspinal
+  levels. Key mechanisms include: (1) Wind-up and long-term potentiation of dorsal horn neurons; (2) Descending facilitation
+  from brainstem (rostroventromedial medulla — RVM); (3) Reduced descending inhibition (opioidergic, serotonergic, noradrenergic
+  pathways); (4) Cortical reorganization — expansion of pain representations in S1 and motor cortex.
+
+
+  Fibromyalgia pathophysiology: central sensitization is the core mechanism. fMRI studies demonstrate enhanced activity in
+  pain-processing regions (insula, SII, anterior cingulate) with reduced descending inhibitory capacity. Abnormal DMN connectivity,
+  with the DMN failing to suppress pain-related networks during rest, propagates chronicity. Neuroinflammatory mechanisms
+  and glial activation contribute.
+
+
+  tDCS M1 anodal mechanism: increases motor cortex excitability, which inhibits pain via corticospinal activation of brainstem
+  pain modulation circuits (periaqueductal gray, nucleus raphe magnus). This ''motor cortex stimulation analgesia'' mechanism
+  is well-established from invasive MCS (motor cortex stimulation) studies.'
+core_symptoms:
+- Widespread chronic pain — diffuse, often migratory (fibromyalgia)
+- Fatigue — disproportionate, not relieved by rest
+- Sleep disturbance — non-restorative sleep, morning stiffness
+- Tender points / allodynia (fibromyalgia)
+- Hyperalgesia — amplified pain response to normally painful stimuli
+- Cognitive difficulties — fibro-fog (attention, memory, processing speed)
+non_motor_symptoms:
+- Depression (comorbid in 40-50% of fibromyalgia patients)
+- Anxiety (comorbid in 50-60%)
+- Headache (tension and migraine-type)
+- Irritable bowel syndrome (comorbid visceral sensitization)
+- Reduced quality of life and social/occupational function
+brain_regions:
+- Primary Motor Cortex (M1)
+- Primary Somatosensory Cortex (S1)
+- Anterior Cingulate Cortex (ACC) / dACC
+- Anterior Insula
+- Periaqueductal Gray (PAG)
+- Dorsolateral Prefrontal Cortex (DLPFC)
+brain_region_details:
+  Primary Motor Cortex (M1): Primary tDCS anodal target for analgesia. M1 anodal stimulation activates corticospinal-brainstem
+    pain modulation circuits (PAG, RVM). Invasive MCS evidence extrapolated to non-invasive tDCS.
+  Primary Somatosensory Cortex (S1): Hyperactivated in chronic pain — enhanced representation of body pain maps. Central sensitization
+    expresses as cortical reorganization in S1.
+  Anterior Cingulate Cortex (ACC) / dACC: Affective-motivational component of pain. ACC hyperactivation drives the aversive
+    emotional aspects of chronic pain. Connected to DLPFC via pain regulation circuits.
+  Anterior Insula: Key SN node; interoceptive processing and pain salience. Hyperactive in fibromyalgia. Bilateral anterior
+    insula hyperactivation is a robust FMS neuroimaging finding.
+  Periaqueductal Gray (PAG): Brainstem pain modulation hub. Reduced PAG-frontal connectivity in chronic pain impairs descending
+    inhibition. M1 tDCS may activate this pathway.
+  Dorsolateral Prefrontal Cortex (DLPFC): Cognitive-evaluative pain component, emotion regulation, and mood. DLPFC anodal
+    tDCS targets depression and catastrophizing that amplify pain experience.
+network_profiles:
+- network: sn
+  dysfunction: hyper
+  severity: severe
+  primary: true
+  relevance: PRIMARY NETWORK IN CHRONIC PAIN. Salience Network hyperactivation — particularly anterior insula and dACC — drives
+    aberrant pain salience, emotional amplification of nociception, and catastrophizing. SN hyperactivity is the most consistent
+    neuroimaging finding in fibromyalgia. M1 tDCS analgesia works partly via SN modulation.
+  evidence_note: Multiple fMRI studies in FMS; Napadow et al. — FMS brain connectivity
+- network: dmn
+  dysfunction: hyper
+  severity: severe
+  primary: false
+  relevance: DMN hyperactivation contributes to pain rumination, catastrophizing, and intrusive pain-related ideation. Reduced
+    anticorrelation between DMN and anti-correlated network in fibromyalgia. DLPFC tDCS may reduce DMN-mediated pain rumination.
+  evidence_note: Altered DMN connectivity in FMS; Napadow et al. 2010 — DMN-pain relationship
+- network: limbic
+  dysfunction: hyper
+  severity: severe
+  primary: false
+  relevance: High comorbidity of depression (40-50%) and anxiety (50-60%) in fibromyalgia reflects limbic hyperreactivity.
+    HPA axis dysregulation amplifies pain and emotional processing. Amygdala hyperactivity drives affective pain component.
+  evidence_note: FMS-depression-anxiety triad; shared neurobiological mechanisms
+- network: cen
+  dysfunction: hypo
+  severity: moderate
+  primary: false
+  relevance: CEN hypofunction impairs top-down pain inhibitory control, cognitive coping strategies, and emotional regulation
+    of pain experience. Reduced prefrontal activity allows limbic and SN hyperactivity to dominate pain experience.
+  evidence_note: ''
+primary_network: sn
+fnon_rationale: 'In chronic pain/fibromyalgia, the primary dysfunctional networks are the Salience Network (hyperactive —
+  pain amplification) and the Limbic Network (hyperactive — affective pain component). The FNON framework deploys two parallel
+  strategies: (1) M1 anodal tDCS for direct analgesic effect via corticospinal-brainstem pain modulation pathways; (2) Left
+  DLPFC anodal tDCS to upregulate CEN pain inhibitory control and address comorbid depression. CES addresses sleep, anxiety,
+  and mood via limbic modulation.'
+phenotypes:
+- slug: fms
+  label: FMS — Fibromyalgia Syndrome
+  description: Widespread chronic musculoskeletal pain with tender points, fatigue, and sleep disturbance meeting ACR 2010
+    fibromyalgia criteria. Central sensitization dominant.
+  key_features:
+  - Widespread pain
+  - Tender points/pressure hyperalgesia
+  - Fatigue
+  - Non-restorative sleep
+  - Fibro-fog
+  primary_networks:
+  - sn
+  - dmn
+  secondary_networks:
+  - limbic
+  - cen
+  preferred_modalities:
+  - tdcs
+  - ces
+  tdcs_target: M1 anodal bilateral (C3+C4) — primary analgesic protocol
+  tps_target: ''
+- slug: clbp
+  label: CLBP — Chronic Low Back Pain
+  description: Chronic persistent low back pain (>3 months) with or without radiculopathy. Mixed nociceptive and central sensitization
+    components.
+  key_features:
+  - Low back pain
+  - Pain radiation
+  - Mobility limitation
+  - Sleep impairment
+  - Disability
+  primary_networks:
+  - sn
+  - limbic
+  secondary_networks:
+  - dmn
+  - cen
+  preferred_modalities:
+  - tdcs
+  - ces
+  tdcs_target: M1 anodal (C3 or C4) — contralateral to dominant pain side
+  tps_target: ''
+- slug: cs
+  label: CS — Central Sensitization Syndrome
+  description: 'Chronic pain with prominent central sensitization features: allodynia, hyperalgesia, diffuse body pain, comorbid
+    fatigue and sleep disturbance.'
+  key_features:
+  - Allodynia
+  - Hyperalgesia
+  - Diffuse pain
+  - Sensory hypersensitivity
+  - Comorbid fatigue
+  primary_networks:
+  - sn
+  - dmn
+  secondary_networks:
+  - limbic
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: M1 anodal + left DLPFC anodal — combined protocol
+  tps_target: ''
+- slug: pain_dep
+  label: PAIN-DEP — Chronic Pain with Comorbid Depression
+  description: Chronic pain syndrome with clinically significant comorbid major depression. Limbic-frontal-pain circuit triad.
+  key_features:
+  - Chronic pain
+  - Depression (PHQ-9 >=10)
+  - Catastrophizing
+  - Sleep disturbance
+  - Reduced quality of life
+  primary_networks:
+  - limbic
+  - sn
+  secondary_networks:
+  - cen
+  - dmn
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: Left DLPFC anodal (depression) + M1 anodal (pain) — sequential or alternating
+  tps_target: ''
+assessments:
+- scale_key: fiqr
+  timing: baseline
+  primary: false
+  notes: Primary FMS outcome measure. Score /100. MCID = 14%. Administer at baseline and endpoint.
+- scale_key: nrs
+  timing: baseline
+  primary: false
+  notes: Primary pain intensity monitoring. 0-10 scale. Administer at every session for pain tracking.
+- scale_key: bpi
+  timing: baseline
+  primary: false
+  notes: Comprehensive pain assessment. Pain severity (0-10) and interference subscales. Standard research tool.
+- scale_key: psqi
+  timing: baseline
+  primary: false
+  notes: Critical in fibromyalgia — sleep disturbance both drives and is driven by pain. Score >5 = poor sleep.
+- scale_key: phq9
+  timing: baseline
+  primary: false
+  notes: Depression comorbidity screen. Score >=10 = moderate depression. Mandatory for pain-depression subtype.
+- scale_key: dass21
+  timing: baseline
+  primary: false
+  notes: Comprehensive mood screen for chronic pain — captures depression, anxiety, and stress triad.
+applicable_modalities:
+- tdcs
+- tps
+- tavns
+- ces
+protocols:
+- protocol_id: C-PAIN-M1
+  label: M1 Analgesic — Fibromyalgia / Chronic Pain
+  modality: tdcs
+  target_region: Primary Motor Cortex (bilateral)
+  target_abbreviation: M1
+  target_electrodes: []
+  phenotype_slugs:
+  - fms
+  - clbp
+  - cs
+  network_targets:
+  - sn
+  - dmn
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    anode: C3 + C4 (bilateral M1) or C3 alone (left M1)
+    cathode: Fp1 + Fp2 (bilateral supraorbital) or contralateral shoulder
+    intensity: 2.0 mA
+    duration: 20-30 min
+    sessions: 10-20 over 4-5 weeks
+    electrode_size: 35 cm2
+    note: 'Fregni et al. montage: anode C3 (left M1), cathode right shoulder or Fp2'
+  rationale: 'M1 anodal tDCS activates descending pain inhibitory pathways via corticospinal-PAG circuit, analogous to invasive
+    motor cortex stimulation for pain. Fregni et al. (2006) Arthritis & Rheumatism RCT (N=32): significant pain reduction
+    in fibromyalgia vs sham. Marlow et al. (2013) meta-analysis confirmed M1 tDCS efficacy for chronic pain. IFCN Level B.
+    OFF-LABEL.'
+  evidence_level: high
+  off_label: true
+  session_count: 20
+  notes: ''
+- protocol_id: C-PAIN-DLPFC
+  label: Left DLPFC — Cognitive Pain & Depression
+  modality: tdcs
+  target_region: Left Dorsolateral Prefrontal Cortex
+  target_abbreviation: L-DLPFC
+  target_electrodes: []
+  phenotype_slugs:
+  - pain_dep
+  - cs
+  network_targets:
+  - cen
+  - dmn
+  - limbic
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    anode: F3 (left DLPFC)
+    cathode: Fp2 (right supraorbital)
+    intensity: 2.0 mA
+    duration: 30 min
+    sessions: 10-15
+    note: MDD-adapted montage for pain with comorbid depression. Monitor PHQ-9 at every session.
+  rationale: DLPFC anodal tDCS targets the cognitive-emotional pain matrix and comorbid depression. Catastrophizing is a major
+    amplifier of chronic pain — CEN upregulation reduces catastrophizing and improves pain coping. Evidence from MDD tDCS
+    extrapolated to pain-depression comorbidity. OFF-LABEL.
+  evidence_level: medium
+  off_label: true
+  session_count: 15
+  notes: ''
+- protocol_id: CES-PAIN
+  label: Alpha-Stim CES — Sleep, Anxiety & Mood
+  modality: ces
+  target_region: Bilateral earlobe electrodes
+  target_abbreviation: CES
+  target_electrodes: []
+  phenotype_slugs:
+  - fms
+  - pain_dep
+  - cs
+  network_targets:
+  - limbic
+  - sn
+  parameters:
+    device: Alpha-Stim AID
+    frequency: 0.5 Hz
+    intensity: 100-300 uA
+    duration: 40-60 min
+    sessions: Daily during treatment block
+  rationale: Alpha-Stim CES FDA-cleared for anxiety, depression, and insomnia. In fibromyalgia, addresses the highly prevalent
+    triad of sleep disturbance, anxiety, and mood symptoms. Sleep restoration reduces pain sensitization. Non-pharmacological
+    — reduces medication burden. Adjunct to tDCS pain protocols.
+  evidence_level: medium
+  off_label: false
+  session_count: 20
+  notes: ''
+- protocol_id: TAVNS-PAIN
+  label: taVNS — Autonomic Pain Modulation Adjunct
+  modality: tavns
+  target_region: Left auricular branch of vagus nerve
+  target_abbreviation: taVNS
+  target_electrodes: []
+  phenotype_slugs:
+  - cs
+  - fms
+  network_targets:
+  - sn
+  - limbic
+  parameters:
+    device: NEMOS (tVNS Technologies) or Parasym
+    frequency: 25 Hz
+    pulse_width: 250 us
+    intensity: Below pain threshold
+    duration: 30 min
+    sessions: Daily adjunct
+    electrode_placement: Left cymba conchae
+  rationale: taVNS modulates pain processing via NTS-brain stem connections and enhanced descending inhibition through noradrenergic
+    and serotonergic pathways. Reduces autonomic hyperreactivity contributing to central sensitization. Investigational for
+    chronic pain — rationale from pain modulation literature.
+  evidence_level: low
+  off_label: true
+  session_count: 20
+  notes: Investigational for chronic pain. Adjunct only. Limited published data.
+safety_rules:
+- category: contraindication
+  description: Active implanted electronic devices in the head/neck region
+  severity: absolute
+  modalities: []
+  source: Manufacturer guidelines and consensus safety statements
+- category: stopping_rule
+  description: 'Discontinue immediately for Grade 3 adverse events: new seizure, severe headache, syncope, skin burn, worsening
+    of psychiatric symptoms requiring acute intervention'
+  severity: high
+  modalities: []
+  source: ''
+- category: monitoring
+  description: Assess and document adverse events at every session using a standardized monitoring checklist
+  severity: moderate
+  modalities: []
+  source: ''
+- category: precaution
+  description: Ensure consistent medication state (ON or OFF) throughout treatment blocks to avoid false responder/non-responder
+    classification
+  severity: moderate
+  modalities: []
+  source: ''
+- category: monitoring
+  description: Monitor pain VAS/NRS at start and end of each session. Transient pain increase after first 1-2 sessions can
+    occur (sensitized cortex). If pain worsening persists beyond 3 sessions, reduce intensity to 1.5 mA and reassess.
+  severity: moderate
+  modalities: []
+  source: Clinical experience in chronic pain tDCS; sensitized cortex response
+- category: precaution
+  description: Fibromyalgia patients commonly have medication polypharmacy (opioids, gabapentinoids, SNRIs, tricyclics). Document
+    all analgesic medications and maintain stable regimen during treatment block to avoid confounding response assessment.
+  severity: moderate
+  modalities: []
+  source: Pharmacological interaction and response assessment confounding
+contraindications:
+- Active implanted devices (cochlear implants, deep brain stimulators, cardiac pacemakers/defibrillators) unless explicitly
+  cleared by device manufacturer
+- Metallic implants in the head or neck region within the stimulation field
+- Active epilepsy with uncontrolled seizures (relative contraindication — requires neurologist clearance)
+- Skull defects or craniectomy at stimulation sites
+- Skin lesions, wounds, or dermatological conditions at electrode placement sites
+- Active malignancy of the central nervous system
+- Pregnancy (precautionary contraindication — insufficient safety data)
+- Severe psychiatric crisis requiring immediate hospitalization
+inclusion_criteria:
+- Confirmed diagnosis of fibromyalgia (ACR 2010/2016 criteria) OR chronic pain >3 months
+- NRS average pain >=4/10
+- Age 18-70 years
+- Stable analgesic medication for >=4 weeks (or medication-naive)
+- Capacity to provide informed consent
+- Adequate skin integrity at electrode placement sites
+exclusion_criteria:
+- Active inflammatory arthritis or pain with identifiable surgical cause requiring primary surgical treatment
+- Active malignancy or cancer-related pain
+- Severe psychiatric disorder (psychosis, active suicidality) as primary diagnosis
+- Uncontrolled seizure disorder
+- Pregnancy
+- Active substance use disorder
+responder_criteria:
+- '>=30% reduction in NRS average pain from baseline (IMMPACT minimum clinically important difference)'
+- '>=14% reduction in FIQR total score (fibromyalgia MCID)'
+- Clinically meaningful SOZO PRS pain and fatigue domain improvement (>=3 points)
+- PHQ-9 >=50% reduction (pain-depression subtype)
+non_responder_pathway: 'For non-responders at Week 4:
+
+  1. Assess and optimize sleep — untreated insomnia severely limits pain neuromodulation response
+
+  2. Review medication stability — analgesic changes during treatment confound response
+
+  3. Switch from DLPFC to M1 protocol (or vice versa) based on pain vs mood dominance
+
+  4. Add CES for sleep and anxiety components if not already prescribed
+
+  5. Extend to 20-session block if partial responder
+
+  6. Screen for comorbid depression — undertreated depression amplifies pain
+
+  7. Multidisciplinary pain review — confirm absence of treatable peripheral pain generator
+
+  8. Doctor review for psychological pain management (CBT, ACT) adjunct'
+evidence_summary: 'Chronic pain / fibromyalgia has the second-strongest tDCS evidence base (after stroke). M1 anodal tDCS:
+  IFCN Level B (probable) for fibromyalgia. Fregni et al. (2006) seminal RCT. Marlow et al. (2013) meta-analysis confirms
+  pain efficacy. Multiple subsequent positive trials. DLPFC tDCS for pain: moderate evidence — partially from MDD extrapolation.
+  CES: FDA-cleared for anxiety, depression, insomnia — directly addressing FMS comorbidities. taVNS: investigational — limited
+  pain-specific data.'
+evidence_quality: high
+evidence_gaps:
+- Long-term pain relief beyond treatment block — limited follow-up data (>3 months)
+- Head-to-head comparison of M1 vs DLPFC vs combined montages for fibromyalgia
+- Predictors of tDCS response for chronic pain — phenotypic, psychological, or genetic markers
+- Optimal session parameters (number, frequency, intensity) for chronic pain
+- taVNS for chronic pain — no dedicated fibromyalgia RCT
+references:
+- pmid: '16799965'
+  title: A randomized, sham-controlled, proof of principle study of transcranial direct current stimulation for the treatment
+    of pain in fibromyalgia
+  authors: Fregni F et al.
+  year: 2006
+  journal: Arthritis & Rheumatism
+  evidence_level: medium
+  notes: ''
+- pmid: '23590951'
+  title: 'Transcranial direct current stimulation for the management of chronic pain: a systematic review'
+  authors: Marlow NM et al.
+  year: 2013
+  journal: Neuromodulation
+  evidence_level: medium
+  notes: ''
+- pmid: '27866120'
+  title: Evidence-based guidelines on the therapeutic use of transcranial direct current stimulation (tDCS)
+  authors: Lefaucheur JP et al.
+  year: 2017
+  journal: Clinical Neurophysiology
+  evidence_level: medium
+  notes: ''
+- pmid: '28009763'
+  title: Bi-cephalic transcranial direct current stimulation for fibromyalgia
+  authors: Knotkova H et al.
+  year: 2017
+  journal: Clinical Journal of Pain
+  evidence_level: medium
+  notes: ''
+clinical_tips:
+- Prioritize M1 bilateral anodal protocol for primary pain reduction — this has the strongest evidence
+- Add left DLPFC anodal protocol for patients with significant depression or catastrophizing component
+- Prescribe CES for home use to address sleep disturbance — sleep optimization markedly improves pain treatment response
+- Monitor NRS pain at every session — document pain trajectory for outcome tracking and responder classification
+- Reassure patients that initial sessions may not show immediate pain reduction — cumulative effects typically emerge at Week
+  3-4
+governance_rules:
+- No Fellow or Clinical Assistant may independently modify treatment plans without Doctor authorization
+- All TPS applications require explicit off-label informed consent and Doctor authorization
+- Adverse events must be documented within 24 hours and escalated per clinic protocol
+- Treatment records must be updated at every session
+- Informed consent must be obtained and documented before initiating any modality
+patient_journey_notes: {}

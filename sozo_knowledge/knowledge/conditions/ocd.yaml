@@ -1,0 +1,433 @@
+# Obsessive-Compulsive Disorder — SOZO Clinical Knowledge
+# Auto-extracted from condition generator. ICD-10: F42
+
+slug: ocd
+display_name: Obsessive-Compulsive Disorder
+icd10: F42
+aliases:
+- OCD
+- obsessive-compulsive
+- obsessions and compulsions
+- OC spectrum
+category: psychiatric
+version: '1.0'
+overview: 'Obsessive-Compulsive Disorder (OCD) is a psychiatric disorder characterized by recurrent, intrusive obsessions
+  (unwanted thoughts, urges, or images causing marked distress) and/or compulsions (repetitive behaviors or mental acts performed
+  to reduce obsession-related anxiety). Lifetime prevalence is approximately 2-3%. OCD is classified among the most disabling
+  psychiatric conditions (WHO top 10 disabling conditions).
+
+
+  OCD neurobiological model: a hyperactive cortico-striato-thalamo-cortical (CSTC) loop drives compulsive behavior. The orbitofrontal
+  cortex (OFC), anterior cingulate cortex (ACC), and caudate nucleus are hyperactive, producing excessive error signaling
+  and ''not done'' feelings that drive repetitive checking and rituals. 40-60% of OCD patients fail to adequately respond
+  to first-line treatments (SSRIs + CBT with ERP).
+
+
+  Neuromodulation targets: (1) right DLPFC cathodal tDCS to inhibit the hyperactive cortico-striatal loop; (2) supplementary
+  motor area (SMA) cathodal tDCS to reduce motor compulsion generation; (3) taVNS as adjunct for OCD with anxiety/mood comorbidity.'
+pathophysiology: 'OCD pathophysiology centers on hyperactivity of the cortico-striato-thalamo-cortical (CSTC) loop. Key nodes:
+  orbitofrontal cortex (OFC, responsible for error signaling and excessive ''checking'' drive), anterior cingulate cortex
+  (ACC, conflict monitoring and ''not done'' signal generation), caudate nucleus (habit formation and compulsive behavior
+  entrenchment), and mediodorsal thalamus (gating and loop amplification).
+
+
+  Three parallel CSTC circuit types are implicated: (1) the ''direct pathway'' is hyperactive, driving excessive thalamocortical
+  activation; (2) the ''indirect pathway'' is hypofunctional in OCD, failing to provide normal brake mechanisms; (3) both
+  produce net excessive loop activity. Serotonin modulates CSTC tone — explaining SSRI efficacy.
+
+
+  Neuroimaging: hyperactivation of OFC-caudate during symptom provocation is the most replicated finding (Rotge et al. 2008
+  meta-analysis). SMA hyperactivation contributes to motor compulsions. Successful treatment (CBT or SSRI) normalizes OFC-caudate
+  hyperactivation. tDCS mechanism: cathodal inhibition of DLPFC or SMA may modulate prefrontal-striatal circuit excitability
+  and reduce OFC hyperactivity via top-down connectivity.'
+core_symptoms:
+- Obsessions — recurrent, persistent, intrusive thoughts, urges, or images
+- Compulsions — repetitive behaviors (checking, washing, ordering, counting) or mental acts performed to neutralize obsessions
+- Marked anxiety and distress from obsessions
+- Significant time consumption (>1 hour/day) or marked functional impairment
+- Insight variability — good, fair, poor, or absent insight
+non_motor_symptoms:
+- Comorbid depression (50-60% lifetime)
+- Comorbid anxiety disorders (generalized anxiety, panic, social anxiety)
+- Tic disorders (Tourette's co-occurrence ~30% of childhood OCD)
+- Body dysmorphic disorder (OCD spectrum)
+- Hoarding disorder (OCD spectrum)
+- Sleep disturbance
+brain_regions:
+- Orbitofrontal Cortex (OFC) — lateral and medial
+- Anterior Cingulate Cortex (ACC) / Subgenual ACC
+- Caudate Nucleus (bilateral)
+- Supplementary Motor Area (SMA) / pre-SMA
+- Mediodorsal Thalamus
+- Dorsolateral Prefrontal Cortex (DLPFC)
+brain_region_details:
+  Orbitofrontal Cortex (OFC) — lateral and medial: Hyperactive in OCD — generates excessive 'not done' error signals and drives
+    repetitive checking compulsions. OFC-caudate hyperactivation is the most replicated neuroimaging finding.
+  Anterior Cingulate Cortex (ACC) / Subgenual ACC: Conflict monitoring and error amplification. Hyperactive dACC drives excessive
+    awareness of potential harm, fueling obsession-compulsion cycle.
+  Caudate Nucleus (bilateral): Habit formation and compulsive behavior entrenchment in OCD. Caudate hyperactivation in OFC-striatal
+    loop. Normalizes with successful treatment.
+  Supplementary Motor Area (SMA) / pre-SMA: Motor compulsion generation. SMA hyperactivation in OCD with predominant motor
+    compulsions (washing, checking, ordering). Cathodal tDCS target for SMA inhibition.
+  Mediodorsal Thalamus: Gating node in CSTC loop. Hyperactivity amplifies OFC-ACC-caudate circuit activity in OCD.
+  Dorsolateral Prefrontal Cortex (DLPFC): Top-down regulatory control over OFC-caudate loop. Right DLPFC cathodal tDCS may
+    modulate DLPFC-OFC balance to reduce compulsive drive.
+network_profiles:
+- network: cen
+  dysfunction: hyper
+  severity: severe
+  primary: true
+  relevance: PRIMARY NETWORK IN OCD. The CEN is abnormally hyperactive in OCD — specifically the orbitofrontal-striatal loop
+    produces excessive error signaling and compulsive behavior. Unlike most conditions where CEN is hypoactive, OCD shows
+    an overactive but dysfunctional prefrontal-striatal circuit generating excessive top-down compulsive drive. tDCS targets
+    cathodal inhibition to reduce CSTC hyperactivity.
+  evidence_note: OFC-caudate hyperactivation meta-analysis; Rotge et al. 2008; CSTC loop model
+- network: sn
+  dysfunction: hyper
+  severity: moderate
+  primary: false
+  relevance: SN hyperactivation (ACC, anterior insula) drives the excessive 'harm threat' salience that underlies OCD obsessions.
+    Aberrant salience attribution to neutral stimuli triggers obsessive cycles. Insula hyperreactivity contributes to contamination
+    obsessions and disgust response.
+  evidence_note: ''
+- network: limbic
+  dysfunction: hyper
+  severity: moderate
+  primary: false
+  relevance: Limbic hyperactivity — amygdala and hippocampus — amplifies the anxiety and distress associated with obsessions.
+    High comorbidity of depression (50-60%) and anxiety reflects limbic network involvement in OCD.
+  evidence_note: OCD-anxiety-depression comorbidity; shared limbic mechanisms
+- network: dmn
+  dysfunction: hyper
+  severity: mild-moderate
+  primary: false
+  relevance: DMN hyperactivation in OCD contributes to excessive self-referential intrusive thoughts, ego-dystonic obsessions,
+    and ruminative cognitive patterns. DMN-CEN connectivity abnormalities are documented in OCD resting-state fMRI.
+  evidence_note: ''
+primary_network: cen
+fnon_rationale: 'In OCD, the CSTC loop is hyperactive — unlike most conditions where the target network is hypoactive, OCD
+  requires INHIBITORY modulation of key nodes. The FNON framework deploys: (1) cathodal right DLPFC tDCS to suppress hyperactive
+  prefrontal-striatal drive; (2) cathodal SMA tDCS to directly inhibit motor compulsion generation; (3) taVNS as adjunct for
+  OCD with significant anxiety and mood comorbidity via vagal-limbic modulation.'
+phenotypes:
+- slug: cont
+  label: CONT — Contamination/Washing
+  description: Contamination obsessions (germs, dirt, disease) driving excessive washing, cleaning, or avoidance. Most prevalent
+    OCD symptom dimension.
+  key_features:
+  - Contamination obsessions
+  - Excessive washing/cleaning
+  - Avoidance of 'contaminated' objects
+  - Disgust sensitivity
+  primary_networks:
+  - cen
+  - sn
+  secondary_networks:
+  - limbic
+  preferred_modalities:
+  - tdcs
+  tdcs_target: Right DLPFC cathodal (F4) + left DLPFC anodal
+  tps_target: ''
+- slug: check
+  label: CHECK — Checking
+  description: Doubt-based obsessions (harm, incompleteness) driving repetitive checking behaviors. Incompleteness/'not-done'
+    feeling prominent.
+  key_features:
+  - Harm obsessions
+  - Excessive checking
+  - '''Not done'' feelings'
+  - Doubt
+  primary_networks:
+  - cen
+  - dmn
+  secondary_networks:
+  - sn
+  preferred_modalities:
+  - tdcs
+  tdcs_target: Right DLPFC cathodal OR SMA cathodal
+  tps_target: ''
+- slug: symm
+  label: SYMM — Symmetry/Ordering
+  description: Need for symmetry, exactness, and 'just right' feelings driving ordering, arranging, and counting rituals.
+    Strong motor compulsion component.
+  key_features:
+  - Symmetry obsessions
+  - Ordering/arranging rituals
+  - '''Just right'' compulsions'
+  - Counting
+  primary_networks:
+  - cen
+  - sn
+  secondary_networks:
+  - dmn
+  preferred_modalities:
+  - tdcs
+  tdcs_target: SMA cathodal — motor compulsion inhibition
+  tps_target: ''
+- slug: intru
+  label: INTRU — Intrusive Thoughts
+  description: Ego-dystonic intrusive thoughts (taboo, aggressive, sexual, or religious) without prominent behavioral compulsions.
+    Mental neutralization prominent.
+  key_features:
+  - Ego-dystonic intrusive thoughts
+  - Mental compulsions (neutralization)
+  - Taboo/aggressive/sexual content
+  - Guilt and shame
+  primary_networks:
+  - dmn
+  - cen
+  secondary_networks:
+  - limbic
+  preferred_modalities:
+  - tdcs
+  - tavns
+  tdcs_target: Right DLPFC cathodal + taVNS for anxiety
+  tps_target: ''
+- slug: hoard
+  label: HOARD — Hoarding
+  description: Difficulty discarding possessions and excessive acquisition. OCD spectrum condition with distinct circuitry
+    from classic OCD.
+  key_features:
+  - Excessive acquisition
+  - Difficulty discarding
+  - Cluttered living spaces
+  - Significant distress at discarding
+  primary_networks:
+  - limbic
+  - cen
+  secondary_networks:
+  - dmn
+  preferred_modalities:
+  - tdcs
+  tdcs_target: Left DLPFC anodal for decision-making enhancement
+  tps_target: ''
+assessments:
+- scale_key: ybocs
+  timing: baseline
+  primary: false
+  notes: Gold standard OCD severity scale. Clinician-administered. Score /40. Score 0-7=subclinical; 8-15=mild; 16-23=moderate;
+    24-31=severe. MCID = 35% reduction.
+- scale_key: ocir
+  timing: baseline
+  primary: false
+  notes: Self-report OCD measure. 18 items, 0-4 scale. Score >=21 = probable OCD. Useful for symptom dimension profiling across
+    the five OCD dimensions.
+- scale_key: phq9
+  timing: baseline
+  primary: false
+  notes: Depression comorbidity monitoring. Mandatory — 50-60% OCD-depression comorbidity.
+- scale_key: gad7
+  timing: baseline
+  primary: false
+  notes: Anxiety comorbidity monitoring. OCD with prominent anxiety features may benefit from taVNS adjunct.
+applicable_modalities:
+- tdcs
+- tps
+- tavns
+- ces
+protocols:
+- protocol_id: C-OCD-R
+  label: Right DLPFC Cathodal — OCD Inhibition Protocol
+  modality: tdcs
+  target_region: Right Dorsolateral Prefrontal Cortex
+  target_abbreviation: R-DLPFC
+  target_electrodes: []
+  phenotype_slugs:
+  - cont
+  - check
+  - intru
+  network_targets:
+  - cen
+  - sn
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    cathode: F4 (right DLPFC) — INHIBITORY PLACEMENT
+    anode: F3 (left DLPFC) or Fp1 (left supraorbital)
+    intensity: 2.0 mA
+    duration: 20-30 min
+    sessions: 10-15 over 3 weeks
+    electrode_size: 35 cm2
+    note: 'IMPORTANT: Cathodal electrode at F4 (inhibitory). This is REVERSED from standard depression montage.'
+  rationale: Cathodal right DLPFC tDCS inhibits hyperactive prefrontal drive to OFC-striatal CSTC loop, reducing compulsion
+    generation. Mondino et al. (2015, Brain Stimulation) demonstrated significant Y-BOCS reduction with right DLPFC cathodal
+    tDCS vs sham. Bation et al. (2016) pilot RCT confirmed efficacy. OFF-LABEL.
+  evidence_level: medium
+  off_label: true
+  session_count: 15
+  notes: ''
+- protocol_id: C-OCD-SMA
+  label: SMA Cathodal — Motor Compulsion Inhibition
+  modality: tdcs
+  target_region: Supplementary Motor Area
+  target_abbreviation: SMA
+  target_electrodes: []
+  phenotype_slugs:
+  - check
+  - symm
+  network_targets:
+  - cen
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    cathode: Cz (SMA / vertex approximation)
+    anode: Iz (inion) or shoulder reference
+    intensity: 1.5-2.0 mA
+    duration: 20 min
+    sessions: 10-15
+    note: SMA cathodal targeting — Cz electrode placement for motor compulsion inhibition
+  rationale: SMA cathodal tDCS directly reduces motor compulsion generation for OCD with prominent motor rituals. Grassi et
+    al. (2018) demonstrated augmented SMA inhibition with cathodal tDCS in OCD. Adjunct or alternative to DLPFC protocol.
+    OFF-LABEL.
+  evidence_level: low
+  off_label: true
+  session_count: 15
+  notes: ''
+- protocol_id: TAVNS-OCD
+  label: taVNS — Anxiety & Mood Adjunct
+  modality: tavns
+  target_region: Left auricular branch of vagus nerve
+  target_abbreviation: taVNS
+  target_electrodes: []
+  phenotype_slugs:
+  - intru
+  - cont
+  network_targets:
+  - limbic
+  - sn
+  parameters:
+    device: NEMOS (tVNS Technologies) or Parasym
+    frequency: 25 Hz
+    pulse_width: 250 us
+    intensity: Below pain threshold
+    duration: 30 min
+    sessions: Daily adjunct
+    electrode_placement: Left cymba conchae
+  rationale: taVNS modulates anxiety and noradrenergic limbic tone as adjunct for OCD with prominent anxiety and depression
+    comorbidity. Investigational in OCD.
+  evidence_level: low
+  off_label: true
+  session_count: 20
+  notes: Investigational in OCD. Adjunct only.
+safety_rules:
+- category: contraindication
+  description: Active implanted electronic devices in the head/neck region
+  severity: absolute
+  modalities: []
+  source: Manufacturer guidelines and consensus safety statements
+- category: stopping_rule
+  description: 'Discontinue immediately for Grade 3 adverse events: new seizure, severe headache, syncope, skin burn, worsening
+    of psychiatric symptoms requiring acute intervention'
+  severity: high
+  modalities: []
+  source: ''
+- category: monitoring
+  description: Assess and document adverse events at every session using a standardized monitoring checklist
+  severity: moderate
+  modalities: []
+  source: ''
+- category: precaution
+  description: Ensure consistent medication state (ON or OFF) throughout treatment blocks to avoid false responder/non-responder
+    classification
+  severity: moderate
+  modalities: []
+  source: ''
+- category: precaution
+  description: Monitor for paradoxical OCD symptom exacerbation in early sessions — cathodal DLPFC tDCS may initially increase
+    awareness of obsessional content before habituating. Brief psychoeducation and reassurance may be required.
+  severity: moderate
+  modalities: []
+  source: Clinical experience in OCD neuromodulation; cortical excitability change dynamics
+- category: monitoring
+  description: Document OCI-R and PHQ-9 at every session. OCD patients with treatment-resistant presentations have elevated
+    suicide risk. Monitor for emerging suicidality.
+  severity: moderate
+  modalities: []
+  source: OCD suicidality epidemiology; clinical monitoring requirement
+contraindications:
+- Active implanted devices (cochlear implants, deep brain stimulators, cardiac pacemakers/defibrillators) unless explicitly
+  cleared by device manufacturer
+- Metallic implants in the head or neck region within the stimulation field
+- Active epilepsy with uncontrolled seizures (relative contraindication — requires neurologist clearance)
+- Skull defects or craniectomy at stimulation sites
+- Skin lesions, wounds, or dermatological conditions at electrode placement sites
+- Active malignancy of the central nervous system
+- Pregnancy (precautionary contraindication — insufficient safety data)
+- Severe psychiatric crisis requiring immediate hospitalization
+inclusion_criteria:
+- DSM-5 diagnosis of OCD
+- Y-BOCS score >=16 (moderate severity)
+- Age 18-65 years
+- Capacity to provide informed consent
+- Stable SSRI/medication regimen for >=8 weeks (or medication-naive)
+exclusion_criteria:
+- Active psychosis or psychotic features
+- Bipolar disorder Type I
+- Current active suicidal ideation with plan
+- Severe personality disorder as primary diagnosis
+- Active severe substance use disorder
+responder_criteria:
+- '>=35% reduction in Y-BOCS total score from baseline (OCD treatment response criterion)'
+- Y-BOCS score <16 (mild range — partial remission)
+- Clinically meaningful SOZO PRS improvement in OCD symptoms domain
+non_responder_pathway: 'For non-responders at Week 4:
+
+  1. Confirm SSRI adequacy — subtherapeutic SSRI dose limits neuromodulation response
+
+  2. Ensure concurrent ERP/CBT is in place
+
+  3. Switch from DLPFC cathodal to SMA cathodal if motor compulsions predominate
+
+  4. Add taVNS for anxiety/mood comorbidity
+
+  5. Doctor psychiatric review for SSRI dose escalation or augmentation'
+evidence_summary: 'OCD neuromodulation has emerging-to-moderate evidence. Mondino et al. (2015) Brain Stimulation: right DLPFC
+  cathodal tDCS significantly reduced Y-BOCS vs sham (N=12). Bation et al. (2016) pilot RCT confirmed efficacy. Grassi et
+  al. (2018) SMA cathodal augmentation study is positive. All studies are small — larger RCTs urgently needed.'
+evidence_quality: medium
+evidence_gaps:
+- Small sample sizes in all published tDCS OCD trials — no adequately powered multi-site RCT
+- Head-to-head comparison of DLPFC cathodal vs SMA cathodal vs combined — no comparative study
+- taVNS in OCD — no published RCT
+- Long-term OCD symptom maintenance after tDCS — limited follow-up data
+references:
+- pmid: '25612915'
+  title: 'Effects of transcranial direct current stimulation on obsessive-compulsive disorder: a pilot study'
+  authors: Mondino M et al.
+  year: 2015
+  journal: Brain Stimulation
+  evidence_level: medium
+  notes: ''
+- pmid: '26773527'
+  title: 'Transcranial direct current stimulation in treatment-refractory obsessive-compulsive disorder: an open-label pilot
+    study'
+  authors: Bation R et al.
+  year: 2016
+  journal: Progress in Neuro-Psychopharmacology and Biological Psychiatry
+  evidence_level: medium
+  notes: ''
+- pmid: '28338325'
+  title: tDCS of supplementary motor area augments its inhibitory role in compulsive behavior
+  authors: Grassi G et al.
+  year: 2018
+  journal: CNS Spectrums
+  evidence_level: medium
+  notes: ''
+- pmid: '2684084'
+  title: 'The Yale-Brown Obsessive Compulsive Scale: I. Development, use, and reliability'
+  authors: Goodman WK et al.
+  year: 1989
+  journal: Archives of General Psychiatry
+  evidence_level: medium
+  notes: ''
+clinical_tips:
+- 'IMPORTANT: Right DLPFC cathodal montage — cathode is at F4 (inhibitory). This is the REVERSE of the standard depression
+  montage where anode is at F3.'
+- Coordinate with treating psychiatrist regarding SSRI optimization — inadequate pharmacotherapy limits neuromodulation efficacy
+- Brief psychoeducation about possible initial symptom fluctuation in early sessions before improvement
+- Monitor PHQ-9 — OCD-depression comorbidity is high and undertreated depression impairs OCD treatment response
+governance_rules:
+- No Fellow or Clinical Assistant may independently modify treatment plans without Doctor authorization
+- All TPS applications require explicit off-label informed consent and Doctor authorization
+- Adverse events must be documented within 24 hours and escalated per clinic protocol
+- Treatment records must be updated at every session
+- Informed consent must be obtained and documented before initiating any modality
+patient_journey_notes: {}

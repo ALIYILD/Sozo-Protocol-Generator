@@ -794,6 +794,23 @@ class GenerationService:
             pass
         return generators
 
+    # ── Canonical routing helpers ─────────────────────────────────────
+
+    _CANONICAL_BLUEPRINTS = {
+        "evidence_based_protocol": "evidence_based_protocol",
+        "handbook": "handbook",
+        "clinical_exam": "clinical_exam",
+    }
+
+    def can_route_canonical(self, condition: str, doc_type: str) -> bool:
+        """Check if a legacy generate() call can be safely routed to canonical."""
+        kb = self.knowledge_base
+        if not kb:
+            return False
+        if doc_type not in self._CANONICAL_BLUEPRINTS:
+            return False
+        return kb.get_condition(condition) is not None
+
     def list_conditions(self) -> list[str]:
         """List all available condition slugs."""
         return self.registry.list_slugs()

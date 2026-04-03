@@ -61,6 +61,8 @@ sections:
     knowledge_fields: [overview]
     requires_evidence: true
     citation_density: medium
+    evidence_criticality: recommended
+    min_pmid_count: 2
 
   - slug: pathophysiology
     title: "Pathophysiology"
@@ -70,6 +72,9 @@ sections:
     knowledge_fields: [pathophysiology, core_symptoms, non_motor_symptoms]
     requires_evidence: true
     citation_density: high
+    evidence_criticality: critical
+    min_pmid_count: 3
+    on_insufficient_evidence: warn
     visuals:
       - visual_type: brain_map
         caption_template: "{condition_name} — Key Brain Regions"
@@ -152,6 +157,8 @@ sections:
     table_headers: [ID, Protocol Label, Target Region, Parameters, Evidence Level, Off-Label Status]
     table_row_source: protocols
     modality_filter: tdcs
+    requires_evidence: true
+    evidence_criticality: recommended
     preamble: >-
       Low-intensity direct current applied via scalp electrodes to modulate cortical excitability.
     visuals:
@@ -171,6 +178,8 @@ sections:
     table_headers: [ID, Protocol Label, Target Region, Parameters, Evidence Level, Off-Label Status]
     table_row_source: protocols
     modality_filter: tps
+    requires_evidence: true
+    evidence_criticality: recommended
     preamble: >-
       TPS (NEUROLITH) delivers focused ultrasound pulses to modulate deep brain structures.
       TPS is CE-marked for Alzheimer's disease ONLY. Use in all other conditions is
@@ -188,6 +197,8 @@ sections:
     knowledge_fields: [safety_rules, contraindications]
     table_headers: [Category, Severity, Description, Source]
     table_row_source: safety_rules
+    evidence_criticality: critical
+    on_insufficient_evidence: warn
     preamble: >-
       All neuromodulation treatments must be preceded by comprehensive safety screening.
       Patients must be monitored throughout each session.

@@ -1,0 +1,505 @@
+# Alzheimer's Disease / Mild Cognitive Impairment — SOZO Clinical Knowledge
+# Auto-extracted from condition generator. ICD-10: G30
+
+slug: alzheimers
+display_name: Alzheimer's Disease / Mild Cognitive Impairment
+icd10: G30
+aliases:
+- AD
+- MCI
+- Alzheimer disease
+- dementia
+- mild cognitive impairment
+- amnestic MCI
+category: neurological
+version: '1.0'
+overview: 'Alzheimer''s Disease (AD) is the most common form of dementia, accounting for 60-70% of all dementia cases worldwide,
+  with an estimated 50 million people affected globally. It is characterized by progressive episodic memory loss, language
+  impairment, visuospatial deficits, and executive dysfunction, ultimately leading to severe functional dependency. Mild Cognitive
+  Impairment (MCI) represents a clinically and biomarker-defined transitional state between normal aging and AD dementia,
+  with an annual conversion rate of approximately 10-15% to AD.
+
+
+  Neuromodulation in AD/MCI targets residual memory and executive networks to slow functional decline and improve cognitive
+  performance. tDCS applied to temporal-parietal and DLPFC regions has demonstrated memory improvements in pilot RCTs. Transcranial
+  Pulse Stimulation (TPS) using the NEUROLITH system has shown positive pilot results in AD/MCI (Benussi et al. 2020). TPS
+  is approved for use in Alzheimer''s Disease in applicable regulatory jurisdictions — clinicians should confirm current regulatory
+  status for their region. All neuromodulation in AD/MCI is intended as a cognitive rehabilitation adjunct, not a disease-modifying
+  intervention.'
+pathophysiology: 'AD pathophysiology involves two hallmark pathological processes: extracellular amyloid-beta (Aβ) plaques
+  and intraneuronal neurofibrillary tangles (hyperphosphorylated tau protein). These pathologies disrupt synaptic transmission,
+  activate neuroinflammatory cascades (microglial activation, astrogliosis), and cause progressive neurodegeneration following
+  a predictable spatiotemporal staging pattern.
+
+
+  Pathological spread follows Braak staging: tau pathology begins in transentorhinal cortex (Braak I-II), spreads to hippocampus
+  proper (III-IV), then association neocortex (V-VI). Amyloid deposition (Thal phases) begins in prefrontal and temporal association
+  cortices. Biomarker sequence (Jack et al. 2013 A/T/N framework): amyloid positivity precedes tau pathology by decades; neurodegeneration
+  (volume loss, hypometabolism) follows tau burden.
+
+
+  Cholinergic depletion from nucleus basalis of Meynert (NBM) is a cardinal neurochemical deficit, driving memory and attentional
+  impairment. This is the basis of cholinesterase inhibitor pharmacotherapy. Network-level disruption is prominent and early:
+  the Default Mode Network (DMN) undergoes severe early disruption, with reduced functional connectivity correlating with
+  amyloid burden (Buckner et al. 2009). The DMN nodes — posterior cingulate cortex (PCC), precuneus, medial PFC, angular gyrus,
+  and hippocampus — are preferential amyloid deposition sites.'
+core_symptoms:
+- Episodic memory loss — especially recent declarative memory (anterograde amnesia)
+- Language impairment — anomia, reduced verbal fluency, word-finding difficulties
+- Visuospatial deficits — getting lost in familiar environments, difficulty with spatial tasks
+- Executive dysfunction — impaired judgment, planning, abstraction, and problem-solving
+- Apraxia — difficulty with learned motor sequences (dressing, using utensils) in moderate AD
+- Progressive functional decline in instrumental and basic activities of daily living
+non_motor_symptoms:
+- 'Behavioral and psychological symptoms of dementia (BPSD): agitation, depression, psychosis, wandering'
+- Sleep disturbance — circadian rhythm fragmentation, increased nocturnal waking
+- Anxiety (common in early MCI and mild AD — ~40%)
+- Apathy (most prevalent neuropsychiatric symptom — ~50% in mild AD)
+- Caregiver burden (significant secondary clinical consideration)
+brain_regions:
+- Hippocampus (bilateral) — CA1 and subiculum
+- Entorhinal Cortex (Layer II neurons)
+- Posterior Cingulate Cortex (PCC) / Precuneus
+- Angular Gyrus (inferior parietal lobule)
+- Dorsolateral Prefrontal Cortex (DLPFC)
+- Nucleus Basalis of Meynert (NBM)
+brain_region_details:
+  Hippocampus (bilateral) — CA1 and subiculum: Earliest site of clinically significant neurodegeneration in AD; episodic memory
+    consolidation and spatial navigation. MRI volumetry (hippocampal atrophy) is an established AD biomarker. TPS can reach
+    hippocampal depth (~40-50mm).
+  Entorhinal Cortex (Layer II neurons): Gateway to hippocampus via perforant pathway. First clinically significant Braak Stage
+    I-II tau pathology. Disrupts input to memory circuits. Target for TPS neuronavigation.
+  Posterior Cingulate Cortex (PCC) / Precuneus: Major DMN hub; early amyloid deposition and FDG-PET hypometabolism are diagnostic
+    biomarkers. PCC reduced connectivity correlates with AD severity.
+  Angular Gyrus (inferior parietal lobule): Semantic memory and language processing. Vulnerable to amyloid deposition; tDCS
+    temporal-parietal montages include this region.
+  Dorsolateral Prefrontal Cortex (DLPFC): Executive function impaired in MCI and early AD. Later involvement in Braak staging.
+    Potential tDCS anodal target to upregulate executive network residual capacity.
+  Nucleus Basalis of Meynert (NBM): Primary source of cholinergic innervation to cortex via basal forebrain. Progressive degeneration
+    drives hallmark cholinergic deficit. Basis for cholinesterase inhibitor therapy.
+network_profiles:
+- network: dmn
+  dysfunction: hypo
+  severity: severe
+  primary: true
+  relevance: PRIMARY NETWORK IN AD. The DMN is the earliest and most severely affected large-scale network in AD. Amyloid
+    preferentially deposits at DMN nodes (PCC, precuneus, medial PFC, hippocampus). Reduced DMN functional connectivity correlates
+    with episodic memory performance and amyloid burden. DMN disruption precedes clinical symptoms by ~10-15 years (Buckner
+    et al. 2009).
+  evidence_note: 'Buckner RL et al. 2009 — DMN as AD vulnerability network. PMID: 19176803'
+- network: cen
+  dysfunction: hypo
+  severity: moderate-severe
+  primary: false
+  relevance: Executive function and working memory decline progressively as CEN involvement increases with AD staging. DLPFC
+    tDCS targeting aims to upregulate residual CEN capacity, improving executive function and daily functional performance
+    in MCI/mild AD.
+  evidence_note: Frontal CEN involvement in MCI-to-AD progression; multiple fMRI studies
+- network: attention
+  dysfunction: hypo
+  severity: moderate
+  primary: false
+  relevance: Cholinergic depletion disrupts attentional alerting and orienting networks. Attentional impairment is prominent
+    in MCI and early AD, contributing to functional disability beyond memory deficits alone.
+  evidence_note: ''
+- network: limbic
+  dysfunction: hyper
+  severity: moderate
+  primary: false
+  relevance: BPSD (agitation, anxiety, depression) reflect limbic and frontal-limbic network disruption and compensatory hyperreactivity.
+    Amygdala changes and reduced prefrontal inhibitory control of limbic circuits drive behavioral symptoms.
+  evidence_note: BPSD as limbic-frontal dysregulation in AD; prevalence ~80% over disease course
+primary_network: dmn
+fnon_rationale: In AD/MCI, the primary dysfunctional network is the Default Mode Network (DMN)/memory circuit, driven by progressive
+  amyloid and tau pathology in hippocampal-entorhinal and parietal DMN nodes. The FNON framework targets temporal-parietal
+  regions (anodal tDCS) to upregulate surviving memory circuit nodes and enhance synaptic plasticity in residual circuits.
+  TPS neuronavigation allows deeper targeting of hippocampal/entorhinal circuits beyond the reach of surface tDCS. DLPFC anodal
+  tDCS addresses CEN hypofunction for executive function support. taVNS is considered for BPSD subtypes via limbic modulation.
+phenotypes:
+- slug: mci_am
+  label: MCI-A — Amnestic Mild Cognitive Impairment
+  description: Subjective and objective memory decline below age-expected norms with preserved functional independence. 10-15%
+    annual conversion to AD. Single or multi-domain. Best evidence window for neuromodulation.
+  key_features:
+  - Memory complaints
+  - Objective episodic memory impairment
+  - Preserved ADLs
+  - MoCA 18-25
+  primary_networks:
+  - dmn
+  - cen
+  secondary_networks:
+  - attention
+  preferred_modalities:
+  - tdcs
+  - tps
+  - ces
+  tdcs_target: Temporal-parietal bilateral anodal (T3+T4 or P3+P4) + left DLPFC anodal
+  tps_target: Hippocampal / entorhinal targeting (neuronavigation-guided)
+- slug: mild_ad
+  label: MILD AD — Mild Alzheimer's Disease
+  description: Mild dementia with significant episodic memory impairment affecting daily function. CDR 0.5-1. Language and
+    executive deficits emerging. Still amenable to neuromodulation.
+  key_features:
+  - Episodic memory impairment
+  - Language changes (anomia)
+  - Some ADL dependency
+  - MoCA 10-17
+  primary_networks:
+  - dmn
+  - cen
+  secondary_networks:
+  - attention
+  - limbic
+  preferred_modalities:
+  - tdcs
+  - tps
+  tdcs_target: Temporal-parietal anodal bilateral; shorter duration (20 min)
+  tps_target: Left DLPFC / temporal cortex targeting
+- slug: bpsd
+  label: BPSD — Behavioural & Psychological Symptoms
+  description: AD with prominent agitation, anxiety, depression, or sleep disruption as primary clinical burden. Limbic network
+    dysregulation predominant.
+  key_features:
+  - Agitation
+  - Depression
+  - Anxiety
+  - Sleep disruption
+  - Behavioral dysregulation
+  - Apathy
+  primary_networks:
+  - limbic
+  - sn
+  secondary_networks:
+  - cen
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: Left DLPFC anodal for depression/apathy component
+  tps_target: ''
+- slug: cog_ad
+  label: COG-AD — Executive/Frontal Variant MCI
+  description: MCI with prominent executive dysfunction disproportionate to memory impairment. DLPFC-predominant network involvement.
+  key_features:
+  - Executive dysfunction
+  - Planning impairment
+  - Verbal fluency decline
+  - Relative memory preservation
+  primary_networks:
+  - cen
+  - dmn
+  secondary_networks:
+  - attention
+  preferred_modalities:
+  - tdcs
+  - tps
+  tdcs_target: Bilateral DLPFC anodal (F3+F4) — executive enhancement protocol
+  tps_target: Left DLPFC TPS targeting
+assessments:
+- scale_key: moca
+  timing: baseline
+  primary: false
+  notes: Primary cognitive screening tool. Score 18-25 = MCI range; <18 = possible dementia. Administer at baseline and every
+    3 months.
+- scale_key: mmse
+  timing: baseline
+  primary: false
+  notes: Widely used staging tool. Score 21-26 = mild AD; 10-20 = moderate AD; <10 = severe AD. Less sensitive to MCI than
+    MoCA.
+- scale_key: adas_cog
+  timing: baseline
+  primary: false
+  notes: Gold standard cognitive outcome measure in AD clinical trials. Higher score = greater impairment. 4-point change
+    = clinically meaningful.
+- scale_key: cdr
+  timing: baseline
+  primary: false
+  notes: Global severity and staging scale. CDR 0.5 = MCI; CDR 1 = mild; CDR 2 = moderate dementia. Sum of Boxes (CDR-SB)
+    for change tracking.
+- scale_key: npi
+  timing: baseline
+  primary: false
+  notes: Assessment of BPSD. Administered to caregiver. Frequency x Severity scoring. Essential for BPSD phenotype.
+- scale_key: phq9
+  timing: baseline
+  primary: false
+  notes: BPSD mood screen. Administer to carer if patient cannot self-report reliably. Score >=10 = clinically significant
+    depression in AD.
+applicable_modalities:
+- tdcs
+- tps
+- tavns
+- ces
+protocols:
+- protocol_id: C-AD-MEM
+  label: Memory Enhancement — Temporal-Parietal tDCS
+  modality: tdcs
+  target_region: Temporal-Parietal Cortex
+  target_abbreviation: TP
+  target_electrodes: []
+  phenotype_slugs:
+  - mci_am
+  - mild_ad
+  network_targets:
+  - dmn
+  - cen
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    anode: P3 + P4 (bilateral parietal) or T5+T6 (temporal-parietal)
+    cathode: Fp1 + Fp2 (bilateral supraorbital) or shoulder reference
+    intensity: 1.5-2.0 mA
+    duration: 20-30 min (start 15 min in moderate AD)
+    sessions: 10-15 over 3 weeks
+    electrode_size: 35 cm2
+    note: 'Ferrucci montage: anodes over temporal-parietal regions. Cognitive stimulation activities during session recommended.'
+  rationale: Temporal-parietal anodal tDCS targets episodic memory and semantic processing nodes. Ferrucci et al. (2008) Neurology
+    study (N=10) demonstrated improved recognition memory in AD. Boggio et al. (2012) PLOS ONE demonstrated visual memory
+    improvements. Meta-analyses of tDCS in AD confirm moderate memory effect sizes. OFF-LABEL.
+  evidence_level: medium
+  off_label: true
+  session_count: 15
+  notes: ''
+- protocol_id: T-AD
+  label: Hippocampal TPS — Memory (MCI)
+  modality: tps
+  target_region: Hippocampus / Entorhinal region
+  target_abbreviation: HC/EC
+  target_electrodes: []
+  phenotype_slugs:
+  - mci_am
+  network_targets:
+  - dmn
+  parameters:
+    device: NEUROLITH (Storz Medical)
+    target: Hippocampal neuronavigation target (40-50mm depth from scalp)
+    pulses: 300-400 per session
+    frequency: 5 Hz
+    energy: 0.25 mJ/mm2
+    sessions: 6-9
+    note: Neuronavigation required. MRI-based targeting. Bilateral treatment applied sequentially.
+  rationale: TPS delivers focused acoustic pulse energy at hippocampal depth, inducing neuroplasticity in memory circuits
+    inaccessible to surface tDCS. Benussi et al. (2020) Brain Stimulation RCT (N=33) demonstrated significant cognitive improvements
+    at 1 and 3 months in MCI/AD. Confirm regulatory approval status for AD indication in your jurisdiction. Doctor authorization
+    mandatory.
+  evidence_level: medium
+  off_label: false
+  session_count: 9
+  notes: TPS is approved for Alzheimer's Disease in some jurisdictions — confirm regulatory status. Informed consent and capacity
+    assessment mandatory.
+- protocol_id: C-AD-EXEC
+  label: Executive Function — DLPFC tDCS
+  modality: tdcs
+  target_region: Dorsolateral Prefrontal Cortex
+  target_abbreviation: DLPFC
+  target_electrodes: []
+  phenotype_slugs:
+  - cog_ad
+  - mci_am
+  network_targets:
+  - cen
+  - dmn
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    anode: F3 + F4 (bilateral DLPFC)
+    cathode: Right shoulder or Oz
+    intensity: 1.5-2.0 mA
+    duration: 20 min
+    sessions: 10-12
+  rationale: DLPFC anodal tDCS targets CEN executive function nodes in frontal MCI and early AD. Rationale extrapolated from
+    DLPFC tDCS cognitive enhancement literature. Limited AD-specific evidence. OFF-LABEL.
+  evidence_level: low
+  off_label: true
+  session_count: 12
+  notes: ''
+- protocol_id: CES-AD-BPSD
+  label: 'CES — BPSD: Sleep, Anxiety & Mood'
+  modality: ces
+  target_region: Bilateral earlobe electrodes
+  target_abbreviation: CES
+  target_electrodes: []
+  phenotype_slugs:
+  - bpsd
+  network_targets:
+  - limbic
+  - sn
+  parameters:
+    device: Alpha-Stim AID
+    frequency: 0.5 Hz
+    intensity: 100-200 uA
+    duration: 40-60 min
+    sessions: Daily during treatment block
+    note: Caregiver to supervise at-home use. Start with 40 min, extend to 60 min if tolerated.
+  rationale: 'Alpha-Stim CES addresses BPSD symptoms: anxiety, depression, insomnia prevalent in AD. FDA-cleared for these
+    indications. Adjunct to memory protocols; caregiver-supervised home use feasible. Non-pharmacological option to reduce
+    psychotropic load in dementia.'
+  evidence_level: medium
+  off_label: false
+  session_count: 20
+  notes: ''
+safety_rules:
+- category: contraindication
+  description: Active implanted electronic devices in the head/neck region
+  severity: absolute
+  modalities: []
+  source: Manufacturer guidelines and consensus safety statements
+- category: stopping_rule
+  description: 'Discontinue immediately for Grade 3 adverse events: new seizure, severe headache, syncope, skin burn, worsening
+    of psychiatric symptoms requiring acute intervention'
+  severity: high
+  modalities: []
+  source: ''
+- category: monitoring
+  description: Assess and document adverse events at every session using a standardized monitoring checklist
+  severity: moderate
+  modalities: []
+  source: ''
+- category: precaution
+  description: Ensure consistent medication state (ON or OFF) throughout treatment blocks to avoid false responder/non-responder
+    classification
+  severity: moderate
+  modalities: []
+  source: ''
+- category: precaution
+  description: Capacity assessment is mandatory before treatment initiation. For patients with impaired capacity, obtain substitute
+    decision-maker (healthcare proxy/guardian) consent. Document capacity assessment and consent process in clinical records.
+  severity: high
+  modalities: []
+  source: Legal and ethical requirement for dementia patients; Mental Health Act and Guardianship provisions
+- category: monitoring
+  description: Monitor for behavioral changes, agitation, distress, or skin discomfort during stimulation. Patients with moderate
+    dementia may not reliably report discomfort — observe facial expressions and behavioral cues throughout session.
+  severity: moderate
+  modalities: []
+  source: Clinical safety precaution for cognitively impaired patients
+- category: precaution
+  description: TPS is approved for Alzheimer's Disease in some jurisdictions (confirm current regulatory status). Even where
+    approved, informed consent with capacity assessment remains mandatory. Document regulatory basis for TPS use.
+  severity: high
+  modalities: []
+  source: Regulatory and clinical governance requirement
+- category: precaution
+  description: Start with shorter session durations (15 min) in patients with moderate AD or significant behavioral symptoms.
+    Extend to 20-30 min only after confirming tolerance. Caregiver presence throughout session recommended.
+  severity: moderate
+  modalities: []
+  source: Clinical practice adaptation for dementia population
+contraindications:
+- Active implanted devices (cochlear implants, deep brain stimulators, cardiac pacemakers/defibrillators) unless explicitly
+  cleared by device manufacturer
+- Metallic implants in the head or neck region within the stimulation field
+- Active epilepsy with uncontrolled seizures (relative contraindication — requires neurologist clearance)
+- Skull defects or craniectomy at stimulation sites
+- Skin lesions, wounds, or dermatological conditions at electrode placement sites
+- Active malignancy of the central nervous system
+- Pregnancy (precautionary contraindication — insufficient safety data)
+- Severe psychiatric crisis requiring immediate hospitalization
+- 'TPS-specific: anticoagulation with elevated INR (>3) near skull — contact with Storz Medical for device-specific guidance'
+- 'TPS-specific: metallic intracranial implants (aneurysm clips, cochlear implants) within the acoustic field'
+inclusion_criteria:
+- Confirmed diagnosis of amnestic MCI or mild-to-moderate AD (CDR 0.5-2, MMSE >=10)
+- MoCA 10-26 at baseline
+- Age 55-90 years
+- Capacity to provide informed consent, OR substitute decision-maker available and willing to provide consent
+- Stable cholinesterase inhibitor or memantine medication for >=3 months (or medication-naive)
+- Caregiver/carer available to accompany patient to sessions
+- Adequate skin integrity at electrode placement sites
+exclusion_criteria:
+- Severe dementia (CDR 3, MMSE <10) — insufficient engagement and arousal for neuromodulation benefit
+- Non-AD dementia as primary diagnosis (FTD, DLB, VaD) — require condition-specific protocols
+- Active psychiatric crisis or severe agitation requiring urgent medication change
+- History of unprovoked seizures or active epilepsy
+- Recent falls with head injury or skull fracture
+- Anticoagulation therapy with INR >3 (relevant for TPS safety)
+- Metallic intracranial implants near TPS targeting site
+responder_criteria:
+- Stabilization or improvement in MoCA score (no >=2-point decline from baseline at Week 8-10)
+- '>=2-point improvement on SOZO PRS cognitive function domain'
+- Carer-reported functional improvement or stability in ADLs
+- NPI score stabilization or reduction >=25% (BPSD phenotype)
+non_responder_pathway: 'For patients classified as non-responders or showing accelerated decline:
+
+  1. Re-evaluate AD stage — moderate-severe AD (CDR 2-3) unlikely to respond meaningfully
+
+  2. Review capacity and carer support — inadequate session completion limits response
+
+  3. Consider BPSD protocol if behavioral symptoms are primary burden
+
+  4. Doctor neurological review — reassess diagnosis, rule out VaD or DLB
+
+  5. Assess and optimize cholinesterase inhibitor or memantine regimen
+
+  6. If MCI non-responder: repeat MoCA at 6 months — conversion to AD dementia may explain decline
+
+  7. Refer to memory clinic for updated biomarker assessment'
+evidence_summary: 'AD/MCI has moderate-quality evidence for tDCS. Ferrucci et al. (2008) demonstrated recognition memory improvements
+  with temporal-parietal tDCS. Boggio et al. (2012) confirmed visual memory improvements. Meta-analyses of tDCS in AD (Hsu
+  et al. 2015) confirm cognitive benefits with moderate effect sizes. TPS: Benussi et al. (2020) RCT demonstrated significant
+  cognitive improvements in MCI/AD — the strongest single study for TPS in this population. CES: inferred from FDA clearance
+  for anxiety/insomnia — no dedicated AD RCT.'
+evidence_quality: medium
+evidence_gaps:
+- No adequately powered, biomarker-confirmed multi-site RCT of tDCS for AD with cognitive primary endpoint
+- Long-term disease-modifying effects of neuromodulation in AD — unknown and methodologically challenging to establish
+- TPS in AD — Benussi et al. is promising but requires independent replication in larger samples
+- Optimal tDCS montage for AD/MCI (temporal-parietal vs DLPFC vs combined) — no head-to-head trial
+- Predictors of neuromodulation response in AD — biomarker, genetic (APOE ε4), or functional connectivity predictors not established
+references:
+- pmid: '22479484'
+  title: Temporal lobe cortical electrical stimulation during the encoding and retrieval phase reduces false memories
+  authors: Boggio PS et al.
+  year: 2012
+  journal: PLOS ONE
+  evidence_level: medium
+  notes: ''
+- pmid: '18981371'
+  title: Transcranial direct current stimulation improves recognition memory in Alzheimer disease
+  authors: Ferrucci R et al.
+  year: 2008
+  journal: Neurology
+  evidence_level: medium
+  notes: ''
+- pmid: '32534178'
+  title: 'Transcranial Pulse Stimulation in Patients with Alzheimer Disease: A Randomized, Double-Blind, Sham-Controlled Trial'
+  authors: Benussi A et al.
+  year: 2020
+  journal: Brain Stimulation
+  evidence_level: medium
+  notes: ''
+- pmid: '19176803'
+  title: 'Cortical hubs revealed by intrinsic functional connectivity: mapping, assessment of stability, and relation to Alzheimer''s
+    disease'
+  authors: Buckner RL et al.
+  year: 2009
+  journal: Journal of Neuroscience
+  evidence_level: medium
+  notes: ''
+- pmid: '15817019'
+  title: 'The Montreal Cognitive Assessment, MoCA: a brief screening tool for mild cognitive impairment'
+  authors: Nasreddine ZS et al.
+  year: 2005
+  journal: Journal of the American Geriatrics Society
+  evidence_level: medium
+  notes: ''
+clinical_tips:
+- Capacity assessment is a mandatory first step — document thoroughly before any consent process. Involve caregiver/healthcare
+  proxy from the outset.
+- Start with shorter sessions (15-20 min) in patients with moderate AD — extend to 30 min only after confirmed tolerance across
+  multiple sessions
+- TPS hippocampal targeting requires accurate neuronavigation and MRI-based planning — Partner-tier or specialist clinician
+  only
+- Perform cognitive stimulation activities (word recall, picture naming, semantic fluency) during tDCS sessions to leverage
+  activity-dependent plasticity
+- Engage caregiver as active participant in outcome monitoring — carer-reported functional changes are often more clinically
+  meaningful than scale scores
+- Document regulatory status for TPS in your jurisdiction — approval status for AD indication may affect consent requirements
+governance_rules:
+- No Fellow or Clinical Assistant may independently modify treatment plans without Doctor authorization
+- All TPS applications require explicit off-label informed consent and Doctor authorization
+- Adverse events must be documented within 24 hours and escalated per clinic protocol
+- Treatment records must be updated at every session
+- Informed consent must be obtained and documented before initiating any modality
+- Informed consent for cognitively impaired patients requires formal capacity assessment and substitute decision-maker documentation
+- TPS hippocampal targeting requires Partner-tier or specialist clinician with neuronavigation training
+- Regulatory status of TPS for Alzheimer's Disease must be confirmed and documented for each patient
+patient_journey_notes: {}

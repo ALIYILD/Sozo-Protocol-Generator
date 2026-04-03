@@ -58,6 +58,9 @@ class SectionBlueprint(BaseModel):
     # Evidence
     requires_evidence: bool = False
     citation_density: str = "none"  # none, low, medium, high
+    evidence_criticality: str = "optional"  # optional, recommended, required, critical
+    min_pmid_count: int = 0  # Minimum PMIDs expected (0 = no enforcement)
+    on_insufficient_evidence: str = "warn"  # warn, placeholder, block
 
     # Subsections
     subsections: list["SectionBlueprint"] = Field(default_factory=list)

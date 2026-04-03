@@ -49,6 +49,14 @@ class SectionProvenance:
     is_placeholder: bool = False
     warnings: list[str] = field(default_factory=list)
 
+    # QA fields
+    evidence_criticality: str = "optional"
+    evidence_sufficient: bool = True
+    min_pmid_required: int = 0
+    actual_pmid_count: int = 0
+    qa_status: str = "pass"  # pass, warn, fail
+    visual_fulfilled: bool = True
+
 
 @dataclass
 class AssemblyProvenance:
@@ -70,6 +78,27 @@ class AssemblyProvenance:
         if not self.assembled_at:
             self.assembled_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
+    @property
+    def readiness(self) -> str:
+        """Document readiness: ready, review_required, or incomplete."""
+        if any(s.qa_status == "fail" for s in self.sections):
+            return "incomplete"
+        if self.placeholder_sections > 0 or any(s.qa_status == "warn" for s in self.sections):
+            return "review_required"
+        return "ready"
+
+    @property
+    def sections_passing(self) -> int:
+        return sum(1 for s in self.sections if s.qa_status == "pass")
+
+    @property
+    def sections_warning(self) -> int:
+        return sum(1 for s in self.sections if s.qa_status == "warn")
+
+    @property
+    def sections_failing(self) -> int:
+        return sum(1 for s in self.sections if s.qa_status == "fail")
+
     def to_dict(self) -> dict:
         """Serialize to dict for JSON export."""
         return {
@@ -77,19 +106,28 @@ class AssemblyProvenance:
             "blueprint_slug": self.blueprint_slug,
             "tier": self.tier,
             "assembled_at": self.assembled_at,
+            "readiness": self.readiness,
             "total_sections": self.total_sections,
             "populated_sections": self.populated_sections,
             "placeholder_sections": self.placeholder_sections,
+            "sections_passing": self.sections_passing,
+            "sections_warning": self.sections_warning,
+            "sections_failing": self.sections_failing,
             "total_evidence_pmids": self.total_evidence_pmids,
             "total_visuals_requested": self.total_visuals_requested,
             "warnings": self.warnings,
             "sections": [
                 {
                     "section_slug": s.section_slug,
-                    "blueprint_slug": s.blueprint_slug,
+                    "qa_status": s.qa_status,
+                    "evidence_criticality": s.evidence_criticality,
+                    "evidence_sufficient": s.evidence_sufficient,
+                    "actual_pmid_count": s.actual_pmid_count,
+                    "min_pmid_required": s.min_pmid_required,
                     "knowledge_fields_used": s.knowledge_fields_used,
                     "evidence_pmids": s.evidence_pmids,
                     "visual_types_requested": s.visual_types_requested,
+                    "visual_fulfilled": s.visual_fulfilled,
                     "has_content": s.has_content,
                     "has_tables": s.has_tables,
                     "is_placeholder": s.is_placeholder,
@@ -316,13 +354,39 @@ class CanonicalDocumentAssembler:
         elif blueprint.requires_evidence and not evidence_pmids:
             confidence = "low_confidence"
 
-        # Finalize provenance
+        # Finalize provenance with QA
         prov.evidence_pmids = evidence_pmids[:10]
+        prov.actual_pmid_count = len(evidence_pmids)
         prov.has_content = bool(content)
         prov.has_tables = bool(tables)
         prov.is_placeholder = is_placeholder
+        prov.evidence_criticality = blueprint.evidence_criticality
+        prov.min_pmid_required = blueprint.min_pmid_count
+        prov.visual_fulfilled = len(blueprint.visuals) == 0  # Fulfilled if none required
+
+        # Evidence sufficiency QA
+        if blueprint.requires_evidence:
+            if blueprint.min_pmid_count > 0 and len(evidence_pmids) < blueprint.min_pmid_count:
+                prov.evidence_sufficient = False
+                prov.warnings.append(
+                    f"Section '{blueprint.title}' requires {blueprint.min_pmid_count} PMIDs "
+                    f"but only has {len(evidence_pmids)}"
+                )
+
+        # Determine QA status
         if is_placeholder:
+            if blueprint.evidence_criticality == "critical":
+                prov.qa_status = "fail"
+            elif blueprint.required:
+                prov.qa_status = "warn"
             prov.warnings.append(f"Section '{blueprint.title}' is a placeholder — needs data")
+        elif blueprint.requires_evidence and not prov.evidence_sufficient:
+            if blueprint.on_insufficient_evidence == "block":
+                prov.qa_status = "fail"
+            else:
+                prov.qa_status = "warn"
+        else:
+            prov.qa_status = "pass"
 
         return SectionContent(
             section_id=blueprint.slug,

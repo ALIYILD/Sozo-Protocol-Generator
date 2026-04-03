@@ -1,0 +1,530 @@
+# Post-Traumatic Stress Disorder — SOZO Clinical Knowledge
+# Auto-extracted from condition generator. ICD-10: F43.1
+
+slug: ptsd
+display_name: Post-Traumatic Stress Disorder
+icd10: F43.1
+aliases:
+- PTSD
+- post-traumatic stress
+- trauma disorder
+- cPTSD
+- complex PTSD
+- combat PTSD
+category: psychiatric
+version: '1.0'
+overview: 'Post-Traumatic Stress Disorder (PTSD) is a trauma- and stressor-related disorder characterized by four symptom
+  clusters following exposure to actual or threatened death, serious injury, or sexual violence: (1) intrusion symptoms (flashbacks,
+  nightmares); (2) persistent avoidance; (3) negative alterations in cognition and mood; and (4) marked alterations in arousal
+  and reactivity (hypervigilance, exaggerated startle). Lifetime prevalence is approximately 7-8% in the general population,
+  higher in trauma-exposed populations (combat veterans 15-30%; sexual assault survivors 30-80%).
+
+
+  PTSD involves a failure of fear memory extinction with amygdala hyperreactivity and impaired vmPFC inhibitory control. Neuromodulation
+  targets prefrontal upregulation to restore fear extinction capacity and improve CEN-amygdala regulation. tDCS (right or
+  left DLPFC) and taVNS (vagal-cardiac regulation and noradrenergic modulation) represent emerging non-pharmacological adjuncts
+  to trauma-focused psychotherapy.
+
+
+  IMPORTANT: Neuromodulation for PTSD should always be delivered alongside trauma-focused psychological support. Standalone
+  neuromodulation without psychological treatment framework is not recommended.'
+pathophysiology: 'PTSD pathophysiology centers on fear memory circuit dysfunction. The amygdala — particularly the basolateral
+  amygdala (BLA) — becomes hyperreactive and drives conditioned fear responses (hyperarousal, exaggerated startle, flashback
+  triggering). Normally, the ventromedial prefrontal cortex (vmPFC) and infralimbic cortex inhibit amygdala activity and facilitate
+  fear extinction via the infralimbic-BLA pathway. In PTSD, vmPFC/mPFC volume reduction and reduced activity impairs this
+  inhibitory pathway, leaving amygdala activity unchecked.
+
+
+  Hippocampal dysfunction (reduced volume correlating with trauma severity and PTSD duration) impairs contextual processing
+  of fear memories — fearful responses become context-independent (generalization). Elevated noradrenaline (from LC hyperactivity)
+  maintains the hyperarousal state, consolidates traumatic memories, and impairs fear extinction consolidation.
+
+
+  Network-level: SN hyperactivation (amygdala, insula) dominates the intrusion and hyperarousal symptom clusters. DMN is altered
+  — excessively activated during rest (rumination on trauma) with abnormal connectivity patterns (Lanius et al. 2010). CEN
+  is impaired — prefrontal executive control of fear memories is reduced. Dissociative PTSD subtype shows distinct pattern:
+  DMN-medial PFC hyperactivation serves as emotional inhibition/overmodulation.'
+core_symptoms:
+- Intrusion symptoms — unwanted traumatic memories, flashbacks, nightmares
+- Avoidance — of trauma-related thoughts, feelings, people, places, activities
+- Negative alterations in cognition and mood — distorted blame, persistent negative emotions, anhedonia, detachment
+- Hyperarousal and reactivity — hypervigilance, exaggerated startle, irritability, concentration difficulties, sleep disturbance
+non_motor_symptoms:
+- Comorbid major depression (50-80% lifetime in PTSD)
+- Comorbid anxiety disorders (generalized anxiety, panic)
+- Substance use disorders (40-60% in combat PTSD)
+- Chronic pain and somatization
+- Social and occupational dysfunction
+- Sleep disorders (nightmares, insomnia)
+brain_regions:
+- Amygdala (bilateral) — basolateral amygdala (BLA)
+- Ventromedial Prefrontal Cortex (vmPFC) / Infralimbic Cortex
+- Hippocampus (bilateral)
+- Dorsolateral Prefrontal Cortex (DLPFC)
+- Anterior Cingulate Cortex (ACC) — dorsal and rostral
+- Anterior Insula
+brain_region_details:
+  Amygdala (bilateral) — basolateral amygdala (BLA): Hyperreactive in PTSD — drives fear conditioning, intrusions, and hyperarousal.
+    Abnormally enhanced fear responses to trauma-related cues. Primary pathophysiological node. Target of indirect modulation
+    via vmPFC upregulation.
+  Ventromedial Prefrontal Cortex (vmPFC) / Infralimbic Cortex: Reduced volume and activity in PTSD. Normally inhibits amygdala
+    and mediates fear extinction. vmPFC hypofunction is the key mechanism of PTSD persistence. Primary target of tDCS upregulation
+    (via DLPFC-vmPFC connectivity).
+  Hippocampus (bilateral): Volume reduction correlates with PTSD severity. Impaired contextual processing allows fear generalization
+    beyond original trauma context. Episodic memory fragmentation contributes to intrusive memory re-experiencing.
+  Dorsolateral Prefrontal Cortex (DLPFC): CEN node mediating top-down regulation of amygdala via vmPFC and direct projections.
+    DLPFC stimulation upregulates prefrontal control over limbic reactivity. Primary accessible tDCS target.
+  Anterior Cingulate Cortex (ACC) — dorsal and rostral: Conflict monitoring and fear extinction consolidation. rACC activity
+    predicts PTSD treatment response. dACC hyperactivation drives arousal symptoms.
+  Anterior Insula: SN hub driving visceral arousal and interoceptive threat signaling. Hyperactive in PTSD — contributes to
+    somatic fear responses and hyperarousal.
+network_profiles:
+- network: sn
+  dysfunction: hyper
+  severity: severe
+  primary: true
+  relevance: PRIMARY NETWORK IN PTSD. Salience Network hyperactivation — amygdala and anterior insula — drives the hallmark
+    PTSD symptoms of hypervigilance, threat hyperdetection, emotional hyperreactivity, and intrusive re-experiencing. Amygdala
+    hyperactivity is the most replicated PTSD neuroimaging finding. SN hyperactivity drives excessive switching to threat-detection
+    mode at the expense of task engagement.
+  evidence_note: Amygdala hyperreactivity in PTSD — multiple fMRI studies; Shin et al.
+- network: limbic
+  dysfunction: hyper
+  severity: severe
+  primary: false
+  relevance: 'Limbic hyperreactivity beyond SN: reduced hippocampal-mediated fear extinction, persistent HPA axis hyperactivation
+    maintaining trauma-induced stress response, and high comorbidity of depression (50-80%) and anxiety. vmPFC-amygdala disconnection
+    is the core limbic circuit dysfunction in PTSD.'
+  evidence_note: vmPFC-amygdala dysconnectivity in PTSD; Rauch et al.
+- network: dmn
+  dysfunction: hyper
+  severity: moderate
+  primary: false
+  relevance: 'Altered DMN function in PTSD: excessive DMN activation during rest drives rumination on traumatic memories and
+    self-blame. Lanius et al. (2010) identified distinct DMN connectivity patterns in hyperactivating vs dissociative PTSD
+    subtypes. DMN intrusions during task performance parallel ADHD/depression DMN interference pattern.'
+  evidence_note: 'Lanius RA et al. (2010) — DMN in PTSD. PMID: 20565312'
+- network: cen
+  dysfunction: hypo
+  severity: moderate
+  primary: false
+  relevance: Impaired CEN — DLPFC hypofunction reduces top-down regulatory control over amygdala and SN hyperactivity. CEN
+    hypofunction impairs emotion regulation, working memory for traumatic memories, and extinction of conditioned fear. Primary
+    tDCS upregulation target.
+  evidence_note: DLPFC hypofunction in PTSD; prefrontal regulatory failure model
+- network: attention
+  dysfunction: hypo
+  severity: moderate
+  primary: false
+  relevance: Attention network biases toward threat stimuli in PTSD. Hypervigilance reflects abnormal salience of threat cues.
+    Difficulty sustaining goal-directed attention reflects competition from hyperactive SN threat detection.
+  evidence_note: ''
+primary_network: sn
+fnon_rationale: In PTSD, the primary dysfunctional network is the Salience Network (SN) — hyperactive amygdala drives fear
+  conditioning, hyperarousal, and intrusions. The FNON framework targets DLPFC (right or left) anodal tDCS to upregulate CEN
+  regulatory control over amygdala reactivity via vmPFC-amygdala projections. taVNS provides vagal-mediated autonomic regulation
+  (reducing cardiac hyperarousal), noradrenergic upregulation of prefrontal circuits, and may enhance fear extinction consolidation
+  during concurrent exposure-based therapy. CES addresses comorbid insomnia and nightmares.
+phenotypes:
+- slug: classic
+  label: CLASSIC-PTSD — Single-Incident Trauma
+  description: Classic PTSD from circumscribed traumatic event (accident, assault, disaster). Full DSM-5 criteria met. All
+    four symptom clusters present.
+  key_features:
+  - Intrusions/flashbacks
+  - Avoidance
+  - Negative mood
+  - Hyperarousal
+  primary_networks:
+  - sn
+  - limbic
+  secondary_networks:
+  - cen
+  - dmn
+  preferred_modalities:
+  - tdcs
+  - tavns
+  - ces
+  tdcs_target: Right DLPFC anodal (F4) — CEN upregulation for amygdala regulation
+  tps_target: ''
+- slug: cptsd
+  label: cPTSD — Complex PTSD
+  description: 'Repeated/prolonged trauma (childhood abuse, captivity, domestic violence). Additional features beyond DSM-5
+    PTSD: persistent affect dysregulation, negative self-concept, interpersonal difficulties (ICD-11 cPTSD).'
+  key_features:
+  - Affect dysregulation
+  - Negative self-concept
+  - Relational difficulties
+  - Emotional flashbacks
+  - Somatic symptoms
+  primary_networks:
+  - limbic
+  - sn
+  secondary_networks:
+  - dmn
+  - cen
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: Left DLPFC anodal for affect and mood; right DLPFC for fear extinction
+  tps_target: ''
+- slug: combat
+  label: COMBAT — Military / Combat-Related PTSD
+  description: PTSD from military combat exposure. High comorbidity with mTBI, substance use, and suicide risk. Distinct neurobiology
+    with extensive hyperarousal features.
+  key_features:
+  - Combat-related intrusions
+  - Moral injury component
+  - High suicide risk
+  - TBI comorbidity
+  - Substance use
+  primary_networks:
+  - sn
+  - limbic
+  secondary_networks:
+  - cen
+  - attention
+  preferred_modalities:
+  - tdcs
+  - tavns
+  - ces
+  tdcs_target: Right DLPFC anodal + taVNS for autonomic hyperarousal
+  tps_target: ''
+- slug: mst
+  label: MST — Military Sexual Trauma
+  description: PTSD following military sexual trauma. High rates of comorbid depression, shame, and interpersonal difficulties.
+  key_features:
+  - Sexual trauma intrusions
+  - Shame and self-blame
+  - Interpersonal avoidance
+  - High depression comorbidity
+  primary_networks:
+  - limbic
+  - dmn
+  secondary_networks:
+  - sn
+  - cen
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: Left DLPFC anodal for depression; right DLPFC for fear network
+  tps_target: ''
+- slug: ptsd_dep
+  label: PTSD-DEP — PTSD with Comorbid Depression
+  description: PTSD meeting concurrent MDD criteria. Highest functional impairment subgroup.
+  key_features:
+  - Full PTSD criteria
+  - MDD criteria met
+  - Anhedonia
+  - Suicidality risk elevated
+  - Severe functional impairment
+  primary_networks:
+  - limbic
+  - dmn
+  secondary_networks:
+  - sn
+  - cen
+  preferred_modalities:
+  - tdcs
+  - ces
+  - tavns
+  tdcs_target: Left DLPFC anodal (primary depression protocol) + right DLPFC for fear
+  tps_target: ''
+assessments:
+- scale_key: pcl5
+  timing: baseline
+  primary: false
+  notes: Primary PTSD self-report measure. 20 items. Score >=33 = probable PTSD. MCID = 5-10 points. Administer at baseline,
+    weekly. Developed by Weathers et al. for NCPTSD.
+- scale_key: caps5
+  timing: baseline
+  primary: false
+  notes: Gold standard clinician-administered PTSD assessment. Provides diagnosis and severity score. Administer at baseline
+    and endpoint. Requires trained clinician.
+- scale_key: phq9
+  timing: baseline
+  primary: false
+  notes: Comorbid depression monitoring. Mandatory for PTSD-DEP subtype. C-SSRS mandatory at every session for PTSD patients.
+- scale_key: psqi
+  timing: baseline
+  primary: false
+  notes: Sleep disturbance and nightmares are cardinal PTSD symptoms. PSQI score >5 = poor sleep. Monitor closely.
+- scale_key: dass21
+  timing: baseline
+  primary: false
+  notes: Comprehensive mood screen covering depression, anxiety, and stress — all highly prevalent in PTSD.
+- scale_key: gad7
+  timing: baseline
+  primary: false
+  notes: Anxiety comorbidity monitoring. GAD is among the most common PTSD comorbidities.
+applicable_modalities:
+- tdcs
+- tps
+- tavns
+- ces
+protocols:
+- protocol_id: C-PTSD-R
+  label: Right DLPFC — Fear Regulation Protocol
+  modality: tdcs
+  target_region: Right Dorsolateral Prefrontal Cortex
+  target_abbreviation: R-DLPFC
+  target_electrodes: []
+  phenotype_slugs:
+  - classic
+  - combat
+  - cptsd
+  network_targets:
+  - cen
+  - limbic
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    anode: F4 (right DLPFC)
+    cathode: Fp1 (left supraorbital) or left shoulder
+    intensity: 2.0 mA
+    duration: 30 min
+    sessions: 10-15 over 3 weeks
+    electrode_size: 35 cm2
+    note: May be combined with psychotherapy session — tDCS during initial psychotherapy exposure component (discuss with
+      therapist).
+  rationale: Right DLPFC anodal tDCS upregulates prefrontal control of left amygdala reactivity via vmPFC pathway. Enhances
+    CEN regulation of fear circuit. Rationale from interhemispheric model and deep TMS evidence (Isserles et al. 2013 — DLPFC
+    deep TMS with trauma cue exposure produced PCL improvement). OFF-LABEL.
+  evidence_level: medium
+  off_label: true
+  session_count: 15
+  notes: 'Mandatory: C-SSRS suicidality screening at every session.'
+- protocol_id: C-PTSD-L
+  label: Left DLPFC — Depression & Mood Protocol
+  modality: tdcs
+  target_region: Left Dorsolateral Prefrontal Cortex
+  target_abbreviation: L-DLPFC
+  target_electrodes: []
+  phenotype_slugs:
+  - ptsd_dep
+  - mst
+  - cptsd
+  network_targets:
+  - cen
+  - dmn
+  - limbic
+  parameters:
+    device: Newronika HDCkit or PlatoScience
+    anode: F3 (left DLPFC)
+    cathode: Fp2 (right supraorbital)
+    intensity: 2.0 mA
+    duration: 30 min
+    sessions: 10-15
+  rationale: Left DLPFC anodal tDCS for PTSD with comorbid depression — standard MDD protocol applied to PTSD-depression triad.
+    Upregulates CEN to suppress DMN rumination and limbic hyperactivity. OFF-LABEL.
+  evidence_level: medium
+  off_label: true
+  session_count: 15
+  notes: C-SSRS mandatory at every session. Suicidal ideation monitoring critical.
+- protocol_id: TAVNS-PTSD
+  label: taVNS — Autonomic & Fear Extinction Adjunct
+  modality: tavns
+  target_region: Left auricular branch of vagus nerve
+  target_abbreviation: taVNS
+  target_electrodes: []
+  phenotype_slugs:
+  - classic
+  - combat
+  - mst
+  - cptsd
+  network_targets:
+  - sn
+  - limbic
+  parameters:
+    device: NEMOS (tVNS Technologies) or Parasym
+    frequency: 25 Hz
+    pulse_width: 250 us
+    intensity: Below pain threshold (0.5-3.0 mA)
+    duration: 30-60 min
+    sessions: Daily adjunct during tDCS block
+    electrode_placement: Left cymba conchae
+  rationale: taVNS modulates amygdala reactivity via NTS projections and noradrenergic circuits. Restores heart rate variability
+    — a biomarker of autonomic dysregulation in PTSD. Vagal stimulation during extinction learning may enhance consolidation
+    (established in animal models; translational evidence emerging). Investigational in PTSD — limited published data.
+  evidence_level: low
+  off_label: true
+  session_count: 20
+  notes: Investigational. Combine with exposure-based psychotherapy sessions for potential extinction enhancement.
+- protocol_id: CES-PTSD
+  label: CES — Insomnia, Nightmares & Hyperarousal
+  modality: ces
+  target_region: Bilateral earlobe electrodes
+  target_abbreviation: CES
+  target_electrodes: []
+  phenotype_slugs:
+  - classic
+  - combat
+  - cptsd
+  - mst
+  network_targets:
+  - limbic
+  - sn
+  parameters:
+    device: Alpha-Stim AID
+    frequency: 0.5 Hz
+    intensity: 100-300 uA
+    duration: 60 min
+    sessions: Nightly before sleep during treatment block
+  rationale: Alpha-Stim CES FDA-cleared for anxiety, insomnia, and depression. In PTSD, addresses hyperarousal, sleep onset
+    difficulty, and mood symptoms. Reduces limbic hyperarousal to facilitate sleep onset. Adjunct to tDCS and psychological
+    treatment. Non-pharmacological — reduces medication burden.
+  evidence_level: medium
+  off_label: false
+  session_count: 20
+  notes: ''
+safety_rules:
+- category: contraindication
+  description: Active implanted electronic devices in the head/neck region
+  severity: absolute
+  modalities: []
+  source: Manufacturer guidelines and consensus safety statements
+- category: stopping_rule
+  description: 'Discontinue immediately for Grade 3 adverse events: new seizure, severe headache, syncope, skin burn, worsening
+    of psychiatric symptoms requiring acute intervention'
+  severity: high
+  modalities: []
+  source: ''
+- category: monitoring
+  description: Assess and document adverse events at every session using a standardized monitoring checklist
+  severity: moderate
+  modalities: []
+  source: ''
+- category: precaution
+  description: Ensure consistent medication state (ON or OFF) throughout treatment blocks to avoid false responder/non-responder
+    classification
+  severity: moderate
+  modalities: []
+  source: ''
+- category: monitoring
+  description: 'MANDATORY: Columbia Suicide Severity Rating Scale (C-SSRS) at EVERY session. PTSD carries significantly elevated
+    suicide risk (particularly combat PTSD, MST, cPTSD). Any new or worsening suicidal ideation with intent requires immediate
+    escalation and crisis protocol.'
+  severity: high
+  modalities: []
+  source: PTSD suicide risk epidemiology; clinical governance requirement
+- category: precaution
+  description: PTSD patients may experience trauma-related emotional responses (flashbacks, distress) during or after sessions.
+    Brief post-session grounding check mandatory. Ensure psychological support (therapist or trauma-informed staff) is available
+    or contactable during treatment.
+  severity: high
+  modalities: []
+  source: Trauma-informed care principles; risk of spontaneous trauma processing during neuromodulation
+- category: precaution
+  description: Neuromodulation should be delivered as an adjunct to trauma-focused psychotherapy (EMDR, PE, CPT), not as standalone
+    treatment. Neuromodulation without concurrent psychological support is not recommended for PTSD.
+  severity: moderate
+  modalities: []
+  source: Evidence-based PTSD treatment guidelines; neuromodulation as psychotherapy adjunct
+- category: monitoring
+  description: Monitor for dissociative symptoms during and after sessions. If patient reports feeling detached, unreal, or
+    experiences flashback during stimulation, pause session and conduct grounding exercise before continuing.
+  severity: moderate
+  modalities: []
+  source: Dissociative symptom management in trauma neuromodulation
+contraindications:
+- Active implanted devices (cochlear implants, deep brain stimulators, cardiac pacemakers/defibrillators) unless explicitly
+  cleared by device manufacturer
+- Metallic implants in the head or neck region within the stimulation field
+- Active epilepsy with uncontrolled seizures (relative contraindication — requires neurologist clearance)
+- Skull defects or craniectomy at stimulation sites
+- Skin lesions, wounds, or dermatological conditions at electrode placement sites
+- Active malignancy of the central nervous system
+- Pregnancy (precautionary contraindication — insufficient safety data)
+- Severe psychiatric crisis requiring immediate hospitalization
+- Active suicidal crisis requiring hospitalization
+- Active severe dissociation during session — safety risk
+inclusion_criteria:
+- DSM-5 diagnosis of PTSD (all four criterion clusters met)
+- PCL-5 score >=33 at baseline
+- Psychologically stable enough to participate — not in acute trauma processing crisis
+- Currently engaged with or willing to engage in trauma-focused psychological support
+- Age 18-70 years
+- Capacity to provide informed consent
+- Stable psychiatric medication for >=4 weeks (or medication-naive)
+exclusion_criteria:
+- Active suicidal ideation with intent or plan — acute psychiatric crisis (refer for acute care)
+- Active psychosis or psychotic features
+- Acute substance intoxication at time of session
+- Active dissociative disorder as primary diagnosis requiring specialist management
+- Recent (past 4 weeks) significant traumatic re-exposure without stabilization
+responder_criteria:
+- '>=10-point reduction in PCL-5 from baseline (meaningful change criterion)'
+- '>=50% reduction in PCL-5 or score <33 (remission)'
+- PHQ-9 >=50% reduction (PTSD-DEP subtype)
+- Clinically meaningful SOZO PRS improvement in trauma symptoms and mood domains
+non_responder_pathway: 'For non-responders at Week 4:
+
+  1. Assess trauma processing engagement — inadequate psychotherapy adjunct limits response
+
+  2. Re-evaluate PTSD subtype — cPTSD requires longer treatment and specialist involvement
+
+  3. Add taVNS for hyperarousal-dominant presentation
+
+  4. Add CES for sleep/nightmare component
+
+  5. Switch tDCS montage: right DLPFC for fear features; left DLPFC for depression features
+
+  6. Assess and treat comorbid substance use — significantly impairs PTSD treatment response
+
+  7. Doctor psychiatric review for pharmacotherapy optimization (sertraline, prazosin)
+
+  8. Refer to trauma-focused psychological treatment if not already engaged'
+evidence_summary: 'PTSD neuromodulation has emerging evidence. tDCS in PTSD: limited dedicated RCTs — most evidence from pilot
+  studies and mechanistic rationale from fear circuit neuroscience. Isserles et al. (2013) deep TMS with trauma exposure showed
+  PCL improvement in small controlled trial. taVNS in PTSD: investigational — mechanism-based rationale from vagal-amygdala
+  connectivity and HRV restoration studies. CES: FDA-cleared for comorbid symptoms (anxiety, depression, insomnia). Overall:
+  PTSD neuromodulation is an emerging adjunctive field; evidence quality is low to medium. Robust RCTs urgently needed.'
+evidence_quality: medium
+evidence_gaps:
+- No adequately powered dedicated tDCS RCT for PTSD with PCL-5 as primary endpoint
+- Optimal tDCS montage for PTSD — right DLPFC vs left DLPFC vs bilateral — no comparative data
+- taVNS in PTSD — no published RCT; translational evidence from animal models only
+- Combined neuromodulation + psychotherapy vs psychotherapy alone — no controlled trial
+- Complex PTSD (cPTSD) — no dedicated neuromodulation study
+references:
+- pmid: '23731839'
+  title: Effectiveness of deep transcranial magnetic stimulation combined with a brief exposure procedure in post-traumatic
+    stress disorder — a pilot study
+  authors: Isserles M et al.
+  year: 2013
+  journal: European Neuropsychopharmacology
+  evidence_level: medium
+  notes: ''
+- pmid: '20565312'
+  title: Default mode network connectivity as a predictor of post-traumatic stress disorder symptom severity in acutely traumatized
+    subjects
+  authors: Lanius RA et al.
+  year: 2010
+  journal: Acta Psychiatrica Scandinavica
+  evidence_level: medium
+  notes: ''
+- pmid: '7487939'
+  title: The development of a Clinician-Administered PTSD Scale
+  authors: Blake DD et al.
+  year: 1995
+  journal: Journal of Traumatic Stress
+  evidence_level: medium
+  notes: ''
+clinical_tips:
+- C-SSRS mandatory at every session — PTSD has among the highest suicide risk of all psychiatric conditions
+- Ensure trauma-focused psychological support is in place before initiating neuromodulation — neuromodulation is adjunct,
+  not standalone
+- Brief grounding check post-session — PTSD patients may experience trauma activation during stimulation
+- 'For combat PTSD with mTBI comorbidity: screen for skull fractures and apply TBI safety protocol simultaneously'
+- Consider right DLPFC for predominant fear/hyperarousal features; left DLPFC for predominant depression/anhedonia features
+governance_rules:
+- No Fellow or Clinical Assistant may independently modify treatment plans without Doctor authorization
+- All TPS applications require explicit off-label informed consent and Doctor authorization
+- Adverse events must be documented within 24 hours and escalated per clinic protocol
+- Treatment records must be updated at every session
+- Informed consent must be obtained and documented before initiating any modality
+- C-SSRS mandatory at every session for PTSD patients — suicidality escalation protocol must be documented and accessible
+- Trauma-focused psychological support must be documented as concurrent treatment — neuromodulation without this is not approved
+- cPTSD and MST cases require Doctor authorization and specialist psychology coordination
+patient_journey_notes: {}
