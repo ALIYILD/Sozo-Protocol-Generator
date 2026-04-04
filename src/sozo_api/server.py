@@ -323,19 +323,7 @@ def create_app() -> FastAPI:
         return {"conditions": [asdict(s) for s in summaries]}
 
     # ── Shared graph checkpointer ────────────────────────────────────────
-
-    _graph_checkpointer = None
-
-    def _get_checkpointer():
-        """Lazy-init a shared MemorySaver checkpointer.
-
-        In production, replace with PostgresSaver for persistence across restarts.
-        """
-        nonlocal _graph_checkpointer
-        if _graph_checkpointer is None:
-            from langgraph.checkpoint.memory import MemorySaver
-            _graph_checkpointer = MemorySaver()
-        return _graph_checkpointer
+    from sozo_api.graph_checkpointer import get_graph_checkpointer
 
     # ── Graph-based generation ─────────────────────────────────────────
 
@@ -376,7 +364,7 @@ def create_app() -> FastAPI:
             if body.condition_slug:
                 structured["condition_slug"] = body.condition_slug.strip()
 
-            checkpointer = _get_checkpointer()
+            checkpointer = get_graph_checkpointer()
             graph = build_unified_graph(checkpointer=checkpointer)
 
             explicit_slug = (
@@ -486,7 +474,7 @@ def create_app() -> FastAPI:
         from sozo_graph.unified_graph import build_unified_graph
 
         try:
-            checkpointer = _get_checkpointer()
+            checkpointer = get_graph_checkpointer()
             graph = build_unified_graph(checkpointer=checkpointer)
             config = {"configurable": {"thread_id": thread_id}}
 
@@ -566,7 +554,7 @@ def create_app() -> FastAPI:
     @application.post("/api/graph/review")
     async def submit_graph_review(
         body: GraphReviewRequest,
-        _user: UserResponse = Depends(require_reviewer),
+        current_user: UserResponse = Depends(require_reviewer),
     ) -> dict:
         """Submit a clinician review decision and resume the graph.
 
@@ -579,7 +567,7 @@ def create_app() -> FastAPI:
         from datetime import datetime, timezone
 
         try:
-            checkpointer = _get_checkpointer()
+            checkpointer = get_graph_checkpointer()
             graph = build_unified_graph(checkpointer=checkpointer)
             config = {"configurable": {"thread_id": body.thread_id}}
 
@@ -611,6 +599,24 @@ def create_app() -> FastAPI:
 
             # Resume graph execution
             result = graph.invoke(None, config=config)
+
+            try:
+                from sozo_api.routes.audit_service import audit_service
+
+                audit_service.log_event(
+                    entity_type="graph_run",
+                    entity_id=body.thread_id,
+                    action="graph_review_submitted",
+                    actor=current_user.email,
+                    details={
+                        "thread_id": body.thread_id,
+                        "decision": body.decision,
+                        "review_status": review_status,
+                        "reviewer_id": body.reviewer_id,
+                    },
+                )
+            except Exception as audit_err:
+                logger.warning("Audit log (graph review) skipped: %s", audit_err)
 
             return {
                 "success": True,

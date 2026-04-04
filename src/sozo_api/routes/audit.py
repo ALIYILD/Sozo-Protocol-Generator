@@ -307,6 +307,7 @@ async def list_available_actions():
             "qa_override", "safety_check", "generation_started",
             "generation_completed", "generation_failed",
             "node_executed",
+            "graph_review_submitted",
         ]
     }
 

@@ -40,6 +40,9 @@ dependencies = [
     # API
     "fastapi>=0.111,<1",
     "uvicorn>=0.29,<1",
+    # LangGraph (protocol generation pipeline + API graph routes)
+    "langgraph>=0.2,<1",
+    "langgraph-checkpoint-sqlite>=2.0,<3",
 ]
 
 [tool.setuptools.packages.find]

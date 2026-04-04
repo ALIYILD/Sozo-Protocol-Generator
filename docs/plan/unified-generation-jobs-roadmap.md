@@ -16,8 +16,8 @@ This plan distills parallel codebase reviews (graph/DB, checkpointer, audit). Ph
 
 ## Phase 2 — Durable checkpoints
 
-- Replace **`MemorySaver`** in `server._get_checkpointer()` with **DB-backed saver** (`PostgresSaver` / `SqliteSaver` per LangGraph version), shared across workers.
-- Run LangGraph checkpoint **schema migrations** in deploy docs/CI.
+- **Applied (dev default):** `sozo_api.graph_checkpointer.get_graph_checkpointer()` uses **`SqliteSaver`** at `outputs/langgraph_checkpoints.db` (or `SOZO_GRAPH_CHECKPOINT_SQLITE`). Set **`SOZO_GRAPH_CHECKPOINTER=memory`** for ephemeral checkpoints (tests default this in `conftest.py`).
+- **Production:** prefer **Postgres** checkpoint backend + shared DB across **workers/instances** when you scale past one process.
 - Align product errors: unknown thread vs **checkpoint missing after restart**.
 
 ## Phase 3 — Audit as single compliance path

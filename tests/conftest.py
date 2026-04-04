@@ -6,9 +6,29 @@ import pytest
 
 # Default relaxed deployment profile before any code imports auth_config / create_app.
 os.environ.setdefault("SOZO_ENV", "development")
+# Hermetic LangGraph checkpoints in tests (no shared SQLite file / cross-test threads).
+os.environ.setdefault("SOZO_GRAPH_CHECKPOINTER", "memory")
 
 # Ensure src/ is on the path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+
+
+@pytest.fixture(autouse=True)
+def _reset_graph_checkpointer():
+    """Isolate LangGraph checkpoint singleton between tests."""
+    try:
+        from sozo_api.graph_checkpointer import reset_graph_checkpointer
+
+        reset_graph_checkpointer()
+    except ImportError:
+        pass
+    yield
+    try:
+        from sozo_api.graph_checkpointer import reset_graph_checkpointer
+
+        reset_graph_checkpointer()
+    except ImportError:
+        pass
 
 
 @pytest.fixture(scope="session")

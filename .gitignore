@@ -33,6 +33,8 @@ htmlcov/
 # Generated outputs (large binary files — regenerate with CLI)
 outputs/documents/
 outputs/visuals/
+outputs/langgraph_checkpoints.db
+outputs/langgraph_checkpoints.db-*
 
 # PubMed cache (regenerate with ingest-evidence)
 data/raw/
