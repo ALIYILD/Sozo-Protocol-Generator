@@ -1,0 +1,18 @@
+{
+  "proposal_id": "promo-e664a306",
+  "candidate_id": "cand-93776114",
+  "target_type": "blueprint_section",
+  "target_file": "sozo_knowledge\\blueprints\\evidence_based_protocol.yaml",
+  "target_field": "assessments",
+  "proposed_change_summary": "Add timing column",
+  "rationale": "",
+  "status": "approved",
+  "safe_to_apply": false,
+  "evidence_sensitive": false,
+  "requires_clinical_approval": false,
+  "approved_by": "Dr. Smith",
+  "approved_at": "2026-04-04T20:38:37Z",
+  "decision_notes": "Reviewed and approved",
+  "created_at": "2026-04-04T20:38:37Z",
+  "warnings": []
+}
