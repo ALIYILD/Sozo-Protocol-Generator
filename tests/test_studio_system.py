@@ -64,9 +64,10 @@ class TestConditionMatchAgent:
 
     def test_all_conditions_from_prompt(self):
         from sozo_generator.agents.condition_match_agent import ConditionMatchAgent
+        from sozo_generator.conditions.registry import get_registry
         agent = ConditionMatchAgent()
         result = agent.execute({"prompt": "Generate all 15 conditions"}, "/tmp")
-        assert len(result.output_data["validated_conditions"]) == 15
+        assert len(result.output_data["validated_conditions"]) == len(get_registry().list_slugs())
 
 
 class TestTemplateMatcher:
@@ -202,5 +203,5 @@ class TestRegressions:
 
     def test_app_syntax(self):
         import ast
-        with open("app.py") as f:
+        with open("app.py", encoding="utf-8") as f:
             ast.parse(f.read())

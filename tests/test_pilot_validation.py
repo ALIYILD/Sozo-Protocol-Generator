@@ -38,9 +38,10 @@ class TestConditionMatchValidation:
         assert "adhd" in valid
 
     def test_all_conditions_prompt(self):
+        from sozo_generator.conditions.registry import get_registry
         r = self._match(prompt="Generate all 15 conditions")
         assert r.output_data["all_conditions"] is True
-        assert len(r.output_data["validated_conditions"]) == 15
+        assert len(r.output_data["validated_conditions"]) == len(get_registry().list_slugs())
 
     def test_unknown_condition_flagged_as_draft(self):
         r = self._match(conditions=["narcolepsy"])
@@ -344,7 +345,7 @@ class TestReviewClarity:
 class TestRegressions:
     def test_app_syntax(self):
         import ast
-        with open("app.py") as f:
+        with open("app.py", encoding="utf-8") as f:
             ast.parse(f.read())
 
     def test_existing_generation_works(self, tmp_path):

@@ -55,7 +55,7 @@ _CONDITION_PATTERNS = {
 
 # ── Doc type keywords for inference ────────────────────────────────────────
 _DOC_TYPE_KEYWORDS = {
-    "handbook": ["stage_1", "stage_2", "patient journey", "modalities", "governance"],
+    "handbook": ["handbook", "stage_1", "stage_2", "patient journey", "modalities", "governance"],
     "evidence_based_protocol": ["pathophysiology", "inclusion", "exclusion", "protocol", "evidence"],
     "clinical_exam": ["examination", "checklist", "assessment", "screening"],
     "phenotype_classification": ["phenotype", "classification", "protocol mapping"],

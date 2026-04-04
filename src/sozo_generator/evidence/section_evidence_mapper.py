@@ -378,7 +378,9 @@ class SectionEvidenceMapper:
         if not isinstance(ref, dict):
             return None
 
-        pmid = str(ref.get("pmid") or ref.get("PMID") or "").strip()
+        pmid_raw = str(ref.get("pmid") or ref.get("PMID") or "").strip()
+        # Only accept numeric PMIDs; discard placeholders like 'REVIEW_REQUIRED_TPS'
+        pmid = pmid_raw if re.match(r"^\d{1,9}$", pmid_raw) else ""
         doi = str(ref.get("doi") or ref.get("DOI") or "").strip() or None
         title = str(ref.get("title") or ref.get("Title") or "").strip()
         authors = str(ref.get("authors") or ref.get("authors_short") or "").strip()

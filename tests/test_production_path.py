@@ -228,7 +228,7 @@ class TestSectionDiffIntegration:
 class TestDeploymentSmoke:
     def test_streamlit_app_syntax(self):
         import ast
-        with open("app.py") as f:
+        with open("app.py", encoding="utf-8") as f:
             ast.parse(f.read())
 
     def test_all_source_modules_import(self):
@@ -239,7 +239,7 @@ class TestDeploymentSmoke:
             if py_file.name == "__init__.py":
                 continue
             module_path = (
-                str(py_file.relative_to("src")).replace("/", ".").replace(".py", "")
+                str(py_file.relative_to("src")).replace("\\", ".").replace("/", ".").replace(".py", "")
             )
             try:
                 importlib.import_module(module_path)
