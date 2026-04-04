@@ -328,6 +328,7 @@ def build_adhd_condition() -> ConditionSchema:
                 "Left DLPFC anodal (F3) + right cathode is standard; bilateral F3/F4 anodal for combined type.",
                 "C-ADHD — Attention & Executive Protocol",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["F3", "F4"],
             ),
             StimulationTarget(
                 modality=Modality.TAVNS,
@@ -340,6 +341,7 @@ def build_adhd_condition() -> ConditionSchema:
                 protocol_label="TAVNS-ADHD — Noradrenergic Adjunct",
                 evidence_level=EvidenceLevel.LOW,
                 off_label=True,
+                eeg_canonical=["Ear"],
             ),
         ],
 
@@ -475,7 +477,9 @@ def build_adhd_condition() -> ConditionSchema:
             "Breitling et al. (2010) adult ADHD tDCS study showed working memory improvements. "
             "No large multi-site RCT for adult ADHD with ASRS primary outcome. taVNS in ADHD: "
             "investigational — rationale supported by noradrenergic mechanism overlap with atomoxetine. "
-            "CES: no dedicated ADHD RCT — inferred from anxiety/insomnia clearance."
+            "CES: no dedicated ADHD RCT — inferred from anxiety/insomnia clearance. "
+            "| Evidence counts (published papers): tDCS=20, TMS=15, tACS=5, PEMF=5, TPS=2. "
+            "Best modalities: tDCS (DLPFC), TMS."
         ),
 
         evidence_gaps=[

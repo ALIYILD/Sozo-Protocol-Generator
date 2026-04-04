@@ -38,6 +38,7 @@ class StimulationTarget(BaseModel):
     evidence_level: EvidenceLevel = EvidenceLevel.MEDIUM
     off_label: bool = True
     consent_required: bool = True
+    eeg_canonical: Optional[list[str]] = None  # canonical EEG positions from brain_regions data
 
 
 class AssessmentTool(BaseModel):

@@ -362,6 +362,7 @@ def build_stroke_rehab_condition() -> ConditionSchema:
                 "Nitsche & Paulus (2000) established the foundational dose-response relationship.",
                 "C-STROKE-MOTOR — Ipsilesional Motor Protocol",
                 EvidenceLevel.HIGH, off_label=True,
+                eeg_canonical=["C3", "C4"],
             ),
             make_tdcs_target(
                 "Left Inferior Frontal Gyrus (Broca's Area)", "IFG", "left",
@@ -370,6 +371,7 @@ def build_stroke_rehab_condition() -> ConditionSchema:
                 "concurrent with aphasia treatment. Fregni et al. (2005) demonstrated naming improvements.",
                 "C-APHASIA — Language Protocol",
                 EvidenceLevel.HIGH, off_label=True,
+                eeg_canonical=["F7", "F8"],
             ),
             make_tdcs_target(
                 "Dorsolateral Prefrontal Cortex", "DLPFC", "bilateral",
@@ -378,6 +380,7 @@ def build_stroke_rehab_condition() -> ConditionSchema:
                 "motor protocols; rationale from CEN dysfunction in PSCI.",
                 "C-COG-STROKE — Cognitive Rehabilitation Protocol",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["F3", "F4"],
             ),
         ],
 
@@ -513,7 +516,9 @@ def build_stroke_rehab_condition() -> ConditionSchema:
             "Nitsche & Paulus (2000) established foundational dose-response. Hummel et al. (2005) "
             "demonstrated ipsilesional M1 anodal tDCS improved motor function in stroke patients. "
             "Aphasia tDCS: multiple positive RCTs including Fregni et al. (2005) and subsequent studies. "
-            "Post-stroke depression tDCS: limited dedicated RCTs — evidence extrapolated from primary MDD."
+            "Post-stroke depression tDCS: limited dedicated RCTs — evidence extrapolated from primary MDD. "
+            "| Evidence counts (published papers): TMS=100, tDCS=100, taVNS=25, PBM=10, PEMF=20. "
+            "Best modalities: TMS, tDCS."
         ),
 
         evidence_gaps=[

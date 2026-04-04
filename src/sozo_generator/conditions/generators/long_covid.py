@@ -348,6 +348,7 @@ def build_long_covid_condition() -> ConditionSchema:
                 "Case series and pilot evidence emerging.",
                 "C-LC-COG — Cognitive Brain Fog Protocol",
                 EvidenceLevel.LOW, off_label=True,
+                eeg_canonical=["F3", "F4"],
             ),
             StimulationTarget(
                 modality=Modality.TAVNS,
@@ -361,6 +362,7 @@ def build_long_covid_condition() -> ConditionSchema:
                 protocol_label="TAVNS-LC — Autonomic Regulation Protocol",
                 evidence_level=EvidenceLevel.LOW,
                 off_label=True,
+                eeg_canonical=["Ear"],
             ),
         ],
 
@@ -470,7 +472,10 @@ def build_long_covid_condition() -> ConditionSchema:
             "confirm frontal hypometabolism. tDCS for long COVID cognitive symptoms: emerging case "
             "series and pilot studies only — no published RCT as of 2024. taVNS for dysautonomia: "
             "investigational — rationale from autonomic medicine literature. CES: best-evidenced "
-            "component via FDA clearance for comorbid symptoms."
+            "component via FDA clearance for comorbid symptoms. "
+            "Note: Long COVID does not appear in the conditions_matrix as a standalone condition; "
+            "evidence is extrapolated from closest analogues (TBI/Concussion, ADHD, Depression). "
+            "Best analogous modalities: tDCS (DLPFC), taVNS."
         ),
 
         evidence_gaps=[

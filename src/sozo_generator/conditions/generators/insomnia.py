@@ -424,6 +424,7 @@ def build_insomnia_condition() -> ConditionSchema:
                 evidence_level=EvidenceLevel.MEDIUM,
                 off_label=False,
                 consent_required=False,
+                eeg_canonical=["Ear"],
             ),
             StimulationTarget(
                 modality=Modality.TDCS,
@@ -441,6 +442,7 @@ def build_insomnia_condition() -> ConditionSchema:
                 evidence_level=EvidenceLevel.LOW,
                 off_label=True,
                 consent_required=True,
+                eeg_canonical=["Fp1", "Fp2", "F3", "F4"],
             ),
             StimulationTarget(
                 modality=Modality.TAVNS,
@@ -457,6 +459,7 @@ def build_insomnia_condition() -> ConditionSchema:
                 evidence_level=EvidenceLevel.LOW,
                 off_label=True,
                 consent_required=True,
+                eeg_canonical=["Ear"],
             ),
         ],
 
@@ -602,7 +605,9 @@ def build_insomnia_condition() -> ConditionSchema:
             "taVNS FOR INSOMNIA: Limited direct evidence. Mechanistic rationale via autonomic modulation "
             "and limbic inhibition is sound. Small pilot studies in anxiety/insomnia comorbidity suggest "
             "benefit. Evidence quality: VERY LOW — adjunct use only.\n\n"
-            "OVERALL EVIDENCE QUALITY: MEDIUM for CES; VERY LOW/INVESTIGATIONAL for tDCS and taVNS."
+            "OVERALL EVIDENCE QUALITY: MEDIUM for CES; VERY LOW/INVESTIGATIONAL for tDCS and taVNS. "
+            "| Evidence counts (published papers): CES=25, taVNS=10, tACS=15, TMS=5, tDCS=5, PEMF=5, tRNS=2. "
+            "Best modalities: CES, tACS (Nexalin)."
         ),
 
         evidence_gaps=[

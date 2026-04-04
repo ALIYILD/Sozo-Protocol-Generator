@@ -94,6 +94,22 @@ CONTRAINDICATIONS_BASE = [
 #   key_outcome_measures: str
 # ═══════════════════════════════════════════════════════════════════════════════
 
+
+# TPS Evidence Summary (from Consensus.app CSV, 2026-04-04)
+# Conditions with explicit T1-T5 dicts above have inline evidence updates.
+# Standard conditions (_make_standard_condition) TPS paper counts:
+#   adhd: 11 papers, 7 HQ (emerging) | top DOIs: 10.3389/fneur.2024.1364270, 10.3389/fneur.2024.1364270
+#   alzheimers: 80 papers, 19 HQ (strong) | top DOIs: 10.3390/neurolint17110188, 10.3390/neurolint17110188
+#   stroke_rehab: 59 papers, 4 HQ (emerging) | top DOIs: 10.1177/02692155251328945, 10.1186/s40001-023-01525-5
+#   tbi: 22 papers, 4 HQ (emerging) | top DOIs: 10.3390/brainsci12040429, 10.3390/brainsci12040429
+#   chronic_pain: 27 papers, 4 HQ (emerging) | top DOIs: 10.1007/s13534-024-00369-0, 10.1080/17434440.2019.1567325
+#   ptsd: 21 papers, 0 HQ (none) | top DOIs: 10.1109/embc46164.2021.9630415, 10.1109/embc46164.2021.9630415
+#   ocd: 18 papers, 1 HQ (preliminary) | top DOIs: 10.1001/jamaneurol.2017.3129, 10.1016/j.neurom.2024.03.004
+#   ms: 5 papers, 2 HQ (preliminary) | top DOIs: 10.1177/1545968317753681, 10.1177/1545968317753681
+#   asd: 17 papers, 14 HQ (strong) | top DOIs: 10.3390/neurolint17110188, 10.3390/neurolint17110188
+#   long_covid: 0 papers, 0 HQ (none) | top DOIs: none
+#   tinnitus: 48 papers, 25 HQ (strong) | top DOIs: 10.1016/j.neubiorev.2015.05.017, 10.1016/j.neubiorev.2015.05.017
+#   insomnia: 4 papers, 0 HQ (none) | top DOIs: 10.3390/jcm11133809, 10.1016/j.brs.2015.01.263
 CONDITIONS = {}
 
 # ── 1. PARKINSON'S DISEASE ───────────────────────────────────────────────────
@@ -101,27 +117,36 @@ CONDITIONS["parkinsons"] = {
     "display_name": "Parkinson's Disease",
     "icd10": "G20",
     "short_name": "PD",
+    "tps_evidence": {
+        "regulatory_status": "Investigational (CE research use)",
+        "evidence_level": "Open-label, Pilot RCT (2025)",
+        "literature_count": "9+",
+        "key_references": "Osou 2023 J Neurol (n=20, 20 citations); RCT 2025 – TPS Enhances Dexterity in PD (sham-controlled); EEG cortical oscillatory changes 2025; SA Perspective Brain Stimulation 2025",
+        "side_effects": "Transient headache, dizziness, fatigue. Generally well tolerated.",
+        "notes": "9 papers (2021–2026). First sham-controlled RCT confirms dexterity improvement (2025). EEG oscillatory changes documented. Foot+brain combined protocol (10,000 pulses).",
+    },
+    "tps_regulatory_note": "Investigational (off-label) — 9+ published papers; first sham-controlled RCT 2025.",
     "tps_warning": TPS_WARNING_TEMPLATE.format(condition="Parkinson's Disease"),
     "tps": [
-        {"code": "T1", "symptom": "Motor: Bradykinesia & Rigidity", "evidence": "Emerging",
+        {"code": "T1", "symptom": "Motor: Bradykinesia & Rigidity", "evidence": "Emerging — preclinical/observational only",
          "targets": ["C3", "C4", "FCz"], "tps": True,
-         "params_text": "TPS: Bilateral M1 + SMA · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²",
+         "params_text": "TPS: Bilateral M1 + SMA · 10,000 pulses (8000 brain + 2000 foot) · 4 Hz PRF · EFD 0.25 mJ/mm² · 12 sessions / 4 weeks",
          "rationale": "M1 bilateral targeting reduces motor cortex hyperexcitability; SMA involvement supports initiation circuits."},
-        {"code": "T2", "symptom": "Tremor", "evidence": "Emerging",
+        {"code": "T2", "symptom": "Tremor", "evidence": "Emerging — preclinical/observational only",
          "targets": ["C3", "C4", "Cz"], "tps": True,
-         "params_text": "TPS: Bilateral M1 + Cerebellum · 3,000 pulses · 5 Hz",
+         "params_text": "TPS: Bilateral M1 + Cerebellum · 10,000 pulses · 4 Hz PRF · EFD 0.25 mJ/mm²",
          "rationale": "Cerebellar-thalamic-cortical loop modulation reduces tremor amplitude."},
-        {"code": "T3", "symptom": "Cognition: PD-MCI", "evidence": "Preliminary",
+        {"code": "T3", "symptom": "Cognition: PD-MCI", "evidence": "Preliminary — case series only",
          "targets": ["F3", "F4", "P3"], "tps": True,
-         "params_text": "TPS: L-DLPFC + bilateral PPC · 4,000 pulses · 5 Hz",
+         "params_text": "TPS: L-DLPFC + bilateral PPC · 10,000 pulses · 4 Hz PRF · EFD 0.25 mJ/mm²",
          "rationale": "DLPFC facilitates working memory; PPC supports spatial-attentional integration."},
-        {"code": "T4", "symptom": "Depression & Apathy", "evidence": "Emerging Pilot",
+        {"code": "T4", "symptom": "Depression & Apathy", "evidence": "Emerging Pilot — 0 pilot RCTs",
          "targets": ["F3", "F4"], "tps": True,
-         "params_text": "TPS: Bilateral DLPFC · 3,000 pulses · 5 Hz",
+         "params_text": "TPS: Bilateral DLPFC · 10,000 pulses · 4 Hz PRF · EFD 0.25 mJ/mm²",
          "rationale": "DLPFC modulation targets affective circuits implicated in PD depression."},
-        {"code": "T5", "symptom": "Pain & Dyskinesia", "evidence": "Experimental",
+        {"code": "T5", "symptom": "Pain & Dyskinesia", "evidence": "Experimental — 0 studies",
          "targets": ["C3", "C4", "Cb1", "Cbz", "Cb2"], "tps": True,
-         "params_text": "TPS: M1 + Cerebellum · 4,000 pulses · 5 Hz",
+         "params_text": "TPS: M1 + Cerebellum · 10,000 pulses · 4 Hz PRF · EFD 0.25 mJ/mm²",
          "rationale": "Cerebellar stimulation modulates dopamine-independent motor loop; M1 for pain gate."},
     ],
     "tdcs": [
@@ -331,27 +356,36 @@ CONDITIONS["depression"] = {
     "display_name": "Major Depressive Disorder",
     "icd10": "F32 / F33",
     "short_name": "MDD",
+    "tps_evidence": {
+        "regulatory_status": "Investigational",
+        "evidence_level": "Pilot RCT + Multiple RCTs (2025)",
+        "literature_count": "14+",
+        "key_references": "Keeser 2023 IJERPH (Pilot RCT, n=30, 34 citations); 3x RCTs CINP 2025; RCT Protocol Frontiers 2022 (5 citations); NAc TRD case 2023; Asian multicenter RCT 2025",
+        "side_effects": "Transient headache, mood fluctuation. Well tolerated.",
+        "notes": "14 papers, 6 RCTs (2022–2026). Rapidly expanding. 3 new RCTs at CINP 2025. NAc target for TRD explored. Active NCT05551585 ongoing RCT.",
+    },
+    "tps_regulatory_note": "Investigational (off-label) — 14+ published papers including 6 RCTs; 3 new RCTs presented at CINP 2025.",
     "tps_warning": TPS_WARNING_TEMPLATE.format(condition="Major Depressive Disorder"),
     "tps": [
-        {"code": "T1", "symptom": "Core Depression: Anhedonia & Low Mood", "evidence": "Emerging",
+        {"code": "T1", "symptom": "Core Depression: Anhedonia & Low Mood", "evidence": "Emerging \u2014 53 RCT/SR supporting",
          "targets": ["F3", "F4"], "tps": True,
-         "params_text": "TPS: Bilateral DLPFC · 3,000–5,000 pulses · 5 Hz · 0.2 mJ/mm²",
+         "params_text": "TPS: Bilateral DLPFC · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm² · 6–12 sessions",
          "rationale": "Bilateral DLPFC modulation targets hypofrontality in MDD; L>R asymmetry is primary treatment target."},
-        {"code": "T2", "symptom": "Rumination & Default Mode Overactivation", "evidence": "Emerging",
+        {"code": "T2", "symptom": "Rumination & Default Mode Overactivation", "evidence": "Emerging \u2014 limited RCT data (n=2)",
          "targets": ["F3", "Fz", "Pz"], "tps": True,
-         "params_text": "TPS: L-DLPFC + posterior DMN · 4,000 pulses · 5 Hz",
+         "params_text": "TPS: L-DLPFC + posterior DMN · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
          "rationale": "Targeting both DLPFC and posterior DMN nodes disrupts ruminative DMN hyperactivity."},
         {"code": "T3", "symptom": "Cognitive Impairment (Depression-Related)", "evidence": "Preliminary",
          "targets": ["F3", "P3", "P4"], "tps": True,
-         "params_text": "TPS: L-DLPFC + PPC · 4,000 pulses · 5 Hz",
+         "params_text": "TPS: L-DLPFC + PPC · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
          "rationale": "Prefrontal-parietal network enhancement addresses concentration and working memory deficits."},
         {"code": "T4", "symptom": "Anxiety Comorbidity", "evidence": "Emerging Pilot",
          "targets": ["F4", "F3"], "tps": True,
-         "params_text": "TPS: R-DLPFC (primary) + L-DLPFC · 3,000 pulses · 5 Hz",
+         "params_text": "TPS: R-DLPFC (primary) + L-DLPFC · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
          "rationale": "R-DLPFC down-regulation may reduce anxiety hyperarousal; complementary to antidepressant effect."},
         {"code": "T5", "symptom": "Treatment-Resistant Depression (TRD)", "evidence": "Experimental",
          "targets": ["F3", "F4", "FC3", "FC4"], "tps": True,
-         "params_text": "TPS: DLPFC + OFC bilateral · 5,000 pulses · 5 Hz",
+         "params_text": "TPS: DLPFC + OFC bilateral · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
          "rationale": "Extended bilateral approach for TRD targets broader prefrontal network including sgACC connectivity."},
     ],
     "tdcs": [
@@ -564,11 +598,11 @@ CONDITIONS["anxiety"] = {
     "short_name": "GAD",
     "tps_warning": TPS_WARNING_TEMPLATE.format(condition="Generalised Anxiety Disorder"),
     "tps": [
-        {"code": "T1", "symptom": "Generalised Worry & Hyperarousal", "evidence": "Emerging",
+        {"code": "T1", "symptom": "Generalised Worry & Hyperarousal", "evidence": "Emerging \u2014 11 RCT/SR supporting",
          "targets": ["F4", "F3"], "tps": True,
          "params_text": "TPS: R-DLPFC (primary) + L-DLPFC · 3,000 pulses · 5 Hz",
          "rationale": "R-DLPFC facilitation shifts prefrontal balance away from threat-hypervigilance."},
-        {"code": "T2", "symptom": "Panic & Autonomic Dysregulation", "evidence": "Emerging",
+        {"code": "T2", "symptom": "Panic & Autonomic Dysregulation", "evidence": "Emerging \u2014 preclinical/observational only",
          "targets": ["F4", "FC4"], "tps": True,
          "params_text": "TPS: R-DLPFC + R-FC · 3,000 pulses · 5 Hz",
          "rationale": "Right prefrontal targeting reduces amygdala hyperreactivity via top-down inhibition."},
@@ -580,7 +614,7 @@ CONDITIONS["anxiety"] = {
          "targets": ["F3", "F4"], "tps": True,
          "params_text": "TPS: Bilateral DLPFC · 3,000 pulses · evening session",
          "rationale": "Evening prefrontal modulation may reduce pre-sleep hyperarousal."},
-        {"code": "T5", "symptom": "Social Anxiety Overlay", "evidence": "Experimental",
+        {"code": "T5", "symptom": "Social Anxiety Overlay", "evidence": "Experimental \u2014 0 studies",
          "targets": ["F4", "F3", "T4"], "tps": True,
          "params_text": "TPS: R-DLPFC + temporal · 3,000 pulses · 5 Hz",
          "rationale": "Temporal lobe involvement addresses social threat appraisal circuits."},
@@ -809,19 +843,24 @@ def _make_standard_condition(
     phenotype_names,  # list of 9 phenotype names
     key_measures,
     contraindications_extra=None,
+    tps_evidence=None,
+    tps_regulatory_note=None,
+    tps_params_texts=None,  # optional list of 5 params_text strings (T1–T5)
 ):
     """Helper to build a condition dict from key parameters."""
+    _tps_params_defaults = [
+        (t1_symptom, t1_targets, "Emerging", "3,000–5,000 pulses"),
+        (t2_symptom, t2_targets, "Emerging", "3,000 pulses"),
+        (t3_symptom, t3_targets, "Preliminary", "4,000 pulses"),
+        (t4_symptom, t4_targets, "Emerging Pilot", "3,000 pulses"),
+        (t5_symptom, t5_targets, "Experimental", "4,000 pulses"),
+    ]
     tps_protocols = [
         {"code": f"T{i+1}", "symptom": s, "evidence": ev, "targets": tg, "tps": True,
-         "params_text": f"TPS: {', '.join(tg)} · {pc} · 5 Hz · 0.2 mJ/mm²",
+         "params_text": (tps_params_texts[i] if tps_params_texts and i < len(tps_params_texts)
+                         else f"TPS: {', '.join(tg)} · {pc} · 5 Hz · 0.2 mJ/mm²"),
          "rationale": f"TPS targeting of {', '.join(tg)} for {s.lower()} in {display_name}."}
-        for i, (s, tg, ev, pc) in enumerate([
-            (t1_symptom, t1_targets, "Emerging", "3,000–5,000 pulses"),
-            (t2_symptom, t2_targets, "Emerging", "3,000 pulses"),
-            (t3_symptom, t3_targets, "Preliminary", "4,000 pulses"),
-            (t4_symptom, t4_targets, "Emerging Pilot", "3,000 pulses"),
-            (t5_symptom, t5_targets, "Experimental", "4,000 pulses"),
-        ])
+        for i, (s, tg, ev, pc) in enumerate(_tps_params_defaults)
     ]
 
     tdcs_protocols = [
@@ -882,6 +921,8 @@ def _make_standard_condition(
         "display_name": display_name,
         "icd10": icd10,
         "short_name": short_name,
+        "tps_evidence": tps_evidence,
+        "tps_regulatory_note": tps_regulatory_note,
         "tps_warning": TPS_WARNING_TEMPLATE.format(condition=display_name),
         "tps": tps_protocols,
         "tdcs": tdcs_protocols,
@@ -911,6 +952,22 @@ CONDITIONS["adhd"] = _make_standard_condition(
      "Emotional Dysregulation", "Working Memory Deficit", "Executive Dysfunction",
      "Learning Disability Overlay", "Sleep-ADHD", "Social-Communication Difficulties"],
     "ASRS, BRIEF-A (adults), CPT-3, CAARS, PSQI",
+    tps_evidence={
+        "regulatory_status": "Investigational",
+        "evidence_level": "Pilot RCT, Double-blind Sham-controlled",
+        "literature_count": "2+",
+        "key_references": "Sham-controlled pilot RCT Frontiers Neurol 2024 (11 citations — adolescents); RCT Protocol 2023 (5 citations); Asian RCT multicenter 2025",
+        "side_effects": "Mild headache, fatigue. Safe profile.",
+        "notes": "2 RCTs (2023–2026). Pilot RCT in adolescents: significant symptom reduction. Double-blind sham-controlled design. Prefrontal targeting, 6000 pulses, 5 Hz PRF.",
+    },
+    tps_regulatory_note="Investigational (off-label) — 2+ published papers; double-blind sham-controlled RCT 2024 in adolescents.",
+    tps_params_texts=[
+        "TPS: Bilateral prefrontal (Fz, F3/F4) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm² · 6 sessions",
+        "TPS: Bilateral prefrontal (Fz, F3/F4) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+        "TPS: Bilateral prefrontal (F3/F4) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+        "TPS: Bilateral prefrontal (F3/F4) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+        "TPS: Bilateral prefrontal (F3/F4) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+    ],
 )
 
 CONDITIONS["alzheimers"] = _make_standard_condition(
@@ -933,6 +990,22 @@ CONDITIONS["alzheimers"] = _make_standard_condition(
      "Posterior Cortical Atrophy", "Lewy Body Overlap", "Vascular Overlay"],
     "ADAS-Cog, MoCA, MMSE, NPI (neuropsychiatric), CDR",
     [["Cholinesterase inhibitor interaction", "tDCS (temporal)", "RELATIVE — monitor carefully"]],
+    tps_evidence={
+        "regulatory_status": "CE Marked (Europe, Alzheimer's)",
+        "evidence_level": "RCT, Meta-analysis, Systematic Review",
+        "literature_count": "31+",
+        "key_references": "Beisteiner 2019 (Adv Sci, n=35, 230 citations); Radjenovic 2025 (Psychol Med, n=58); RCT JAMA Network Open 2025; Systematic Review CNS Neurosci Ther 2023; Meta-analysis 2025",
+        "side_effects": "Transient headache (~4%), mood deterioration (~3%), dizziness, fatigue. 93% no AEs.",
+        "notes": "31 papers (2019–2026). 13 RCTs in overall TPS evidence base. CERAD CTS improved p=.017, d=.32. 9.8-pt gain in top-quartile. 3-month durability. Memory network upregulation fMRI. CE-cleared.",
+    },
+    tps_regulatory_note="CE Marked (Europe, Alzheimer's) — 31+ published papers including RCTs and meta-analyses.",
+    tps_params_texts=[
+        "TPS: dlPFC + IFC + LPC + Precuneus (DMN) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm² · 6–12 sessions / 2–4 weeks",
+        "TPS: dlPFC + LPC + Precuneus · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+        "TPS: dlPFC + IFC + temporal · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+        "TPS: dlPFC + DMN nodes · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+        "TPS: Multi-site DMN (dlPFC + LPC + Precuneus) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+    ],
 )
 
 CONDITIONS["stroke_rehab"] = _make_standard_condition(
@@ -1000,6 +1073,22 @@ CONDITIONS["chronic_pain"] = _make_standard_condition(
      "Musculoskeletal Chronic Pain", "Low Back Pain", "CRPS",
      "Headache / Migraine", "Pain-Depression Comorbidity", "Pain-Sleep Comorbidity"],
     "VAS, NRS, BPI, FIQR (fibromyalgia), MFI-20 (fatigue), PHQ-9",
+    tps_evidence={
+        "regulatory_status": "Investigational",
+        "evidence_level": "Case series, SA Perspective",
+        "literature_count": "2+",
+        "key_references": "TPS in AD, PD, and chronic pain: South American perspective (Brain Stimulation 2025); NAc stimulation case in TRD/pain 2023",
+        "side_effects": "Well tolerated; standard TPS side effect profile.",
+        "notes": "Very early stage for pain. LIFU/tFUS has stronger pain evidence (15+ papers). 2 papers (2023–2026). Consider TPS as adjunct to other modalities.",
+    },
+    tps_regulatory_note="Investigational (off-label) — 2+ published papers; emerging South American clinical use reported 2025.",
+    tps_params_texts=[
+        "TPS: Bilateral M1 (C3/C4) + frontal · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm² · 6 sessions",
+        "TPS: Bilateral M1 (C3/C4) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+        "TPS: Contralateral M1 (C3/C4) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+        "TPS: Frontal (F3/F4) + M1 · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+        "TPS: Frontal (F3/Fz) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+    ],
 )
 
 CONDITIONS["ptsd"] = _make_standard_condition(
@@ -1091,6 +1180,22 @@ CONDITIONS["asd"] = _make_standard_condition(
     "SRS-2, ABC, VABS-3, ADOS-2 (diagnostic), PSQI",
     [["Seizure disorder (common in ASD)", "All modalities", "ABSOLUTE if uncontrolled seizures"],
      ["Severe sensory sensitivity to electrodes", "tDCS", "ADAPT — use minimal gel, desensitisation protocol"]],
+    tps_evidence={
+        "regulatory_status": "Investigational",
+        "evidence_level": "Double-blind RCT, Sham-controlled",
+        "literature_count": "4+",
+        "key_references": "Beisteiner 2023 Brain Communications (21 citations, RCT); RCT Protocol 2022 (7 citations); Brain connectivity post-hoc Autism Research 2025; Asian multicenter RCT 2025",
+        "side_effects": "Well tolerated; standard TPS side effect profile.",
+        "notes": "4 RCTs/protocols (2022–2026). Strongest NIBS evidence for ASD. Network connectivity changes documented. Independent Asian cohort confirms 2025.",
+    },
+    tps_regulatory_note="Investigational (off-label) — 4+ published papers; double-blind sham-controlled RCT (Beisteiner 2023, Brain Communications).",
+    tps_params_texts=[
+        "TPS: Prefrontal + parietal social networks (F3/F4, P3/P4) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm² · 6–12 sessions",
+        "TPS: Prefrontal + parietal (F3/F4, P3/P4) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+        "TPS: Parietal social networks (P3/P4) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+        "TPS: Prefrontal (F3/F4) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+        "TPS: Bilateral prefrontal (F3/F4) · 6,000 pulses · 5 Hz PRF · EFD 0.20 mJ/mm²",
+    ],
 )
 
 CONDITIONS["long_covid"] = _make_standard_condition(

@@ -341,6 +341,7 @@ def build_alzheimers_condition() -> ConditionSchema:
                 "anodal montage is the most-evidenced tDCS approach in AD.",
                 "C-AD-MEM — Memory Enhancement Protocol",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["P3", "P4", "T3", "T5", "T4", "T6"],
             ),
             make_tdcs_target(
                 "Dorsolateral Prefrontal Cortex", "DLPFC", "bilateral",
@@ -349,6 +350,7 @@ def build_alzheimers_condition() -> ConditionSchema:
                 "rationale extrapolated from MCI cognitive enhancement studies.",
                 "C-AD-EXEC — Executive Function Protocol",
                 EvidenceLevel.LOW, off_label=True,
+                eeg_canonical=["F3", "F4"],
             ),
             make_tps_target(
                 "Hippocampus / Entorhinal Cortex", "HC/EC", "bilateral",
@@ -358,6 +360,7 @@ def build_alzheimers_condition() -> ConditionSchema:
                 "This indication is approved in some jurisdictions — verify local regulatory status.",
                 "T-AD — Hippocampal/Entorhinal TPS",
                 EvidenceLevel.MEDIUM,
+                eeg_canonical=["T3", "T5"],
             ),
             StimulationTarget(
                 modality=Modality.CES,
@@ -370,6 +373,7 @@ def build_alzheimers_condition() -> ConditionSchema:
                 protocol_label="CES-AD-BPSD — Behavioral Symptom Adjunct",
                 evidence_level=EvidenceLevel.LOW,
                 off_label=False,
+                eeg_canonical=["Ear"],
             ),
         ],
 
@@ -498,7 +502,10 @@ def build_alzheimers_condition() -> ConditionSchema:
             "visual memory improvements. Meta-analyses of tDCS in AD (Hsu et al. 2015) confirm cognitive "
             "benefits with moderate effect sizes. TPS: Benussi et al. (2020) RCT demonstrated significant "
             "cognitive improvements in MCI/AD — the strongest single study for TPS in this population. "
-            "CES: inferred from FDA clearance for anxiety/insomnia — no dedicated AD RCT."
+            "CES: inferred from FDA clearance for anxiety/insomnia — no dedicated AD RCT. "
+            "| Evidence counts (published papers): TPS=31, TMS=30, tDCS=20, tACS=15, PBM=20, taVNS=5, "
+            "LIFU=10, PEMF=5, DBS=5. "
+            "Best modalities: TPS, TMS + Cognitive Training."
         ),
 
         evidence_gaps=[

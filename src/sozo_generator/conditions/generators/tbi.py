@@ -344,6 +344,7 @@ def build_tbi_condition() -> ConditionSchema:
                 "improvements in TBI patients with DLPFC tDCS.",
                 "C-TBI-COG — Cognitive Rehabilitation Protocol",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["F3", "F4"],
             ),
             StimulationTarget(
                 modality=Modality.TAVNS,
@@ -357,6 +358,7 @@ def build_tbi_condition() -> ConditionSchema:
                 protocol_label="TAVNS-TBI — Autonomic & Cognitive Adjunct",
                 evidence_level=EvidenceLevel.LOW,
                 off_label=True,
+                eeg_canonical=["Ear"],
             ),
         ],
 
@@ -486,7 +488,9 @@ def build_tbi_condition() -> ConditionSchema:
             "confirmed cognitive improvements in mTBI. Multiple small studies support feasibility and "
             "safety. No large multi-site RCT completed. taVNS: investigational — rationale from autonomic "
             "dysfunction and noradrenergic deficiency in TBI. CES: FDA-cleared for comorbid symptoms; "
-            "useful adjunct."
+            "useful adjunct. "
+            "| Evidence counts (published papers): PBM=25, tDCS=10, TMS=10, PEMF=10. "
+            "Best modalities: PBM (810 nm), tDCS."
         ),
 
         evidence_gaps=[

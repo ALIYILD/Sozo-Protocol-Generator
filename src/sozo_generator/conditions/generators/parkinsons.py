@@ -392,30 +392,35 @@ def build_parkinsons_condition() -> ConditionSchema:
                 "M1 is hypoactive in PD due to reduced thalamocortical drive. Anodal tDCS increases cortical excitability, improving motor output. Multiple RCTs demonstrate improvements in bradykinesia, gait speed, and motor learning.",
                 "C1 — Motor (Bradykinesia & Rigidity)",
                 EvidenceLevel.HIGH, off_label=True,
+                eeg_canonical=["C3", "C4"],
             ),
             make_tdcs_target(
                 "Dorsolateral Prefrontal Cortex", "DLPFC", "bilateral",
                 "DLPFC hypoactivation underlies executive dysfunction and depression in PD. Left anodal tDCS improves working memory, cognitive flexibility, and mood.",
                 "C3 — Cognition & Executive Function",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["F3", "F4"],
             ),
             make_tdcs_target(
                 "Supplementary Motor Area", "SMA", "bilateral",
                 "SMA hypoactivity contributes to reduced movement initiation and FOG. Anodal SMA stimulation has shown benefits in gait parameters.",
                 "C2 — Gait & Dual-Task",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["Fz", "FCz"],
             ),
             make_tps_target(
                 "Primary Motor Cortex", "M1", "bilateral",
                 "Focused TPS on M1 delivers mechanical stimulation to the cortex-basal ganglia circuit. NEUROLITH TPS has shown significant UPDRS motor improvements in early trials.",
                 "T1 — Motor",
                 EvidenceLevel.LOW,
+                eeg_canonical=["C3", "C4"],
             ),
             make_tps_target(
                 "Substantia Nigra / Subthalamic Region", "SN/STN", "bilateral",
                 "Deep TPS targeting the midbrain region (up to 80mm depth) may directly modulate the dysfunctional basal ganglia circuit.",
                 "T2 — Deep Basal Ganglia Target",
                 EvidenceLevel.LOW,
+                eeg_canonical=["Deep"],
             ),
         ],
 
@@ -597,7 +602,9 @@ def build_parkinsons_condition() -> ConditionSchema:
             "significant improvements in UPDRS motor scores with M1 anodal tDCS. Meta-analyses (Doruk Cengiz et al. 2020) "
             "confirm medium effect sizes for motor outcomes. Cognitive tDCS (DLPFC): moderate evidence from smaller trials. "
             "TPS: Emerging evidence from Koch et al. (2019) and subsequent studies using NEUROLITH; OFF-LABEL for PD. "
-            "taVNS and CES: Limited PD-specific evidence; broader neuropsychiatric evidence supports adjunct use."
+            "taVNS and CES: Limited PD-specific evidence; broader neuropsychiatric evidence supports adjunct use. "
+            "| Evidence counts (published papers): DBS=1000, TMS=80, tDCS=15, taVNS=10, tACS=10, PBM=10, TPS=9, PEMF=5, tRNS=3. "
+            "Best modalities: DBS (STN/GPi), TMS."
         ),
 
         evidence_gaps=[

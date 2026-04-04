@@ -304,6 +304,7 @@ def build_ocd_condition() -> ConditionSchema:
                 "pilot RCT evidence. NOTE: cathode is placed at F4 for inhibitory effect. OFF-LABEL.",
                 "C-OCD-R — Right DLPFC Cathodal Inhibition",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["F4"],
             ),
             make_tdcs_target(
                 "Supplementary Motor Area (Cathodal)", "SMA", "bilateral",
@@ -312,6 +313,7 @@ def build_ocd_condition() -> ConditionSchema:
                 "SMA tDCS augmentation effect in OCD. OFF-LABEL.",
                 "C-OCD-SMA — SMA Cathodal Motor Inhibition",
                 EvidenceLevel.LOW, off_label=True,
+                eeg_canonical=["Fz", "FCz"],
             ),
             StimulationTarget(
                 modality=Modality.TAVNS,
@@ -324,6 +326,7 @@ def build_ocd_condition() -> ConditionSchema:
                 protocol_label="TAVNS-OCD — Anxiety & Limbic Adjunct",
                 evidence_level=EvidenceLevel.LOW,
                 off_label=True,
+                eeg_canonical=["Ear"],
             ),
         ],
 
@@ -422,7 +425,9 @@ def build_ocd_condition() -> ConditionSchema:
             "OCD neuromodulation has emerging-to-moderate evidence. Mondino et al. (2015) Brain "
             "Stimulation: right DLPFC cathodal tDCS significantly reduced Y-BOCS vs sham (N=12). "
             "Bation et al. (2016) pilot RCT confirmed efficacy. Grassi et al. (2018) SMA cathodal "
-            "augmentation study is positive. All studies are small — larger RCTs urgently needed."
+            "augmentation study is positive. All studies are small — larger RCTs urgently needed. "
+            "| Evidence counts (published papers): TMS=100, DBS=50, tDCS=10, taVNS=5, LIFU=3. "
+            "Best modalities: TMS (Deep/H7), DBS (VC/VS)."
         ),
 
         evidence_gaps=[

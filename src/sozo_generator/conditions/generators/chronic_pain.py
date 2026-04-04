@@ -315,6 +315,7 @@ def build_chronic_pain_condition() -> ConditionSchema:
                 "fibromyalgia (Level B probable evidence).",
                 "C-PAIN-M1 — Motor Cortex Analgesic Protocol",
                 EvidenceLevel.HIGH, off_label=True,
+                eeg_canonical=["C3", "C4"],
             ),
             make_tdcs_target(
                 "Dorsolateral Prefrontal Cortex", "DLPFC", "left",
@@ -323,6 +324,7 @@ def build_chronic_pain_condition() -> ConditionSchema:
                 "amplify pain experience. Evidence from MDD tDCS literature; limited chronic pain-specific data.",
                 "C-PAIN-DLPFC — Cognitive Pain & Depression Protocol",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["F3"],
             ),
         ],
 
@@ -453,7 +455,10 @@ def build_chronic_pain_condition() -> ConditionSchema:
             "Marlow et al. (2013) meta-analysis confirms pain efficacy. Multiple subsequent positive trials. "
             "DLPFC tDCS for pain: moderate evidence — partially from MDD extrapolation. "
             "CES: FDA-cleared for anxiety, depression, insomnia — directly addressing FMS comorbidities. "
-            "taVNS: investigational — limited pain-specific data."
+            "taVNS: investigational — limited pain-specific data. "
+            "| Evidence counts (published papers): tDCS=150, TMS=60, taVNS=40, CES=35, PEMF=15, LIFU=15, "
+            "DBS=10, TPS=5, PBM=10, tACS=10, tRNS=5. "
+            "Best modalities: tDCS (M1), TMS (M1)."
         ),
 
         evidence_gaps=[

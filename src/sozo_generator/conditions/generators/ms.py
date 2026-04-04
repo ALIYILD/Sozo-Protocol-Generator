@@ -326,6 +326,7 @@ def build_ms_condition() -> ConditionSchema:
                 "improved lower limb motor function in RRMS. Adjunct to physiotherapy. OFF-LABEL.",
                 "C-MS-MOTOR — Motor Function Protocol",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["C3", "C4"],
             ),
             make_tdcs_target(
                 "Dorsolateral Prefrontal Cortex", "DLPFC", "bilateral",
@@ -335,6 +336,7 @@ def build_ms_condition() -> ConditionSchema:
                 "reduced MS fatigue. OFF-LABEL.",
                 "C-MS-COG — Cognitive & Fatigue Protocol",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["F3", "F4"],
             ),
             StimulationTarget(
                 modality=Modality.TAVNS,
@@ -347,6 +349,7 @@ def build_ms_condition() -> ConditionSchema:
                 protocol_label="TAVNS-MS — Fatigue Adjunct",
                 evidence_level=EvidenceLevel.LOW,
                 off_label=True,
+                eeg_canonical=["Ear"],
             ),
         ],
 
@@ -468,7 +471,9 @@ def build_ms_condition() -> ConditionSchema:
             "MS neuromodulation has emerging-to-moderate evidence. Mori et al. (2013) Brain Stimulation: "
             "M1 tDCS improved motor function in RRMS. Charvet et al. (2017) Multiple Sclerosis journal: "
             "remote-supervised DLPFC tDCS improved cognitive performance in RRMS. Palm et al. (2014): "
-            "DLPFC tDCS reduced fatigue. All studies are small (N=10-30). Larger multi-site RCTs needed."
+            "DLPFC tDCS reduced fatigue. All studies are small (N=10-30). Larger multi-site RCTs needed. "
+            "| Evidence counts (published papers): TMS=15, tDCS=10, PEMF=10, tRNS=5. "
+            "Best modalities: PEMF, tRNS."
         ),
 
         evidence_gaps=[

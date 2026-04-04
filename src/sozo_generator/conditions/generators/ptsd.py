@@ -358,6 +358,7 @@ def build_ptsd_condition() -> ConditionSchema:
                 "Isserles et al. (2013) used deep TMS over right DLPFC with trauma exposure. OFF-LABEL.",
                 "C-PTSD-R — Right DLPFC Fear Regulation Protocol",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["F4"],
             ),
             make_tdcs_target(
                 "Left Dorsolateral Prefrontal Cortex", "L-DLPFC", "left",
@@ -366,6 +367,7 @@ def build_ptsd_condition() -> ConditionSchema:
                 "Upregulates CEN cognitive control and emotion regulation. OFF-LABEL.",
                 "C-PTSD-L — Left DLPFC Depression Protocol",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["F3"],
             ),
             StimulationTarget(
                 modality=Modality.TAVNS,
@@ -380,6 +382,7 @@ def build_ptsd_condition() -> ConditionSchema:
                 protocol_label="TAVNS-PTSD — Autonomic Regulation & Fear Extinction Adjunct",
                 evidence_level=EvidenceLevel.LOW,
                 off_label=True,
+                eeg_canonical=["Ear"],
             ),
         ],
 
@@ -513,7 +516,9 @@ def build_ptsd_condition() -> ConditionSchema:
             "controlled trial. taVNS in PTSD: investigational — mechanism-based rationale from "
             "vagal-amygdala connectivity and HRV restoration studies. CES: FDA-cleared for comorbid "
             "symptoms (anxiety, depression, insomnia). Overall: PTSD neuromodulation is an emerging "
-            "adjunctive field; evidence quality is low to medium. Robust RCTs urgently needed."
+            "adjunctive field; evidence quality is low to medium. Robust RCTs urgently needed. "
+            "| Evidence counts (published papers): TMS=30, tDCS=10, CES=10, taVNS=5. "
+            "Best modalities: TMS, CES."
         ),
 
         evidence_gaps=[

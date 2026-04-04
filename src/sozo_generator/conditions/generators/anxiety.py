@@ -282,6 +282,7 @@ def build_anxiety_condition() -> ConditionSchema:
                 "amygdala-driving hyperactivity. Core target for anxiety downregulation in the tDCS anxiety literature.",
                 "C-ANX — Anxiety Downregulation",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["F4", "F3"],
             ),
         ],
 
@@ -371,7 +372,9 @@ def build_anxiety_condition() -> ConditionSchema:
         evidence_summary=(
             "GAD has moderate tDCS evidence. Right cathodal / left anodal montage: Palm et al. (2012) pilot, "
             "Bystritsky et al. (2008) open-label study. CES: FDA-cleared, systematic review evidence. "
-            "taVNS: emerging controlled trial evidence. No published TPS data for GAD specifically."
+            "taVNS: emerging controlled trial evidence. No published TPS data for GAD specifically. "
+            "| Evidence counts (published papers): CES=40, TMS=20, tDCS=15, taVNS=10, PEMF=5, PBM=5, tACS=5. "
+            "Best modalities: CES (Alpha-Stim), taVNS."
         ),
 
         evidence_gaps=[

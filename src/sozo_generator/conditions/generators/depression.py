@@ -388,6 +388,7 @@ def build_depression_condition() -> ConditionSchema:
                 "emotion regulation. Multiple RCTs (Brunoni 2013, Blumberger 2018) confirm antidepressant efficacy.",
                 "C4 — Depression & Mood",
                 EvidenceLevel.HIGH, off_label=True,
+                eeg_canonical=["F3"],
             ),
             make_tps_target(
                 "Left DLPFC + sgACC Network (Extended)", "L-DLPFC/sgACC", "left",
@@ -398,6 +399,7 @@ def build_depression_condition() -> ConditionSchema:
                 "Session spacing of 48–72h enforced. OFF-LABEL for depression — Doctor authorization mandatory.",
                 "T-DEP — TPS Depression (DLPFC/sgACC)",
                 EvidenceLevel.LOW,
+                eeg_canonical=["F3", "Pz"],
             ),
             make_tdcs_target(
                 "Anterior Cingulate Cortex", "ACC", "bilateral",
@@ -405,6 +407,7 @@ def build_depression_condition() -> ConditionSchema:
                 "Cathodal ACC placement can reduce sgACC hyperactivity. Emerging evidence only.",
                 "ACC — Rumination Protocol",
                 EvidenceLevel.LOW, off_label=True,
+                eeg_canonical=["Fz", "AFz", "Cz"],
             ),
         ],
 
@@ -650,7 +653,10 @@ def build_depression_condition() -> ConditionSchema:
             "TPS in MDD: no published RCT data — OFF-LABEL. Open-label pilot data (Storz Medical, "
             "Swiss cohorts) report 29–40% BDI-II reduction and fMRI functional connectivity normalization "
             "at 4–6 weeks with 0.25–0.5 mJ/mm², 1–4 Hz, 200–400 pulses/session, 2–3×/week. "
-            "Works as add-on to standard pharmacotherapy. Comorbid AD-related depression: see T-DEP-AD."
+            "Works as add-on to standard pharmacotherapy. Comorbid AD-related depression: see T-DEP-AD. "
+            "| Evidence counts (published papers): TMS=500, tDCS=200, taVNS=80, DBS=30, CES=30, TPS=14, "
+            "PEMF=15, LIFU=12, tACS=20, PBM=10, tRNS=3. "
+            "Best modalities: TMS (rTMS/iTBS), tDCS."
         ),
 
         evidence_gaps=[

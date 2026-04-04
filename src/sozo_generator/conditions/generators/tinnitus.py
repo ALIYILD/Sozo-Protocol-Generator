@@ -304,6 +304,7 @@ def build_tinnitus_condition() -> ConditionSchema:
                 "Inconsistent results across studies — electrode placement precision is challenging. OFF-LABEL.",
                 "C-TIN-AC — Auditory Cortex Inhibition",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["T3", "T5"],
             ),
             make_tdcs_target(
                 "Dorsolateral Prefrontal Cortex", "DLPFC", "left",
@@ -312,6 +313,7 @@ def build_tinnitus_condition() -> ConditionSchema:
                 "found DLPFC tDCS modulates tinnitus distress via attention network upregulation. OFF-LABEL.",
                 "C-TIN-DLPFC — Frontal Attention Regulation",
                 EvidenceLevel.MEDIUM, off_label=True,
+                eeg_canonical=["F3"],
             ),
             StimulationTarget(
                 modality=Modality.TAVNS,
@@ -324,6 +326,7 @@ def build_tinnitus_condition() -> ConditionSchema:
                 protocol_label="TAVNS-TIN — Auditory Modulation & Anxiety Adjunct",
                 evidence_level=EvidenceLevel.LOW,
                 off_label=True,
+                eeg_canonical=["Ear"],
             ),
         ],
 
@@ -447,7 +450,9 @@ def build_tinnitus_condition() -> ConditionSchema:
             "noted inconsistency in electrode placement findings. Lehtimaki et al. (2013) confirmed "
             "effect of temporal tDCS. Key challenge: inconsistent electrode placement findings across "
             "studies — standardized protocols needed. taVNS: investigational. CES: FDA-cleared for "
-            "comorbid symptoms."
+            "comorbid symptoms. "
+            "| Evidence counts (published papers): TMS=40, tDCS=40, taVNS=15, tRNS=15, tACS=8. "
+            "Best modalities: TMS (1 Hz), tDCS, tRNS."
         ),
 
         evidence_gaps=[

@@ -329,6 +329,7 @@ def build_asd_condition() -> ConditionSchema:
                 "in repetitive behaviors and social affect in ASD. OFF-LABEL INVESTIGATIONAL.",
                 "C-ASD-EXEC — Executive Function Protocol",
                 EvidenceLevel.LOW, off_label=True,
+                eeg_canonical=["F3"],
             ),
             make_tdcs_target(
                 "Temporoparietal Junction", "TPJ", "right",
@@ -337,6 +338,7 @@ def build_asd_condition() -> ConditionSchema:
                 "theory of mind and social perspective-taking. PURELY INVESTIGATIONAL — very limited evidence.",
                 "C-ASD-SOC — Social Cognition Protocol",
                 EvidenceLevel.LOW, off_label=True,
+                eeg_canonical=["P4"],
             ),
         ],
 
@@ -440,7 +442,9 @@ def build_asd_condition() -> ConditionSchema:
             "pilot study demonstrated DLPFC tDCS improvements in ASD symptoms. Schneider & Hopp (2011) "
             "showed tDCS effects on language in ASD. All studies are small (N<20) pilot studies. "
             "No adequately powered RCT exists. All tDCS applications in ASD are off-label research. "
-            "CES: FDA-cleared for comorbid symptoms (anxiety, insomnia) — best-evidenced component."
+            "CES: FDA-cleared for comorbid symptoms (anxiety, insomnia) — best-evidenced component. "
+            "| Evidence counts (published papers): TMS=5, tDCS=5, TPS=2. "
+            "Best modalities: TMS, TPS (emerging)."
         ),
 
         evidence_gaps=[

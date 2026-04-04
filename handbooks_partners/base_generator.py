@@ -25,7 +25,7 @@ from sozo_generator.docx.legacy_helpers import (
     apply_global_replacements,
 )
 
-TEMPLATE = _PROJECT_ROOT / "templates" / "gold_standard" / "Clinical_Handbook.docx"
+TEMPLATE = _PROJECT_ROOT / "templates" / "gold_standard" / "Clinical_Handbook_Partners.docx"
 OUTPUT_ROOT = Path("outputs/documents")
 
 

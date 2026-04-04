@@ -40,6 +40,7 @@ def make_tdcs_target(
     protocol_label: str | None = None,
     evidence_level: EvidenceLevel = EvidenceLevel.MEDIUM,
     off_label: bool = True,
+    eeg_canonical: list[str] | None = None,
 ) -> StimulationTarget:
     return StimulationTarget(
         modality=Modality.TDCS,
@@ -50,6 +51,7 @@ def make_tdcs_target(
         protocol_label=protocol_label,
         evidence_level=evidence_level,
         off_label=off_label,
+        eeg_canonical=eeg_canonical,
     )
 
 
@@ -60,6 +62,7 @@ def make_tps_target(
     rationale: str,
     protocol_label: str | None = None,
     evidence_level: EvidenceLevel = EvidenceLevel.MEDIUM,
+    eeg_canonical: list[str] | None = None,
 ) -> StimulationTarget:
     return StimulationTarget(
         modality=Modality.TPS,
@@ -71,6 +74,7 @@ def make_tps_target(
         evidence_level=evidence_level,
         off_label=True,
         consent_required=True,
+        eeg_canonical=eeg_canonical,
     )
 
 
