@@ -69,3 +69,141 @@ framework:
     Network = the biological substrate. Connectomics + qEEG identifies which network
     is dysfunctional. Frequency = the biomarker. Oscillation = the target state.
     Neuromodulation = the intervention to achieve it.
+
+
+# ── Network Neuroscience Foundations (brain networks CSV, April 2026) ──
+network_neuroscience_foundations:
+  rationale: >
+    FNON methodology is grounded in brain network neuroscience. The following
+    landmark papers provide the theoretical basis for network-targeted
+    neuromodulation: graph-theoretic analysis of connectomes, resting-state
+    network discovery, structure-function mapping, and disease network models.
+  landmark_citations:
+    - title: "Complex brain networks: graph theoretical analysis of structural and functional systems"
+      authors: "E. Bullmore, O. Sporns"
+      year: "2009"
+      citations: 11197
+      doi: "10.1038/nrn2575"
+      takeaway: >
+      Graph theory has rapidly been applied to study brain network organization, revealing features like small-world topology, highly connected hubs, and modularity.
+      relevance_topics: [graph_theory_methods, structure_function]
+    - title: "Complex network measures of brain connectivity: Uses and interpretations"
+      authors: "M. Rubinov, O. Sporns"
+      year: "2010"
+      citations: 10623
+      doi: "10.1016/j.neuroimage.2009.10.003"
+      takeaway: >
+      Complex network analysis reveals insights into brain networks, revealing functional integration, segregation, centrality, and resilience to insults.
+      relevance_topics: [general]
+    - title: "Exploring the brain network: A review on resting-state fMRI functional connectivity"
+      authors: "M. P. Heuvel, H. Pol"
+      year: "2010"
+      citations: 2885
+      doi: "10.1016/j.euroneuro.2010.03.008"
+      takeaway: >
+      Resting-state fMRI studies reveal new insights into the human brain's functional connectivity, which may play a key role in cognitive performance and understanding connectivity diseases like Alzheimer's, dementia, schizophrenia, and multiple sclerosis.
+      relevance_topics: [resting_state, structure_function, disease_networks]
+    - title: "Network neuroscience"
+      authors: "D. Bassett, O. Sporns"
+      year: "2017"
+      citations: 2083
+      doi: "10.1038/nn.4502"
+      takeaway: >
+      Network neuroscience combines empirical and computational advances to better understand the brain as a multiscale networked system, advancing our understanding of complex brain function and cognition.
+      relevance_topics: [general]
+    - title: "Organization, development and function of complex brain networks"
+      authors: "O. Sporns, D. Chialvo, Marcus Kaiser, C. Hilgetag"
+      year: "2004"
+      citations: 2041
+      doi: "10.1016/j.tics.2004.07.008"
+      takeaway: >
+      Network analysis offers new insights into global and integrative aspects of brain function, including the origin of flexible and coherent cognitive states within neural architecture.
+      relevance_topics: [general]
+    - title: "Structural and Functional Brain Networks: From Connections to Cognition"
+      authors: "Hae-Jeong Park, Karl J. Friston"
+      year: "2013"
+      citations: 1929
+      doi: "10.1126/science.1238411"
+      takeaway: >
+      Hierarchical modular brain networks facilitate local neuronal operations and global integration of segregated functions, with context-sensitive integration requiring a divergence between structural and functional networks.
+      relevance_topics: [general]
+    - title: "THE HUMAN CONNECTOME: A COMPLEX NETWORK"
+      authors: "O. Sporns"
+      year: "2011"
+      citations: 1356
+      doi: "10.1111/j.1749-6632.2010.05888.x"
+      takeaway: >
+      The human connectome reveals high clustering, modularity, efficiency, and short path length, promoting high specialization and integration within a modular small-world architecture.
+      relevance_topics: [graph_theory_methods, structure_function, disease_networks]
+    - title: "Modular Brain Networks."
+      authors: "O. Sporns, Richard F. Betzel"
+      year: "2016"
+      citations: 1192
+      doi: "10.1146/annurev-psych-122414-033634"
+      takeaway: >
+      Modules in brain networks can play a role in brain evolution, wiring minimization, and functional specialization, with various community detection methods available in network neuroscience.
+      relevance_topics: [graph_theory_methods]
+    - title: "Structure and function of complex brain networks"
+      authors: "O. Sporns"
+      year: "2013"
+      citations: 826
+      doi: "10.31887/dcns.2013.15.3/osporns"
+      takeaway: >
+      Recent advances in brain network analysis reveal modules and hub regions, which may help understand neural substrates of brain and mental disorders.
+      relevance_topics: [graph_theory_methods, resting_state, disease_networks]
+    - title: "Fundamentals of Brain Network Analysis"
+      authors: "A. Fornito, A. Zalesky, E. Bullmore"
+      year: "2016"
+      citations: 800
+      doi: "10.1016/c2012-0-06036-x"
+      takeaway: >
+      This book introduces graph theory and network science methods to understand brain organization, ranging from microscopic to macroscopic scales, and is suitable for neuroscientists and scientists from various backgrounds.
+      relevance_topics: [graph_theory_methods]
+    - title: "Contributions and challenges for network models in cognitive neuroscience"
+      authors: "O. Sporns"
+      year: "2014"
+      citations: 722
+      doi: "10.1038/nn.3690"
+      takeaway: >
+      Network models in cognitive neuroscience have contributed to understanding brain connectivity and its role in enabling integrative neural processes, but face limitations in methodology and interpretation.
+      relevance_topics: [graph_theory_methods, structure_function]
+    - title: "Linking Structure and Function in Macroscale Brain Networks"
+      authors: "Laura E. Suárez, R. Markello, Richard F. Betzel, B. Mišić"
+      year: "2020"
+      citations: 622
+      doi: "10.1016/j.tics.2020.01.008"
+      takeaway: >
+      Current models of structure-function relationships in brain networks lack sufficient biological detail to fully predict function.
+      relevance_topics: [structure_function]
+    - title: "Application of Graph Theory for Identifying Connectivity Patterns in Human Brain Networks: A Systema"
+      authors: "F. Farahani, W. Karwowski, Nichole R. Lighthall"
+      year: "2019"
+      citations: 576
+      doi: "10.3389/fnins.2019.00585"
+      takeaway: >
+      Graph theory-based methods have significantly contributed to understanding human brain connectivity architecture, aiding in understanding human cognition and neurological disorders.
+      relevance_topics: [graph_theory_methods, resting_state, structure_function]
+    - title: "Resting-brain functional connectivity predicted by analytic measures of network communication"
+      authors: "J. Goñi, M. P. van den Heuvel, Andrea Avena-Koenigsberger, N. Vélez de Mendizába"
+      year: "2013"
+      citations: 567
+      doi: "10.1073/pnas.1315529111"
+      takeaway: >
+      Analytic measures of network communication, such as search information and path transitivity, can predict resting-state functional connectivity in the human brain, with accuracy comparable to path length measures and computational models.
+      relevance_topics: [graph_theory_methods, resting_state, structure_function]
+    - title: "The application of graph theoretical analysis to complex networks in the brain"
+      authors: "J. Reijneveld, S. Ponten, H. Berendse, C. Stam"
+      year: "2007"
+      citations: 524
+      doi: "10.1016/j.clinph.2007.08.010"
+      takeaway: >
+      Healthy brains exhibit small world network features, which optimize rapid synchronization, resilience to damage, and local processing and global integration.
+      relevance_topics: [network_communication]
+
+  key_principles:
+    - "Brain function emerges from complex network interactions, not isolated regions"
+    - "Neurological/psychiatric conditions reflect network-level dysfunction"
+    - "Targeted neuromodulation can restore pathological network states"
+    - "QEEG biomarkers index network connectivity and oscillatory dynamics"
+    - "Small-world architecture: balance of local clustering and global integration"
+    - "Hub regions (high betweenness centrality) are preferential stimulation targets"

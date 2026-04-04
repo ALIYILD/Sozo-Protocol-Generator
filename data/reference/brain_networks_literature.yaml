@@ -1,0 +1,727 @@
+# SOZO Brain Center — Brain Networks Neuroscience Literature
+# Source: brain networks - 04 Apr 2026.csv
+# 94 papers on brain network science, graph theory, connectomics
+# Organized by topic category; sorted by citation count
+
+meta:
+  total_papers: 94
+  source: "brain networks - 04 Apr 2026.csv"
+  date: "2026-04-04"
+  topics: [graph_theory_methods, resting_state, structure_function, disease_networks, network_communication, multilayer, general]
+
+# ── Top landmark papers (all topics, top 20 by citation) ────────────────
+landmark_papers:
+  - title: "Complex brain networks: graph theoretical analysis of structural and functional systems"
+    authors: "E. Bullmore, O. Sporns"
+    year: "2009"
+    journal: "Nature Reviews Neuroscience"
+    citations: 11197
+    doi: "10.1038/nrn2575"
+    study_type: null
+    takeaway: >
+    Graph theory has rapidly been applied to study brain network organization, revealing features like small-world topology, highly connected hubs, and modularity.
+    topics: [graph_theory_methods, structure_function]
+  - title: "Complex network measures of brain connectivity: Uses and interpretations"
+    authors: "M. Rubinov, O. Sporns"
+    year: "2010"
+    journal: "NeuroImage"
+    citations: 10623
+    doi: "10.1016/j.neuroimage.2009.10.003"
+    study_type: null
+    takeaway: >
+    Complex network analysis reveals insights into brain networks, revealing functional integration, segregation, centrality, and resilience to insults.
+    topics: [general]
+  - title: "Exploring the brain network: A review on resting-state fMRI functional connectivity"
+    authors: "M. P. Heuvel, H. Pol"
+    year: "2010"
+    journal: "European Neuropsychopharmacology"
+    citations: 2885
+    doi: "10.1016/j.euroneuro.2010.03.008"
+    study_type: null
+    takeaway: >
+    Resting-state fMRI studies reveal new insights into the human brain's functional connectivity, which may play a key role in cognitive performance and understanding connectivity diseases like Alzheimer's, dementia, schizophrenia, and multiple sclerosis.
+    topics: [resting_state, structure_function, disease_networks]
+  - title: "Network neuroscience"
+    authors: "D. Bassett, O. Sporns"
+    year: "2017"
+    journal: "Nature Neuroscience"
+    citations: 2083
+    doi: "10.1038/nn.4502"
+    study_type: null
+    takeaway: >
+    Network neuroscience combines empirical and computational advances to better understand the brain as a multiscale networked system, advancing our understanding of complex brain function and cognition.
+    topics: [general]
+  - title: "Organization, development and function of complex brain networks"
+    authors: "O. Sporns, D. Chialvo, Marcus Kaiser, C. Hilgetag"
+    year: "2004"
+    journal: "Trends in Cognitive Sciences"
+    citations: 2041
+    doi: "10.1016/j.tics.2004.07.008"
+    study_type: null
+    takeaway: >
+    Network analysis offers new insights into global and integrative aspects of brain function, including the origin of flexible and coherent cognitive states within neural architecture.
+    topics: [general]
+  - title: "Structural and Functional Brain Networks: From Connections to Cognition"
+    authors: "Hae-Jeong Park, Karl J. Friston"
+    year: "2013"
+    journal: "Science"
+    citations: 1929
+    doi: "10.1126/science.1238411"
+    study_type: null
+    takeaway: >
+    Hierarchical modular brain networks facilitate local neuronal operations and global integration of segregated functions, with context-sensitive integration requiring a divergence between structural and functional networks.
+    topics: [general]
+  - title: "THE HUMAN CONNECTOME: A COMPLEX NETWORK"
+    authors: "O. Sporns"
+    year: "2011"
+    journal: "Schizophrenia Research"
+    citations: 1356
+    doi: "10.1111/j.1749-6632.2010.05888.x"
+    study_type: null
+    takeaway: >
+    The human connectome reveals high clustering, modularity, efficiency, and short path length, promoting high specialization and integration within a modular small-world architecture.
+    topics: [graph_theory_methods, structure_function, disease_networks]
+  - title: "Modular Brain Networks."
+    authors: "O. Sporns, Richard F. Betzel"
+    year: "2016"
+    journal: "Annual review of psychology"
+    citations: 1192
+    doi: "10.1146/annurev-psych-122414-033634"
+    study_type: null
+    takeaway: >
+    Modules in brain networks can play a role in brain evolution, wiring minimization, and functional specialization, with various community detection methods available in network neuroscience.
+    topics: [graph_theory_methods]
+  - title: "Structure and function of complex brain networks"
+    authors: "O. Sporns"
+    year: "2013"
+    journal: "Dialogues in Clinical Neuroscience"
+    citations: 826
+    doi: "10.31887/dcns.2013.15.3/osporns"
+    study_type: "literature review"
+    takeaway: >
+    Recent advances in brain network analysis reveal modules and hub regions, which may help understand neural substrates of brain and mental disorders.
+    topics: [graph_theory_methods, resting_state, disease_networks, network_communication]
+  - title: "Fundamentals of Brain Network Analysis"
+    authors: "A. Fornito, A. Zalesky, E. Bullmore"
+    year: "2016"
+    journal: null
+    citations: 800
+    doi: "10.1016/c2012-0-06036-x"
+    study_type: null
+    takeaway: >
+    This book introduces graph theory and network science methods to understand brain organization, ranging from microscopic to macroscopic scales, and is suitable for neuroscientists and scientists from various backgrounds.
+    topics: [graph_theory_methods]
+  - title: "Contributions and challenges for network models in cognitive neuroscience"
+    authors: "O. Sporns"
+    year: "2014"
+    journal: "Nature Neuroscience"
+    citations: 722
+    doi: "10.1038/nn.3690"
+    study_type: null
+    takeaway: >
+    Network models in cognitive neuroscience have contributed to understanding brain connectivity and its role in enabling integrative neural processes, but face limitations in methodology and interpretation.
+    topics: [graph_theory_methods, structure_function]
+  - title: "Linking Structure and Function in Macroscale Brain Networks"
+    authors: "Laura E. Suárez, R. Markello, Richard F. Betzel, B. Mišić"
+    year: "2020"
+    journal: "Trends in Cognitive Sciences"
+    citations: 622
+    doi: "10.1016/j.tics.2020.01.008"
+    study_type: null
+    takeaway: >
+    Current models of structure-function relationships in brain networks lack sufficient biological detail to fully predict function.
+    topics: [structure_function]
+  - title: "Application of Graph Theory for Identifying Connectivity Patterns in Human Brain Networks: A Systematic Review"
+    authors: "F. Farahani, W. Karwowski, Nichole R. Lighthall"
+    year: "2019"
+    journal: "Frontiers in Neuroscience"
+    citations: 576
+    doi: "10.3389/fnins.2019.00585"
+    study_type: "systematic review"
+    takeaway: >
+    Graph theory-based methods have significantly contributed to understanding human brain connectivity architecture, aiding in understanding human cognition and neurological disorders.
+    topics: [graph_theory_methods, resting_state, structure_function, disease_networks]
+  - title: "Resting-brain functional connectivity predicted by analytic measures of network communication"
+    authors: "J. Goñi, M. P. van den Heuvel, Andrea Avena-Koenigsberger, N. Vélez de Mendizábal, Richard F. Betzel"
+    year: "2013"
+    journal: "Proceedings of the National Academy of Sciences"
+    citations: 567
+    doi: "10.1073/pnas.1315529111"
+    study_type: null
+    takeaway: >
+    Analytic measures of network communication, such as search information and path transitivity, can predict resting-state functional connectivity in the human brain, with accuracy comparable to path length measures and computational models.
+    topics: [graph_theory_methods, resting_state, structure_function, network_communication]
+  - title: "The application of graph theoretical analysis to complex networks in the brain"
+    authors: "J. Reijneveld, S. Ponten, H. Berendse, C. Stam"
+    year: "2007"
+    journal: "Clinical Neurophysiology"
+    citations: 524
+    doi: "10.1016/j.clinph.2007.08.010"
+    study_type: "literature review"
+    takeaway: >
+    Healthy brains exhibit small world network features, which optimize rapid synchronization, resilience to damage, and local processing and global integration.
+    topics: [network_communication]
+  - title: "Graph theory methods: applications in brain networks"
+    authors: "O. Sporns"
+    year: "2018"
+    journal: "Dialogues in Clinical Neuroscience"
+    citations: 512
+    doi: "10.31887/dcns.2018.20.2/osporns"
+    study_type: null
+    takeaway: >
+    Graph theory methods play a central role in understanding the architecture, development, and evolution of brain networks, aiding in the detection of community modules and central elements.
+    topics: [graph_theory_methods, network_communication, multilayer]
+  - title: "Graph analysis of functional brain networks: practical issues in translational neuroscience"
+    authors: "F. de Vico Fallani, Jonas Richiardi, M. Chavez, S. Achard"
+    year: "2014"
+    journal: "Philosophical Transactions of the Royal Society B: Biological Sciences"
+    citations: 440
+    doi: "10.1098/rstb.2013.0521"
+    study_type: null
+    takeaway: >
+    Graph analysis of functional brain networks is essential in translational neuroscience to quantify brain dysfunctions, but requires knowledge of methodological steps and neural phenomena for physiologically relevant analysis.
+    topics: [network_communication]
+  - title: "Cognitive Network Neuroscience"
+    authors: "J. Medaglia, M. Lynall, D. Bassett"
+    year: "2015"
+    journal: "Journal of Cognitive Neuroscience"
+    citations: 366
+    doi: "10.1162/jocn_a_00810"
+    study_type: "literature review"
+    takeaway: >
+    Network science contributes to cognitive neuroscience by providing insights into human brain structure and function, with potential for significant discoveries when integrated with cognitive neuroscientists.
+    topics: [structure_function, disease_networks, network_communication]
+  - title: "The structural–functional connectome and the default mode network of the human brain"
+    authors: "A. Horn, D. Ostwald, M. Reisert, F. Blankenburg"
+    year: "2014"
+    journal: "NeuroImage"
+    citations: 333
+    doi: "10.1016/j.neuroimage.2013.09.069"
+    study_type: null
+    takeaway: >
+    The default mode network (DMN) is the functional brain network that uses the most direct structural connections, shaping its functional repertoire and offering a valuable method for analyzing global brain connectivity.
+    topics: [graph_theory_methods, resting_state]
+  - title: "Graph theoretical analysis of structural and functional connectivity MRI in normal and pathological brain networks"
+    authors: "M. Guye, Gaelle Bettus, F. Bartolomei, P. Cozzone"
+    year: "2010"
+    journal: "Magnetic Resonance Materials in Physics, Biology and Medicine"
+    citations: 307
+    doi: "10.1007/s10334-010-0205-z"
+    study_type: null
+    takeaway: >
+    The whole-brain network exhibits 'small-world' properties, allowing high efficiency and modular organization, and revealing hub regions crucial for whole-network functioning and understanding brain pathologies.
+    topics: [graph_theory_methods, resting_state, structure_function, disease_networks]
+
+# ── Papers by topic category ─────────────────────────────────────────────
+by_topic:
+  graph_theory_methods:
+    count: 41
+    top_papers:
+      - title: "Complex brain networks: graph theoretical analysis of structural and functional systems"
+        authors: "E. Bullmore, O. Sporns"
+        year: "2009"
+        citations: 11197
+        doi: "10.1038/nrn2575"
+        takeaway: >
+        Graph theory has rapidly been applied to study brain network organization, revealing features like small-world topology, highly connected hubs, and modularity.
+      - title: "THE HUMAN CONNECTOME: A COMPLEX NETWORK"
+        authors: "O. Sporns"
+        year: "2011"
+        citations: 1356
+        doi: "10.1111/j.1749-6632.2010.05888.x"
+        takeaway: >
+        The human connectome reveals high clustering, modularity, efficiency, and short path length, promoting high specialization and integration within a modular small-world architecture.
+      - title: "Modular Brain Networks."
+        authors: "O. Sporns, Richard F. Betzel"
+        year: "2016"
+        citations: 1192
+        doi: "10.1146/annurev-psych-122414-033634"
+        takeaway: >
+        Modules in brain networks can play a role in brain evolution, wiring minimization, and functional specialization, with various community detection methods available in network neuroscience.
+      - title: "Structure and function of complex brain networks"
+        authors: "O. Sporns"
+        year: "2013"
+        citations: 826
+        doi: "10.31887/dcns.2013.15.3/osporns"
+        takeaway: >
+        Recent advances in brain network analysis reveal modules and hub regions, which may help understand neural substrates of brain and mental disorders.
+      - title: "Fundamentals of Brain Network Analysis"
+        authors: "A. Fornito, A. Zalesky, E. Bullmore"
+        year: "2016"
+        citations: 800
+        doi: "10.1016/c2012-0-06036-x"
+        takeaway: >
+        This book introduces graph theory and network science methods to understand brain organization, ranging from microscopic to macroscopic scales, and is suitable for neuroscientists and scientists from various backgrounds.
+      - title: "Contributions and challenges for network models in cognitive neuroscience"
+        authors: "O. Sporns"
+        year: "2014"
+        citations: 722
+        doi: "10.1038/nn.3690"
+        takeaway: >
+        Network models in cognitive neuroscience have contributed to understanding brain connectivity and its role in enabling integrative neural processes, but face limitations in methodology and interpretation.
+      - title: "Application of Graph Theory for Identifying Connectivity Patterns in Human Brain Networks: A Systematic Review"
+        authors: "F. Farahani, W. Karwowski, Nichole R. Lighthall"
+        year: "2019"
+        citations: 576
+        doi: "10.3389/fnins.2019.00585"
+        takeaway: >
+        Graph theory-based methods have significantly contributed to understanding human brain connectivity architecture, aiding in understanding human cognition and neurological disorders.
+      - title: "Resting-brain functional connectivity predicted by analytic measures of network communication"
+        authors: "J. Goñi, M. P. van den Heuvel, Andrea Avena-Koenigsberger, N. Vélez de Mendizába"
+        year: "2013"
+        citations: 567
+        doi: "10.1073/pnas.1315529111"
+        takeaway: >
+        Analytic measures of network communication, such as search information and path transitivity, can predict resting-state functional connectivity in the human brain, with accuracy comparable to path length measures and computational models.
+      - title: "Graph theory methods: applications in brain networks"
+        authors: "O. Sporns"
+        year: "2018"
+        citations: 512
+        doi: "10.31887/dcns.2018.20.2/osporns"
+        takeaway: >
+        Graph theory methods play a central role in understanding the architecture, development, and evolution of brain networks, aiding in the detection of community modules and central elements.
+      - title: "The structural–functional connectome and the default mode network of the human brain"
+        authors: "A. Horn, D. Ostwald, M. Reisert, F. Blankenburg"
+        year: "2014"
+        citations: 333
+        doi: "10.1016/j.neuroimage.2013.09.069"
+        takeaway: >
+        The default mode network (DMN) is the functional brain network that uses the most direct structural connections, shaping its functional repertoire and offering a valuable method for analyzing global brain connectivity.
+  resting_state:
+    count: 19
+    top_papers:
+      - title: "Exploring the brain network: A review on resting-state fMRI functional connectivity"
+        authors: "M. P. Heuvel, H. Pol"
+        year: "2010"
+        citations: 2885
+        doi: "10.1016/j.euroneuro.2010.03.008"
+        takeaway: >
+        Resting-state fMRI studies reveal new insights into the human brain's functional connectivity, which may play a key role in cognitive performance and understanding connectivity diseases like Alzheimer's, dementia, schizophrenia, and multiple sclerosis.
+      - title: "Structure and function of complex brain networks"
+        authors: "O. Sporns"
+        year: "2013"
+        citations: 826
+        doi: "10.31887/dcns.2013.15.3/osporns"
+        takeaway: >
+        Recent advances in brain network analysis reveal modules and hub regions, which may help understand neural substrates of brain and mental disorders.
+      - title: "Application of Graph Theory for Identifying Connectivity Patterns in Human Brain Networks: A Systematic Review"
+        authors: "F. Farahani, W. Karwowski, Nichole R. Lighthall"
+        year: "2019"
+        citations: 576
+        doi: "10.3389/fnins.2019.00585"
+        takeaway: >
+        Graph theory-based methods have significantly contributed to understanding human brain connectivity architecture, aiding in understanding human cognition and neurological disorders.
+      - title: "Resting-brain functional connectivity predicted by analytic measures of network communication"
+        authors: "J. Goñi, M. P. van den Heuvel, Andrea Avena-Koenigsberger, N. Vélez de Mendizába"
+        year: "2013"
+        citations: 567
+        doi: "10.1073/pnas.1315529111"
+        takeaway: >
+        Analytic measures of network communication, such as search information and path transitivity, can predict resting-state functional connectivity in the human brain, with accuracy comparable to path length measures and computational models.
+      - title: "The structural–functional connectome and the default mode network of the human brain"
+        authors: "A. Horn, D. Ostwald, M. Reisert, F. Blankenburg"
+        year: "2014"
+        citations: 333
+        doi: "10.1016/j.neuroimage.2013.09.069"
+        takeaway: >
+        The default mode network (DMN) is the functional brain network that uses the most direct structural connections, shaping its functional repertoire and offering a valuable method for analyzing global brain connectivity.
+      - title: "Graph theoretical analysis of structural and functional connectivity MRI in normal and pathological brain networks"
+        authors: "M. Guye, Gaelle Bettus, F. Bartolomei, P. Cozzone"
+        year: "2010"
+        citations: 307
+        doi: "10.1007/s10334-010-0205-z"
+        takeaway: >
+        The whole-brain network exhibits 'small-world' properties, allowing high efficiency and modular organization, and revealing hub regions crucial for whole-network functioning and understanding brain pathologies.
+      - title: "Network-Level Structure-Function Relationships in Human Neocortex"
+        authors: "B. Mišić, Richard F. Betzel, M. D. de Reus, M. P. van den Heuvel, M. Berman, A."
+        year: "2016"
+        citations: 282
+        doi: "10.1093/cercor/bhw089"
+        takeaway: >
+        The human neocortex supports diverse functional network configurations that often diverge from the underlying anatomical substrate, with connections between high-degree hubs being particularly important.
+      - title: "Large-scale functional connectivity networks in the rodent brain"
+        authors: "A. Gozzi, A. Schwarz"
+        year: "2016"
+        citations: 197
+        doi: "10.1016/j.neuroimage.2015.12.017"
+        takeaway: >
+        Rodent brain imaging reveals large-scale functional connectivity networks, potentially representing an evolutionary precursor to the human default mode network.
+      - title: "A Mapping Between Structural and Functional Brain Networks"
+        authors: "J. Meier, P. Tewarie, A. Hillebrand, L. Douw, B. Dijk, S. Stufflebeam, P. Mieghe"
+        year: "2016"
+        citations: 136
+        doi: "10.1089/brain.2015.0408"
+        takeaway: >
+        The structure-function relationship in brain networks is modality dependent, with a high goodness of fit level between their connectivity matrices in multimodal imaging.
+      - title: "Structure–function relationships during segregated and integrated network states of human brain functional connectivity"
+        authors: "M. Fukushima, Richard F. Betzel, Ye He, M. P. van den Heuvel, X. Zuo, O. Sporns"
+        year: "2018"
+        citations: 118
+        doi: "10.1007/s00429-017-1539-3"
+        takeaway: >
+        Structural connections play a significant role in integrating neural processes underlying human behavior, with increased similarity in edge weights and network partitions during integrated network states.
+  structure_function:
+    count: 51
+    top_papers:
+      - title: "Complex brain networks: graph theoretical analysis of structural and functional systems"
+        authors: "E. Bullmore, O. Sporns"
+        year: "2009"
+        citations: 11197
+        doi: "10.1038/nrn2575"
+        takeaway: >
+        Graph theory has rapidly been applied to study brain network organization, revealing features like small-world topology, highly connected hubs, and modularity.
+      - title: "Exploring the brain network: A review on resting-state fMRI functional connectivity"
+        authors: "M. P. Heuvel, H. Pol"
+        year: "2010"
+        citations: 2885
+        doi: "10.1016/j.euroneuro.2010.03.008"
+        takeaway: >
+        Resting-state fMRI studies reveal new insights into the human brain's functional connectivity, which may play a key role in cognitive performance and understanding connectivity diseases like Alzheimer's, dementia, schizophrenia, and multiple sclerosis.
+      - title: "THE HUMAN CONNECTOME: A COMPLEX NETWORK"
+        authors: "O. Sporns"
+        year: "2011"
+        citations: 1356
+        doi: "10.1111/j.1749-6632.2010.05888.x"
+        takeaway: >
+        The human connectome reveals high clustering, modularity, efficiency, and short path length, promoting high specialization and integration within a modular small-world architecture.
+      - title: "Contributions and challenges for network models in cognitive neuroscience"
+        authors: "O. Sporns"
+        year: "2014"
+        citations: 722
+        doi: "10.1038/nn.3690"
+        takeaway: >
+        Network models in cognitive neuroscience have contributed to understanding brain connectivity and its role in enabling integrative neural processes, but face limitations in methodology and interpretation.
+      - title: "Linking Structure and Function in Macroscale Brain Networks"
+        authors: "Laura E. Suárez, R. Markello, Richard F. Betzel, B. Mišić"
+        year: "2020"
+        citations: 622
+        doi: "10.1016/j.tics.2020.01.008"
+        takeaway: >
+        Current models of structure-function relationships in brain networks lack sufficient biological detail to fully predict function.
+      - title: "Application of Graph Theory for Identifying Connectivity Patterns in Human Brain Networks: A Systematic Review"
+        authors: "F. Farahani, W. Karwowski, Nichole R. Lighthall"
+        year: "2019"
+        citations: 576
+        doi: "10.3389/fnins.2019.00585"
+        takeaway: >
+        Graph theory-based methods have significantly contributed to understanding human brain connectivity architecture, aiding in understanding human cognition and neurological disorders.
+      - title: "Resting-brain functional connectivity predicted by analytic measures of network communication"
+        authors: "J. Goñi, M. P. van den Heuvel, Andrea Avena-Koenigsberger, N. Vélez de Mendizába"
+        year: "2013"
+        citations: 567
+        doi: "10.1073/pnas.1315529111"
+        takeaway: >
+        Analytic measures of network communication, such as search information and path transitivity, can predict resting-state functional connectivity in the human brain, with accuracy comparable to path length measures and computational models.
+      - title: "Cognitive Network Neuroscience"
+        authors: "J. Medaglia, M. Lynall, D. Bassett"
+        year: "2015"
+        citations: 366
+        doi: "10.1162/jocn_a_00810"
+        takeaway: >
+        Network science contributes to cognitive neuroscience by providing insights into human brain structure and function, with potential for significant discoveries when integrated with cognitive neuroscientists.
+      - title: "Graph theoretical analysis of structural and functional connectivity MRI in normal and pathological brain networks"
+        authors: "M. Guye, Gaelle Bettus, F. Bartolomei, P. Cozzone"
+        year: "2010"
+        citations: 307
+        doi: "10.1007/s10334-010-0205-z"
+        takeaway: >
+        The whole-brain network exhibits 'small-world' properties, allowing high efficiency and modular organization, and revealing hub regions crucial for whole-network functioning and understanding brain pathologies.
+      - title: "Network-Level Structure-Function Relationships in Human Neocortex"
+        authors: "B. Mišić, Richard F. Betzel, M. D. de Reus, M. P. van den Heuvel, M. Berman, A."
+        year: "2016"
+        citations: 282
+        doi: "10.1093/cercor/bhw089"
+        takeaway: >
+        The human neocortex supports diverse functional network configurations that often diverge from the underlying anatomical substrate, with connections between high-degree hubs being particularly important.
+  disease_networks:
+    count: 48
+    top_papers:
+      - title: "Exploring the brain network: A review on resting-state fMRI functional connectivity"
+        authors: "M. P. Heuvel, H. Pol"
+        year: "2010"
+        citations: 2885
+        doi: "10.1016/j.euroneuro.2010.03.008"
+        takeaway: >
+        Resting-state fMRI studies reveal new insights into the human brain's functional connectivity, which may play a key role in cognitive performance and understanding connectivity diseases like Alzheimer's, dementia, schizophrenia, and multiple sclerosis.
+      - title: "THE HUMAN CONNECTOME: A COMPLEX NETWORK"
+        authors: "O. Sporns"
+        year: "2011"
+        citations: 1356
+        doi: "10.1111/j.1749-6632.2010.05888.x"
+        takeaway: >
+        The human connectome reveals high clustering, modularity, efficiency, and short path length, promoting high specialization and integration within a modular small-world architecture.
+      - title: "Structure and function of complex brain networks"
+        authors: "O. Sporns"
+        year: "2013"
+        citations: 826
+        doi: "10.31887/dcns.2013.15.3/osporns"
+        takeaway: >
+        Recent advances in brain network analysis reveal modules and hub regions, which may help understand neural substrates of brain and mental disorders.
+      - title: "Application of Graph Theory for Identifying Connectivity Patterns in Human Brain Networks: A Systematic Review"
+        authors: "F. Farahani, W. Karwowski, Nichole R. Lighthall"
+        year: "2019"
+        citations: 576
+        doi: "10.3389/fnins.2019.00585"
+        takeaway: >
+        Graph theory-based methods have significantly contributed to understanding human brain connectivity architecture, aiding in understanding human cognition and neurological disorders.
+      - title: "Cognitive Network Neuroscience"
+        authors: "J. Medaglia, M. Lynall, D. Bassett"
+        year: "2015"
+        citations: 366
+        doi: "10.1162/jocn_a_00810"
+        takeaway: >
+        Network science contributes to cognitive neuroscience by providing insights into human brain structure and function, with potential for significant discoveries when integrated with cognitive neuroscientists.
+      - title: "Graph theoretical analysis of structural and functional connectivity MRI in normal and pathological brain networks"
+        authors: "M. Guye, Gaelle Bettus, F. Bartolomei, P. Cozzone"
+        year: "2010"
+        citations: 307
+        doi: "10.1007/s10334-010-0205-z"
+        takeaway: >
+        The whole-brain network exhibits 'small-world' properties, allowing high efficiency and modular organization, and revealing hub regions crucial for whole-network functioning and understanding brain pathologies.
+      - title: "Graph Neural Networks in Network Neuroscience"
+        authors: "Alaa Bessadok, M. Mahjoub, I. Rekik"
+        year: "2021"
+        citations: 255
+        doi: "10.1109/tpami.2022.3209686"
+        takeaway: >
+        Graph neural networks (GNNs) are rapidly becoming the state-of-the-art in network neuroscience tasks, enhancing performance in brain graph synthesis, disease classification, and population graph integration.
+      - title: "Understanding Structural-Functional Relationships in the Human Brain"
+        authors: "Zhijiang Wang, Zhengjia Dai, G. Gong, Changsong Zhou, Yong He"
+        year: "2015"
+        citations: 221
+        doi: "10.1177/1073858414537560"
+        takeaway: >
+        The human brain's structural-functional connectivity (SC-FC) is tightly coupled, supporting diverse cognitive functions and exhibiting significant changes in normal development and neuropsychiatric disorders.
+      - title: "Brain network communication: concepts, models and applications"
+        authors: "Caio Seguin, O. Sporns, A. Zalesky"
+        year: "2023"
+        citations: 192
+        doi: "10.1038/s41583-023-00718-5"
+        takeaway: >
+        This review highlights the growing variety of brain network communication models and their usefulness in studying brain function across various neuroscience fields.
+      - title: "Brain functional and effective connectivity based on electroencephalography recordings: A review"
+        authors: "Jun Cao, Yifan Zhao, Xiaocai Shan, Hualiang Wei, Yuzhu Guo, Liangyu Chen, J. Erk"
+        year: "2021"
+        citations: 187
+        doi: "10.1002/hbm.25683"
+        takeaway: >
+        EEG-based brain connectivity studies can help better understand various neurological conditions and provide valuable clinical tools.
+  network_communication:
+    count: 20
+    top_papers:
+      - title: "Structure and function of complex brain networks"
+        authors: "O. Sporns"
+        year: "2013"
+        citations: 826
+        doi: "10.31887/dcns.2013.15.3/osporns"
+        takeaway: >
+        Recent advances in brain network analysis reveal modules and hub regions, which may help understand neural substrates of brain and mental disorders.
+      - title: "Resting-brain functional connectivity predicted by analytic measures of network communication"
+        authors: "J. Goñi, M. P. van den Heuvel, Andrea Avena-Koenigsberger, N. Vélez de Mendizába"
+        year: "2013"
+        citations: 567
+        doi: "10.1073/pnas.1315529111"
+        takeaway: >
+        Analytic measures of network communication, such as search information and path transitivity, can predict resting-state functional connectivity in the human brain, with accuracy comparable to path length measures and computational models.
+      - title: "The application of graph theoretical analysis to complex networks in the brain"
+        authors: "J. Reijneveld, S. Ponten, H. Berendse, C. Stam"
+        year: "2007"
+        citations: 524
+        doi: "10.1016/j.clinph.2007.08.010"
+        takeaway: >
+        Healthy brains exhibit small world network features, which optimize rapid synchronization, resilience to damage, and local processing and global integration.
+      - title: "Graph theory methods: applications in brain networks"
+        authors: "O. Sporns"
+        year: "2018"
+        citations: 512
+        doi: "10.31887/dcns.2018.20.2/osporns"
+        takeaway: >
+        Graph theory methods play a central role in understanding the architecture, development, and evolution of brain networks, aiding in the detection of community modules and central elements.
+      - title: "Graph analysis of functional brain networks: practical issues in translational neuroscience"
+        authors: "F. de Vico Fallani, Jonas Richiardi, M. Chavez, S. Achard"
+        year: "2014"
+        citations: 440
+        doi: "10.1098/rstb.2013.0521"
+        takeaway: >
+        Graph analysis of functional brain networks is essential in translational neuroscience to quantify brain dysfunctions, but requires knowledge of methodological steps and neural phenomena for physiologically relevant analysis.
+      - title: "Cognitive Network Neuroscience"
+        authors: "J. Medaglia, M. Lynall, D. Bassett"
+        year: "2015"
+        citations: 366
+        doi: "10.1162/jocn_a_00810"
+        takeaway: >
+        Network science contributes to cognitive neuroscience by providing insights into human brain structure and function, with potential for significant discoveries when integrated with cognitive neuroscientists.
+      - title: "Understanding Structural-Functional Relationships in the Human Brain"
+        authors: "Zhijiang Wang, Zhengjia Dai, G. Gong, Changsong Zhou, Yong He"
+        year: "2015"
+        citations: 221
+        doi: "10.1177/1073858414537560"
+        takeaway: >
+        The human brain's structural-functional connectivity (SC-FC) is tightly coupled, supporting diverse cognitive functions and exhibiting significant changes in normal development and neuropsychiatric disorders.
+      - title: "Brain network communication: concepts, models and applications"
+        authors: "Caio Seguin, O. Sporns, A. Zalesky"
+        year: "2023"
+        citations: 192
+        doi: "10.1038/s41583-023-00718-5"
+        takeaway: >
+        This review highlights the growing variety of brain network communication models and their usefulness in studying brain function across various neuroscience fields.
+      - title: "Brain functional and effective connectivity based on electroencephalography recordings: A review"
+        authors: "Jun Cao, Yifan Zhao, Xiaocai Shan, Hualiang Wei, Yuzhu Guo, Liangyu Chen, J. Erk"
+        year: "2021"
+        citations: 187
+        doi: "10.1002/hbm.25683"
+        takeaway: >
+        EEG-based brain connectivity studies can help better understand various neurological conditions and provide valuable clinical tools.
+      - title: "Structure–function relationships during segregated and integrated network states of human brain functional connectivity"
+        authors: "M. Fukushima, Richard F. Betzel, Ye He, M. P. van den Heuvel, X. Zuo, O. Sporns"
+        year: "2018"
+        citations: 118
+        doi: "10.1007/s00429-017-1539-3"
+        takeaway: >
+        Structural connections play a significant role in integrating neural processes underlying human behavior, with increased similarity in edge weights and network partitions during integrated network states.
+  multilayer:
+    count: 11
+    top_papers:
+      - title: "Graph theory methods: applications in brain networks"
+        authors: "O. Sporns"
+        year: "2018"
+        citations: 512
+        doi: "10.31887/dcns.2018.20.2/osporns"
+        takeaway: >
+        Graph theory methods play a central role in understanding the architecture, development, and evolution of brain networks, aiding in the detection of community modules and central elements.
+      - title: "Multilayer motif analysis of brain networks."
+        authors: "F. Battiston, V. Nicosia, M. Chavez, V. Latora"
+        year: "2016"
+        citations: 178
+        doi: "10.1063/1.4979282"
+        takeaway: >
+        Multi-layer network analysis reveals that functional connectivity in the human brain is non-trivially constrained by the underlying anatomical network, contributing to a better understanding of the interplay between structure and function.
+      - title: "Multilayer modeling and analysis of human brain networks"
+        authors: "Manlio De Domenico"
+        year: "2017"
+        citations: 173
+        doi: "10.1093/gigascience/gix004"
+        takeaway: >
+        Multilayer network analysis and modeling of the human brain has revolutionized computational neuroscience, allowing for better understanding and treatment of brain diseases and psychiatric disorders.
+      - title: "Multilayer Brain Networks"
+        authors: "Michael Vaiana, S. Muldoon"
+        year: "2017"
+        citations: 130
+        doi: "10.1007/s00332-017-9436-8"
+        takeaway: >
+        Multilayer networks in neuroscience have revealed previously hidden features and helped model disease, structure-function relationships, network evolution, and link multi-scale data sets.
+      - title: "Network and Multilayer Network Approaches to Understanding Human Brain Dynamics"
+        authors: "S. Muldoon, D. Bassett"
+        year: "2016"
+        citations: 113
+        doi: "10.1086/687857"
+        takeaway: >
+        Multilayer network approaches to neuroimaging data provide novel insights into human brain structure and evolving function.
+      - title: "Discordant attributes of structural and functional brain connectivity in a two-layer multiplex network"
+        authors: "Sol Lim, F. Radicchi, M. P. van den Heuvel, O. Sporns"
+        year: "2019"
+        citations: 68
+        doi: "10.1038/s41598-019-39243-w"
+        takeaway: >
+        Discordant and lateralized patterns of associativity in structural and functional brain connectivity may help understand the laterality of neurological dysfunctions and recovery.
+      - title: "Graph Neural Networks in Brain Connectivity Studies: Methods, Challenges, and Future Directions"
+        authors: "H. Mohammadi, Waldemar Karwowski"
+        year: "2024"
+        citations: 33
+        doi: "10.3390/brainsci15010017"
+        takeaway: >
+        Graph Neural Networks (GNNs) excel in modeling complex brain connectivity patterns and integrating multiple imaging modalities, but need improved interpretability and multimodal integration for full clinical utility.
+      - title: "Applying multilayer analysis to morphological, structural, and functional brain networks to identify relevant dysfunctio"
+        authors: "Jordi Casas-Roma, E. Martínez-Heras, Albert Solé-Ribalta, E. Solana, E. Lopez-So"
+        year: "2022"
+        citations: 25
+        doi: "10.1162/netn_a_00258"
+        takeaway: >
+        This study developed a framework that combines morphological, structural, and functional brain connectivity networks to identify dysfunction patterns in multiple sclerosis patients.
+      - title: "Network insights: Transforming brain science and mental health through innovative analysis"
+        authors: "Peng Wang, Lulu Cheng"
+        year: "2024"
+        citations: 7
+        doi: "10.1002/brx2.53"
+        takeaway: >
+        Network analysis offers a more nuanced understanding of mental disorders and can revolutionize personalized cognitive interventions and treatment strategies for cognitive dysfunctions.
+      - title: "Mapping brain-wide activity networks: brainways as a tool for neurobiological discovery"
+        authors: "B. Kantor, K. Ruzal, I. Ben-Ami Bartal"
+        year: "2025"
+        citations: 2
+        doi: "10.1038/s41386-025-02105-3"
+        takeaway: >
+        Brainways is an AI-based software that streamlines neural network identification and analysis, enabling rapid and accurate understanding of neural networks underlying complex behaviors.
+  general:
+    count: 11
+    top_papers:
+      - title: "Complex network measures of brain connectivity: Uses and interpretations"
+        authors: "M. Rubinov, O. Sporns"
+        year: "2010"
+        citations: 10623
+        doi: "10.1016/j.neuroimage.2009.10.003"
+        takeaway: >
+        Complex network analysis reveals insights into brain networks, revealing functional integration, segregation, centrality, and resilience to insults.
+      - title: "Network neuroscience"
+        authors: "D. Bassett, O. Sporns"
+        year: "2017"
+        citations: 2083
+        doi: "10.1038/nn.4502"
+        takeaway: >
+        Network neuroscience combines empirical and computational advances to better understand the brain as a multiscale networked system, advancing our understanding of complex brain function and cognition.
+      - title: "Organization, development and function of complex brain networks"
+        authors: "O. Sporns, D. Chialvo, Marcus Kaiser, C. Hilgetag"
+        year: "2004"
+        citations: 2041
+        doi: "10.1016/j.tics.2004.07.008"
+        takeaway: >
+        Network analysis offers new insights into global and integrative aspects of brain function, including the origin of flexible and coherent cognitive states within neural architecture.
+      - title: "Structural and Functional Brain Networks: From Connections to Cognition"
+        authors: "Hae-Jeong Park, Karl J. Friston"
+        year: "2013"
+        citations: 1929
+        doi: "10.1126/science.1238411"
+        takeaway: >
+        Hierarchical modular brain networks facilitate local neuronal operations and global integration of segregated functions, with context-sensitive integration requiring a divergence between structural and functional networks.
+      - title: "Generative AI for brain image computing and brain network computing: a review"
+        authors: "Changwei Gong, Changhong Jing, Xuhang Chen, Chi-Man Pun, Guoli Huang, Ashirbani"
+        year: "2023"
+        citations: 75
+        doi: "10.3389/fnins.2023.1203104"
+        takeaway: >
+        Generative AI in neuroimaging offers promising opportunities for extracting spatiotemporal brain features and reconstructing topological connectivity of brain networks.
+      - title: "Functional networks of the brain: from connectivity restoration to dynamic integration"
+        authors: "A. E. Hramov, Nikita S. Frolov, V. Maksimenko, S. Kurkin, V. B. Kazantsev, Aleks"
+        year: "2020"
+        citations: 63
+        doi: "10.3367/ufne.2020.06.038807"
+        takeaway: >
+        Reconstructing functional networks of the brain using recorded activity can help understand cognitive and pathological processes, and create new brain-computer interfaces.
+      - title: "Brain network similarity: methods and applications"
+        authors: "A. Mheich, F. Wendling, Mahmoud Hassan"
+        year: "2019"
+        citations: 62
+        doi: "10.1162/netn_a_00133"
+        takeaway: >
+        Brain network similarity methods can provide new insights into object categorization in the human brain by comparing two brain networks.
+      - title: "Network Analysis of Time Series: Novel Approaches to Network Neuroscience"
+        authors: "Thomas F. Varley, O. Sporns"
+        year: "2022"
+        citations: 32
+        doi: "10.3389/fnins.2021.787068"
+        takeaway: >
+        Network-based analysis of non-linear time series allows researchers to infer a low-dimensional 'intrinsic manifold' from empirical brain data, preserving temporally extended dynamics.
+      - title: "A comprehensive survey of complex brain network representation"
+        authors: "Haoteng Tang, Guixiang Ma, Yanfu Zhang, Kai Ye, Lei Guo, Guodong Liu, Qi Huang,"
+        year: "2023"
+        citations: 21
+        doi: "10.1016/j.metrad.2023.100046"
+        takeaway: >
+        This paper provides a comprehensive overview of traditional and deep-learning methods for brain network mining, highlighting promising research directions in this field.
+      - title: "Brain Network Analysis: A Review on Multivariate Analytical Methods"
+        authors: "Mohsen Bahrami, P. Laurienti, Heather Shappell, S. Simpson"
+        year: "2022"
+        citations: 10
+        doi: "10.1089/brain.2022.0007"
+        takeaway: >
+        This review highlights the importance of choosing appropriate multivariate methods for brain network analysis, considering variables like network type, subject count, and study objectives.
