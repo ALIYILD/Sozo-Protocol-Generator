@@ -778,3 +778,122 @@ CONDITIONS_2["insomnia"] = dict(
         ["Evidence is promising for hyperarousal phenotype; CBT-I remains gold standard", "tDCS is equivalent to CBT-I for chronic insomnia"],
     ],
 )
+
+# \u2500\u2500 15. PARKINSON'S DISEASE \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+CONDITIONS_2["parkinsons"] = dict(
+    name="Parkinson's Disease", short="Parkinson's", slug="parkinsons",
+    med_class="Levodopa/Dopamine Agonists", med_name="dopaminergic agent",
+    phenotype_options="\u25a1 Motor Predominant  \u25a1 Cognitive/MCI  \u25a1 Autonomic  \u25a1 Depression Comorbid  \u25a1 Freezing of Gait",
+    subtitle="Parkinson's Disease Responder Tracking & Classification",
+    sec2_subtitle="SOZO Response Assessment, Levodopa-tDCS Documentation & FNON Non-Responder Pathway",
+    false_nonresponder_note="This avoids \"false non-responder\" labelling due to levodopa ON/OFF state variability and diurnal motor fluctuation at assessment.",
+    measurement_confound_warning=(
+        "WARNING: UPDRS-III motor scores vary significantly with levodopa ON/OFF state. If baseline is assessed "
+        "in OFF state and follow-up in ON state (or vice versa), you will create a false responder or non-responder. "
+        "Always assess in a defined ON state (60\u201390 minutes post-levodopa). Document levodopa dose, timing, "
+        "and time since last dose at EVERY assessment. Assess at the same time of morning for each session."
+    ),
+    sec7_title="7. Levodopa/Dopamine Agonist-tDCS Scheduling & Documentation",
+    sec7_intro="tDCS effects are state-dependent. Levodopa modulates dopaminergic tone in the cortico-striatal motor loop; dopamine agonists affect D2/D3 receptor activation \u2014 both interact with tDCS LTP-like plasticity mechanisms in M1 and DLPFC.",
+    sec7a_title="7A. Levodopa ON vs OFF State Comparison",
+    scheduling_rule=(
+        "SOZO Standard Rule: Choose ONE medication state (ideally defined ON state: 60\u201390 min post-levodopa) "
+        "for ALL assessments in a block and keep it CONSISTENT. "
+        "ON/OFF state variability and wearing-off effects are the most common sources of false classification in PD."
+    ),
+    sec7c_title="7C. Levodopa + tDCS Pairing by PD Phenotype",
+    sec7d_title="7D. Levodopa-tDCS Documentation Checklist",
+    phenotype_row=["Phenotype", "\u25a1 Motor Predominant  \u25a1 Cognitive/MCI  \u25a1 Autonomic  \u25a1 Depression Comorbid  \u25a1 Freezing of Gait"],
+    response_domains=[
+        ["Domain", "Response Criteria", "Met?", "Notes"],
+        ["UPDRS-III (Motor)", "\u22652.3 point reduction (MCID); \u226520% improvement in motor score = clinical response", "\u25a1 Y \u25a1 N", ""],
+        ["MoCA (Cognitive)", "Stable or improved MoCA (\u22651 point); prevent progression in PD-MCI", "\u25a1 Y \u25a1 N", ""],
+        ["PDQ-39 (QoL)", "MCID \u22654.2 point SI reduction; clinically meaningful QoL improvement", "\u25a1 Y \u25a1 N", ""],
+        ["PHQ-9/GAD-7 (Mood)", "\u226550% reduction = response; score \u22644 = remission of PD depression/anxiety", "\u25a1 Y \u25a1 N", ""],
+    ],
+    responder_profiles=[
+        ["Phenotype", "Best-Fit Patient Profile", "Protocol", "Evidence"],
+        ["Motor Predominant (M1 bilateral)", "UPDRS-III \u226515; bradykinesia/rigidity dominant; H&Y 1\u20133; stable levodopa", "M1 bilateral tDCS + TPS M1+SMA + physiotherapy concurrent", "Moderate (meta-analysis; RCTs)"],
+        ["Cognitive/MCI (DLPFC bilateral)", "MoCA <26; executive dysfunction; PD-MCI; cholinergic deficit", "DLPFC bilateral tDCS + TPS DLPFC + cognitive training", "Moderate (Brugger 2010; Litvan 2012)"],
+        ["Freezing of Gait (SMA+M1)", "FoG-Q >7; gait initiation failure; cueing-responsive; SMA circuit", "SMA (Cz) tDCS + M1 + TPS SMA+M1 + RAS gait training", "Emerging (Naro 2019)"],
+        ["Depression Comorbid (L-DLPFC)", "PHQ-9 \u226510; PD depression; L-DLPFC hypo; SSRI partial response", "L-DLPFC tDCS + taVNS + CES + antidepressant concurrent", "Emerging (Reijnders 2008)"],
+        ["Autonomic Predominant (taVNS-led)", "Orthostatic hypotension; POTS; cardiac sympathetic denervation; Lewy stage 1-2", "taVNS 40 min primary + CES daily + tDCS M1 supportive", "Emerging (Goldstein 2003)"],
+        ["Comprehensive PD (full SOZO)", "Motor + cognitive + mood all impaired; H&Y 2\u20133; multiple symptoms", "Full S-O-Z-O: taVNS \u2192 M1+DLPFC tDCS \u2192 TPS M1+SMA+DLPFC \u2192 physio+cognitive", "Emerging"],
+    ],
+    clinical_predictors=[
+        ["Predictor", "Why It Matters", "Present?"],
+        ["Motor symptom severity UPDRS-III \u226515 in ON state", "M1 tDCS most effective when baseline motor deficit present but not end-stage", "\u25a1 Y \u25a1 N"],
+        ["Stable levodopa regimen \u22654 weeks", "Stable dopaminergic tone required for tDCS LTP-like plasticity induction", "\u25a1 Y \u25a1 N"],
+        ["No active DBS implant", "DBS is absolute TPS contraindication; confirm before any TPS session", "\u25a1 Y \u25a1 N"],
+        ["Physiotherapy concurrent or planned", "Active motor tasks during M1 tDCS potentiate LTP; essential for motor response", "\u25a1 Y \u25a1 N"],
+        ["Network hypothesis confirmed by 6-Network Assessment", "FNON Primary Motor Network + Executive Network mapping guides M1/DLPFC targeting", "\u25a1 Y \u25a1 N"],
+        ["MoCA documented at baseline", "PD-MCI screen essential; cognitive phenotype requires DLPFC protocol adaptation", "\u25a1 Y \u25a1 N"],
+    ],
+    protocol_predictors=[
+        ["Factor", "Recommendation"],
+        ["Target choice", "M1 bilateral (C3/C4) for motor; DLPFC (F3/F4) for cognitive; SMA (Cz) for FoG; L-DLPFC (F3) for depression"],
+        ["Medication timing", "Session in defined ON state (60-90 min post-levodopa); document timing at every session"],
+        ["Active task during tDCS", "Physiotherapy during M1 tDCS essential; cognitive tasks during DLPFC tDCS; RAS gait during SMA"],
+        ["TPS protocol", "NEUROLITH 4 Hz, 0.25 mJ/mm\u00b2, 10,000 pulses, M1+SMA+DLPFC, 25-30 min/session, 12 sessions/4 weeks"],
+        ["Assessment state", "UPDRS-III always in defined ON state; document medication phase at each assessment"],
+    ],
+    response_classification=[
+        ["Classification", "Criteria", "Action"],
+        ["Responder", "UPDRS-III \u22652.3 point reduction + QoL (PDQ-39 MCID) improvement", "Continue protocol; plan maintenance schedule with neurologist"],
+        ["Partial Responder", "UPDRS-III 1\u20132 point reduction OR QoL improvement without UPDRS-III change", "Re-phenotype; verify ON state assessment; add physiotherapy integration"],
+        ["Non-Responder", "<1 point UPDRS-III change in all domains after adequate trial in ON state", "Follow FNON Non-Responder Pathway (Section 6); verify medication timing"],
+    ],
+    non_responder_profiles=[
+        ["Profile", "Why Limited Response", "Alternative Strategy"],
+        ["Assessed in OFF state (medication not at peak)", "OFF state cortical excitability is too low for LTP induction; results invalid", "Reschedule; strictly enforce ON state timing; repeat assessment"],
+        ["Advanced PD (H&Y 4-5) with severe atrophy", "Severe neurodegeneration limits cortical plasticity; motor circuit may be irreversibly impaired", "Reduce tDCS intensity; focus on CES+taVNS for non-motor; palliative QoL goals"],
+        ["Atypical Parkinsonism (PSP, MSA, CBS)", "Different pathological substrate; PD protocols not validated; limited cortical plasticity", "Specialist neurological review; atypical PD protocol; avoid TPS in PSP"],
+        ["Active DBS implant (not yet screened out)", "DBS absolute TPS contraindication missed at screening; cease TPS immediately", "Cease TPS; confirm DBS status; refer to DBS centre for protocol adjustment"],
+        ["Severe levodopa fluctuations / wearing-off dominance", "Unstable dopaminergic state undermines plasticity induction; valid assessment impossible", "Optimise PD medication first; neurologist review; reassess after stable period"],
+    ],
+    med_state_comparison=[
+        ["Factor", "Defined ON State (Default SOZO)", "OFF State / Wearing-Off (Do NOT Assess)"],
+        ["Definition", "60\u201390 min after levodopa; peak dopaminergic effect; optimal cortical excitability", "Pre-dose; end of dose; tremor/rigidity worse than ON; cortical excitability low"],
+        ["UPDRS-III Score", "Best motor performance; valid response measurement", "Artificially elevated UPDRS-III; \u226510 point difference from ON is common"],
+        ["tDCS LTP Response", "Dopamine facilitates cortical LTP-like plasticity; optimal for tDCS benefit", "Reduced cortical plasticity; tDCS effects attenuated in OFF state"],
+        ["Task Participation", "Better cooperation; greater motor task compliance; motor cortex primed", "Reduced compliance due to motor fluctuation; physiotherapy tasks poorly tolerated"],
+        ["Evidence Support", "All PD tDCS RCTs require defined ON state assessment", "OFF state assessment invalidates comparison; never use as primary UPDRS-III timepoint"],
+    ],
+    med_documentation=[
+        ["Domain", "Details"],
+        ["Levodopa/Dopamine Agonist Name & Dose", ""],
+        ["Time of Last Levodopa Dose Before Session", "___:___ AM/PM"],
+        ["Time Since Last Dose at Session Start", "___ minutes"],
+        ["ON/OFF State at Session Start", "\u25a1 ON (defined)  \u25a1 Wearing-off  \u25a1 OFF  \u25a1 Dyskinesia present"],
+        ["UPDRS-III Score at Session Start (if assessing)", "___/132"],
+        ["Rescue Apomorphine Used?", "\u25a1 No  \u25a1 Yes \u2014 Dose/Time: ___"],
+        ["Assessment State for Block", "\u25a1 Defined ON state (60\u201390 min post-levodopa)  \u25a1 Other (document rationale)"],
+        ["Session Start Time (for consistency)", "Keep consistent: ___:___ AM/PM"],
+    ],
+    phenotype_pairing=[
+        ["Phenotype", "tDCS Config", "Concurrent Task", "Outcome Measures"],
+        ["Motor Predominant", "M1 bilateral anodal (C3/C4) 2 mA", "Physiotherapy (gait, balance, UL) during tDCS", "UPDRS-III, PDQ-39, TUG"],
+        ["Cognitive/MCI", "DLPFC bilateral anodal (F3/F4) 2 mA", "N-back, verbal fluency, visuospatial tasks", "MoCA, UPDRS-I cognitive, PDQ-39"],
+        ["Freezing of Gait", "SMA (Cz) anodal + DLPFC 2 mA", "RAS gait training + cueing exercises", "FoG-Q, TUG, UPDRS-III gait items"],
+        ["Depression Comorbid", "L-DLPFC (F3) anodal + taVNS", "Behavioural activation + light exercise", "PHQ-9, PDQ-39 emotional, UPDRS-III"],
+    ],
+    doc_checklist=[
+        ["Documentation Item", "Completed", "N/A"],
+        ["Levodopa/DA agonist name, dose, and dosing frequency recorded", "\u25a1 Yes", "\u25a1"],
+        ["Time of last levodopa dose before every session documented", "\u25a1 Yes", "\u25a1"],
+        ["ON/OFF state at session start recorded for every session", "\u25a1 Yes", "\u25a1"],
+        ["UPDRS-III assessed in defined ON state at baseline and follow-up", "\u25a1 Yes", "\u25a1"],
+        ["MoCA completed at baseline (and follow-up if cognitive phenotype)", "\u25a1 Yes", "\u25a1"],
+        ["Medication changes during block documented and flagged", "\u25a1 Yes", "\u25a1"],
+        ["DBS implant status confirmed absent before any TPS session", "\u25a1 Yes", "\u25a1"],
+        ["Physiotherapy / motor task integrated during M1 tDCS sessions", "\u25a1 Yes", "\u25a1"],
+        ["Session start time consistent across block", "\u25a1 Yes", "\u25a1"],
+        ["Outcomes interpreted with medication phase and ON state documented", "\u25a1 Yes", "\u25a1"],
+    ],
+    language_guide=[
+        ["Appropriate to State", "AVOID Stating"],
+        ["tDCS/TPS is an adjunctive intervention alongside stable dopaminergic pharmacotherapy", "tDCS or TPS replaces levodopa or modifies the underlying Parkinson's disease process"],
+        ["Effects target cortical excitability and motor circuit facilitation; PD pharmacotherapy remains primary", "tDCS cures Parkinson's disease or halts neurodegeneration"],
+        ["Evidence is moderate for motor facilitation; TPS at 4 Hz/M1+SMA is investigational and off-label", "TPS is approved for Parkinson's disease treatment"],
+    ],
+)

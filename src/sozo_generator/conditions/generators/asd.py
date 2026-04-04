@@ -331,6 +331,19 @@ def build_asd_condition() -> ConditionSchema:
                 EvidenceLevel.LOW, off_label=True,
                 eeg_canonical=["F3"],
             ),
+            StimulationTarget(
+                modality=Modality.CES,
+                target_region="Bilateral earlobe electrodes (CES)",
+                target_abbreviation="CES",
+                laterality="bilateral",
+                rationale="Alpha-Stim CES FDA-cleared for anxiety, depression, and insomnia. In adult ASD, "
+                          "targets the highly prevalent anxiety (40-80%) and sleep disturbance (50-80%). "
+                          "Non-pharmacological adjunct. Particularly relevant for autistic burnout and anxiety.",
+                protocol_label="CES-ASD — Anxiety & Sleep Adjunct",
+                evidence_level=EvidenceLevel.MEDIUM,
+                off_label=False,
+                eeg_canonical=["bilateral earlobes"],
+            ),
             make_tdcs_target(
                 "Temporoparietal Junction", "TPJ", "right",
                 "Right TPJ anodal tDCS targets social cognition and mentalizing in ASD. "

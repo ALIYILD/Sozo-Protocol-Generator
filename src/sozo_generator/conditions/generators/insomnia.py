@@ -258,7 +258,7 @@ def build_insomnia_condition() -> ConditionSchema:
 
         assessment_tools=[
             AssessmentTool(
-                scale_key="ISI",
+                scale_key="isi",
                 name="Insomnia Severity Index",
                 abbreviation="ISI",
                 domains=["sleep onset", "sleep maintenance", "early awakening", "sleep satisfaction", "daytime impairment"],
@@ -267,7 +267,7 @@ def build_insomnia_condition() -> ConditionSchema:
                 notes="0-7 no insomnia; 8-14 sub-threshold; 15-21 moderate; 22-28 severe. MCID = 6 points. Gold standard insomnia outcome measure (Bastien et al. 2001).",
             ),
             AssessmentTool(
-                scale_key="PSQI",
+                scale_key="psqi",
                 name="Pittsburgh Sleep Quality Index",
                 abbreviation="PSQI",
                 domains=["sleep quality", "sleep latency", "sleep duration", "sleep efficiency", "sleep disturbances", "sleep medication", "daytime dysfunction"],
@@ -276,7 +276,7 @@ def build_insomnia_condition() -> ConditionSchema:
                 notes="Score > 5 indicates poor sleeper; > 10 severe impairment. 7-component comprehensive sleep quality measure.",
             ),
             AssessmentTool(
-                scale_key="ESS",
+                scale_key="ess",
                 name="Epworth Sleepiness Scale",
                 abbreviation="ESS",
                 domains=["daytime sleepiness"],
@@ -285,7 +285,7 @@ def build_insomnia_condition() -> ConditionSchema:
                 notes="0-10 normal; 11-24 excessive daytime sleepiness. ESS > 10 raises concern for OSA or hypersomnia — investigate before neurostimulation.",
             ),
             AssessmentTool(
-                scale_key="DASS21",
+                scale_key="dass21",
                 name="Depression Anxiety Stress Scales 21",
                 abbreviation="DASS-21",
                 domains=["depression", "anxiety", "stress"],

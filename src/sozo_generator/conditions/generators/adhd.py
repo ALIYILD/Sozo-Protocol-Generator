@@ -343,6 +343,20 @@ def build_adhd_condition() -> ConditionSchema:
                 off_label=True,
                 eeg_canonical=["Ear"],
             ),
+            StimulationTarget(
+                modality=Modality.CES,
+                target_region="Bilateral earlobe electrodes (CES)",
+                target_abbreviation="CES",
+                laterality="bilateral",
+                rationale="Alpha-Stim CES FDA-cleared for anxiety, depression, and insomnia. In ADHD, "
+                          "addresses sleep disturbance (present in 25-55%), comorbid anxiety, and emotional "
+                          "dysregulation. Non-pharmacological adjunct that does not interact with stimulant "
+                          "medications. Supports focus and reduces hyperarousal.",
+                protocol_label="CES-ADHD — Sleep, Focus & Anxiety Adjunct",
+                evidence_level=EvidenceLevel.MEDIUM,
+                off_label=False,
+                eeg_canonical=["bilateral earlobes"],
+            ),
         ],
 
         protocols=[

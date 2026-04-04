@@ -284,6 +284,33 @@ def build_anxiety_condition() -> ConditionSchema:
                 EvidenceLevel.MEDIUM, off_label=True,
                 eeg_canonical=["F4", "F3"],
             ),
+            StimulationTarget(
+                modality=Modality.CES,
+                target_region="Bilateral earlobe electrodes (CES)",
+                target_abbreviation="CES",
+                laterality="bilateral",
+                rationale="Alpha-Stim CES (0.5 Hz, 100-300 µA) has FDA clearance for anxiety. "
+                          "Modulates serotonin, beta-endorphin, and cortisol. Provides immediate anxiolytic "
+                          "effect as adjunct to tDCS. Systematic review evidence (Kirsch 2010). "
+                          "Effective for GAD sleep disturbance component.",
+                protocol_label="CES-ANX — Alpha-Stim Anxiety & Sleep",
+                evidence_level=EvidenceLevel.MEDIUM,
+                off_label=False,
+                eeg_canonical=["bilateral earlobes"],
+            ),
+            StimulationTarget(
+                modality=Modality.TAVNS,
+                target_region="Left auricular vagus nerve",
+                target_abbreviation="taVNS",
+                laterality="left",
+                rationale="taVNS modulates NTS-amygdala pathways via vagal afferent activation, "
+                          "reducing limbic hyperreactivity. Benevides et al. (2020) and Fang et al. (2021) "
+                          "demonstrate anxiolytic effects. Adjunct to tDCS for GAD and panic features.",
+                protocol_label="TAVNS-ANX — Anxiety Adjunct",
+                evidence_level=EvidenceLevel.MEDIUM,
+                off_label=True,
+                eeg_canonical=["left ear (cymba conchae)"],
+            ),
         ],
 
         protocols=[

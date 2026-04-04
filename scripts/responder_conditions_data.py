@@ -459,8 +459,8 @@ CONDITIONS["alzheimers"] = dict(
 )
 
 # ── 5. STROKE ────────────────────────────────────────────────────────────────
-CONDITIONS["stroke"] = dict(
-    name="Post-Stroke Rehabilitation", short="Stroke", slug="stroke",
+CONDITIONS["stroke_rehab"] = dict(
+    name="Post-Stroke Rehabilitation", short="Stroke", slug="stroke_rehab",
     med_class="Antiplatelets/SSRIs", med_name="antiplatelet/neurorestorative agent",
     phenotype_options="□ Motor (UL)  □ Motor (LL/Gait)  □ Aphasia  □ Cognitive  □ Mixed",
     subtitle="Stroke Responder Tracking & Classification",

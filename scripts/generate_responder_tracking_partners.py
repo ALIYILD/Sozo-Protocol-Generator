@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """
-Generate Responder Tracking & Classification (Partners Tier) for all 14 conditions.
+Generate Responder Tracking & Classification (Partners Tier) for all 14+ conditions.
+Built from scratch with python-docx (no template dependency).
 Usage: python scripts/generate_responder_tracking_partners.py [slug]
-       omit slug to generate all 14.
+       omit slug to generate all conditions.
 """
 import sys
 from pathlib import Path
 from docx import Document
-from docx.shared import RGBColor
+from docx.shared import Pt, RGBColor, Inches
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.oxml.ns import qn
+from docx.oxml import OxmlElement
 
 # ── add project root to path ─────────────────────────────────────────────────
 sys.path.insert(0, str(Path(__file__).parent))
@@ -16,200 +21,273 @@ from responder_conditions_data_2 import CONDITIONS_2
 CONDITIONS.update(CONDITIONS_2)
 
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent
+OUTPUT_ROOT = _PROJECT_ROOT / "outputs" / "documents"
 
-TEMPLATE = _PROJECT_ROOT / "templates" / "gold_standard" / "Responder_Tracking.docx"
-OUTPUT_ROOT = Path("outputs/documents")
-
+# ── colour palette ────────────────────────────────────────────────────────────
+C_NAVY   = RGBColor(0x1B, 0x3A, 0x5C)
+C_BLUE   = RGBColor(0x2E, 0x75, 0xB6)
+C_PURPLE = RGBColor(0x7B, 0x2D, 0x8E)
 C_WHITE  = RGBColor(0xFF, 0xFF, 0xFF)
 C_BLACK  = RGBColor(0x00, 0x00, 0x00)
+C_LGRAY  = RGBColor(0xEB, 0xF0, 0xF7)
+
+HEX_NAVY   = "1B3A5C"
+HEX_BLUE   = "2E75B6"
+HEX_PURPLE = "7B2D8E"
+HEX_LGRAY  = "EBF0F7"
+HEX_WHITE  = "FFFFFF"
 
 
-# ── helpers ──────────────────────────────────────────────────────────────────
+# ── xml helpers ───────────────────────────────────────────────────────────────
 
-def _para_replace(para, old: str, new: str):
-    full = "".join(r.text for r in para.runs)
-    if old not in full:
-        return
-    replaced = full.replace(old, new)
-    fr = para.runs[0] if para.runs else None
-    bold  = fr.font.bold if fr else None
-    size  = fr.font.size if fr else None
-    try:
-        color = fr.font.color.rgb if (fr and fr.font.color.type) else None
-    except Exception:
-        color = None
-    for r in para.runs:
-        r.text = ""
-    if fr:
-        fr.text = replaced
-        fr.font.bold = bold
-        if size:  fr.font.size = size
-        if color: fr.font.color.rgb = color
+def _set_cell_bg(cell, hex_color: str):
+    tc = cell._tc
+    tcPr = tc.find(qn("w:tcPr"))
+    if tcPr is None:
+        tcPr = OxmlElement("w:tcPr")
+        tc.insert(0, tcPr)
+    shd = OxmlElement("w:shd")
+    shd.set(qn("w:val"), "clear")
+    shd.set(qn("w:color"), "auto")
+    shd.set(qn("w:fill"), hex_color)
+    existing = tcPr.find(qn("w:shd"))
+    if existing is not None:
+        tcPr.remove(existing)
+    tcPr.append(shd)
+
+
+def _set_col_width(table, col_idx: int, width_inches: float):
+    for row in table.rows:
+        row.cells[col_idx].width = Inches(width_inches)
+
+
+# ── paragraph/table factories ─────────────────────────────────────────────────
+
+def _add_title_banner(doc, text: str):
+    """Full-width navy banner paragraph."""
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    run = p.add_run(text)
+    run.bold = True
+    run.font.size = Pt(13)
+    run.font.color.rgb = C_WHITE
+    # shade the paragraph background via a 1x1 table trick — simpler: use a table
+    # (paragraph shading via XML)
+    pPr = p._p.get_or_add_pPr()
+    shd = OxmlElement("w:shd")
+    shd.set(qn("w:val"), "clear")
+    shd.set(qn("w:color"), "auto")
+    shd.set(qn("w:fill"), HEX_NAVY)
+    pPr.append(shd)
+    return p
+
+
+def _add_section_heading(doc, text: str, level: int = 1):
+    p = doc.add_paragraph()
+    run = p.add_run(text)
+    run.bold = True
+    if level == 1:
+        run.font.size = Pt(11)
+        run.font.color.rgb = C_NAVY
     else:
-        para.add_run(replaced)
+        run.font.size = Pt(10)
+        run.font.color.rgb = C_BLUE
+    return p
 
 
-def _para_set(para, new_text: str):
-    _para_replace(para, "".join(r.text for r in para.runs), new_text)
+def _add_body_text(doc, text: str, italic: bool = False):
+    p = doc.add_paragraph()
+    run = p.add_run(text)
+    run.font.size = Pt(9)
+    if italic:
+        run.italic = True
+    return p
 
 
-def _cell_write(cell, text: str, bold: bool = False, white: bool = False):
-    for p in cell.paragraphs:
-        for r in p.runs:
-            r.text = ""
-    para = cell.paragraphs[0]
-    run  = para.runs[0] if para.runs else para.add_run()
-    run.text = text
-    run.font.bold = bold
-    if white:
-        run.font.color.rgb = C_WHITE
-    else:
-        try:
-            if run.font.color.type:
-                run.font.color.rgb = C_BLACK
-        except Exception:
-            pass
+def _make_table(doc, rows_data: list, navy_header: bool = True):
+    """Build a table from rows_data (list of lists). First row = header."""
+    if not rows_data:
+        return None
+    n_cols = max(len(r) for r in rows_data)
+    table = doc.add_table(rows=len(rows_data), cols=n_cols)
+    table.style = "Table Grid"
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
 
-
-def _replace_table(table, rows: list):
-    """Replace table content; preserves header navy background from template."""
-    n_template = len(table.rows)
-    for ri in range(n_template):
+    for ri, row_vals in enumerate(rows_data):
         row = table.rows[ri]
-        if ri >= len(rows):
-            for cell in row.cells:
-                _cell_write(cell, "")
-            continue
-        is_hdr = (ri == 0)
-        for ci, cell in enumerate(row.cells):
-            text = str(rows[ri][ci]) if ci < len(rows[ri]) else ""
-            _cell_write(cell, text, bold=is_hdr, white=is_hdr)
-
-
-# ── global text replacements ─────────────────────────────────────────────────
-
-def _apply_global(doc, c):
-    """Replace PD-specific terms throughout the document."""
-    reps = [
-        ("PD Responder Tracking & Classification", c["subtitle"]),
-        ("SOZO Response Assessment, Levodopa-tDCS Documentation & FNON Non-Responder Pathway",
-         c["sec2_subtitle"]),
-        ("Levodopa-tDCS Scheduling & Documentation", c["sec7_title"].replace("7. ", "")),
-        ("7. Levodopa-tDCS Scheduling & Documentation", c["sec7_title"]),
-        ("7A. ON-State vs OFF-State Comparison", c["sec7a_title"]),
-        ("7C. Levodopa + tDCS Pairing by PD Phenotype", c["sec7c_title"]),
-        ("7D. Levodopa-tDCS Documentation Checklist", c["sec7d_title"]),
-        ("tDCS effects are state-dependent. Dopamine influences NMDA-dependent plasticity.",
-         c["sec7_intro"]),
-        ("SOZO Standard Rule: Choose ONE medication state for a block and keep it CONSISTENT. Inconsistent ON/OFF timing is one of",
-         c["scheduling_rule"][:120]),
-        ("Use at Session 10 (or 8\u201310) and again at end of block:",
-         f"Use at Session 10 (or 8\u201310) and again at end of block:"),
-        # PD-specific terms
-        ("Parkinson's Disease (PD)", c["name"]),
-        ("Parkinson's disease (PD)", c["name"]),
-        ("Parkinson's Disease", c["name"]),
-        ("Parkinson's disease", c["name"]),
-        ("Parkinson's", c["short"]),
-        ("PD fluctuations", f"{c['short']} symptom fluctuation"),
-        (" (PD)", f""),
-        ("PD Phenotype", f"{c['short']} Phenotype"),
-        ("H&Y Stage", "Symptom Severity"),
-        ("levodopa", c["med_name"]),
-        ("Levodopa", c["med_name"].capitalize()),
-    ]
-    for para in doc.paragraphs:
-        full = "".join(r.text for r in para.runs)
-        for old, new in reps:
-            if old in full:
-                _para_replace(para, old, new)
-                full = "".join(r.text for r in para.runs)
-    for table in doc.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                for para in cell.paragraphs:
-                    full = "".join(r.text for r in para.runs)
-                    for old, new in reps:
-                        if old in full:
-                            _para_replace(para, old, new)
-                            full = "".join(r.text for r in para.runs)
-
-
-# ── targeted para replacements ───────────────────────────────────────────────
-
-def _apply_paras(doc, c):
-    paras = doc.paragraphs
-    # [1] subtitle
-    _para_set(paras[1], c["subtitle"])
-    # [2] section 2 subtitle
-    _para_set(paras[2], c["sec2_subtitle"])
-    # [8] false non-responder note
-    _para_set(paras[8], c["false_nonresponder_note"])
-    # [19] measurement confound warning
-    _para_set(paras[19], c["measurement_confound_warning"])
-    # [29] safety warning (keep generic)
-    _para_set(paras[29], "DO NOT escalate intensity beyond safety limits. Always follow SOZO FNON Protocol safety parameters.")
-    # [32] section 7 intro
-    _para_set(paras[32], c["sec7_intro"])
-    # [36] scheduling rule
-    _para_set(paras[36], c["scheduling_rule"])
-
-
-# ── table replacements ────────────────────────────────────────────────────────
-
-def _apply_tables(doc, c):
-    tables = doc.tables
-
-    # Table[0]: Patient info — update phenotype row (row 3)
-    _cell_write(tables[0].rows[3].cells[0], c["phenotype_row"][0], bold=False)
-    _cell_write(tables[0].rows[3].cells[1], c["phenotype_row"][1], bold=False)
-    # Clear H&Y Stage row (row 4) — replace label
-    _cell_write(tables[0].rows[4].cells[0], "Symptom Severity / Stage", bold=False)
-
-    # Table[1]: Response domains (5r x 4c)
-    _replace_table(tables[1], c["response_domains"])
-
-    # Table[2]: Responder profiles (7r x 4c)
-    _replace_table(tables[2], c["responder_profiles"])
-
-    # Table[3]: Clinical predictors (5r x 3c)
-    _replace_table(tables[3], c["clinical_predictors"])
-
-    # Table[4]: Protocol predictors (5r x 2c)
-    _replace_table(tables[4], c["protocol_predictors"])
-
-    # Table[5]: Response classification (4r x 3c)
-    _replace_table(tables[5], c["response_classification"])
-
-    # Table[6]: Non-responder profiles (5r x 3c)
-    _replace_table(tables[6], c["non_responder_profiles"])
-
-    # Table[8]: Medication state comparison (6r x 3c)
-    _replace_table(tables[8], c["med_state_comparison"])
-
-    # Table[9]: Medication documentation (8r x 2c)
-    _replace_table(tables[9], c["med_documentation"])
-
-    # Table[10]: Phenotype pairing (5r x 4c)
-    _replace_table(tables[10], c["phenotype_pairing"])
-
-    # Table[11]: Documentation checklist (10r x 3c)
-    _replace_table(tables[11], c["doc_checklist"])
-
-    # Table[13]: Language guide (4r x 2c)
-    _replace_table(tables[13], c["language_guide"])
+        is_hdr = (ri == 0 and navy_header)
+        shade = not is_hdr and (ri % 2 == 1)
+        for ci in range(n_cols):
+            cell = row.cells[ci]
+            val = str(row_vals[ci]) if ci < len(row_vals) else ""
+            if is_hdr:
+                _set_cell_bg(cell, HEX_NAVY)
+            elif shade:
+                _set_cell_bg(cell, HEX_LGRAY)
+            cell.text = ""
+            p = cell.paragraphs[0]
+            run = p.add_run(val)
+            run.bold = is_hdr
+            run.font.size = Pt(9)
+            if is_hdr:
+                run.font.color.rgb = C_WHITE
+    return table
 
 
 # ── build one condition ───────────────────────────────────────────────────────
 
 def build(c: dict):
     slug = c["slug"]
-    print(f"  Generating: {c['short']} ({slug})...")
-    doc = Document(str(TEMPLATE))
-    _apply_global(doc, c)
-    _apply_paras(doc, c)
-    _apply_tables(doc, c)
+    name = c["name"]
+    short = c["short"]
+    print(f"  Generating: {short} ({slug})...")
 
+    doc = Document()
+
+    # ── Page margins ──────────────────────────────────────────────────────────
+    for section in doc.sections:
+        section.top_margin    = Inches(0.6)
+        section.bottom_margin = Inches(0.6)
+        section.left_margin   = Inches(0.75)
+        section.right_margin  = Inches(0.75)
+
+    # ── Header banner ─────────────────────────────────────────────────────────
+    _add_title_banner(doc, "SOZO BRAIN CENTER \u2014 PARTNERS TIER")
+    _add_title_banner(doc, c["subtitle"])
+    _add_title_banner(doc, c["sec2_subtitle"])
+
+    p = doc.add_paragraph()
+    run = p.add_run("FNON + Evidence-Based Assessment \u2014 Includes Brain Network Analysis")
+    run.bold = True
+    run.italic = True
+    run.font.size = Pt(9)
+    run.font.color.rgb = C_BLUE
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    doc.add_paragraph()
+
+    # ── Patient Information Table ─────────────────────────────────────────────
+    _add_section_heading(doc, "Patient Information", level=2)
+    patient_rows = [
+        ["Field", "Details"],
+        ["Patient Name / ID", ""],
+        ["Date of Birth", ""],
+        [c["phenotype_row"][0], c["phenotype_row"][1]],
+        ["Symptom Severity / Stage", ""],
+        ["Condition Name", name],
+        ["Medication Class", c.get("med_class", "")],
+        ["Referring Clinician", ""],
+        ["Assessment Date", ""],
+    ]
+    _make_table(doc, patient_rows)
+    doc.add_paragraph()
+
+    # ── Section 1: Response Definition ───────────────────────────────────────
+    _add_section_heading(doc, "1. SOZO Operational Response Definition")
+    _add_body_text(doc, (
+        "Define response at end of block (typically 10\u201320 sessions). "
+        "Patient must meet criteria in at least one primary domain AND show no deterioration in others."
+    ))
+    _add_body_text(doc, c["false_nonresponder_note"], italic=True)
+    doc.add_paragraph()
+
+    # ── Section 2: Likely Responder Profiles ─────────────────────────────────
+    _add_section_heading(doc, "2. Likely Responder Profiles")
+    _add_body_text(doc, (
+        "FNON-based responder profiling maps treatment targets to network hypotheses "
+        "for optimised protocol selection."
+    ))
+    _make_table(doc, c["responder_profiles"])
+    doc.add_paragraph()
+
+    # ── Section 3: Predictors of Better Response ─────────────────────────────
+    _add_section_heading(doc, "3. Predictors of Better Response")
+    _add_section_heading(doc, "3A. Clinical Predictors", level=2)
+    _make_table(doc, c["clinical_predictors"])
+    doc.add_paragraph()
+
+    _add_section_heading(doc, "3B. Protocol Predictors (Modifiable)", level=2)
+    _make_table(doc, c["protocol_predictors"])
+    doc.add_paragraph()
+
+    _add_section_heading(doc, "3C. Measurement Predictors", level=2)
+    _add_body_text(doc, c["measurement_confound_warning"], italic=True)
+    doc.add_paragraph()
+
+    # ── Section 4: Response Classification ───────────────────────────────────
+    _add_section_heading(doc, "4. SOZO Response Classification")
+    _add_body_text(doc, "Use at Session 10 (or 8\u201310) and again at end of block:")
+    _make_table(doc, c["response_classification"])
+    _add_body_text(doc, (
+        "PATIENT CLASSIFICATION: \u25a1 Responder  \u25a1 Partial Responder  \u25a1 Non-Responder"
+    ))
+    doc.add_paragraph()
+
+    # ── Section 5: Non-Responder Profiles ────────────────────────────────────
+    _add_section_heading(doc, "5. Likely Non-Responder Profiles")
+    _make_table(doc, c["non_responder_profiles"])
+    doc.add_paragraph()
+
+    # ── Section 6: FNON Pathway ───────────────────────────────────────────────
+    _add_section_heading(doc, "6. SOZO Non-Responder Pathway (FNON Level 5)")
+    _add_body_text(doc, (
+        "If no meaningful improvement after 8\u201310 sessions, follow FNON Level 5 adjustment pathway: "
+        "Reassess phenotype, review medication state, adjust montage, consider multi-modal pathway."
+    ))
+    _add_body_text(doc, (
+        "DO NOT escalate intensity beyond safety limits. "
+        "Always follow SOZO FNON Protocol safety parameters."
+    ))
+    doc.add_paragraph()
+
+    # ── Section 7: Medication-tDCS Documentation ──────────────────────────────
+    _add_section_heading(doc, c["sec7_title"])
+    _add_body_text(doc, c["sec7_intro"])
+
+    _add_section_heading(doc, c["sec7a_title"], level=2)
+    _make_table(doc, c["med_state_comparison"])
+    doc.add_paragraph()
+
+    _add_section_heading(doc, "7B. SOZO Scheduling Rules", level=2)
+    _add_body_text(doc, c["scheduling_rule"])
+    doc.add_paragraph()
+
+    _add_section_heading(doc, c["sec7c_title"], level=2)
+    _make_table(doc, c["phenotype_pairing"])
+    doc.add_paragraph()
+
+    _add_section_heading(doc, c["sec7d_title"], level=2)
+    _make_table(doc, c["doc_checklist"])
+    doc.add_paragraph()
+
+    # ── Section 8: Signature / Data Collection ────────────────────────────────
+    _add_section_heading(doc, "8. SOZO Responder Signature Data Collection")
+    _make_table(doc, c["med_documentation"])
+    doc.add_paragraph()
+
+    # ── Regulator-Safe Language Guide ─────────────────────────────────────────
+    _add_section_heading(doc, "Regulator-Safe Language Guide")
+    _make_table(doc, c["language_guide"])
+    doc.add_paragraph()
+
+    # ── Response Domains (Section 1 table) ────────────────────────────────────
+    _add_section_heading(doc, "Response Domain Assessment", level=2)
+    _make_table(doc, c["response_domains"])
+    doc.add_paragraph()
+
+    # ── Clinical Notes ────────────────────────────────────────────────────────
+    _add_section_heading(doc, "Clinical Notes & Rationale:", level=2)
+    _add_body_text(doc, "_" * 60)
+    _add_body_text(doc, "_" * 60)
+
+    # ── Sign-off table ────────────────────────────────────────────────────────
+    signoff_rows = [
+        ["Role", "Name", "Signature", "Date"],
+        ["Treating Clinician", "", "", ""],
+    ]
+    _make_table(doc, signoff_rows)
+
+    # ── Save ──────────────────────────────────────────────────────────────────
     out = OUTPUT_ROOT / slug / "partners" / f"Responder_Tracking_Partners_{slug}.docx"
     out.parent.mkdir(parents=True, exist_ok=True)
     doc.save(str(out))
@@ -234,7 +312,9 @@ if __name__ == "__main__":
                 build(data)
                 ok.append(slug)
             except Exception as e:
+                import traceback
                 print(f"  [FAIL] {slug}: {e}")
+                traceback.print_exc()
                 fail.append(slug)
         print(f"\nDone: {len(ok)} OK, {len(fail)} failed.")
         if fail:

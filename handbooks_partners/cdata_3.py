@@ -596,7 +596,162 @@ CDATA = {
             ["Paradoxical Insomnia", "CES primary + taVNS + tDCS Fpz cathode; avoid high-intensity tDCS; prioritise arousal perception retraining"],
             ["Circadian Rhythm", "taVNS timed to target circadian phase shift + CES + tDCS Fz/Cz; coordinate with light therapy schedule"],
             ["Pain Comorbid", "tDCS M1/C3 anode (descending inhibition) + TPS peripheral (pain sites) + CES + taVNS (pain + sleep)"],
-            ["No response after 8–10", "Return to FNON Level 1: Reassess phenotype → Re-map network → Adjust montage. DO NOT escalate intensity."],
+            ["No response after 8\u201310", "Return to FNON Level 1: Reassess phenotype \u2192 Re-map network \u2192 Adjust montage. DO NOT escalate intensity."],
+        ],
+    },
+
+    "parkinsons": {
+        "slug": "parkinsons",
+        "cover_title": "PARKINSON'S DISEASE",
+        "name": "Parkinson's Disease",
+        "short": "Parkinson's",
+        "abbr": "PD",
+        "med_name": "levodopa / dopamine agonists",
+
+        "partners_tier_body": (
+            "PARTNERS TIER: This document contains the complete FNON framework including network hypothesis "
+            "generation, 6-Network Bedside Assessment, S-O-Z-O sequencing, and full FNON Level 1\u20135 clinical "
+            "decision pathway for Parkinson\u2019s Disease. For use by the treating Doctor and authorised SOZO "
+            "clinical staff only."
+        ),
+        "tps_offlabel_body": (
+            "WARNING: Off-Label Disclosure: TPS (NEUROLITH\u00ae) use in Parkinson\u2019s Disease is "
+            "INVESTIGATIONAL at SOZO Brain Center. It is not CE-marked or FDA-approved for PD. All patients "
+            "must provide written informed consent inclusive of the off-label TPS disclosure. TPS use is "
+            "restricted to the prescribing Doctor only. NEUROLITH\u00ae 4 Hz, 0.25 mJ/mm\u00b2, 10,000 pulses; "
+            "targets M1 + SMA + DLPFC over 25\u201330 min/session, 12 sessions/4 weeks."
+        ),
+        "mandatory_consent_body": (
+            "WARNING: MANDATORY: No diagnostic or therapeutic procedures may be performed prior to informed "
+            "consent being obtained. This includes the off-label disclosure for all investigational modalities "
+            "used in Parkinson\u2019s Disease treatment. DBS patients: TPS is ABSOLUTELY CONTRAINDICATED. "
+            "Non-compliance is a clinical governance violation."
+        ),
+
+        "prs_primary_label": "Primary Motor Symptoms Domain \u2014 score each relevant item on a 0\u201310 scale (patient-rated):",
+        "prs_primary_items": [
+            "Tremor severity (resting tremor)",
+            "Rigidity (muscle stiffness)",
+            "Bradykinesia (slowness of movement)",
+            "Gait difficulty / freezing of gait",
+            "Postural instability / balance impairment",
+            "Fine motor tasks (writing, buttoning, grip)",
+            "Falls frequency",
+            "Dysarthria / speech difficulty",
+        ],
+        "prs_secondary_label": "Non-Motor Symptoms Domain:",
+        "prs_secondary_items": [
+            "Cognitive impairment / memory",
+            "Depression / low mood",
+            "Anxiety",
+            "Sleep disturbance (insomnia / RBD)",
+            "Fatigue",
+            "Autonomic symptoms (orthostasis, constipation)",
+            "Apathy / motivation loss",
+            "Pain / sensory symptoms",
+        ],
+
+        "phenotype_prelim": (
+            "Assign a preliminary phenotype: Motor Predominant (Tremor/Rigidity/Bradykinesia), "
+            "Cognitive/MCI Predominant, Autonomic Predominant, Depression Comorbid, "
+            "Freezing of Gait, or Advanced PD (H&Y 4-5)."
+        ),
+
+        "pre_session_med_check": "\u2610 Record current PD medications (levodopa dose, dopamine agonist, timing; last dose; document ON/OFF state at session start)",
+        "session_med_doc": "PD medication state (levodopa/dopamine agonist dose and timing; ON/OFF state at session; wearing-off status)",
+
+        "false_class_body": (
+            "WARNING: AVOIDING FALSE CLASSIFICATION: UPDRS-III motor scores vary significantly with "
+            "levodopa ON/OFF state. Always assess in the same medication state (ideally defined ON state: "
+            "60\u201390 minutes post-levodopa). Document levodopa dose, timing, and time since last dose at "
+            "every assessment. Morning assessments at a consistent time avoid diurnal fluctuation. "
+            "Assess in the same room and same movement conditions between baseline and follow-up."
+        ),
+
+        "inclusion_items": [
+            "Confirmed diagnosis of Parkinson\u2019s Disease (UK Brain Bank or MDS diagnostic criteria)",
+            "H&Y Stage 1\u20133 (ambulatory with or without assistance)",
+            "Stable PD medication regimen for \u22654 weeks",
+            "UPDRS-III \u226515 at baseline (motor symptoms warrant intervention)",
+            "Age 40\u201385; capable of informed consent (or supported consent with carer)",
+            "No active DBS implant (absolute TPS contraindication)",
+            "Written informed consent including TPS off-label disclosure",
+            "Baseline SOZO PRS and UPDRS-III, MoCA completed",
+        ],
+        "exclusion_items": [
+            "Active deep brain stimulator (DBS) \u2014 ABSOLUTE contraindication to TPS",
+            "Metallic implants in head/neck stimulation field",
+            "Cardiac pacemaker or ICD",
+            "Active psychosis or dopamine dysregulation syndrome",
+            "H&Y Stage 5 (bed/wheelchair-bound) without caregiver-supported protocol",
+            "Pregnancy",
+            "Recent neurosurgical procedure or skull defect over target area",
+            "Inability to tolerate stimulation or cooperate with protocol",
+        ],
+        "conditional_items": [
+            "Levodopa wearing-off: assess in defined ON state; document timing precisely",
+            "Cognitive impairment (MoCA <21): supported consent; caregiver present; simplified protocol",
+            "Orthostatic hypotension: seated or supine session; blood pressure monitoring pre/post",
+            "REM Sleep Behaviour Disorder: CES evening; sleep specialist concurrent",
+            "Comorbid essential tremor: clarify PD vs ET component; differentiated protocol",
+            "Impulse control disorder: psychiatry input; monitor on dopamine agonist",
+            "Severe dysarthria: speech therapy concurrent; AAC support for cognitive tasks",
+            "Elderly (\u226575): reduce tDCS intensity (1\u20131.5 mA); shorter sessions; fall risk assessment",
+        ],
+
+        "modality_table": [
+            ["Modality", "Device", "Regulatory", "Evidence Level", "Papers (est.)"],
+            ["tDCS", "Newronika HDCkit / PlatoScience", "CE Class IIa", "RCT, Meta-analysis", "50+"],
+            ["TPS", "NEUROLITH\u00ae (Storz Medical)", "CE Class IIa \u2014 INVESTIGATIONAL OFF-LABEL", "Pilot RCT, Open-label", "5+"],
+            ["taVNS", "Nemos / TENS tragus device", "CE-marked (epilepsy/depression)", "Open-label, Pilot", "10+"],
+            ["CES", "Alpha-Stim AID", "FDA-cleared (anxiety/insomnia/depression)", "Open-label, Pilot", "5+"],
+            ["TMS", "NeuroStar / MagVenture", "CE/FDA (research use)", "RCT, Meta-analysis", "60+"],
+            ["DBS", "Medtronic / Abbott", "FDA-cleared for PD", "Gold Standard RCT", "500+"],
+        ],
+        "best_modality": "tDCS (M1 anodal), TMS (rTMS M1/DLPFC)",
+        "offlabel_table": [
+            ["Modality", "Regulatory Status", "PD Classification", "Disclosure Required"],
+            ["tDCS", "CE Class IIa", "Level B evidence; M1 anodal motor facilitation for PD established", "Standard informed consent"],
+            ["TPS", "CE Class IIa", "INVESTIGATIONAL \u2014 OFF-LABEL", "Full off-label disclosure + Doctor sign-off"],
+            ["taVNS", "CE-marked (epilepsy/depression)", "Emerging for PD autonomic and motor symptoms", "Standard informed consent + evidence disclosure"],
+            ["CES", "FDA-cleared (anxiety/depression/insomnia)", "Supportive for PD depression, anxiety, sleep", "Standard informed consent"],
+        ],
+        "phenotype_table": [
+            ["Phenotype", "Key Features (Network Basis)"],
+            ["Motor Predominant", "Tremor, rigidity, bradykinesia; M1+SMA hypoactivation; beta-band excess in BG-thalamic circuit"],
+            ["Cognitive / MCI", "MoCA <26; DLPFC-PPC Executive Control Network hypoactivation; DMN disrupted PD-MCI"],
+            ["Autonomic Predominant", "Orthostatic hypotension, POTS, constipation; brainstem-vagal circuit degeneration (Lewy body stage 1-2)"],
+            ["Depression Comorbid", "PHQ-9 \u226510; L-DLPFC hypoactivation; LIMBIC-motor overlap; high in PD (30\u201340%)"],
+            ["Freezing of Gait", "FoG-Q >7; SMA-basal ganglia circuit failure; cueing-responsive; high fall risk"],
+            ["Tremor Predominant", "Resting tremor dominant; cerebellar-thalamic circuit; bilateral M1 tDCS; DBS if refractory"],
+            ["Advanced PD (H&Y 4-5)", "Severe bilateral disability; limited ambulatory; CES+taVNS primary; tDCS low-intensity; caregiver-supported"],
+        ],
+        "task_pairing_table": [
+            ["Montage Target", "Domain", "Concurrent Task"],
+            ["M1 bilateral (C3/C4 anodal)", "Motor facilitation", "Gait training, balance exercises, physiotherapy during tDCS for motor cortex priming"],
+            ["DLPFC (F3/F4 anodal)", "Cognitive-motor", "Dual-task gait, N-back, verbal fluency during tDCS for executive-motor integration"],
+            ["SMA (Cz anodal)", "Gait initiation", "Rhythmic Auditory Stimulation (RAS), cueing gait training concurrent with stimulation"],
+            ["taVNS extended (40 min)", "Autonomic / neuroprotective", "HRV biofeedback, paced breathing (6 cpm), orthostatic training, relaxation"],
+            ["CES (Alpha-Stim)", "Sleep / mood / anxiety", "PD anxiety management; sleep hygiene; caregiver communication support"],
+        ],
+        "response_domains_table": [
+            ["Domain", "Response Criteria"],
+            ["UPDRS-III (Primary)", "MCID \u22652.3 points reduction; \u226520% improvement in motor score = clinical response"],
+            ["MoCA (Cognitive)", "Stable or improved MoCA (\u22651 point) over treatment block; prevent cognitive decline"],
+            ["PDQ-39 (QoL)", "MCID \u22654.2 point SI reduction; clinically meaningful QoL improvement"],
+            ["PHQ-9 / GAD-7 (Mood)", "\u226550% reduction = response; score \u22644 = remission of PD depression/anxiety"],
+            ["FoG-Q (Gait)", "\u22653-point reduction = clinical improvement in freezing; TUG \u226520% faster"],
+        ],
+        "montage_table": [
+            ["Phenotype", "SOZO Device & Network Strategy"],
+            ["Motor Predominant", "tDCS M1 bilateral (C3/C4 anodal 2\u202fmA) + TPS M1+SMA (4\u202fHz, 10,000 pulses, 0.25\u202fmJ/mm\u00b2) + taVNS 30min + physiotherapy"],
+            ["Cognitive / MCI", "tDCS DLPFC bilateral (F3/F4 anodal 2\u202fmA) + TPS DLPFC (4\u202fHz, 1,000 pulses) + taVNS 30min + cognitive rehab"],
+            ["Autonomic Predominant", "taVNS 40min primary + CES daily + tDCS M1 (1.5\u202fmA); TPS deferred until autonomic stable"],
+            ["Depression Comorbid", "tDCS L-DLPFC (F3 anodal 2\u202fmA) + TPS DLPFC L (4\u202fHz, 800 pulses) + taVNS 30min + CES daily"],
+            ["Freezing of Gait", "tDCS SMA (Cz anodal 2\u202fmA) + DLPFC + TPS M1+SMA (4\u202fHz, 10,000 pulses) + RAS gait training"],
+            ["Tremor Predominant", "tDCS M1 bilateral (C3/C4 1.5\u202fmA) + TPS M1 bilateral (4\u202fHz, 800 pulses) + taVNS 30min"],
+            ["Advanced PD (H&Y 4-5)", "CES primary (daily) + taVNS 20min + tDCS DLPFC (1\u202fmA, 15\u202fmin); TPS deferred"],
+            ["No response after 8\u201310", "Return to FNON Level 1: Reassess phenotype \u2192 Confirm ON state assessment \u2192 Re-map network. DO NOT escalate intensity."],
         ],
     },
 }

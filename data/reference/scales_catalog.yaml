@@ -133,22 +133,7 @@ scales:
     pmid: "8080219"
     type: "self_report"
 
-  # Sleep
-  psqi:
-    name: "Pittsburgh Sleep Quality Index"
-    abbreviation: "PSQI"
-    conditions: ["insomnia", "parkinsons", "depression", "ptsd", "long_covid"]
-    domains: ["sleep_quality"]
-    pmid: "2748771"
-    type: "self_report"
-
-  isi:
-    name: "Insomnia Severity Index"
-    abbreviation: "ISI"
-    conditions: ["insomnia", "depression", "anxiety", "long_covid"]
-    domains: ["insomnia_severity"]
-    pmid: "11772681"
-    type: "self_report"
+  # Sleep — moved to expanded entries below (isi, psqi)
 
   # Tinnitus
   thi:
@@ -315,3 +300,201 @@ scales:
     domains: ["carer_burden"]
     type: "self_report"
     threshold: "0-20 little/no burden; 21-40 mild-moderate; 41-60 moderate-severe; 61-88 severe"
+
+  # ── Missing scales added April 2026 ──
+
+  adas_cog:
+    name: "Alzheimer's Disease Assessment Scale-Cognitive"
+    abbreviation: "ADAS-Cog"
+    conditions: ["alzheimers", "mci"]
+    domains: ["cognition", "memory", "language"]
+    scoring_range: "0-70"
+    interpretation: "Higher scores indicate worse cognitive function; change >=4 points = clinically meaningful"
+    pmid: "3418805"
+    type: "clinician_administered"
+
+  barthel:
+    name: "Barthel Index of Activities of Daily Living"
+    abbreviation: "Barthel ADL"
+    conditions: ["stroke_rehab", "tbi", "ms"]
+    domains: ["activities_of_daily_living", "functional_independence"]
+    scoring_range: "0-100"
+    interpretation: "Higher = more independent; <20 = total dependence; 61-99 = moderate dependence; 100 = independent"
+    pmid: "14258950"
+    type: "clinician_administered"
+
+  bdi2:
+    name: "Beck Depression Inventory-II"
+    abbreviation: "BDI-II"
+    conditions: ["depression", "anxiety", "tbi", "ms", "long_covid"]
+    domains: ["depression", "mood"]
+    scoring_range: "0-63"
+    interpretation: "0-13 minimal; 14-19 mild; 20-28 moderate; >=29 severe depression"
+    pmid: "9204627"
+    type: "self_report"
+
+  bdss:
+    name: "Brief Dissociative Symptoms Scale"
+    abbreviation: "BDSS"
+    conditions: ["ptsd"]
+    domains: ["dissociation", "trauma"]
+    scoring_range: "0-20"
+    interpretation: "Higher scores indicate greater dissociative symptom burden"
+    type: "self_report"
+
+  brief2:
+    name: "Behavior Rating Inventory of Executive Function-2"
+    abbreviation: "BRIEF-2"
+    conditions: ["adhd", "tbi", "asd"]
+    domains: ["executive_function", "cognition", "behaviour"]
+    scoring_range: "T-scores (mean=50, SD=10)"
+    interpretation: "T-score >=65 = clinically elevated; higher = worse executive function"
+    pmid: "11153985"
+    type: "caregiver_report"
+
+  cfq11:
+    name: "Chalder Fatigue Questionnaire-11"
+    abbreviation: "CFQ-11"
+    conditions: ["long_covid", "ms", "chronic_pain"]
+    domains: ["fatigue", "physical_fatigue", "mental_fatigue"]
+    scoring_range: "0-33"
+    interpretation: "Higher = greater fatigue; >=4 (bimodal) or >=18 (Likert) = caseness"
+    pmid: "8329409"
+    type: "self_report"
+
+  cpt3:
+    name: "Conners' Continuous Performance Test 3"
+    abbreviation: "CPT-3"
+    conditions: ["adhd", "tbi"]
+    domains: ["attention", "sustained_attention", "impulsivity"]
+    scoring_range: "T-scores (mean=50, SD=10)"
+    interpretation: "T-score >=65 = clinically significant; measures inattention, impulsivity, and vigilance"
+    type: "clinician_administered"
+
+  dass21:
+    name: "Depression Anxiety Stress Scales-21"
+    abbreviation: "DASS-21"
+    conditions: ["insomnia", "anxiety", "depression", "long_covid", "chronic_pain", "tbi"]
+    domains: ["depression", "anxiety", "stress"]
+    scoring_range: "0-63 per subscale (scores multiplied x2 from 21-item version)"
+    interpretation: "Depression: >=14 moderate; Anxiety: >=10 moderate; Stress: >=19 moderate"
+    pmid: "11556941"
+    type: "self_report"
+
+  ess:
+    name: "Epworth Sleepiness Scale"
+    abbreviation: "ESS"
+    conditions: ["insomnia", "ms", "tbi", "parkinsons", "long_covid"]
+    domains: ["daytime_sleepiness", "sleep"]
+    scoring_range: "0-24"
+    interpretation: "0-10 normal; >=10 excessive daytime sleepiness; >=16 severe EDS — investigate OSA/hypersomnia"
+    pmid: "1798888"
+    type: "self_report"
+
+  fiqr:
+    name: "Fibromyalgia Impact Questionnaire Revised"
+    abbreviation: "FIQR"
+    conditions: ["chronic_pain"]
+    domains: ["pain", "function", "symptoms", "fatigue"]
+    scoring_range: "0-100"
+    interpretation: "Higher = greater fibromyalgia impact; >=59 = severe; MCID = 14% improvement"
+    pmid: "19121432"
+    type: "self_report"
+
+  fma_ue:
+    name: "Fugl-Meyer Assessment Upper Extremity"
+    abbreviation: "FMA-UE"
+    conditions: ["stroke_rehab"]
+    domains: ["motor_function", "upper_limb_recovery"]
+    scoring_range: "0-66"
+    interpretation: "Higher = better motor function; 0-28 = severe; 29-42 = moderate; 43-49 = mild; MCID = 5-6 points"
+    pmid: "7206847"
+    type: "clinician_administered"
+
+  fss:
+    name: "Fatigue Severity Scale"
+    abbreviation: "FSS"
+    conditions: ["ms", "long_covid", "tbi", "parkinsons", "chronic_pain"]
+    domains: ["fatigue"]
+    scoring_range: "1-7 (9 items, mean score)"
+    interpretation: "Mean >=4 = significant fatigue; >=5 = severe fatigue"
+    pmid: "2803071"
+    type: "self_report"
+
+  hdrs:
+    name: "Hamilton Depression Rating Scale"
+    abbreviation: "HDRS / HAM-D"
+    conditions: ["depression", "tbi", "ms", "long_covid"]
+    domains: ["depression", "mood"]
+    scoring_range: "0-52"
+    interpretation: "0-7 normal; 8-16 mild; 17-23 moderate; >=23 severe; <=7 = remission"
+    pmid: "14100341"
+    type: "clinician_administered"
+
+  nrs:
+    name: "Numeric Rating Scale for Pain"
+    abbreviation: "NRS-11"
+    conditions: ["chronic_pain", "tbi", "ms", "fibromyalgia"]
+    domains: ["pain_intensity"]
+    scoring_range: "0-10"
+    interpretation: "0 = no pain; 1-3 mild; 4-6 moderate; 7-10 severe; MCID = 2 points (30% reduction)"
+    type: "self_report"
+
+  ocir:
+    name: "OCD Inventory-Revised"
+    abbreviation: "OCI-R"
+    conditions: ["ocd"]
+    domains: ["ocd_symptoms", "obsessions", "compulsions"]
+    scoring_range: "0-72"
+    interpretation: ">=21 = probable OCD; differentiates 6 OCD subtypes (washing, checking, ordering, etc.)"
+    pmid: "12186185"
+    type: "self_report"
+
+  pcss:
+    name: "Post-Concussion Symptom Scale"
+    abbreviation: "PCSS"
+    conditions: ["tbi"]
+    domains: ["post_concussion_symptoms", "tbi_severity"]
+    scoring_range: "0-132"
+    interpretation: "Higher = greater symptom burden; clinically significant improvement = >=12 point reduction"
+    pmid: "22622916"
+    type: "self_report"
+
+  vabs:
+    name: "Vineland Adaptive Behavior Scales"
+    abbreviation: "Vineland"
+    conditions: ["asd"]
+    domains: ["adaptive_behaviour", "daily_living", "social_function"]
+    scoring_range: "Standard scores (mean=100, SD=15)"
+    interpretation: "Below 70 = significant adaptive deficits; tracks functional gains in intervention"
+    pmid: "9749881"
+    type: "clinician_administered"
+
+  vas_tinnitus:
+    name: "Visual Analogue Scale for Tinnitus"
+    abbreviation: "VAS-Tinnitus"
+    conditions: ["tinnitus"]
+    domains: ["tinnitus_loudness", "tinnitus_distress"]
+    scoring_range: "0-100"
+    interpretation: "Higher = worse; separate ratings for loudness, distress, and awareness; MCID = 13 mm"
+    type: "self_report"
+
+  isi:
+    name: "Insomnia Severity Index"
+    abbreviation: "ISI"
+    conditions: ["insomnia", "depression", "anxiety", "long_covid"]
+    domains: ["insomnia_severity"]
+    scoring_range: "0-28"
+    interpretation: "0-7 no insomnia; 8-14 subthreshold; 15-21 moderate clinical insomnia; 22-28 severe insomnia"
+    pmid: "11772681"
+    type: "self_report"
+
+  psqi:
+    name: "Pittsburgh Sleep Quality Index"
+    abbreviation: "PSQI"
+    conditions: ["insomnia", "parkinsons", "depression", "ptsd", "long_covid", "anxiety"]
+    domains: ["sleep_quality"]
+    scoring_range: "0-21"
+    interpretation: ">5 = poor sleep quality; higher = worse; 7 component scores"
+    pmid: "2748771"
+    type: "self_report"

@@ -326,6 +326,33 @@ def build_chronic_pain_condition() -> ConditionSchema:
                 EvidenceLevel.MEDIUM, off_label=True,
                 eeg_canonical=["F3"],
             ),
+            StimulationTarget(
+                modality=Modality.CES,
+                target_region="Bilateral earlobe electrodes (CES)",
+                target_abbreviation="CES",
+                laterality="bilateral",
+                rationale="Alpha-Stim CES (0.5 Hz, 100-300 µA) has FDA clearance for anxiety, depression, "
+                          "and insomnia — all common comorbidities in chronic pain and fibromyalgia. "
+                          "Reduces sleep disturbance, catastrophizing-related anxiety, and mood symptoms "
+                          "that amplify pain experience. Adjunct to tDCS.",
+                protocol_label="CES-PAIN — Sleep, Anxiety & Mood",
+                evidence_level=EvidenceLevel.MEDIUM,
+                off_label=False,
+                eeg_canonical=["bilateral earlobes"],
+            ),
+            StimulationTarget(
+                modality=Modality.TAVNS,
+                target_region="Left auricular branch of vagus nerve",
+                target_abbreviation="taVNS",
+                laterality="left",
+                rationale="taVNS modulates autonomic pain regulation via NTS-PAG pathways. "
+                          "Reduces central sensitization through vagal anti-inflammatory mechanisms. "
+                          "Relevant for fibromyalgia and centrally sensitized pain phenotypes. Investigational.",
+                protocol_label="TAVNS-PAIN — Autonomic Pain Modulation Adjunct",
+                evidence_level=EvidenceLevel.LOW,
+                off_label=True,
+                eeg_canonical=["left ear (cymba conchae)"],
+            ),
         ],
 
         protocols=[

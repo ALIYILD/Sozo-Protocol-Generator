@@ -360,6 +360,19 @@ def build_tbi_condition() -> ConditionSchema:
                 off_label=True,
                 eeg_canonical=["Ear"],
             ),
+            StimulationTarget(
+                modality=Modality.CES,
+                target_region="Bilateral earlobe electrodes (CES)",
+                target_abbreviation="CES",
+                laterality="bilateral",
+                rationale="Alpha-Stim CES FDA-cleared for anxiety, depression, and insomnia — highly prevalent "
+                          "TBI comorbidities. Addresses post-concussion sleep disturbance, anxiety, and mood "
+                          "symptoms without pharmacological load. Adjunct to DLPFC tDCS in TBI rehabilitation.",
+                protocol_label="CES-TBI — Sleep, Anxiety & Mood Adjunct",
+                evidence_level=EvidenceLevel.MEDIUM,
+                off_label=False,
+                eeg_canonical=["bilateral earlobes"],
+            ),
         ],
 
         protocols=[

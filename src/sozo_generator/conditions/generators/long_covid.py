@@ -364,6 +364,20 @@ def build_long_covid_condition() -> ConditionSchema:
                 off_label=True,
                 eeg_canonical=["Ear"],
             ),
+            StimulationTarget(
+                modality=Modality.CES,
+                target_region="Bilateral earlobe electrodes (CES)",
+                target_abbreviation="CES",
+                laterality="bilateral",
+                rationale="Alpha-Stim CES FDA-cleared for anxiety, depression, and insomnia — all common "
+                          "long COVID comorbidities. Addresses sleep disruption, mood symptoms, and anxiety "
+                          "without pharmacological load, which is important in a population with drug sensitivity. "
+                          "Adjunct to DLPFC tDCS and taVNS in the long COVID multimodal protocol.",
+                protocol_label="CES-LC — Sleep, Anxiety & Mood",
+                evidence_level=EvidenceLevel.MEDIUM,
+                off_label=False,
+                eeg_canonical=["bilateral earlobes"],
+            ),
         ],
 
         protocols=[
