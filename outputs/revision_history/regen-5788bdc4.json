@@ -1,0 +1,21 @@
+{
+  "result_id": "regen-5788bdc4",
+  "plan_id": "plan-9fe1266e",
+  "old_document_id": "test-ready",
+  "new_document_id": "rev-regen-5788bdc4",
+  "condition": "parkinsons",
+  "blueprint": "evidence_based_protocol",
+  "tier": "fellow",
+  "created_at": "2026-04-04T21:02:24Z",
+  "applied_changes": [
+    "cr-e73cc649"
+  ],
+  "blocked_changes": [],
+  "sections_changed": [],
+  "readiness_before": "ready",
+  "readiness_after": "ready",
+  "success": true,
+  "error": "",
+  "plan_summary": "=== CHANGE PLAN: plan-9fe1266e ===\nDocument: parkinsons/evidence_based_protocol/fellow\nChanges: 1 proposed, 0 blocked\nImpacted sections: none\nRequires regeneration: True\nRequires evidence review: False\nSafe to auto-apply: True\n\n  [applied] cr-e73cc649: update_wording \u2192 section_override:\n    Comment: Minor wording improvement\n    Resolution: Apply update_wording to section ''",
+  "result_summary": "=== REGENERATION RESULT: regen-5788bdc4 ===\nPlan: plan-9fe1266e\nSuccess: True\nApplied: 1 changes\nBlocked: 0\nReadiness: ready \u2192 ready\nPMIDs: 140 \u2192 140\nSections changed: none\nOutput: outputs\\documents\\parkinsons\\fellow\\parkinsons_evidence-based-protocol_fellow.docx"
+}

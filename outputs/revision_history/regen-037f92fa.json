@@ -1,0 +1,25 @@
+{
+  "result_id": "regen-037f92fa",
+  "plan_id": "plan-0feaeed0",
+  "old_document_id": "docx-test",
+  "new_document_id": "rev-regen-037f92fa",
+  "condition": "parkinsons",
+  "blueprint": "evidence_based_protocol",
+  "tier": "fellow",
+  "created_at": "2026-04-04T20:58:37Z",
+  "applied_changes": [
+    "cr-69dccd78",
+    "cr-578b46eb"
+  ],
+  "blocked_changes": [],
+  "sections_changed": [
+    "protocols_tps",
+    "pathophysiology"
+  ],
+  "readiness_before": "ready",
+  "readiness_after": "ready",
+  "success": true,
+  "error": "",
+  "plan_summary": "=== CHANGE PLAN: plan-0feaeed0 ===\nDocument: parkinsons/evidence_based_protocol/fellow\nChanges: 5 proposed, 0 blocked\nImpacted sections: protocols_tps, pathophysiology, network_profiles, safety, brain_anatomy\nRequires regeneration: True\nRequires evidence review: True\nSafe to auto-apply: False\n\n  [applied] cr-69dccd78: strengthen_evidence \u2192 section_override:protocols_tps [EVIDENCE-SENSITIVE] [NEEDS APPROVAL]\n    Comment: Add more evidence for the TPS rationale in this section.\n    Resolution: Review evidence for section 'protocols_tps' \u2014 may need additional PMIDs\n  [deferred] cr-bdf89965: update_wording \u2192 section_override:network_profiles\n    Comment: This is too technical for Fellows. Simplify the network analysis.\n    Resolution: Adjust tone/complexity in section 'network_profiles' for tier appropriateness\n  [deferred] cr-dcf08cb5: update_safety \u2192 knowledge_patch:safety [EVIDENCE-SENSITIVE] [NEEDS APPROVAL]\n    Comment: The contraindications section needs to include pregnancy risk.\n    Resolution: Review evidence for section 'safety' \u2014 may need additional PMIDs\n  [deferred] cr-a2d29705: update_visual \u2192 blueprint_patch:brain_anatomy\n    Comment: Move the brain map visual above the protocol table.\n    Resolution: Update visual placement or type in blueprint for section 'brain_anatomy'\n  [applied] cr-578b46eb: add_content \u2192 section_override:pathophysiology\n    Comment: Expand the pathophysiology mechanisms with Braak staging detail.\n    Resolution: Apply add_content to section 'pathophysiology'\n\nWARNINGS:\n  - Plan includes evidence-sensitive changes \u2014 manual review recommended\n  - Plan includes knowledge/rule patches \u2014 clinical review required",
+  "result_summary": "=== REGENERATION RESULT: regen-037f92fa ===\nPlan: plan-0feaeed0\nSuccess: True\nApplied: 2 changes\nBlocked: 0\nReadiness: ready \u2192 ready\nPMIDs: 140 \u2192 140\nSections changed: protocols_tps, pathophysiology\nOutput: outputs\\documents\\parkinsons\\fellow\\parkinsons_evidence-based-protocol_fellow.docx"
+}

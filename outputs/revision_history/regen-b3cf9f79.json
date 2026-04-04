@@ -1,0 +1,23 @@
+{
+  "result_id": "regen-b3cf9f79",
+  "plan_id": "plan-2d8d9e26",
+  "old_document_id": "test-regen",
+  "new_document_id": "rev-regen-b3cf9f79",
+  "condition": "parkinsons",
+  "blueprint": "evidence_based_protocol",
+  "tier": "fellow",
+  "created_at": "2026-04-04T20:56:47Z",
+  "applied_changes": [
+    "cr-97fc3920"
+  ],
+  "blocked_changes": [],
+  "sections_changed": [
+    "pathophysiology"
+  ],
+  "readiness_before": "ready",
+  "readiness_after": "ready",
+  "success": true,
+  "error": "",
+  "plan_summary": "=== CHANGE PLAN: plan-2d8d9e26 ===\nDocument: parkinsons/evidence_based_protocol/fellow\nChanges: 2 proposed, 0 blocked\nImpacted sections: pathophysiology, network_profiles\nRequires regeneration: True\nRequires evidence review: False\nSafe to auto-apply: True\n\n  [applied] cr-97fc3920: add_content \u2192 section_override:pathophysiology\n    Comment: Add more detail to pathophysiology section\n    Resolution: Apply add_content to section 'pathophysiology'\n  [deferred] cr-3a930547: update_wording \u2192 section_override:network_profiles\n    Comment: Simplify network analysis for Fellows\n    Resolution: Adjust tone/complexity in section 'network_profiles' for tier appropriateness",
+  "result_summary": "=== REGENERATION RESULT: regen-b3cf9f79 ===\nPlan: plan-2d8d9e26\nSuccess: True\nApplied: 1 changes\nBlocked: 0\nReadiness: ready \u2192 ready\nPMIDs: 140 \u2192 140\nSections changed: pathophysiology\nOutput: outputs\\documents\\parkinsons\\fellow\\parkinsons_evidence-based-protocol_fellow.docx"
+}

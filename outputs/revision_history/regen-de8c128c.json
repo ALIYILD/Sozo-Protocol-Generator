@@ -1,0 +1,21 @@
+{
+  "result_id": "regen-de8c128c",
+  "plan_id": "plan-f8284e2b",
+  "old_document_id": "test-prov",
+  "new_document_id": "rev-regen-de8c128c",
+  "condition": "depression",
+  "blueprint": "evidence_based_protocol",
+  "tier": "fellow",
+  "created_at": "2026-04-04T20:56:49Z",
+  "applied_changes": [
+    "cr-cb81b9e0"
+  ],
+  "blocked_changes": [],
+  "sections_changed": [],
+  "readiness_before": "ready",
+  "readiness_after": "ready",
+  "success": true,
+  "error": "",
+  "plan_summary": "=== CHANGE PLAN: plan-f8284e2b ===\nDocument: depression/evidence_based_protocol/fellow\nChanges: 1 proposed, 0 blocked\nImpacted sections: none\nRequires regeneration: True\nRequires evidence review: False\nSafe to auto-apply: True\n\n  [applied] cr-cb81b9e0: general_update \u2192 section_override:\n    Comment: Minor fix\n    Resolution: Apply general_update to section ''",
+  "result_summary": "=== REGENERATION RESULT: regen-de8c128c ===\nPlan: plan-f8284e2b\nSuccess: True\nApplied: 1 changes\nBlocked: 0\nReadiness: ready \u2192 ready\nPMIDs: 140 \u2192 140\nSections changed: none\nOutput: outputs\\documents\\depression\\fellow\\depression_evidence-based-protocol_fellow.docx"
+}

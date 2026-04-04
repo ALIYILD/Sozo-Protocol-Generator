@@ -1,0 +1,21 @@
+{
+  "proposal_id": "promo-4233f3db",
+  "candidate_id": "cand-eae1d28b",
+  "target_type": "knowledge_condition",
+  "target_file": "sozo_knowledge\\knowledge\\conditions\\.yaml",
+  "target_field": "",
+  "proposed_change_summary": "",
+  "rationale": "",
+  "status": "rejected",
+  "safe_to_apply": false,
+  "evidence_sensitive": true,
+  "requires_clinical_approval": true,
+  "approved_by": "Dr. Smith",
+  "approved_at": "2026-04-04T20:56:27Z",
+  "decision_notes": "Needs more evidence review",
+  "created_at": "2026-04-04T20:56:27Z",
+  "warnings": [
+    "Evidence-sensitive content \u2014 requires clinical review",
+    "Clinical knowledge change \u2014 requires stronger review"
+  ]
+}
