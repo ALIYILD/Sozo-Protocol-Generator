@@ -1,0 +1,12 @@
+---
+description: Sozo monorepo boundaries and safety defaults
+alwaysApply: true
+---
+
+# Sozo core
+
+- **Scope:** Clinical document generation platform (Python backend, optional Vite frontend). Not autonomous clinical software; preserve disclaimers in benchmark/report copy.
+- **Paths:** `src/` packages — `sozo_generator`, `sozo_api`, `sozo_auth`, `sozo_graph`, `autoagent_clinical`.
+- **Tests:** Run targeted pytest from repo root; `src/` on path via `tests/conftest.py`. Keep changes minimal and file-scoped unless migrating a subsystem.
+- **Docs:** `CONTRIBUTING.md` (gates, live tests), `AGENTS.md` (subagent map), `src/autoagent_clinical/reports/README.md` (benchmark lab).
+- Prefer matching existing naming, Pydantic v2 patterns, and Typer/FastAPI style already in tree.

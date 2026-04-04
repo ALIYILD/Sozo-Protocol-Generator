@@ -1,0 +1,14 @@
+---
+description: Vite/React frontend specialist
+globs: frontend/**/*.tsx,frontend/**/*.ts,frontend/vite.config.ts
+alwaysApply: false
+---
+
+# Frontend subagent
+
+- **Role:** `frontend/src` — pages, `api/client`, auth (`RequireRoles`, `ProtectedRoute`), protocol/evidence UI, Vitest tests.
+- **Tokens:** `localStorage` keys (`useAuth`, `client`) are **XSS-sensitive**; prefer tight CSP, short-lived access tokens, and consider **silent refresh** before clearing session on 401 if backend supports it. **Never** enable `VITE_AUTH_BYPASS` in production builds (`authEnvGuard`).
+- **Resilience:** Add or extend **ErrorBoundary** for top-level/route error UI; centralize empty/error states where pages duplicate patterns.
+- **Backend:** Align with `sozo_api` contracts; handle 401/403 and loading/error states consistently.
+- **Do:** Match existing layout/components; run `npm test` / `npm run build` in `frontend/`; CI via `frontend-ci.yml`.
+- **Don’t:** Commit `node_modules/` or `dist/` (gitignored); avoid hard-coding prod URLs without env-based config.

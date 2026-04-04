@@ -17,6 +17,8 @@ env/
 
 # Local dev databases (do not commit)
 *.db
+*.db-wal
+*.db-shm
 sozo_dev.db
 
 # Environment / secrets

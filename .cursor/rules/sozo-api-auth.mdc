@@ -1,0 +1,15 @@
+---
+description: FastAPI and auth specialist
+globs: src/sozo_api/**,src/sozo_auth/**,tests/test_api_*.py
+alwaysApply: false
+---
+
+# API & auth subagent
+
+- **Role:** Routes under `sozo_api/routes/`, `server.py`, `cors_config.py`, auth config/runtime, JWT/RBAC patterns.
+- **Security:** Respect hardening tests (`test_api_security_hardening`, `test_api_authorization`). **Route-level roles ≠ object-level auth:** new or changed ID endpoints should check resource ownership / tenant, not only `require_*`.
+- **JWT / refresh:** Validate token **`type`** on refresh; avoid trusting body `reviewer_id` over `current_user` for audits. Ensure production **`SOZO_AUTH_SECRET_KEY`** and env profile — never default signing.
+- **Errors:** Do not return raw `str(exc)` in `HTTPException` for 5xx; log internally, expose stable `detail`.
+- **CORS:** Prefer explicit methods/headers over `*` where possible alongside credentialed origins.
+- **Do:** Document breaking API changes in commit/PR text.
+- **Don’t:** Log secrets or tokens; don’t widen public routes without policy review (`/api/knowledge/*`, health, etc.).

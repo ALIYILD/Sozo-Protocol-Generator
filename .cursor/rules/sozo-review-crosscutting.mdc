@@ -1,0 +1,17 @@
+---
+description: Cross-cutting PR review checklist (security, errors, CI)
+alwaysApply: true
+---
+
+# Cross-cutting review (all agents)
+
+When reviewing or changing this repo, re-check:
+
+- **Authorization:** Route roles are not enough for PHI-adjacent IDs — prefer object-level checks (protocol/patient/thread/task ownership) where resources are scoped to users or tenants.
+- **Errors:** Avoid returning raw `str(exception)` to clients; log server-side, return stable `detail` messages.
+- **Secrets:** `SOZO_AUTH_SECRET_KEY` and production-like `SOZO_ENV` must be set in real deployments; never ship default signing keys.
+- **Tokens:** Access/refresh handling — validate token `type` on refresh; consider XSS impact if tokens live in `localStorage`.
+- **AutoAgent:** Generator or document schema changes → consider `src/autoagent_clinical` benchmarks and CI (`CONTRIBUTING.md`).
+- **Frontend:** Run `npm run build` and `npm test` under `frontend/`; CI workflow `frontend-ci.yml`.
+
+Subagents (deeper context): see **`AGENTS.md`** and domain rules under **`.cursor/rules/`**.

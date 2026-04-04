@@ -1,0 +1,14 @@
+---
+description: LangGraph and intake specialist
+globs: src/sozo_graph/**,tests/test_graph_*.py
+alwaysApply: false
+---
+
+# Graph subagent
+
+- **Role:** `unified_graph`, `state`, `integration`, nodes (e.g. `condition_resolver`), intake contracts.
+- **Coupling:** `integration.py` bridges generator, pipeline, and `GenerationService` — avoid new **private** (`_`) pipeline calls without stability plan; watch duplicate LLM composition (`integration` vs `protocol_composer` node).
+- **Sync I/O:** Evidence + LLM + filesystem work is **blocking** — document timeout expectations for API callers or offload to workers.
+- **Contracts:** Prefer explicit state shapes and tests (`test_graph_intake_contract`); align docstrings with actual raise/return behavior.
+- **Do:** Clear errors when condition/montage ambiguous; keep graph testable without full stack when possible.
+- **Don’t:** Change graph output schema without updating consumers (API, generator, FE) and contract tests.

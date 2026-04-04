@@ -1,0 +1,12 @@
+---
+description: GenerationService and document pipeline specialist
+globs: src/sozo_generator/**
+alwaysApply: false
+---
+
+# Generator subagent
+
+- **Role:** `GenerationService`, `assemble_canonical_document`, DOCX output, `cli/main.py`, condition registry/generators, schemas (`DocumentSpec`, enums).
+- **AutoAgent:** Harness `generation_service` + `normalize.docx_to_benchmark_markdown`; assembly errors should surface predictably for harness metadata.
+- **Do:** Preserve canonical assembly → render flow; keep optional paths backward-compatible for benchmarks without real service.
+- **Don’t:** Silent swallow of assembly/generation failures; avoid breaking `tests/test_generation_service.py` and `tests/test_autoagent_generation_harness.py` without updating harness expectations.

@@ -1,0 +1,13 @@
+---
+description: AutoAgent-Clinical benchmark lab specialist
+globs: src/autoagent_clinical/**,tests/test_autoagent*.py,scripts/autoagent_metrics_summary.py,.github/workflows/autoagent-clinical.yml
+alwaysApply: false
+---
+
+# AutoAgent-Clinical subagent
+
+- **Role:** YAML cases, validators, evaluators, harnesses (`baseline_fixture`, `generation_service`, stubs), `runner`, `report_writer`, CLI flags (`--strict-exit-code`, JUnit, metrics).
+- **Structured path:** `DocumentSpec` on `HarnessResult`, `document_spec_invariants`, `structured_spec_validator`; `benchmark_text_source`, `document_invariant_mode`.
+- **CI:** `.github/workflows/autoagent-clinical.yml`; opt-in `live_generation` / `SOZO_AUTOAGENT_LIVE=1` for real `GenerationService` tests.
+- **Do:** Keep taxonomy codes stable; extend benchmarks before loosening validators; mirror prod slugs in relaxed mode when touching EBP sections.
+- **Don’t:** Stuff assembly provenance into `structured_protocol`; don’t gate releases on scores alone without human review.

@@ -1,5 +1,7 @@
 # Contributing to Sozo-Protocol-Generator
 
+**Cursor / AI:** Specialist “subagents” and path→rule mapping live in **`AGENTS.md`** and **`.cursor/rules/*.mdc`**. Open files in a domain to load the matching rule.
+
 ## Merge expectations (benchmark lab)
 
 The **AutoAgent-Clinical** package is an internal engineering benchmark lab. It is **not** a clinical safety or regulatory gate by itself.
@@ -33,6 +35,30 @@ python -m pytest tests/test_autoagent_generation_harness.py tests/test_autoagent
 ```
 
 Omit the env var to skip those tests (they will **`pytest.skip`** at the start). Mock-based tests remain the default path for fast, deterministic CI.
+
+## Build all (local)
+
+From the repository root:
+
+```bash
+pip install -e .
+pip install build
+python -m build
+```
+
+Artifacts: **`dist/sozo_generator-*.whl`** and **`dist/sozo_generator-*.tar.gz`** (directory is gitignored).
+
+Frontend:
+
+```bash
+cd frontend
+npm ci
+npm run build
+```
+
+Output: **`frontend/dist/`** (gitignored).
+
+CI: **`.github/workflows/frontend-ci.yml`** runs `npm ci`, `npm run build`, and `npm test` when `frontend/` changes.
 
 ## Frontend (`frontend/`)
 
