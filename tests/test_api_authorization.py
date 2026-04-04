@@ -13,6 +13,33 @@ def _bearer(role: str) -> dict[str, str]:
     return {"Authorization": f"Bearer {create_access_token('test-user', role)}"}
 
 
+@pytest.fixture(autouse=True, scope="module")
+def _ensure_audit_log_table():
+    """Create audit_log table in the test DB if it doesn't already exist."""
+    from sozo_api.routes.db_helper import get_db
+    conn = get_db()
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS audit_log (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            entity_type TEXT    NOT NULL,
+            entity_id   TEXT    NOT NULL,
+            action      TEXT    NOT NULL,
+            actor_id    TEXT,
+            timestamp   TEXT    NOT NULL DEFAULT (datetime('now')),
+            input_hash  TEXT,
+            output_hash TEXT,
+            node_name   TEXT,
+            details     TEXT
+        )
+    """)
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS ix_audit_log_entity_ts "
+        "ON audit_log (entity_type, entity_id, timestamp)"
+    )
+    conn.commit()
+    conn.close()
+
+
 @pytest.fixture
 def client():
     from sozo_api.server import app
