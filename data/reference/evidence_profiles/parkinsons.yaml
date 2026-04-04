@@ -73,3 +73,41 @@ notes: >
   Focus on M1 (motor cortex) and DLPFC stimulation paradigms.
   Key: levodopa interaction effects on tDCS response.
   Avoid: deep brain stimulation (DBS) literature unless directly comparing to tDCS.
+
+tps_priority_dois:
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic R"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schw..."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological"
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic R"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schw..."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological"
+  - doi: "10.1001/jamaneurol.2017.3129"
+    title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology: Adva"
+    authors: "V. Krishna, F. Sammartino, A. Rezai"
+    year: 2017
+    study_type: "systematic review"
+    citations: 247
+    takeaway: "Transcranial focused ultrasound technology shows promise for treating neurological conditions, with potential applications in movement disorders, epil"
+  - doi: "10.1007/s13534-024-00369-0"
+    title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+    authors: "Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim"
+    year: 2024
+    study_type: "systematic review"
+    citations: 32
+    takeaway: "Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in healthy humans and patients with central"
+  - doi: "10.1101/2025.05.16.25327804"
+    title: "Human Applications of Transcranial Temporal Interference Stimulation: A Systematic Review"
+    authors: "I. Demchenko, Ishaan Tailor, Sina Chegini, Haochen Yu, Fa..."
+    year: 2025
+    study_type: "systematic review"
+    citations: 5
+    takeaway: "Transcranial temporal interference stimulation (tTIS) is a safe, well-tolerated method that can target deep brain regions and improve symptoms in Park"
+  TPS evidence: 79 papers identified (19 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

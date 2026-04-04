@@ -1,0 +1,365 @@
+# SOZO Brain Center — Conditions x Modality Evidence Matrix
+# Source: SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026
+# 18 conditions x 10 modalities with paper counts
+
+conditions:
+  alzheimers:
+    condition: "Alzheimer's Disease"
+    primary_network: DMN
+    secondary_network: Memory Network (HC-EC)
+    qeeg_biomarker: ↓Alpha APF slowing; ↑Theta
+    f_band: Alpha + Gamma
+    paper_counts:
+      tps: 31
+      tms: 30
+      tdcs: 20
+      tavns: 5
+      ces: 5
+      tacs: 15
+      pbm: 20
+      lifu: 10
+      pemf: 5
+      dbs: 5
+    best_first_line: TPS (CE cleared, 31 papers)
+    best_second_line: 40Hz tACS + PBM
+    fnon_score: 5
+  parkinsons:
+    condition: "Parkinson's Disease"
+    primary_network: Sensorimotor
+    secondary_network: Cortico-BG pathway
+    qeeg_biomarker: ↑Beta M1-STN; ↓Mu
+    f_band: Beta
+    paper_counts:
+      tps: 9
+      tms: 80
+      tdcs: 15
+      tavns: 10
+      ces: null
+      tacs: 10
+      pbm: 10
+      lifu: 5
+      pemf: null
+      dbs: 1000
+    best_first_line: DBS STN (FDA approved)
+    best_second_line: TPS + TMS M1/SMA
+    fnon_score: 5
+  mci:
+    condition: MCI
+    primary_network: DMN + ECN
+    secondary_network: Limbic HC
+    qeeg_biomarker: ↓Alpha + ↑Theta
+    f_band: Alpha
+    paper_counts:
+      tps: 7
+      tms: 30
+      tdcs: 80
+      tavns: 5
+      ces: 5
+      tacs: 15
+      pbm: 20
+      lifu: 5
+      pemf: 5
+      dbs: 5
+    best_first_line: tDCS/TPS multi-site
+    best_second_line: PBM intranasal + taVNS
+    fnon_score: 4
+  depression:
+    condition: Depression (MDD)
+    primary_network: ECN L-DLPFC
+    secondary_network: DMN PCC rumination
+    qeeg_biomarker: "FAA R>L; ↑Theta"
+    f_band: Alpha asymmetry + Theta
+    paper_counts:
+      tps: 14
+      tms: 500
+      tdcs: 200
+      tavns: 80
+      ces: 30
+      tacs: 20
+      pbm: 10
+      lifu: 10
+      pemf: 15
+      dbs: 30
+    best_first_line: TMS rTMS/iTBS (FDA cleared)
+    best_second_line: TPS (6 sessions) + CES
+    fnon_score: 5
+  ptsd:
+    condition: PTSD
+    primary_network: Limbic Network
+    secondary_network: Salience amygdala-ACC
+    qeeg_biomarker: ↑Theta limbic; ↑Gamma
+    f_band: Theta + Gamma
+    paper_counts:
+      tps: 5
+      tms: 30
+      tdcs: 10
+      tavns: 80
+      ces: 10
+      tacs: 5
+      pbm: 5
+      lifu: 5
+      pemf: 10
+      dbs: null
+    best_first_line: taVNS + TMS R-DLPFC
+    best_second_line: CES + TPS multi-site
+    fnon_score: 4
+  ocd:
+    condition: OCD
+    primary_network: Salience dACC
+    secondary_network: CSTC OFC-caudate
+    qeeg_biomarker: ↑Theta ACC; ↑Beta OFC
+    f_band: Theta + Beta
+    paper_counts:
+      tps: null
+      tms: 100
+      tdcs: 10
+      tavns: 5
+      ces: null
+      tacs: null
+      pbm: null
+      lifu: 5
+      pemf: null
+      dbs: 50
+    best_first_line: TMS Deep H7 (FDA cleared)
+    best_second_line: LIFU caudate + TPS
+    fnon_score: 4
+  adhd:
+    condition: ADHD
+    primary_network: ECN + DAN
+    secondary_network: DMN suppress
+    qeeg_biomarker: ↑TBR; ↓Beta frontal
+    f_band: TBR (Theta/Beta)
+    paper_counts:
+      tps: 2
+      tms: 30
+      tdcs: 20
+      tavns: 5
+      ces: 5
+      tacs: 10
+      pbm: 5
+      lifu: 3
+      pemf: 5
+      dbs: null
+    best_first_line: TMS L-DLPFC + tDCS
+    best_second_line: TPS bilateral + tACS 7Hz
+    fnon_score: 3
+  asd:
+    condition: Autism (ASD)
+    primary_network: Social Brain
+    secondary_network: Cerebellar-Limbic
+    qeeg_biomarker: ↓Alpha social; ↑Gamma sensory
+    f_band: Alpha + Gamma
+    paper_counts:
+      tps: 4
+      tms: 20
+      tdcs: 10
+      tavns: 10
+      ces: null
+      tacs: 5
+      pbm: 5
+      lifu: null
+      pemf: 5
+      dbs: null
+    best_first_line: TPS RCT 2023 Brain Commun
+    best_second_line: Cerebellar TMS + taVNS
+    fnon_score: 4
+  chronic_pain:
+    condition: Chronic Pain
+    primary_network: Pain Matrix + SMN
+    secondary_network: Limbic insula-amygdala
+    qeeg_biomarker: ↑Gamma; ↓Mu; ↓Alpha
+    f_band: Gamma + Mu
+    paper_counts:
+      tps: 5
+      tms: 60
+      tdcs: 150
+      tavns: 40
+      ces: 35
+      tacs: 10
+      pbm: 10
+      lifu: 15
+      pemf: 15
+      dbs: 10
+    best_first_line: tDCS M1 anodal (150 papers)
+    best_second_line: TPS multi-site + LIFU
+    fnon_score: 4
+  epilepsy:
+    condition: Epilepsy (resistant)
+    primary_network: Epileptic Network
+    secondary_network: ANT thalamus
+    qeeg_biomarker: Focus-specific delta; ↑HFOs
+    f_band: Delta + Theta
+    paper_counts:
+      tps: null
+      tms: 20
+      tdcs: 10
+      tavns: 50
+      ces: null
+      tacs: null
+      pbm: null
+      lifu: 10
+      pemf: 20
+      dbs: 30
+    best_first_line: DBS ANT (FDA 2018)
+    best_second_line: taVNS CE + LIFU focus
+    fnon_score: 4
+  tinnitus:
+    condition: Tinnitus
+    primary_network: Auditory Network
+    secondary_network: Limbic distress
+    qeeg_biomarker: ↑Alpha L-STG (maladaptive)
+    f_band: Alpha suppress
+    paper_counts:
+      tps: null
+      tms: 40
+      tdcs: 40
+      tavns: 15
+      ces: 5
+      tacs: 5
+      pbm: 5
+      lifu: 5
+      pemf: null
+      dbs: null
+    best_first_line: TMS 1Hz L-STG
+    best_second_line: tDCS cathodal + taVNS
+    fnon_score: 3
+  essential_tremor:
+    condition: Essential Tremor
+    primary_network: Sensorimotor VIM
+    secondary_network: Cerebellar-M1
+    qeeg_biomarker: ↑Beta tremor oscillation
+    f_band: Beta tremor
+    paper_counts:
+      tps: null
+      tms: 30
+      tdcs: 10
+      tavns: null
+      ces: null
+      tacs: 5
+      pbm: null
+      lifu: 8
+      pemf: null
+      dbs: 200
+    best_first_line: DBS VIM (FDA 1997)
+    best_second_line: MRgFUS + TPS cerebellar
+    fnon_score: 4
+  insomnia:
+    condition: Insomnia
+    primary_network: Thalamocortical sleep
+    secondary_network: DMN hyperarousal
+    qeeg_biomarker: ↓Spindles; ↓Delta; ↑Beta
+    f_band: Delta + Theta
+    paper_counts:
+      tps: null
+      tms: null
+      tdcs: 10
+      tavns: 80
+      ces: 25
+      tacs: 15
+      pbm: 5
+      lifu: null
+      pemf: 5
+      dbs: null
+    best_first_line: CES (FDA cleared)
+    best_second_line: tACS 77.5Hz Nexalin
+    fnon_score: 4
+  schizophrenia:
+    condition: Schizophrenia
+    primary_network: ECN-Auditory disconnection
+    secondary_network: Salience hyperactivation
+    qeeg_biomarker: ↑Delta frontal; ↓Alpha; ↑Gamma AH
+    f_band: Delta + Alpha + Gamma
+    paper_counts:
+      tps: null
+      tms: 30
+      tdcs: 30
+      tavns: 5
+      ces: 5
+      tacs: 10
+      pbm: 5
+      lifu: null
+      pemf: null
+      dbs: null
+    best_first_line: TMS inhibitory L-STG
+    best_second_line: tDCS dual-site + tACS
+    fnon_score: 3
+  stroke_rehab:
+    condition: Stroke (Motor)
+    primary_network: Sensorimotor ipsilesional
+    secondary_network: Cerebellar-M1
+    qeeg_biomarker: ↓Mu; ↓Beta ipsilesional
+    f_band: Mu + Beta
+    paper_counts:
+      tps: 5
+      tms: 80
+      tdcs: 100
+      tavns: 25
+      ces: null
+      tacs: 10
+      pbm: 20
+      lifu: 5
+      pemf: 20
+      dbs: null
+    best_first_line: tDCS anodal ipsilesional M1
+    best_second_line: taVNS paired PT + TPS
+    fnon_score: 4
+  tbi:
+    condition: TBI (Cognitive)
+    primary_network: DMN + ECN
+    secondary_network: Frontal executive
+    qeeg_biomarker: ↑Delta focal; ↓Alpha; ↑Theta
+    f_band: Delta + Alpha
+    paper_counts:
+      tps: null
+      tms: 20
+      tdcs: 30
+      tavns: null
+      ces: null
+      tacs: 10
+      pbm: 25
+      lifu: 5
+      pemf: 10
+      dbs: null
+    best_first_line: tDCS + TMS combined
+    best_second_line: PBM transcranial + PEMF
+    fnon_score: 3
+  anxiety:
+    condition: Anxiety (GAD)
+    primary_network: Salience Network
+    secondary_network: Limbic amygdala-PFC
+    qeeg_biomarker: ↑Beta frontal; ↑Theta limbic
+    f_band: Beta + Theta
+    paper_counts:
+      tps: null
+      tms: 20
+      tdcs: 20
+      tavns: 80
+      ces: 40
+      tacs: 10
+      pbm: 5
+      lifu: 5
+      pemf: 10
+      dbs: null
+    best_first_line: taVNS CE + CES
+    best_second_line: TMS L-DLPFC + PBM
+    fnon_score: 4
+  doc:
+    condition: DOC
+    primary_network: Frontoparietal consciousness
+    secondary_network: Thalamocortical arousal
+    qeeg_biomarker: ↑Delta global; ↓Alpha
+    f_band: Delta restore alpha
+    paper_counts:
+      tps: 2
+      tms: 10
+      tdcs: 5
+      tavns: 5
+      ces: null
+      tacs: 5
+      pbm: 5
+      lifu: 5
+      pemf: null
+      dbs: null
+    best_first_line: taVNS + TPS emerging
+    best_second_line: tDCS bilateral + PBM
+    fnon_score: 2

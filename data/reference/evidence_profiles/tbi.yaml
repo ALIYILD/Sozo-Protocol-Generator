@@ -41,6 +41,16 @@ search_profiles:
        post-concussion symptom[Title/Abstract]) AND validation[Title/Abstract]
     max_results: 10
 
+
+  tps_protocols:
+    query: >
+      Traumatic Brain Injury[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
 priority_pmids:
   - "28209484"  # Sacco 2016 tDCS TBI review
   - "29618386"  # Rezaee 2018 tDCS cognitive TBI
@@ -49,3 +59,41 @@ notes: >
   Exclude acute TBI (< 3 months) and skull fracture cases.
   Include both mild TBI (mTBI/concussion) and moderate TBI literature.
   Post-concussion syndrome has distinct evidence base from severe TBI.
+
+tps_priority_dois:
+  - doi: "10.3390/brainsci12040429"
+    title: "Transcranial Pulsed-Current Stimulation versus Transcranial Direct Current Stimulation in Patients with Disorders of Con"
+    authors: "A. Barra, M. Rosenfelder, S. Mortaheb, M. Carrière, G. Ma..."
+    year: 2022
+    study_type: "rct"
+    citations: 20
+    takeaway: "Transcranial direct-current stimulation (tDCS) improves behavioral improvements and increases theta frontal functional connectivity in patients with d"
+  - doi: "10.3390/brainsci12040429"
+    title: "Transcranial Pulsed-Current Stimulation versus Transcranial Direct Current Stimulation in Patients with Disorders of Con"
+    authors: "A. Barra, M. Rosenfelder, S. Mortaheb, M. Carrière, G. Ma..."
+    year: 2022
+    study_type: "rct"
+    citations: 20
+    takeaway: "Transcranial direct-current stimulation (tDCS) improves behavioral improvements and increases theta frontal functional connectivity in patients with d"
+  - doi: "10.3390/brainsci12040429"
+    title: "Transcranial Pulsed-Current Stimulation versus Transcranial Direct Current Stimulation in Patients with Disorders of Con"
+    authors: "A. Barra, M. Rosenfelder, S. Mortaheb, M. Carrière, G. Ma..."
+    year: 2022
+    study_type: "rct"
+    citations: 20
+    takeaway: "Transcranial direct-current stimulation (tDCS) improves behavioral improvements and increases theta frontal functional connectivity in patients with d"
+  - doi: "10.3390/brainsci12040429"
+    title: "Transcranial Pulsed-Current Stimulation versus Transcranial Direct Current Stimulation in Patients with Disorders of Con"
+    authors: "A. Barra, M. Rosenfelder, S. Mortaheb, M. Carrière, G. Ma..."
+    year: 2022
+    study_type: "rct"
+    citations: 20
+    takeaway: "Transcranial direct-current stimulation (tDCS) improves behavioral improvements and increases theta frontal functional connectivity in patients with d"
+  - doi: "10.1111/cns.70606"
+    title: "Neuroprotective Effects of Transcranial Pulsed Current Stimulation: Modulation of Microglial Polarization in Traumatic B"
+    authors: "Peng Yao, Bingkai Ren, Qianhui Zhou, Yang Bai, Zhen Feng"
+    year: 2025
+    study_type: "non-rct experimental"
+    citations: 0
+    takeaway: "Transcranial pulsed current stimulation (tPCS) effectively reduces neuroinflammation and promotes neurological recovery after traumatic brain injury b"
+  TPS evidence: 22 papers identified (4 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

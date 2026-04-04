@@ -1,0 +1,172 @@
+# SOZO Brain Center — Cranial Electrotherapy Stimulation Protocol Reference
+# Source: Master with QEEG places.xlsx, April 2026
+# 8 condition protocols
+
+modality: "ces"
+name: "Cranial Electrotherapy Stimulation"
+
+protocols:
+  - condition: "Anxiety / GAD"
+    brain_target: "Cortical bilateral (via ear clips)"
+    eeg_position: "Bilateral earlobe / mastoid"
+    protocol_summary: >
+    Alpha-Stim CES: 0.5 Hz modified square wave, 100–500 μA, 20–60 min/day via ear clips. Large meta-analysis effect size ES = -0.96.
+    intensity: "100–500 μA"
+    frequency: "0.5 Hz (modified square wave)"
+    duration_per_session: "20–60 min/day"
+    total_sessions: "3–5 weeks daily"
+    pulses_per_session: "N/A (continuous micro-AC)"
+    devices: "Alpha-Stim M/AID, Fisher Wallace Stimulator, CES Ultra"
+    montage: "Bilateral ear clip electrodes"
+    regulatory_status: "FDA Cleared (anxiety)"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "40+"
+    key_references: >
+    Barclay 2014 meta; Kirsch 2014; Lande 2011
+    side_effects: >
+    Mild skin irritation, occasional headache. Extremely safe. No serious AEs in FDA review.
+    notes: >
+    FDA cleared since 1991. Strong meta-analytic evidence. Mechanism: increases alpha EEG, modulates GABA and serotonin.
+  - condition: "Insomnia"
+    brain_target: "Cortical bilateral (via ear clips)"
+    eeg_position: "Bilateral earlobe / mastoid"
+    protocol_summary: >
+    Alpha-Stim CES: 0.5 Hz, 100–500 μA, 20–60 min before sleep. Meta-analysis ES = -1.02 (sleep quality).
+    intensity: "100–500 μA"
+    frequency: "0.5 Hz"
+    duration_per_session: "20–60 min (before sleep)"
+    total_sessions: "3–5 weeks nightly"
+    pulses_per_session: "N/A"
+    devices: "Alpha-Stim M/AID, Fisher Wallace Stimulator"
+    montage: "Bilateral ear clip electrodes"
+    regulatory_status: "FDA Cleared (insomnia)"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "25+"
+    key_references: >
+    Barclay 2014 meta; Gilula 2007
+    side_effects: >
+    Mild skin irritation. Very rarely headache. Extremely safe.
+    notes: >
+    Strong ES for sleep quality. Works within first session for some patients. Non-pharmacological alternative.
+  - condition: "Depression (MDD)"
+    brain_target: "Cortical bilateral (via ear clips)"
+    eeg_position: "Bilateral earlobe / mastoid"
+    protocol_summary: >
+    Alpha-Stim CES for mild–moderate depression; 0.5 Hz, 100–500 μA, 20–60 min/day. Meta-analysis ES = -0.69.
+    intensity: "100–500 μA"
+    frequency: "0.5 Hz"
+    duration_per_session: "20–60 min/day"
+    total_sessions: "4–6 weeks daily"
+    pulses_per_session: "N/A"
+    devices: "Alpha-Stim M/AID, Fisher Wallace Stimulator"
+    montage: "Bilateral ear clip electrodes"
+    regulatory_status: "FDA Cleared (depression)"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "30+"
+    key_references: >
+    Barclay 2014 meta; Kirsch 2014
+    side_effects: >
+    Mild skin irritation. Extremely safe. No serious AEs.
+    notes: >
+    FDA cleared. Best for mild-moderate depression. Less powerful than TMS but excellent for home use.
+  - condition: "Chronic Pain"
+    brain_target: "Cortical bilateral; local MET probes"
+    eeg_position: "Bilateral earlobe + local probe application"
+    protocol_summary: >
+    Alpha-Stim with MET (microcurrent electrical therapy) probes for localized pain in addition to CES ear clips.
+    intensity: "100–500 μA"
+    frequency: "Various (0.5–100 Hz)"
+    duration_per_session: "20–60 min/day"
+    total_sessions: "4–8 weeks"
+    pulses_per_session: "N/A"
+    devices: "Alpha-Stim M (MET probes), Alpha-Stim AID"
+    montage: "Bilateral ear clips + MET probes on pain sites"
+    regulatory_status: "FDA Cleared (pain)"
+    evidence_level: "RCT, Open-label"
+    literature_count: "35+"
+    key_references: >
+    Kirsch 2000; Taylor 2013
+    side_effects: >
+    Mild skin irritation. Very safe.
+    notes: >
+    MET probes allow localized pain relief in addition to central CES effects. Headache, CRPS, back pain.
+  - condition: "PTSD"
+    brain_target: "Cortical bilateral (via ear clips)"
+    eeg_position: "Bilateral earlobe / mastoid"
+    protocol_summary: >
+    Alpha-Stim CES used in US military PTSD programs; 60 min/day. Reduces hyperarousal and anxiety.
+    intensity: "100–500 μA"
+    frequency: "0.5 Hz"
+    duration_per_session: "60 min/day"
+    total_sessions: "4–8 weeks"
+    pulses_per_session: "N/A"
+    devices: "Alpha-Stim M/AID"
+    montage: "Bilateral ear clip electrodes"
+    regulatory_status: "FDA Cleared (anxiety/insomnia component of PTSD)"
+    evidence_level: "Open-label, Military cohort studies"
+    literature_count: "10+"
+    key_references: >
+    Lande 2011; Taylor 2013 (military)
+    side_effects: >
+    Mild skin irritation. Extremely safe.
+    notes: >
+    Widely used in VA/DoD programs. Addresses sleep and anxiety comorbidities. Not FDA cleared specifically for PTSD.
+  - condition: "Tourette's Syndrome"
+    brain_target: "Cortical bilateral (via ear clips)"
+    eeg_position: "Bilateral earlobe / mastoid"
+    protocol_summary: >
+    CES 24-week treatment; fMRI study showing functional changes in corticostriatal circuits.
+    intensity: "100–500 μA"
+    frequency: "0.5 Hz"
+    duration_per_session: "20–60 min/day"
+    total_sessions: "24 weeks"
+    pulses_per_session: "N/A"
+    devices: "Alpha-Stim M/AID"
+    montage: "Bilateral ear clip electrodes"
+    regulatory_status: "Investigational"
+    evidence_level: "Case series, fMRI study"
+    literature_count: "2+"
+    key_references: >
+    Limited literature (fMRI case series)
+    side_effects: >
+    Mild skin irritation. Very safe.
+    notes: >
+    Very limited evidence. fMRI shows corticostriatal modulation. Requires replication.
+  - condition: "Fibromyalgia"
+    brain_target: "Cortical bilateral (via ear clips) + MET probes"
+    eeg_position: "Bilateral earlobe + pain sites"
+    protocol_summary: >
+    Alpha-Stim CES + MET probe application for fibromyalgia widespread pain; 60 min daily.
+    intensity: "100–500 μA"
+    frequency: "0.5 Hz"
+    duration_per_session: "60 min/day"
+    total_sessions: "4–8 weeks"
+    pulses_per_session: "N/A"
+    devices: "Alpha-Stim M (with MET probes)"
+    montage: "Bilateral ear clips + MET probes"
+    regulatory_status: "Investigational (off-label FDA cleared device)"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "5+"
+    key_references: >
+    Lichtbroun 2001; Peripheral literature
+    side_effects: >
+    Mild skin irritation. Very safe.
+    notes: >
+    Combined approach (CES + MET probes). May reduce widespread pain and fatigue.
+  - condition: "Source: SOZO Brain Center Clinical Research Compilation | neuromod_data.md | Updated April 2026"
+    brain_target: null
+    eeg_position: null
+    protocol_summary: null
+    intensity: null
+    frequency: null
+    duration_per_session: null
+    total_sessions: null
+    pulses_per_session: null
+    devices: null
+    montage: null
+    regulatory_status: null
+    evidence_level: null
+    literature_count: null
+    key_references: null
+    side_effects: null
+    notes: null

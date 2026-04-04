@@ -1,0 +1,423 @@
+# SOZO Brain Center — Conditions qEEG Profiles
+# Source: SOZO_Assessments_Master.xlsx, April 2026
+# Detailed qEEG signatures: eyes-open/closed, event-related, pathological thresholds, response biomarkers
+
+profiles:
+  depression:
+    condition: "Depression (MDD)"
+    primary_qeeg_signature: >
+    ↑ Frontal theta (Fz); Frontal alpha asymmetry (FAA: F4>F3 = ↓ L-DLPFC activity); ↑ Beta eyes-open; ↓ Alpha globally; ↑ Delta+Theta broad
+    key_electrodes: "F3, F4 (FAA primary); Fz (theta); Fp1/Fp2 (prefrontal); Cz; C4 (R-central AEC)"
+    key_metrics: >
+    FAA (F4-F3 alpha, mV²); Absolute theta Fz; APF; TBR; Alpha/theta ratio; wPLI coherence F3-Fz
+    eyes_open_findings: >
+    ↑ Beta globally; ↑ Frontal alpha asymmetry (R>L activity); ↑ Frontal theta; ↓ Alpha asymmetry
+    eyes_closed_findings: >
+    ↑ Frontal theta (Fz) — most consistent marker; ↓ Global alpha; ↑ Delta; Asymmetric frontal alpha
+    event_related_paradigm: >
+    P300 at Cz/Pz (cognitive load); N200 (error monitoring); Emotional Stroop ERP; Reward ERP (ERN at FCz)
+    pathological_threshold: >
+    FAA >0.3 log units (F4>F3 alpha = L-hypoactivity); Theta Fz >6 μV²; APF <9.5 Hz globally
+    fnon_treatment_target: >
+    FAA normalisation: L≥R alpha (restore L-DLPFC excitability); Frontal theta ↓ toward <4 μV² at Fz; APF ↑ toward 10 Hz; TMS/TPS F3 target
+    response_biomarker: >
+    FAA change pre/post session (F4-F3 alpha); Frontal theta power Fz change; APF shift; PHQ-9 score correlation with qEEG improvement
+  alzheimers:
+    condition: "Alzheimer's Disease / Dementia"
+    primary_qeeg_signature: >
+    Generalised slowing: ↑ Theta + Delta; ↓ Alpha power; ↓ APF (<8 Hz = high-sensitivity AD marker); ↑ Theta/Gamma ratio; ↓ Posterior dominant rhythm
+    key_electrodes: "Pz, P3, P4 (primary); O1/O2 (alpha loss); T5/T6 (temporal theta); F3/F4; C3/C4"
+    key_metrics: >
+    APF (alpha peak frequency — most sensitive single metric); Delta/alpha ratio (DAR); TGC (theta-gamma coupling HC); Spectral entropy; Inter-hemispheric coherence
+    eyes_open_findings: >
+    ↓ Alpha activity parieto-occipital; ↑ Delta globally; Loss of PDR; ↑ Coherence anterior-posterior (pathological)
+    eyes_closed_findings: >
+    ↓ Alpha power Pz/O1/O2; ↑ Theta globally; ↓ Alpha peak frequency; ↓ Complexity (approximate entropy); ↑ Delta/theta inter-hemispheric coherence
+    event_related_paradigm: >
+    40 Hz ASSR (gamma deficit in AD — reduced 40 Hz generation); P300 amplitude/latency at Pz; MMN (mismatch); Olfactory-cognitive ERP (combined with olfactory test)
+    pathological_threshold: >
+    APF <8 Hz = probable AD/MCI; DAR >3.0 = significant slowing; APF <9 Hz = MCI conversion risk; ↓ spectral entropy <0.6
+    fnon_treatment_target: >
+    APF ↑ toward 9-10 Hz (primary treatment response measure); ↓ Theta power T5/T6/Pz; 40 Hz gamma ↑ (tACS/PBM 40 Hz target); TGC restoration HC; ↑ Alpha Pz
+    response_biomarker: >
+    APF change (Hz shift per session/course); Alpha power Pz change (mV²); 40 Hz SSVEP amplitude; MMSE/MoCA correlation with APF
+  parkinsons:
+    condition: "Parkinson's Disease"
+    primary_qeeg_signature: >
+    ↑ Frontal/temporal theta; ↓ Central beta (C3/C4 — primary motor biomarker); ↑ Theta/alpha ratio; ↓ APF; STN beta synchrony 13-30 Hz (LFP)
+    key_electrodes: "C3/C4 (beta ↓ — primary); F3/F4 (theta ↑); T3/T5 (L-temporal theta); Pz (posterior); O1/O2 (PDR)"
+    key_metrics: >
+    Central beta power C3/C4; SMBR (sensorimotor beta rebound) post-movement; STN LFP beta (if DBS); APF; DAR; Frontal theta Fz; ERD at C3/C4
+    eyes_open_findings: >
+    ↑ Beta globally (some PD subtypes); ↓ ERD during movement; ↑ Frontal theta; ↓ Alpha
+    eyes_closed_findings: >
+    ↓ Central beta C3/C4 (primary PD marker); ↑ Frontal theta F3/F4; ↑ Theta globally; ↓ PDR; ↑ Tremor coherence (tremor-dominant PD)
+    event_related_paradigm: >
+    Motor imagery ERD (mu/beta desynchronisation at C3/C4 — reduced in PD); MRCP (movement-related cortical potential — prolonged latency); P300 (cognitive decline assessment)
+    pathological_threshold: >
+    Central beta ↓50% vs normative; SMBR absent or reduced; Tremor coherence (4-7 Hz) >threshold; APF <8.5 Hz with cognitive PD
+    fnon_treatment_target: >
+    Central beta ↑ restoration C3/C4 (via TPS/TMS M1 suppression of pathological synchrony — paradoxical normalisation); Frontal theta ↓; UPDRS correlation with beta power
+    response_biomarker: >
+    Central beta power C3/C4 change (pre/post TPS session); UPDRS Part III correlation; SMBR restoration; Tremor amplitude (accelerometry) correlation
+  chronic_pain:
+    condition: "Chronic Pain"
+    primary_qeeg_signature: >
+    ↑ Theta all regions; ↑ Alpha resting; ↓ APF parieto-occipital; ↑ Frontal beta (hyperexcitability); Thalamocortical dysrhythmia; ↑ Gamma (neuropathic)
+    key_electrodes: "Cz, C3, C4 (central theta/alpha); Pz, P3, P4 (parietal APF); F3/Fp1 (frontal reactivity); T3/T4"
+    key_metrics: >
+    Thalamocortical coherence Cz-Pz; EO/EC reactivity (↓ = poor arousal regulation); Central alpha/theta; APF; Gamma power C3/C4 (neuropathic); Frontal beta
+    eyes_open_findings: >
+    ↑ Beta globally; ↑ Mu (motor alpha — central sensitisation); ↑ Gamma (neuropathic); ↓ EO/EC difference
+    eyes_closed_findings: >
+    ↑ Central alpha (thalamocortical dysrhythmia); ↑ Theta; ↓ APF parietal; ↑ Thalamocortical coherence Cz-Pz (pathological synchrony)
+    event_related_paradigm: >
+    CPM-related ERP (conditioned pain modulation response); P300 (attentional pain capture); Pain-evoked ERP (heat stimulus); N2-P2 pain ERP
+    pathological_threshold: >
+    Central alpha >10 μV² at Cz (thalamocortical dysrhythmia sign); EO/EC reactivity <20%; APF <9 Hz parietal; Gamma >30% increase neuropathic
+    fnon_treatment_target: >
+    Central theta ↓ Cz/C3/C4 (primary); APF ↑; M1 alpha (mu) normalisation; Gamma ↓ (neuropathic target); Thalamocortical coherence ↓
+    response_biomarker: >
+    NRS pain correlation with central theta change; CPM efficiency improvement; APF change; Gamma power Cz change (neuropathic component)
+  ocd:
+    condition: "OCD"
+    primary_qeeg_signature: >
+    ↑ Delta + Theta frontal; ↓ Frontal alpha; ↑ Fronto-central coherence; ↑ ERN (error-related negativity) at FCz — PRIMARY OCD BIOMARKER; Abnormal P300
+    key_electrodes: "Fz, FCz (ERN — primary OCD ERP site); F3/F4 (theta); Cz; C3/C4"
+    key_metrics: >
+    ERN amplitude FCz (primary OCD biomarker; ↑ = ACC hyperactivation = OCD endophenotype); P300 Cz/Pz; N200 Fz; Frontal theta; Fronto-central coherence
+    eyes_open_findings: >
+    ↑ Frontal beta (hyperarousal, some); ↑ Fronto-central coherence; ↑ Gamma (obsessional content)
+    eyes_closed_findings: >
+    ↑ Frontal theta Fz; ↓ Alpha F3/F4; ↑ Delta frontal; Excess ERN amplitude at FCz
+    event_related_paradigm: >
+    ERN at FCz (response to errors/Go-No-Go — ↑ in OCD = ACC hyperactivation); P300 (decision-making); Pe (post-error positivity); N200 (conflict detection)
+    pathological_threshold: >
+    ERN amplitude at FCz >8 μV above controls; Frontal theta >5 μV² Fz; P300 latency >400 ms; N200 amplitude >6 μV
+    fnon_treatment_target: >
+    ERN ↓ at FCz (ACC normalisation — primary OCD treatment response marker); Frontal theta ↓; Fronto-central coherence ↓; Alpha ↑ frontal
+    response_biomarker: >
+    ERN amplitude change FCz (before/after deep TMS H7 course — primary biomarker); Y-BOCS correlation with ERN; Frontal theta change
+  anxiety___gad:
+    condition: "Anxiety / GAD"
+    primary_qeeg_signature: >
+    ↑ R frontal alpha (FAA: F4>F3 in anxiety = withdrawal bias); ↑ High beta 20-30 Hz globally; ↑ Frontal theta; ↓ Posterior alpha; Hyperarousal EEG pattern
+    key_electrodes: "F3/F4 (FAA — anxiety biomarker: OPPOSITE to depression); Fz (frontal theta); Cz (beta excess); Pz (posterior alpha ↓); C3/C4"
+    key_metrics: >
+    FAA (F4-F3): in anxiety F4>F3 alpha = R>L frontal power = anxiety withdrawal bias; Global beta power (20-30 Hz); Posterior alpha Pz; Frontal theta Fz
+    eyes_open_findings: >
+    ↑ Beta globally; ↑ R frontal alpha (withdrawal bias); ↓ Posterior alpha
+    eyes_closed_findings: >
+    ↑ Frontal theta; ↑ Global beta; ↑ R frontal alpha asymmetry (FAA reversed vs depression); ↓ Posterior alpha
+    event_related_paradigm: >
+    Threat-related ERP (P200/P300 for threatening stimuli — ↑ in GAD); Emotional Stroop P300; Late Positive Potential (LPP) to threat faces
+    pathological_threshold: >
+    FAA: R>L alpha >0.3 log units (anxiety withdrawal phenotype); Global beta 20-30 Hz >8 μV² at Cz; Posterior alpha <4 μV² Pz
+    fnon_treatment_target: >
+    FAA normalisation: L≥R (opposite target to depression); Global beta ↓ (hyperarousal); Posterior alpha ↑; Frontal theta ↓
+    response_biomarker: >
+    FAA change pre/post (critical — must track asymmetry direction); Beta power change; GAD-7 correlation with FAA; Posterior alpha change
+  ptsd:
+    condition: "PTSD"
+    primary_qeeg_signature: >
+    FAA: ↑ L frontal alpha activity (L>R approach/anger bias — OPPOSITE to depression FAA); ↑ High beta (hyperarousal); ↓ Posterior alpha; ↑ R parietal beta; ↓ Total EEG power
+    key_electrodes: "F3/F4 (FAA — PTSD L>R activity pattern); FC3/FC4 (fronto-central beta); P3/P4 (R parietal beta); Cz (beta); O1/O2 (↓ alpha)"
+    key_metrics: >
+    FAA (F4-F3): In PTSD, L-frontal alpha < R-frontal alpha = ↑ L-frontal activity = approach/anger bias; Global beta power; Posterior alpha; Alpha coherence bilateral; Theta coherence frontal-temporal
+    eyes_open_findings: >
+    ↑ High beta globally (hyperarousal); ↑ L-frontal activity (anger/intrusion); ↑ R parietal beta
+    eyes_closed_findings: >
+    ↓ Posterior alpha; ↓ Total EEG power; Altered theta frontal-temporal coherence; ↑ L frontal activity
+    event_related_paradigm: >
+    Trauma-cue ERP (P300 to trauma-related stimuli — ↑ in PTSD); Emotional Stroop (reaction time); Startle ERP (↑ N100 to loud sound); Fear-conditioned response ERP
+    pathological_threshold: >
+    L-frontal alpha < R-frontal (L-F3 alpha >R-F4 alpha = hyper-approach bias); Global beta >12 μV² (hyperarousal); Alpha coherence <0.5; Posterior alpha <4 μV²
+    fnon_treatment_target: >
+    FAA balance: approach-withdrawal normalisation; Global beta ↓ (hyperarousal); Posterior alpha ↑; vmPFC-amygdala coherence ↑
+    response_biomarker: >
+    FAA direction change (L vs R asymmetry tracking); PCL-5 correlation with beta change; HRV improvement correlation with alpha ↑
+  insomnia:
+    condition: "Insomnia"
+    primary_qeeg_signature: >
+    ↑ High-frequency beta (20-30 Hz — hyperarousal marker); ↑ Gamma; ↓ Delta (NREM3); ↑ Alpha intrusion in NREM; ↓ Sleep spindles (sigma 12-15 Hz — key biomarker); ↑ Theta/alpha ratio at sleep onset
+    key_electrodes: "Fz, F3/F4 (frontal beta — hyperarousal); Cz (central — spindle reference); Pz (alpha intrusion NREM); C3/C4 (sigma 12-15 Hz — spindle measurement)"
+    key_metrics: >
+    Sleep spindle density C3/C4 (12-15 Hz, spindles/hour; ↓ = insomnia marker); NREM3 delta power (0.5-4 Hz); Pre-sleep beta Fz; Alpha/delta ratio NREM; CAP rate; K-complex density
+    eyes_open_findings: >
+    ↑ Pre-sleep beta Fz/F3 (hyperarousal before sleep); ↑ Gamma; ↓ Alpha EO/EC difference
+    eyes_closed_findings: >
+    Full PSG scoring: Sleep staging (NREM1/2/3, REM); Spindle counting/density; Delta power SWS; Alpha-NREM index (CAP rate); K-complex density; Sleep efficiency (%)
+    event_related_paradigm: >
+    Sleep spindle SSEPs (somatosensory sleep spindle — automated detection); K-complex ERP; Sleep slow oscillation (SO) detection; Sleep fragmentation index (CAP rate)
+    pathological_threshold: >
+    Sleep spindle density <12 spindles/hour (insomnia marker); NREM3 delta <15% TST; Pre-sleep beta >8 μV² Fz; Alpha/delta ratio >0.8 NREM
+    fnon_treatment_target: >
+    Sleep spindle density ↑ (12-15 Hz sigma, C3/C4); NREM3 delta ↑; Pre-sleep beta ↓ Fz; Alpha/delta ratio ↓; Sleep EEG entropy ↑
+    response_biomarker: >
+    PSG spindle density change pre/post CES/tACS; ISI and PSQI correlation with sigma power; Delta power SWS change; Sleep efficiency change
+  epilepsy:
+    condition: "Epilepsy"
+    primary_qeeg_signature: >
+    Epileptiform discharges (spikes, sharp waves — diagnostic); ↑ Delta/theta at seizure focus; ↑ HFOs (high-frequency oscillations 80-500 Hz = epileptogenic zone marker); Background slowing
+    key_electrodes: "Variable by focus: Temporal (T3/T4/T5/T6); Frontal (F3/F4/F7/F8); Central (C3/C4); All (generalised). IED detection: all 10-20 electrodes minimum"
+    key_metrics: >
+    IED rate (interictal epileptiform discharge rate, /hour — primary biomarker); HFO rate (ripples 80-120 Hz, fast ripples 120-500 Hz at focus); Background alpha/theta ratio; Spectral coherence seizure network; SOZ entropy
+    eyes_open_findings: >
+    Paroxysmal discharges (time-locked to IEDs); Photoparoxysmal response (PPR — photosensitivity testing); Hyperventilation response
+    eyes_closed_findings: >
+    IEDs (background monitoring); Background slowing at focus; Generalised IED (if IGE); Sleep activated IEDs (NFLE, CSWS, LKS)
+    event_related_paradigm: >
+    Photic stimulation response (PPR grading); Hyperventilation EEG (absence detection); Sleep EEG (activated IEDs); ERP-based command following (in DOC-epilepsy overlap)
+    pathological_threshold: >
+    IED rate >5/hour = clinically significant; HFO rate >20/min at focus = resection target (SEEG); Background delta >30% = significant focal slowing
+    fnon_treatment_target: >
+    IED ↓ suppression at focus (DBS/taVNS/LIFU primary target); HFO ↓; Background alpha ↑ (network normalisation); Seizure propagation network disruption
+    response_biomarker: >
+    IED rate change (%/hour); Seizure frequency (primary clinical outcome); EEG background improvement; DBS stimulation response tracking
+  stroke_rehab:
+    condition: "Stroke Rehabilitation"
+    primary_qeeg_signature: >
+    ↑ Delta/theta affected hemisphere; ↓ Alpha/beta affected hemisphere; ↑ DAR (delta-alpha ratio) affected side; ↑ BSI (brain symmetry index); Motor recovery predictor: beta power affected M1
+    key_electrodes: "C3/C4 (affected motor cortex — primary); F3/F4 (DAR); T7/T8 (temporal asymmetry); Cz; P3/P4 (if neglect)"
+    key_metrics: >
+    BSI (Brain Symmetry Index — 0-1; <0.1 = good symmetry/recovery; primary stroke qEEG biomarker); DAR (delta-alpha ratio >3.7 = dysfunction); Beta power affected C3 or C4; ERD at affected electrode during motor imagery
+    eyes_open_findings: >
+    ↑ Asymmetry affected vs unaffected; ↑ Delta affected hemisphere (lesion indicator); ↓ Beta affected M1
+    eyes_closed_findings: >
+    ↑ Delta/theta affected hemisphere; ↓ Alpha/beta affected; ↑ DAR (primary); Altered sleep architecture (if post-stroke sleep disorder)
+    event_related_paradigm: >
+    Motor imagery ERD at C3/C4 (affected motor cortex — key BCI paradigm for stroke rehab); Laterality Index (LI) during motor tasks; MRCP (motor readiness); Sensorimotor rhythm (SMR) training
+    pathological_threshold: >
+    BSI >0.2 = significant hemispheric asymmetry; DAR >3.7 affected hemisphere = significant dysfunction; Beta power affected <50% of unaffected = motor deficit indicator
+    fnon_treatment_target: >
+    BSI ↓ toward symmetry (<0.1); DAR ↓ affected hemisphere; Beta ↑ ipsilesional M1 (C3 or C4); ERD restoration affected electrode during movement
+    response_biomarker: >
+    BSI change per week (primary recovery tracking); DAR change; Fugl-Meyer correlation with beta power ipsilesional; ERD recovery timeline
+  mci:
+    condition: "MCI (Mild Cognitive Impairment)"
+    primary_qeeg_signature: >
+    ↑ Theta (less than AD); Mildly ↓ Alpha; ↓ APF (below 9 Hz — key conversion predictor); ↓ Alpha/theta ratio; ↓ EEG complexity; ↑ Delta mild
+    key_electrodes: "Pz (posterior slowing — primary MCI marker), T5/T6 (temporal theta), F3/F4 (frontal), O1/O2 (APF assessment)"
+    key_metrics: >
+    APF (key single metric: <9 Hz = conversion risk); Alpha/theta ratio (↓ in MCI); Absolute theta T5/T6; EEG complexity (approximate entropy); DAR; Spectral coherence theta HC-cortex
+    eyes_open_findings: >
+    ↓ Alpha parieto-occipital; Mildly ↑ Theta; ↓ APF
+    eyes_closed_findings: >
+    ↑ Theta Pz/T5/T6; ↓ Alpha amplitude; ↓ APF; ↓ Complexity (AE/PE measures)
+    event_related_paradigm: >
+    P300 at Pz (↓ amplitude = early AD risk in MCI); Mismatch Negativity (MMN — attentional resource); N200 (discrimination); Memory ERP (RAVLT-linked P600)
+    pathological_threshold: >
+    APF <9 Hz = MCI or conversion risk; APF <8.5 Hz = dementia staging; Alpha/theta ratio <1.5 Pz; EEG complexity <0.6 (AE)
+    fnon_treatment_target: >
+    APF ↑ toward 9-10 Hz; Theta ↓ temporal (T5/T6/Pz); Alpha ↑ Pz; TGC restoration; Complexity ↑
+    response_biomarker: >
+    APF change (primary MCI progression/treatment response biomarker); RAVLT verbal memory correlation with APF; MoCA change correlation with theta power; Alpha/theta ratio change
+  tinnitus:
+    condition: "Tinnitus"
+    primary_qeeg_signature: >
+    ↑ Gamma power T3/T4 (auditory cortex — tinnitus generator marker); ↓ Alpha T3/T4 (maladaptive silence-induced); ↑ Theta auditory cortex (thalamocortical dysrhythmia); ↑ Temporal-frontal gamma coherence
+    key_electrodes: "T3/T4 (primary tinnitus sites); T5/T6 (posterior temporal); F3/F4 (frontal distress); Fz (entropy); C3/C4"
+    key_metrics: >
+    Gamma power T3/T4 (↑ = tinnitus generator); Alpha T3/T4 (↑ maladaptive pattern — suppress target); Theta temporal (thalamocortical dysrhythmia); Temporal-frontal gamma coherence; Alpha/gamma ratio temporal
+    eyes_open_findings: >
+    ↑ Gamma T3/T4 during silence (tinnitus percept correlate); ↑ Temporal-frontal high-gamma coherence
+    eyes_closed_findings: >
+    ↑ Gamma T3/T4; ↑ Theta T3/T4; ↓ Alpha suppression (maladaptive); ↑ Delta (some tinnitus subtypes)
+    event_related_paradigm: >
+    ASSR 40 Hz (auditory cortex gamma — ↓ in tinnitus paradoxically as inhibition is maladaptive); N1-P2 auditory ERP (↑ amplitude = cortical hyperexcitability); Mismatch Negativity (MMN) to sound changes; Offset response
+    pathological_threshold: >
+    Gamma T3/T4 >6 μV² = significant tinnitus generator; Temporal alpha >6 μV² (maladaptive silence pattern); THI score >40 = significant handicap
+    fnon_treatment_target: >
+    Temporal gamma ↓ T3/T4 (primary); Temporal alpha ↑ suppression (PARADOX: must suppress maladaptive alpha — unique to tinnitus); Theta ↓; Temporal-frontal coherence ↓
+    response_biomarker: >
+    THI score correlation with gamma T3/T4 change; Tinnitus loudness VAS vs gamma power; Alpha change T3/T4; Residual inhibition period change
+  schizophrenia:
+    condition: "Schizophrenia"
+    primary_qeeg_signature: >
+    ↑ Frontal delta + theta; ↓ Alpha (resting EC); ↓ 40 Hz ASSR (gamma) — PRIMARY biomarker; ↓ P300 amplitude; ↓ MMN; Disrupted SN-DMN connectivity; ↓ P50 gating (sensory gating deficit)
+    key_electrodes: "Fz, F3/F4 (frontal delta/theta); Cz (P300, midline reference); T3/T4 (AH correlate); P3/P4 (P300 — key ERP sites); O1/O2"
+    key_metrics: >
+    40 Hz ASSR amplitude/phase (↓ = primary schizophrenia biomarker; ASSR deficit replicable across labs); P300 amplitude P3/Pz (↓); MMN amplitude Fz (↓); P50 S2/S1 ratio (↑ = gating deficit); Frontal delta/theta; N100 amplitude
+    eyes_open_findings: >
+    ↑ Beta eyes-open; ↓ Alpha EC; ↑ Frontal delta
+    eyes_closed_findings: >
+    ↑ Frontal delta/theta; ↓ Alpha globally; ↓ Complexity; ↓ Spectral entropy; ↑ SN-DMN coherence (pathological)
+    event_related_paradigm: >
+    40 Hz ASSR (auditory steady-state response — 40 Hz click train; ↓ amplitude = schizophrenia marker); P300 (odd-ball — ↓ amplitude/↑ latency); MMN (change detection — ↓ in schizophrenia); P50 gating (S1-S2 paradigm; ↑ S2/S1 = poor gating); N200; ERN at FCz
+    pathological_threshold: >
+    40 Hz ASSR power <-15 dB vs controls; P300 amplitude <5 μV at Pz; MMN amplitude <3 μV at Fz; P50 S2/S1 >0.5 = gating deficit
+    fnon_treatment_target: >
+    40 Hz gamma ↑ (ASSR restoration — primary tACS/gamma entrainment target); P300 ↑; MMN ↑; Delta/theta ↓; Alpha ↑; L-STG gamma (AH: inhibitory TMS target)
+    response_biomarker: >
+    40 Hz ASSR change pre/post treatment course; PANSS correlation with ASSR; P300 amplitude change; MMN restoration; MCCB cognitive score correlation
+  tbi___concussion:
+    condition: "TBI / Concussion"
+    primary_qeeg_signature: >
+    ↑ Frontal/temporal theta; ↑ Delta; ↓ Posterior alpha; ↑ TBR; ↑ Theta/alpha ratio; ↓ Global coherence; ↓ EEG complexity (primary TBI severity metric); ↑ Slow waves in wakefulness
+    key_electrodes: "Fz, F3/F4 (frontal theta/delta); T3/T4 (temporal); Pz (posterior alpha ↓); Cz (global measure); All channels (coherence)"
+    key_metrics: >
+    EEG complexity/entropy (↓ = TBI severity — primary qEEG concussion biomarker); Theta/alpha ratio globally; Frontal theta Fz; Global coherence index (↓); Delta asymmetry; Concussion qEEG index (proprietary: EEG Sport/BrainScope); P300 amplitude
+    eyes_open_findings: >
+    ↑ Theta/alpha globally; ↑ Delta focal (if contusion); ↓ Alpha EO
+    eyes_closed_findings: >
+    ↑ Theta globally (especially frontal Fz/T3); ↑ Delta (if moderate-severe); ↓ Alpha; ↓ Complexity; ↑ Slow wave activity
+    event_related_paradigm: >
+    P300 (↓ amplitude = cognitive deficit post-TBI); N200 (attention); MRCP (motor readiness prolonged); MMN (↓ auditory discrimination); Resting EEG complexity metrics
+    pathological_threshold: >
+    EEG complexity (AE) <0.7 = significant TBI effect; TBR >3.5 = concussion (EEG Sport cutoff); Global coherence <0.5 (EO condition); Frontal theta >8 μV² post-concussion
+    fnon_treatment_target: >
+    Global theta ↓ (Fz/T3/T4 — primary recovery target); Posterior alpha ↑; Global coherence ↑; EEG complexity ↑ (entropy restoration is recovery biomarker); TBR normalisation
+    response_biomarker: >
+    EEG complexity/entropy change per week (primary concussion recovery metric); TBR change; Symptom (NSI/RPQ) correlation with qEEG complexity; Return-to-play timing linked to complexity normalisation
+  addiction___substance_use_disorder:
+    condition: "Addiction / Substance Use Disorder"
+    primary_qeeg_signature: >
+    ↑ Frontal theta; ↑ Beta (alcohol withdrawal); ↓ P300 amplitude (Cz/Pz — primary biomarker); ↑ Alpha resting (alcohol); ↓ Frontal alpha asymmetry; ↓ Gamma; Craving-linked delta/theta ↑
+    key_electrodes: "Cz (P300 — primary addiction site); Pz (P300); Fz, F3/F4 (theta/beta); T3/T4 (temporal); Fp1/Fp2 (OFC-linked)"
+    key_metrics: >
+    P300 amplitude Cz/Pz (↓ = inhibitory deficit/addiction severity — strongest biomarker; predicts relapse probability); Frontal theta Fz; Beta power alcohol; Alpha power resting; P50 gating; ERN FCz (impulsivity marker)
+    eyes_open_findings: >
+    ↑ Beta fast activity (alcohol acute — GABA agonism); ↑ Frontal alpha (resting, alcohol); ↑ Gamma eyes-open
+    eyes_closed_findings: >
+    ↑ Frontal theta; ↓ Alpha (some); ↑ Slow activity; ↓ Complexity; ↑ Frontal-midline theta (craving correlate)
+    event_related_paradigm: >
+    P300 (odd-ball — ↓ amplitude = inhibitory deficit; relapse predictor — strongest addiction ERP); Go/No-Go ERP (↓ P300 No-Go = poor inhibition); Craving ERP (drug cue paradigm — ↑ P300/LPP to drug stimuli); ERN (response monitoring deficit); N200
+    pathological_threshold: >
+    P300 amplitude <4 μV at Cz = high relapse risk; P300 amplitude <5 μV at Pz = significant inhibitory deficit; Frontal theta >6 μV² = heavy use signature
+    fnon_treatment_target: >
+    P300 ↑ at Cz (inhibitory control restoration — primary FNON target); Frontal theta ↓; DLPFC excitability ↑ (TPS F3/F4); NAc activity ↓ (LIFU target)
+    response_biomarker: >
+    P300 amplitude change Cz (primary addiction qEEG outcome); Relapse rate correlation with P300 baseline; TLFB abstinence days vs P300 change; ERN change (FCz)
+  adhd:
+    condition: "ADHD"
+    primary_qeeg_signature: >
+    ↑ TBR (theta/beta ratio at Cz >3.0 — PRIMARY ADHD qEEG biomarker); Excess frontal theta Fz; ↓ Beta Cz; Subtypes: maturational lag vs hyperarousal; ↑ DMN intrusion
+    key_electrodes: "Cz (TBR primary ADHD site); Fz (frontal theta); F3/F4 (frontal slowing); C3/C4 (central beta ↓); Pz (attention monitoring)"
+    key_metrics: >
+    TBR at Cz (theta/beta ratio: >3.0 = ADHD diagnosis support; most studied ADHD qEEG metric); Absolute theta Fz; Beta power Cz; P300 amplitude Cz/Pz; ERN at FCz (attention monitoring — ↓ in ADHD); CPT-II correlation with TBR
+    eyes_open_findings: >
+    ↑ TBR Cz; ↑ Frontal theta Fz; ↓ Beta globally; ↑ Slow-wave activity
+    eyes_closed_findings: >
+    ↑ Theta globally (especially Fz/Cz); ↓ Beta Cz; ↑ DMN activity; ↓ Alpha (task-relevant suppression deficit)
+    event_related_paradigm: >
+    P300 (odd-ball at Cz — ↓ amplitude = inattention; ↑ latency = processing speed deficit); ERN at FCz (↓ in ADHD = poor error monitoring); Go/No-Go (↑ commission errors, ↓ N2); Contingent Negative Variation (CNV — expectancy deficit in ADHD); CPT-ERP
+    pathological_threshold: >
+    TBR at Cz >3.0 (primary cutoff — FDA-cleared NeuroPace/NEBA threshold); TBR >5.0 = severe ADHD; Frontal theta >8 μV² Fz = significant slowing
+    fnon_treatment_target: >
+    TBR ↓ at Cz toward <3.0 (primary ADHD treatment response metric); Frontal theta ↓ Fz; Beta ↑ Cz; P300 ↑; DMN-ECN anti-correlation restoration
+    response_biomarker: >
+    TBR change per session (primary neurofeedback and TPS/tACS metric); CAARS/Conners correlation with TBR; CPT-II change vs beta power; QbTest motion correlation with theta
+  essential_tremor:
+    condition: "Essential Tremor"
+    primary_qeeg_signature: >
+    Tremor-frequency coherence 4-12 Hz (Cz/FCz) — PRIMARY ET biomarker; ↑ Low beta (14-21 Hz) desynchronisation SMA movement; ↑ Upper beta (18-30 Hz) ERD DLPFC; Disrupted CTC circuit synchrony
+    key_electrodes: "Cz/FCz (SMA — tremor coherence primary); C3/C4 (motor cortex); F3/F4 (dlPFC); P9/P10/Oz (cerebellar reference)"
+    key_metrics: >
+    Tremor frequency coherence 4-12 Hz at Cz/FCz (↑ = CTC synchrony = ET biomarker); Corticomuscular coherence EMG-EEG at tremor frequency; Beta ERD at FCz during movement (↑ = motor planning deficit); Alpha/beta motor cortex ratio
+    eyes_open_findings: >
+    Tremor burst coherence (corticomuscular); ↑ Cerebellar-motor coherence; ↑ Beta desynchronisation SMA (paradoxical — suggests disrupted motor rhythm)
+    eyes_closed_findings: >
+    ↑ Tremor-frequency (4-12 Hz) coherence at Cz/FCz/C3/C4; ↑ Beta ERD; Disrupted SMA activation sequence
+    event_related_paradigm: >
+    Corticomuscular coherence (EMG-EEG task: wrist extension — ↑ coherence at tremor frequency = CTC involvement); Cerebellar TMS MEP (motor evoked potential); Motor imagery ERD at Cz/FCz
+    pathological_threshold: >
+    Tremor coherence Cz/FCz >0.15 at tremor frequency; Corticomuscular coherence >0.1 at tremor frequency; Beta ERD FCz >40% during movement
+    fnon_treatment_target: >
+    Tremor-frequency coherence ↓ (desynchronise CTC — primary target); Beta ERD normalisation FCz; Cerebellar-M1 coherence normalisation
+    response_biomarker: >
+    Tremor coherence change Cz/FCz (primary qEEG ET biomarker tracking); TETRAS score correlation; Spirography change vs coherence; DBS/TPS-induced coherence reduction
+  asd:
+    condition: "Autism Spectrum Disorder (ASD)"
+    primary_qeeg_signature: >
+    Mu rhythm suppression deficit at Cz/C3 (mirror neuron biomarker); ↓ Long-range coherence; ↑ Local connectivity; U-shaped power (↑ delta+gamma, ↓ alpha); ↑ Gamma sensory cortices (hyperreactivity)
+    key_electrodes: "Cz/C3/C4 (mu — mirror neuron); F3/F4 (frontal social); T3/T4 (temporal language/social); P3/P4 (parietal spatial); globally (long-range coherence)"
+    key_metrics: >
+    Mu suppression at Cz (11-13 Hz band, action observation paradigm — ↓ suppression = mirror neuron deficit = ASD biomarker); Long-range coherence F3-P3/T3; Local coherence (↑ in ASD — opposite to long-range); 40 Hz ASSR (altered in ASD); N170 face ERP
+    eyes_open_findings: >
+    ↑ Gamma sensory cortices (sensory hyperreactivity); ↑ Beta; ↓ Alpha (EO — ↓ inhibitory control); ↑ Local frontal coherence
+    eyes_closed_findings: >
+    ↑ Delta/theta; ↑ Gamma (sensory); ↓ Alpha; ↓ Long-range connectivity; ↑ Local hyperconnectivity
+    event_related_paradigm: >
+    Mu paradigm (action observation — hand actions; ↓ suppression = mirror neuron deficit); N170 face ERP (delayed/reduced in ASD); MMN to social sounds; ASSR 40 Hz; P300 social-cognitive (theory of mind paradigm); ERP to social/non-social stimuli distinction
+    pathological_threshold: >
+    Mu suppression <20% during action observation (ASD marker vs 40-50% in neurotypical); Long-range coherence F3-P3 <0.3 (↓ connectivity); 40 Hz ASSR <-10 dB vs controls
+    fnon_treatment_target: >
+    Mu suppression ↑ (Cz — mirror neuron activation restoration); Long-range coherence ↑; 40 Hz gamma normalisation; Frontal alpha ↑; Social brain network connectivity
+    response_biomarker: >
+    Mu suppression change (primary ASD qEEG biomarker); ADOS-2 social affect correlation with mu; N170 face ERP latency change; Long-range coherence restoration
+  disorders_of_consciousness_(doc):
+    condition: "Disorders of Consciousness (DOC)"
+    primary_qeeg_signature: >
+    Generalised delta/theta dominance; Absent/severely ↓ alpha/beta; ↓ EEG complexity/entropy (primary DOC severity metric and consciousness correlate); Absent PDR; ↓ EEG reactivity to stimulation
+    key_electrodes: "Global (all 10-20 channels required); Fz/Cz/Pz (midline — arousal); O1/O2 (PDR assessment, visual reactivity); T3/T4 (name-calling auditory response); All (reactivity testing)"
+    key_metrics: >
+    EEG complexity/entropy (↑ = MCS vs ↓ = UWS — primary DOC prognostic metric; LZC, MSE, AE); EEG reactivity index (change with stimulation — absent = UWS); Delta/theta power; PDR presence (positive sign); Sleep cycling presence; P300 amplitude (command-following ERP)
+    eyes_open_findings: >
+    No meaningful reactivity (UWS) vs stimulus-driven reactivity (MCS); Absence of alpha pattern; Global delta dominance
+    eyes_closed_findings: >
+    Profound slowing: delta/theta dominance; No PDR; Absent sleep architecture (severe UWS); Low complexity throughout
+    event_related_paradigm: >
+    ERP command-following paradigm (P300 to own name — presence = covert awareness indicator even in clinically UWS); Mental imagery paradigm (EEG: motor imagery P300-based BCI); Startle ERP; Semantic processing ERP (N400); Auditory change MMN
+    pathological_threshold: >
+    EEG complexity (MSE/LZC) <0.5 = UWS; EEG reactivity = absent (UWS) vs present (MCS); PDR absent = severe DOC; Sleep cycling absent = very poor prognosis
+    fnon_treatment_target: >
+    EEG complexity ↑ (primary target — emergence of consciousness correlate); EEG reactivity ↑; Delta ↓; Thalamocortical connectivity ↑; PDR emergence; Sleep cycling restoration
+    response_biomarker: >
+    EEG complexity change per week (primary DOC recovery biomarker); CRS-R change correlation with entropy; P300 command-following ERP presence/absence; EEG reactivity change
+  fibromyalgia:
+    condition: "Fibromyalgia"
+    primary_qeeg_signature: >
+    ↑ Central theta Cz/C3/C4 (primary FM marker); ↑ Theta/alpha + theta/beta ratios; ↓ Delta R-insula; ↑ Beta R-midcingulate; ↓ APF; Thalamocortical dysrhythmia; ↓ EO/EC reactivity
+    key_electrodes: "Cz, C3/C4 (central theta — primary FM); Fz (frontal slowing); Pz, P3/P4 (parietal theta); T3/T4 (temporal); O1/O2 (APF)"
+    key_metrics: >
+    Central theta Cz (↑ = central sensitisation biomarker — primary FM qEEG metric); APF (↓ correlates with FM severity — NRS pain); Thalamocortical coherence Cz-Pz (↑ = dysrhythmia); EO/EC reactivity index; Theta/alpha ratio; Beta R-frontal/midcingulate
+    eyes_open_findings: >
+    ↑ Central theta EO (active pain sensitisation); ↓ EO/EC theta difference (arousal dysregulation); ↑ Beta R-frontal
+    eyes_closed_findings: >
+    ↑ Central/parietal theta; ↓ Alpha; ↓ APF; ↑ Thalamocortical coherence Cz-Pz
+    event_related_paradigm: >
+    Pain-evoked ERP (laser evoked potential — LEP; ↑ amplitude = central sensitisation); N2-P2 pain ERP; CPM-related ERP (deficient DNIC reflected in ↓ LEP suppression); Heat pain ERP
+    pathological_threshold: >
+    Central theta Cz >6 μV² = significant FM central sensitisation; Thalamocortical coherence >0.4 Cz-Pz = dysrhythmia; APF <9 Hz = FM cognitive impairment component
+    fnon_treatment_target: >
+    Central theta ↓ Cz/C3/C4 (tDCS M1 primary target); APF ↑; Thalamocortical coherence ↓; EO/EC reactivity ↑; Insula beta ↓
+    response_biomarker: >
+    Central theta change Cz (primary FM qEEG outcome); NRS pain correlation with theta power; FIQ-R change vs thalamocortical coherence; APF change with treatment
+  multiple_sclerosis:
+    condition: "Multiple Sclerosis"
+    primary_qeeg_signature: >
+    ↑ Frontal theta (fatigue correlate — primary MS qEEG biomarker); ↑ Delta; ↓ Alpha; ↓ APF; ↑ Theta/alpha ratio; ↓ P300 (cognitive decline); VEP P100 ↑ latency (optic neuritis marker)
+    key_electrodes: "Fz, F3/F4 (frontal theta — fatigue); Pz (posterior alpha); C3/C4 (central); O1/O2 (VEP reference); Occipital (VEP active electrode)"
+    key_metrics: >
+    Frontal theta Fz (correlates with FSS fatigue severity — primary MS qEEG metric); APF (↓ with cognitive decline); P300 amplitude/latency Cz/Pz (SDMT correlation); VEP P100 latency (>115 ms = optic neuritis); Alpha power Pz; Theta/alpha ratio
+    eyes_open_findings: >
+    ↑ Fatigue-related theta EO (Uhthoff — worse in heat); ↓ Alpha EO; ↑ Frontal delta during fatigue tasks
+    eyes_closed_findings: >
+    ↑ Frontal theta; ↓ Alpha; ↓ APF; ↑ Theta globally with cognitive decline; ↓ Complexity
+    event_related_paradigm: >
+    P300 (↓ amplitude/↑ latency = cognitive decline in MS; SDMT correlation); VEP P100 (optic nerve conduction velocity — ↑ latency = demyelination); Motor evoked potential (MEP) central motor conduction time; SSEP (somatosensory)
+    pathological_threshold: >
+    VEP P100 >115 ms = abnormal (optic neuritis); P300 latency >380 ms = cognitive slowing; Frontal theta >6 μV² correlates with FSS >4 (moderate-severe fatigue)
+    fnon_treatment_target: >
+    Frontal theta ↓ Fz (fatigue target — primary treatment response); APF ↑; P300 amplitude ↑; Global coherence ↑; Sensorimotor beta restoration
+    response_biomarker: >
+    Frontal theta change vs FSS fatigue score; SDMT change vs P300 amplitude; VEP P100 latency change (demyelination); EDSS correlation with qEEG complexity
+  dystonia:
+    condition: "Dystonia"
+    primary_qeeg_signature: >
+    ↓ Sensorimotor beta C3/C4; ↓ PMBR (post-movement beta rebound) — PRIMARY DYSTONIA qEEG BIOMARKER; ↑ Alpha coherence motor cortex (maladaptive); ↓ Cortical silent period (impaired GABAergic inhibition)
+    key_electrodes: "C3/C4 (sensorimotor beta — primary); Cz/FCz (SMA); F3/F4 (frontal); Pz (parietal). Specific body-part electrode for task-specific dystonia (e.g., C3 for right-hand writer's cramp)"
+    key_metrics: >
+    PMBR at C3/C4 (post-movement beta rebound — ↓ = dystonia; reflects impaired inhibitory interneuron function); Beta power C3/C4 (↓); Alpha coherence M1 (↑ = maladaptive plasticity); Cortical Silent Period (CSP duration ↓); SEP N20/P25 (↑ amplitude = hyperexcitability); EMG-EEG coherence
+    eyes_open_findings: >
+    ↓ ERD (reduced beta desynchronisation during movement); ↑ Alpha coherence; ↓ Beta ERS post-movement
+    eyes_closed_findings: >
+    ↓ Sensorimotor beta; ↓ PMBR; ↑ Motor cortex excitability (paired-pulse TMS: ↓ SICI = impaired GABA); ↑ Alpha coherence M1
+    event_related_paradigm: >
+    PMBR paradigm (hand movement task; ↓ beta rebound = dystonia biomarker); MEP (motor evoked potential — lowered rMT = hyperexcitability); SICI (short-interval cortical inhibition — ↓ = GABAergic deficit); EMG-EEG corticomuscular coherence
+    pathological_threshold: >
+    PMBR <15% (vs 30-40% normative) = dystonia marker; SICI <30% (↓ GABA-A) = M1 hyperexcitability; CSP duration <150 ms (impaired GABA-B)
+    fnon_treatment_target: >
+    PMBR ↑ at C3/C4 (restore beta rebound — primary dystonia treatment target); Beta ↑ sensorimotor; Alpha coherence ↓ M1; CSP duration ↑ (GABA restoration); SICI normalisation
+    response_biomarker: >
+    PMBR change pre/post DBS/TPS (primary qEEG dystonia biomarker); BFMDRS correlation with PMBR; CSP duration change; GPi DBS stimulation response

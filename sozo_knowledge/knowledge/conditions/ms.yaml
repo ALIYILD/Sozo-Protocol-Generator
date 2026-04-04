@@ -479,3 +479,40 @@ governance_rules:
 - Active relapse is an absolute exclusion — document relapse status at each session
 - Neurology treating team must be informed of neuromodulation — document communication
 patient_journey_notes: {}
+
+tps_evidence:
+  total_papers: 5
+  high_quality_count: 2
+  evidence_grade: "preliminary"
+  key_papers:
+    - doi: "10.1177/1545968317753681"
+      title: "Pulse Width Does Not Influence the Gains Achieved With Neuromuscular Electrical Stimulation in People With Multiple Sclerosis"
+      year: 2018
+      study_type: "rct"
+      citations: 13
+      takeaway: "Neuromuscular electrical stimulation can improve walking performance and provide symptom relief in MS regardless of pulse width parameters."
+  clinical_note: >
+    TPS evidence for MS is preliminary with only 5 publications and 2 high-quality studies. The available
+    RCT data pertains to peripheral neuromuscular stimulation rather than direct TPS; use for MS should be
+    considered investigational and requires comprehensive neurological assessment and Doctor authorization.
+
+
+fnon_protocol:
+  primary_network: null
+  fnon_notes: "No FNON protocol data available for this condition."
+
+qeeg_biomarkers:
+  primary_biomarker: null
+  f_band_target: null
+
+modality_evidence_counts:
+  tps: null
+  best_first_line: null
+  fnon_score: 0
+
+
+assessment_profile:
+  primary_clinical_scales: null
+  neuropsychological_battery: null
+  primary_scale: null
+  qeeg_primary_signature: null

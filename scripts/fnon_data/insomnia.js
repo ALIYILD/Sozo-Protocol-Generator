@@ -616,4 +616,27 @@ module.exports = {
       { authors: "Riemann D, Spiegelhalder K, Feige B, et al.", year: 2010, title: "The hyperarousal model of insomnia: A review of the concept and its evidence", journal: "Sleep Medicine Reviews", volume: "14(1)", pages: "19–31", doi: "10.1016/j.smrv.2009.04.002" },
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: 'Thalamocortical sleep + DMN',
+  fnonSecondaryNetwork: 'DMN hyperarousal',
+  fnonFBand: 'Delta/theta facilitation + beta suppression',
+  fnonEegNodes: 'Fz/F3/F4(frontal)+Cz(central spindles)+bilateral mastoid (tACS/CES path)',
+  fnonOscillationGoal: 'Facilitate sleep spindles(12-15Hz)+delta(0.5-4Hz); suppress hyperarousal beta; restore thalamocortical sleep rhythm',
+  fnonPrimaryModalityParams: 'tACS Nexalin (77.5Hz, 15mA, forehead-bilateral mastoid, FDA cleared) OR CES Alpha-Stim (0.5Hz, 100-500μA, 20-60min before sleep)',
+  fnonAddonModality: 'PEMF (delta/theta 1-8Hz, 30min pre-sleep); PBM bilateral frontal; taVNS (25Hz, 30min pre-sleep)',
+  fnonSessions: '8 weeks (tACS) or 3-5 weeks (CES)',
+  fnonEvidenceLevel: 'RCT (CES+tACS); High quality',
+  fnonLitCount: '25+ CES; 15+ tACS; 5+ PEMF',
+  fnonKeyReferences: 'Barclay 2014 meta (CES ES=-1.02); Nexalin RCTs 2022-2024; Gilula 2007 CES insomnia',
+  fnonNotes: 'FNON: Sleep spindle+delta deficit are primary targets. Nexalin 77.5Hz paradoxically entrains via thalamocortical resonance. CES 0.5Hz = direct slow oscillation entrainment.',
+  fnonQeegBiomarker: '↓Spindles; ↓Delta; ↑Beta',
+  fnonPaperCounts: {
+    tps: null, tms: null, tdcs: 10,
+    tavns: 80, ces: 25, tacs: 15,
+    pbm: 5, lifu: null, pemf: 5, dbs: null,
+  },
+  fnonBestFirstLine: 'CES (FDA cleared)',
+  fnonBestSecondLine: 'tACS 77.5Hz Nexalin',
+  fnonScore: 4,
+
 };

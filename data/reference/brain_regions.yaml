@@ -1,0 +1,918 @@
+# SOZO Brain Center — Brain Regions Reference (48 regions)
+# Source: SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026
+
+meta:
+  total_regions: 46
+  source: "SOZO_Brain_Networks_qEEG_FNON.xlsx"
+  date: "2026-04-04"
+
+regions:
+  - name: Dorsolateral PFC
+    abbreviation: DLPFC
+    lobe: Frontal
+    depth: Cortical
+    eeg_positions: F3(L),F4(R)
+    brodmann: BA9,46
+    primary_functions: Executive function, working memory, cognitive control, mood regulation
+    fnon_networks: ["ECN", "Salience", "DMN"]
+    qeeg_normal: Alpha(8-12 Hz); Beta during task
+    qeeg_pathological: "↓Alpha=cognitive slowing; ↑Theta=MDD; ↑Beta=anxiety"
+    clinical_conditions: ["MDD", "OCD", "ADHD", "Schizophrenia", "MCI", "PTSD", "Addiction"]
+    modalities: ["TPS", "TMS (primary)", "tDCS", "tACS", "PBM", "LIFU", "tRNS"]
+    fnon_notes: "Primary rTMS target for depression. L-DLPFC (F3). FNON: Alpha elevation + theta suppression."
+  - name: Ventromedial PFC
+    abbreviation: vmPFC
+    lobe: Frontal
+    depth: Cortical
+    eeg_positions: Fz/AFz
+    brodmann: BA10,11,25
+    primary_functions: Emotional valuation, reward learning, fear extinction, DMN self-reference
+    fnon_networks: ["DMN", "Limbic", "Reward"]
+    qeeg_normal: Theta(4-8 Hz); Alpha during emotion regulation
+    qeeg_pathological: "↑Theta=depression,PTSD; ↓Alpha=poor emotion regulation"
+    clinical_conditions: ["MDD", "PTSD", "Anxiety", "OCD", "Addiction"]
+    modalities: ["TPS", "tDCS", "LIFU", "Deep TMS (H1)", "tACS"]
+    fnon_notes: "Key DMN hub. Subgenual (Cg25) = DBS target for TRD. FNON: Theta suppression + alpha facilitation."
+  - name: Orbitofrontal Cortex
+    abbreviation: OFC
+    lobe: Frontal
+    depth: Cortical
+    eeg_positions: Fp1/Fp2,F7/F8
+    brodmann: BA11,12,13
+    primary_functions: Reward evaluation, impulse control, decision-making, emotional behaviour
+    fnon_networks: ["Limbic", "Reward"]
+    qeeg_normal: Beta during reward; Alpha at rest
+    qeeg_pathological: "↓Alpha+↑Beta=impulsivity; ↑Theta=OCD"
+    clinical_conditions: ["OCD", "Addiction", "Eating disorders", "ADHD"]
+    modalities: ["TPS", "tDCS", "LIFU", "Deep TMS"]
+    fnon_notes: "FNON: Beta suppression for impulsivity; OFC-amygdala loop target."
+  - name: Medial PFC
+    abbreviation: mPFC
+    lobe: Frontal
+    depth: Cortical
+    eeg_positions: Fz/AFz
+    brodmann: BA10,32
+    primary_functions: Self-referential processing, theory of mind, DMN anchor, prospective memory
+    fnon_networks: ["DMN"]
+    qeeg_normal: Theta-Alpha(6-10 Hz) during mind-wandering
+    qeeg_pathological: "↑Theta=rumination; ↑Alpha=reduced engagement"
+    clinical_conditions: ["MDD (rumination)", "Autism", "Schizophrenia"]
+    modalities: ["TPS", "tDCS", "tACS", "Deep TMS", "LIFU"]
+    fnon_notes: "Core DMN node. TPS Fz/AFz multi-site. FNON: Theta suppression for rumination."
+  - name: Inferior Frontal Gyrus
+    abbreviation: IFG
+    lobe: Frontal
+    depth: Cortical
+    eeg_positions: "F7(L=Broca),F8(R)"
+    brodmann: BA44,45,47
+    primary_functions: Language production (L-Broca), inhibitory control (R), semantic processing
+    fnon_networks: ["Language", "ECN"]
+    qeeg_normal: Beta during language; Alpha at rest
+    qeeg_pathological: "↓Beta(L)=aphasia; ↑Alpha(R)=impaired inhibition"
+    clinical_conditions: ["Aphasia", "ADHD", "OCD", "Alzheimer's"]
+    modalities: ["TPS", "TMS", "tDCS", "LIFU"]
+    fnon_notes: "TPS F7 = AD/MCI multi-site target. FNON: Beta facilitation (L) for language."
+  - name: Anterior Cingulate Cortex
+    abbreviation: ACC
+    lobe: Frontal/Limbic
+    depth: Deep cortical
+    eeg_positions: Fz,AFz,Cz
+    brodmann: BA24,32,33
+    primary_functions: Error monitoring, conflict detection, pain modulation, emotional regulation
+    fnon_networks: ["Salience", "Limbic", "Pain"]
+    qeeg_normal: Theta(4-8 Hz); Gamma for errors
+    qeeg_pathological: "↑Theta=depression,OCD,PTSD; ↑Gamma=chronic pain"
+    clinical_conditions: ["MDD", "OCD", "PTSD", "Chronic pain", "ADHD"]
+    modalities: ["TPS", "Deep TMS (H7)", "tDCS", "LIFU", "tACS"]
+    fnon_notes: "dACC vs sgACC (Cg25) different targets. H7 coil reaches mPFC/ACC for OCD. FNON: Theta suppression."
+  - name: Supplementary Motor Area
+    abbreviation: SMA
+    lobe: Frontal
+    depth: Cortical
+    eeg_positions: Fz,FCz
+    brodmann: BA6
+    primary_functions: Motor planning, movement sequencing, bimanual coordination, gait initiation
+    fnon_networks: ["Sensorimotor"]
+    qeeg_normal: Beta(13-30 Hz); Mu(8-12 Hz)
+    qeeg_pathological: "↑Beta=PD motor freezing; ↓Beta=dyskinesia"
+    clinical_conditions: ["Parkinson's", "Dystonia", "Stuttering"]
+    modalities: ["TPS", "TMS", "tDCS", "tACS", "PEMF"]
+    fnon_notes: "TPS PD protocol targets FCz. FNON: Beta suppression for PD; theta for sequencing."
+  - name: Primary Motor Cortex
+    abbreviation: M1
+    lobe: Frontal
+    depth: Cortical
+    eeg_positions: C3(L),C4(R)
+    brodmann: BA4
+    primary_functions: Voluntary movement, corticospinal tract, motor homunculus
+    fnon_networks: ["Sensorimotor"]
+    qeeg_normal: Beta(13-30 Hz); Mu(8-12 Hz)
+    qeeg_pathological: "↑Beta=PD; ↓Mu=chronic pain; ↑Theta=MS spasticity"
+    clinical_conditions: ["PD", "Stroke", "Chronic pain", "Dystonia", "MS", "TBI"]
+    modalities: ["TPS", "TMS (rMT reference)", "tDCS", "tACS", "PBM", "PEMF", "tRNS"]
+    fnon_notes: "Motor threshold (rMT) reference. FNON: Contralateral target. Beta suppression for PD."
+  - name: Primary Somatosensory Cortex
+    abbreviation: S1
+    lobe: Parietal
+    depth: Cortical
+    eeg_positions: C3/C4,CP3/CP4
+    brodmann: BA1,2,3
+    primary_functions: Somatosensory processing, pain, tactile discrimination, proprioception
+    fnon_networks: ["Sensorimotor", "Pain"]
+    qeeg_normal: Mu+Beta; suppressed during touch
+    qeeg_pathological: "↓Mu=central sensitisation; ↑Beta=fibromyalgia"
+    clinical_conditions: ["Chronic pain", "Fibromyalgia", "CRPS", "Stroke sensory"]
+    modalities: ["TPS", "TMS", "tDCS", "tACS", "LIFU"]
+    fnon_notes: "LIFU landmark: Lee 2015 (356 cit) finger-level specificity. FNON: Gamma suppression for pain."
+  - name: Inferior Parietal Lobule
+    abbreviation: IPL
+    lobe: Parietal
+    depth: Cortical
+    eeg_positions: P3/CP5(L),P4/CP6(R)
+    brodmann: BA39,40
+    primary_functions: "Attention, visuospatial, language (L=AG), working memory buffer"
+    fnon_networks: ["ECN", "DMN", "DAN"]
+    qeeg_normal: Alpha(8-12 Hz) dominant
+    qeeg_pathological: "↓Alpha=AD/MCI; ↑Theta=MCI signature"
+    clinical_conditions: ["Alzheimer's", "MCI", "Hemineglect", "Dyslexia"]
+    modalities: ["TPS", "TMS", "tDCS", "tRNS", "tACS"]
+    fnon_notes: "TPS AD/MCI protocol targets P3/P4. FNON: Alpha facilitation for MCI."
+  - name: Posterior Parietal Cortex
+    abbreviation: PPC
+    lobe: Parietal
+    depth: Cortical
+    eeg_positions: P3/P4,Pz
+    brodmann: BA5,7
+    primary_functions: Visuospatial integration, sensorimotor transformation, spatial attention
+    fnon_networks: ["DAN", "ECN", "Sensorimotor"]
+    qeeg_normal: Alpha; Beta during coordination
+    qeeg_pathological: "↑Theta=spatial deficits; ↓Beta=apraxia"
+    clinical_conditions: ["Hemineglect", "TBI", "Apraxia", "Stroke posterior"]
+    modalities: ["TPS", "TMS", "tDCS", "tACS", "LIFU"]
+    fnon_notes: "Right PPC for spatial attention. FNON: Theta suppression + beta restoration."
+  - name: Precuneus
+    abbreviation: PCun
+    lobe: Parietal
+    depth: Cortical
+    eeg_positions: Pz
+    brodmann: BA7
+    primary_functions: Episodic memory, self-referential thought, consciousness, DMN core
+    fnon_networks: ["DMN (core hub)"]
+    qeeg_normal: High alpha(8-12 Hz) at rest
+    qeeg_pathological: "↓Alpha=AD amyloid; ↑Theta=memory deficit"
+    clinical_conditions: ["AD", "MCI", "DOC", "Depression"]
+    modalities: ["TPS", "tDCS", "tACS(40Hz)", "PBM", "LIFU"]
+    fnon_notes: "Primary DMN hub. TPS AD targets Pz. FNON: 40 Hz gamma entrainment (tACS) for amyloid."
+  - name: Posterior Cingulate Cortex
+    abbreviation: PCC
+    lobe: Cingulate
+    depth: Cortical
+    eeg_positions: Pz,CPz
+    brodmann: BA23,31
+    primary_functions: Autobiographical memory, self-referential, mind-wandering, consciousness
+    fnon_networks: ["DMN (major hub)"]
+    qeeg_normal: High alpha; Theta during self-referential
+    qeeg_pathological: "↑Theta+↓Alpha=AD/MCI; DMN hyperactivity=depression"
+    clinical_conditions: ["AD", "MCI", "Depression", "DOC", "Schizophrenia"]
+    modalities: ["TPS (Pz target)", "tDCS", "tACS(40Hz)", "PBM", "LIFU"]
+    fnon_notes: "PCC-Precuneus axis is DMN core. Hypometabolism = AD biomarker. FNON: Alpha restoration."
+  - name: Angular Gyrus
+    abbreviation: AG
+    lobe: Parietal
+    depth: Cortical
+    eeg_positions: P3(L),CP5
+    brodmann: BA39
+    primary_functions: Language comprehension, reading, semantic processing, mathematical cognition
+    fnon_networks: ["Language", "DMN"]
+    qeeg_normal: Alpha dominant; theta during semantic
+    qeeg_pathological: "↓Alpha=AD language; ↑Theta=MCI"
+    clinical_conditions: ["AD", "Dyslexia", "Dyscalculia", "Semantic aphasia"]
+    modalities: ["TPS", "TMS", "tDCS"]
+    fnon_notes: "TPS AD multi-site includes AG. FNON: Alpha restoration for semantic access."
+  - name: Superior Temporal Gyrus
+    abbreviation: STG
+    lobe: Temporal
+    depth: Cortical
+    eeg_positions: T3/T5(L),T4/T6(R)
+    brodmann: BA22,41,42
+    primary_functions: "Primary auditory (A1), Wernicke's (L), speech perception, ToM"
+    fnon_networks: ["Language", "Auditory", "Social"]
+    qeeg_normal: Beta during auditory; Alpha at rest
+    qeeg_pathological: "↓Beta(L)=AH in schizophrenia; ↑Gamma=tinnitus"
+    clinical_conditions: ["Schizophrenia (AH)", "Tinnitus", "APD", "Autism"]
+    modalities: ["TMS (inhibitory L-STG)", "tDCS cathodal", "tRNS", "tACS", "taVNS"]
+    fnon_notes: "tDCS cathodal reduces AH. FNON: Beta suppression (L) for hallucinations."
+  - name: Middle Temporal Gyrus
+    abbreviation: MTG
+    lobe: Temporal
+    depth: Cortical
+    eeg_positions: T3/T5,T4/T6
+    brodmann: BA21
+    primary_functions: Semantic memory, face recognition, language (L), multimodal association
+    fnon_networks: ["Language", "DMN", "Social"]
+    qeeg_normal: Alpha at rest; Theta during semantic
+    qeeg_pathological: "↑Theta=AD semantic; ↓Alpha=AD signature"
+    clinical_conditions: ["AD", "Semantic dementia", "TLE"]
+    modalities: ["TPS", "TMS", "tDCS", "LIFU"]
+    fnon_notes: "TPS T3/T4 in multi-site AD protocol. FNON: Theta suppression; alpha restoration."
+  - name: Hippocampus
+    abbreviation: HC
+    lobe: Temporal (mesial)
+    depth: Deep
+    eeg_positions: T3/T4 (approx)
+    brodmann: None (deep)
+    primary_functions: Episodic memory, spatial navigation, pattern separation, neurogenesis
+    fnon_networks: ["Limbic", "DMN", "Memory"]
+    qeeg_normal: Theta(4-8 Hz); sharp-wave ripples(80-120 Hz)
+    qeeg_pathological: "↓Theta=AD; ↑Delta=hippocampal atrophy"
+    clinical_conditions: ["AD", "MCI", "PTSD", "TLE", "Depression"]
+    modalities: ["LIFU", "PBM intranasal", "DBS", "taVNS (indirect)"]
+    fnon_notes: "LIFU and PBM intranasal are primary HC modalities. taVNS drives HC plasticity via NTS-HC. FNON: Theta facilitation."
+  - name: Amygdala
+    abbreviation: Amy
+    lobe: Temporal (mesial)
+    depth: Deep
+    eeg_positions: T3/T4,F7/F8 (approx)
+    brodmann: None (deep)
+    primary_functions: Fear conditioning, emotional memory, threat detection, anxiety regulation
+    fnon_networks: ["Limbic", "Salience", "Fear"]
+    qeeg_normal: Theta(4-8 Hz); Gamma during fear
+    qeeg_pathological: "↑Gamma=anxiety,PTSD; ↑Theta=fear; ↓Beta=extinction failure"
+    clinical_conditions: ["PTSD", "Anxiety", "Depression", "Addiction", "Autism"]
+    modalities: ["LIFU", "DBS", "taVNS (indirect)", "Deep TMS"]
+    fnon_notes: "Cannot reach with surface stimulation. taVNS/CES modulate via vagal afferents. FNON: Theta suppression."
+  - name: Entorhinal Cortex
+    abbreviation: EC
+    lobe: Temporal
+    depth: Deep cortical
+    eeg_positions: T3/T4
+    brodmann: BA28,34
+    primary_functions: HC gateway, grid cells, olfactory, memory consolidation relay
+    fnon_networks: ["Limbic", "Memory"]
+    qeeg_normal: Gamma-theta coupling; sharp-wave ripples
+    qeeg_pathological: "↑Theta+↓gamma coupling=earliest AD; ↓HC coherence"
+    clinical_conditions: ["AD (first affected)", "MCI", "TLE"]
+    modalities: ["LIFU", "DBS", "taVNS", "PBM intranasal"]
+    fnon_notes: First tau pathology region in AD. 40 Hz gamma entrainment targets EC-HC theta-gamma coupling. FNON critical for AD prevention.
+  - name: Hippocampal-EC Complex
+    abbreviation: MTL
+    lobe: Temporal
+    depth: Deep
+    eeg_positions: T3/T4
+    brodmann: BA28,34,35
+    primary_functions: Memory formation, spatial navigation, context encoding, semantic learning
+    fnon_networks: ["Limbic-Memory"]
+    qeeg_normal: Theta-gamma coupling
+    qeeg_pathological: "↓Coupling = AD biomarker"
+    clinical_conditions: ["AD", "MCI", "TLE", "Amnesia"]
+    modalities: ["LIFU", "PBM", "taVNS", "DBS (entorhinal)"]
+    fnon_notes: "Combined target: LIFU + PBM intranasal + taVNS for tri-modal MTL memory circuit restoration."
+  - name: Insula
+    abbreviation: Ins
+    lobe: Buried cortex
+    depth: Deep cortical
+    eeg_positions: T3-C3/T4-C4 area
+    brodmann: BA13
+    primary_functions: Interoception, pain awareness, drug craving, social emotion, autonomic
+    fnon_networks: ["Salience (anterior hub)"]
+    qeeg_normal: Gamma pain/craving; Beta rest; Theta anxiety
+    qeeg_pathological: "↑Gamma=chronic pain,craving; ↑Theta=PTSD"
+    clinical_conditions: ["Chronic pain", "Addiction", "Anxiety", "PTSD", "Eating disorders"]
+    modalities: ["Deep TMS (H4/H coils)", "LIFU", "taVNS", "DBS"]
+    fnon_notes: "FDA cleared BrainsWay H4 (smoking cessation bilateral insula). FNON: Gamma suppression for pain/craving."
+  - name: Primary Visual Cortex
+    abbreviation: V1
+    lobe: Occipital
+    depth: Cortical
+    eeg_positions: Oz,O1/O2
+    brodmann: BA17
+    primary_functions: Primary visual, edge detection, retinotopic organisation
+    fnon_networks: ["Visual Network"]
+    qeeg_normal: Alpha(8-12 Hz) dominant; suppressed by visual input
+    qeeg_pathological: "↑Alpha=visual suppression; ↓Alpha=visual hyperexcitability"
+    clinical_conditions: ["Migraine", "Visual stroke", "Charles Bonnet"]
+    modalities: ["TMS", "tDCS", "tACS", "LIFU"]
+    fnon_notes: "LIFU landmark: Lee 2016 (Sci Rep, 376 cit) — V1 phosphene confirmed. Occipital alpha = qEEG reference."
+  - name: Cingulate Motor Area
+    abbreviation: CMA
+    lobe: Cingulate
+    depth: Cortical
+    eeg_positions: FCz,Cz
+    brodmann: BA24
+    primary_functions: Movement initiation, ERN, motivational aspects of movement
+    fnon_networks: ["Sensorimotor", "Salience"]
+    qeeg_normal: Beta; Theta during error/motivation
+    qeeg_pathological: "↑Theta=reduced motivation (PD,depression); ERN=OCD"
+    clinical_conditions: ["PD (motivation)", "OCD", "Depression"]
+    modalities: ["TPS", "TMS", "tDCS", "tACS"]
+    fnon_notes: "TPS PD protocol includes CMA at FCz. FNON: Beta suppression + theta reduction."
+  - name: Thalamus
+    abbreviation: Thal
+    lobe: Subcortical
+    depth: Deep
+    eeg_positions: Cz/T3T4 reference
+    brodmann: Multiple nuclei
+    primary_functions: Sensory relay, arousal, consciousness, motor relay (VIM), pain (VPL), cognition (MD)
+    fnon_networks: ["All networks (thalamocortical loops)"]
+    qeeg_normal: Alpha spindles(8-12 Hz); sleep spindles(12-15 Hz)
+    qeeg_pathological: "↑Delta=DOC; ↑Theta=pain sensitization; absent spindles=insomnia"
+    clinical_conditions: ["Chronic pain", "DOC", "ET (VIM)", "AD", "Insomnia", "Epilepsy (ANT)"]
+    modalities: ["DBS (VIM", "ANT)", "LIFU (VPL", "VIM)", "MRgFUS (VIM ablation)"]
+    fnon_notes: "Only DBS/LIFU/MRgFUS reach thalamus. VPL=pain, VIM=tremor, MD=cognition, ANT=epilepsy. FNON: Thalamic relay resets all loops."
+  - name: Basal Ganglia / Striatum
+    abbreviation: BG
+    lobe: Subcortical
+    depth: Deep
+    eeg_positions: Fz/FCz reference
+    brodmann: None
+    primary_functions: Motor learning, habit formation, reward, action selection
+    fnon_networks: ["Reward", "Sensorimotor"]
+    qeeg_normal: Beta excess in PD; Gamma during reward
+    qeeg_pathological: "↑Beta=PD rigidity; ↓Gamma=reward deficit"
+    clinical_conditions: ["PD", "OCD (caudate)", "Addiction (NAc)", "ADHD"]
+    modalities: ["DBS (STN/GPi", "VC/VS)", "LIFU (NAc)", "Deep TMS"]
+    fnon_notes: "STN DBS gold standard PD. NAc (addiction) = LIFU only noninvasive option. FNON: Beta desynchronization."
+  - name: Subthalamic Nucleus
+    abbreviation: STN
+    lobe: Subcortical
+    depth: Deep
+    eeg_positions: No direct EEG
+    brodmann: None
+    primary_functions: Motor control, action inhibition, emotional processing, cognitive control
+    fnon_networks: ["Cortico-STN hyperdirect"]
+    qeeg_normal: Beta(13-30 Hz) pathological excess in PD
+    qeeg_pathological: "↑Beta=PD hallmark STN-M1 synchrony"
+    clinical_conditions: ["PD", "OCD", "ET", "ADHD"]
+    modalities: ["DBS (FDA approved 1997 PD)", "MRgFUS"]
+    fnon_notes: FDA approved DBS target for PD. Beta LFP in STN is measurable biomarker. DBS 130 Hz desynchronises beta.
+  - name: Globus Pallidus Internus
+    abbreviation: GPi
+    lobe: Subcortical
+    depth: Deep
+    eeg_positions: No direct EEG
+    brodmann: None
+    primary_functions: Motor inhibition, dopamine relay, dystonia suppression
+    fnon_networks: ["Cortico-BG output"]
+    qeeg_normal: Beta in PD; Gamma during movement prep
+    qeeg_pathological: "↑Beta=rigidity; ↑Gamma=dyskinesia risk; ↑Delta=dystonia"
+    clinical_conditions: ["PD (dyskinesia)", "Dystonia", "Tourette's"]
+    modalities: ["DBS (FDA approved)", "MRgFUS"]
+    fnon_notes: "GPi preferred when dyskinesia prominent. Dystonia: longer PW (120-450 μs). FNON: DBS resets GPi output."
+  - name: Nucleus Accumbens
+    abbreviation: NAc
+    lobe: Subcortical
+    depth: Deep
+    eeg_positions: Fz area (deep)
+    brodmann: None
+    primary_functions: Reward, motivation, reinforcement, craving, pleasure, anhedonia
+    fnon_networks: ["Reward", "Mesolimbic"]
+    qeeg_normal: Theta during reward anticipation; Gamma during receipt
+    qeeg_pathological: "↑Theta=craving,anhedonia; ↓Gamma=depression/anhedonia"
+    clinical_conditions: ["Addiction", "Depression", "OCD (VC/VS)", "Eating disorders"]
+    modalities: ["DBS (VC/VS HDE)", "LIFU (noninvasive NAc — emerging)", "Deep TMS"]
+    fnon_notes: "Only noninvasive modality: LIFU. TPS TRD: NAc case 2023. FNON: Theta/gamma balance for reward."
+  - name: Locus Coeruleus
+    abbreviation: LC
+    lobe: Brainstem
+    depth: Deep
+    eeg_positions: No EEG — deep
+    brodmann: None
+    primary_functions: Noradrenergic regulation, arousal, attention, stress, BDNF, neuroplasticity
+    fnon_networks: ["Arousal-Noradrenergic"]
+    qeeg_normal: No direct EEG; influences global arousal
+    qeeg_pathological: "Hyperactivation=PTSD; Degeneration=AD early"
+    clinical_conditions: ["PTSD", "AD", "Depression", "Anxiety", "CFS"]
+    modalities: ["taVNS (primary NTS→LC axis)", "CES (indirect)", "DBS (emerging)"]
+    fnon_notes: "taVNS → NTS → LC → cortical NE + BDNF release. Primary mechanism for taVNS memory/mood. FNON: taVNS = LC activator."
+  - name: "Wernicke's Area"
+    abbreviation: WA
+    lobe: Temporal
+    depth: Cortical
+    eeg_positions: T3/T5 (L)
+    brodmann: BA22
+    primary_functions: Language comprehension, phonological processing, semantic access
+    fnon_networks: ["Language"]
+    qeeg_normal: Beta during comprehension; Alpha at rest
+    qeeg_pathological: "↓Beta=Wernicke's aphasia; ↓Alpha=semantic deficit"
+    clinical_conditions: ["Stroke aphasia", "AD (language)", "Dyslexia"]
+    modalities: ["TMS (mapping)", "tDCS", "TPS"]
+    fnon_notes: "TMS inhibition maps Wernicke's for presurgical planning. Facilitatory tDCS for aphasia recovery."
+  - name: "Broca's Area"
+    abbreviation: BA44
+    lobe: Frontal
+    depth: Cortical
+    eeg_positions: F7 (L)
+    brodmann: BA44,45
+    primary_functions: Language production, phonological assembly, syntax, verbal WM, mirror neurons
+    fnon_networks: ["Language"]
+    qeeg_normal: Beta during speech; Mu suppression
+    qeeg_pathological: "↓Beta=Broca's aphasia; ↑Alpha=word production failure"
+    clinical_conditions: ["Stroke aphasia", "Stuttering", "ALS (speech)"]
+    modalities: ["TMS (facilitatory)", "tDCS (anodal)", "TPS"]
+    fnon_notes: "High-freq TMS (10 Hz) over ipsilesional Broca's accelerates aphasia recovery. FNON: Beta facilitation."
+  - name: Cerebellum (lateral)
+    abbreviation: CB
+    lobe: Posterior fossa
+    depth: Posterior
+    eeg_positions: Oz/Iz (nearest); P9/P10
+    brodmann: None direct
+    primary_functions: Motor coordination, timing, motor learning, balance, cognitive (Crus II)
+    fnon_networks: ["Cerebellar", "Sensorimotor"]
+    qeeg_normal: No dominant scalp EEG; contributes to motor alpha via thalamus
+    qeeg_pathological: "↑Theta cortical=ataxia compensation; ↑Delta=degenerative ataxia"
+    clinical_conditions: ["Essential tremor", "Ataxia", "Stroke (motor)", "Dystonia"]
+    modalities: ["Cerebellar TMS (1 Hz or TBS)", "transcerebellar tDCS", "TPS (emerging)"]
+    fnon_notes: "Cerebellar TMS 1 Hz reduces tremor. Cerebellar-M1 connectivity for stroke. FNON: CB-M1 beta coherence normalisation."
+  - name: Cerebellar Vermis
+    abbreviation: CV
+    lobe: Posterior fossa
+    depth: Posterior
+    eeg_positions: Oz
+    brodmann: None
+    primary_functions: Midline motor, emotional regulation (fastigial), autism social deficits, posture
+    fnon_networks: ["Cerebellar", "Limbic-CB"]
+    qeeg_normal: Contributes to limbic theta via fastigial-hypothalamic
+    qeeg_pathological: "↓Connectivity with frontal=ASD social; ↑theta=emotional dysregulation"
+    clinical_conditions: ["ASD", "Depression", "Schizophrenia"]
+    modalities: ["Cerebellar TMS", "transcerebellar tDCS", "TPS (ASD protocol)"]
+    fnon_notes: "TPS ASD protocol (Brain Commun RCT 2023) includes cerebellar-linked networks. FNON: CB-limbic theta for ASD."
+  - name: Default Mode Network (full)
+    abbreviation: DMN
+    lobe: Network
+    depth: Distributed
+    eeg_positions: Pz,Fz,F3/F4,P3/P4,T3/T4
+    brodmann: BA7,10,23,39
+    primary_functions: Self-referential, autobiographical memory, mind-wandering, social cognition, consciousness
+    fnon_networks: ["DMN"]
+    qeeg_normal: Alpha(8-12 Hz) across PCC/precuneus; theta during episodic recall
+    qeeg_pathological: "↓Alpha=AD/MCI; ↑Theta=depression rumination; DMN hyperconnectivity=schizophrenia"
+    clinical_conditions: ["AD", "MCI", "Depression", "Autism", "Schizophrenia", "ADHD", "DOC"]
+    modalities: ["TPS (6-site DMN)", "tACS 40 Hz", "PBM (transcranial+intranasal)", "LIFU", "tDCS"]
+    fnon_notes: "SOZO primary TPS target for AD — 6 DMN nodes. FNON: TPS + 40 Hz tACS + PBM triple-modal."
+  - name: Salience Network
+    abbreviation: SN
+    lobe: Network
+    depth: Distributed
+    eeg_positions: Fz/AFz,T3/T4 (insula)
+    brodmann: BA24,13
+    primary_functions: Salient stimulus detection, DMN-ECN switching, interoception, error detection
+    fnon_networks: ["Salience"]
+    qeeg_normal: Gamma during salience; Beta-Alpha transition
+    qeeg_pathological: "↑SN=anxiety,PTSD,OCD; ↓SN=autism; chronic pain"
+    clinical_conditions: ["Anxiety", "OCD", "PTSD", "Autism", "Chronic pain"]
+    modalities: ["Deep TMS (H7)", "LIFU (insula)", "taVNS", "TPS"]
+    fnon_notes: "Cannot surface stimulate insula. Deep TMS or LIFU needed. FNON: Gamma/alpha balance across SN."
+  - name: Executive Control Network
+    abbreviation: ECN
+    lobe: Network
+    depth: Distributed
+    eeg_positions: F3/F4,P3/P4
+    brodmann: BA9,46,40,7
+    primary_functions: Cognitive control, working memory, goal-directed behaviour, planning, inhibition
+    fnon_networks: ["ECN"]
+    qeeg_normal: Beta(13-30 Hz); Alpha during WM; Theta during WM load
+    qeeg_pathological: "↓Beta=executive dysfunction; ↑Theta=WM overload; ↓Alpha=ADHD"
+    clinical_conditions: ["ADHD", "Schizophrenia", "MCI", "Depression", "OCD", "TBI"]
+    modalities: ["TPS", "TMS (L-DLPFC)", "tDCS", "tACS", "PBM", "tRNS"]
+    fnon_notes: "ECN = DLPFC + PPC bilateral. FNON: Beta facilitation + alpha modulation."
+  - name: Sensorimotor Network
+    abbreviation: SMN
+    lobe: Network
+    depth: Distributed
+    eeg_positions: C3/C4,Cz,Fz
+    brodmann: BA4,1-3,6
+    primary_functions: Movement, somatosensory integration, motor learning, body schema
+    fnon_networks: ["Sensorimotor"]
+    qeeg_normal: Mu(8-12 Hz)+Beta(13-30 Hz); ERD with movement
+    qeeg_pathological: "↑Beta=PD; ↓Mu=pain; ↓SMN connectivity=stroke"
+    clinical_conditions: ["PD", "Stroke", "MS", "Chronic pain", "Dystonia"]
+    modalities: ["TPS", "TMS", "tDCS", "tACS", "PBM", "PEMF", "taVNS (paired PT)"]
+    fnon_notes: "Mu + Beta = key FNON biomarkers for motor disorders. Beta suppression = primary PD treatment."
+  - name: Limbic Network
+    abbreviation: LN
+    lobe: Network
+    depth: Distributed (deep+cortical)
+    eeg_positions: T3/T4,Fz,Pz
+    brodmann: BA28,24,23,13
+    primary_functions: Emotional processing, fear memory, reward, HPA-axis regulation
+    fnon_networks: ["Limbic"]
+    qeeg_normal: Theta(4-8 Hz) dominant; Gamma during arousal
+    qeeg_pathological: "↑Theta=fear,depression,PTSD; ↑Gamma=anxiety"
+    clinical_conditions: ["PTSD", "Anxiety", "Depression", "Addiction", "Eating disorders"]
+    modalities: ["taVNS (primary)", "TPS", "Deep TMS", "LIFU", "DBS (sgACC)", "CES"]
+    fnon_notes: "taVNS most effective for limbic theta suppression. FNON: Theta-Gamma balance in limbic."
+  - name: Dorsal Attention Network
+    abbreviation: DAN
+    lobe: Network
+    depth: Distributed
+    eeg_positions: P3/P4,F7/F8
+    brodmann: BA7,8,40
+    primary_functions: Top-down spatial attention, voluntary orienting, attentional control
+    fnon_networks: ["DAN"]
+    qeeg_normal: Alpha contralateral suppression during attention
+    qeeg_pathological: "Lateralised alpha excess=hemineglect; ↓DAN=ADHD"
+    clinical_conditions: ["Hemineglect", "ADHD", "TBI", "Stroke posterior"]
+    modalities: ["TMS", "tDCS", "tACS (alpha)", "TPS"]
+    fnon_notes: "Alpha lateralisation = qEEG biomarker for hemineglect. FNON: Alpha-asymmetry correction."
+  - name: Visual Network
+    abbreviation: VisN
+    lobe: Network
+    depth: Distributed
+    eeg_positions: Oz,O1/O2,P7/P8
+    brodmann: BA17,18,19
+    primary_functions: Visual scene processing, object/motion/colour recognition
+    fnon_networks: ["Visual"]
+    qeeg_normal: Occipital alpha(8-12 Hz); Gamma during processing
+    qeeg_pathological: "↑Alpha=visual suppression; ↓Alpha=migraine hyperexcitability"
+    clinical_conditions: ["Migraine", "Visual stroke", "Charles Bonnet"]
+    modalities: ["TMS", "tDCS", "tACS", "LIFU (Lee 2016 V1)"]
+    fnon_notes: "Occipital alpha = primary qEEG reference. LIFU V1 landmark. FNON: Alpha normalisation."
+  - name: Auditory Network
+    abbreviation: AudN
+    lobe: Network
+    depth: Distributed
+    eeg_positions: T3/T5,T4/T6
+    brodmann: BA22,41,42
+    primary_functions: Auditory processing, speech, pitch discrimination, auditory-motor
+    fnon_networks: ["Auditory"]
+    qeeg_normal: Theta for auditory scene; Beta during language; Alpha at rest
+    qeeg_pathological: "↑Alpha=tinnitus; ↑Gamma=hyperacusis; ↓Beta=APD"
+    clinical_conditions: ["Tinnitus", "Schizophrenia (AH)", "APD"]
+    modalities: ["TMS (1 Hz L-STG)", "tDCS cathodal", "tRNS", "tACS", "taVNS"]
+    fnon_notes: Tinnitus alpha is maladaptive — suppress (paradox). tRNS stochastic resonance for auditory S/N.
+  - name: Language Network
+    abbreviation: LangN
+    lobe: Network
+    depth: Distributed (L)
+    eeg_positions: F7,T3,T5,P3
+    brodmann: BA44,22,39,40
+    primary_functions: Speech production, language comprehension, reading, phonological processing
+    fnon_networks: ["Language"]
+    qeeg_normal: Beta dominant during speech; Alpha at rest
+    qeeg_pathological: "↓Beta(L)=aphasia; ↑Alpha(L)=word retrieval failure"
+    clinical_conditions: ["Aphasia", "Dyslexia", "ALS speech", "AD language"]
+    modalities: ["TMS (hemispheric rebalancing)", "tDCS anodal L-Broca", "TPS multi-site"]
+    fnon_notes: "Inter-hemispheric imbalance model: inhibit R-IFG + facilitate L-IFG. FNON: Beta facilitation (L)."
+  - name: Reward / Mesolimbic
+    abbreviation: Reward
+    lobe: Network
+    depth: Distributed (deep+cortical)
+    eeg_positions: Fp1/Fp2,Fz,T3/T4
+    brodmann: None/deep
+    primary_functions: Reward prediction, motivation, anhedonia, craving, dopaminergic signalling
+    fnon_networks: ["Reward", "Mesolimbic"]
+    qeeg_normal: Theta during anticipation; Gamma during reward
+    qeeg_pathological: "↑Theta=craving; ↑OFC beta=compulsion; ↓Gamma=anhedonia"
+    clinical_conditions: ["Depression (anhedonia)", "Addiction", "OCD", "Eating disorders"]
+    modalities: ["TMS (OFC)", "DBS (NAc/VC-VS)", "LIFU (NAc)", "taVNS (VTA via LC)"]
+    fnon_notes: "FNON: Theta suppression (craving) + Gamma facilitation (anhedonia). taVNS + LIFU NAc combination."
+  - name: Frontoparietal Control Network
+    abbreviation: FPCN
+    lobe: Network
+    depth: Distributed
+    eeg_positions: F3/F4,P3/P4,T5/T6
+    brodmann: BA9,46,39,40
+    primary_functions: Flexible cognitive control, task switching, metacognition, DMN-ECN bridging
+    fnon_networks: ["FPCN"]
+    qeeg_normal: Alpha-Beta; flexible theta-alpha modulation
+    qeeg_pathological: "↓Connectivity=cognitive inflexibility; co-activation with DMN=rumination"
+    clinical_conditions: ["OCD", "Schizophrenia", "MCI", "ADHD", "Depression"]
+    modalities: ["TPS bilateral", "TMS L-DLPFC", "tDCS", "tACS (theta coherence)"]
+    fnon_notes: "FNON: Theta coherence entrainment (frontal-parietal 6 Hz) + TPS bilateral for reconfiguration."
+  - name: Cerebellar-Cortical Network
+    abbreviation: CCN
+    lobe: Network
+    depth: Distributed
+    eeg_positions: Oz/Iz,C3/C4,F3/F4
+    brodmann: None/deep
+    primary_functions: Motor timing, cerebellar plasticity, motor learning, cognitive (Crus II), emotional (vermis)
+    fnon_networks: ["Cerebellar", "Sensorimotor"]
+    qeeg_normal: No dominant scalp; contributes to motor alpha via thalamus
+    qeeg_pathological: "↓CB-M1 connectivity=ataxia,stroke; CB-frontal dysconnectivity=autism"
+    clinical_conditions: ["ET", "Ataxia", "Stroke", "Autism (vermis)", "Dystonia"]
+    modalities: ["Cerebellar TMS", "transcerebellar tDCS", "TPS (emerging CB)", "DBS (dentate)"]
+    fnon_notes: "FNON: CB-M1 beta coherence normalisation via cerebellar TMS + M1 TPS combination."
+  - name: Pain Matrix / Network
+    abbreviation: PMN
+    lobe: Network
+    depth: Distributed
+    eeg_positions: Cz,T3/T4,Fz
+    brodmann: BA1-3,13,24
+    primary_functions: Pain signal integration, emotional pain, descending modulation, nociceptive attention
+    fnon_networks: ["Pain Matrix"]
+    qeeg_normal: "Gamma pain; Theta chronic; ↓Alpha=sensitisation"
+    qeeg_pathological: "↑Gamma=neuropathic; ↑Theta=fibromyalgia; ↓Alpha=central sensitisation"
+    clinical_conditions: ["Chronic pain", "Fibromyalgia", "CRPS", "Neuropathic pain"]
+    modalities: ["TPS", "TMS (M1)", "tDCS (M1 anodal)", "taVNS", "CES", "LIFU (thalamic)", "PBM", "PEMF"]
+    fnon_notes: "Multiple targets: M1 (tDCS), thalamus (LIFU), vagal (taVNS). FNON: Gamma suppression + alpha restoration."
+
+# ── Supplementary: Brain Regions from Master Protocol Reference ──
+# Source: Master with QEEG places.xlsx, April 2026
+# Includes: functions, target conditions, modalities, qEEG biomarker relevance
+
+regions_extended:
+  dorsolateral_prefrontal_cortex:
+    region: "Dorsolateral Prefrontal Cortex"
+    abbreviation: "DLPFC"
+    eeg_position: "F3 (L), F4 (R)"
+    hemisphere: "Bilateral"
+    depth: "Cortical"
+    functions: >
+    Executive function, working memory, cognitive control, mood regulation, cognitive flexibility
+    key_conditions: "Depression, OCD, ADHD, Schizophrenia, Cognitive impairment, Addiction"
+    modalities: "TMS, tDCS, TPS, tACS, PBM, LIFU, tRNS, PEMF"
+    notes: >
+    Primary TMS target for depression. L-DLPFC for depression; R-DLPFC for anxiety/PTSD
+    qeeg_biomarker_relevance: >
+    Frontal alpha asymmetry (F3/F4): ↓ L-DLPFC alpha = hypoactivity (depression, schizophrenia); ↑ frontal theta (F3/Fz) = ADHD, depression, TBI; ↑ frontal beta = anxiety/hyperarousal
+  primary_motor_cortex:
+    region: "Primary Motor Cortex"
+    abbreviation: "M1"
+    eeg_position: "C3 (L), C4 (R)"
+    hemisphere: "Contralateral to limb"
+    depth: "Cortical"
+    functions: >
+    Motor execution, voluntary movement generation, corticospinal tract origin
+    key_conditions: "Parkinson's, Stroke, Chronic pain, Dystonia, MS"
+    modalities: "TMS, tDCS, TPS, tACS, PBM, PEMF, tRNS"
+    notes: >
+    Contralateral targeting — L-M1 controls R body and vice versa. rMT measured here.
+    qeeg_biomarker_relevance: >
+    Central beta ↓ (C3/C4) in PD and dystonia; ↑ DAR (delta-alpha ratio) in stroke; ↓ beta post-movement rebound in dystonia; ↑ central theta in TBI/chronic pain
+  supplementary_motor_area:
+    region: "Supplementary Motor Area"
+    abbreviation: "SMA"
+    eeg_position: "Fz / FCz"
+    hemisphere: "Bilateral (midline)"
+    depth: "Cortical"
+    functions: >
+    Motor planning, movement sequencing, bimanual coordination, gait initiation
+    key_conditions: "Parkinson's, OCD, Dystonia"
+    modalities: "TMS, TPS, tDCS"
+    notes: >
+    Medial frontal location. TPS/TMS target for PD motor sequencing.
+    qeeg_biomarker_relevance: >
+    Tremor-frequency (4-12 Hz) coherence at Cz/FCz in essential tremor; ↑ low-beta desynchronization (FCz) in ET; motor planning slow waves (readiness potential) at Fz/FCz
+  anterior_cingulate_cortex:
+    region: "Anterior Cingulate Cortex"
+    abbreviation: "ACC"
+    eeg_position: "Fz / AFz / Cz"
+    hemisphere: "Bilateral (midline)"
+    depth: "Cortical (deep cortex)"
+    functions: >
+    Error monitoring, emotional regulation, conflict detection, pain modulation, attention
+    key_conditions: "OCD, Depression, Chronic pain, ADHD"
+    modalities: "TMS, tDCS, LIFU, tACS"
+    notes: >
+    Difficult to reach with surface stimulation. LIFU and deep TMS (H coils) reach better.
+    qeeg_biomarker_relevance: >
+    Excess ERN (error-related negativity) at FCz in OCD; ↑ frontal theta at Fz linked to ACC hyperactivity in OCD/anxiety; reduced N200/P300 in addiction and schizophrenia
+  inferior_frontal_gyrus:
+    region: "Inferior Frontal Gyrus"
+    abbreviation: "IFG"
+    eeg_position: "F7 (L=Broca's), F8 (R)"
+    hemisphere: "Bilateral"
+    depth: "Cortical"
+    functions: >
+    Language production (Broca's area L), inhibitory control, cognitive flexibility
+    key_conditions: "Alzheimer's (TPS), Aphasia, OCD"
+    modalities: "TMS, TPS, LIFU"
+    notes: >
+    Broca's area (L-IFG) critical for language. TPS targets as part of DMN network.
+    qeeg_biomarker_relevance: >
+    Frontal delta at F7/F8 in Alzheimer's; reduced high-gamma (40+ Hz) coherence in language network disruption; frontal slowing correlates with IFG volume loss in dementia
+  lateral_parietal_cortex:
+    region: "Lateral Parietal Cortex"
+    abbreviation: "LPC"
+    eeg_position: "P3 (L), P4 (R)"
+    hemisphere: "Bilateral"
+    depth: "Cortical"
+    functions: >
+    Attention, spatial processing, visuospatial awareness, working memory buffer
+    key_conditions: "Alzheimer's, MCI, Hemineglect"
+    modalities: "TMS, tDCS, TPS, tRNS"
+    notes: >
+    TPS targets as part of AD/MCI multi-site protocol. Right LPC for hemineglect.
+    qeeg_biomarker_relevance: >
+    ↓ parietal alpha (P3/P4/Pz) in Alzheimer's/MCI; ↑ parietal beta in PTSD (P3/P4); BSI (brain symmetry index) at parietal sites for stroke lateralization
+  temporal_cortex___auditory_cor:
+    region: "Temporal Cortex / Auditory Cortex"
+    abbreviation: "TC"
+    eeg_position: "T3/T5 (L), T4/T6 (R)"
+    hemisphere: "Bilateral"
+    depth: "Cortical"
+    functions: >
+    Auditory processing, language comprehension (Wernicke's L), memory encoding, semantic processing
+    key_conditions: "Tinnitus, Schizophrenia (hallucinations), Alzheimer's, Epilepsy (temporal lobe)"
+    modalities: "TMS, tDCS, tACS, taVNS, tRNS"
+    notes: >
+    Primary target for tinnitus (inhibitory TMS) and auditory hallucinations (schizophrenia).
+    qeeg_biomarker_relevance: >
+    ↑ gamma at T3/T4 in tinnitus; left temporal theta at T5 predicts PD cognitive decline; ↑ T3/T4 slow waves in schizophrenia (hallucinations); ↑ T-channel theta in TLE
+  precuneus:
+    region: "Precuneus"
+    abbreviation: "PCu"
+    eeg_position: "Pz"
+    hemisphere: "Bilateral (midline)"
+    depth: "Cortical"
+    functions: >
+    Self-referential processing, episodic memory retrieval, visual-spatial imagery, consciousness
+    key_conditions: "Alzheimer's, MCI, Depression, DOC"
+    modalities: "TMS, TPS, tDCS"
+    notes: >
+    Key default mode network hub. TPS targets as part of AD protocol.
+    qeeg_biomarker_relevance: >
+    Loss of posterior dominant rhythm (Pz/O1/O2) in Alzheimer's; ↓ alpha at Pz predicts DMN hub failure; precuneus alpha power correlates with consciousness level in DOC
+  orbitofrontal_cortex:
+    region: "Orbitofrontal Cortex"
+    abbreviation: "OFC"
+    eeg_position: "Fp1 (L), Fp2 (R)"
+    hemisphere: "Bilateral"
+    depth: "Cortical"
+    functions: >
+    Decision-making, reward/punishment processing, emotion regulation, impulse control
+    key_conditions: "OCD, Addiction, Depression"
+    modalities: "TMS, tDCS, LIFU"
+    notes: >
+    Important node in corticostriatal OCD and addiction circuits.
+    qeeg_biomarker_relevance: >
+    ↑ frontal delta at Fp1/Fp2 in OCD (OFC hyperactivity); excess beta coherence in addiction (OFC-striatal); reduced frontal alpha in OCD compulsive states
+  primary_somatosensory_cortex:
+    region: "Primary Somatosensory Cortex"
+    abbreviation: "S1"
+    eeg_position: "C3' / C4'"
+    hemisphere: "Contralateral"
+    depth: "Cortical"
+    functions: >
+    Tactile sensation, proprioception, pain processing (somatotopic map)
+    key_conditions: "Chronic pain, Stroke, Phantom limb"
+    modalities: "TMS, tDCS"
+    notes: >
+    Adjacent to M1. Targeted in stroke and pain protocols.
+    qeeg_biomarker_relevance: >
+    ↑ central alpha at C3/C4 in chronic pain (S1 hyperexcitability); thalamocortical dysrhythmia visible at Cz/C3/C4 in fibromyalgia; ↓ N20 SEP amplitude post-stroke
+  hippocampus:
+    region: "Hippocampus"
+    abbreviation: "HC"
+    eeg_position: "Deep (T3/T5 approximate surface)"
+    hemisphere: "Bilateral"
+    depth: "Subcortical (temporal lobe)"
+    functions: >
+    Memory consolidation, spatial navigation, new learning (declarative memory), fear extinction
+    key_conditions: "Alzheimer's, Epilepsy (temporal), PTSD, Depression"
+    modalities: "LIFU, DBS, taVNS (indirect), TPS (indirect via DMN)"
+    notes: >
+    Cannot be directly targeted by surface stimulation. LIFU, DBS, and intranasal PBM can reach it.
+    qeeg_biomarker_relevance: >
+    ↑ temporal theta (T5/T6) linked to hippocampal hyperexcitability in TLE; ↓ alpha at temporal sites in MCI/AD correlates with hippocampal atrophy; theta-gamma coupling (T5/T6) = memory encoding
+  amygdala:
+    region: "Amygdala"
+    abbreviation: "Amy"
+    eeg_position: "Deep (T3/T4 approximate)"
+    hemisphere: "Bilateral"
+    depth: "Subcortical (temporal lobe)"
+    functions: >
+    Fear processing, emotional learning, stress response, threat detection
+    key_conditions: "PTSD, Anxiety, Depression, Addiction"
+    modalities: "LIFU, DBS (NAc adjacent), taVNS (indirect)"
+    notes: >
+    Deep structure, not directly accessible by surface stimulation. LIFU can modulate.
+    qeeg_biomarker_relevance: >
+    ↑ R frontal alpha (F4) asymmetry = R amygdala-mediated withdrawal/anxiety bias; ↑ high-beta at F3/F4 correlates with amygdala hyperactivity in PTSD/anxiety
+  thalamus:
+    region: "Thalamus"
+    abbreviation: "Th"
+    eeg_position: "Deep (central)"
+    hemisphere: "Bilateral"
+    depth: "Deep subcortical"
+    functions: >
+    Sensory relay, consciousness regulation, gating of motor output, arousal, attention
+    key_conditions: "Essential tremor (VIM), Pain, DOC, Epilepsy (ANT), PD (CM-Pf)"
+    modalities: "DBS, LIFU, tACS (indirect), taVNS (indirect)"
+    notes: >
+    Multiple nuclei with distinct functions: VIM (tremor), ANT (epilepsy), CM-Pf (Tourette's), MD (depression).
+    qeeg_biomarker_relevance: >
+    Thalamocortical dysrhythmia: ↑ theta at Cz/C3/C4 in tinnitus, fibromyalgia, chronic pain; ↓ spindle-band (12-15 Hz) at C3/C4 in insomnia; generalized delta (all channels) in DOC
+  subthalamic_nucleus:
+    region: "Subthalamic Nucleus"
+    abbreviation: "STN"
+    eeg_position: "Deep basal ganglia"
+    hemisphere: "Bilateral"
+    depth: "Deep subcortical"
+    functions: >
+    Motor control (indirect pathway), behavioral inhibition, decision-making
+    key_conditions: "Parkinson's disease (primary), OCD"
+    modalities: "DBS, LIFU (emerging)"
+    notes: >
+    Primary DBS target for PD. Smaller target than GPi. Risk of dysarthria and mood effects.
+    qeeg_biomarker_relevance: >
+    Central beta synchrony (C3/C4 13-30 Hz) reflects STN-M1 coupling; beta power at C3/C4 inversely correlates with DBS therapeutic effect in PD; ↑ beta coherence C3-C4 in PD
+  globus_pallidus_internus:
+    region: "Globus Pallidus Internus"
+    abbreviation: "GPi"
+    eeg_position: "Deep basal ganglia"
+    hemisphere: "Bilateral"
+    depth: "Deep subcortical"
+    functions: >
+    Motor output regulation (indirect and direct pathways), movement suppression/facilitation
+    key_conditions: "Parkinson's, Dystonia, Tourette's, Huntington's"
+    modalities: "DBS"
+    notes: >
+    Larger target than STN, less dysarthria risk. Preferred for dyskinesia and dystonia.
+    qeeg_biomarker_relevance: >
+    Sensorimotor beta (C3/C4) reflects GPi output; ↓ post-movement beta rebound at C3/C4/FCz in dystonia vs. PD; GPi DBS normalizes sensorimotor beta dynamics at Cz
+  nucleus_accumbens:
+    region: "Nucleus Accumbens"
+    abbreviation: "NAc"
+    eeg_position: "Deep striatum"
+    hemisphere: "Bilateral"
+    depth: "Deep subcortical"
+    functions: >
+    Reward processing, motivation, addiction, pleasure, aversion
+    key_conditions: "Addiction, OCD, Depression (via VC/VS)"
+    modalities: "DBS, LIFU (emerging)"
+    notes: >
+    Core of reward system. DBS target for addiction and OCD. Overlap with VC/VS target.
+    qeeg_biomarker_relevance: >
+    Frontal theta (Fz) excess in addiction reflects mesolimbic-frontal drive from NAc-OFC loop; ↓ P300 at Cz/Pz = blunted reward processing in addiction (indirect NAc biomarker)
+  insula:
+    region: "Insula"
+    abbreviation: "IC"
+    eeg_position: "Deep (T3/T4 adjacent)"
+    hemisphere: "Bilateral"
+    depth: "Cortical (buried in Sylvian fissure)"
+    functions: >
+    Interoception, pain integration, emotional awareness, taste, autonomic regulation, addiction
+    key_conditions: "Chronic pain, Addiction, Smoking cessation, Depression"
+    modalities: "TMS (H-coil deep), LIFU, DBS (emerging)"
+    notes: >
+    Targeted by deep TMS for smoking cessation. LIFU can reach with precision.
+    qeeg_biomarker_relevance: >
+    ↑ right-sided beta at temporal-parietal junction in fibromyalgia (insula hyperactivity); ↓ alpha reactivity (EO/EC) across channels in chronic pain correlates with insula sensitization
+  cerebellum:
+    region: "Cerebellum"
+    abbreviation: "Cereb"
+    eeg_position: "Oz / posterior region"
+    hemisphere: "Bilateral"
+    depth: "Posterior fossa"
+    functions: >
+    Motor coordination, balance, fine movement, procedural learning, cognitive functions (emerging)
+    key_conditions: "Ataxia, Essential tremor, ASD (cerebellar-cortical circuits)"
+    modalities: "TMS, tDCS, TPS (emerging)"
+    notes: >
+    Cerebellar TMS increasingly studied. Modulates cerebello-thalamo-cortical circuit.
+    qeeg_biomarker_relevance: >
+    Tremor-frequency (4-12 Hz) coherence at posterior channels in essential tremor; cerebellar deep-channel EEG shows abnormal phase-coupling with M1 (C3/C4) in ET and PD
+  vagus_nerve_auricular_branch:
+    region: "Vagus Nerve (auricular branch)"
+    abbreviation: "ABVN"
+    eeg_position: "Ear (cymba conchae, tragus)"
+    hemisphere: "Left side preferred"
+    depth: "Peripheral nerve (brain interface)"
+    functions: >
+    Autonomic regulation, anti-inflammatory, neuromodulation of brainstem nuclei (NTS), parasympathetic tone
+    key_conditions: "Depression, Epilepsy, Pain, Inflammation, Stroke (paired)"
+    modalities: "taVNS, CES (indirect)"
+    notes: >
+    Auricular branch of vagus nerve provides non-invasive access to vagal signaling pathway.
+    qeeg_biomarker_relevance: >
+    Not a direct QEEG target; taVNS modulates global EEG toward ↑ alpha, ↓ high-beta; vagal-driven EEG shifts tracked at Cz (↑ alpha) and Fz (↓ theta) post-stimulation
+  subgenual_cingulate_cortex:
+    region: "Subgenual Cingulate Cortex"
+    abbreviation: "SCC (Cg25)"
+    eeg_position: "Deep medial frontal"
+    hemisphere: "Bilateral (midline)"
+    depth: "Deep cortical (buried)"
+    functions: >
+    Emotion regulation, depression circuitry, autonomous nervous system regulation, hedonia
+    key_conditions: "Treatment-resistant depression"
+    modalities: "DBS, TMS (deep H-coil, indirect)"
+    notes: >
+    Mayberg's original DBS target for TRD. Aka Brodmann area 25. Defines depression circuit hub.
+    qeeg_biomarker_relevance: >
+    Frontal alpha asymmetry at F3/F4 indirectly reflects SCC (Cg25) hyperactivity in TRD; ↑ frontal theta at Fz correlates with SCC-mediated ruminative drive in MDD; biomarker: ↓ F3 alpha + ↑ Fz theta = SCC-predominant subtype
+  pedunculopontine_nucleus:
+    region: "Pedunculopontine Nucleus"
+    abbreviation: "PPN"
+    eeg_position: "Deep brainstem"
+    hemisphere: "Bilateral"
+    depth: "Deep brainstem"
+    functions: >
+    Gait control, posture, wakefulness, REM sleep
+    key_conditions: "PD (gait freezing), Falls, DOC"
+    modalities: "DBS (emerging)"
+    notes: >
+    PPN DBS for gait freezing in PD. Complex target in brainstem. Requires skilled placement.
+    qeeg_biomarker_relevance: >
+    PPN not directly visible on scalp EEG; gait freeze correlates with ↑ central theta (Cz) in PD; frontal delta-theta increase tracks PPN-dependent postural/gait decline in advanced PD
+  source:_sozo_brain_center_|_ne:
+    region: "Source: SOZO Brain Center | Neuroanatomy Reference | April 2026"
+    abbreviation: null
+    eeg_position: null
+    hemisphere: null
+    depth: null
+    functions: null
+    key_conditions: null
+    modalities: null
+    notes: null
+    qeeg_biomarker_relevance: null

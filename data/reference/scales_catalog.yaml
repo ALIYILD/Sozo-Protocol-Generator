@@ -224,3 +224,94 @@ scales:
     domains: ["quality_of_life"]
     pmid: "1634691"
     type: "self_report"
+
+  # ── Additional scales from Assessment Master (April 2026) ──
+
+  cssrs:
+    name: "Columbia Suicide Severity Rating Scale"
+    abbreviation: "C-SSRS"
+    conditions: ["depression", "ptsd", "bipolar"]
+    domains: ["safety", "suicidality"]
+    type: "clinician_administered"
+    threshold: "Any ideation with intent or plan = immediate escalation"
+    frequency: "Every session"
+
+  shaps:
+    name: "Snaith-Hamilton Pleasure Scale"
+    abbreviation: "SHAPS"
+    conditions: ["depression", "parkinsons"]
+    domains: ["anhedonia"]
+    type: "self_report"
+    threshold: "Score >= 3 = significant anhedonia"
+
+  wsas:
+    name: "Work and Social Adjustment Scale"
+    abbreviation: "WSAS"
+    conditions: ["depression", "anxiety", "ocd"]
+    domains: ["functional_impairment"]
+    type: "self_report"
+    threshold: "0-10 subclinical; 11-20 moderate; >20 severe impairment"
+
+  caars:
+    name: "Conners Adult ADHD Rating Scale"
+    abbreviation: "CAARS"
+    conditions: ["adhd"]
+    domains: ["adhd_severity", "inattention", "hyperactivity"]
+    type: "self_report"
+    threshold: "T-score >= 65 = clinically significant"
+
+  trs:
+    name: "Tinnitus Reaction Scale"
+    abbreviation: "TRS"
+    conditions: ["tinnitus"]
+    domains: ["tinnitus_distress"]
+    type: "self_report"
+    threshold: ">= 30 = clinically significant distress"
+
+  sdmt:
+    name: "Symbol Digit Modalities Test"
+    abbreviation: "SDMT"
+    conditions: ["ms", "tbi", "stroke_rehab"]
+    domains: ["cognitive_speed", "processing_speed"]
+    type: "clinician_administered"
+    threshold: "Z-score < -1.5 = cognitively impaired; sensitive MS cognitive marker"
+
+  npi:
+    name: "Neuropsychiatric Inventory"
+    abbreviation: "NPI"
+    conditions: ["alzheimers", "parkinsons", "tbi"]
+    domains: ["neuropsychiatric_symptoms", "behavioural"]
+    type: "carer_reported"
+    threshold: "Severity x Frequency per domain; total > 12 = significant NPS burden"
+
+  cdr:
+    name: "Clinical Dementia Rating"
+    abbreviation: "CDR"
+    conditions: ["alzheimers", "mci"]
+    domains: ["dementia_staging", "cognition"]
+    type: "clinician_administered"
+    threshold: "0=Normal; 0.5=MCI; 1=Mild AD; 2=Moderate AD; 3=Severe AD"
+
+  brief_pain:
+    name: "Brief Pain Inventory"
+    abbreviation: "BPI"
+    conditions: ["chronic_pain", "ms", "tbi"]
+    domains: ["pain_severity", "pain_interference"]
+    type: "self_report"
+    threshold: "Severity 0-10; Interference 0-10; > 4 = moderate-severe pain"
+
+  fma:
+    name: "Fugl-Meyer Assessment"
+    abbreviation: "FMA"
+    conditions: ["stroke_rehab"]
+    domains: ["motor_function", "stroke_recovery"]
+    type: "clinician_administered"
+    threshold: "0-66 upper limb; 0-34 lower limb. MCID = 5-6 points"
+
+  zbi:
+    name: "Zarit Burden Interview"
+    abbreviation: "ZBI"
+    conditions: ["alzheimers"]
+    domains: ["carer_burden"]
+    type: "self_report"
+    threshold: "0-20 little/no burden; 21-40 mild-moderate; 41-60 moderate-severe; 61-88 severe"

@@ -534,3 +534,132 @@ governance_rules:
 - Hemorrhagic stroke cases require explicit physician neurology clearance before tDCS initiation — document in clinical record
 - Post-stroke depression monitoring (PHQ-9, C-SSRS) mandatory at every session for PSD phenotype
 patient_journey_notes: {}
+
+tps_evidence:
+  total_papers: 59
+  high_quality_count: 4
+  evidence_grade: "emerging"
+  key_papers:
+    - doi: "10.1177/02692155251328945"
+      title: "The impact of the number of sessions and stimulation parameters on repetitive transcranial magnetic stimulation efficacy for post-stroke upper extremity function"
+      year: 2025
+      study_type: "meta-analysis"
+      citations: 1
+      takeaway: "Optimal repetitive transcranial stimulation for post-stroke upper extremity function involves at least 15 sessions; informs TPS stroke protocol design."
+    - doi: "10.1186/s40001-023-01525-5"
+      title: "A literature review and meta-analysis of the optimal factors of repetitive transcranial magnetic stimulation in post-infarction aphasia"
+      year: 2024
+      study_type: "meta-analysis"
+      citations: 0
+      takeaway: "Optimal treatment effects for post-infarction aphasia may be achieved with a total pulse of 40,000 across multiple sessions."
+    - doi: "10.1007/s13534-024-00369-0"
+      title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+      year: 2024
+      study_type: "systematic review"
+      citations: 32
+      takeaway: "Low-intensity tFUS shows promising potential for non-invasive brain stimulation in patients with central nervous system disorders."
+  clinical_note: >
+    TPS is off-label for stroke rehabilitation with 59 publications and 4 high-quality studies. Meta-analyses
+    support multi-session transcranial stimulation protocols targeting motor and language cortex recovery, with
+    tFUS literature providing mechanistic rationale for TPS application in post-stroke neuroplasticity.
+
+
+fnon_protocol:
+  primary_network: "Sensorimotor ipsilesional"
+  secondary_network: "Cerebellar-M1"
+  f_band: "Mu + Beta"
+  eeg_nodes: null
+  oscillation_goal: null
+  primary_modality_params: null
+  addon_modality: null
+  sessions: null
+  evidence_level: null
+  lit_count: null
+  key_references: null
+  fnon_notes: "Full FNON protocol pending. See conditions_modality_matrix.yaml."
+
+qeeg_biomarkers:
+  primary_biomarker: "↓Mu; ↓Beta ipsilesional"
+  f_band_target: "Mu + Beta"
+
+modality_evidence_counts:
+  tps: 5
+  tms: 80
+  tdcs: 100
+  tavns: 25
+  ces: null
+  tacs: 10
+  pbm: 20
+  lifu: 5
+  pemf: 20
+  dbs: null
+  best_first_line: "tDCS anodal ipsilesional M1"
+  best_second_line: "taVNS paired PT + TPS"
+  fnon_score: 4
+
+
+assessment_profile:
+  primary_clinical_scales: >
+    mRS (Modified Rankin Scale — primary functional outcome); NIHSS (NIH Stroke Scale — acute severity); BI (Barthel Index); FIM (Functional Independence Measure); ARAT (Action Research Arm Test — UL function); FAC (Functional Ambulation Categories — gait); SIS (Stroke Impact Scale); aphasia: WAB (Western Aphasia Battery)
+  neuropsychological_battery: >
+    MoCA (cognitive screen post-stroke); MMSE; RAVLT (verbal memory, if applicable); TMT-A&B (executive/processing speed); Boston Naming (aphasia); Token Test (comprehension); WAIS Processing Speed; SDMT (attention); Cancellation Task (neglect); Catherine Bergego Scale (CBS — neglect)
+  physiological_assessments: >
+    TUG (Timed Up and Go — functional mobility); 10MWT (10-Metre Walk Test — gait speed); 6MWT (6-Minute Walk Test); Fugl-Meyer Assessment (FMA — motor impairment); WMFT (Wolf Motor Function Test); BBT (Box and Block Test — hand function); Grip strength dynamometry; HRV (autonomic post-stroke)
+  functional_assessments: >
+    mRS at baseline, 1, 3, 6 months; FIM independence score; Neglect assessment (CBS, line bisection, star cancellation); Aphasia: WAB Aphasia Quotient; Falls diary; Home modification needs; Vocational rehabilitation; Carer burden
+  neuroimaging: >
+    MRI DWI (acute stroke — infarct core/penumbra); MRI T2/FLAIR (final infarct volume); DTI (corticospinal tract integrity — FA ratio = recovery predictor); fMRI motor task (ipsilesional M1 reactivation); MRI tractography (language pathways if aphasia); PET FDG (diaschisis mapping)
+  assessment_rationale: >
+    BSI and DAR are primary qEEG biomarkers for stroke recovery trajectory. TPS/tDCS anodal ipsilesional M1 + inhibitory contralesional M1 = interhemispheric balance restoration protocol.
+  primary_scale: >
+    mRS (Modified Rankin Scale — primary functional outcome) at baseline/3/6 months
+  screening_scales: >
+    NIHSS (acute severity); Barthel basic screening
+  severity_staging: >
+    NIHSS (severity scoring); Barthel Index (ADL)
+  qol_scale: >
+    SIS (Stroke Impact Scale); EQ-5D; SF-36; MRS global disability
+  follow_up_frequency: >
+    Monthly mRS; 3-monthly SIS; Weekly Barthel during rehabilitation
+  comorbidity_screens: >
+    GDS-15 (post-stroke depression — prevalent in 30%); ESS; neglect screens; HADS
+  safety_screens: >
+    Falls risk (STRATIFY); PHQ-9 (post-stroke depression); Road safety (driving)
+  score_thresholds: >
+    mRS: 0=No symptoms; 1=Minor; 2=Unable to manage activities; 3=Requires some help; 4=Unable to walk independently; 5=Bedridden; 6=Death. Barthel ≥60 = moderate independence. NIHSS <5 = mild stroke.
+  qeeg_primary_signature: >
+    ↑ Delta/theta affected hemisphere; ↓ Alpha/beta affected hemisphere; ↑ DAR (delta-alpha ratio) affected side; ↑ BSI (brain symmetry index); Motor recovery predictor: beta power affected M1
+  qeeg_key_electrodes: "C3/C4 (affected motor cortex — primary); F3/F4 (DAR); T7/T8 (temporal asymmetry); Cz; P3/P4 (if neglect)"
+  qeeg_key_metrics: >
+    BSI (Brain Symmetry Index — 0-1; <0.1 = good symmetry/recovery; primary stroke qEEG biomarker); DAR (delta-alpha ratio >3.7 = dysfunction); Beta power affected C3 or C4; ERD at affected electrode during motor imagery
+  qeeg_eyes_open: >
+    ↑ Asymmetry affected vs unaffected; ↑ Delta affected hemisphere (lesion indicator); ↓ Beta affected M1
+  qeeg_eyes_closed: >
+    ↑ Delta/theta affected hemisphere; ↓ Alpha/beta affected; ↑ DAR (primary); Altered sleep architecture (if post-stroke sleep disorder)
+  qeeg_event_related: >
+    Motor imagery ERD at C3/C4 (affected motor cortex — key BCI paradigm for stroke rehab); Laterality Index (LI) during motor tasks; MRCP (motor readiness); Sensorimotor rhythm (SMR) training
+  qeeg_pathological_threshold: >
+    BSI >0.2 = significant hemispheric asymmetry; DAR >3.7 affected hemisphere = significant dysfunction; Beta power affected <50% of unaffected = motor deficit indicator
+  qeeg_treatment_target: >
+    BSI ↓ toward symmetry (<0.1); DAR ↓ affected hemisphere; Beta ↑ ipsilesional M1 (C3 or C4); ERD restoration affected electrode during movement
+  qeeg_response_biomarker: >
+    BSI change per week (primary recovery tracking); DAR change; Fugl-Meyer correlation with beta power ipsilesional; ERD recovery timeline
+
+
+neuromod_profile:
+  key_symptoms: >
+    Hemiparesis/hemiplegia, aphasia, dysphagia, neglect, spasticity, cognitive impairment, depression, sensory loss, balance problems
+  qeeg_patterns: >
+    ↑ delta/theta in affected hemisphere; ↓ alpha/beta in affected hemisphere; ↑ DAR (delta-alpha ratio >3.7 = dysfunction); hemispheric asymmetry (BSI); ↓ beta in affected M1; frontal asymmetry; alpha asymmetry correlates with motor recovery
+  qeeg_electrodes: "C3/C4 (motor cortex asymmetry), F3/F4 (frontal DAR), T7/T8 (temporal asymmetry), Cz, P3/P4"
+  affected_regions: >
+    Perilesional cortex, M1 ipsilesional (hypoactive), contralesional M1 (may be hyperactive), Broca's/Wernicke's (if aphasia), parietal cortex (if neglect), thalamus
+  primary_networks_disrupted: >
+    Sensorimotor (disrupted interhemispheric balance), Language network (if L hemisphere), Attention network (if R hemisphere — neglect), Corticospinal tract
+  network_dysfunction_pattern: >
+    Contralesional M1 hyperactivity inhibits ipsilesional M1 via transcallosal inhibition → worsens motor deficit; interhemispheric imbalance (BSI > 0.1 = poor prognosis)
+  recommended_techniques: >
+    TMS 1 Hz contralesional M1 (inhibit) or high-freq ipsilesional; tDCS anode ipsilesional M1; taVNS + rehab exercises; PEMF 1 Hz contralateral; PBM 808 nm
+  primary_stimulation_targets: "Ipsilesional M1 (excitatory), contralesional M1 (inhibitory 1 Hz), Broca's area (aphasia)"
+  stimulation_rationale: >
+    Inhibit contralesional M1 to release transcallosal inhibition on ipsilesional M1; dual-site tDCS restores interhemispheric balance; taVNS + motor training → enhanced plasticity via ACh/NE release

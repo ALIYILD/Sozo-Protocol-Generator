@@ -40,6 +40,16 @@ search_profiles:
        TFI[Title/Abstract]) AND validation[Title/Abstract]
     max_results: 10
 
+
+  tps_protocols:
+    query: >
+      Tinnitus[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
 priority_pmids:
   - "23063562"  # Shekhawat 2013 tDCS tinnitus review
   - "22200714"  # Vanneste 2011 tDCS tinnitus bilateral
@@ -50,3 +60,41 @@ notes: >
   Left temporal cathodal (inhibit hyperactive auditory cortex) is most studied.
   taVNS may target limbic component (distress) rather than auditory phantom.
   Include tinnitus distress and annoyance, not just loudness, as outcomes.
+
+tps_priority_dois:
+  - doi: "10.1016/j.neubiorev.2015.05.017"
+    title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+    authors: "P. Donaldson, N. Rinehart, P. Enticott"
+    year: 2015
+    study_type: "systematic review"
+    citations: 114
+    takeaway: "Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder,"
+  - doi: "10.1016/j.neubiorev.2015.05.017"
+    title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+    authors: "P. Donaldson, N. Rinehart, P. Enticott"
+    year: 2015
+    study_type: "systematic review"
+    citations: 114
+    takeaway: "Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder,"
+  - doi: "10.1016/j.neubiorev.2015.05.017"
+    title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+    authors: "P. Donaldson, N. Rinehart, P. Enticott"
+    year: 2015
+    study_type: "systematic review"
+    citations: 114
+    takeaway: "Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder,"
+  - doi: "10.1016/j.neubiorev.2015.05.017"
+    title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+    authors: "P. Donaldson, N. Rinehart, P. Enticott"
+    year: 2015
+    study_type: "systematic review"
+    citations: 114
+    takeaway: "Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder,"
+  - doi: "10.1007/s00415-011-6037-6"
+    title: "Short- and long-lasting tinnitus relief induced by transcranial direct current stimulation"
+    authors: "P. Garin, C. Gilain, J. Van Damme, K. de Fays, J. Jamart,..."
+    year: 2011
+    study_type: "rct"
+    citations: 93
+    takeaway: "Anodal tDCS effectively reduces tinnitus intensity and discomfort, with potential for longer-lasting relief and modulation of tinnitus perception."
+  TPS evidence: 48 papers identified (25 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

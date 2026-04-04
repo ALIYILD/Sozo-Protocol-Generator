@@ -825,3 +825,136 @@ patient_journey_notes:
     Administer SRS-2, BRIEF-2, Vineland, Sensory Profile-2. Document
     comorbidities, current medications, and sensory profile. Assess baseline
     anxiety with GAD-7.
+
+tps_evidence:
+  total_papers: 17
+  high_quality_count: 14
+  evidence_grade: "strong"
+  key_papers:
+    - doi: "10.3390/neurolint17110188"
+      title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders — A Systematic Review"
+      year: 2025
+      study_type: "meta-analysis"
+      citations: 0
+      takeaway: "TPS shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological and psychiatric disorders."
+    - doi: "10.1016/j.neubiorev.2015.05.017"
+      title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+      year: 2015
+      study_type: "systematic review"
+      citations: 114
+      takeaway: "Noninvasive stimulation of the temporoparietal junction shows potential in treating ASD-related social cognition deficits."
+    - doi: "10.1001/jamanetworkopen.2025.5776"
+      title: "Transcranial Pulsed Current Stimulation and Social Functioning in Children With Autism"
+      year: 2025
+      study_type: "rct"
+      citations: 2
+      takeaway: "Transcranial pulsed current stimulation improves social functioning and sleep disorders in children with autism spectrum disorder."
+  clinical_note: >
+    ASD has a strong TPS evidence profile with 17 papers and 14 high-quality studies. A 2025 JAMA Network
+    Open RCT directly demonstrates pulsed current stimulation improving social functioning and comorbid
+    sleep disorders in children with ASD, supporting TPS targeting of social brain networks.
+
+
+fnon_protocol:
+  primary_network: "Social Brain + Cerebellar-Limbic"
+  secondary_network: "Cerebellar-Limbic"
+  f_band: "Alpha facilitation + Theta-gamma coupling"
+  eeg_nodes: "F3/F4(DLPFC)+P3/P4(TPJ-ToM)+Pz(DMN)+cerebellar surface"
+  oscillation_goal: >
+    Improve social brain network coherence; restore TGC; normalise frontal alpha; reduce sensory gamma hyperactivity
+  primary_modality_params: >
+    TPS NEUROLITH: 6000 pulses, EFD 0.20 mJ/mm², 5 Hz PRF, 6-12 sessions. Multi-site: prefrontal+parietal+temporal. RCT 2023 Brain Commun (21 cit)
+  addon_modality: >
+    tACS 40Hz gamma temporal nodes; taVNS (social via vagal-LC-social axis); Cerebellar TMS (vermis 1Hz)
+  sessions: "6–12"
+  evidence_level: "Double-blind RCT 2023"
+  lit_count: "4+ TPS; 20+ TMS; 10+ tDCS"
+  key_references: "Beisteiner 2023 Brain Commun (21 cit); Autism Research 2025; Asian RCT 2025"
+  fnon_notes: >
+    Social brain (TPJ+mPFC+STG) = primary target. TPS covers all nodes per session. taVNS for autonomic-social integration.
+
+qeeg_biomarkers:
+  primary_biomarker: "↓Alpha social; ↑Gamma sensory"
+  f_band_target: "Alpha + Gamma"
+
+modality_evidence_counts:
+  tps: 4
+  tms: 20
+  tdcs: 10
+  tavns: 10
+  ces: null
+  tacs: 5
+  pbm: 5
+  lifu: null
+  pemf: 5
+  dbs: null
+  best_first_line: "TPS RCT 2023 Brain Commun"
+  best_second_line: "Cerebellar TMS + taVNS"
+  fnon_score: 4
+
+
+assessment_profile:
+  primary_clinical_scales: >
+    ADOS-2 (Autism Diagnostic Observation Schedule — gold standard diagnostic); ADI-R (Autism Diagnostic Interview-Revised — developmental history); SRS-2 (Social Responsiveness Scale); VABS-3 (Vineland Adaptive Behaviour Scales); SCQ (Social Communication Questionnaire); RBS-R (Repetitive Behaviour Scale); CBCL; Sensory Profile-2; PDDBI; ABC (Aberrant Behaviour Checklist)
+  neuropsychological_battery: >
+    ADOS-2 cognitive subscale; WASI-II/WPPSI (IQ); VABS-3 adaptive behaviour; NEPSY-II (social perception, face recognition, attention); BRIEF-2 (executive function); CANTAB social cognition battery; GARS-3; MoCA/MMSE (if adult); ToM tasks (Theory of Mind); Eyes Test (Baron-Cohen reading the mind in the eyes); Emotion recognition (Cambridge face memory)
+  physiological_assessments: >
+    Sensory assessment (sensory profile — tactile, auditory, vestibular); HRV (autonomic dysregulation in ASD); Actigraphy (sleep — significant insomnia comorbidity in 70% ASD); GI assessment (gut-brain axis in ASD); Eye tracking (gaze patterns — social preference); Cortisol (HPA in ASD)
+  functional_assessments: >
+    ADOS-2 social affect + RRB subscores; Vineland adaptive skills; ABC irritability subscale; Sleep diary (critical in ASD); Sensory diary; Social interaction log; School/work participation; CBCL challenging behaviour; Communication progress; Safety assessment (elopement)
+  neuroimaging: >
+    MRI structural (brain size/growth trajectories in ASD); DTI long-range white matter tracts (↓ FA fronto-temporal); fMRI social tasks (face processing, ToM — ↓ amygdala/STS activation); fMRI resting-state (atypical DMN); MRS (↓ GABA, ↑ glutamate in social brain areas); EEG mu paradigm (action observation)
+  assessment_rationale: >
+    Mu suppression is key ASD qEEG biomarker for mirror neuron circuit function. TPS RCT 2023 (Brain Commun, 21 cit) — multi-site frontal+parietal+temporal covers ASD social brain network nodes.
+  primary_scale: >
+    ADOS-2 (gold standard diagnostic — baseline); SRS-2 (weekly/monthly during intervention)
+  screening_scales: >
+    SCQ (Social Communication Questionnaire — 15 mins); GARS-3
+  severity_staging: >
+    VABS-3 (Vineland adaptive behaviour — 6-monthly); ABC (Aberrant Behaviour)
+  qol_scale: >
+    VABS-3 adaptive composite; ABC-C (subscales); CGAS (children)
+  follow_up_frequency: >
+    Monthly SRS-2 during intervention; 6-monthly VABS-3; 3-monthly ABC; ADOS-2 annually
+  comorbidity_screens: >
+    CBCL (co-occurring behaviour); BRIEF-2 (executive); Sensory Profile-2; ISI (sleep)
+  safety_screens: >
+    Safety assessment (elopement/self-harm); Sensory diet monitoring; Medication side effects
+  score_thresholds: >
+    SRS-2 T-score: 60-65 Mild; 66-75 Moderate; ≥76 Severe. VABS-3 <70 = significant adaptive deficit. ABC irritability subscale ≥18 = significant (primary outcome in many ASD trials).
+  qeeg_primary_signature: >
+    Mu rhythm suppression deficit at Cz/C3 (mirror neuron biomarker); ↓ Long-range coherence; ↑ Local connectivity; U-shaped power (↑ delta+gamma, ↓ alpha); ↑ Gamma sensory cortices (hyperreactivity)
+  qeeg_key_electrodes: "Cz/C3/C4 (mu — mirror neuron); F3/F4 (frontal social); T3/T4 (temporal language/social); P3/P4 (parietal spatial); globally (long-range coherence)"
+  qeeg_key_metrics: >
+    Mu suppression at Cz (11-13 Hz band, action observation paradigm — ↓ suppression = mirror neuron deficit = ASD biomarker); Long-range coherence F3-P3/T3; Local coherence (↑ in ASD — opposite to long-range); 40 Hz ASSR (altered in ASD); N170 face ERP
+  qeeg_eyes_open: >
+    ↑ Gamma sensory cortices (sensory hyperreactivity); ↑ Beta; ↓ Alpha (EO — ↓ inhibitory control); ↑ Local frontal coherence
+  qeeg_eyes_closed: >
+    ↑ Delta/theta; ↑ Gamma (sensory); ↓ Alpha; ↓ Long-range connectivity; ↑ Local hyperconnectivity
+  qeeg_event_related: >
+    Mu paradigm (action observation — hand actions; ↓ suppression = mirror neuron deficit); N170 face ERP (delayed/reduced in ASD); MMN to social sounds; ASSR 40 Hz; P300 social-cognitive (theory of mind paradigm); ERP to social/non-social stimuli distinction
+  qeeg_pathological_threshold: >
+    Mu suppression <20% during action observation (ASD marker vs 40-50% in neurotypical); Long-range coherence F3-P3 <0.3 (↓ connectivity); 40 Hz ASSR <-10 dB vs controls
+  qeeg_treatment_target: >
+    Mu suppression ↑ (Cz — mirror neuron activation restoration); Long-range coherence ↑; 40 Hz gamma normalisation; Frontal alpha ↑; Social brain network connectivity
+  qeeg_response_biomarker: >
+    Mu suppression change (primary ASD qEEG biomarker); ADOS-2 social affect correlation with mu; N170 face ERP latency change; Long-range coherence restoration
+
+
+neuromod_profile:
+  key_symptoms: >
+    Social communication deficits, restricted/repetitive behaviors, sensory sensitivities (hyper/hypo), difficulty with transitions, special interests, executive function challenges
+  qeeg_patterns: >
+    U-shaped power profile — ↑ low-freq (delta/theta) + ↑ high-freq (beta/gamma), ↓ midrange alpha + beta; ↓ alpha (eyes-open — ↓ inhibitory control); excess beta in Dup15q; ↓ long-range connectivity; ↑ local connectivity
+  qeeg_electrodes: "Fz, F3/F4 (frontal changes), Cz (central), T3/T4 (temporal), P3/P4 (parietal), globally altered"
+  affected_regions: >
+    PFC, temporal cortex, fusiform gyrus (face processing), amygdala, cerebellum, STS (superior temporal sulcus)
+  primary_networks_disrupted: >
+    Social brain network (impaired — STS, fusiform, amygdala, mPFC), DMN (atypical connectivity), Mirror neuron network (altered), Long-range underconnectivity + local overconnectivity pattern
+  network_dysfunction_pattern: >
+    Long-range underconnectivity → poor social brain network integration; local overconnectivity → restricted/repetitive processing; ↓ alpha in social cortex → ↓ inhibitory gating of sensory input → sensory sensitivity
+  recommended_techniques: >
+    TMS DLPFC/SMA; TPS (emerging); tDCS DLPFC; neurofeedback
+  primary_stimulation_targets: "DLPFC (F3/F4), SMA (FCz), temporal/social cortex"
+  stimulation_rationale: >
+    DLPFC TMS/tDCS targets executive function and repetitive behaviors; SMA modulation ↓ motor stereotypies; neurofeedback alpha training → ↑ social cortex inhibitory gating; TPS to enhance long-range connectivity

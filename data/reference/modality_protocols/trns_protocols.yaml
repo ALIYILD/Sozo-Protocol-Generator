@@ -1,0 +1,193 @@
+# SOZO Brain Center — Transcranial Random Noise Stimulation Protocol Reference
+# Source: Master with QEEG places.xlsx, April 2026
+# 9 condition protocols
+
+modality: "trns"
+name: "Transcranial Random Noise Stimulation"
+
+protocols:
+  - condition: "Tinnitus"
+    brain_target: "Bilateral auditory cortex"
+    eeg_position: "T3/T5 and T4/T6 (bilateral)"
+    protocol_summary: >
+    Bilateral high-frequency tRNS (100–640 Hz) over auditory cortex; 1.5 mA, 10 min. Targets hyperactive auditory cortical generators.
+    intensity: "1.5 mA"
+    frequency: "100–640 Hz (HF-tRNS)"
+    duration_per_session: "10 min"
+    total_sessions: "5–10 sessions"
+    pulses_per_session: "N/A (random noise)"
+    devices: "Soterix, Neuroelectrics Starstim"
+    montage: "Bilateral temporal electrodes T3/T4"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "15+"
+    key_references: >
+    Joos 2015; Vanneste 2013; Cima 2014
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    High-frequency band (100–640 Hz) most effective. Acts via stochastic resonance mechanism.
+  - condition: "MS-related Pain"
+    brain_target: "Primary motor cortex (M1)"
+    eeg_position: "C3 or C4"
+    protocol_summary: >
+    tRNS over M1; 2 mA, 20 min; reduces central neuropathic pain in MS.
+    intensity: "2 mA"
+    frequency: "100–640 Hz (HF-tRNS)"
+    duration_per_session: "20 min"
+    total_sessions: "5–10 sessions"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics"
+    montage: "M1 electrode (C3/C4)"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "5+"
+    key_references: >
+    Ferrucci 2011; Emerging MS tRNS literature
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    M1 stimulation for central pain in MS. tRNS produces more uniform cortical effects than tDCS.
+  - condition: "Parkinson's Disease"
+    brain_target: "Motor cortex (M1)"
+    eeg_position: "C3/C4"
+    protocol_summary: >
+    tRNS over M1 to modulate corticospinal excitability and reduce motor symptoms.
+    intensity: "1–2 mA"
+    frequency: "100–640 Hz"
+    duration_per_session: "15–20 min"
+    total_sessions: "5–10 sessions"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics"
+    montage: "M1 bilateral motor electrodes"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "3+"
+    key_references: >
+    Emerging tRNS PD literature
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    Very limited data. tRNS reduces M1 excitability differently than tDCS — useful for PD motor circuit modulation.
+  - condition: "Schizophrenia (Negative Symptoms)"
+    brain_target: "DLPFC bilateral"
+    eeg_position: "F3/F4"
+    protocol_summary: >
+    tRNS bilateral DLPFC for negative symptom improvement in schizophrenia.
+    intensity: "1–2 mA"
+    frequency: "100–640 Hz"
+    duration_per_session: "20 min"
+    total_sessions: "10–15 sessions"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics"
+    montage: "Bilateral F3/F4 DLPFC electrodes"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "3+"
+    key_references: >
+    Emerging tRNS schizophrenia literature
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    Targets prefrontal hypofrontality in schizophrenia negative symptoms.
+  - condition: "Depression (MDD)"
+    brain_target: "DLPFC"
+    eeg_position: "F3"
+    protocol_summary: >
+    tRNS L-DLPFC; emerging as adjunct or alternative to tDCS for depression.
+    intensity: "1–2 mA"
+    frequency: "100–640 Hz"
+    duration_per_session: "20 min"
+    total_sessions: "10–15 sessions"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics"
+    montage: "L-DLPFC electrode F3"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "3+"
+    key_references: >
+    Emerging tRNS depression literature
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    Limited vs tDCS/TMS literature but growing. May offer advantages in terms of blinding (harder to distinguish from sham).
+  - condition: "Motor / Perceptual Learning"
+    brain_target: "M1 (motor), V1 (visual)"
+    eeg_position: "C3/C4 (M1), Oz (V1)"
+    protocol_summary: >
+    tRNS over M1 or V1 during learning; 10 min, enhances motor skill acquisition and visual perceptual learning.
+    intensity: "1 mA"
+    frequency: "100–640 Hz"
+    duration_per_session: "10 min"
+    total_sessions: "1–5 sessions (per learning block)"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics"
+    montage: "M1 (C3) or V1 (Oz) electrode placement"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "20+"
+    key_references: >
+    Fertonani 2011; Van der Groen 2016
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    Stochastic resonance enhances signal-to-noise in cortical processing. Particularly effective for learning paradigms.
+  - condition: "Cognitive Enhancement"
+    brain_target: "DLPFC, Parietal"
+    eeg_position: "F3/F4, P3/P4"
+    protocol_summary: >
+    tRNS targeting prefrontal and parietal areas for general cognitive enhancement.
+    intensity: "1–2 mA"
+    frequency: "100–640 Hz"
+    duration_per_session: "15–20 min"
+    total_sessions: "5–10 sessions"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics"
+    montage: "Frontal + parietal electrode montage"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "10+"
+    key_references: >
+    Pasqualotto 2020; Snowball 2013
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    May enhance arithmetic, memory, and general cognitive processing. Similar efficacy to tDCS with less polarity specificity.
+  - condition: "Vascular Cognitive Impairment (VCI) + Insomnia"
+    brain_target: "Inferior parietal lobule (IPL)"
+    eeg_position: "P3/P4 (bilateral IPL)"
+    protocol_summary: >
+    tRNS bilateral IPL; 20 min/day, 2 weeks. Targets cognitive-sleep comorbidity in VCI. Emerging protocol.
+    intensity: "2 mA"
+    frequency: "100–640 Hz"
+    duration_per_session: "20 min/day"
+    total_sessions: "10 sessions / 2 weeks"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics"
+    montage: "Bilateral IPL electrodes P3/P4"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "2+"
+    key_references: >
+    Emerging tRNS VCI literature 2023–2024
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    Novel indication. IPL targeting for VCI addresses attention and memory processing deficits.
+  - condition: "Source: SOZO Brain Center Clinical Research Compilation | neuromod_data.md | Updated April 2026"
+    brain_target: null
+    eeg_position: null
+    protocol_summary: null
+    intensity: null
+    frequency: null
+    duration_per_session: null
+    total_sessions: null
+    pulses_per_session: null
+    devices: null
+    montage: null
+    regulatory_status: null
+    evidence_level: null
+    literature_count: null
+    key_references: null
+    side_effects: null
+    notes: null

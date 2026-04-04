@@ -620,4 +620,13 @@ module.exports = {
       { authors: "Roosendaal SD, Schoonheim MM, Hulst HE, et al.", year: 2010, title: "Resting state networks change in clinically isolated syndrome", journal: "Brain", volume: "133(6)", pages: "1612–1621", doi: "10.1093/brain/awq058" },
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: null,
+  fnonNotes: 'No FNON data available for this condition.',
+  fnonQeegBiomarker: null,
+  fnonPaperCounts: null,
+  fnonBestFirstLine: null,
+  fnonBestSecondLine: null,
+  fnonScore: 0,
+
 };

@@ -49,6 +49,16 @@ search_profiles:
       safety[Title/Abstract]
     max_results: 10
 
+
+  tps_protocols:
+    query: >
+      Major Depressive Disorder[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
 priority_pmids:
   - "16868819"  # Fregni 2006 tDCS depression
   - "22562094"  # Boggio 2007 tDCS MDD
@@ -58,3 +68,41 @@ priority_pmids:
 notes: >
   Focus on left DLPFC anodal / right DLPFC cathodal montage evidence.
   Include SELECT-TDCS and ELECT-TDCS landmark trials.
+
+tps_priority_dois:
+  - doi: "10.1016/j.ajp.2023.103891"
+    title: "The association of total pulses with the efficacy of repetitive transcranial magnetic stimulation for treatment-resistan"
+    authors: "Chia-Ling Yu, Yu-Chen Kao, Trevor Thompson, A. Brunoni, C..."
+    year: 2023
+    study_type: "meta-analysis"
+    citations: 15
+    takeaway: "Higher doses of repetitive transcranial magnetic stimulation (rTMS) are not always associated with increased improvement of depressive symptoms in pat"
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic R"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schw..."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological"
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic R"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schw..."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological"
+  - doi: "10.1007/s13534-024-00369-0"
+    title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+    authors: "Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim"
+    year: 2024
+    study_type: "systematic review"
+    citations: 32
+    takeaway: "Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in healthy humans and patients with central"
+  - doi: "10.1111/cns.14372"
+    title: "Transcranial pulse stimulation in Alzheimer's disease"
+    authors: "Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang"
+    year: 2023
+    study_type: "systematic review"
+    citations: 12
+    takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients"
+  TPS evidence: 203 papers identified (53 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

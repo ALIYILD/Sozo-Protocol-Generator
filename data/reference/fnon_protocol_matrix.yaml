@@ -1,0 +1,209 @@
+# SOZO Brain Center — FNON Protocol Matrix
+# Source: SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026
+# 12 conditions with full FNON protocol specifications
+
+protocols:
+  alzheimers:
+    condition: "Alzheimer's Disease"
+    primary_network: DMN + Memory Network
+    f_band: Alpha(8-12Hz) + 40Hz Gamma
+    eeg_nodes: Pz(PCC)+Fz/AFz(mPFC)+F3/F4(DLPFC)+P3/P4(LPC)+T3/T4(MTG/HC)
+    oscillation_goal: >
+      Restore alpha coherence across DMN; induce 40Hz gamma entrainment; suppress theta excess; restore DMN-ECN anti-correlation
+    primary_modality_params: >
+      TPS NEUROLITH: 6000 pulses, EFD 0.20 mJ/mm², 5 Hz PRF, MRI-navigated, 6-site DMN — CE cleared Europe
+    addon_modality: >
+      40Hz tACS bilateral T3-T4 (2mA,20min); PBM Vielight 810nm 40Hz transcranial+intranasal
+    sessions: 6–12
+    evidence_level: RCT+Syst Review+Meta-analysis
+    lit_count: 31+ TPS; 15 tACS; 20+ PBM
+    key_references: Beisteiner 2019 Adv Sci (230 cit); JAMA Network Open RCT 2025; Clancy 2022 (40Hz tACS)
+    fnon_notes: >
+      SOZO FNON primary protocol. CE-cleared TPS core. 40Hz tACS/PBM for gamma entrainment. qEEG: APF monitoring toward 10Hz.
+  parkinsons:
+    condition: "Parkinson's Disease — Motor"
+    primary_network: Sensorimotor Network
+    f_band: Beta(13-30Hz) suppression
+    eeg_nodes: C3/C4(M1)+FCz/Fz(SMA/CMA)+F3(DLPFC)+foot targets
+    oscillation_goal: >
+      Desynchronise pathological STN-M1 beta; restore sensorimotor beta ERD; normalise mu rhythm
+    primary_modality_params: >
+      TPS NEUROLITH: 10,000 pulses (8000 brain+2000 foot), EFD 0.25 mJ/mm², 4 Hz PRF, 12 sessions/4 weeks
+    addon_modality: >
+      TMS high-freq M1 (10-25Hz); taVNS (25Hz,30min pre) for BDNF; tACS (4Hz theta for SMA)
+    sessions: 12 sessions
+    evidence_level: Open-label + Pilot RCT 2025
+    lit_count: 9+ TPS; 80+ TMS; 10 tACS
+    key_references: Osou 2023 J Neurol (20 cit); TPS dexterity RCT 2025; Chou 2015 meta TMS+PD
+    fnon_notes: >
+      FNON: Beta biomarker = PD qEEG signature. Mu+beta suppression M1+SMA primary target. Foot stimulation adds proprioceptive input.
+  mci:
+    condition: MCI
+    primary_network: DMN + ECN + Limbic
+    f_band: Alpha(8-12Hz) + Theta suppression
+    eeg_nodes: F3/F4(DLPFC)+P3/P4(LPC)+Pz(PCC)+T3/T4(MTG/HC)
+    oscillation_goal: >
+      Prevent alpha slowing; suppress frontal theta; restore DMN-ECN connectivity; facilitate HC theta for memory
+    primary_modality_params: >
+      TPS NEUROLITH: 6000 pulses, EFD 0.20 mJ/mm², 5 Hz PRF, 6 sessions, frontal+parietal+temporal
+    addon_modality: >
+      PBM intranasal 810nm (HC); tACS 10Hz bilateral parietal (alpha entrainment); taVNS (HC theta)
+    sessions: 6–12
+    evidence_level: Open-label, 24-week trial
+    lit_count: 7+ TPS; 80+ combined
+    key_references: Nayeri 2023 Annals (19 cit); Biomedicines 2024 (6 cit); 24-week MCI trial 2025
+    fnon_notes: >
+      FNON: Early intervention — prevent AD conversion. APF monitoring as progression biomarker. Multi-modal critical.
+  depression:
+    condition: Depression (MDD)
+    primary_network: ECN (L-DLPFC) + DMN
+    f_band: Alpha asymmetry + Theta suppression
+    eeg_nodes: F3(L-DLPFC)+Pz(PCC/DMN)+T3/T4 (limbic)
+    oscillation_goal: >
+      Correct L>R DLPFC alpha asymmetry (FAA); suppress frontal theta; reduce DMN rumination hyperactivity
+    primary_modality_params: >
+      TPS: 6000 pulses, EFD 0.20 mJ/mm², 5 Hz PRF, 6-12 sessions. OR TMS 10Hz L-DLPFC (120%rMT, 3000 pulses, 30 sessions)
+    addon_modality: >
+      CES (Alpha-Stim 0.5Hz, 60min daily) for frontal alpha; taVNS (25Hz, 30-60min) for limbic theta
+    sessions: 6–30
+    evidence_level: Pilot RCT+2025 RCTs (TPS); FDA Cleared (TMS)
+    lit_count: 14+ TPS; 500+ TMS; 200+ tDCS
+    key_references: "Keeser 2023 IJERPH (34 cit); O'Reardon 2007; CINP 2025 3x TPS RCTs"
+    fnon_notes: >
+      FAA (F4-F3 alpha) = primary qEEG biomarker for MDD. TPS offers faster treatment (6 vs 30 sessions).
+  ptsd:
+    condition: PTSD
+    primary_network: Limbic + Salience Network
+    f_band: Theta suppression + Alpha facilitation
+    eeg_nodes: F4(R-DLPFC)+T3/T4(temporal-limbic)+Fz(ACC)
+    oscillation_goal: >
+      Suppress limbic theta (hyperarousal); facilitate vmPFC alpha for fear extinction; reduce SN hyperactivation
+    primary_modality_params: >
+      TMS high-freq R-DLPFC (20Hz, 110%rMT, 2400 pulses). OR TPS multi-site (F4+T3/T4+Fz); taVNS (25Hz, 60min)
+    addon_modality: >
+      CES (60min, hyperarousal); PBM bilateral frontal (810nm); EMDR concurrent taVNS
+    sessions: 20–30
+    evidence_level: Open-label + Pilot RCT
+    lit_count: 30+ TMS; 80+ taVNS; 10+ TPS
+    key_references: Karsen 2014; Philip 2019; Liu 2020 meta taVNS; Neuromodulation for TRD 2023
+    fnon_notes: >
+      FNON: PFC-amygdala connectivity biomarker. R-DLPFC TMS activates vmPFC fear extinction. taVNS = primary limbic modulator.
+  ocd:
+    condition: OCD
+    primary_network: Salience (dACC) + CSTC Circuit
+    f_band: Theta normalisation (error monitoring)
+    eeg_nodes: Fz/AFz(dACC/mPFC)+F3/F4(DLPFC)+deep caudate
+    oscillation_goal: >
+      Normalise ACC theta; reduce CSTC hyperactivity; suppress OFC-caudate beta loop
+    primary_modality_params: >
+      Deep TMS BrainsWay H7: 20Hz, 100%rMT, 2000 pulses, 29 sessions. Symptom provocation pre-session. FDA cleared.
+    addon_modality: >
+      LIFU (caudate nucleus); tDCS bilateral OFC cathodal; TPS (Fz/AFz+F3/F4)
+    sessions: 29 sessions
+    evidence_level: RCT, Meta-analysis
+    lit_count: 100+ TMS; 5+ LIFU; 50+ DBS
+    key_references: Carmi 2019 Am J Psychiatry; Roth 2021; Greenberg 2010 DBS; Connectomic OCD 2022
+    fnon_notes: >
+      FNON: Theta excess ACC (ERN hyperactivation) + beta OFC. H7 gold standard. LIFU noninvasive caudate option.
+  adhd:
+    condition: ADHD
+    primary_network: ECN + DAN + DMN suppression
+    f_band: TBR correction (Theta/Beta ratio)
+    eeg_nodes: Fz/F3/F4(prefrontal)+Cz/Pz(central-parietal)+P3/P4(parietal attention)
+    oscillation_goal: >
+      Correct TBR excess (canonical ADHD qEEG biomarker); suppress DMN intrusion; facilitate ECN-DAN coupling
+    primary_modality_params: >
+      TPS: 6000 pulses, EFD 0.20 mJ/mm², 5 Hz PRF, 6 sessions bilateral prefrontal — RCT 2024 Frontiers (11 cit)
+    addon_modality: >
+      tACS (7Hz theta-alpha border, Fz/FCz); CES (Alpha-Stim frontal alpha); PBM (F3/F4 bilateral)
+    sessions: 6–12
+    evidence_level: Pilot RCT 2024 (TPS); Investigational
+    lit_count: 2+ TPS RCT; 20+ tDCS; 10+ tACS
+    key_references: TPS adolescent RCT 2024 Frontiers (11 cit); ADHD tACS 2020-2024; Meinzer tDCS ADHD
+    fnon_notes: >
+      TBR (theta/beta) = primary ADHD qEEG biomarker. NF (neurofeedback) complements TPS for TBR training.
+  asd:
+    condition: Autism (ASD)
+    primary_network: Social Brain + Cerebellar-Limbic
+    f_band: Alpha facilitation + Theta-gamma coupling
+    eeg_nodes: F3/F4(DLPFC)+P3/P4(TPJ-ToM)+Pz(DMN)+cerebellar surface
+    oscillation_goal: >
+      Improve social brain network coherence; restore TGC; normalise frontal alpha; reduce sensory gamma hyperactivity
+    primary_modality_params: >
+      TPS NEUROLITH: 6000 pulses, EFD 0.20 mJ/mm², 5 Hz PRF, 6-12 sessions. Multi-site: prefrontal+parietal+temporal. RCT 2023 Brain Commun (21 cit)
+    addon_modality: >
+      tACS 40Hz gamma temporal nodes; taVNS (social via vagal-LC-social axis); Cerebellar TMS (vermis 1Hz)
+    sessions: 6–12
+    evidence_level: Double-blind RCT 2023
+    lit_count: 4+ TPS; 20+ TMS; 10+ tDCS
+    key_references: Beisteiner 2023 Brain Commun (21 cit); Autism Research 2025; Asian RCT 2025
+    fnon_notes: >
+      Social brain (TPJ+mPFC+STG) = primary target. TPS covers all nodes per session. taVNS for autonomic-social integration.
+  chronic_pain:
+    condition: Chronic Pain
+    primary_network: Pain Matrix + Sensorimotor
+    f_band: Gamma suppression + Alpha restoration
+    eeg_nodes: Cz/C3/C4(M1/S1)+T3/T4(insula/limbic)+Fz(ACC)+Pz(parietal attention)
+    oscillation_goal: >
+      Suppress neuropathic gamma; restore M1 alpha+beta (mu); reduce ACC theta; suppress insula-SN hyperactivation
+    primary_modality_params: >
+      tDCS anodal M1 (C3/C4, 2mA, 20min, 10 sessions — strongest evidence); TMS high-freq M1 (10Hz); taVNS (100Hz analgesia mode)
+    addon_modality: >
+      TPS multi-site (M1+ACC+insula); LIFU (thalamic VPL nucleus); CES (Alpha-Stim MET probes); PBM bilateral M1
+    sessions: 5–20
+    evidence_level: RCT + Meta-analysis
+    lit_count: 150+ tDCS; 60+ TMS; 40+ taVNS; 15+ LIFU
+    key_references: Fregni 2006; Lefaucheur 2017 IFCNS; Napadow 2012 taVNS; Lee 2015 LIFU thalamic; Network targets pain 2023
+    fnon_notes: >
+      FNON: Pain gamma signature = suppression target. LIFU unique for thalamic pain relay. taVNS 100Hz (not 25Hz) for pain — frequency specific.
+  epilepsy:
+    condition: Epilepsy (drug-resistant)
+    primary_network: Epileptic Network + ANT
+    f_band: Theta/delta suppression at focus
+    eeg_nodes: Focus-dependent positions + bilateral ANT (DBS) or LIFU-guided
+    oscillation_goal: >
+      Suppress epileptogenic focus; break pathological synchrony; prevent network seizure propagation
+    primary_modality_params: >
+      DBS ANT: 145Hz, cycling 1min ON/5min OFF — FDA approved (SANTE trial). OR taVNS (25Hz, CE marked); LIFU (focus-specific)
+    addon_modality: >
+      TMS (1Hz inhibitory over focus); PEMF (low-freq focus suppression)
+    sessions: Ongoing (DBS) or 4-12 wk
+    evidence_level: RCT (DBS+taVNS)
+    lit_count: 30+ DBS; 50+ taVNS; 20+ LIFU
+    key_references: "Fisher 2010 SANTE (ANT-DBS); Salanova 2015 (75% at 7yr); Stefan 2012 taVNS; Network-guided epilepsy 2022"
+    fnon_notes: >
+      FNON: Network-guided — target full epileptic network not just focus. Connectomic mapping identifies optimal targets.
+  insomnia:
+    condition: Insomnia
+    primary_network: Thalamocortical sleep + DMN
+    f_band: Delta/theta facilitation + beta suppression
+    eeg_nodes: Fz/F3/F4(frontal)+Cz(central spindles)+bilateral mastoid (tACS/CES path)
+    oscillation_goal: >
+      Facilitate sleep spindles(12-15Hz)+delta(0.5-4Hz); suppress hyperarousal beta; restore thalamocortical sleep rhythm
+    primary_modality_params: >
+      tACS Nexalin (77.5Hz, 15mA, forehead-bilateral mastoid, FDA cleared) OR CES Alpha-Stim (0.5Hz, 100-500μA, 20-60min before sleep)
+    addon_modality: >
+      PEMF (delta/theta 1-8Hz, 30min pre-sleep); PBM bilateral frontal; taVNS (25Hz, 30min pre-sleep)
+    sessions: 8 weeks (tACS) or 3-5 weeks (CES)
+    evidence_level: RCT (CES+tACS); High quality
+    lit_count: 25+ CES; 15+ tACS; 5+ PEMF
+    key_references: "Barclay 2014 meta (CES ES=-1.02); Nexalin RCTs 2022-2024; Gilula 2007 CES insomnia"
+    fnon_notes: >
+      FNON: Sleep spindle+delta deficit are primary targets. Nexalin 77.5Hz paradoxically entrains via thalamocortical resonance. CES 0.5Hz = direct slow oscillation entrainment.
+  tinnitus:
+    condition: Tinnitus
+    primary_network: Auditory Network + Limbic distress
+    f_band: Alpha suppression (auditory cortex) + Beta normalisation
+    eeg_nodes: T3/T5(L-STG)+T4/T6(R-STG)
+    oscillation_goal: >
+      Suppress maladaptive alpha excess in silent auditory cortex; normalise L-STG beta; reduce limbic distress; break auditory-attention hypervigilance
+    primary_modality_params: >
+      TMS 1Hz inhibitory L-STG (T3/T5, 110%rMT, 1000 pulses, 10 sessions) OR tRNS bilateral temporal (stochastic resonance, 100-640Hz, 1.5mA, 10min)
+    addon_modality: >
+      tDCS cathodal L-temporal (2mA); taVNS paired with tone therapy; tACS (40Hz gamma temporal coherence)
+    sessions: 10–15
+    evidence_level: RCT, Open-label
+    lit_count: 40+ tDCS; 15+ tRNS; 15+ taVNS; 25+ TMS
+    key_references: Joos 2015; Vanneste 2013 tRNS; Kraus 2016 taVNS; Fregni 2006 tinnitus tDCS
+    fnon_notes: >
+      Tinnitus alpha is paradoxical (↑alpha=maladaptive) — must SUPPRESS. tRNS stochastic resonance for auditory S/N ratio.

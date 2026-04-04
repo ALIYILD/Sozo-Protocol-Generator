@@ -1,0 +1,3246 @@
+{
+  "generated_at": "2026-04-04",
+  "total_refs_parsed": 214,
+  "unique_papers": 188,
+  "pmids_found": 164,
+  "papers": [
+    {
+      "author": "Beisteiner",
+      "year": "2019",
+      "journal": "Adv Sci, n=35, 230 citations",
+      "raw": "Beisteiner 2019 (Adv Sci, n=35, 230 citations)",
+      "pmid": "32042569",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's Disease — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis, Systematic Review"
+      ]
+    },
+    {
+      "author": "Radjenovic",
+      "year": "2025",
+      "journal": "Psychol Med, n=58",
+      "raw": "Radjenovic 2025 (Psychol Med, n=58)",
+      "pmid": "40795673",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's Disease — TPS",
+        "Mild Cognitive Impairment (MCI) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis, Systematic Review",
+        "Open-label, Observational, 24-week Trial"
+      ]
+    },
+    {
+      "author": "RCT JAMA Network Open",
+      "year": "2025",
+      "journal": "",
+      "raw": "RCT JAMA Network Open 2025",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's Disease — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis, Systematic Review"
+      ]
+    },
+    {
+      "author": "Systematic Review CNS Neurosci Ther",
+      "year": "2023",
+      "journal": "",
+      "raw": "Systematic Review CNS Neurosci Ther 2023",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's Disease — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis, Systematic Review"
+      ]
+    },
+    {
+      "author": "Meta-analysis",
+      "year": "2025",
+      "journal": "",
+      "raw": "Meta-analysis 2025",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's Disease — TPS",
+        "Mild Cognitive Impairment (MCI) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis, Systematic Review",
+        "Open-label, Observational, 24-week Trial"
+      ]
+    },
+    {
+      "author": "Osou",
+      "year": "2023",
+      "journal": "n=20, 20 citations",
+      "raw": "Osou 2023 J Neurol (n=20, 20 citations)",
+      "pmid": "38032371",
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT (2025)"
+      ]
+    },
+    {
+      "author": "RCT",
+      "year": "2025",
+      "journal": "sham-controlled",
+      "raw": "RCT 2025 – TPS Enhances Dexterity in PD (sham-controlled)",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT (2025)"
+      ]
+    },
+    {
+      "author": "EEG cortical oscillatory changes",
+      "year": "2025",
+      "journal": "",
+      "raw": "EEG cortical oscillatory changes 2025",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT (2025)"
+      ]
+    },
+    {
+      "author": "SA Perspective Brain Stimulation",
+      "year": "2025",
+      "journal": "",
+      "raw": "SA Perspective Brain Stimulation 2025",
+      "pmid": "41919027",
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT (2025)"
+      ]
+    },
+    {
+      "author": "Nayeri",
+      "year": "2023",
+      "journal": "19 citations",
+      "raw": "Nayeri 2023 Annals Clin Transl Neurol (19 citations)",
+      "pmid": "37979355",
+      "pmid_error": null,
+      "conditions": [
+        "Mild Cognitive Impairment (MCI) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Open-label, Observational, 24-week Trial"
+      ]
+    },
+    {
+      "author": "Biomedicines",
+      "year": "2024",
+      "journal": "6 citations",
+      "raw": "Biomedicines 2024 (6 citations)",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Mild Cognitive Impairment (MCI) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Open-label, Observational, 24-week Trial"
+      ]
+    },
+    {
+      "author": "24-week MCI trial",
+      "year": "2025",
+      "journal": "",
+      "raw": "24-week MCI trial 2025",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Mild Cognitive Impairment (MCI) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Open-label, Observational, 24-week Trial"
+      ]
+    },
+    {
+      "author": "Keeser",
+      "year": "2023",
+      "journal": "Pilot RCT, n=30, 34 citations",
+      "raw": "Keeser 2023 IJERPH (Pilot RCT, n=30, 34 citations)",
+      "pmid": "38091084",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Pilot RCT + Multiple RCTs (2025)"
+      ]
+    },
+    {
+      "author": "3x RCTs CINP",
+      "year": "2025",
+      "journal": "",
+      "raw": "3x RCTs CINP 2025",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Pilot RCT + Multiple RCTs (2025)"
+      ]
+    },
+    {
+      "author": "RCT Protocol Frontiers",
+      "year": "2022",
+      "journal": "5 citations",
+      "raw": "RCT Protocol Frontiers 2022 (5 citations)",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Pilot RCT + Multiple RCTs (2025)"
+      ]
+    },
+    {
+      "author": "NAc TRD case",
+      "year": "2023",
+      "journal": "",
+      "raw": "NAc TRD case 2023",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Pilot RCT + Multiple RCTs (2025)"
+      ]
+    },
+    {
+      "author": "Asian multicenter RCT",
+      "year": "2025",
+      "journal": "",
+      "raw": "Asian multicenter RCT 2025",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — TPS",
+        "Autism Spectrum Disorder (ASD) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Pilot RCT + Multiple RCTs (2025)",
+        "Double-blind RCT, Sham-controlled"
+      ]
+    },
+    {
+      "author": "Sham-controlled pilot RCT Frontiers Neurol",
+      "year": "2024",
+      "journal": "11 citations — adolescents",
+      "raw": "Sham-controlled pilot RCT Frontiers Neurol 2024 (11 citations — adolescents)",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "ADHD — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Pilot RCT, Double-blind Sham-controlled"
+      ]
+    },
+    {
+      "author": "RCT Protocol",
+      "year": "2023",
+      "journal": "5 citations",
+      "raw": "RCT Protocol 2023 (5 citations)",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "ADHD — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Pilot RCT, Double-blind Sham-controlled"
+      ]
+    },
+    {
+      "author": "Asian RCT multicenter",
+      "year": "2025",
+      "journal": "",
+      "raw": "Asian RCT multicenter 2025",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "ADHD — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Pilot RCT, Double-blind Sham-controlled"
+      ]
+    },
+    {
+      "author": "Beisteiner",
+      "year": "2023",
+      "journal": "21 citations, RCT",
+      "raw": "Beisteiner 2023 Brain Communications (21 citations, RCT)",
+      "pmid": "38032371",
+      "pmid_error": null,
+      "conditions": [
+        "Autism Spectrum Disorder (ASD) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Double-blind RCT, Sham-controlled"
+      ]
+    },
+    {
+      "author": "RCT Protocol",
+      "year": "2022",
+      "journal": "7 citations",
+      "raw": "RCT Protocol 2022 (7 citations)",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Autism Spectrum Disorder (ASD) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Double-blind RCT, Sham-controlled"
+      ]
+    },
+    {
+      "author": "Brain connectivity post-hoc Autism Research",
+      "year": "2025",
+      "journal": "",
+      "raw": "Brain connectivity post-hoc Autism Research 2025",
+      "pmid": "41568249",
+      "pmid_error": null,
+      "conditions": [
+        "Autism Spectrum Disorder (ASD) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Double-blind RCT, Sham-controlled"
+      ]
+    },
+    {
+      "author": "Emerging DOC literature",
+      "year": "2024",
+      "journal": "",
+      "raw": "Emerging DOC literature 2024–2025",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Disorders of Consciousness (DOC) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Case series, Open-label"
+      ]
+    },
+    {
+      "author": "TPS Opens New Horizons in Psychiatric Patients",
+      "year": "2025",
+      "journal": "",
+      "raw": "TPS Opens New Horizons in Psychiatric Patients 2025",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Disorders of Consciousness (DOC) — TPS"
+      ],
+      "modalities": [
+        "TPS"
+      ],
+      "evidence_levels": [
+        "Case series, Open-label"
+      ]
+    },
+    {
+      "author": "O'Reardon",
+      "year": "2007",
+      "journal": "Biol Psychiatry",
+      "raw": "O'Reardon 2007 (Biol Psychiatry)",
+      "pmid": "18167324",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — Standard rTMS — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Carpenter",
+      "year": "2012",
+      "journal": "",
+      "raw": "Carpenter 2012",
+      "pmid": "27637243",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — Standard rTMS — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Blumberger",
+      "year": "2018",
+      "journal": "THREE-D",
+      "raw": "Blumberger 2018 (THREE-D)",
+      "pmid": "30639917",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — Standard rTMS — TMS_rTMS",
+        "Depression (MDD) — iTBS — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis",
+        "RCT, Non-inferiority trial"
+      ]
+    },
+    {
+      "author": "Huang",
+      "year": "2005",
+      "journal": "",
+      "raw": "Huang 2005",
+      "pmid": "18970620",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — iTBS — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Non-inferiority trial"
+      ]
+    },
+    {
+      "author": "Carmi",
+      "year": "2019",
+      "journal": "Am J Psychiatry",
+      "raw": "Carmi 2019 (Am J Psychiatry)",
+      "pmid": "31888275",
+      "pmid_error": null,
+      "conditions": [
+        "OCD — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Roth",
+      "year": "2021",
+      "journal": "",
+      "raw": "Roth 2021",
+      "pmid": "36101709",
+      "pmid_error": null,
+      "conditions": [
+        "OCD — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Dinur-Klein",
+      "year": "2014",
+      "journal": "",
+      "raw": "Dinur-Klein 2014",
+      "pmid": "25038985",
+      "pmid_error": null,
+      "conditions": [
+        "Smoking Cessation — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT"
+      ]
+    },
+    {
+      "author": "Karsen",
+      "year": "2014",
+      "journal": "",
+      "raw": "Karsen 2014",
+      "pmid": "24486424",
+      "pmid_error": null,
+      "conditions": [
+        "PTSD — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Philip",
+      "year": "2019",
+      "journal": "",
+      "raw": "Philip 2019",
+      "pmid": "33816204",
+      "pmid_error": null,
+      "conditions": [
+        "PTSD — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Isserles",
+      "year": "2013",
+      "journal": "",
+      "raw": "Isserles 2013",
+      "pmid": "23453933",
+      "pmid_error": null,
+      "conditions": [
+        "PTSD — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Repetitive TMS and Parkinson meta-analysis (Chou",
+      "year": "2015",
+      "journal": "",
+      "raw": "Repetitive TMS and Parkinson meta-analysis (Chou 2015)",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease (Motor) — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Lefaucheur",
+      "year": "2014",
+      "journal": "Clin Neurophysiol",
+      "raw": "Lefaucheur 2014",
+      "pmid": "25546762",
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease (Motor) — TMS_rTMS",
+        "Stroke Rehabilitation — TMS_rTMS",
+        "Chronic Pain — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Shirota",
+      "year": "2012",
+      "journal": "",
+      "raw": "Shirota 2012",
+      "pmid": "24649131",
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease (Depression) — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Ikeda",
+      "year": "2019",
+      "journal": "",
+      "raw": "Ikeda 2019",
+      "pmid": "33330760",
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease (Depression) — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Hsu",
+      "year": "2012",
+      "journal": "meta",
+      "raw": "Hsu 2012 (meta)",
+      "pmid": "30895136",
+      "pmid_error": null,
+      "conditions": [
+        "Stroke Rehabilitation — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Khedr",
+      "year": "2005",
+      "journal": "",
+      "raw": "Khedr 2005",
+      "pmid": "16314035",
+      "pmid_error": null,
+      "conditions": [
+        "Stroke Rehabilitation — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Nardone",
+      "year": "2017",
+      "journal": "",
+      "raw": "Nardone 2017",
+      "pmid": "29876036",
+      "pmid_error": null,
+      "conditions": [
+        "Chronic Pain — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Langguth",
+      "year": "2006",
+      "journal": "",
+      "raw": "Langguth 2006",
+      "pmid": "17187000",
+      "pmid_error": null,
+      "conditions": [
+        "Tinnitus — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Khedr",
+      "year": "2010",
+      "journal": "",
+      "raw": "Khedr 2010",
+      "pmid": "20714077",
+      "pmid_error": null,
+      "conditions": [
+        "Tinnitus — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "De Ridder",
+      "year": "2011",
+      "journal": "",
+      "raw": "De Ridder 2011",
+      "pmid": "24493880",
+      "pmid_error": null,
+      "conditions": [
+        "Tinnitus — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Hoffman",
+      "year": "2000",
+      "journal": "",
+      "raw": "Hoffman 2000",
+      "pmid": "20301582",
+      "pmid_error": null,
+      "conditions": [
+        "Schizophrenia (Auditory Hallucinations) — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Sommer",
+      "year": "2012",
+      "journal": "",
+      "raw": "Sommer 2012",
+      "pmid": "23801489",
+      "pmid_error": null,
+      "conditions": [
+        "Schizophrenia (Auditory Hallucinations) — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Slotema",
+      "year": "2011",
+      "journal": "meta",
+      "raw": "Slotema 2011 (meta)",
+      "pmid": "22070919",
+      "pmid_error": null,
+      "conditions": [
+        "Schizophrenia (Auditory Hallucinations) — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Ahmed",
+      "year": "2012",
+      "journal": "",
+      "raw": "Ahmed 2012",
+      "pmid": "25328183",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's Disease — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Bentwich",
+      "year": "2011",
+      "journal": "",
+      "raw": "Bentwich 2011",
+      "pmid": "21806442",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's Disease — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Cotelli",
+      "year": "2011",
+      "journal": "",
+      "raw": "Cotelli 2011",
+      "pmid": "22190129",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's Disease — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Cantello",
+      "year": "2007",
+      "journal": "",
+      "raw": "Cantello 2007",
+      "pmid": "18093149",
+      "pmid_error": null,
+      "conditions": [
+        "Epilepsy — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Case series"
+      ]
+    },
+    {
+      "author": "Fregni",
+      "year": "2006",
+      "journal": "pain",
+      "raw": "Fregni 2006",
+      "pmid": "17166593",
+      "pmid_error": null,
+      "conditions": [
+        "Epilepsy — TMS_rTMS",
+        "Depression (MDD) — tDCS",
+        "Chronic Pain — tDCS",
+        "Tinnitus — tDCS",
+        "Fibromyalgia — tDCS",
+        "Epilepsy — tDCS"
+      ],
+      "modalities": [
+        "TMS_rTMS",
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Case series",
+        "RCT, Meta-analysis",
+        "RCT, Open-label",
+        "RCT"
+      ]
+    },
+    {
+      "author": "Theodore",
+      "year": "2002",
+      "journal": "",
+      "raw": "Theodore 2002",
+      "pmid": "15309151",
+      "pmid_error": null,
+      "conditions": [
+        "Epilepsy — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT, Case series"
+      ]
+    },
+    {
+      "author": "Lipton",
+      "year": "2010",
+      "journal": "",
+      "raw": "Lipton 2010",
+      "pmid": "21231646",
+      "pmid_error": null,
+      "conditions": [
+        "Migraine — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT"
+      ]
+    },
+    {
+      "author": "Bhola",
+      "year": "2015",
+      "journal": "",
+      "raw": "Bhola 2015",
+      "pmid": "26757008",
+      "pmid_error": null,
+      "conditions": [
+        "Migraine — TMS_rTMS"
+      ],
+      "modalities": [
+        "TMS_rTMS"
+      ],
+      "evidence_levels": [
+        "RCT"
+      ]
+    },
+    {
+      "author": "Loo",
+      "year": "2012",
+      "journal": "SELECT-TDCS",
+      "raw": "Loo 2012 (SELECT-TDCS)",
+      "pmid": "24674401",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Brunoni",
+      "year": "2017",
+      "journal": "ELECT-TDCS",
+      "raw": "Brunoni 2017 (ELECT-TDCS)",
+      "pmid": "29398575",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Nitsche",
+      "year": "2008",
+      "journal": "",
+      "raw": "Nitsche 2008",
+      "pmid": "19100269",
+      "pmid_error": null,
+      "conditions": [
+        "Chronic Pain — tDCS",
+        "Stroke (Motor Rehabilitation) — tDCS",
+        "Epilepsy — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis",
+        "RCT, Case series"
+      ]
+    },
+    {
+      "author": "Lefaucheur",
+      "year": "2017",
+      "journal": "IFCNS guidelines",
+      "raw": "Lefaucheur 2017",
+      "pmid": "29287622",
+      "pmid_error": null,
+      "conditions": [
+        "Chronic Pain — tDCS",
+        "Stroke (Motor Rehabilitation) — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Boggio",
+      "year": "2007",
+      "journal": "",
+      "raw": "Boggio 2007",
+      "pmid": "18243412",
+      "pmid_error": null,
+      "conditions": [
+        "Stroke (Motor Rehabilitation) — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Meinzer",
+      "year": "2015",
+      "journal": "",
+      "raw": "Meinzer 2015",
+      "pmid": "26687176",
+      "pmid_error": null,
+      "conditions": [
+        "Cognitive Enhancement / MCI — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Bystad",
+      "year": "2016",
+      "journal": "",
+      "raw": "Bystad 2016",
+      "pmid": "27247262",
+      "pmid_error": null,
+      "conditions": [
+        "Cognitive Enhancement / MCI — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Dedoncker",
+      "year": "2016",
+      "journal": "meta",
+      "raw": "Dedoncker 2016 (meta)",
+      "pmid": "27160468",
+      "pmid_error": null,
+      "conditions": [
+        "Cognitive Enhancement / MCI — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Vanneste",
+      "year": "2010",
+      "journal": "",
+      "raw": "Vanneste 2010",
+      "pmid": "21358983",
+      "pmid_error": null,
+      "conditions": [
+        "Tinnitus — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Brunelin",
+      "year": "2012",
+      "journal": "",
+      "raw": "Brunelin 2012",
+      "pmid": "23002183",
+      "pmid_error": null,
+      "conditions": [
+        "Schizophrenia — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Mondino",
+      "year": "2015",
+      "journal": "",
+      "raw": "Mondino 2015",
+      "pmid": "26594043",
+      "pmid_error": null,
+      "conditions": [
+        "Schizophrenia — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Valle",
+      "year": "2009",
+      "journal": "",
+      "raw": "Valle 2009",
+      "pmid": "20812517",
+      "pmid_error": null,
+      "conditions": [
+        "Fibromyalgia — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT"
+      ]
+    },
+    {
+      "author": "Soff",
+      "year": "2017",
+      "journal": "",
+      "raw": "Soff 2017",
+      "pmid": "28993967",
+      "pmid_error": null,
+      "conditions": [
+        "ADHD — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Prehn-Kristensen",
+      "year": "2014",
+      "journal": "",
+      "raw": "Prehn-Kristensen 2014",
+      "pmid": "25153776",
+      "pmid_error": null,
+      "conditions": [
+        "ADHD — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Boggio",
+      "year": "2008",
+      "journal": "alcohol",
+      "raw": "Boggio 2008 (alcohol)",
+      "pmid": "20409944",
+      "pmid_error": null,
+      "conditions": [
+        "Addiction — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Batista",
+      "year": "2015",
+      "journal": "",
+      "raw": "Batista 2015",
+      "pmid": "27493872",
+      "pmid_error": null,
+      "conditions": [
+        "Addiction — tDCS"
+      ],
+      "modalities": [
+        "tDCS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Hein",
+      "year": "2013",
+      "journal": "",
+      "raw": "Hein 2013",
+      "pmid": "25075242",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — taVNS_tVNS",
+        "Tinnitus — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis",
+        "Open-label, Pilot RCT"
+      ]
+    },
+    {
+      "author": "Rong",
+      "year": "2016",
+      "journal": "",
+      "raw": "Rong 2016",
+      "pmid": "29071943",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Liu",
+      "year": "2020",
+      "journal": "meta",
+      "raw": "Liu 2020 (meta)",
+      "pmid": "39022320",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Stefan",
+      "year": "2012",
+      "journal": "",
+      "raw": "Stefan 2012",
+      "pmid": "23651154",
+      "pmid_error": null,
+      "conditions": [
+        "Epilepsy — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "He",
+      "year": "2013",
+      "journal": "",
+      "raw": "He 2013",
+      "pmid": "27845307",
+      "pmid_error": null,
+      "conditions": [
+        "Epilepsy — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Bauer",
+      "year": "2016",
+      "journal": "",
+      "raw": "Bauer 2016",
+      "pmid": "29294622",
+      "pmid_error": null,
+      "conditions": [
+        "Epilepsy — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Laqua",
+      "year": "2014",
+      "journal": "",
+      "raw": "Laqua 2014",
+      "pmid": "25571272",
+      "pmid_error": null,
+      "conditions": [
+        "Chronic Pain — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Napadow",
+      "year": "2012",
+      "journal": "",
+      "raw": "Napadow 2012",
+      "pmid": "23222890",
+      "pmid_error": null,
+      "conditions": [
+        "Chronic Pain — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Goadsby",
+      "year": "2018",
+      "journal": "PREVA trial",
+      "raw": "Goadsby 2018 (PREVA trial)",
+      "pmid": "30525946",
+      "pmid_error": null,
+      "conditions": [
+        "Migraine Prevention — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "RCT"
+      ]
+    },
+    {
+      "author": "Silberstein",
+      "year": "2016",
+      "journal": "EVENT trial",
+      "raw": "Silberstein 2016 (EVENT trial)",
+      "pmid": "28090330",
+      "pmid_error": null,
+      "conditions": [
+        "Migraine Prevention — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "RCT"
+      ]
+    },
+    {
+      "author": "Stavrakis",
+      "year": "2016",
+      "journal": "",
+      "raw": "Stavrakis 2016",
+      "pmid": "27796073",
+      "pmid_error": null,
+      "conditions": [
+        "Inflammatory / Rheumatoid Arthritis — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "Open-label, Trials ongoing"
+      ]
+    },
+    {
+      "author": "Gupta",
+      "year": "2020",
+      "journal": "",
+      "raw": "Gupta 2020",
+      "pmid": "41648679",
+      "pmid_error": null,
+      "conditions": [
+        "Inflammatory / Rheumatoid Arthritis — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "Open-label, Trials ongoing"
+      ]
+    },
+    {
+      "author": "Dawson",
+      "year": "2016",
+      "journal": "VNS-paired",
+      "raw": "Dawson 2016 (VNS-paired)",
+      "pmid": "29067204",
+      "pmid_error": null,
+      "conditions": [
+        "Stroke Rehabilitation — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Porter",
+      "year": "2012",
+      "journal": "",
+      "raw": "Porter 2012",
+      "pmid": "29431966",
+      "pmid_error": null,
+      "conditions": [
+        "Stroke Rehabilitation — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Kraus",
+      "year": "2016",
+      "journal": "",
+      "raw": "Kraus 2016",
+      "pmid": "29086652",
+      "pmid_error": null,
+      "conditions": [
+        "Tinnitus — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT"
+      ]
+    },
+    {
+      "author": "Emerging literature",
+      "year": "2018",
+      "journal": "",
+      "raw": "Emerging literature 2018–2023",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Insomnia — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Emerging literature",
+      "year": "2020",
+      "journal": "",
+      "raw": "Emerging literature 2020–2024",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "Pilot, Case series"
+      ]
+    },
+    {
+      "author": "Ragsdale",
+      "year": "2021",
+      "journal": "",
+      "raw": "Ragsdale 2021",
+      "pmid": "35079324",
+      "pmid_error": null,
+      "conditions": [
+        "PTSD — taVNS_tVNS"
+      ],
+      "modalities": [
+        "taVNS_tVNS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Barclay",
+      "year": "2014",
+      "journal": "",
+      "raw": "Barclay 2014 meta",
+      "pmid": "25659517",
+      "pmid_error": null,
+      "conditions": [
+        "Anxiety / GAD — CES",
+        "Insomnia — CES",
+        "Depression (MDD) — CES"
+      ],
+      "modalities": [
+        "CES"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Kirsch",
+      "year": "2014",
+      "journal": "",
+      "raw": "Kirsch 2014",
+      "pmid": "26798749",
+      "pmid_error": null,
+      "conditions": [
+        "Anxiety / GAD — CES",
+        "Depression (MDD) — CES"
+      ],
+      "modalities": [
+        "CES"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Lande",
+      "year": "2011",
+      "journal": "",
+      "raw": "Lande 2011",
+      "pmid": "22242987",
+      "pmid_error": null,
+      "conditions": [
+        "Anxiety / GAD — CES",
+        "PTSD — CES"
+      ],
+      "modalities": [
+        "CES"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis",
+        "Open-label, Military cohort studies"
+      ]
+    },
+    {
+      "author": "Gilula",
+      "year": "2007",
+      "journal": "",
+      "raw": "Gilula 2007",
+      "pmid": "17723791",
+      "pmid_error": null,
+      "conditions": [
+        "Insomnia — CES"
+      ],
+      "modalities": [
+        "CES"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Kirsch",
+      "year": "2000",
+      "journal": "",
+      "raw": "Kirsch 2000",
+      "pmid": "16646145",
+      "pmid_error": null,
+      "conditions": [
+        "Chronic Pain — CES"
+      ],
+      "modalities": [
+        "CES"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Taylor",
+      "year": "2013",
+      "journal": "military",
+      "raw": "Taylor 2013",
+      "pmid": "26229662",
+      "pmid_error": null,
+      "conditions": [
+        "Chronic Pain — CES",
+        "PTSD — CES"
+      ],
+      "modalities": [
+        "CES"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label",
+        "Open-label, Military cohort studies"
+      ]
+    },
+    {
+      "author": "Lichtbroun",
+      "year": "2001",
+      "journal": "",
+      "raw": "Lichtbroun 2001",
+      "pmid": "17039098",
+      "pmid_error": null,
+      "conditions": [
+        "Fibromyalgia — CES"
+      ],
+      "modalities": [
+        "CES"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Emerging RCT data",
+      "year": "2022",
+      "journal": "",
+      "raw": "Emerging RCT data 2022–2024",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Insomnia — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "RCT, High quality"
+      ]
+    },
+    {
+      "author": "Kaur",
+      "year": "2020",
+      "journal": "",
+      "raw": "Kaur 2020",
+      "pmid": "36891418",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Widge",
+      "year": "2019",
+      "journal": "",
+      "raw": "Widge 2019",
+      "pmid": "31946505",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Clancy",
+      "year": "2022",
+      "journal": "",
+      "raw": "Clancy 2022",
+      "pmid": "37397545",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's / MCI (Gamma Entrainment) — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Herrmann",
+      "year": "2013",
+      "journal": "",
+      "raw": "Herrmann 2013",
+      "pmid": "25425128",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's / MCI (Gamma Entrainment) — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Iaccarino",
+      "year": "2016",
+      "journal": "40 Hz γ mouse",
+      "raw": "Iaccarino 2016 (40 Hz γ mouse)",
+      "pmid": "28845061",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's / MCI (Gamma Entrainment) — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Helfrich",
+      "year": "2014",
+      "journal": "",
+      "raw": "Helfrich 2014",
+      "pmid": "26265276",
+      "pmid_error": null,
+      "conditions": [
+        "Schizophrenia (Auditory Hallucinations) — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT"
+      ]
+    },
+    {
+      "author": "Koo",
+      "year": "2019",
+      "journal": "",
+      "raw": "Koo 2019",
+      "pmid": "32419971",
+      "pmid_error": null,
+      "conditions": [
+        "Schizophrenia (Auditory Hallucinations) — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT"
+      ]
+    },
+    {
+      "author": "Brittain",
+      "year": "2013",
+      "journal": "",
+      "raw": "Brittain 2013",
+      "pmid": "24749000",
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT"
+      ]
+    },
+    {
+      "author": "Wach",
+      "year": "2013",
+      "journal": "",
+      "raw": "Wach 2013",
+      "pmid": "25861309",
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT"
+      ]
+    },
+    {
+      "author": "Emerging ADHD tACS literature",
+      "year": "2020",
+      "journal": "",
+      "raw": "Emerging ADHD tACS literature 2020–2024",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "ADHD — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Zaehle",
+      "year": "2010",
+      "journal": "",
+      "raw": "Zaehle 2010",
+      "pmid": "21072168",
+      "pmid_error": null,
+      "conditions": [
+        "Chronic Pain — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "Open-label, Small RCT"
+      ]
+    },
+    {
+      "author": "Raco",
+      "year": "2016",
+      "journal": "",
+      "raw": "Raco 2016",
+      "pmid": "27838425",
+      "pmid_error": null,
+      "conditions": [
+        "Chronic Pain — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "Open-label, Small RCT"
+      ]
+    },
+    {
+      "author": "Boyen",
+      "year": "2014",
+      "journal": "",
+      "raw": "Boyen 2014",
+      "pmid": "25843324",
+      "pmid_error": null,
+      "conditions": [
+        "Tinnitus — tACS"
+      ],
+      "modalities": [
+        "tACS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Saltmarche",
+      "year": "2017",
+      "journal": "",
+      "raw": "Saltmarche 2017",
+      "pmid": "28186867",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's / Dementia — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Berman",
+      "year": "2017",
+      "journal": "",
+      "raw": "Berman 2017",
+      "pmid": "29849372",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's / Dementia — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Naeser",
+      "year": "2014",
+      "journal": "",
+      "raw": "Naeser 2014",
+      "pmid": "25316370",
+      "pmid_error": null,
+      "conditions": [
+        "TBI / Concussion — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "Open-label, RCT"
+      ]
+    },
+    {
+      "author": "Morries",
+      "year": "2015",
+      "journal": "",
+      "raw": "Morries 2015",
+      "pmid": "26535475",
+      "pmid_error": null,
+      "conditions": [
+        "TBI / Concussion — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "Open-label, RCT"
+      ]
+    },
+    {
+      "author": "Hipskind",
+      "year": "2019",
+      "journal": "",
+      "raw": "Hipskind 2019",
+      "pmid": "31886743",
+      "pmid_error": null,
+      "conditions": [
+        "TBI / Concussion — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "Open-label, RCT"
+      ]
+    },
+    {
+      "author": "Schiffer",
+      "year": "2009",
+      "journal": "",
+      "raw": "Schiffer 2009",
+      "pmid": "20477511",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT"
+      ]
+    },
+    {
+      "author": "Cassano",
+      "year": "2018",
+      "journal": "",
+      "raw": "Cassano 2018",
+      "pmid": "30536609",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT"
+      ]
+    },
+    {
+      "author": "Henderson",
+      "year": "2016",
+      "journal": "",
+      "raw": "Henderson 2016",
+      "pmid": "29188971",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT"
+      ]
+    },
+    {
+      "author": "Moro",
+      "year": "2013",
+      "journal": "",
+      "raw": "Moro 2013",
+      "pmid": "26363697",
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Hamilton",
+      "year": "2020",
+      "journal": "SYMBYX PD trial",
+      "raw": "Hamilton 2020 (SYMBYX PD trial)",
+      "pmid": "35169637",
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Blanco",
+      "year": "2017",
+      "journal": "1064 nm",
+      "raw": "Blanco 2017 (1064 nm)",
+      "pmid": "30188296",
+      "pmid_error": null,
+      "conditions": [
+        "Cognitive Enhancement — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Hesse",
+      "year": "2021",
+      "journal": "",
+      "raw": "Hesse 2021",
+      "pmid": "35310352",
+      "pmid_error": null,
+      "conditions": [
+        "Cognitive Enhancement — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Lampl",
+      "year": "2007",
+      "journal": "NEST-1",
+      "raw": "Lampl 2007 (NEST-1)",
+      "pmid": "17909152",
+      "pmid_error": null,
+      "conditions": [
+        "Stroke — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "RCT (conflicting results)"
+      ]
+    },
+    {
+      "author": "Zivin",
+      "year": "2009",
+      "journal": "NEST-2",
+      "raw": "Zivin 2009 (NEST-2)",
+      "pmid": "20104063",
+      "pmid_error": null,
+      "conditions": [
+        "Stroke — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "RCT (conflicting results)"
+      ]
+    },
+    {
+      "author": "Emerging PBM anxiety literature",
+      "year": "2020",
+      "journal": "",
+      "raw": "Emerging PBM anxiety literature 2020–2024",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Anxiety — PBM"
+      ],
+      "modalities": [
+        "PBM"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Rohan",
+      "year": "2014",
+      "journal": "",
+      "raw": "Rohan 2014",
+      "pmid": "25665366",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — PEMF"
+      ],
+      "modalities": [
+        "PEMF"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Martiny",
+      "year": "2010",
+      "journal": "",
+      "raw": "Martiny 2010",
+      "pmid": "22122690",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — PEMF"
+      ],
+      "modalities": [
+        "PEMF"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Elkins",
+      "year": "2021",
+      "journal": "",
+      "raw": "Elkins 2021",
+      "pmid": "35547946",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — PEMF"
+      ],
+      "modalities": [
+        "PEMF"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Nair",
+      "year": "2011",
+      "journal": "",
+      "raw": "Nair 2011",
+      "pmid": "25838669",
+      "pmid_error": null,
+      "conditions": [
+        "Stroke Rehabilitation — PEMF"
+      ],
+      "modalities": [
+        "PEMF"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Strafella",
+      "year": "2020",
+      "journal": "",
+      "raw": "Strafella 2020",
+      "pmid": "33396755",
+      "pmid_error": null,
+      "conditions": [
+        "Stroke Rehabilitation — PEMF"
+      ],
+      "modalities": [
+        "PEMF"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Lappin",
+      "year": "2003",
+      "journal": "",
+      "raw": "Lappin 2003",
+      "pmid": "14691560",
+      "pmid_error": null,
+      "conditions": [
+        "Multiple Sclerosis (MS) — PEMF"
+      ],
+      "modalities": [
+        "PEMF"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Richards",
+      "year": "1997",
+      "journal": "",
+      "raw": "Richards 1997",
+      "pmid": "18259563",
+      "pmid_error": null,
+      "conditions": [
+        "Multiple Sclerosis (MS) — PEMF"
+      ],
+      "modalities": [
+        "PEMF"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Sandyk",
+      "year": "1992",
+      "journal": "",
+      "raw": "Sandyk 1992",
+      "pmid": "1305641",
+      "pmid_error": null,
+      "conditions": [
+        "Epilepsy — PEMF"
+      ],
+      "modalities": [
+        "PEMF"
+      ],
+      "evidence_levels": [
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Anninos",
+      "year": "2014",
+      "journal": "",
+      "raw": "Anninos 2014",
+      "pmid": "25164355",
+      "pmid_error": null,
+      "conditions": [
+        "Epilepsy — PEMF"
+      ],
+      "modalities": [
+        "PEMF"
+      ],
+      "evidence_levels": [
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Sutbeyaz",
+      "year": "2009",
+      "journal": "",
+      "raw": "Sutbeyaz 2009",
+      "pmid": "20162025",
+      "pmid_error": null,
+      "conditions": [
+        "Chronic Pain — PEMF"
+      ],
+      "modalities": [
+        "PEMF"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Thomas",
+      "year": "2007",
+      "journal": "",
+      "raw": "Thomas 2007",
+      "pmid": "20301437",
+      "pmid_error": null,
+      "conditions": [
+        "Chronic Pain — PEMF"
+      ],
+      "modalities": [
+        "PEMF"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Reznik",
+      "year": "2020",
+      "journal": "",
+      "raw": "Reznik 2020",
+      "pmid": "33569544",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — LIFU_tFUS",
+        "Chronic Pain — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT",
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Sanguinetti",
+      "year": "2020",
+      "journal": "",
+      "raw": "Sanguinetti 2020",
+      "pmid": "33520480",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — LIFU_tFUS",
+        "Chronic Pain — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT",
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Tyler",
+      "year": "2019",
+      "journal": "",
+      "raw": "Tyler 2019",
+      "pmid": "32894849",
+      "pmid_error": null,
+      "conditions": [
+        "Depression (MDD) — LIFU_tFUS",
+        "Chronic Pain — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot RCT",
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Lee",
+      "year": "2016",
+      "journal": "376 citations, visual cortex",
+      "raw": "Lee 2016 Sci Rep (376 citations, visual cortex)",
+      "pmid": "32844269",
+      "pmid_error": null,
+      "conditions": [
+        "Chronic Pain — LIFU_tFUS",
+        "OCD — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Open-label, Case series",
+        "Pilot, Case series"
+      ]
+    },
+    {
+      "author": "Legon",
+      "year": "2018",
+      "journal": "265 citations, M1 inhibition",
+      "raw": "Legon 2018 Sci Rep (265 citations, M1 inhibition)",
+      "pmid": "30217150",
+      "pmid_error": null,
+      "conditions": [
+        "Chronic Pain — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Lee",
+      "year": "2015",
+      "journal": "",
+      "raw": "Lee 2015",
+      "pmid": "30294225",
+      "pmid_error": null,
+      "conditions": [
+        "OCD — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Pilot, Case series"
+      ]
+    },
+    {
+      "author": "Kim",
+      "year": "2018",
+      "journal": "",
+      "raw": "Kim 2018",
+      "pmid": "33907338",
+      "pmid_error": null,
+      "conditions": [
+        "OCD — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Pilot, Case series"
+      ]
+    },
+    {
+      "author": "Kim",
+      "year": "2023",
+      "journal": "cortical + thalamic stimulation",
+      "raw": "Kim 2023 (cortical + thalamic stimulation)",
+      "pmid": "41049725",
+      "pmid_error": null,
+      "conditions": [
+        "OCD — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Pilot, Case series"
+      ]
+    },
+    {
+      "author": "Fisher",
+      "year": "2014",
+      "journal": "",
+      "raw": "Fisher 2014",
+      "pmid": "26790020",
+      "pmid_error": null,
+      "conditions": [
+        "Epilepsy — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Deffieux",
+      "year": "2013",
+      "journal": "",
+      "raw": "Deffieux 2013",
+      "pmid": "24286554",
+      "pmid_error": null,
+      "conditions": [
+        "Epilepsy — LIFU_tFUS",
+        "Essential Tremor — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Legon",
+      "year": "2014",
+      "journal": "",
+      "raw": "Legon 2014",
+      "pmid": "25620925",
+      "pmid_error": null,
+      "conditions": [
+        "Essential Tremor — LIFU_tFUS",
+        "Alzheimer's Disease — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Krishna",
+      "year": "2017",
+      "journal": "247 citations, systematic review",
+      "raw": "Krishna 2017 JAMA Neurol (247 citations, systematic review)",
+      "pmid": "30019020",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's Disease — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Davidson",
+      "year": "2025",
+      "journal": "",
+      "raw": "Davidson 2025 IEEE Rev Biomed Eng",
+      "pmid": "41883614",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's Disease — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Beisteiner",
+      "year": "2020",
+      "journal": "",
+      "raw": "Beisteiner 2020",
+      "pmid": "33304757",
+      "pmid_error": null,
+      "conditions": [
+        "Schizophrenia — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Pilot, Case series"
+      ]
+    },
+    {
+      "author": "Leinenga",
+      "year": "2015",
+      "journal": "FUS mouse AD",
+      "raw": "Leinenga 2015 (FUS mouse AD)",
+      "pmid": "25761889",
+      "pmid_error": null,
+      "conditions": [
+        "Schizophrenia — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Pilot, Case series"
+      ]
+    },
+    {
+      "author": "JAMA Neurol review",
+      "year": "2017",
+      "journal": "",
+      "raw": "JAMA Neurol review 2017",
+      "pmid": "29637117",
+      "pmid_error": null,
+      "conditions": [
+        "Schizophrenia — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Pilot, Case series"
+      ]
+    },
+    {
+      "author": "Lee",
+      "year": "2024",
+      "journal": "systematic review, 22 clinical studies",
+      "raw": "Lee 2024 Biomed Eng Lett (systematic review, 22 clinical studies)",
+      "pmid": "41726529",
+      "pmid_error": null,
+      "conditions": [
+        "Schizophrenia — LIFU_tFUS"
+      ],
+      "modalities": [
+        "LIFU_tFUS"
+      ],
+      "evidence_levels": [
+        "Pilot, Case series"
+      ]
+    },
+    {
+      "author": "Joos",
+      "year": "2015",
+      "journal": "",
+      "raw": "Joos 2015",
+      "pmid": "27020001",
+      "pmid_error": null,
+      "conditions": [
+        "Tinnitus — tRNS"
+      ],
+      "modalities": [
+        "tRNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Vanneste",
+      "year": "2013",
+      "journal": "",
+      "raw": "Vanneste 2013",
+      "pmid": "24778933",
+      "pmid_error": null,
+      "conditions": [
+        "Tinnitus — tRNS"
+      ],
+      "modalities": [
+        "tRNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Cima",
+      "year": "2014",
+      "journal": "",
+      "raw": "Cima 2014",
+      "pmid": "25840068",
+      "pmid_error": null,
+      "conditions": [
+        "Tinnitus — tRNS"
+      ],
+      "modalities": [
+        "tRNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Ferrucci",
+      "year": "2011",
+      "journal": "",
+      "raw": "Ferrucci 2011",
+      "pmid": "22887828",
+      "pmid_error": null,
+      "conditions": [
+        "MS-related Pain — tRNS"
+      ],
+      "modalities": [
+        "tRNS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Fertonani",
+      "year": "2011",
+      "journal": "",
+      "raw": "Fertonani 2011",
+      "pmid": "22223077",
+      "pmid_error": null,
+      "conditions": [
+        "Motor / Perceptual Learning — tRNS"
+      ],
+      "modalities": [
+        "tRNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Van der Groen",
+      "year": "2016",
+      "journal": "",
+      "raw": "Van der Groen 2016",
+      "pmid": "37592685",
+      "pmid_error": null,
+      "conditions": [
+        "Motor / Perceptual Learning — tRNS"
+      ],
+      "modalities": [
+        "tRNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Pasqualotto",
+      "year": "2020",
+      "journal": "",
+      "raw": "Pasqualotto 2020",
+      "pmid": "33203016",
+      "pmid_error": null,
+      "conditions": [
+        "Cognitive Enhancement — tRNS"
+      ],
+      "modalities": [
+        "tRNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Snowball",
+      "year": "2013",
+      "journal": "",
+      "raw": "Snowball 2013",
+      "pmid": "25166654",
+      "pmid_error": null,
+      "conditions": [
+        "Cognitive Enhancement — tRNS"
+      ],
+      "modalities": [
+        "tRNS"
+      ],
+      "evidence_levels": [
+        "RCT, Open-label"
+      ]
+    },
+    {
+      "author": "Emerging tRNS VCI literature",
+      "year": "2023",
+      "journal": "",
+      "raw": "Emerging tRNS VCI literature 2023–2024",
+      "pmid": null,
+      "pmid_error": null,
+      "conditions": [
+        "Vascular Cognitive Impairment (VCI) + Insomnia — tRNS"
+      ],
+      "modalities": [
+        "tRNS"
+      ],
+      "evidence_levels": [
+        "Open-label, Pilot"
+      ]
+    },
+    {
+      "author": "Deuschl",
+      "year": "2006",
+      "journal": "NEJM",
+      "raw": "Deuschl 2006 (NEJM)",
+      "pmid": "18808872",
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease (Motor) — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Williams",
+      "year": "2010",
+      "journal": "PD SURG",
+      "raw": "Williams 2010 (PD SURG)",
+      "pmid": "33326195",
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease (Motor) — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Weaver",
+      "year": "2009",
+      "journal": "",
+      "raw": "Weaver 2009",
+      "pmid": "20301775",
+      "pmid_error": null,
+      "conditions": [
+        "Parkinson's Disease (Motor) — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "RCT, Meta-analysis"
+      ]
+    },
+    {
+      "author": "Koller",
+      "year": "1997",
+      "journal": "",
+      "raw": "Koller 1997",
+      "pmid": "18591077",
+      "pmid_error": null,
+      "conditions": [
+        "Essential Tremor — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "RCT, Case series"
+      ]
+    },
+    {
+      "author": "Benabid",
+      "year": "1991",
+      "journal": "",
+      "raw": "Benabid 1991",
+      "pmid": "1924317",
+      "pmid_error": null,
+      "conditions": [
+        "Essential Tremor — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "RCT, Case series"
+      ]
+    },
+    {
+      "author": "Pahwa",
+      "year": "2006",
+      "journal": "",
+      "raw": "Pahwa 2006",
+      "pmid": "17948613",
+      "pmid_error": null,
+      "conditions": [
+        "Essential Tremor — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "RCT, Case series"
+      ]
+    },
+    {
+      "author": "Vidailhet",
+      "year": "2005",
+      "journal": "",
+      "raw": "Vidailhet 2005",
+      "pmid": "16321171",
+      "pmid_error": null,
+      "conditions": [
+        "Dystonia — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Krauss",
+      "year": "1999",
+      "journal": "",
+      "raw": "Krauss 1999",
+      "pmid": "18073823",
+      "pmid_error": null,
+      "conditions": [
+        "Dystonia — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Coubes",
+      "year": "2000",
+      "journal": "",
+      "raw": "Coubes 2000",
+      "pmid": "11059658",
+      "pmid_error": null,
+      "conditions": [
+        "Dystonia — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Greenberg",
+      "year": "2010",
+      "journal": "",
+      "raw": "Greenberg 2010",
+      "pmid": "22132285",
+      "pmid_error": null,
+      "conditions": [
+        "OCD (Treatment-Resistant) — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Mallet",
+      "year": "2008",
+      "journal": "STN",
+      "raw": "Mallet 2008 (STN)",
+      "pmid": "19349958",
+      "pmid_error": null,
+      "conditions": [
+        "OCD (Treatment-Resistant) — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Denys",
+      "year": "2010",
+      "journal": "",
+      "raw": "Denys 2010",
+      "pmid": "21183225",
+      "pmid_error": null,
+      "conditions": [
+        "OCD (Treatment-Resistant) — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Mayberg",
+      "year": "2005",
+      "journal": "SCC",
+      "raw": "Mayberg 2005 (SCC)",
+      "pmid": "16280578",
+      "pmid_error": null,
+      "conditions": [
+        "Treatment-Resistant Depression (TRD) — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Schlaepfer",
+      "year": "2014",
+      "journal": "MFB",
+      "raw": "Schlaepfer 2014 (MFB)",
+      "pmid": "25542304",
+      "pmid_error": null,
+      "conditions": [
+        "Treatment-Resistant Depression (TRD) — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Kennedy",
+      "year": "2011",
+      "journal": "",
+      "raw": "Kennedy 2011",
+      "pmid": "23194563",
+      "pmid_error": null,
+      "conditions": [
+        "Treatment-Resistant Depression (TRD) — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Open-label, Case series"
+      ]
+    },
+    {
+      "author": "Fisher",
+      "year": "2010",
+      "journal": "SANTE trial",
+      "raw": "Fisher 2010 (SANTE trial)",
+      "pmid": "24027801",
+      "pmid_error": null,
+      "conditions": [
+        "Epilepsy — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "RCT"
+      ]
+    },
+    {
+      "author": "Salanova",
+      "year": "2015",
+      "journal": "7-year follow-up",
+      "raw": "Salanova 2015 (7-year follow-up)",
+      "pmid": "26596638",
+      "pmid_error": null,
+      "conditions": [
+        "Epilepsy — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "RCT"
+      ]
+    },
+    {
+      "author": "Porta",
+      "year": "2009",
+      "journal": "",
+      "raw": "Porta 2009",
+      "pmid": "21992831",
+      "pmid_error": null,
+      "conditions": [
+        "Tourette's Syndrome — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Case series, Open-label"
+      ]
+    },
+    {
+      "author": "Servello",
+      "year": "2008",
+      "journal": "",
+      "raw": "Servello 2008",
+      "pmid": "18683116",
+      "pmid_error": null,
+      "conditions": [
+        "Tourette's Syndrome — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Case series, Open-label"
+      ]
+    },
+    {
+      "author": "Martino",
+      "year": "2010",
+      "journal": "",
+      "raw": "Martino 2010",
+      "pmid": "22002451",
+      "pmid_error": null,
+      "conditions": [
+        "Tourette's Syndrome — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Case series, Open-label"
+      ]
+    },
+    {
+      "author": "Laxton",
+      "year": "2010",
+      "journal": "",
+      "raw": "Laxton 2010",
+      "pmid": "21145043",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's Disease — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Open-label, Phase 2 trial"
+      ]
+    },
+    {
+      "author": "Lozano",
+      "year": "2016",
+      "journal": "ADvance trial",
+      "raw": "Lozano 2016 (ADvance trial)",
+      "pmid": "29281905",
+      "pmid_error": null,
+      "conditions": [
+        "Alzheimer's Disease — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Open-label, Phase 2 trial"
+      ]
+    },
+    {
+      "author": "Kuhn",
+      "year": "2011",
+      "journal": "",
+      "raw": "Kuhn 2011",
+      "pmid": "24273620",
+      "pmid_error": null,
+      "conditions": [
+        "Addiction — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Case series, Open-label"
+      ]
+    },
+    {
+      "author": "Müller",
+      "year": "2016",
+      "journal": "",
+      "raw": "Müller 2016",
+      "pmid": "30002696",
+      "pmid_error": null,
+      "conditions": [
+        "Addiction — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Case series, Open-label"
+      ]
+    },
+    {
+      "author": "Voges",
+      "year": "2019",
+      "journal": "",
+      "raw": "Voges 2019",
+      "pmid": "31955812",
+      "pmid_error": null,
+      "conditions": [
+        "Addiction — DBS"
+      ],
+      "modalities": [
+        "DBS"
+      ],
+      "evidence_levels": [
+        "Case series, Open-label"
+      ]
+    }
+  ]
+}

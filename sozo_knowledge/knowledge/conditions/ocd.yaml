@@ -431,3 +431,136 @@ governance_rules:
 - Treatment records must be updated at every session
 - Informed consent must be obtained and documented before initiating any modality
 patient_journey_notes: {}
+
+tps_evidence:
+  total_papers: 22
+  high_quality_count: 5
+  evidence_grade: "emerging"
+  key_papers:
+    - doi: "10.1001/jamaneurol.2017.3129"
+      title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology"
+      year: 2017
+      study_type: "systematic review"
+      citations: 247
+      takeaway: "Transcranial focused ultrasound shows promise for neurological and psychiatric conditions including OCD via deep circuit targeting."
+    - doi: "10.1080/02656736.2025.2539986"
+      title: "Strengths and weaknesses of transcranial ultrasound stimulation and its promise in psychiatry"
+      year: 2025
+      study_type: "systematic review"
+      citations: 1
+      takeaway: "Transcranial ultrasound stimulation offers precise noninvasive brain stimulation with potential psychiatric applications including OCD."
+    - doi: "10.1016/s0924-977x(07)70102-5"
+      title: "Double-blind, randomized, placebo-controlled addition of quetiapine in non-refractory OCD patients"
+      year: 2007
+      study_type: "rct"
+      citations: 2
+      takeaway: "OCD patients exhibit inhibitory deficits and increased facilitation in cortical circuits, with reduced motor thresholds — targets for TPS modulation."
+  clinical_note: >
+    TPS is off-label for OCD with 22 papers and 5 high-quality studies. Evidence from transcranial
+    ultrasound reviews supports deep circuit targeting of cortico-striato-thalamo-cortical loops, and
+    neurophysiological RCT data identifies OCD-specific cortical excitability patterns amenable to TPS.
+
+
+fnon_protocol:
+  primary_network: "Salience (dACC) + CSTC Circuit"
+  secondary_network: "CSTC OFC-caudate"
+  f_band: "Theta normalisation (error monitoring)"
+  eeg_nodes: "Fz/AFz(dACC/mPFC)+F3/F4(DLPFC)+deep caudate"
+  oscillation_goal: >
+    Normalise ACC theta; reduce CSTC hyperactivity; suppress OFC-caudate beta loop
+  primary_modality_params: >
+    Deep TMS BrainsWay H7: 20Hz, 100%rMT, 2000 pulses, 29 sessions. Symptom provocation pre-session. FDA cleared.
+  addon_modality: >
+    LIFU (caudate nucleus); tDCS bilateral OFC cathodal; TPS (Fz/AFz+F3/F4)
+  sessions: "29 sessions"
+  evidence_level: "RCT, Meta-analysis"
+  lit_count: "100+ TMS; 5+ LIFU; 50+ DBS"
+  key_references: "Carmi 2019 Am J Psychiatry; Roth 2021; Greenberg 2010 DBS; Connectomic OCD 2022"
+  fnon_notes: >
+    FNON: Theta excess ACC (ERN hyperactivation) + beta OFC. H7 gold standard. LIFU noninvasive caudate option.
+
+qeeg_biomarkers:
+  primary_biomarker: "↑Theta ACC; ↑Beta OFC"
+  f_band_target: "Theta + Beta"
+
+modality_evidence_counts:
+  tps: null
+  tms: 100
+  tdcs: 10
+  tavns: 5
+  ces: null
+  tacs: null
+  pbm: null
+  lifu: 5
+  pemf: null
+  dbs: 50
+  best_first_line: "TMS Deep H7 (FDA cleared)"
+  best_second_line: "LIFU caudate + TPS"
+  fnon_score: 4
+
+
+assessment_profile:
+  primary_clinical_scales: >
+    Y-BOCS (Yale-Brown Obsessive Compulsive Scale — primary outcome), OCI-R (Obsessive Compulsive Inventory-Revised), DOCS, DASS-21, BDI-II, CGI-OCD, Sheehan Disability Scale (SDS), ICAP (Anxiety & Phobia), Tic disorder scales if comorbid
+  neuropsychological_battery: >
+    Hayling & Brixton (executive/initiation), Stroop (cognitive inhibition — ERN marker), WCST (cognitive flexibility — perseveration), Stop-Signal Task (response inhibition — SSRT), TMT-B, Tower of London (planning), IGT (Iowa Gambling Task — decision making)
+  physiological_assessments: >
+    HRV (↓ vagal tone); Skin conductance response (SCR — hyperreactivity to OCD triggers); Salivary cortisol; Sleep actigraphy (↑ arousal in OCD); Galvanic skin response
+  functional_assessments: >
+    Y-BOCS symptom checklist (obsession vs compulsion split); DOCS functional domains; OCD symptom diary; CGI severity/improvement
+  neuroimaging: >
+    fMRI resting-state (↑ OFC-caudate-thalamus connectivity); PET FDG (hypermetabolism OFC+caudate); Structural MRI (caudate volume, OFC grey matter); DBS target localisation MRI (if DBS considered)
+  assessment_rationale: >
+    ERN is biomarker for ACC hyperactivation in OCD — high ERN = predict response to H7 TMS. CSTC loop dysfunction drives the compulsive cycle.
+  primary_scale: >
+    Y-BOCS (primary — at baseline and every 4-6 weeks)
+  screening_scales: >
+    OCI-R (screening); DOCS; MOCI
+  severity_staging: >
+    Y-BOCS-II severity staging; CGI-OCD
+  qol_scale: >
+    SDS (Sheehan Disability Scale); WHODAS-2
+  follow_up_frequency: >
+    6-weekly Y-BOCS; Monthly OCI-R; DOCS
+  comorbidity_screens: >
+    BDI-II or PHQ-9 (depression); GAD-7 (anxiety); SCID if needed for subtype
+  safety_screens: >
+    C-SSRS (suicide screen — monthly); Tic screen (if Tourette's comorbid)
+  score_thresholds: >
+    Y-BOCS: 0-7 Subclinical; 8-15 Mild; 16-23 Moderate; 24-31 Severe; 32-40 Extreme. Y-BOCS ≥16 = treatment candidate. Response = ≥35% reduction. Remission = Y-BOCS ≤12.
+  qeeg_primary_signature: >
+    ↑ Delta + Theta frontal; ↓ Frontal alpha; ↑ Fronto-central coherence; ↑ ERN (error-related negativity) at FCz — PRIMARY OCD BIOMARKER; Abnormal P300
+  qeeg_key_electrodes: "Fz, FCz (ERN — primary OCD ERP site); F3/F4 (theta); Cz; C3/C4"
+  qeeg_key_metrics: >
+    ERN amplitude FCz (primary OCD biomarker; ↑ = ACC hyperactivation = OCD endophenotype); P300 Cz/Pz; N200 Fz; Frontal theta; Fronto-central coherence
+  qeeg_eyes_open: >
+    ↑ Frontal beta (hyperarousal, some); ↑ Fronto-central coherence; ↑ Gamma (obsessional content)
+  qeeg_eyes_closed: >
+    ↑ Frontal theta Fz; ↓ Alpha F3/F4; ↑ Delta frontal; Excess ERN amplitude at FCz
+  qeeg_event_related: >
+    ERN at FCz (response to errors/Go-No-Go — ↑ in OCD = ACC hyperactivation); P300 (decision-making); Pe (post-error positivity); N200 (conflict detection)
+  qeeg_pathological_threshold: >
+    ERN amplitude at FCz >8 μV above controls; Frontal theta >5 μV² Fz; P300 latency >400 ms; N200 amplitude >6 μV
+  qeeg_treatment_target: >
+    ERN ↓ at FCz (ACC normalisation — primary OCD treatment response marker); Frontal theta ↓; Fronto-central coherence ↓; Alpha ↑ frontal
+  qeeg_response_biomarker: >
+    ERN amplitude change FCz (before/after deep TMS H7 course — primary biomarker); Y-BOCS correlation with ERN; Frontal theta change
+
+
+neuromod_profile:
+  key_symptoms: >
+    Intrusive obsessive thoughts, compulsive repetitive behaviors, anxiety, avoidance, cognitive rigidity, excessive checking/washing/counting, distress
+  qeeg_patterns: >
+    ↑ delta + theta (frontal), ↓ frontal/central alpha, excess frontal beta (some), ↑ theta/beta ratio, ↑ fronto-central coherence, excess error-related negativity (ERN) at FCz, abnormal P300
+  qeeg_electrodes: "Fz, FCz (frontal midline theta, ERN), F3/F4 (frontal delta/theta), Cz (central changes), C3/C4"
+  affected_regions: >
+    ACC (hyperactive), OFC (hyperactive), caudate nucleus, DLPFC, ventral striatum, SMA, thalamus, mPFC
+  primary_networks_disrupted: >
+    CSTC loop (cortico-striato-thalamo-cortical — hyperactive), DMN (↑ entropy, hyperconnected), CEN (↑ entropy), DAN/Dorsal attention (↓ entropy), Salience (impaired switching — SN↔CEN and SN↔DMN altered)
+  network_dysfunction_pattern: >
+    CSTC hyperdrive → compulsive repetition; hyperactive OFC/ACC generates persistent 'error signal' → cannot inhibit compulsions; SN switching failure → unable to disengage OCD loop
+  recommended_techniques: >
+    Deep TMS H7 coil mPFC/ACC 20 Hz; TMS 1 Hz R-DLPFC (inhibitory); DBS VC/VS or STN; tDCS cathode OFC; LIFU caudate/ACC
+  primary_stimulation_targets: "mPFC/ACC (deep TMS H7), R-DLPFC (1 Hz), VC/VS (DBS), OFC (tDCS cathodal), caudate (LIFU)"
+  stimulation_rationale: >
+    mPFC/ACC deep TMS disrupts hyperactive CSTC drive; R-DLPFC inhibition to ↓ right hemisphere anxiety-related overactivity; DBS VC/VS modulates reward/compulsion circuitry

@@ -1,0 +1,1370 @@
+# SOZO Brain Center — TPS Evidence Database
+# Source: Consensus.app export, 2026-04-04
+# 2,994 papers on Transcranial Pulse Stimulation / Transcranial Ultrasound
+# Auto-generated from: neuromodulation protocol knowledge base CSV
+
+meta:
+  source: "Consensus.app TPS/tFUS literature export"
+  export_date: "2026-04-04"
+  total_papers: 2994
+  high_quality_papers: 225
+
+conditions:
+  parkinsons:
+    total_papers: 79
+    high_quality_count: 19
+    evidence_grade: strong
+    top_papers:
+      - title: Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review and Meta-Analysis
+        authors: Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwichtenberg, C. Herrmann, K. Witt, Mandy Roheger
+        year: 2025
+        doi: 10.3390/neurolint17110188
+        study_type: meta-analysis
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological and psychiatric disorders.
+        consensus_link: "https://consensus.app/papers/neuromodulatory-effects-of-transcranial-pulse-polte-klingmann/b7c199b4aa7d50f28159f7498ad51406/"
+      - title: Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review and Meta-Analysis
+        authors: Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwichtenberg, C. Herrmann, K. Witt, Mandy Roheger
+        year: 2025
+        doi: 10.3390/neurolint17110188
+        study_type: meta-analysis
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological and psychiatric disorders.
+        consensus_link: "https://consensus.app/papers/neuromodulatory-effects-of-transcranial-pulse-polte-klingmann/b7c199b4aa7d50f28159f7498ad51406/"
+      - title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology: Advances in Diagnosis and Treatment"
+        authors: V. Krishna, F. Sammartino, A. Rezai
+        year: 2017
+        doi: 10.1001/jamaneurol.2017.3129
+        study_type: systematic review
+        citations: 247
+        takeaway: Transcranial focused ultrasound technology shows promise for treating neurological conditions, with potential applications in movement disorders, epilepsy, neurobehavioral disorders, and brain tumors.
+        consensus_link: "https://consensus.app/papers/a-review-of-the-current-therapies-challenges-and-future-krishna-sammartino/3c9b01386f16568b8952e70cf5b4b2d7/"
+      - title: A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound
+        authors: Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim
+        year: 2024
+        doi: 10.1007/s13534-024-00369-0
+        study_type: systematic review
+        citations: 32
+        takeaway: Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in healthy humans and patients with central nervous system diseases.
+        consensus_link: "https://consensus.app/papers/a-review-of-functional-neuromodulation-in-humans-using-lee-park/4388106407815114ae05ac0655d0ec9d/"
+      - title: "Human Applications of Transcranial Temporal Interference Stimulation: A Systematic Review"
+        authors: I. Demchenko, Ishaan Tailor, Sina Chegini, Haochen Yu, Fatemeh Gholamali Nezhad, Alice Rueda, Anne Kever, Sridhar Krishnan, Abhishek Datta, Jed A. Meltzer, Simon J. Graham, Tom A. Schweizer, S. Ramper
+        year: 2025
+        doi: 10.1101/2025.05.16.25327804
+        study_type: systematic review
+        citations: 5
+        takeaway: "Transcranial temporal interference stimulation (tTIS) is a safe, well-tolerated method that can target deep brain regions and improve symptoms in Parkinson's disease and essential tremor."
+        consensus_link: "https://consensus.app/papers/human-applications-of-transcranial-temporal-demchenko-tailor/2a0b64493fca5bac915bd63cfb0e313e/"
+      - title: "Human Applications of Transcranial Temporal Interference Stimulation: A Systematic Review"
+        authors: I. Demchenko, Ishaan Tailor, Sina Chegini, Haochen Yu, Fatemeh Gholamali Nezhad, Alice Rueda, Anne Kever, Sridhar Krishnan, Abhishek Datta, Jed A. Meltzer, Simon J. Graham, Tom A. Schweizer, S. Ramper
+        year: 2025
+        doi: 10.1101/2025.05.16.25327804
+        study_type: systematic review
+        citations: 5
+        takeaway: "Transcranial temporal interference stimulation (tTIS) is a safe, well-tolerated method that can target deep brain regions and improve symptoms in Parkinson's disease and essential tremor."
+        consensus_link: "https://consensus.app/papers/human-applications-of-transcranial-temporal-demchenko-tailor/2a0b64493fca5bac915bd63cfb0e313e/"
+      - title: "Human Applications of Transcranial Temporal Interference Stimulation: A Systematic Review"
+        authors: I. Demchenko, Ishaan Tailor, Sina Chegini, Haochen Yu, Fatemeh Gholamali Nezhad, Alice Rueda, Anne Kever, Sridhar Krishnan, Abhishek Datta, Jed A. Meltzer, Simon J. Graham, Tom A. Schweizer, S. Ramper
+        year: 2025
+        doi: 10.1101/2025.05.16.25327804
+        study_type: systematic review
+        citations: 5
+        takeaway: "Transcranial temporal interference stimulation (tTIS) is a safe, well-tolerated method that can target deep brain regions and improve symptoms in Parkinson's disease and essential tremor."
+        consensus_link: "https://consensus.app/papers/human-applications-of-transcranial-temporal-demchenko-tailor/2a0b64493fca5bac915bd63cfb0e313e/"
+      - title: "Human Applications of Transcranial Temporal Interference Stimulation: A Systematic Review"
+        authors: I. Demchenko, Ishaan Tailor, Sina Chegini, Haochen Yu, Fatemeh Gholamali Nezhad, Alice Rueda, Anne Kever, Sridhar Krishnan, Abhishek Datta, Jed A. Meltzer, Simon J. Graham, Tom A. Schweizer, S. Ramper
+        year: 2025
+        doi: 10.1101/2025.05.16.25327804
+        study_type: systematic review
+        citations: 5
+        takeaway: "Transcranial temporal interference stimulation (tTIS) is a safe, well-tolerated method that can target deep brain regions and improve symptoms in Parkinson's disease and essential tremor."
+        consensus_link: "https://consensus.app/papers/human-applications-of-transcranial-temporal-demchenko-tailor/2a0b64493fca5bac915bd63cfb0e313e/"
+      - title: Systematic review of experimental studies in humans on transcranial temporal interference stimulation
+        authors: Paria Mansourinezhad, Rob M C Mestrom, Debby C W Klooster, Mathieu Sprengers, Paul A J M Boon, M. Paulides
+        year: 2025
+        doi: 10.1088/1741-2552/ae0524
+        study_type: systematic review
+        citations: 2
+        takeaway: TTIS shows potential in modulating human brain activity and behavior, but current evidence is mostly cortical and limited, with limited evidence on subcortical structures and meaningful clinical benef
+        consensus_link: "https://consensus.app/papers/systematic-review-of-experimental-studies-in-humans-on-mansourinezhad-mestrom/568d9a4f7df054bd92ba53ed246b3741/"
+      - title: Systematic review of experimental studies in humans on transcranial temporal interference stimulation
+        authors: Paria Mansourinezhad, Rob M C Mestrom, Debby C W Klooster, Mathieu Sprengers, Paul A J M Boon, M. Paulides
+        year: 2025
+        doi: 10.1088/1741-2552/ae0524
+        study_type: systematic review
+        citations: 2
+        takeaway: TTIS shows potential in modulating human brain activity and behavior, but current evidence is mostly cortical and limited, with limited evidence on subcortical structures and meaningful clinical benef
+        consensus_link: "https://consensus.app/papers/systematic-review-of-experimental-studies-in-humans-on-mansourinezhad-mestrom/568d9a4f7df054bd92ba53ed246b3741/"
+
+  depression:
+    total_papers: 203
+    high_quality_count: 53
+    evidence_grade: strong
+    top_papers:
+      - title: "The association of total pulses with the efficacy of repetitive transcranial magnetic stimulation for treatment-resistant major depression: A dose-response meta-analysis."
+        authors: Chia-Ling Yu, Yu-Chen Kao, Trevor Thompson, A. Brunoni, Chih-Wei Hsu, André F. Carvalho, Che-Sheng Chu, P. Tseng, Yu-Kang Tu, Fu-Chi Yang, Kuan-Pin Su, Shu-Li Cheng, Tien-Wei Hsu, Chih-Sung Liang
+        year: 2023
+        doi: 10.1016/j.ajp.2023.103891
+        study_type: meta-analysis
+        citations: 15
+        takeaway: Higher doses of repetitive transcranial magnetic stimulation (rTMS) are not always associated with increased improvement of depressive symptoms in patients with treatment-resistant depression, with st
+        consensus_link: "https://consensus.app/papers/the-association-of-total-pulses-with-the-efficacy-of-yu-kao/b8addefdddae5bbdb309faa8f0d42d70/"
+      - title: Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review and Meta-Analysis
+        authors: Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwichtenberg, C. Herrmann, K. Witt, Mandy Roheger
+        year: 2025
+        doi: 10.3390/neurolint17110188
+        study_type: meta-analysis
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological and psychiatric disorders.
+        consensus_link: "https://consensus.app/papers/neuromodulatory-effects-of-transcranial-pulse-polte-klingmann/b7c199b4aa7d50f28159f7498ad51406/"
+      - title: Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review and Meta-Analysis
+        authors: Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwichtenberg, C. Herrmann, K. Witt, Mandy Roheger
+        year: 2025
+        doi: 10.3390/neurolint17110188
+        study_type: meta-analysis
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological and psychiatric disorders.
+        consensus_link: "https://consensus.app/papers/neuromodulatory-effects-of-transcranial-pulse-polte-klingmann/b7c199b4aa7d50f28159f7498ad51406/"
+      - title: A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound
+        authors: Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim
+        year: 2024
+        doi: 10.1007/s13534-024-00369-0
+        study_type: systematic review
+        citations: 32
+        takeaway: Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in healthy humans and patients with central nervous system diseases.
+        consensus_link: "https://consensus.app/papers/a-review-of-functional-neuromodulation-in-humans-using-lee-park/4388106407815114ae05ac0655d0ec9d/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "Human Applications of Transcranial Temporal Interference Stimulation: A Systematic Review"
+        authors: I. Demchenko, Ishaan Tailor, Sina Chegini, Haochen Yu, Fatemeh Gholamali Nezhad, Alice Rueda, Anne Kever, Sridhar Krishnan, Abhishek Datta, Jed A. Meltzer, Simon J. Graham, Tom A. Schweizer, S. Ramper
+        year: 2025
+        doi: 10.1101/2025.05.16.25327804
+        study_type: systematic review
+        citations: 5
+        takeaway: "Transcranial temporal interference stimulation (tTIS) is a safe, well-tolerated method that can target deep brain regions and improve symptoms in Parkinson's disease and essential tremor."
+        consensus_link: "https://consensus.app/papers/human-applications-of-transcranial-temporal-demchenko-tailor/2a0b64493fca5bac915bd63cfb0e313e/"
+
+  anxiety:
+    total_papers: 31
+    high_quality_count: 11
+    evidence_grade: strong
+    top_papers:
+      - title: A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound
+        authors: Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim
+        year: 2024
+        doi: 10.1007/s13534-024-00369-0
+        study_type: systematic review
+        citations: 32
+        takeaway: Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in healthy humans and patients with central nervous system diseases.
+        consensus_link: "https://consensus.app/papers/a-review-of-functional-neuromodulation-in-humans-using-lee-park/4388106407815114ae05ac0655d0ec9d/"
+      - title: "Strengths and weaknesses of transcranial ultrasound stimulation and its promise in psychiatry: an overview of the technology and a systematic review of the clinical applications"
+        authors: D. Attali, Maxime Daniel, Marion Plaze, Jean-François Aubry
+        year: 2025
+        doi: 10.1080/02656736.2025.2539986
+        study_type: systematic review
+        citations: 1
+        takeaway: Transcranial ultrasound stimulation (TUS) offers precise, noninvasive, and reversible brain stimulation, with potential applications in psychiatry for depression, anxiety, schizophrenia, and substance
+        consensus_link: "https://consensus.app/papers/strengths-and-weaknesses-of-transcranial-ultrasound-attali-daniel/bb7a97ed5114531db748167251c560b2/"
+      - title: "Dual-site transcranial direct current stimulation to treat tinnitus: a randomized controlled trial"
+        authors: E. Cardon, L. Jacquemin, Hanne Vermeersch, I. Joossen, Julie Moyaert, G. Mertens, O. Vanderveken, M. Lammers, P. Van de Heyning, V. van Rompaey, A. Gilles
+        year: 2022
+        doi: 10.1093/brain/awac263
+        study_type: rct
+        citations: 11
+        takeaway: Dual-site sequential high-definition-tDCS of the left temporal area and right dorsolateral prefrontal cortex does not alleviate tinnitus severity, with fluctuations influenced by gender and concurrent
+        consensus_link: "https://consensus.app/papers/dualsite-transcranial-direct-current-stimulation-to-cardon-jacquemin/5bb9f7dcd06d5b3e8a5be6fd9b139756/"
+      - title: "Dual-site transcranial direct current stimulation to treat tinnitus: a randomized controlled trial"
+        authors: E. Cardon, L. Jacquemin, Hanne Vermeersch, I. Joossen, Julie Moyaert, G. Mertens, O. Vanderveken, M. Lammers, P. Van de Heyning, V. van Rompaey, A. Gilles
+        year: 2022
+        doi: 10.1093/brain/awac263
+        study_type: rct
+        citations: 11
+        takeaway: Dual-site sequential high-definition-tDCS of the left temporal area and right dorsolateral prefrontal cortex does not alleviate tinnitus severity, with fluctuations influenced by gender and concurrent
+        consensus_link: "https://consensus.app/papers/dualsite-transcranial-direct-current-stimulation-to-cardon-jacquemin/5bb9f7dcd06d5b3e8a5be6fd9b139756/"
+      - title: "Dual-site transcranial direct current stimulation to treat tinnitus: a randomized controlled trial"
+        authors: E. Cardon, L. Jacquemin, Hanne Vermeersch, I. Joossen, Julie Moyaert, G. Mertens, O. Vanderveken, M. Lammers, P. Van de Heyning, V. van Rompaey, A. Gilles
+        year: 2022
+        doi: 10.1093/brain/awac263
+        study_type: rct
+        citations: 11
+        takeaway: Dual-site sequential high-definition-tDCS of the left temporal area and right dorsolateral prefrontal cortex does not alleviate tinnitus severity, with fluctuations influenced by gender and concurrent
+        consensus_link: "https://consensus.app/papers/dualsite-transcranial-direct-current-stimulation-to-cardon-jacquemin/5bb9f7dcd06d5b3e8a5be6fd9b139756/"
+      - title: "Dual-site transcranial direct current stimulation to treat tinnitus: a randomized controlled trial"
+        authors: E. Cardon, L. Jacquemin, Hanne Vermeersch, I. Joossen, Julie Moyaert, G. Mertens, O. Vanderveken, M. Lammers, P. Van de Heyning, V. van Rompaey, A. Gilles
+        year: 2022
+        doi: 10.1093/brain/awac263
+        study_type: rct
+        citations: 11
+        takeaway: Dual-site sequential high-definition-tDCS of the left temporal area and right dorsolateral prefrontal cortex does not alleviate tinnitus severity, with fluctuations influenced by gender and concurrent
+        consensus_link: "https://consensus.app/papers/dualsite-transcranial-direct-current-stimulation-to-cardon-jacquemin/5bb9f7dcd06d5b3e8a5be6fd9b139756/"
+      - title: "Effects of Transcranial Pulse Stimulation (TPS) on Young Adults With Symptom of Depression: A Pilot Randomised Controlled Trial Protocol"
+        authors: T. Cheung, Y. Ho, J. Yeung, S. Leung, K. Fong, T. Fong, G. Kranz, R. Beisteiner, C. Cheng
+        year: 2022
+        doi: 10.3389/fneur.2022.861214
+        study_type: rct
+        citations: 5
+        takeaway: Transcranial pulse stimulation (TPS) may be an effective treatment option for young adults with major depressive disorder.
+        consensus_link: "https://consensus.app/papers/effects-of-transcranial-pulse-stimulation-tps-on-young-cheung-ho/3725b86a07ef574abfbe0e1e33470b66/"
+      - title: Electro-tranquilization in the relief of pre-nosological forms of psychosomatic disorders
+        authors: I. Darenskiy
+        year: 2024
+        doi: 10.33920/med-01-2405-02
+        study_type: rct
+        citations: 0
+        takeaway: Electro-tranquilization significantly reduces the severity of anxiety, depression, somatization, and distress in patients with pre-nosological psychosomatic disorders.
+        consensus_link: "https://consensus.app/papers/electrotranquilization-in-the-relief-of-prenosological-darenskiy/2476d67a75285e62953dd24758cdcd17/"
+      - title: Electro-tranquilization in the relief of pre-nosological forms of psychosomatic disorders
+        authors: I. Darenskiy
+        year: 2024
+        doi: 10.33920/med-01-2405-02
+        study_type: rct
+        citations: 0
+        takeaway: Electro-tranquilization significantly reduces the severity of anxiety, depression, somatization, and distress in patients with pre-nosological psychosomatic disorders.
+        consensus_link: "https://consensus.app/papers/electrotranquilization-in-the-relief-of-prenosological-darenskiy/2476d67a75285e62953dd24758cdcd17/"
+      - title: Electro-tranquilization in the relief of pre-nosological forms of psychosomatic disorders
+        authors: I. Darenskiy
+        year: 2024
+        doi: 10.33920/med-01-2405-02
+        study_type: rct
+        citations: 0
+        takeaway: Electro-tranquilization significantly reduces the severity of anxiety, depression, somatization, and distress in patients with pre-nosological psychosomatic disorders.
+        consensus_link: "https://consensus.app/papers/electrotranquilization-in-the-relief-of-prenosological-darenskiy/2476d67a75285e62953dd24758cdcd17/"
+
+  adhd:
+    total_papers: 17
+    high_quality_count: 9
+    evidence_grade: emerging
+    top_papers:
+      - title: Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review and Meta-Analysis
+        authors: Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwichtenberg, C. Herrmann, K. Witt, Mandy Roheger
+        year: 2025
+        doi: 10.3390/neurolint17110188
+        study_type: meta-analysis
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological and psychiatric disorders.
+        consensus_link: "https://consensus.app/papers/neuromodulatory-effects-of-transcranial-pulse-polte-klingmann/b7c199b4aa7d50f28159f7498ad51406/"
+      - title: Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review and Meta-Analysis
+        authors: Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwichtenberg, C. Herrmann, K. Witt, Mandy Roheger
+        year: 2025
+        doi: 10.3390/neurolint17110188
+        study_type: meta-analysis
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological and psychiatric disorders.
+        consensus_link: "https://consensus.app/papers/neuromodulatory-effects-of-transcranial-pulse-polte-klingmann/b7c199b4aa7d50f28159f7498ad51406/"
+      - title: "Efficacy and safety of transcranial pulse stimulation in young adolescents with attention-deficit/hyperactivity disorder: a pilot, randomized, double-blind, sham-controlled trial"
+        authors: T. Cheung, Benjamin K. Yee, Bolton Chau, J. Lam, Kwan Hin Fong, H. Lo, Tim Man-Ho Li, Albert Martin Li, Lei Sun, Roland Beisteiner, C. Cheng
+        year: 2024
+        doi: 10.3389/fneur.2024.1364270
+        study_type: rct
+        citations: 11
+        takeaway: "Transcranial pulse stimulation (TPS) is an effective and safe adjunct treatment for ADHD in young adolescents, with a 30% reduction in mean SNAP-IV score at postintervention."
+        consensus_link: "https://consensus.app/papers/efficacy-and-safety-of-transcranial-pulse-stimulation-in-cheung-yee/7ebd1ad736875a87958e5e0cb19d4746/"
+      - title: "Efficacy and safety of transcranial pulse stimulation in young adolescents with attention-deficit/hyperactivity disorder: a pilot, randomized, double-blind, sham-controlled trial"
+        authors: T. Cheung, Benjamin K. Yee, Bolton Chau, J. Lam, Kwan Hin Fong, H. Lo, Tim Man-Ho Li, Albert Martin Li, Lei Sun, Roland Beisteiner, C. Cheng
+        year: 2024
+        doi: 10.3389/fneur.2024.1364270
+        study_type: rct
+        citations: 11
+        takeaway: "Transcranial pulse stimulation (TPS) is an effective and safe adjunct treatment for ADHD in young adolescents, with a 30% reduction in mean SNAP-IV score at postintervention."
+        consensus_link: "https://consensus.app/papers/efficacy-and-safety-of-transcranial-pulse-stimulation-in-cheung-yee/7ebd1ad736875a87958e5e0cb19d4746/"
+      - title: "Efficacy and safety of transcranial pulse stimulation in young adolescents with attention-deficit/hyperactivity disorder: a pilot, randomized, double-blind, sham-controlled trial"
+        authors: T. Cheung, Benjamin K. Yee, Bolton Chau, J. Lam, Kwan Hin Fong, H. Lo, Tim Man-Ho Li, Albert Martin Li, Lei Sun, Roland Beisteiner, C. Cheng
+        year: 2024
+        doi: 10.3389/fneur.2024.1364270
+        study_type: rct
+        citations: 11
+        takeaway: "Transcranial pulse stimulation (TPS) is an effective and safe adjunct treatment for ADHD in young adolescents, with a 30% reduction in mean SNAP-IV score at postintervention."
+        consensus_link: "https://consensus.app/papers/efficacy-and-safety-of-transcranial-pulse-stimulation-in-cheung-yee/7ebd1ad736875a87958e5e0cb19d4746/"
+      - title: "Evaluating the efficacy and safety of transcranial pulse stimulation on adolescents with attention deficit hyperactivity disorder: Study protocol of a pilot randomized, double-blind, sham-controlled t"
+        authors: T. Cheung, Bolton K. H. Chau, Kwan Hin Fong, J. Lam, H. Lo, Man Li, Albert Martin Li, R. Beisteiner, Sun Lei, B. Yee, C. Cheng
+        year: 2023
+        doi: 10.3389/fneur.2023.1076086
+        study_type: rct
+        citations: 5
+        takeaway: Transcranial pulse stimulation (TPS) may be an effective and safe treatment for ADHD in young adolescents.
+        consensus_link: "https://consensus.app/papers/evaluating-the-efficacy-and-safety-of-transcranial-pulse-cheung-chau/eec093e1add853fd8156cdada27484ce/"
+      - title: "Evaluating the efficacy and safety of transcranial pulse stimulation on adolescents with attention deficit hyperactivity disorder: Study protocol of a pilot randomized, double-blind, sham-controlled t"
+        authors: T. Cheung, Bolton K. H. Chau, Kwan Hin Fong, J. Lam, H. Lo, Man Li, Albert Martin Li, R. Beisteiner, Sun Lei, B. Yee, C. Cheng
+        year: 2023
+        doi: 10.3389/fneur.2023.1076086
+        study_type: rct
+        citations: 5
+        takeaway: Transcranial pulse stimulation (TPS) may be an effective and safe treatment for ADHD in young adolescents.
+        consensus_link: "https://consensus.app/papers/evaluating-the-efficacy-and-safety-of-transcranial-pulse-cheung-chau/eec093e1add853fd8156cdada27484ce/"
+      - title: "Evaluating the efficacy and safety of transcranial pulse stimulation on adolescents with attention deficit hyperactivity disorder: Study protocol of a pilot randomized, double-blind, sham-controlled t"
+        authors: T. Cheung, Bolton K. H. Chau, Kwan Hin Fong, J. Lam, H. Lo, Man Li, Albert Martin Li, R. Beisteiner, Sun Lei, B. Yee, C. Cheng
+        year: 2023
+        doi: 10.3389/fneur.2023.1076086
+        study_type: rct
+        citations: 5
+        takeaway: Transcranial pulse stimulation (TPS) may be an effective and safe treatment for ADHD in young adolescents.
+        consensus_link: "https://consensus.app/papers/evaluating-the-efficacy-and-safety-of-transcranial-pulse-cheung-chau/eec093e1add853fd8156cdada27484ce/"
+      - title: "Evaluating the efficacy and safety of transcranial pulse stimulation on adolescents with attention deficit hyperactivity disorder: Study protocol of a pilot randomized, double-blind, sham-controlled t"
+        authors: T. Cheung, Bolton K. H. Chau, Kwan Hin Fong, J. Lam, H. Lo, Man Li, Albert Martin Li, R. Beisteiner, Sun Lei, B. Yee, C. Cheng
+        year: 2023
+        doi: 10.3389/fneur.2023.1076086
+        study_type: rct
+        citations: 5
+        takeaway: Transcranial pulse stimulation (TPS) may be an effective and safe treatment for ADHD in young adolescents.
+        consensus_link: "https://consensus.app/papers/evaluating-the-efficacy-and-safety-of-transcranial-pulse-cheung-chau/eec093e1add853fd8156cdada27484ce/"
+      - title: Subjective Reactions of Children to Single-Pulse Transcranial Magnetic Stimulation
+        authors: M. Garvey, Karen J. Kaczynski, D. Becker, J. Bartko
+        year: 2001
+        doi: 10.1177/088307380101601205
+        study_type: non-rct observational study
+        citations: 80
+        takeaway: Most children find transcranial magnetic stimulation painless, with a few finding it uncomfortable.
+        consensus_link: "https://consensus.app/papers/subjective-reactions-of-children-to-singlepulse-garvey-kaczynski/b32d14563cb2500786faee480b596e49/"
+
+  alzheimers:
+    total_papers: 80
+    high_quality_count: 19
+    evidence_grade: strong
+    top_papers:
+      - title: Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review and Meta-Analysis
+        authors: Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwichtenberg, C. Herrmann, K. Witt, Mandy Roheger
+        year: 2025
+        doi: 10.3390/neurolint17110188
+        study_type: meta-analysis
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological and psychiatric disorders.
+        consensus_link: "https://consensus.app/papers/neuromodulatory-effects-of-transcranial-pulse-polte-klingmann/b7c199b4aa7d50f28159f7498ad51406/"
+      - title: Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review and Meta-Analysis
+        authors: Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwichtenberg, C. Herrmann, K. Witt, Mandy Roheger
+        year: 2025
+        doi: 10.3390/neurolint17110188
+        study_type: meta-analysis
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological and psychiatric disorders.
+        consensus_link: "https://consensus.app/papers/neuromodulatory-effects-of-transcranial-pulse-polte-klingmann/b7c199b4aa7d50f28159f7498ad51406/"
+      - title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology: Advances in Diagnosis and Treatment"
+        authors: V. Krishna, F. Sammartino, A. Rezai
+        year: 2017
+        doi: 10.1001/jamaneurol.2017.3129
+        study_type: systematic review
+        citations: 247
+        takeaway: Transcranial focused ultrasound technology shows promise for treating neurological conditions, with potential applications in movement disorders, epilepsy, neurobehavioral disorders, and brain tumors.
+        consensus_link: "https://consensus.app/papers/a-review-of-the-current-therapies-challenges-and-future-krishna-sammartino/3c9b01386f16568b8952e70cf5b4b2d7/"
+      - title: A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound
+        authors: Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim
+        year: 2024
+        doi: 10.1007/s13534-024-00369-0
+        study_type: systematic review
+        citations: 32
+        takeaway: Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in healthy humans and patients with central nervous system diseases.
+        consensus_link: "https://consensus.app/papers/a-review-of-functional-neuromodulation-in-humans-using-lee-park/4388106407815114ae05ac0655d0ec9d/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: Effect of Transcranial Pulse Stimulation for the Treatment of Alzheimer´s Disease and its Related Symptoms.
+        authors: Ramiro Fernández-Castaño, M. Fernández-Blázquez, Iria Echevarría-Fernández, Manuela Cabrera-Freitag, K. Freitag
+        year: 2023
+        doi: 10.2174/1567205020666230727102025
+        study_type: systematic review
+        citations: 2
+        takeaway: "Transcranial pulse stimulation (TPS) is a safe and promising therapeutic option for Alzheimer's disease, helping maintain disease stability and slowing its progression."
+        consensus_link: "https://consensus.app/papers/effect-of-transcranial-pulse-stimulation-for-the-fern%C3%A1ndez-casta%C3%B1o-fern%C3%A1ndez-bl%C3%A1zquez/f545aa7a0c2757d7b5ab55de0c1d0465/"
+
+  stroke_rehab:
+    total_papers: 64
+    high_quality_count: 4
+    evidence_grade: emerging
+    top_papers:
+      - title: "The impact of the number of sessions and stimulation parameters on repetitive transcranial magnetic stimulation efficacy for post-stroke upper extremity recovery: A systematic review and meta-analysis"
+        authors: Gabriel Barreto, Paz Sánchez, Rebeca Dias, A. Baltar, Lívia Shirahige, Rodrigo Fragoso de Andrade, Kelly Sukar Cavalcanti de Oliveira, Carlos Alberto Santana, D. Piscitelli, Kátia Monte-Silva
+        year: 2025
+        doi: 10.1177/02692155251328945
+        study_type: meta-analysis
+        citations: 1
+        takeaway: "The optimal repetitive transcranial magnetic stimulation protocol for post-stroke upper extremity function involves at least 15 sessions, frequencies above 1 Hz, intensities below 100% of resting moto"
+        consensus_link: "https://consensus.app/papers/the-impact-of-the-number-of-sessions-and-stimulation-barreto-s%C3%A1nchez/131cd7d4331655e1aab3be106348950b/"
+      - title: A literature review and meta-analysis of the optimal factors study of repetitive transcranial magnetic stimulation in post-infarction aphasia
+        authors: Yang Tan, Lin-ming Zhang, Xing-ling Liang, Guei-fei Xiong, Xuan-lin Xing, Qiu-juan Zhang, Bing-ran Zhang, Zi-bin Yang, Ming-wei Liu
+        year: 2024
+        doi: 10.1186/s40001-023-01525-5
+        study_type: meta-analysis
+        citations: 0
+        takeaway: "Optimal treatment effects of repetitive transcranial magnetic stimulation for post-infarction aphasia may be achieved with a total pulse of 40,000, a pulse/session of 1000, and an RMT of 80%."
+        consensus_link: "https://consensus.app/papers/a-literature-review-and-metaanalysis-of-the-optimal-tan-zhang/c48076281832584aa308169dfd931537/"
+      - title: A literature review and meta-analysis of the optimal factors study of repetitive transcranial magnetic stimulation in post-infarction aphasia
+        authors: Yang Tan, Lin-ming Zhang, Xing-ling Liang, Guei-fei Xiong, Xuan-lin Xing, Qiu-juan Zhang, Bing-ran Zhang, Zi-bin Yang, Ming-wei Liu
+        year: 2024
+        doi: 10.1186/s40001-023-01525-5
+        study_type: meta-analysis
+        citations: 0
+        takeaway: "Optimal treatment effects of repetitive transcranial magnetic stimulation for post-infarction aphasia may be achieved with a total pulse of 40,000, a pulse/session of 1000, and an RMT of 80%."
+        consensus_link: "https://consensus.app/papers/a-literature-review-and-metaanalysis-of-the-optimal-tan-zhang/c48076281832584aa308169dfd931537/"
+      - title: A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound
+        authors: Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim
+        year: 2024
+        doi: 10.1007/s13534-024-00369-0
+        study_type: systematic review
+        citations: 32
+        takeaway: Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in healthy humans and patients with central nervous system diseases.
+        consensus_link: "https://consensus.app/papers/a-review-of-functional-neuromodulation-in-humans-using-lee-park/4388106407815114ae05ac0655d0ec9d/"
+      - title: Comparison of Three Non-Invasive Transcranial Electrical Stimulation Methods for Increasing Cortical Excitability
+        authors: Yasuto Inukai, Kei Saito, R. Sasaki, Shota Tsuiki, S. Miyaguchi, S. Kojima, Mitsuhiro Masaki, N. Otsuru, H. Onishi
+        year: 2016
+        doi: 10.3389/fnhum.2016.00668
+        study_type: non-rct experimental
+        citations: 135
+        takeaway: Transcranial random noise stimulation (tRNS) is the most effective non-invasive brain stimulation method for increasing cortical excitability, potentially improving motor function in stroke patients.
+        consensus_link: "https://consensus.app/papers/comparison-of-three-noninvasive-transcranial-electrical-inukai-saito/fec7b0f591f255a5bf9a5f5be575d55b/"
+      - title: Comparison of Three Non-Invasive Transcranial Electrical Stimulation Methods for Increasing Cortical Excitability
+        authors: Yasuto Inukai, Kei Saito, R. Sasaki, Shota Tsuiki, S. Miyaguchi, S. Kojima, Mitsuhiro Masaki, N. Otsuru, H. Onishi
+        year: 2016
+        doi: 10.3389/fnhum.2016.00668
+        study_type: non-rct experimental
+        citations: 135
+        takeaway: Transcranial random noise stimulation (tRNS) is the most effective non-invasive brain stimulation method for increasing cortical excitability, potentially improving motor function in stroke patients.
+        consensus_link: "https://consensus.app/papers/comparison-of-three-noninvasive-transcranial-electrical-inukai-saito/fec7b0f591f255a5bf9a5f5be575d55b/"
+      - title: Comparison of Three Non-Invasive Transcranial Electrical Stimulation Methods for Increasing Cortical Excitability
+        authors: Yasuto Inukai, Kei Saito, R. Sasaki, Shota Tsuiki, S. Miyaguchi, S. Kojima, Mitsuhiro Masaki, N. Otsuru, H. Onishi
+        year: 2016
+        doi: 10.3389/fnhum.2016.00668
+        study_type: non-rct experimental
+        citations: 135
+        takeaway: Transcranial random noise stimulation (tRNS) is the most effective non-invasive brain stimulation method for increasing cortical excitability, potentially improving motor function in stroke patients.
+        consensus_link: "https://consensus.app/papers/comparison-of-three-noninvasive-transcranial-electrical-inukai-saito/fec7b0f591f255a5bf9a5f5be575d55b/"
+      - title: Comparison of Three Non-Invasive Transcranial Electrical Stimulation Methods for Increasing Cortical Excitability
+        authors: Yasuto Inukai, Kei Saito, R. Sasaki, Shota Tsuiki, S. Miyaguchi, S. Kojima, Mitsuhiro Masaki, N. Otsuru, H. Onishi
+        year: 2016
+        doi: 10.3389/fnhum.2016.00668
+        study_type: non-rct experimental
+        citations: 135
+        takeaway: Transcranial random noise stimulation (tRNS) is the most effective non-invasive brain stimulation method for increasing cortical excitability, potentially improving motor function in stroke patients.
+        consensus_link: "https://consensus.app/papers/comparison-of-three-noninvasive-transcranial-electrical-inukai-saito/fec7b0f591f255a5bf9a5f5be575d55b/"
+      - title: "Transcorneal stimulation of trigeminal nerve afferents to increase cerebral blood flow in rats with cerebral vasospasm: a noninvasive method to activate the trigeminovascular reflex."
+        authors: B. Atalay, H. Bolay, T. Dalkara, F. Soylemezoglu, K. Oge, O. E. Ozcan
+        year: 2002
+        doi: 10.3171/jns.2002.97.5.1179
+        study_type: non-rct experimental
+        citations: 42
+        takeaway: Transcorneal stimulation of trigeminal nerve afferents in the cornea effectively increases cerebral blood flow in rats with cerebral vasospasm, offering a noninvasive treatment option for human applic
+        consensus_link: "https://consensus.app/papers/transcorneal-stimulation-of-trigeminal-nerve-afferents-atalay-bolay/c10c815961a555489785c2eef05bc8b2/"
+      - title: Minimizing Discomfort with Surface Neuromuscular Stimulation
+        authors: Saad C. Naaman, R. Stein, C. Thomas
+        year: 2000
+        doi: 10.1177/154596830001400308
+        study_type: non-rct experimental
+        citations: 30
+        takeaway: Minimizing discomfort during surface neuromuscular stimulation requires applying it over nerves rather than motor points, and setting as low a frequency and pulse duration as possible for a given degr
+        consensus_link: "https://consensus.app/papers/minimizing-discomfort-with-surface-neuromuscular-naaman-stein/8fd04b1bcbfc57af921d1e5a3b474204/"
+
+  tbi:
+    total_papers: 22
+    high_quality_count: 4
+    evidence_grade: emerging
+    top_papers:
+      - title: "Transcranial Pulsed-Current Stimulation versus Transcranial Direct Current Stimulation in Patients with Disorders of Consciousness: A Pilot, Sham-Controlled Cross-Over Double-Blind Study"
+        authors: A. Barra, M. Rosenfelder, S. Mortaheb, M. Carrière, G. Martens, Y. Bodien, L. Morales-Quezada, A. Bender, S. Laureys, A. Thibaut, F. Fregni
+        year: 2022
+        doi: 10.3390/brainsci12040429
+        study_type: rct
+        citations: 20
+        takeaway: Transcranial direct-current stimulation (tDCS) improves behavioral improvements and increases theta frontal functional connectivity in patients with disorders of consciousness, while transcranial puls
+        consensus_link: "https://consensus.app/papers/transcranial-pulsedcurrent-stimulation-versus-barra-rosenfelder/c2cbcae907b55221bc7ba7f3047a2866/"
+      - title: "Transcranial Pulsed-Current Stimulation versus Transcranial Direct Current Stimulation in Patients with Disorders of Consciousness: A Pilot, Sham-Controlled Cross-Over Double-Blind Study"
+        authors: A. Barra, M. Rosenfelder, S. Mortaheb, M. Carrière, G. Martens, Y. Bodien, L. Morales-Quezada, A. Bender, S. Laureys, A. Thibaut, F. Fregni
+        year: 2022
+        doi: 10.3390/brainsci12040429
+        study_type: rct
+        citations: 20
+        takeaway: Transcranial direct-current stimulation (tDCS) improves behavioral improvements and increases theta frontal functional connectivity in patients with disorders of consciousness, while transcranial puls
+        consensus_link: "https://consensus.app/papers/transcranial-pulsedcurrent-stimulation-versus-barra-rosenfelder/c2cbcae907b55221bc7ba7f3047a2866/"
+      - title: "Transcranial Pulsed-Current Stimulation versus Transcranial Direct Current Stimulation in Patients with Disorders of Consciousness: A Pilot, Sham-Controlled Cross-Over Double-Blind Study"
+        authors: A. Barra, M. Rosenfelder, S. Mortaheb, M. Carrière, G. Martens, Y. Bodien, L. Morales-Quezada, A. Bender, S. Laureys, A. Thibaut, F. Fregni
+        year: 2022
+        doi: 10.3390/brainsci12040429
+        study_type: rct
+        citations: 20
+        takeaway: Transcranial direct-current stimulation (tDCS) improves behavioral improvements and increases theta frontal functional connectivity in patients with disorders of consciousness, while transcranial puls
+        consensus_link: "https://consensus.app/papers/transcranial-pulsedcurrent-stimulation-versus-barra-rosenfelder/c2cbcae907b55221bc7ba7f3047a2866/"
+      - title: "Transcranial Pulsed-Current Stimulation versus Transcranial Direct Current Stimulation in Patients with Disorders of Consciousness: A Pilot, Sham-Controlled Cross-Over Double-Blind Study"
+        authors: A. Barra, M. Rosenfelder, S. Mortaheb, M. Carrière, G. Martens, Y. Bodien, L. Morales-Quezada, A. Bender, S. Laureys, A. Thibaut, F. Fregni
+        year: 2022
+        doi: 10.3390/brainsci12040429
+        study_type: rct
+        citations: 20
+        takeaway: Transcranial direct-current stimulation (tDCS) improves behavioral improvements and increases theta frontal functional connectivity in patients with disorders of consciousness, while transcranial puls
+        consensus_link: "https://consensus.app/papers/transcranial-pulsedcurrent-stimulation-versus-barra-rosenfelder/c2cbcae907b55221bc7ba7f3047a2866/"
+      - title: "Neuroprotective Effects of Transcranial Pulsed Current Stimulation: Modulation of Microglial Polarization in Traumatic Brain Injury"
+        authors: Peng Yao, Bingkai Ren, Qianhui Zhou, Yang Bai, Zhen Feng
+        year: 2025
+        doi: 10.1111/cns.70606
+        study_type: non-rct experimental
+        citations: 0
+        takeaway: Transcranial pulsed current stimulation (tPCS) effectively reduces neuroinflammation and promotes neurological recovery after traumatic brain injury by enhancing orexin-A expression and suppressing th
+        consensus_link: "https://consensus.app/papers/neuroprotective-effects-of-transcranial-pulsed-current-yao-ren/4216f2f1c9fe5af7afcb37c8940c1232/"
+      - title: Effects of Varying Pulse Width and Frequency of Wireless Stimulation in Rat Sciatic Nerve
+        authors: R. A. Frederick, P. Troyk, S. Cogan
+        year: 2021
+        doi: 10.1109/embc46164.2021.9631070
+        study_type: non-rct experimental
+        citations: 0
+        takeaway: Wireless floating microelectrode arrays (WFMAs) provide a stable peripheral nerve interface for functional electrical stimulation, with various stimulation parameters effectively controlling movement 
+        consensus_link: "https://consensus.app/papers/effects-of-varying-pulse-width-and-frequency-of-wireless-frederick-troyk/1bb9b02370e2543b978f498da005dede/"
+      - title: "Neuroprotective Effects of Transcranial Pulsed Current Stimulation: Modulation of Microglial Polarization in Traumatic Brain Injury"
+        authors: Peng Yao, Bingkai Ren, Qianhui Zhou, Yang Bai, Zhen Feng
+        year: 2025
+        doi: 10.1111/cns.70606
+        study_type: non-rct experimental
+        citations: 0
+        takeaway: Transcranial pulsed current stimulation (tPCS) effectively reduces neuroinflammation and promotes neurological recovery after traumatic brain injury by enhancing orexin-A expression and suppressing th
+        consensus_link: "https://consensus.app/papers/neuroprotective-effects-of-transcranial-pulsed-current-yao-ren/4216f2f1c9fe5af7afcb37c8940c1232/"
+      - title: "Neuroprotective Effects of Transcranial Pulsed Current Stimulation: Modulation of Microglial Polarization in Traumatic Brain Injury"
+        authors: Peng Yao, Bingkai Ren, Qianhui Zhou, Yang Bai, Zhen Feng
+        year: 2025
+        doi: 10.1111/cns.70606
+        study_type: non-rct experimental
+        citations: 0
+        takeaway: Transcranial pulsed current stimulation (tPCS) effectively reduces neuroinflammation and promotes neurological recovery after traumatic brain injury by enhancing orexin-A expression and suppressing th
+        consensus_link: "https://consensus.app/papers/neuroprotective-effects-of-transcranial-pulsed-current-yao-ren/4216f2f1c9fe5af7afcb37c8940c1232/"
+      - title: "Neuroprotective Effects of Transcranial Pulsed Current Stimulation: Modulation of Microglial Polarization in Traumatic Brain Injury"
+        authors: Peng Yao, Bingkai Ren, Qianhui Zhou, Yang Bai, Zhen Feng
+        year: 2025
+        doi: 10.1111/cns.70606
+        study_type: non-rct experimental
+        citations: 0
+        takeaway: Transcranial pulsed current stimulation (tPCS) effectively reduces neuroinflammation and promotes neurological recovery after traumatic brain injury by enhancing orexin-A expression and suppressing th
+        consensus_link: "https://consensus.app/papers/neuroprotective-effects-of-transcranial-pulsed-current-yao-ren/4216f2f1c9fe5af7afcb37c8940c1232/"
+      - title: Non-invasive brain current stimulation in neurorehabilitation
+        authors: H. Coslett, R. Hamilton
+        year: 2011
+        doi: 10.3233/rnn-2011-0626
+        study_type: null
+        citations: 4
+        takeaway: Noninvasive brain stimulation techniques like TMS, tDCS, and ACS show promise in facilitating functional plasticity after brain injury, potentially enhancing recovery in various neurologic disorders.
+        consensus_link: "https://consensus.app/papers/noninvasive-brain-current-stimulation-in-coslett-hamilton/491dbffbe8005254a11ed0d2bdc1d7ff/"
+
+  chronic_pain:
+    total_papers: 218
+    high_quality_count: 37
+    evidence_grade: strong
+    top_papers:
+      - title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology: Advances in Diagnosis and Treatment"
+        authors: V. Krishna, F. Sammartino, A. Rezai
+        year: 2017
+        doi: 10.1001/jamaneurol.2017.3129
+        study_type: systematic review
+        citations: 247
+        takeaway: Transcranial focused ultrasound technology shows promise for treating neurological conditions, with potential applications in movement disorders, epilepsy, neurobehavioral disorders, and brain tumors.
+        consensus_link: "https://consensus.app/papers/a-review-of-the-current-therapies-challenges-and-future-krishna-sammartino/3c9b01386f16568b8952e70cf5b4b2d7/"
+      - title: "Efficacy of Pulsed Radiofrequency Stimulation in Patients with Peripheral Neuropathic Pain: A Narrative Review."
+        authors: M. Chang
+        year: 2018
+        doi: 10.36076/ppj.2018.3.e225
+        study_type: systematic review
+        citations: 92
+        takeaway: Pulsed radiofrequency stimulation is an effective treatment for radicular pain from spinal diseases and postherpetic and occipital neuralgia, but not for trigeminal neuralgia.
+        consensus_link: "https://consensus.app/papers/efficacy-of-pulsed-radiofrequency-stimulation-in-chang/213744a710695b51b2761e2ef3807e8a/"
+      - title: A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound
+        authors: Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim
+        year: 2024
+        doi: 10.1007/s13534-024-00369-0
+        study_type: systematic review
+        citations: 32
+        takeaway: Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in healthy humans and patients with central nervous system diseases.
+        consensus_link: "https://consensus.app/papers/a-review-of-functional-neuromodulation-in-humans-using-lee-park/4388106407815114ae05ac0655d0ec9d/"
+      - title: "Advanced methods of spinal stimulation in the treatment of chronic pain: pulse trains, waveforms, frequencies, targets, and feedback loops"
+        authors: Ankit Maheshwari, J. Pope, T. Deer, S. Falowski
+        year: 2019
+        doi: 10.1080/17434440.2019.1567325
+        study_type: systematic review
+        citations: 22
+        takeaway: Spinal cord stimulation has advanced in efficacy for treating chronic pain, with new targets, frequencies, pulse trains, and feedback loops improving treatment outcomes.
+        consensus_link: "https://consensus.app/papers/advanced-methods-of-spinal-stimulation-in-the-treatment-of-maheshwari-pope/f61a194ba8c552f6850f9e5395914d27/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "Transcranial pulse stimulation in Alzheimer's disease"
+        authors: Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang
+        year: 2023
+        doi: 10.1111/cns.14372
+        study_type: systematic review
+        citations: 12
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients, with no serious adverse events or complications "
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-in-alzheimers-disease-chen-you/bdfe100e14385b7dbaec0402c1cea527/"
+      - title: "The effectiveness of pulsed electrical stimulation in the management of osteoarthritis of the knee: results of a double-blind, randomized, placebo-controlled, repeated-measures trial."
+        authors: R. Fary, G. Carroll, T. Briffa, N. Briffa
+        year: 2011
+        doi: 10.1002/art.30258
+        study_type: rct
+        citations: 65
+        takeaway: Pulsed electrical stimulation (PES) was no more effective than placebo in managing pain and function in knee osteoarthritis patients over 26 weeks.
+        consensus_link: "https://consensus.app/papers/the-effectiveness-of-pulsed-electrical-stimulation-in-the-fary-carroll/f127738a9873553882b7c79af457c284/"
+
+  ptsd:
+    total_papers: 29
+    high_quality_count: 4
+    evidence_grade: emerging
+    top_papers:
+      - title: "Devices for noninvasive transcranial electrostimulation of the brain endorphinergic system: application for improvement of human psycho-physiological status."
+        authors: V. Lebedev, A. V. Malygin, A. V. Kovalevski, S. V. Rychkova, V. N. Sisoev, S. P. Kropotov, E. M. Krupitski, L. Gerasimova, D. V. Glukhov, Gerald P. Kozlowski
+        year: 2002
+        doi: 10.1046/j.1525-1594.2002.06944.x
+        study_type: rct
+        citations: 26
+        takeaway: Activation of brain endorphinergic structures by noninvasive transcranial electrostimulation significantly improves or eliminates fatigue, stress, and other psycho-physiological disturbances, enhancin
+        consensus_link: "https://consensus.app/papers/devices-for-noninvasive-transcranial-lebedev-malygin/e1381c65db0752a1b9b8630b80d786d5/"
+      - title: "Devices for noninvasive transcranial electrostimulation of the brain endorphinergic system: application for improvement of human psycho-physiological status."
+        authors: V. Lebedev, A. V. Malygin, A. V. Kovalevski, S. V. Rychkova, V. N. Sisoev, S. P. Kropotov, E. M. Krupitski, L. Gerasimova, D. V. Glukhov, Gerald P. Kozlowski
+        year: 2002
+        doi: 10.1046/j.1525-1594.2002.06944.x
+        study_type: rct
+        citations: 26
+        takeaway: Activation of brain endorphinergic structures by noninvasive transcranial electrostimulation significantly improves or eliminates fatigue, stress, and other psycho-physiological disturbances, enhancin
+        consensus_link: "https://consensus.app/papers/devices-for-noninvasive-transcranial-lebedev-malygin/e1381c65db0752a1b9b8630b80d786d5/"
+      - title: "Devices for noninvasive transcranial electrostimulation of the brain endorphinergic system: application for improvement of human psycho-physiological status."
+        authors: V. Lebedev, A. V. Malygin, A. V. Kovalevski, S. V. Rychkova, V. N. Sisoev, S. P. Kropotov, E. M. Krupitski, L. Gerasimova, D. V. Glukhov, Gerald P. Kozlowski
+        year: 2002
+        doi: 10.1046/j.1525-1594.2002.06944.x
+        study_type: rct
+        citations: 26
+        takeaway: Activation of brain endorphinergic structures by noninvasive transcranial electrostimulation significantly improves or eliminates fatigue, stress, and other psycho-physiological disturbances, enhancin
+        consensus_link: "https://consensus.app/papers/devices-for-noninvasive-transcranial-lebedev-malygin/e1381c65db0752a1b9b8630b80d786d5/"
+      - title: "Devices for noninvasive transcranial electrostimulation of the brain endorphinergic system: application for improvement of human psycho-physiological status."
+        authors: V. Lebedev, A. V. Malygin, A. V. Kovalevski, S. V. Rychkova, V. N. Sisoev, S. P. Kropotov, E. M. Krupitski, L. Gerasimova, D. V. Glukhov, Gerald P. Kozlowski
+        year: 2002
+        doi: 10.1046/j.1525-1594.2002.06944.x
+        study_type: rct
+        citations: 26
+        takeaway: Activation of brain endorphinergic structures by noninvasive transcranial electrostimulation significantly improves or eliminates fatigue, stress, and other psycho-physiological disturbances, enhancin
+        consensus_link: "https://consensus.app/papers/devices-for-noninvasive-transcranial-lebedev-malygin/e1381c65db0752a1b9b8630b80d786d5/"
+      - title: "Transcutaneous Cervical Vagus Nerve Stimulation Inhibits the Reciprocal of the Pulse Transit Time’s Responses to Traumatic Stress in Posttraumatic Stress Disorder*"
+        authors: A. Gazi, Srirakshaa Sundararaj, Anna B. Harrison, N. Gurel, M. Wittbrodt, Mhmtjamil Alkhalaf, Majd Soudan, O. Levantsevych, Ammer Haffar, Amit J. Shah, V. Vaccarino, J. Bremner, O. Inan
+        year: 2021
+        doi: 10.1109/embc46164.2021.9630415
+        study_type: non-rct experimental
+        citations: 22
+        takeaway: "Transcutaneous cervical vagus nerve stimulation (tcVNS) reduces the reciprocal of the pulse transit time's responses to traumatic stress in individuals with posttraumatic stress disorder (PTSD), sugge"
+        consensus_link: "https://consensus.app/papers/transcutaneous-cervical-vagus-nerve-stimulation-gazi-sundararaj/cb771cfdbc1159a783c88a6e4f0db7d3/"
+      - title: "Transcutaneous Cervical Vagus Nerve Stimulation Inhibits the Reciprocal of the Pulse Transit Time’s Responses to Traumatic Stress in Posttraumatic Stress Disorder*"
+        authors: A. Gazi, Srirakshaa Sundararaj, Anna B. Harrison, N. Gurel, M. Wittbrodt, Mhmtjamil Alkhalaf, Majd Soudan, O. Levantsevych, Ammer Haffar, Amit J. Shah, V. Vaccarino, J. Bremner, O. Inan
+        year: 2021
+        doi: 10.1109/embc46164.2021.9630415
+        study_type: non-rct experimental
+        citations: 22
+        takeaway: "Transcutaneous cervical vagus nerve stimulation (tcVNS) reduces the reciprocal of the pulse transit time's responses to traumatic stress in individuals with posttraumatic stress disorder (PTSD), sugge"
+        consensus_link: "https://consensus.app/papers/transcutaneous-cervical-vagus-nerve-stimulation-gazi-sundararaj/cb771cfdbc1159a783c88a6e4f0db7d3/"
+      - title: "Transcutaneous Cervical Vagus Nerve Stimulation Inhibits the Reciprocal of the Pulse Transit Time’s Responses to Traumatic Stress in Posttraumatic Stress Disorder*"
+        authors: A. Gazi, Srirakshaa Sundararaj, Anna B. Harrison, N. Gurel, M. Wittbrodt, Mhmtjamil Alkhalaf, Majd Soudan, O. Levantsevych, Ammer Haffar, Amit J. Shah, V. Vaccarino, J. Bremner, O. Inan
+        year: 2021
+        doi: 10.1109/embc46164.2021.9630415
+        study_type: non-rct experimental
+        citations: 22
+        takeaway: "Transcutaneous cervical vagus nerve stimulation (tcVNS) reduces the reciprocal of the pulse transit time's responses to traumatic stress in individuals with posttraumatic stress disorder (PTSD), sugge"
+        consensus_link: "https://consensus.app/papers/transcutaneous-cervical-vagus-nerve-stimulation-gazi-sundararaj/cb771cfdbc1159a783c88a6e4f0db7d3/"
+      - title: "Transcutaneous Cervical Vagus Nerve Stimulation Inhibits the Reciprocal of the Pulse Transit Time’s Responses to Traumatic Stress in Posttraumatic Stress Disorder*"
+        authors: A. Gazi, Srirakshaa Sundararaj, Anna B. Harrison, N. Gurel, M. Wittbrodt, Mhmtjamil Alkhalaf, Majd Soudan, O. Levantsevych, Ammer Haffar, Amit J. Shah, V. Vaccarino, J. Bremner, O. Inan
+        year: 2021
+        doi: 10.1109/embc46164.2021.9630415
+        study_type: non-rct experimental
+        citations: 22
+        takeaway: "Transcutaneous cervical vagus nerve stimulation (tcVNS) reduces the reciprocal of the pulse transit time's responses to traumatic stress in individuals with posttraumatic stress disorder (PTSD), sugge"
+        consensus_link: "https://consensus.app/papers/transcutaneous-cervical-vagus-nerve-stimulation-gazi-sundararaj/cb771cfdbc1159a783c88a6e4f0db7d3/"
+      - title: "Effects of transcranial direct current stimulation (tDCS) in “Kiss nightclub fire” patients with post-traumatic stress disorder (PTSD): A phase II clinical trial"
+        authors: K. Marcolin, Ângelo Batista Miralha da Cunha, B. Yoneyama, T. Ribeiro
+        year: 2023
+        doi: 10.1177/20503121231160953
+        study_type: non-rct experimental
+        citations: 4
+        takeaway: "Transcranial direct current stimulation (tDCS) can effectively reduce post-traumatic stress disorder symptoms and improve depression and anxiety in \"KISS nightclub fire\" disaster patients without cogn"
+        consensus_link: "https://consensus.app/papers/effects-of-transcranial-direct-current-stimulation-tdcs-marcolin-cunha/f386f593706557c48fe337f01d06f4c7/"
+      - title: "Effects of transcranial direct current stimulation (tDCS) in “Kiss nightclub fire” patients with post-traumatic stress disorder (PTSD): A phase II clinical trial"
+        authors: K. Marcolin, Ângelo Batista Miralha da Cunha, B. Yoneyama, T. Ribeiro
+        year: 2023
+        doi: 10.1177/20503121231160953
+        study_type: non-rct experimental
+        citations: 4
+        takeaway: "Transcranial direct current stimulation (tDCS) can effectively reduce post-traumatic stress disorder symptoms and improve depression and anxiety in \"KISS nightclub fire\" disaster patients without cogn"
+        consensus_link: "https://consensus.app/papers/effects-of-transcranial-direct-current-stimulation-tdcs-marcolin-cunha/f386f593706557c48fe337f01d06f4c7/"
+
+  ocd:
+    total_papers: 24
+    high_quality_count: 5
+    evidence_grade: emerging
+    top_papers:
+      - title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology: Advances in Diagnosis and Treatment"
+        authors: V. Krishna, F. Sammartino, A. Rezai
+        year: 2017
+        doi: 10.1001/jamaneurol.2017.3129
+        study_type: systematic review
+        citations: 247
+        takeaway: Transcranial focused ultrasound technology shows promise for treating neurological conditions, with potential applications in movement disorders, epilepsy, neurobehavioral disorders, and brain tumors.
+        consensus_link: "https://consensus.app/papers/a-review-of-the-current-therapies-challenges-and-future-krishna-sammartino/3c9b01386f16568b8952e70cf5b4b2d7/"
+      - title: P.3.21 Double-blind, randomized, placebo-controlled addition of quetiapine in non-refractory OCD patients
+        authors: N. Vulink, S. Fluitman, J. S. Meinardi, H. Westenberg, D. Denys
+        year: 2007
+        doi: 10.1016/s0924-977x(07)70102-5
+        study_type: rct
+        citations: 2
+        takeaway: OCD patients exhibit inhibitory deficits or increased facilitation in cortical circuits, with reduced motor thresholds and shorter TCI durations compared to healthy controls.
+        consensus_link: "https://consensus.app/papers/p321-doubleblind-randomized-placebocontrolled-addition-vulink-fluitman/b078e0142a1659c2a909b6337ff09fae/"
+      - title: P.3.21 Double-blind, randomized, placebo-controlled addition of quetiapine in non-refractory OCD patients
+        authors: N. Vulink, S. Fluitman, J. S. Meinardi, H. Westenberg, D. Denys
+        year: 2007
+        doi: 10.1016/s0924-977x(07)70102-5
+        study_type: rct
+        citations: 2
+        takeaway: OCD patients exhibit inhibitory deficits or increased facilitation in cortical circuits, with reduced motor thresholds and shorter TCI durations compared to healthy controls.
+        consensus_link: "https://consensus.app/papers/p321-doubleblind-randomized-placebocontrolled-addition-vulink-fluitman/b078e0142a1659c2a909b6337ff09fae/"
+      - title: P.3.21 Double-blind, randomized, placebo-controlled addition of quetiapine in non-refractory OCD patients
+        authors: N. Vulink, S. Fluitman, J. S. Meinardi, H. Westenberg, D. Denys
+        year: 2007
+        doi: 10.1016/s0924-977x(07)70102-5
+        study_type: rct
+        citations: 2
+        takeaway: OCD patients exhibit inhibitory deficits or increased facilitation in cortical circuits, with reduced motor thresholds and shorter TCI durations compared to healthy controls.
+        consensus_link: "https://consensus.app/papers/p321-doubleblind-randomized-placebocontrolled-addition-vulink-fluitman/b078e0142a1659c2a909b6337ff09fae/"
+      - title: P.3.21 Double-blind, randomized, placebo-controlled addition of quetiapine in non-refractory OCD patients
+        authors: N. Vulink, S. Fluitman, J. S. Meinardi, H. Westenberg, D. Denys
+        year: 2007
+        doi: 10.1016/s0924-977x(07)70102-5
+        study_type: rct
+        citations: 2
+        takeaway: OCD patients exhibit inhibitory deficits or increased facilitation in cortical circuits, with reduced motor thresholds and shorter TCI durations compared to healthy controls.
+        consensus_link: "https://consensus.app/papers/p321-doubleblind-randomized-placebocontrolled-addition-vulink-fluitman/b078e0142a1659c2a909b6337ff09fae/"
+      - title: Synaptic reshaping of plastic neuronal networks by periodic multichannel stimulation with single-pulse and burst stimuli
+        authors: Justus A. Kromer, P. Tass
+        year: 2022
+        doi: 10.1371/journal.pcbi.1010568
+        study_type: non-rct experimental
+        citations: 10
+        takeaway: Periodic multichannel stimulation can reshape plastic neuronal networks to counteract pathological synaptic connectivity, potentially offering long-lasting therapeutic effects in brain disorders.
+        consensus_link: "https://consensus.app/papers/synaptic-reshaping-of-plastic-neuronal-networks-by-kromer-tass/7039400403c0515aa0a8d6ebbfbf9047/"
+      - title: A Low-Intensity Transcranial Focused Ultrasound Parameter Exploration Study of the Ventral Capsule/Ventral Striatum.
+        authors: Tina Chou, Brian J. Kochanowski, Ashley N. Hayden, Benjamin M. Borron, M. C. Barbeiro, Junqian Xu, Joo-won Kim, Xuefeng Zhang, Richard R. Bouchard, K. L. Phan, Wayne K. Goodman, Darin D. Dougherty
+        year: 2024
+        doi: 10.1016/j.neurom.2024.03.004
+        study_type: non-rct experimental
+        citations: 9
+        takeaway: Low-intensity transcranial focused ultrasound (tFUS) shows potential for noninvasive treatment of obsessive-compulsive disorder (OCD) by modulating the ventral capsule/ventral striatum.
+        consensus_link: "https://consensus.app/papers/a-lowintensity-transcranial-focused-ultrasound-chou-kochanowski/fb01a5f179955734b3523e4ef717602d/"
+      - title: A Low-Intensity Transcranial Focused Ultrasound Parameter Exploration Study of the Ventral Capsule/Ventral Striatum.
+        authors: Tina Chou, Brian J. Kochanowski, Ashley N. Hayden, Benjamin M. Borron, M. C. Barbeiro, Junqian Xu, Joo-won Kim, Xuefeng Zhang, Richard R. Bouchard, K. L. Phan, Wayne K. Goodman, Darin D. Dougherty
+        year: 2024
+        doi: 10.1016/j.neurom.2024.03.004
+        study_type: non-rct experimental
+        citations: 9
+        takeaway: Low-intensity transcranial focused ultrasound (tFUS) shows potential for noninvasive treatment of obsessive-compulsive disorder (OCD) by modulating the ventral capsule/ventral striatum.
+        consensus_link: "https://consensus.app/papers/a-lowintensity-transcranial-focused-ultrasound-chou-kochanowski/fb01a5f179955734b3523e4ef717602d/"
+      - title: A Low-Intensity Transcranial Focused Ultrasound Parameter Exploration Study of the Ventral Capsule/Ventral Striatum.
+        authors: Tina Chou, Brian J. Kochanowski, Ashley N. Hayden, Benjamin M. Borron, M. C. Barbeiro, Junqian Xu, Joo-won Kim, Xuefeng Zhang, Richard R. Bouchard, K. L. Phan, Wayne K. Goodman, Darin D. Dougherty
+        year: 2024
+        doi: 10.1016/j.neurom.2024.03.004
+        study_type: non-rct experimental
+        citations: 9
+        takeaway: Low-intensity transcranial focused ultrasound (tFUS) shows potential for noninvasive treatment of obsessive-compulsive disorder (OCD) by modulating the ventral capsule/ventral striatum.
+        consensus_link: "https://consensus.app/papers/a-lowintensity-transcranial-focused-ultrasound-chou-kochanowski/fb01a5f179955734b3523e4ef717602d/"
+      - title: A Low-Intensity Transcranial Focused Ultrasound Parameter Exploration Study of the Ventral Capsule/Ventral Striatum.
+        authors: Tina Chou, Brian J. Kochanowski, Ashley N. Hayden, Benjamin M. Borron, M. C. Barbeiro, Junqian Xu, Joo-won Kim, Xuefeng Zhang, Richard R. Bouchard, K. L. Phan, Wayne K. Goodman, Darin D. Dougherty
+        year: 2024
+        doi: 10.1016/j.neurom.2024.03.004
+        study_type: non-rct experimental
+        citations: 9
+        takeaway: Low-intensity transcranial focused ultrasound (tFUS) shows potential for noninvasive treatment of obsessive-compulsive disorder (OCD) by modulating the ventral capsule/ventral striatum.
+        consensus_link: "https://consensus.app/papers/a-lowintensity-transcranial-focused-ultrasound-chou-kochanowski/fb01a5f179955734b3523e4ef717602d/"
+
+  ms:
+    total_papers: 112
+    high_quality_count: 3
+    evidence_grade: emerging
+    top_papers:
+      - title: "In vitro muscle contraction: A technical review on electrical pulse stimulation in C2C12 cells."
+        authors: Mark R C van de Meene, A. M. van den Hoek, R. Hanemaaijer, L. Verschuren, J. D. de Jong
+        year: 2025
+        doi: 10.1113/ep092677
+        study_type: systematic review
+        citations: 1
+        takeaway: Electrical pulse stimulation in C2C12 cells is commonly used to model exercise, with 2 ms pulses at 1 Hz and moderate voltages, but more detailed parameter reporting and protocol design are needed for
+        consensus_link: "https://consensus.app/papers/in-vitro-muscle-contraction-a-technical-review-on-meene-hoek/a4cc7046581b5e1d875f1852d9f07e3a/"
+      - title: "Pulse Width Does Not Influence the Gains Achieved With Neuromuscular Electrical Stimulation in People With Multiple Sclerosis: Double-Blind, Randomized Trial"
+        authors: Awad M. Almuklass, Leah A. Davis, Landon Hamilton, J. Hebert, E. Alvarez, R. Enoka
+        year: 2018
+        doi: 10.1177/1545968317753681
+        study_type: rct
+        citations: 13
+        takeaway: Neuromuscular electrical stimulation (NMES) can improve walking performance and provide symptom relief in individuals with multiple sclerosis, regardless of pulse width.
+        consensus_link: "https://consensus.app/papers/pulse-width-does-not-influence-the-gains-achieved-with-almuklass-davis/f49e335cb8e25789aa837af052ab928a/"
+      - title: "Pulse Width Does Not Influence the Gains Achieved With Neuromuscular Electrical Stimulation in People With Multiple Sclerosis: Double-Blind, Randomized Trial"
+        authors: Awad M. Almuklass, Leah A. Davis, Landon Hamilton, J. Hebert, E. Alvarez, R. Enoka
+        year: 2018
+        doi: 10.1177/1545968317753681
+        study_type: rct
+        citations: 13
+        takeaway: Neuromuscular electrical stimulation (NMES) can improve walking performance and provide symptom relief in individuals with multiple sclerosis, regardless of pulse width.
+        consensus_link: "https://consensus.app/papers/pulse-width-does-not-influence-the-gains-achieved-with-almuklass-davis/f49e335cb8e25789aa837af052ab928a/"
+      - title: "Paired‐pulse magnetic stimulation of the human motor cortex: differences among I waves"
+        authors: R. Hanajima, Y. Ugawa, Y. Terao, K. Sakai, T. Furubayashi, K. Machii, I. Kanazawa
+        year: 1998
+        doi: 10.1111/j.1469-7793.1998.607bn.x
+        study_type: non-rct experimental
+        citations: 377
+        takeaway: A subthreshold conditioning stimulus in the motor cortex moderately suppresses I3 waves but does not affect I1 waves, suggesting it is an effect of GABAergic inhibition within the motor cortex.
+        consensus_link: "https://consensus.app/papers/paired%E2%80%90pulse-magnetic-stimulation-of-the-human-motor-hanajima-ugawa/9c733873f50d5a86b49fbfa5f1ef2881/"
+      - title: "Occipital Transcranial Magnetic Stimulation Has Opposing Effects on Visual and Auditory Stimulus Detection: Implications for Multisensory Interactions"
+        authors: V. Romei, M. Murray, L. Merabet, G. Thut
+        year: 2007
+        doi: 10.1523/jneurosci.2827-07.2007
+        study_type: non-rct experimental
+        citations: 202
+        takeaway: Occipital TMS can shorten reaction times to unisensory auditory stimuli, suggesting early auditory-visual interactions in visual cortex.
+        consensus_link: "https://consensus.app/papers/occipital-transcranial-magnetic-stimulation-has-romei-murray/70179bfa5b3659fdbc373b3db96d2587/"
+      - title: "Auditory nerve fiber responses to electric stimulation: modulated and unmodulated pulse trains."
+        authors: Leonid M. Litvak, B. Delgutte, D. Eddington
+        year: 2001
+        doi: 10.1121/1.1375140
+        study_type: non-rct experimental
+        citations: 133
+        takeaway: A sustained, high-rate, desynchronizing pulse train (DPT) can improve auditory nerve response in cochlear implants, potentially achieving realistic responses to complex stimulus waveforms.
+        consensus_link: "https://consensus.app/papers/auditory-nerve-fiber-responses-to-electric-stimulation-litvak-delgutte/59478e19bd655548982ba899cf6dbda7/"
+      - title: Transcranial stimulation of the human frontal eye field by magnetic pulses
+        authors: R. M. Müri, C. Hess, O. Meienberg
+        year: 1991
+        doi: 10.1007/bf00231057
+        study_type: non-rct experimental
+        citations: 94
+        takeaway: Magnetic pulses applied to the frontal eye field can cause significant latency prolongations in antisaccade tasks, but only when applied within a vulnerable period.
+        consensus_link: "https://consensus.app/papers/transcranial-stimulation-of-the-human-frontal-eye-field-by-m%C3%BCri-hess/2191270b63e356309e489d2d1e1d0043/"
+      - title: Electrically Evoked Auditory Steady State Responses in Cochlear Implant Users
+        authors: Michael Hofmann, J. Wouters
+        year: 2010
+        doi: 10.1007/s10162-009-0201-z
+        study_type: non-rct experimental
+        citations: 91
+        takeaway: Electrically evoked auditory steady state responses (EASSRs) can be reliably recorded in cochlear implant users, with their electrophysiological thresholds correlating well with behaviorally determine
+        consensus_link: "https://consensus.app/papers/electrically-evoked-auditory-steady-state-responses-in-hofmann-wouters/9186463a42b951faa9b36241e0b8d406/"
+      - title: Time-dependent activation of parieto-frontal networks for directing attention to tactile space. A study with paired transcranial magnetic stimulation pulses in right-brain-damaged patients with extinc
+        authors: M. Oliveri, P. Rossini, M. Filippi, R. Traversa, P. Cicinelli, M. Palmieri, P. Pasqualetti, C. Caltagirone
+        year: 2000
+        doi: 10.1093/brain/123.9.1939
+        study_type: non-rct experimental
+        citations: 89
+        takeaway: Paired transcranial magnetic stimulation can improve tactile extinction in right-brain-damaged patients by selectively inhibiting or facilitating the unaffected hemisphere, with time-dependent process
+        consensus_link: "https://consensus.app/papers/timedependent-activation-of-parietofrontal-networks-for-oliveri-rossini/7233d29286b25eb9bf2c59708ea8995f/"
+      - title: Improving Visual Sensitivity with Subthreshold Transcranial Magnetic Stimulation
+        authors: Arman Abrahamyan, C. Clifford, E. Arabzadeh, Justin A. Harris
+        year: 2011
+        doi: 10.1523/jneurosci.6256-10.2011
+        study_type: non-rct experimental
+        citations: 72
+        takeaway: Subthreshold transcranial magnetic stimulation (TMS) can enhance visual perception by summating neuronal activity with stimulus-evoked activity.
+        consensus_link: "https://consensus.app/papers/improving-visual-sensitivity-with-subthreshold-abrahamyan-clifford/204ad39b5d4d51bc913e1c60fd9e6007/"
+
+  asd:
+    total_papers: 17
+    high_quality_count: 14
+    evidence_grade: strong
+    top_papers:
+      - title: Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review and Meta-Analysis
+        authors: Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwichtenberg, C. Herrmann, K. Witt, Mandy Roheger
+        year: 2025
+        doi: 10.3390/neurolint17110188
+        study_type: meta-analysis
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological and psychiatric disorders.
+        consensus_link: "https://consensus.app/papers/neuromodulatory-effects-of-transcranial-pulse-polte-klingmann/b7c199b4aa7d50f28159f7498ad51406/"
+      - title: Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review and Meta-Analysis
+        authors: Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwichtenberg, C. Herrmann, K. Witt, Mandy Roheger
+        year: 2025
+        doi: 10.3390/neurolint17110188
+        study_type: meta-analysis
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological and psychiatric disorders.
+        consensus_link: "https://consensus.app/papers/neuromodulatory-effects-of-transcranial-pulse-polte-klingmann/b7c199b4aa7d50f28159f7498ad51406/"
+      - title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+        authors: P. Donaldson, N. Rinehart, P. Enticott
+        year: 2015
+        doi: 10.1016/j.neubiorev.2015.05.017
+        study_type: systematic review
+        citations: 114
+        takeaway: Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder, with further exploration needed in conditions lik
+        consensus_link: "https://consensus.app/papers/noninvasive-stimulation-of-the-temporoparietal-junction-donaldson-rinehart/682f8ad39f1a5281aca40559ceb47da9/"
+      - title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+        authors: P. Donaldson, N. Rinehart, P. Enticott
+        year: 2015
+        doi: 10.1016/j.neubiorev.2015.05.017
+        study_type: systematic review
+        citations: 114
+        takeaway: Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder, with further exploration needed in conditions lik
+        consensus_link: "https://consensus.app/papers/noninvasive-stimulation-of-the-temporoparietal-junction-donaldson-rinehart/682f8ad39f1a5281aca40559ceb47da9/"
+      - title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+        authors: P. Donaldson, N. Rinehart, P. Enticott
+        year: 2015
+        doi: 10.1016/j.neubiorev.2015.05.017
+        study_type: systematic review
+        citations: 114
+        takeaway: Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder, with further exploration needed in conditions lik
+        consensus_link: "https://consensus.app/papers/noninvasive-stimulation-of-the-temporoparietal-junction-donaldson-rinehart/682f8ad39f1a5281aca40559ceb47da9/"
+      - title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+        authors: P. Donaldson, N. Rinehart, P. Enticott
+        year: 2015
+        doi: 10.1016/j.neubiorev.2015.05.017
+        study_type: systematic review
+        citations: 114
+        takeaway: Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder, with further exploration needed in conditions lik
+        consensus_link: "https://consensus.app/papers/noninvasive-stimulation-of-the-temporoparietal-junction-donaldson-rinehart/682f8ad39f1a5281aca40559ceb47da9/"
+      - title: "Effects of transcranial pulse stimulation on autism spectrum disorder: a double-blind, randomized, sham-controlled trial"
+        authors: T. Cheung, Tim Man-Ho Li, J. Lam, Kwan Hin Fong, Lok Yi Chiu, Y. Ho, A. C. Tse, Cheng-Ta Li, C. Cheng, R. Beisteiner
+        year: 2023
+        doi: 10.1093/braincomms/fcad226
+        study_type: rct
+        citations: 21
+        takeaway: Transcranial pulse stimulation over the right temporoparietal junction effectively reduces core symptoms of autism spectrum disorder, with sustainable improvements at 1- and 3-month follow-ups.
+        consensus_link: "https://consensus.app/papers/effects-of-transcranial-pulse-stimulation-on-autism-cheung-li/d0b1eb3d3607519b8200f0fc7109a17d/"
+      - title: "Effects of transcranial pulse stimulation on autism spectrum disorder: a double-blind, randomized, sham-controlled trial"
+        authors: T. Cheung, Tim Man-Ho Li, J. Lam, Kwan Hin Fong, Lok Yi Chiu, Y. Ho, A. C. Tse, Cheng-Ta Li, C. Cheng, R. Beisteiner
+        year: 2023
+        doi: 10.1093/braincomms/fcad226
+        study_type: rct
+        citations: 21
+        takeaway: Transcranial pulse stimulation over the right temporoparietal junction effectively reduces core symptoms of autism spectrum disorder, with sustainable improvements at 1- and 3-month follow-ups.
+        consensus_link: "https://consensus.app/papers/effects-of-transcranial-pulse-stimulation-on-autism-cheung-li/d0b1eb3d3607519b8200f0fc7109a17d/"
+      - title: "Effects of transcranial pulse stimulation on autism spectrum disorder: a double-blind, randomized, sham-controlled trial"
+        authors: T. Cheung, Tim Man-Ho Li, J. Lam, Kwan Hin Fong, Lok Yi Chiu, Y. Ho, A. C. Tse, Cheng-Ta Li, C. Cheng, R. Beisteiner
+        year: 2023
+        doi: 10.1093/braincomms/fcad226
+        study_type: rct
+        citations: 21
+        takeaway: Transcranial pulse stimulation over the right temporoparietal junction effectively reduces core symptoms of autism spectrum disorder, with sustainable improvements at 1- and 3-month follow-ups.
+        consensus_link: "https://consensus.app/papers/effects-of-transcranial-pulse-stimulation-on-autism-cheung-li/d0b1eb3d3607519b8200f0fc7109a17d/"
+      - title: "Evaluating the Safety and Efficacy of Transcranial Pulse Stimulation on Autism Spectrum Disorder: A Double-Blinded, Randomized, Sham-Controlled Trial Protocol"
+        authors: T. Cheung, Y. Ho, Kwan Hin Fong, Yuen Ting Joyce Lam, Man Ho Li, A. C. Tse, C. Cheng, R. Beisteiner
+        year: 2022
+        doi: 10.3390/ijerph192315614
+        study_type: rct
+        citations: 7
+        takeaway: This study aims to evaluate the safety and efficacy of transcranial pulse stimulation (TPS) in adolescents with autism spectrum disorder (ASD) through a double-blinded, randomized, sham-controlled tri
+        consensus_link: "https://consensus.app/papers/evaluating-the-safety-and-efficacy-of-transcranial-pulse-cheung-ho/b19b3ef3232a520da06c87854005b63b/"
+
+  long_covid:
+    total_papers: 3
+    high_quality_count: 0
+    evidence_grade: none
+    top_papers:
+      - title: Case Report of Improvement in Long-COVID Symptoms in an Air Force Medic Treated With Transcranial Magnetic Stimulation Using Electro-Magnetic Brain Pulse Technique.
+        authors: Joe X Zhang, Jianzhong Zhang
+        year: 2023
+        doi: 10.1093/milmed/usad182
+        study_type: case report
+        citations: 7
+        takeaway: Electro-Magnetic Brain Pulse (EMBP) treatment improved mood, sense of smell, and brain fogging in a COVID-19 patient, reducing dyspnea and enhancing cognitive performance.
+        consensus_link: "https://consensus.app/papers/case-report-of-improvement-in-longcovid-symptoms-in-an-air-zhang-zhang/3c9a76b656fe56a28a2daf97ddf6cc7d/"
+      - title: TRANSCRANIAL PULSE STIMULATION (TPS) OPENS UP NEW HORIZONS IN THE TREATMENT OF PSYCHIATRIC PATIENTS
+        authors: "*Marc Ziegenbein, U. Sprick, C. Cheng, Teris Cheung"
+        year: 2025
+        doi: 10.1093/ijnp/pyae059.360
+        study_type: null
+        citations: 0
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in treating psychiatric patients and Alzheimer's disease, with potential for off-label applications in psychiatric and post-Covid patients."
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-tps-opens-up-new-horizons-ziegenbein-sprick/4b651deab0a4577f89aec39c07b934ff/"
+      - title: TRANSCRANIAL PULSE STIMULATION (TPS) OPENS UP NEW HORIZONS IN THE TREATMENT OF PSYCHIATRIC PATIENTS
+        authors: "*Marc Ziegenbein, U. Sprick, C. Cheng, Teris Cheung"
+        year: 2025
+        doi: 10.1093/ijnp/pyae059.360
+        study_type: null
+        citations: 0
+        takeaway: "Transcranial pulse stimulation (TPS) shows promise in treating psychiatric patients and Alzheimer's disease, with potential for off-label applications in psychiatric and post-Covid patients."
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-tps-opens-up-new-horizons-ziegenbein-sprick/4b651deab0a4577f89aec39c07b934ff/"
+
+  tinnitus:
+    total_papers: 48
+    high_quality_count: 25
+    evidence_grade: strong
+    top_papers:
+      - title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+        authors: P. Donaldson, N. Rinehart, P. Enticott
+        year: 2015
+        doi: 10.1016/j.neubiorev.2015.05.017
+        study_type: systematic review
+        citations: 114
+        takeaway: Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder, with further exploration needed in conditions lik
+        consensus_link: "https://consensus.app/papers/noninvasive-stimulation-of-the-temporoparietal-junction-donaldson-rinehart/682f8ad39f1a5281aca40559ceb47da9/"
+      - title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+        authors: P. Donaldson, N. Rinehart, P. Enticott
+        year: 2015
+        doi: 10.1016/j.neubiorev.2015.05.017
+        study_type: systematic review
+        citations: 114
+        takeaway: Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder, with further exploration needed in conditions lik
+        consensus_link: "https://consensus.app/papers/noninvasive-stimulation-of-the-temporoparietal-junction-donaldson-rinehart/682f8ad39f1a5281aca40559ceb47da9/"
+      - title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+        authors: P. Donaldson, N. Rinehart, P. Enticott
+        year: 2015
+        doi: 10.1016/j.neubiorev.2015.05.017
+        study_type: systematic review
+        citations: 114
+        takeaway: Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder, with further exploration needed in conditions lik
+        consensus_link: "https://consensus.app/papers/noninvasive-stimulation-of-the-temporoparietal-junction-donaldson-rinehart/682f8ad39f1a5281aca40559ceb47da9/"
+      - title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+        authors: P. Donaldson, N. Rinehart, P. Enticott
+        year: 2015
+        doi: 10.1016/j.neubiorev.2015.05.017
+        study_type: systematic review
+        citations: 114
+        takeaway: Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder, with further exploration needed in conditions lik
+        consensus_link: "https://consensus.app/papers/noninvasive-stimulation-of-the-temporoparietal-junction-donaldson-rinehart/682f8ad39f1a5281aca40559ceb47da9/"
+      - title: Short- and long-lasting tinnitus relief induced by transcranial direct current stimulation
+        authors: P. Garin, C. Gilain, J. Van Damme, K. de Fays, J. Jamart, M. Ossemann, Y. Vandermeeren
+        year: 2011
+        doi: 10.1007/s00415-011-6037-6
+        study_type: rct
+        citations: 93
+        takeaway: Anodal tDCS effectively reduces tinnitus intensity and discomfort, with potential for longer-lasting relief and modulation of tinnitus perception.
+        consensus_link: "https://consensus.app/papers/short-and-longlasting-tinnitus-relief-induced-by-garin-gilain/7ceab3098cbd5c41a471933f19d6a5bc/"
+      - title: Short- and long-lasting tinnitus relief induced by transcranial direct current stimulation
+        authors: P. Garin, C. Gilain, J. Van Damme, K. de Fays, J. Jamart, M. Ossemann, Y. Vandermeeren
+        year: 2011
+        doi: 10.1007/s00415-011-6037-6
+        study_type: rct
+        citations: 93
+        takeaway: Anodal tDCS effectively reduces tinnitus intensity and discomfort, with potential for longer-lasting relief and modulation of tinnitus perception.
+        consensus_link: "https://consensus.app/papers/short-and-longlasting-tinnitus-relief-induced-by-garin-gilain/7ceab3098cbd5c41a471933f19d6a5bc/"
+      - title: Short- and long-lasting tinnitus relief induced by transcranial direct current stimulation
+        authors: P. Garin, C. Gilain, J. Van Damme, K. de Fays, J. Jamart, M. Ossemann, Y. Vandermeeren
+        year: 2011
+        doi: 10.1007/s00415-011-6037-6
+        study_type: rct
+        citations: 93
+        takeaway: Anodal tDCS effectively reduces tinnitus intensity and discomfort, with potential for longer-lasting relief and modulation of tinnitus perception.
+        consensus_link: "https://consensus.app/papers/short-and-longlasting-tinnitus-relief-induced-by-garin-gilain/7ceab3098cbd5c41a471933f19d6a5bc/"
+      - title: Short- and long-lasting tinnitus relief induced by transcranial direct current stimulation
+        authors: P. Garin, C. Gilain, J. Van Damme, K. de Fays, J. Jamart, M. Ossemann, Y. Vandermeeren
+        year: 2011
+        doi: 10.1007/s00415-011-6037-6
+        study_type: rct
+        citations: 93
+        takeaway: Anodal tDCS effectively reduces tinnitus intensity and discomfort, with potential for longer-lasting relief and modulation of tinnitus perception.
+        consensus_link: "https://consensus.app/papers/short-and-longlasting-tinnitus-relief-induced-by-garin-gilain/7ceab3098cbd5c41a471933f19d6a5bc/"
+      - title: "Repeated sessions of transcranial direct current stimulation for treatment of chronic subjective tinnitus: a pilot randomized controlled trial"
+        authors: B. Forogh, Z. Mirshaki, G. Raissi, A. Shirazi, K. Mansoori, T. Ahadi
+        year: 2016
+        doi: 10.1007/s10072-015-2393-9
+        study_type: rct
+        citations: 52
+        takeaway: Repeated sessions of anodal tDCS over the left temporoparietal area did not show significant long-lasting relief for chronic tinnitus patients.
+        consensus_link: "https://consensus.app/papers/repeated-sessions-of-transcranial-direct-current-forogh-mirshaki/c164e83189485095bb3c7a2780da1222/"
+      - title: "Comparing immediate transient tinnitus suppression using tACS and tDCS: a placebo-controlled study"
+        authors: S. Vanneste, Vincent Walsh, P. Heyning, D. Ridder
+        year: 2013
+        doi: 10.1007/s00221-013-3406-7
+        study_type: rct
+        citations: 52
+        takeaway: Bifrontal tDCS effectively reduces tinnitus annoyance and loudness, while individual alpha-modulated tACS does not show a similar effect.
+        consensus_link: "https://consensus.app/papers/comparing-immediate-transient-tinnitus-suppression-vanneste-walsh/07fbd782bafd5d30a3c426b443b4afe1/"
+
+  insomnia:
+    total_papers: 16
+    high_quality_count: 7
+    evidence_grade: emerging
+    top_papers:
+      - title: Transcranial Pulsed Current Stimulation and Social Functioning in Children With Autism
+        authors: Zhenhuan Liu, Sandra Zhong, Roger C. Ho, Xuguang Qian, Yan Tang, Hui Tian, Chuntao Zhang, Nuo Li, Yong Zhao, Yuqiong Zhang, Huituan Liu, Meifeng Wu, Yingjie Zhan, Min Li, Zhihai Lv, Fengyi Hao, Wilson
+        year: 2025
+        doi: 10.1001/jamanetworkopen.2025.5776
+        study_type: rct
+        citations: 2
+        takeaway: Transcranial pulsed current stimulation (tPCS) improves social functioning and sleep disorders in children with autism spectrum disorder (ASD), suggesting it may be a viable nonpharmacologic alternati
+        consensus_link: "https://consensus.app/papers/transcranial-pulsed-current-stimulation-and-social-liu-zhong/8bc3eb3ccf6e50b5813443b3f9bd4a43/"
+      - title: Transcranial Pulsed Current Stimulation and Social Functioning in Children With Autism
+        authors: Zhenhuan Liu, Sandra Zhong, Roger C. Ho, Xuguang Qian, Yan Tang, Hui Tian, Chuntao Zhang, Nuo Li, Yong Zhao, Yuqiong Zhang, Huituan Liu, Meifeng Wu, Yingjie Zhan, Min Li, Zhihai Lv, Fengyi Hao, Wilson
+        year: 2025
+        doi: 10.1001/jamanetworkopen.2025.5776
+        study_type: rct
+        citations: 2
+        takeaway: Transcranial pulsed current stimulation (tPCS) improves social functioning and sleep disorders in children with autism spectrum disorder (ASD), suggesting it may be a viable nonpharmacologic alternati
+        consensus_link: "https://consensus.app/papers/transcranial-pulsed-current-stimulation-and-social-liu-zhong/8bc3eb3ccf6e50b5813443b3f9bd4a43/"
+      - title: Transcranial Pulsed Current Stimulation and Social Functioning in Children With Autism
+        authors: Zhenhuan Liu, Sandra Zhong, Roger C. Ho, Xuguang Qian, Yan Tang, Hui Tian, Chuntao Zhang, Nuo Li, Yong Zhao, Yuqiong Zhang, Huituan Liu, Meifeng Wu, Yingjie Zhan, Min Li, Zhihai Lv, Fengyi Hao, Wilson
+        year: 2025
+        doi: 10.1001/jamanetworkopen.2025.5776
+        study_type: rct
+        citations: 2
+        takeaway: Transcranial pulsed current stimulation (tPCS) improves social functioning and sleep disorders in children with autism spectrum disorder (ASD), suggesting it may be a viable nonpharmacologic alternati
+        consensus_link: "https://consensus.app/papers/transcranial-pulsed-current-stimulation-and-social-liu-zhong/8bc3eb3ccf6e50b5813443b3f9bd4a43/"
+      - title: "TRANSCRANIAL PULSE STIMULATION FOR THE TREATMENT OF MAJOR DEPRESSIVE DISORDER: A RANDOMIZED, DOUBLE-BLIND, SHAM- CONTROLLED, PILOT TRIALS"
+        authors: "*Penny Ping Qin, A. S. Li, A. Xia, Jimmy Minxia Jin, Bella B. B. Zhang, R. Kan, T. Lin, G. Kranz"
+        year: 2025
+        doi: 10.1093/ijnp/pyae059.241
+        study_type: rct
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) is a feasible and acceptable treatment for major depressive disorder, but current randomized controlled trials lack sufficient power to determine its treatment eff
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-for-the-treatment-of-major-qin-li/ac7778aa8abf55b1963289fcf9c40c16/"
+      - title: "272. EFFECTIVENESS OF TRANSCRANIAL PULSE STIMULATION FOR MAJOR DEPRESSION: PRELIMINARY EVIDENCE FOR CLINICAL RESPONSE AND NEUROIMAGING MECHANISMS"
+        authors: P. Qin, W. Chau, I. Chak, T.T.Z. Lin, M. Jin, A. Xia, B.B.B. Zhang, R. Kan, G. Kranz
+        year: 2025
+        doi: 10.1093/ijnp/pyaf052.036
+        study_type: rct
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) is a promising and effective therapy for patients with major depressive disorder, with enhanced functional connectivity between the left dorsolateral prefrontal co
+        consensus_link: "https://consensus.app/papers/272-effectiveness-of-transcranial-pulse-stimulation-for-qin-chau/e61a568d8d7a58928e020b2e9c78cde5/"
+      - title: "TRANSCRANIAL PULSE STIMULATION FOR THE TREATMENT OF MAJOR DEPRESSIVE DISORDER: A RANDOMIZED, DOUBLE-BLIND, SHAM- CONTROLLED, PILOT TRIALS"
+        authors: "*Penny Ping Qin, A. S. Li, A. Xia, Jimmy Minxia Jin, Bella B. B. Zhang, R. Kan, T. Lin, G. Kranz"
+        year: 2025
+        doi: 10.1093/ijnp/pyae059.241
+        study_type: rct
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) is a feasible and acceptable treatment for major depressive disorder, but current randomized controlled trials lack sufficient power to determine its treatment eff
+        consensus_link: "https://consensus.app/papers/transcranial-pulse-stimulation-for-the-treatment-of-major-qin-li/ac7778aa8abf55b1963289fcf9c40c16/"
+      - title: "272. EFFECTIVENESS OF TRANSCRANIAL PULSE STIMULATION FOR MAJOR DEPRESSION: PRELIMINARY EVIDENCE FOR CLINICAL RESPONSE AND NEUROIMAGING MECHANISMS"
+        authors: P. Qin, W. Chau, I. Chak, T.T.Z. Lin, M. Jin, A. Xia, B.B.B. Zhang, R. Kan, G. Kranz
+        year: 2025
+        doi: 10.1093/ijnp/pyaf052.036
+        study_type: rct
+        citations: 0
+        takeaway: Transcranial pulse stimulation (TPS) is a promising and effective therapy for patients with major depressive disorder, with enhanced functional connectivity between the left dorsolateral prefrontal co
+        consensus_link: "https://consensus.app/papers/272-effectiveness-of-transcranial-pulse-stimulation-for-qin-chau/e61a568d8d7a58928e020b2e9c78cde5/"
+      - title: Neuromodulation Using Transcranial Focused Ultrasound on the Bilateral Medial Prefrontal Cortex
+        authors: Young Goo Kim, Song E. Kim, Jihye Lee, Sungeun Hwang, S. Yoo, Hyang Woon Lee
+        year: 2022
+        doi: 10.3390/jcm11133809
+        study_type: non-rct experimental
+        citations: 33
+        takeaway: Transcranial focused ultrasound (tFUS) can potentially modify brain activity and connectivity associated with neuropsychiatric diseases like insomnia and depression.
+        consensus_link: "https://consensus.app/papers/neuromodulation-using-transcranial-focused-ultrasound-kim-kim/92ae56a931ac5d64811fefd60728da7d/"
+      - title: Transcranial stimulation with low voltage, pulsed alternating current enhances parasympathetic activity
+        authors: M. Altemus, Sundus Mari, Samprit Banerjee, R. Yang
+        year: 2015
+        doi: 10.1016/j.brs.2015.01.263
+        study_type: non-rct experimental
+        citations: 0
+        takeaway: Low dosage transcranial pulsed alternating current stimulation (tPCS) enhances parasympathetic activity, potentially mediating its clinical effects in treating depression, anxiety, insomnia, and pain.
+        consensus_link: "https://consensus.app/papers/transcranial-stimulation-with-low-voltage-pulsed-altemus-mari/fccd1e1c0bfd547daa7590c79fed2038/"
+      - title: Transcranial stimulation with low voltage, pulsed alternating current enhances parasympathetic activity
+        authors: M. Altemus, Sundus Mari, Samprit Banerjee, R. Yang
+        year: 2015
+        doi: 10.1016/j.brs.2015.01.263
+        study_type: non-rct experimental
+        citations: 0
+        takeaway: Low dosage transcranial pulsed alternating current stimulation (tPCS) enhances parasympathetic activity, potentially mediating its clinical effects in treating depression, anxiety, insomnia, and pain.
+        consensus_link: "https://consensus.app/papers/transcranial-stimulation-with-low-voltage-pulsed-altemus-mari/fccd1e1c0bfd547daa7590c79fed2038/"
+
+general_tps:
+  description: "General TPS/tFUS papers not matched to a specific condition"
+  total_unmatched_papers: 1880
+  top_papers:
+    - title: Transcranial magnetic stimulation and the human brain
+      authors: M. Hallett
+      year: 2000
+      doi: 10.1038/35018000
+      study_type: null
+      citations: 1549
+      takeaway: TMS is a non-invasive tool for studying the human brain, offering potential for therapy and enhancing understanding of specific areas.
+      consensus_link: "https://consensus.app/papers/transcranial-magnetic-stimulation-and-the-human-brain-hallett/7c4817c2a7b453ff9e5707e86492dc2e/"
+    - title: Transcranial magnetic stimulation and the human brain
+      authors: M. Hallett
+      year: 2000
+      doi: 10.1038/35018000
+      study_type: null
+      citations: 1549
+      takeaway: TMS is a non-invasive tool for studying the human brain, offering potential for therapy and enhancing understanding of specific areas.
+      consensus_link: "https://consensus.app/papers/transcranial-magnetic-stimulation-and-the-human-brain-hallett/7c4817c2a7b453ff9e5707e86492dc2e/"
+    - title: Transcranial magnetic stimulation and the human brain
+      authors: M. Hallett
+      year: 2000
+      doi: 10.1038/35018000
+      study_type: null
+      citations: 1549
+      takeaway: TMS is a non-invasive tool for studying the human brain, offering potential for therapy and enhancing understanding of specific areas.
+      consensus_link: "https://consensus.app/papers/transcranial-magnetic-stimulation-and-the-human-brain-hallett/7c4817c2a7b453ff9e5707e86492dc2e/"
+    - title: Transcranial magnetic stimulation and the human brain
+      authors: M. Hallett
+      year: 2000
+      doi: 10.1038/35018000
+      study_type: null
+      citations: 1549
+      takeaway: TMS is a non-invasive tool for studying the human brain, offering potential for therapy and enhancing understanding of specific areas.
+      consensus_link: "https://consensus.app/papers/transcranial-magnetic-stimulation-and-the-human-brain-hallett/7c4817c2a7b453ff9e5707e86492dc2e/"
+    - title: Partially non‐linear stimulation intensity‐dependent effects of direct current stimulation on motor cortex excitability in humans
+      authors: G. Batsikadze, V. Moliadze, V. Moliadze, W. Paulus, M. Kuo, Michael A Nitsche
+      year: 2013
+      doi: 10.1113/jphysiol.2012.249730
+      study_type: non-rct experimental
+      citations: 936
+      takeaway: Increasing the intensity of transcranial direct current stimulation (tDCS) does not necessarily increase efficacy, but may shift the direction of excitability alterations.
+      consensus_link: "https://consensus.app/papers/partially-non%E2%80%90linear-stimulation-intensity%E2%80%90dependent-batsikadze-moliadze/d90ed04aa5b25856a1a87dc5acb17dba/"
+    - title: Partially non‐linear stimulation intensity‐dependent effects of direct current stimulation on motor cortex excitability in humans
+      authors: G. Batsikadze, V. Moliadze, V. Moliadze, W. Paulus, M. Kuo, Michael A Nitsche
+      year: 2013
+      doi: 10.1113/jphysiol.2012.249730
+      study_type: non-rct experimental
+      citations: 936
+      takeaway: Increasing the intensity of transcranial direct current stimulation (tDCS) does not necessarily increase efficacy, but may shift the direction of excitability alterations.
+      consensus_link: "https://consensus.app/papers/partially-non%E2%80%90linear-stimulation-intensity%E2%80%90dependent-batsikadze-moliadze/d90ed04aa5b25856a1a87dc5acb17dba/"
+    - title: Partially non‐linear stimulation intensity‐dependent effects of direct current stimulation on motor cortex excitability in humans
+      authors: G. Batsikadze, V. Moliadze, V. Moliadze, W. Paulus, M. Kuo, Michael A Nitsche
+      year: 2013
+      doi: 10.1113/jphysiol.2012.249730
+      study_type: non-rct experimental
+      citations: 936
+      takeaway: Increasing the intensity of transcranial direct current stimulation (tDCS) does not necessarily increase efficacy, but may shift the direction of excitability alterations.
+      consensus_link: "https://consensus.app/papers/partially-non%E2%80%90linear-stimulation-intensity%E2%80%90dependent-batsikadze-moliadze/d90ed04aa5b25856a1a87dc5acb17dba/"
+    - title: Transcranial Pulsed Ultrasound Stimulates Intact Brain Circuits
+      authors: Yusuf Tufail, Alexei D. Matyushov, Nathan Baldwin, Monica L. Tauchmann, Joseph Georges, Anna Yoshihiro, S. Tillery, W. Tyler
+      year: 2010
+      doi: 10.1016/j.neuron.2010.05.008
+      study_type: null
+      citations: 893
+      takeaway: Transcranial pulsed ultrasound effectively stimulates intact brain circuits without requiring invasive procedures or surgical invasion, offering a promising alternative to electromagnetic methods.
+      consensus_link: "https://consensus.app/papers/transcranial-pulsed-ultrasound-stimulates-intact-brain-tufail-matyushov/e1aa480b587f5978b67358369a2ac559/"
+    - title: Transcranial Pulsed Ultrasound Stimulates Intact Brain Circuits
+      authors: Yusuf Tufail, Alexei D. Matyushov, Nathan Baldwin, Monica L. Tauchmann, Joseph Georges, Anna Yoshihiro, S. Tillery, W. Tyler
+      year: 2010
+      doi: 10.1016/j.neuron.2010.05.008
+      study_type: null
+      citations: 893
+      takeaway: Transcranial pulsed ultrasound effectively stimulates intact brain circuits without requiring invasive procedures or surgical invasion, offering a promising alternative to electromagnetic methods.
+      consensus_link: "https://consensus.app/papers/transcranial-pulsed-ultrasound-stimulates-intact-brain-tufail-matyushov/e1aa480b587f5978b67358369a2ac559/"
+    - title: Transcranial Pulsed Ultrasound Stimulates Intact Brain Circuits
+      authors: Yusuf Tufail, Alexei D. Matyushov, Nathan Baldwin, Monica L. Tauchmann, Joseph Georges, Anna Yoshihiro, S. Tillery, W. Tyler
+      year: 2010
+      doi: 10.1016/j.neuron.2010.05.008
+      study_type: null
+      citations: 893
+      takeaway: Transcranial pulsed ultrasound effectively stimulates intact brain circuits without requiring invasive procedures or surgical invasion, offering a promising alternative to electromagnetic methods.
+      consensus_link: "https://consensus.app/papers/transcranial-pulsed-ultrasound-stimulates-intact-brain-tufail-matyushov/e1aa480b587f5978b67358369a2ac559/"
+    - title: Noninvasive human brain stimulation.
+      authors: T. Wagner, A. Valero-Cabré, Á. Pascual-Leone
+      year: 2007
+      doi: 10.1146/annurev.bioeng.9.061206.133100
+      study_type: null
+      citations: 879
+      takeaway: Noninvasive brain stimulation techniques show potential in research and therapy, but the physics and mechanisms of action remain incompletely explored.
+      consensus_link: "https://consensus.app/papers/noninvasive-human-brain-stimulation-wagner-valero-cabr%C3%A9/507eb1a9abe557abb7af7ea24687de07/"
+    - title: Noninvasive human brain stimulation.
+      authors: T. Wagner, A. Valero-Cabré, Á. Pascual-Leone
+      year: 2007
+      doi: 10.1146/annurev.bioeng.9.061206.133100
+      study_type: null
+      citations: 879
+      takeaway: Noninvasive brain stimulation techniques show potential in research and therapy, but the physics and mechanisms of action remain incompletely explored.
+      consensus_link: "https://consensus.app/papers/noninvasive-human-brain-stimulation-wagner-valero-cabr%C3%A9/507eb1a9abe557abb7af7ea24687de07/"
+    - title: Noninvasive human brain stimulation.
+      authors: T. Wagner, A. Valero-Cabré, Á. Pascual-Leone
+      year: 2007
+      doi: 10.1146/annurev.bioeng.9.061206.133100
+      study_type: null
+      citations: 879
+      takeaway: Noninvasive brain stimulation techniques show potential in research and therapy, but the physics and mechanisms of action remain incompletely explored.
+      consensus_link: "https://consensus.app/papers/noninvasive-human-brain-stimulation-wagner-valero-cabr%C3%A9/507eb1a9abe557abb7af7ea24687de07/"
+    - title: Noninvasive human brain stimulation.
+      authors: T. Wagner, A. Valero-Cabré, Á. Pascual-Leone
+      year: 2007
+      doi: 10.1146/annurev.bioeng.9.061206.133100
+      study_type: null
+      citations: 879
+      takeaway: Noninvasive brain stimulation techniques show potential in research and therapy, but the physics and mechanisms of action remain incompletely explored.
+      consensus_link: "https://consensus.app/papers/noninvasive-human-brain-stimulation-wagner-valero-cabr%C3%A9/507eb1a9abe557abb7af7ea24687de07/"
+    - title: Transcranial Alternating Current Stimulation Enhances Individual Alpha Activity in Human EEG
+      authors: T. Zaehle, S. Rach, C. Herrmann
+      year: 2010
+      doi: 10.1371/journal.pone.0013766
+      study_type: non-rct experimental
+      citations: 755
+      takeaway: Transcranial alternating current stimulation (tACS) directly modulates oscillatory brain activity in healthy individuals, potentially benefiting both research and therapeutic applications.
+      consensus_link: "https://consensus.app/papers/transcranial-alternating-current-stimulation-enhances-zaehle-rach/5c31e337576b5ad9982086e002a3d942/"

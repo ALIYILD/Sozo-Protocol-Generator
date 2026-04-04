@@ -1,0 +1,423 @@
+# SOZO Brain Center — Clinical Scales Schedule
+# Source: SOZO_Assessments_Master.xlsx, April 2026
+# Validated scales with follow-up schedule, comorbidity/safety screens, score thresholds
+
+schedules:
+  depression:
+    condition: "Depression (MDD)"
+    category: "Mood"
+    primary_scale: >
+    PHQ-9 (weekly/monthly baseline & follow-up)
+    screening_scales: >
+    PHQ-2 (screening); ZUNG; CES-D
+    severity_staging_scale: >
+    HAM-D-17; MADRS; IDS-SR; QIDS-SR
+    qol_function_scale: >
+    WHODAS-2; WSAS; Q-LES-Q (Quality of Life Enjoyment and Satisfaction)
+    follow_up_frequency: >
+    Weekly PHQ-9 during treatment; Monthly follow-up
+    comorbidity_screens: >
+    GAD-7 (anxiety); ISI (insomnia); AUDIT (alcohol); DAST-10
+    safety_screens: >
+    C-SSRS (suicide risk — every session); PHQ-9 Q9 screen
+    score_thresholds: >
+    PHQ-9: 0-4 None; 5-9 Mild; 10-14 Moderate; 15-19 Mod-Severe; ≥20 Severe. MADRS ≥20 = treatment candidate. HAM-D ≥17 = moderate.
+  alzheimers:
+    condition: "Alzheimer's Disease / Dementia"
+    category: "Neurodegenerative"
+    primary_scale: >
+    MMSE (monthly); MoCA (quarterly)
+    screening_scales: >
+    GPCOG (GP Cognitive Assessment); 6-Item CIT; AD8
+    severity_staging_scale: >
+    CDR (Clinical Dementia Rating — staging); FAST (functional staging)
+    qol_function_scale: >
+    QoL-AD; Barthel Index; QADL; NPI (Neuropsychiatric symptoms)
+    follow_up_frequency: >
+    Monthly MMSE; 3-monthly MoCA+CDR; 6-monthly comprehensive
+    comorbidity_screens: >
+    CSDD (Cornell for depression); NPI-Q; PHQ-9 (carer); ZBI (carer burden)
+    safety_screens: >
+    None specific — wander risk assessment
+    score_thresholds: >
+    MMSE: 24-30 Normal; 18-23 Mild; 12-17 Moderate; <12 Severe. MoCA <26 = cognitive impairment. CDR: 0=Normal; 0.5=MCI; 1=Mild AD; 2=Moderate; 3=Severe.
+  parkinsons:
+    condition: "Parkinson's Disease"
+    category: "Movement Disorder"
+    primary_scale: >
+    MDS-UPDRS (Parts I-IV) — monthly during treatment
+    screening_scales: >
+    NMSQ (Non-Motor Symptoms); NMS Burden Scale; PDSS
+    severity_staging_scale: >
+    H&Y (Hoehn & Yahr staging)
+    qol_function_scale: >
+    PDQ-39 (QoL); PFRS (Parkinson Fatigue); EQ-5D
+    follow_up_frequency: >
+    Monthly MDS-UPDRS; 6-monthly H&Y; Weekly FOGQ during intervention
+    comorbidity_screens: >
+    GDS-15 (depression); ESS (sleepiness); PDSS (sleep); NMS-Q
+    safety_screens: >
+    FOGQ (falls/freezing risk); DemTect (cognitive); CAMCOG
+    score_thresholds: >
+    MDS-UPDRS III: 0-16 Mild; 17-32 Moderate; 33-69 Severe. H&Y: 1=Unilateral; 2=Bilateral; 3=Postural instability; 4=Severe disability; 5=Wheelchair/bed. PDQ-39 <20 = mild impact.
+  chronic_pain:
+    condition: "Chronic Pain"
+    category: "Pain"
+    primary_scale: >
+    NRS/VAS pain 0-10 (daily diary); BPI (Brief Pain Inventory)
+    screening_scales: >
+    PainDETECT (neuropathic screen); DN4; LANSS; CSI (central sensitisation)
+    severity_staging_scale: >
+    CSI (Central Sensitisation Inventory)
+    qol_function_scale: >
+    PROMIS-29 (function); WHODAS-2; SF-36 Pain subscale; PGIC
+    follow_up_frequency: >
+    Daily NRS; Weekly BPI; Monthly CSI and PGIC
+    comorbidity_screens: >
+    HADS (anxiety + depression); ISI (insomnia); PHQ-9; PSQI
+    safety_screens: >
+    No specific safety screen; PCS (catastrophising risk)
+    score_thresholds: >
+    NRS: 0=No pain; 1-3=Mild; 4-6=Moderate; 7-10=Severe. CSI ≥40 = central sensitisation. DN4 ≥4/10 = neuropathic. PGIC ≥6 = clinically meaningful improvement.
+  ocd:
+    condition: "OCD"
+    category: "OCD spectrum"
+    primary_scale: >
+    Y-BOCS (primary — at baseline and every 4-6 weeks)
+    screening_scales: >
+    OCI-R (screening); DOCS; MOCI
+    severity_staging_scale: >
+    Y-BOCS-II severity staging; CGI-OCD
+    qol_function_scale: >
+    SDS (Sheehan Disability Scale); WHODAS-2
+    follow_up_frequency: >
+    6-weekly Y-BOCS; Monthly OCI-R; DOCS
+    comorbidity_screens: >
+    BDI-II or PHQ-9 (depression); GAD-7 (anxiety); SCID if needed for subtype
+    safety_screens: >
+    C-SSRS (suicide screen — monthly); Tic screen (if Tourette's comorbid)
+    score_thresholds: >
+    Y-BOCS: 0-7 Subclinical; 8-15 Mild; 16-23 Moderate; 24-31 Severe; 32-40 Extreme. Y-BOCS ≥16 = treatment candidate. Response = ≥35% reduction. Remission = Y-BOCS ≤12.
+  anxiety___gad:
+    condition: "Anxiety / GAD"
+    category: "Anxiety"
+    primary_scale: >
+    GAD-7 (weekly during treatment)
+    screening_scales: >
+    STAI-T (trait anxiety); GAD-2 (screening); HAM-A
+    severity_staging_scale: >
+    STAI-S/T levels; HAM-A severity
+    qol_function_scale: >
+    WSAS (work/social); EQ-5D; SF-36 Mental Health
+    follow_up_frequency: >
+    Weekly GAD-7 during treatment; Monthly STAI follow-up
+    comorbidity_screens: >
+    PHQ-9 (depression); ISI (insomnia); PDSS (panic if comorbid); ACQ
+    safety_screens: >
+    C-SSRS; Safety assessment for avoidance behaviour impact
+    score_thresholds: >
+    GAD-7: 0-4 Minimal; 5-9 Mild; 10-14 Moderate; ≥15 Severe. Response = ≥50% reduction. Remission = GAD-7 <5. HAM-A <10 = no/minimal anxiety.
+  ptsd:
+    condition: "PTSD"
+    category: "Trauma"
+    primary_scale: >
+    PCL-5 (weekly during treatment; monthly maintenance)
+    screening_scales: >
+    PC-PTSD-5 (4-item primary care screen); ITQ
+    severity_staging_scale: >
+    CAPS-5 (clinician gold standard — baseline, 3/6 months)
+    qol_function_scale: >
+    WSAS; SF-36; WHO-5 wellbeing; SWLS
+    follow_up_frequency: >
+    Weekly PCL-5 during treatment; 3-monthly CAPS-5; Monthly IES-R
+    comorbidity_screens: >
+    PHQ-9; GAD-7; AUDIT (alcohol); DAST; DES (dissociation)
+    safety_screens: >
+    C-SSRS every session (high suicide risk in PTSD); ACE-Q; Safety planning
+    score_thresholds: >
+    PCL-5: ≥33 = probable PTSD diagnosis. Response = ≥10-point reduction. Remission = PCL-5 <28. CAPS-5 ≥25 = moderate-severe.
+  insomnia:
+    condition: "Insomnia"
+    category: "Sleep"
+    primary_scale: >
+    ISI (primary — weekly during CBT-I or neuromodulation)
+    screening_scales: >
+    AIS (Athens Insomnia Scale); PSQI; BSRQ
+    severity_staging_scale: >
+    PSQI component scores (7 domains); Sleep diary (2-week prospective)
+    qol_function_scale: >
+    ESS (daytime function); FOSQ-10 (functional outcomes); EQ-5D
+    follow_up_frequency: >
+    Weekly ISI during treatment; Monthly PSQI follow-up; 2-week sleep diary at baseline
+    comorbidity_screens: >
+    GAD-7; PHQ-9; ESS (sleepiness comorbidity); Restless Leg Scale (RLS)
+    safety_screens: >
+    None specific; Safety if co-prescribed sedatives (falls risk)
+    score_thresholds: >
+    ISI: 0-7 No insomnia; 8-14 Subthreshold; 15-21 Moderate; 22-28 Severe. PSQI >5 = poor sleep quality. SE (sleep efficiency) <85% = clinical insomnia. Response = ISI ≥8-point reduction.
+  epilepsy:
+    condition: "Epilepsy"
+    category: "Neurological — Seizure"
+    primary_scale: >
+    Seizure diary (mandatory — daily; primary outcome)
+    screening_scales: >
+    NDDI-E (depression in epilepsy 6-item screen)
+    severity_staging_scale: >
+    ILAE outcome classification (Engel/ILAE scale — post-surgery/DBS)
+    qol_function_scale: >
+    QOLIE-31 (epilepsy-specific QoL); ABNAS; SF-36
+    follow_up_frequency: >
+    Daily seizure diary; 6-monthly QOLIE-31; 3-monthly NDDI-E
+    comorbidity_screens: >
+    NDDI-E (depression); PHQ-9; HADS; BRIEF (executive)
+    safety_screens: >
+    Seizure detection device log; SUDEP risk assessment (SUDEP-7); Driving notification
+    score_thresholds: >
+    Engel I = seizure free; II = ≥90% reduction; III = ≥50%; IV = <50%. ILAE: 1=No seizure; 2=1-2 seizures; 3=3+ seizures; 4=No change. SUDEP-7 ≥4 = high risk.
+  stroke_rehab:
+    condition: "Stroke Rehabilitation"
+    category: "Neurological — Stroke"
+    primary_scale: >
+    mRS (Modified Rankin Scale — primary functional outcome) at baseline/3/6 months
+    screening_scales: >
+    NIHSS (acute severity); Barthel basic screening
+    severity_staging_scale: >
+    NIHSS (severity scoring); Barthel Index (ADL)
+    qol_function_scale: >
+    SIS (Stroke Impact Scale); EQ-5D; SF-36; MRS global disability
+    follow_up_frequency: >
+    Monthly mRS; 3-monthly SIS; Weekly Barthel during rehabilitation
+    comorbidity_screens: >
+    GDS-15 (post-stroke depression — prevalent in 30%); ESS; neglect screens; HADS
+    safety_screens: >
+    Falls risk (STRATIFY); PHQ-9 (post-stroke depression); Road safety (driving)
+    score_thresholds: >
+    mRS: 0=No symptoms; 1=Minor; 2=Unable to manage activities; 3=Requires some help; 4=Unable to walk independently; 5=Bedridden; 6=Death. Barthel ≥60 = moderate independence. NIHSS <5 = mild stroke.
+  mci:
+    condition: "MCI (Mild Cognitive Impairment)"
+    category: "Neurodegenerative — Early"
+    primary_scale: >
+    MoCA (primary — 3-monthly)
+    screening_scales: >
+    AD8 (carer-reported); MMSE; 6-CIT
+    severity_staging_scale: >
+    CDR 0.5 (MCI staging); FAQ (functional activities questionnaire)
+    qol_function_scale: >
+    QoL-AD; WHODAS-2; Carer burden (ZBI mild version)
+    follow_up_frequency: >
+    3-monthly MoCA; 6-monthly CDR + FAQ; 1-yearly comprehensive assessment
+    comorbidity_screens: >
+    GDS-15 (depression); ISI (insomnia comorbidity; bidirectional risk); AUDIT
+    safety_screens: >
+    None specific; Driving assessment if MCI advanced; wandering risk
+    score_thresholds: >
+    MoCA: 26-30 Normal; 18-25 MCI; 10-17 Moderate impairment; <10 Severe. CDR: 0.5 = MCI (key staging). FAQ: ≥6 = functional impairment (MCI→early dementia threshold).
+  tinnitus:
+    condition: "Tinnitus"
+    category: "Auditory"
+    primary_scale: >
+    THI (Tinnitus Handicap Inventory — primary; every 4-6 weeks)
+    screening_scales: >
+    TFI (Tinnitus Functional Index); VAS tinnitus loudness daily
+    severity_staging_scale: >
+    THI severity grade; TQ (Tinnitus Questionnaire) — subcategories
+    qol_function_scale: >
+    SF-36; EQ-5D; HQ (Hyperacusis Questionnaire if comorbid)
+    follow_up_frequency: >
+    Monthly THI; Weekly VAS loudness; Pre/post treatment TFI
+    comorbidity_screens: >
+    PHQ-9; GAD-7; PSQI (insomnia — very common in tinnitus); HADS
+    safety_screens: >
+    Audiogram (rule out progressive hearing loss); DPOAE (cochlear monitoring)
+    score_thresholds: >
+    THI: 0-16 Slight; 18-36 Mild; 38-56 Moderate; 58-76 Severe; 78-100 Catastrophic. TFI ≥25 = clinically significant. Response = THI ≥7-point reduction or TFI ≥13-point change.
+  schizophrenia:
+    condition: "Schizophrenia"
+    category: "Psychotic"
+    primary_scale: >
+    PANSS (baseline, 4-weekly during treatment; 3-monthly maintenance)
+    screening_scales: >
+    BPRS (screening); NSA (Negative Symptom Assessment)
+    severity_staging_scale: >
+    PSP (Personal and Social Performance); GAF
+    qol_function_scale: >
+    PSP; SF-36 Mental Health; QoL-S (Quality of Life Scale)
+    follow_up_frequency: >
+    4-weekly PANSS; 3-monthly PSP; Monthly UKU (side effects)
+    comorbidity_screens: >
+    CDSS (Calgary Depression Scale — separate from PANSS); BNSS; AIMS (tardive dyskinesia)
+    safety_screens: >
+    AIMS (tardive dyskinesia quarterly if antipsychotics); Metabolic monitoring; C-SSRS
+    score_thresholds: >
+    PANSS Positive: ≥20 = significant positive symptoms. PANSS Negative: ≥21 = significant. Total: <58=Mild; 58-75=Moderate; 75-95=Severe; >95=Very severe. Response=≥20% reduction.
+  tbi___concussion:
+    condition: "TBI / Concussion"
+    category: "Neurological — TBI"
+    primary_scale: >
+    NSI (Neurobehavioural Symptom Inventory — weekly) or RPQ
+    screening_scales: >
+    SCAT5 (sport concussion — sideline); BIST (Brain Injury Screening Tool)
+    severity_staging_scale: >
+    GOSE (Glasgow Outcome Scale Extended); RPQ severity grades
+    qol_function_scale: >
+    SIS (Stroke Impact Scale — TBI version); QOLIBRI; WHODAS-2
+    follow_up_frequency: >
+    Weekly NSI during recovery; Monthly GOSE; 6-monthly QOLIBRI
+    comorbidity_screens: >
+    PHQ-9; GAD-7; PCL-5 (PTSD comorbidity — common in TBI); ISI; AUDIT
+    safety_screens: >
+    NSI item 21 (suicidal ideation); C-SSRS; Driving fitness assessment (if TBI moderate-severe); Seizure risk
+    score_thresholds: >
+    NSI: 0-12 Mild; 13-25 Moderate; 26-51 Severe; >51 Very severe. RPQ: ≥3 symptoms = post-concussion syndrome (PCS). GOSE: 5-8 Good recovery; 3-4 Moderate disability; 2 Severe; 1 Dead.
+  addiction___substance_use_disorder:
+    condition: "Addiction / Substance Use Disorder"
+    category: "Addiction"
+    primary_scale: >
+    AUDIT (alcohol) or DAST-10 (drugs) — monthly
+    screening_scales: >
+    CAGE (4-question rapid alcohol screen); ASSIST (all substances)
+    severity_staging_scale: >
+    ASI (Addiction Severity Index) — baseline and 3/6 months
+    qol_function_scale: >
+    WSAS (work/social functioning); SF-36; quality of life scales
+    follow_up_frequency: >
+    Monthly AUDIT/DAST; 3-monthly ASI; Weekly craving VAS
+    comorbidity_screens: >
+    PHQ-9; GAD-7; PCL-5 (PTSD — very common in SUD); BIS-11 (impulsivity)
+    safety_screens: >
+    CIWA-Ar (alcohol withdrawal severity — if detoxification); C-SSRS; Urinalysis
+    score_thresholds: >
+    AUDIT: 0-7 Low risk; 8-15 Hazardous; 16-19 Harmful; ≥20 Dependence. DAST-10: 0-2 Abstinent; 3-5 Low level; 6-8 Moderate; 9-10 Substantial dependence.
+  adhd:
+    condition: "ADHD"
+    category: "Neurodevelopmental"
+    primary_scale: >
+    CAARS-S:L (self-report) + CAARS-O:L (observer) — monthly during treatment
+    screening_scales: >
+    ASRS-v1.1 (6-item ultra-brief screen); WURS (Wender Utah childhood)
+    severity_staging_scale: >
+    Brown ADHD Rating Scales — domain profile; DSM-5 symptom checklist
+    qol_function_scale: >
+    WSAS; WHODAS-2; AAQoL (Adult ADHD Quality of Life); EQ-5D
+    follow_up_frequency: >
+    Monthly CAARS; 3-monthly AAQoL; 6-weekly QbTest objective
+    comorbidity_screens: >
+    PHQ-9; GAD-7; ISI (sleep dysregulation in ADHD); SRS-2 (if ASD comorbid)
+    safety_screens: >
+    None specific for neuromodulation — medication interaction monitoring
+    score_thresholds: >
+    ASRS: ≥14 = probable ADHD. CAARS ADHD Index >65T = clinically significant. QbCheck: hyperactivity + inattention >1.5SD = ADHD objective support.
+  essential_tremor:
+    condition: "Essential Tremor"
+    category: "Movement Disorder"
+    primary_scale: >
+    TETRAS (The Essential Tremor Rating Assessment Scale) — 6-weekly
+    screening_scales: >
+    FTM (Fahn-Tolosa-Marin) historical standard; Tremor rating scale
+    severity_staging_scale: >
+    TETRAS performance subscale; FTM classification (Task-specific/Postural/Kinetic)
+    qol_function_scale: >
+    QUEST (Quality of Life in ET); SF-36; PDQ-39 (if parkinsonism overlap)
+    follow_up_frequency: >
+    6-weekly TETRAS; Quarterly QUEST; 6-monthly FTM comprehensive
+    comorbidity_screens: >
+    BDI-II (depression in ET); Cognitive screen (MoCA if ET+cognitive)
+    safety_screens: >
+    Falls risk (STRATIFY — postural instability); DBS/MRgFUS eligibility criteria
+    score_thresholds: >
+    TETRAS ≥15 = moderate ET (treatment threshold). FTM ≥15 = significant functional impact. QUEST ≥40 = significant QoL impairment. DBS considered for medication-refractory ET (FTM >45 or TETRAS >30).
+  asd:
+    condition: "Autism Spectrum Disorder (ASD)"
+    category: "Neurodevelopmental"
+    primary_scale: >
+    ADOS-2 (gold standard diagnostic — baseline); SRS-2 (weekly/monthly during intervention)
+    screening_scales: >
+    SCQ (Social Communication Questionnaire — 15 mins); GARS-3
+    severity_staging_scale: >
+    VABS-3 (Vineland adaptive behaviour — 6-monthly); ABC (Aberrant Behaviour)
+    qol_function_scale: >
+    VABS-3 adaptive composite; ABC-C (subscales); CGAS (children)
+    follow_up_frequency: >
+    Monthly SRS-2 during intervention; 6-monthly VABS-3; 3-monthly ABC; ADOS-2 annually
+    comorbidity_screens: >
+    CBCL (co-occurring behaviour); BRIEF-2 (executive); Sensory Profile-2; ISI (sleep)
+    safety_screens: >
+    Safety assessment (elopement/self-harm); Sensory diet monitoring; Medication side effects
+    score_thresholds: >
+    SRS-2 T-score: 60-65 Mild; 66-75 Moderate; ≥76 Severe. VABS-3 <70 = significant adaptive deficit. ABC irritability subscale ≥18 = significant (primary outcome in many ASD trials).
+  disorders_of_consciousness_(doc):
+    condition: "Disorders of Consciousness (DOC)"
+    category: "Neurological — Consciousness"
+    primary_scale: >
+    CRS-R (Coma Recovery Scale-Revised — weekly assessment minimum)
+    screening_scales: >
+    FOUR Score (acute intensive care setting); GCS
+    severity_staging_scale: >
+    FOUR; WHIM; DOC staging: UWS vs MCS-/MCS+/EMCS
+    qol_function_scale: >
+    Family QoL measures (proxy); NCS (Nociception Coma Scale — pain)
+    follow_up_frequency: >
+    Weekly CRS-R; Monthly WHIM; 3-monthly family QoL and NCS
+    comorbidity_screens: >
+    NCS (pain — non-verbal); Dysautonomia assessment; Temperature regulation; Sleep-wake cycle tracking
+    safety_screens: >
+    None specific beyond standard critical care; Family/surrogate decision-making support
+    score_thresholds: >
+    CRS-R ≥8 total = signs of awareness. CRS-R Arousal subscale ≥1 = inconsistent visual or auditory function. MCS = reproducible command-following or communication. EMCS = reliable communication.
+  fibromyalgia:
+    condition: "Fibromyalgia"
+    category: "Pain/Rheumatology"
+    primary_scale: >
+    FIQ-R (Revised Fibromyalgia Impact Questionnaire — primary; monthly)
+    screening_scales: >
+    FMS-2016 diagnostic criteria (WPI+SS); FMSS
+    severity_staging_scale: >
+    CSI (Central Sensitisation Inventory); WPI+SS scoring
+    qol_function_scale: >
+    SF-36 Pain + Physical Function; WHODAS-2; EQ-5D
+    follow_up_frequency: >
+    Monthly FIQ-R; 3-monthly SF-36 and CSI; Weekly NRS pain + fatigue
+    comorbidity_screens: >
+    PHQ-9; GAD-7; ISI (non-restorative sleep); FSS (fatigue); HADS
+    safety_screens: >
+    No specific safety screen — exclude inflammatory arthritis (CRP, RF, ANA)
+    score_thresholds: >
+    FIQ-R ≥39 (out of 100) = moderate impact; ≥59 = severe. CSI ≥40 = central sensitisation. WPI ≥7 + SS ≥5 = 2010 ACR criteria. FIQ-R response = ≥14% improvement.
+  multiple_sclerosis:
+    condition: "Multiple Sclerosis"
+    category: "Neurological — MS"
+    primary_scale: >
+    EDSS (Expanded Disability Status Scale) — 6-monthly; SDMT (quarterly — primary cognitive)
+    screening_scales: >
+    MSSS (MS Severity Score); PDDS (simplified self-report EDSS)
+    severity_staging_scale: >
+    EDSS staging (0-10); MSFC (MS Functional Composite)
+    qol_function_scale: >
+    MSIS-29 (MS Impact Scale); EQ-5D; SF-36
+    follow_up_frequency: >
+    6-monthly EDSS; Quarterly SDMT; Monthly FSS fatigue; 3-monthly MSIS-29
+    comorbidity_screens: >
+    HADS (anxiety + depression — prevalent in MS); ISI (fatigue/sleep); PHQ-9
+    safety_screens: >
+    JCV index (if Natalizumab — PML risk); Bladder diary; Falls risk
+    score_thresholds: >
+    EDSS: 0-3.5 No/minimal limitation; 4.0-5.5 Limiting walking; 6.0-7.0 Aid/wheelchair; 7.5-9.5 Bed/institutionalised; 10 Death. SDMT <47 or ≥4-point decline = cognitive impairment.
+  dystonia:
+    condition: "Dystonia"
+    category: "Movement Disorder"
+    primary_scale: >
+    BFMDRS (generalised) or TWSTRS (cervical) — 6-weekly; Monthly during DBS programming
+    screening_scales: >
+    UDRS (Unified Dystonia Rating Scale)
+    severity_staging_scale: >
+    BFMDRS movement + disability subscales; Cervical Dystonia Severity Scale
+    qol_function_scale: >
+    QoL-EDYS (dystonia-specific QoL); WSAS; SF-36
+    follow_up_frequency: >
+    6-weekly BFMDRS/TWSTRS; 3-monthly QoL-EDYS; 6-monthly comprehensive
+    comorbidity_screens: >
+    PDQ-39 (if DBS overlap); MoCA (inherited dystonias); HADS
+    safety_screens: >
+    AIMS (tardive dystonia from antipsychotics); Falls risk (cervical dystonia); DBS threshold monitoring
+    score_thresholds: >
+    BFMDRS: 0-120 movement; 0-30 disability. TWSTRS: 0-85 severity+disability. DBS response = ≥25% BFMDRS improvement. Botulinum toxin: TWSTRS >25 = retreatment threshold.

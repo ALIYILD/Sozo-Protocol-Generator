@@ -1,0 +1,193 @@
+# SOZO Brain Center — Low-Intensity Focused Ultrasound Protocol Reference
+# Source: Master with QEEG places.xlsx, April 2026
+# 9 condition protocols
+
+modality: "lifu"
+name: "Low-Intensity Focused Ultrasound"
+
+protocols:
+  - condition: "Depression (MDD)"
+    brain_target: "rIFG (right IFG), DLPFC"
+    eeg_position: "F8 (R), F3 (L)"
+    protocol_summary: >
+    LIFU targeting right inferior frontal gyrus or DLPFC; significant mood improvement in open-label studies.
+    intensity: "ISPPA 6–24 W/cm²; FF 250–650 kHz"
+    frequency: "250–650 kHz (FF); PRF 1 kHz"
+    duration_per_session: "10–20 min"
+    total_sessions: "10–15 sessions"
+    pulses_per_session: "N/A (focused ultrasound beam)"
+    devices: "BrainSonix BX Pulsar, Openwater, Brainbox"
+    montage: "Focused transducer array; stereotactic neuronavigation"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot RCT"
+    literature_count: "10+"
+    key_references: >
+    Reznik 2020; Sanguinetti 2020; Tyler 2019
+    side_effects: >
+    Minimal. Transient discomfort, slight warming sensation. Very safe within parameters.
+    notes: >
+    Can reach any cortical or subcortical target with mm precision. Advantage over other noninvasive modalities for deep targets.
+  - condition: "Chronic Pain"
+    brain_target: "Thalamus, ACC"
+    eeg_position: "Deep (neuronavigation-guided)"
+    protocol_summary: >
+    LIFU targeting thalamic pain relay nuclei or ACC; modulates pain processing non-invasively.
+    intensity: "ISPPA 6–24 W/cm²"
+    frequency: "250–650 kHz"
+    duration_per_session: "10–20 min"
+    total_sessions: "5–15 sessions"
+    pulses_per_session: "N/A"
+    devices: "BrainSonix, Openwater"
+    montage: "Focused transducer + neuronavigation (MRI or CT guidance)"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Case series"
+    literature_count: "10+"
+    key_references: >
+    Lee 2015; Kim 2018; Emerging LIFU pain literature
+    side_effects: >
+    Minimal. Transient discomfort. Very safe.
+    notes: >
+    Unique ability to reach deep thalamic pain targets noninvasively. Requires imaging guidance.
+  - condition: "OCD"
+    brain_target: "Caudate nucleus, ACC"
+    eeg_position: "Deep (neuronavigation)"
+    protocol_summary: >
+    LIFU targeting caudate/ACC for OCD symptom reduction. Emerging modality targeting corticostriatal circuit.
+    intensity: "ISPPA 6–24 W/cm²"
+    frequency: "250–650 kHz"
+    duration_per_session: "10–20 min"
+    total_sessions: "10–15 sessions"
+    pulses_per_session: "N/A"
+    devices: "BrainSonix, Brainbox"
+    montage: "Focused transducer + neuronavigation"
+    regulatory_status: "Investigational"
+    evidence_level: "Pilot, Case series"
+    literature_count: "3+"
+    key_references: >
+    Emerging LIFU OCD literature 2022–2024
+    side_effects: >
+    Minimal. Transient discomfort.
+    notes: >
+    Very early stage. Caudate/ACC are key OCD circuit nodes. LIFU can reach these without surgery.
+  - condition: "Epilepsy"
+    brain_target: "Seizure focus"
+    eeg_position: "Focus-dependent (neuronavigation)"
+    protocol_summary: >
+    LIFU focused on epileptogenic zone to inhibit seizure focus. Precise mm-level targeting.
+    intensity: "ISPPA 6–24 W/cm²"
+    frequency: "250–650 kHz"
+    duration_per_session: "10–20 min"
+    total_sessions: "5–10 sessions"
+    pulses_per_session: "N/A"
+    devices: "BrainSonix, Openwater"
+    montage: "Focused transducer + surgical/imaging navigation"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "5+"
+    key_references: >
+    Fisher 2014; Deffieux 2013; Emerging LIFU epilepsy literature
+    side_effects: >
+    Minimal. Transient discomfort.
+    notes: >
+    Exciting approach for pharmaco-resistant epilepsy without surgery. Requires precise focus localization.
+  - condition: "Addiction / Substance Use"
+    brain_target: "Nucleus accumbens (NAc)"
+    eeg_position: "Deep (neuronavigation)"
+    protocol_summary: >
+    LIFU targeting NAc to modulate reward circuitry in addiction; very early-stage data.
+    intensity: "ISPPA 6–24 W/cm²"
+    frequency: "250–650 kHz"
+    duration_per_session: "10–20 min"
+    total_sessions: "10–15 sessions"
+    pulses_per_session: "N/A"
+    devices: "BrainSonix, Openwater"
+    montage: "Focused transducer + neuronavigation"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "3+"
+    key_references: >
+    Emerging LIFU addiction literature
+    side_effects: >
+    Minimal. Transient discomfort.
+    notes: >
+    NAc is a key addiction circuit node accessible only via DBS traditionally. LIFU offers noninvasive alternative.
+  - condition: "Essential Tremor"
+    brain_target: "VIM thalamus"
+    eeg_position: "Deep (neuronavigation/MRgFUS)"
+    protocol_summary: >
+    LIFU/tFUS targeting VIM thalamus; inhibitory effect on tremor-generating circuits. Related to but distinct from MRgFUS ablation.
+    intensity: "ISPPA 6–24 W/cm²"
+    frequency: "250–650 kHz"
+    duration_per_session: "10–20 min"
+    total_sessions: "5–10 sessions"
+    pulses_per_session: "N/A"
+    devices: "BrainSonix, Openwater"
+    montage: "Focused transducer array + MRI guidance"
+    regulatory_status: "Investigational (MRgFUS FDA cleared for ablation; low-intensity neuromodulation investigational)"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "5+"
+    key_references: >
+    Legon 2014; Deffieux 2013
+    side_effects: >
+    Minimal. Transient discomfort. Safe within FDA thermal limits.
+    notes: >
+    Distinct from high-intensity MRgFUS (ablation). Low-intensity neuromodulation mode. VIM targeting same as DBS.
+  - condition: "Alzheimer's Disease"
+    brain_target: "DMN / Hippocampus"
+    eeg_position: "Deep (neuronavigation)"
+    protocol_summary: >
+    LIFU targeting DMN nodes and hippocampus to disrupt amyloid aggregates and promote neuroplasticity.
+    intensity: "ISPPA 6–24 W/cm²"
+    frequency: "250–650 kHz"
+    duration_per_session: "10–20 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A"
+    devices: "BrainSonix, Openwater"
+    montage: "Focused transducer + MRI neuronavigation"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "5+"
+    key_references: >
+    Beisteiner 2020 (overlaps TPS); Leinenga 2015 (FUS mouse AD)
+    side_effects: >
+    Minimal. Transient discomfort.
+    notes: >
+    FUS can open BBB transiently (at higher power) to facilitate drug delivery. Low-intensity neuromodulation distinct.
+  - condition: "Schizophrenia"
+    brain_target: "DLPFC"
+    eeg_position: "F3/F4"
+    protocol_summary: >
+    LIFU targeting DLPFC for 15 sessions; cognitive symptom improvement in pilot studies.
+    intensity: "ISPPA 6–24 W/cm²"
+    frequency: "250–650 kHz"
+    duration_per_session: "15–20 min"
+    total_sessions: "15 sessions"
+    pulses_per_session: "N/A"
+    devices: "BrainSonix, Brainbox"
+    montage: "Focused transducer + neuronavigation"
+    regulatory_status: "Investigational"
+    evidence_level: "Pilot, Case series"
+    literature_count: "3+"
+    key_references: >
+    Emerging LIFU schizophrenia literature
+    side_effects: >
+    Minimal. Transient discomfort.
+    notes: >
+    Very early stage. DLPFC targeting for cognitive deficits in schizophrenia.
+  - condition: "Source: SOZO Brain Center Clinical Research Compilation | neuromod_data.md | Updated April 2026"
+    brain_target: null
+    eeg_position: null
+    protocol_summary: null
+    intensity: null
+    frequency: null
+    duration_per_session: null
+    total_sessions: null
+    pulses_per_session: null
+    devices: null
+    montage: null
+    regulatory_status: null
+    evidence_level: null
+    literature_count: null
+    key_references: null
+    side_effects: null
+    notes: null

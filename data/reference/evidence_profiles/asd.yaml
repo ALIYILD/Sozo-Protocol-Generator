@@ -41,6 +41,16 @@ search_profiles:
       (validation[Title/Abstract] OR psychometrics[Title/Abstract])
     max_results: 10
 
+
+  tps_protocols:
+    query: >
+      Autism Spectrum Disorder[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
 priority_pmids:
   - "23683437"  # D'Urso 2015 tDCS ASD
   - "20811047"  # Enticott 2012 TMS ASD (comparative)
@@ -49,3 +59,41 @@ notes: >
   All tDCS in ASD is investigational — clearly mark off-label.
   Informed consent/assent from caregivers essential for adult ASD with intellectual disability.
   Distinguish social communication (TPJ target) from executive function (DLPFC target) protocols.
+
+tps_priority_dois:
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic R"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schw..."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological"
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic R"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schw..."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological"
+  - doi: "10.1016/j.neubiorev.2015.05.017"
+    title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+    authors: "P. Donaldson, N. Rinehart, P. Enticott"
+    year: 2015
+    study_type: "systematic review"
+    citations: 114
+    takeaway: "Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder,"
+  - doi: "10.1016/j.neubiorev.2015.05.017"
+    title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+    authors: "P. Donaldson, N. Rinehart, P. Enticott"
+    year: 2015
+    study_type: "systematic review"
+    citations: 114
+    takeaway: "Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder,"
+  - doi: "10.1016/j.neubiorev.2015.05.017"
+    title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+    authors: "P. Donaldson, N. Rinehart, P. Enticott"
+    year: 2015
+    study_type: "systematic review"
+    citations: 114
+    takeaway: "Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations, tinnitus, and depersonalisation disorder,"
+  TPS evidence: 17 papers identified (14 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

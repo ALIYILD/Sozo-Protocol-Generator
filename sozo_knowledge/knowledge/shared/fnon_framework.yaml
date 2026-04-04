@@ -1,0 +1,71 @@
+# SOZO Brain Center — FNON Framework Knowledge
+# Frequency-Network-Oscillation-Neuromodulation
+# Source: SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026
+
+framework:
+  name: "FNON Framework"
+  full_name: "Frequency-Network-Oscillation-Neuromodulation"
+  evidence_sweep: "179 papers (94 brain networks + 85 neuromodulation), April 2026"
+  description: >
+    The FNON framework is SOZO Brain Center's clinical methodology for mapping each
+    patient's condition to dysregulated brain networks, abnormal oscillatory patterns,
+    and optimal multi-modal neuromodulation targets. It moves beyond single-region
+    stimulation to address the distributed network architecture of neurological and
+    psychiatric conditions.
+
+  components:
+    F_frequency:
+      description: >
+        Each clinical condition has a characteristic frequency band signature.
+        qEEG biomarker mapping identifies the patient's individual frequency profile
+        before FNON protocol selection.
+      bands:
+        - delta: "0.5-4 Hz — deep sleep, focal lesion, dementia"
+        - theta: "4-8 Hz — memory, MDD/PTSD rumination, drowsiness"
+        - alpha: "8-12 Hz — relaxed wakefulness, AD/MCI slowing, tinnitus"
+        - beta: "13-30 Hz — active cognition, PD motor signature, anxiety"
+        - gamma: "30-80 Hz — feature binding, AD (40Hz entrainment target)"
+
+    N_network:
+      description: >
+        12 major resting-state networks mapped. Network targeting outperforms
+        single-region approaches. Connectomics + qEEG identifies which network
+        is dysfunctional.
+      networks:
+        - DMN: "Default Mode Network — self-referential, AD/MCI, depression rumination"
+        - SN: "Salience Network — anxiety, OCD, PTSD, pain"
+        - ECN: "Executive Control Network — depression, ADHD, schizophrenia"
+        - SMN: "Sensorimotor Network — PD, stroke, chronic pain"
+        - Limbic: "Limbic Network — PTSD, anxiety, depression, addiction"
+        - Visual: "Visual Network — migraine, visual stroke"
+        - Auditory: "Auditory Network — tinnitus, schizophrenia"
+        - Language: "Language Network — aphasia, dyslexia"
+        - Reward: "Reward/Mesolimbic — depression anhedonia, addiction"
+        - DAN: "Dorsal Attention Network — ADHD, hemineglect"
+        - FPCN: "Frontoparietal Control Network — OCD, MCI, ADHD"
+        - CCN: "Cerebellar-Cortical Network — tremor, ataxia, autism"
+
+    O_oscillation:
+      description: >
+        Oscillation goal defines what the neuromodulation must achieve in terms of
+        frequency band normalisation. Each protocol specifies whether to suppress
+        (e.g., pathological beta in PD), facilitate (e.g., alpha in AD), or entrain
+        (e.g., 40Hz gamma for AD amyloid clearance).
+
+    N_neuromodulation:
+      description: >
+        Primary modality and add-on modalities selected based on network topology,
+        target depth, and oscillation goal. TPS reaches deep cortical/subcortical nodes;
+        tDCS modulates cortical excitability; taVNS drives limbic theta suppression;
+        CES entrains slow oscillations.
+
+  reference_files:
+    brain_regions: "data/reference/brain_regions.yaml"
+    qeeg_biomarkers: "data/reference/qeeg_biomarkers.yaml"
+    fnon_protocols: "data/reference/fnon_protocol_matrix.yaml"
+    conditions_matrix: "data/reference/conditions_modality_matrix.yaml"
+
+  key_principle: >
+    Network = the biological substrate. Connectomics + qEEG identifies which network
+    is dysfunctional. Frequency = the biomarker. Oscillation = the target state.
+    Neuromodulation = the intervention to achieve it.

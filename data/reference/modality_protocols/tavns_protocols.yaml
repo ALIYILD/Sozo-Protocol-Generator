@@ -1,0 +1,235 @@
+# SOZO Brain Center — Transcutaneous Auricular Vagus Nerve Stimulation Protocol Reference
+# Source: Master with QEEG places.xlsx, April 2026
+# 11 condition protocols
+
+modality: "tavns"
+name: "Transcutaneous Auricular Vagus Nerve Stimulation"
+
+protocols:
+  - condition: "Depression (MDD)"
+    brain_target: "Left auricular vagus nerve (cymba conchae)"
+    eeg_position: "Left ear"
+    protocol_summary: >
+    taVNS via left ear cymba conchae; 25 Hz, 250 μs pulse width, 0.5–2 mA, 30–60 min/day, 4–12 weeks. Activates NTS-locus coeruleus-PFC circuitry.
+    intensity: "0.5–2 mA"
+    frequency: "25 Hz"
+    duration_per_session: "30–60 min/day"
+    total_sessions: "4–12 weeks daily"
+    pulses_per_session: "N/A (continuous stimulation)"
+    devices: "NEMOS (tVNS Technologies), Parasym"
+    montage: "Left ear clip — cymba conchae electrode"
+    regulatory_status: "CE Marked (Europe, depression)"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "80+"
+    key_references: >
+    Hein 2013; Rong 2016; Liu 2020 (meta)
+    side_effects: >
+    Mild tingling, occasional skin irritation at ear electrode. Very safe.
+    notes: >
+    Non-invasive alternative to implanted VNS. Activates vagal afferents → NTS → brainstem neuromodulation.
+  - condition: "Epilepsy"
+    brain_target: "Left auricular vagus nerve (cymba conchae)"
+    eeg_position: "Left ear"
+    protocol_summary: >
+    taVNS for epilepsy adjunct; 25 Hz, 250 μs, 30 min twice daily. Add-on to AEDs.
+    intensity: "0.5–2 mA"
+    frequency: "25 Hz"
+    duration_per_session: "30 min × 2/day"
+    total_sessions: "4–12 weeks"
+    pulses_per_session: "N/A"
+    devices: "NEMOS, Parasym"
+    montage: "Left ear cymba conchae"
+    regulatory_status: "CE Marked (Europe)"
+    evidence_level: "RCT, Open-label"
+    literature_count: "50+"
+    key_references: >
+    Stefan 2012; He 2013; Bauer 2016
+    side_effects: >
+    Mild tingling, skin irritation. Very safe.
+    notes: >
+    Mirror of implanted VNS for epilepsy indication. Strong evidence for add-on seizure reduction.
+  - condition: "Chronic Pain"
+    brain_target: "Left auricular vagus nerve"
+    eeg_position: "Left ear"
+    protocol_summary: >
+    taVNS at higher frequency (100 Hz) for analgesic effect; 250 μs, 3 mA, 30–60 min.
+    intensity: "1–3 mA"
+    frequency: "100 Hz"
+    duration_per_session: "30–60 min"
+    total_sessions: "4–8 weeks daily"
+    pulses_per_session: "N/A"
+    devices: "NEMOS, Parasym, Alpha-Stim"
+    montage: "Left ear cymba conchae"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "40+"
+    key_references: >
+    Laqua 2014; Napadow 2012
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    Higher frequency (100 Hz) preferred for analgesia vs 25 Hz for other indications.
+  - condition: "Migraine Prevention"
+    brain_target: "Cervical vagus nerve (right side) or left ear"
+    eeg_position: "Neck (cervical) or left ear"
+    protocol_summary: >
+    gammaCore cervical nVNS at migraine onset: 25 Hz, 2-min stimulation × 3 applications. Auricular versions also used for prevention.
+    intensity: "0.5–3 mA"
+    frequency: "25 Hz"
+    duration_per_session: "2 min × 3 per attack"
+    total_sessions: "Acute/episodic or daily for prevention"
+    pulses_per_session: "N/A"
+    devices: "gammaCore (electroCore), NEMOS"
+    montage: "Cervical electrode (neck) or left ear"
+    regulatory_status: "FDA Cleared (gammaCore — cluster headache, migraine prevention 2018–2019)"
+    evidence_level: "RCT"
+    literature_count: "30+"
+    key_references: >
+    Goadsby 2018 (PREVA trial); Silberstein 2016 (EVENT trial)
+    side_effects: >
+    Mild redness, tingling at neck. Generally very safe.
+    notes: >
+    gammaCore is FDA cleared for cluster headache (acute) and migraine prevention. Strong evidence.
+  - condition: "Inflammatory / Rheumatoid Arthritis"
+    brain_target: "Left auricular vagus nerve"
+    eeg_position: "Left ear"
+    protocol_summary: >
+    taVNS for anti-inflammatory effect; cholinergic anti-inflammatory pathway. 25 Hz, ongoing trials.
+    intensity: "0.5–2 mA"
+    frequency: "25 Hz"
+    duration_per_session: "30–60 min/day"
+    total_sessions: "4–12 weeks"
+    pulses_per_session: "N/A"
+    devices: "Parasym, NEMOS"
+    montage: "Left ear cymba conchae"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Trials ongoing"
+    literature_count: "20+"
+    key_references: >
+    Stavrakis 2016; Gupta 2020
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    Anti-inflammatory via spleen-α7nAChR pathway. Also studied in heart failure and Crohn's.
+  - condition: "Stroke Rehabilitation"
+    brain_target: "Left auricular vagus nerve"
+    eeg_position: "Left ear"
+    protocol_summary: >
+    taVNS paired with rehabilitation exercises; 25 Hz; promotes neuroplasticity and motor recovery.
+    intensity: "0.5–2 mA"
+    frequency: "25 Hz"
+    duration_per_session: "30–60 min (paired with PT)"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A"
+    devices: "Parasym, NEMOS"
+    montage: "Left ear cymba conchae + concurrent rehab"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "25+"
+    key_references: >
+    Dawson 2016 (VNS-paired); Porter 2012
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    Pairing with active motor rehab is critical for efficacy. Promotes BDNF and long-term potentiation.
+  - condition: "Tinnitus"
+    brain_target: "Left tragus / cymba conchae"
+    eeg_position: "Left ear"
+    protocol_summary: >
+    taVNS at left tragus/cymba conchae; 25 Hz. Targets auditory cortex neuroplasticity.
+    intensity: "0.5–2 mA"
+    frequency: "25 Hz"
+    duration_per_session: "30–60 min/day"
+    total_sessions: "4–8 weeks"
+    pulses_per_session: "N/A"
+    devices: "NEMOS, Parasym"
+    montage: "Left ear tragus or cymba conchae"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot RCT"
+    literature_count: "15+"
+    key_references: >
+    Kraus 2016; Hein 2013
+    side_effects: >
+    Mild tingling, skin irritation. Very safe.
+    notes: >
+    Combined with auditory tone matching therapy for enhanced effect (paired VNS approach).
+  - condition: "Insomnia"
+    brain_target: "Left auricular vagus nerve"
+    eeg_position: "Left ear"
+    protocol_summary: >
+    taVNS before sleep; 25 Hz, promotes parasympathetic tone and reduces sleep onset latency.
+    intensity: "0.5–2 mA"
+    frequency: "25 Hz"
+    duration_per_session: "30 min before sleep"
+    total_sessions: "4–8 weeks nightly"
+    pulses_per_session: "N/A"
+    devices: "NEMOS, Alpha-Stim"
+    montage: "Left ear cymba conchae"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "10+"
+    key_references: >
+    Emerging literature 2018–2023
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    May work via autonomic modulation promoting sleep. Limited controlled trials.
+  - condition: "Parkinson's Disease"
+    brain_target: "Left auricular vagus nerve"
+    eeg_position: "Left ear"
+    protocol_summary: >
+    taVNS combined with PD rehabilitation; 25 Hz. Limited but emerging evidence.
+    intensity: "0.5–2 mA"
+    frequency: "25 Hz"
+    duration_per_session: "30 min/day"
+    total_sessions: "4–12 weeks"
+    pulses_per_session: "N/A"
+    devices: "NEMOS, Parasym"
+    montage: "Left ear cymba conchae"
+    regulatory_status: "Investigational"
+    evidence_level: "Pilot, Case series"
+    literature_count: "10+"
+    key_references: >
+    Emerging literature 2020–2024
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    May reduce non-motor symptoms (depression, autonomic dysfunction). Motor data limited.
+  - condition: "PTSD"
+    brain_target: "Left auricular vagus nerve"
+    eeg_position: "Left ear"
+    protocol_summary: >
+    Emerging taVNS for PTSD; 25 Hz. Modulates fear extinction via amygdala-prefrontal pathway.
+    intensity: "0.5–2 mA"
+    frequency: "25 Hz"
+    duration_per_session: "30–60 min/day"
+    total_sessions: "4–8 weeks"
+    pulses_per_session: "N/A"
+    devices: "NEMOS, Parasym"
+    montage: "Left ear cymba conchae"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "5+"
+    key_references: >
+    Ragsdale 2021; Emerging literature
+    side_effects: >
+    Mild tingling. Very safe.
+    notes: >
+    May enhance exposure-based therapy by modulating amygdala reactivity.
+  - condition: "Source: SOZO Brain Center Clinical Research Compilation | neuromod_data.md | Updated April 2026"
+    brain_target: null
+    eeg_position: null
+    protocol_summary: null
+    intensity: null
+    frequency: null
+    duration_per_session: null
+    total_sessions: null
+    pulses_per_session: null
+    devices: null
+    montage: null
+    regulatory_status: null
+    evidence_level: null
+    literature_count: null
+    key_references: null
+    side_effects: null
+    notes: null

@@ -341,4 +341,27 @@ module.exports = {
       "Carter CS, Braver TS, Barch DM, Botvinick MM, Noll D, Cohen JD. (1998). Anterior cingulate cortex, error detection, and the online monitoring of performance. Science, 280(5364), 747–749. doi:10.1126/science.280.5364.747",
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: 'Salience (dACC) + CSTC Circuit',
+  fnonSecondaryNetwork: 'CSTC OFC-caudate',
+  fnonFBand: 'Theta normalisation (error monitoring)',
+  fnonEegNodes: 'Fz/AFz(dACC/mPFC)+F3/F4(DLPFC)+deep caudate',
+  fnonOscillationGoal: 'Normalise ACC theta; reduce CSTC hyperactivity; suppress OFC-caudate beta loop',
+  fnonPrimaryModalityParams: 'Deep TMS BrainsWay H7: 20Hz, 100%rMT, 2000 pulses, 29 sessions. Symptom provocation pre-session. FDA cleared.',
+  fnonAddonModality: 'LIFU (caudate nucleus); tDCS bilateral OFC cathodal; TPS (Fz/AFz+F3/F4)',
+  fnonSessions: '29 sessions',
+  fnonEvidenceLevel: 'RCT, Meta-analysis',
+  fnonLitCount: '100+ TMS; 5+ LIFU; 50+ DBS',
+  fnonKeyReferences: 'Carmi 2019 Am J Psychiatry; Roth 2021; Greenberg 2010 DBS; Connectomic OCD 2022',
+  fnonNotes: 'FNON: Theta excess ACC (ERN hyperactivation) + beta OFC. H7 gold standard. LIFU noninvasive caudate option.',
+  fnonQeegBiomarker: '↑Theta ACC; ↑Beta OFC',
+  fnonPaperCounts: {
+    tps: null, tms: 100, tdcs: 10,
+    tavns: 5, ces: null, tacs: null,
+    pbm: null, lifu: 5, pemf: null, dbs: 50,
+  },
+  fnonBestFirstLine: 'TMS Deep H7 (FDA cleared)',
+  fnonBestSecondLine: 'LIFU caudate + TPS',
+  fnonScore: 4,
+
 };

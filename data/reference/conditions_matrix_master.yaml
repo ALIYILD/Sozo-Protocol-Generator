@@ -1,0 +1,350 @@
+# SOZO Brain Center — Conditions x Modality Master Evidence Matrix
+# Source: Master with QEEG places.xlsx, April 2026
+# 23 conditions x 11 modalities (approximate PubMed/Scholar paper counts)
+
+conditions:
+  depression_mdd:
+    condition: "Depression (MDD)"
+    paper_counts:
+      tps: 3
+      tms: 500
+      tdcs: 200
+      tavns: 80
+      ces: 30
+      tacs: 20
+      pbm: 10
+      pemf: 15
+      lifu: 10
+      trns: 3
+      dbs: 30
+    best_modality: "TMS (rTMS/iTBS), tDCS"
+  alzheimers_dementia:
+    condition: "Alzheimer's/Dementia"
+    paper_counts:
+      tps: 15
+      tms: 30
+      tdcs: 20
+      tavns: 5
+      ces: null
+      tacs: 15
+      pbm: 20
+      pemf: 5
+      lifu: 5
+      trns: null
+      dbs: 5
+    best_modality: "TPS, TMS + Cognitive Training"
+  parkinsons_disease:
+    condition: "Parkinson's Disease"
+    paper_counts:
+      tps: 5
+      tms: 80
+      tdcs: 15
+      tavns: 10
+      ces: null
+      tacs: 10
+      pbm: 10
+      pemf: 5
+      lifu: null
+      trns: 3
+      dbs: 1000
+    best_modality: "DBS (STN/GPi), TMS"
+  chronic_pain:
+    condition: "Chronic Pain"
+    paper_counts:
+      tps: null
+      tms: 60
+      tdcs: 150
+      tavns: 40
+      ces: 35
+      tacs: 10
+      pbm: 10
+      pemf: 15
+      lifu: 10
+      trns: 5
+      dbs: 10
+    best_modality: "tDCS (M1), TMS (M1)"
+  ocd:
+    condition: "OCD"
+    paper_counts:
+      tps: null
+      tms: 100
+      tdcs: 10
+      tavns: 5
+      ces: null
+      tacs: null
+      pbm: null
+      pemf: null
+      lifu: 3
+      trns: null
+      dbs: 50
+    best_modality: "TMS (Deep/H7), DBS (VC/VS)"
+  anxiety_gad:
+    condition: "Anxiety/GAD"
+    paper_counts:
+      tps: null
+      tms: 20
+      tdcs: 15
+      tavns: 10
+      ces: 40
+      tacs: 5
+      pbm: 5
+      pemf: 5
+      lifu: null
+      trns: null
+      dbs: null
+    best_modality: "CES (Alpha-Stim), taVNS"
+  ptsd:
+    condition: "PTSD"
+    paper_counts:
+      tps: null
+      tms: 30
+      tdcs: 10
+      tavns: 5
+      ces: 10
+      tacs: null
+      pbm: null
+      pemf: null
+      lifu: null
+      trns: null
+      dbs: null
+    best_modality: "TMS, CES"
+  insomnia:
+    condition: "Insomnia"
+    paper_counts:
+      tps: null
+      tms: 5
+      tdcs: 5
+      tavns: 10
+      ces: 25
+      tacs: 15
+      pbm: null
+      pemf: 5
+      lifu: null
+      trns: 2
+      dbs: null
+    best_modality: "CES, tACS (Nexalin)"
+  epilepsy:
+    condition: "Epilepsy"
+    paper_counts:
+      tps: null
+      tms: 20
+      tdcs: 15
+      tavns: 50
+      ces: null
+      tacs: null
+      pbm: null
+      pemf: 20
+      lifu: 5
+      trns: null
+      dbs: 30
+    best_modality: "taVNS, DBS (ANT)"
+  stroke_rehabilitation:
+    condition: "Stroke Rehabilitation"
+    paper_counts:
+      tps: null
+      tms: 100
+      tdcs: 100
+      tavns: 25
+      ces: null
+      tacs: null
+      pbm: 10
+      pemf: 20
+      lifu: null
+      trns: null
+      dbs: null
+    best_modality: "TMS, tDCS"
+  mild_cognitive_impairment:
+    condition: "Mild Cognitive Impairment"
+    paper_counts:
+      tps: 3
+      tms: 15
+      tdcs: 15
+      tavns: null
+      ces: null
+      tacs: 10
+      pbm: 5
+      pemf: 5
+      lifu: null
+      trns: 2
+      dbs: null
+    best_modality: "TPS, TMS, tDCS"
+  tinnitus:
+    condition: "Tinnitus"
+    paper_counts:
+      tps: null
+      tms: 40
+      tdcs: 40
+      tavns: 15
+      ces: null
+      tacs: 8
+      pbm: null
+      pemf: null
+      lifu: null
+      trns: 15
+      dbs: null
+    best_modality: "TMS (1 Hz), tDCS, tRNS"
+  schizophrenia:
+    condition: "Schizophrenia"
+    paper_counts:
+      tps: null
+      tms: 50
+      tdcs: 30
+      tavns: null
+      ces: null
+      tacs: 10
+      pbm: null
+      pemf: null
+      lifu: 3
+      trns: 3
+      dbs: null
+    best_modality: "TMS (1 Hz L-TPJ), tDCS"
+  tbi_concussion:
+    condition: "TBI/Concussion"
+    paper_counts:
+      tps: null
+      tms: 10
+      tdcs: 10
+      tavns: null
+      ces: null
+      tacs: null
+      pbm: 25
+      pemf: 10
+      lifu: null
+      trns: null
+      dbs: null
+    best_modality: "PBM (810 nm), tDCS"
+  addiction:
+    condition: "Addiction"
+    paper_counts:
+      tps: null
+      tms: 30
+      tdcs: 30
+      tavns: null
+      ces: null
+      tacs: null
+      pbm: null
+      pemf: 3
+      lifu: 3
+      trns: null
+      dbs: 5
+    best_modality: "TMS, tDCS"
+  adhd:
+    condition: "ADHD"
+    paper_counts:
+      tps: 2
+      tms: 15
+      tdcs: 20
+      tavns: null
+      ces: null
+      tacs: 5
+      pbm: null
+      pemf: 5
+      lifu: null
+      trns: null
+      dbs: null
+    best_modality: "tDCS (DLPFC), TMS"
+  essential_tremor:
+    condition: "Essential Tremor"
+    paper_counts:
+      tps: null
+      tms: 10
+      tdcs: null
+      tavns: null
+      ces: null
+      tacs: null
+      pbm: null
+      pemf: null
+      lifu: 5
+      trns: null
+      dbs: 200
+    best_modality: "DBS (VIM), LIFU (MRgFUS)"
+  dystonia:
+    condition: "Dystonia"
+    paper_counts:
+      tps: null
+      tms: 10
+      tdcs: 5
+      tavns: null
+      ces: null
+      tacs: null
+      pbm: null
+      pemf: null
+      lifu: null
+      trns: null
+      dbs: 100
+    best_modality: "DBS (GPi)"
+  multiple_sclerosis:
+    condition: "Multiple Sclerosis"
+    paper_counts:
+      tps: null
+      tms: 15
+      tdcs: 10
+      tavns: null
+      ces: null
+      tacs: null
+      pbm: null
+      pemf: 10
+      lifu: null
+      trns: 5
+      dbs: null
+    best_modality: "PEMF, tRNS"
+  fibromyalgia:
+    condition: "Fibromyalgia"
+    paper_counts:
+      tps: null
+      tms: 15
+      tdcs: 25
+      tavns: 5
+      ces: 5
+      tacs: null
+      pbm: null
+      pemf: 5
+      lifu: null
+      trns: null
+      dbs: null
+    best_modality: "tDCS (M1), TMS"
+  autism_spectrum_disorder:
+    condition: "Autism Spectrum Disorder"
+    paper_counts:
+      tps: 2
+      tms: 5
+      tdcs: 5
+      tavns: null
+      ces: null
+      tacs: null
+      pbm: null
+      pemf: null
+      lifu: null
+      trns: null
+      dbs: null
+    best_modality: "TMS, TPS (emerging)"
+  disorders_of_consciousness:
+    condition: "Disorders of Consciousness"
+    paper_counts:
+      tps: 2
+      tms: 5
+      tdcs: 10
+      tavns: null
+      ces: null
+      tacs: null
+      pbm: null
+      pemf: null
+      lifu: null
+      trns: null
+      dbs: null
+    best_modality: "TMS, tDCS"
+  source:_sozo_brain_center_clinical_:
+    condition: "Source: SOZO Brain Center Clinical Research Compilation | PubMed/Scholar estimates as of 2024-2025 | Generated April 2026"
+    paper_counts:
+      tps: null
+      tms: null
+      tdcs: null
+      tavns: null
+      ces: null
+      tacs: null
+      pbm: null
+      pemf: null
+      lifu: null
+      trns: null
+      dbs: null
+    best_modality: null

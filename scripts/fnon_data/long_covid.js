@@ -613,4 +613,13 @@ module.exports = {
       { authors: "Srivastava A, Dasgupta A, Bhattacharyya S, et al.", year: 2022, title: "Neurological complications of COVID-19 and their potential mechanisms", journal: "European Journal of Neuroscience", volume: "56(9)", pages: "5590–5614", doi: "10.1111/ejn.15837" },
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: null,
+  fnonNotes: 'No FNON data available for this condition.',
+  fnonQeegBiomarker: null,
+  fnonPaperCounts: null,
+  fnonBestFirstLine: null,
+  fnonBestSecondLine: null,
+  fnonScore: 0,
+
 };

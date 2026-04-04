@@ -341,4 +341,27 @@ module.exports = {
       "Heinricher MM, et al. (2009). Descending control of nociception: Specificity, recruitment and plasticity. Brain Res Rev, 60(1), 214–225. doi:10.1016/j.brainresrev.2008.12.009",
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: 'Pain Matrix + Sensorimotor',
+  fnonSecondaryNetwork: 'Limbic insula-amygdala',
+  fnonFBand: 'Gamma suppression + Alpha restoration',
+  fnonEegNodes: 'Cz/C3/C4(M1/S1)+T3/T4(insula/limbic)+Fz(ACC)+Pz(parietal attention)',
+  fnonOscillationGoal: 'Suppress neuropathic gamma; restore M1 alpha+beta (mu); reduce ACC theta; suppress insula-SN hyperactivation',
+  fnonPrimaryModalityParams: 'tDCS anodal M1 (C3/C4, 2mA, 20min, 10 sessions — strongest evidence); TMS high-freq M1 (10Hz); taVNS (100Hz analgesia mode)',
+  fnonAddonModality: 'TPS multi-site (M1+ACC+insula); LIFU (thalamic VPL nucleus); CES (Alpha-Stim MET probes); PBM bilateral M1',
+  fnonSessions: '5–20',
+  fnonEvidenceLevel: 'RCT + Meta-analysis',
+  fnonLitCount: '150+ tDCS; 60+ TMS; 40+ taVNS; 15+ LIFU',
+  fnonKeyReferences: 'Fregni 2006; Lefaucheur 2017 IFCNS; Napadow 2012 taVNS; Lee 2015 LIFU thalamic; Network targets pain 2023',
+  fnonNotes: 'FNON: Pain gamma signature = suppression target. LIFU unique for thalamic pain relay. taVNS 100Hz (not 25Hz) for pain — frequency specific.',
+  fnonQeegBiomarker: '↑Gamma; ↓Mu; ↓Alpha',
+  fnonPaperCounts: {
+    tps: 5, tms: 60, tdcs: 150,
+    tavns: 40, ces: 35, tacs: 10,
+    pbm: 10, lifu: 15, pemf: 15, dbs: 10,
+  },
+  fnonBestFirstLine: 'tDCS M1 anodal (150 papers)',
+  fnonBestSecondLine: 'TPS multi-site + LIFU',
+  fnonScore: 4,
+
 };

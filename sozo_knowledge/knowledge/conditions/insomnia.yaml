@@ -547,3 +547,89 @@ governance_rules:
 - CES device regulatory status must be confirmed for jurisdiction prior to clinical use — FDA Class III cleared (USA); TGA/MHRA/CE
   registration status varies.
 patient_journey_notes: {}
+
+tps_evidence:
+  total_papers: 12
+  high_quality_count: 3
+  evidence_grade: "emerging"
+  key_papers:
+    - doi: "10.1001/jamanetworkopen.2025.5776"
+      title: "Transcranial Pulsed Current Stimulation and Social Functioning in Children With Autism"
+      year: 2025
+      study_type: "rct"
+      citations: 2
+      takeaway: "Transcranial pulsed current stimulation improves social functioning and sleep disorders in children with ASD, suggesting sleep regulatory effects."
+    - doi: "10.3390/jcm11133809"
+      title: "Neuromodulation Using Transcranial Focused Ultrasound on the Bilateral Medial Prefrontal Cortex"
+      year: 2022
+      study_type: "non-rct experimental"
+      citations: 33
+      takeaway: "Transcranial focused ultrasound can potentially modify brain activity and connectivity associated with neuropsychiatric diseases including insomnia."
+  clinical_note: >
+    TPS evidence for insomnia is emerging with 12 papers and 3 high-quality studies. An RCT demonstrates
+    pulsed stimulation improves sleep disorders in ASD children, and tFUS studies show mPFC targeting
+    modulates sleep-wake circuitry — providing mechanistic rationale for TPS sleep protocol development.
+
+
+fnon_protocol:
+  primary_network: "Thalamocortical sleep + DMN"
+  secondary_network: "DMN hyperarousal"
+  f_band: "Delta/theta facilitation + beta suppression"
+  eeg_nodes: "Fz/F3/F4(frontal)+Cz(central spindles)+bilateral mastoid (tACS/CES path)"
+  oscillation_goal: >
+    Facilitate sleep spindles(12-15Hz)+delta(0.5-4Hz); suppress hyperarousal beta; restore thalamocortical sleep rhythm
+  primary_modality_params: >
+    tACS Nexalin (77.5Hz, 15mA, forehead-bilateral mastoid, FDA cleared) OR CES Alpha-Stim (0.5Hz, 100-500μA, 20-60min before sleep)
+  addon_modality: >
+    PEMF (delta/theta 1-8Hz, 30min pre-sleep); PBM bilateral frontal; taVNS (25Hz, 30min pre-sleep)
+  sessions: "8 weeks (tACS) or 3-5 weeks (CES)"
+  evidence_level: "RCT (CES+tACS); High quality"
+  lit_count: "25+ CES; 15+ tACS; 5+ PEMF"
+  key_references: "Barclay 2014 meta (CES ES=-1.02); Nexalin RCTs 2022-2024; Gilula 2007 CES insomnia"
+  fnon_notes: >
+    FNON: Sleep spindle+delta deficit are primary targets. Nexalin 77.5Hz paradoxically entrains via thalamocortical resonance. CES 0.5Hz = direct slow oscillation entrainment.
+
+qeeg_biomarkers:
+  primary_biomarker: "↓Spindles; ↓Delta; ↑Beta"
+  f_band_target: "Delta + Theta"
+
+modality_evidence_counts:
+  tps: null
+  tms: null
+  tdcs: 10
+  tavns: 80
+  ces: 25
+  tacs: 15
+  pbm: 5
+  lifu: null
+  pemf: 5
+  dbs: null
+  best_first_line: "CES (FDA cleared)"
+  best_second_line: "tACS 77.5Hz Nexalin"
+  fnon_score: 4
+
+
+assessment_profile:
+  primary_clinical_scales: null
+  neuropsychological_battery: null
+  primary_scale: null
+  qeeg_primary_signature: null
+
+
+neuromod_profile:
+  key_symptoms: >
+    Difficulty falling/staying asleep, early awakening, non-restorative sleep, daytime fatigue, impaired concentration, irritability, anxiety about sleep
+  qeeg_patterns: >
+    ↑ high-frequency beta (hyperarousal); ↑ gamma; ↓ delta during sleep; ↑ alpha intrusion in NREM; ↓ sleep spindles (sigma 12-15 Hz); ↑ theta/alpha ratio at sleep onset; cortical hyperarousal markers
+  qeeg_electrodes: "Fz, F3/F4 (frontal beta excess), Cz (central hyperarousal), Pz (alpha intrusion), C3/C4 (↓ sleep spindles)"
+  affected_regions: >
+    DLPFC (hyperactive at night), hypothalamus (SCN/VLPO), thalamus (reticular nucleus — spindle generation), ACC, brainstem arousal centers
+  primary_networks_disrupted: >
+    ARAS/Ascending reticular activating system (hyperactive), Thalamocortical circuits (↓ spindle generation), DMN (fails to deactivate), Sleep-wake regulatory network (dysregulated)
+  network_dysfunction_pattern: >
+    ARAS hyperactivity → cortical hyperarousal → cannot transition to NREM; thalamic reticular nucleus dysfunction → ↓ sleep spindles → poor sleep consolidation; DLPFC remains engaged instead of deactivating
+  recommended_techniques: >
+    CES 0.5 Hz Alpha-Stim pre-sleep; tACS 77.5 Hz (Nexalin) or slow-wave tACS; taVNS 25 Hz pre-sleep; TMS 1 Hz R-DLPFC; neurofeedback SMR (12-15 Hz)
+  primary_stimulation_targets: "DLPFC (R, inhibitory — 1 Hz), thalamic circuits (tACS), brainstem/vagal (taVNS, CES)"
+  stimulation_rationale: >
+    R-DLPFC inhibition ↓ cognitive hyperarousal; slow-wave tACS promotes SWS architecture; CES/taVNS → parasympathetic activation → ↓ cortisol/ARAS; SMR NFB trains sleep spindle generation

@@ -1,0 +1,235 @@
+# SOZO Brain Center — Transcranial Direct Current Stimulation Protocol Reference
+# Source: Master with QEEG places.xlsx, April 2026
+# 11 condition protocols
+
+modality: "tdcs"
+name: "Transcranial Direct Current Stimulation"
+
+protocols:
+  - condition: "Depression (MDD)"
+    brain_target: "L-DLPFC (Anode), R Supraorbital (Cathode)"
+    eeg_position: "F3 (Anode), Fp2 (Cathode)"
+    protocol_summary: >
+    Anodal stimulation of L-DLPFC with cathodal reference at R supraorbital; 2 mA, 20–30 min, 10–20 sessions. SELECT-TDCS and ELECT-TDCS trial protocols.
+    intensity: "2 mA"
+    frequency: "DC (0 Hz)"
+    duration_per_session: "20–30 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A (DC)"
+    devices: "Soterix HD-tDCS, Flow Neuroscience, Newronika HDC-STIM"
+    montage: "Anode F3 / Cathode Fp2 (35 cm²)"
+    regulatory_status: "Investigational (FDA Breakthrough 2021 for Flow)"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "200+"
+    key_references: >
+    Fregni 2006; Loo 2012 (SELECT-TDCS); Brunoni 2017 (ELECT-TDCS)
+    side_effects: >
+    Tingling, itching, mild redness at electrode site. Occasionally headache.
+    notes: >
+    Home use possible (Flow Neuroscience device). Best combined with antidepressants or psychotherapy.
+  - condition: "Chronic Pain"
+    brain_target: "Contralateral M1 (Anode), Fp2 (Cathode)"
+    eeg_position: "C3 or C4 (Anode), Fp2 (Cathode)"
+    protocol_summary: >
+    Anodal M1 stimulation modulates descending pain inhibitory pathways; 2 mA, 20 min, 5–10 sessions.
+    intensity: "2 mA"
+    frequency: "DC (0 Hz)"
+    duration_per_session: "20 min"
+    total_sessions: "5–10 sessions"
+    pulses_per_session: "N/A (DC)"
+    devices: "Soterix, Newronika HDC-STIM"
+    montage: "Anode M1 (C3/C4) / Cathode Fp2"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "150+"
+    key_references: >
+    Fregni 2006 (pain); Nitsche 2008; Lefaucheur 2017
+    side_effects: >
+    Tingling, itching, mild skin redness. Very safe.
+    notes: >
+    Works for fibromyalgia, CRPS, post-surgical pain. Evidence strongest for neuropathic and central sensitization pain.
+  - condition: "Stroke (Motor Rehabilitation)"
+    brain_target: "Ipsilesional M1 (Anode)"
+    eeg_position: "Ipsilesional C3 or C4 (Anode), contralateral Fp (Cathode)"
+    protocol_summary: >
+    Anodal stimulation ipsilesional M1 to promote motor recovery; paired with physical/occupational therapy.
+    intensity: "1–2 mA"
+    frequency: "DC (0 Hz)"
+    duration_per_session: "20 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A (DC)"
+    devices: "Soterix, Newronika"
+    montage: "Anode ipsilesional M1 / Cathode contralateral M1 or Fp"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "100+"
+    key_references: >
+    Boggio 2007; Nitsche 2008; Lefaucheur 2017 (IFCNS guidelines)
+    side_effects: >
+    Tingling, itching. Rarely skin irritation.
+    notes: >
+    Timing relative to rehab session critical. Concurrent stimulation during PT is optimal.
+  - condition: "Cognitive Enhancement / MCI"
+    brain_target: "L-DLPFC (Anode)"
+    eeg_position: "F3 (Anode), Fp2 (Cathode)"
+    protocol_summary: >
+    Anodal L-DLPFC to enhance working memory and executive function; widely used in healthy aging and MCI research.
+    intensity: "1–2 mA"
+    frequency: "DC (0 Hz)"
+    duration_per_session: "20 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A (DC)"
+    devices: "Soterix, Flow Neuroscience"
+    montage: "Anode F3 / Cathode Fp2 or F4"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "80+"
+    key_references: >
+    Meinzer 2015; Bystad 2016; Dedoncker 2016 (meta)
+    side_effects: >
+    Tingling, itching. Very mild.
+    notes: >
+    Large heterogeneity in literature. Online (during task) effects strongest.
+  - condition: "Tinnitus"
+    brain_target: "Temporal Cortex / L-DLPFC"
+    eeg_position: "T3/T5 or F3"
+    protocol_summary: >
+    Various montages targeting auditory cortex or DLPFC to modulate tinnitus distress and loudness.
+    intensity: "1–2 mA"
+    frequency: "DC (0 Hz)"
+    duration_per_session: "20–30 min"
+    total_sessions: "10–15 sessions"
+    pulses_per_session: "N/A (DC)"
+    devices: "Soterix, Newronika"
+    montage: "Various temporal-frontal montages"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "40+"
+    key_references: >
+    Fregni 2006 (tinnitus); Vanneste 2010
+    side_effects: >
+    Tingling, itching. Very safe.
+    notes: >
+    No single optimal montage established. Multi-target approaches may be superior.
+  - condition: "Schizophrenia"
+    brain_target: "L-DLPFC (Anode), L-TPJ (Cathode)"
+    eeg_position: "F3 (Anode), T3/CP5 (Cathode)"
+    protocol_summary: >
+    Dual-site stimulation: anodal L-DLPFC + cathodal L-TPJ to modulate prefrontal-temporal imbalance.
+    intensity: "2 mA"
+    frequency: "DC (0 Hz)"
+    duration_per_session: "20 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A (DC)"
+    devices: "Soterix, Newronika"
+    montage: "Anode F3 / Cathode T3 or CP5"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "30+"
+    key_references: >
+    Brunelin 2012; Mondino 2015
+    side_effects: >
+    Tingling, itching at electrode sites.
+    notes: >
+    Targets auditory verbal hallucinations and cognitive deficits. Cathodal temporal cortex reduces hallucinations.
+  - condition: "Fibromyalgia"
+    brain_target: "M1 (Anode)"
+    eeg_position: "C3 (Anode), Fp2 (Cathode)"
+    protocol_summary: >
+    Anodal M1 stimulation for widespread pain reduction in fibromyalgia; 2 mA, 20 min.
+    intensity: "2 mA"
+    frequency: "DC (0 Hz)"
+    duration_per_session: "20 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A (DC)"
+    devices: "Soterix, Newronika"
+    montage: "Anode C3 (M1) / Cathode Fp2"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT"
+    literature_count: "25+"
+    key_references: >
+    Fregni 2006 (fibromyalgia); Valle 2009
+    side_effects: >
+    Tingling, itching. Very safe.
+    notes: >
+    Also combined with aerobic exercise for enhanced outcomes.
+  - condition: "ADHD"
+    brain_target: "R-DLPFC (Anode)"
+    eeg_position: "F4 (Anode), Fp1 (Cathode)"
+    protocol_summary: >
+    Anodal right DLPFC stimulation for attention and inhibitory control improvement in ADHD.
+    intensity: "1–2 mA"
+    frequency: "DC (0 Hz)"
+    duration_per_session: "20 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A (DC)"
+    devices: "Soterix, Flow Neuroscience"
+    montage: "Anode F4 / Cathode Fp1"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "20+"
+    key_references: >
+    Soff 2017; Prehn-Kristensen 2014
+    side_effects: >
+    Tingling, itching. Generally well tolerated.
+    notes: >
+    Both L- and R-DLPFC protocols studied. R-DLPFC targets inhibitory control more directly.
+  - condition: "Addiction"
+    brain_target: "Bilateral DLPFC (Anode bilateral)"
+    eeg_position: "F3/F4 bilateral"
+    protocol_summary: >
+    Bilateral anodal DLPFC to reduce craving and improve executive control in addiction.
+    intensity: "2 mA"
+    frequency: "DC (0 Hz)"
+    duration_per_session: "20–30 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A (DC)"
+    devices: "Soterix, Newronika"
+    montage: "Bilateral Anode F3+F4 / Cathode elsewhere"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "30+"
+    key_references: >
+    Boggio 2008 (alcohol); Batista 2015
+    side_effects: >
+    Tingling, itching.
+    notes: >
+    Targets craving via prefrontal top-down control of limbic system. Applicable to alcohol, cocaine, nicotine.
+  - condition: "Epilepsy"
+    brain_target: "Epileptogenic Focus (Cathodal)"
+    eeg_position: "Variable, over focus"
+    protocol_summary: >
+    Cathodal stimulation to reduce cortical excitability at seizure focus; 1–2 mA.
+    intensity: "1–2 mA"
+    frequency: "DC (0 Hz)"
+    duration_per_session: "20 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A (DC)"
+    devices: "Soterix, Newronika"
+    montage: "Cathode over epileptogenic focus"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Case series"
+    literature_count: "15+"
+    key_references: >
+    Fregni 2006 (epilepsy); Nitsche 2008
+    side_effects: >
+    Tingling, itching at electrode sites.
+    notes: >
+    Cathodal inhibitory protocol. Requires precise localization of epileptogenic zone.
+  - condition: "Source: SOZO Brain Center Clinical Research Compilation | neuromod_data.md | Updated April 2026"
+    brain_target: null
+    eeg_position: null
+    protocol_summary: null
+    intensity: null
+    frequency: null
+    duration_per_session: null
+    total_sessions: null
+    pulses_per_session: null
+    devices: null
+    montage: null
+    regulatory_status: null
+    evidence_level: null
+    literature_count: null
+    key_references: null
+    side_effects: null
+    notes: null

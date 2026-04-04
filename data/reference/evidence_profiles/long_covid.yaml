@@ -48,6 +48,16 @@ search_profiles:
       (validation[Title/Abstract] OR outcome[Title/Abstract])
     max_results: 10
 
+
+  tps_protocols:
+    query: >
+      Long COVID[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
 priority_pmids:
   - "33461194"  # Taquet 2021 neurological sequelae COVID
   - "33990065"  # Fernandez-de-las-Penas 2021 persistent symptoms
@@ -57,3 +67,27 @@ notes: >
   Mark all protocols as LOW confidence or INVESTIGATIONAL.
   Distinguish brain fog/cognitive (DLPFC target) from dysautonomia (taVNS) phenotypes.
   Evidence base growing rapidly — search with broader date range.
+
+tps_priority_dois:
+  - doi: "10.1093/milmed/usad182"
+    title: "Case Report of Improvement in Long-COVID Symptoms in an Air Force Medic Treated With Transcranial Magnetic Stimulation U"
+    authors: "Joe X Zhang, Jianzhong Zhang"
+    year: 2023
+    study_type: "case report"
+    citations: 7
+    takeaway: "Electro-Magnetic Brain Pulse (EMBP) treatment improved mood, sense of smell, and brain fogging in a COVID-19 patient, reducing dyspnea and enhancing c"
+  - doi: "10.1093/ijnp/pyae059.360"
+    title: "TRANSCRANIAL PULSE STIMULATION (TPS) OPENS UP NEW HORIZONS IN THE TREATMENT OF PSYCHIATRIC PATIENTS"
+    authors: "*Marc Ziegenbein, U. Sprick, C. Cheng, Teris Cheung"
+    year: 2025
+    study_type: ""
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows promise in treating psychiatric patients and Alzheimer's disease, with potential for off-label applications"
+  - doi: "10.1093/ijnp/pyae059.360"
+    title: "TRANSCRANIAL PULSE STIMULATION (TPS) OPENS UP NEW HORIZONS IN THE TREATMENT OF PSYCHIATRIC PATIENTS"
+    authors: "*Marc Ziegenbein, U. Sprick, C. Cheng, Teris Cheung"
+    year: 2025
+    study_type: ""
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows promise in treating psychiatric patients and Alzheimer's disease, with potential for off-label applications"
+  TPS evidence: 3 papers identified (0 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

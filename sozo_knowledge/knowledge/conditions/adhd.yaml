@@ -903,3 +903,130 @@ patient_journey_notes:
   stage_3: >-
     Administer ASRS, BRIEF-2, CPT-3. Document medication regimen including
     stimulants. Screen for comorbid depression (PHQ-9) and anxiety (GAD-7).
+
+tps_evidence:
+  total_papers: 15
+  high_quality_count: 7
+  evidence_grade: "emerging"
+  key_papers:
+    - doi: "10.3389/fneur.2024.1364270"
+      title: "Efficacy and safety of transcranial pulse stimulation in young adolescents with attention-deficit/hyperactivity disorder"
+      year: 2024
+      study_type: "rct"
+      citations: 11
+      takeaway: "TPS is an effective and safe adjunct treatment for ADHD in young adolescents, with a 30% reduction in mean SNAP-IV scores."
+    - doi: "10.3389/fneur.2023.1076086"
+      title: "Evaluating the efficacy and safety of transcranial pulse stimulation on adolescents with attention deficit hyperactivity disorder"
+      year: 2023
+      study_type: "rct"
+      citations: 5
+      takeaway: "TPS may be an effective and safe treatment for ADHD in young adolescents."
+  clinical_note: >
+    ADHD has direct TPS RCT evidence from two Cheung et al. trials in adolescents, showing a 30% reduction
+    in SNAP-IV scores and a favorable safety profile. This represents the strongest direct TPS evidence
+    for any off-label psychiatric condition outside of Alzheimer's disease.
+
+
+fnon_protocol:
+  primary_network: "ECN + DAN + DMN suppression"
+  secondary_network: "DMN suppress"
+  f_band: "TBR correction (Theta/Beta ratio)"
+  eeg_nodes: "Fz/F3/F4(prefrontal)+Cz/Pz(central-parietal)+P3/P4(parietal attention)"
+  oscillation_goal: >
+    Correct TBR excess (canonical ADHD qEEG biomarker); suppress DMN intrusion; facilitate ECN-DAN coupling
+  primary_modality_params: >
+    TPS: 6000 pulses, EFD 0.20 mJ/mm², 5 Hz PRF, 6 sessions bilateral prefrontal — RCT 2024 Frontiers (11 cit)
+  addon_modality: >
+    tACS (7Hz theta-alpha border, Fz/FCz); CES (Alpha-Stim frontal alpha); PBM (F3/F4 bilateral)
+  sessions: "6–12"
+  evidence_level: "Pilot RCT 2024 (TPS); Investigational"
+  lit_count: "2+ TPS RCT; 20+ tDCS; 10+ tACS"
+  key_references: "TPS adolescent RCT 2024 Frontiers (11 cit); ADHD tACS 2020-2024; Meinzer tDCS ADHD"
+  fnon_notes: >
+    TBR (theta/beta) = primary ADHD qEEG biomarker. NF (neurofeedback) complements TPS for TBR training.
+
+qeeg_biomarkers:
+  primary_biomarker: "↑TBR; ↓Beta frontal"
+  f_band_target: "TBR (Theta/Beta)"
+
+modality_evidence_counts:
+  tps: 2
+  tms: 30
+  tdcs: 20
+  tavns: 5
+  ces: 5
+  tacs: 10
+  pbm: 5
+  lifu: 3
+  pemf: 5
+  dbs: null
+  best_first_line: "TMS L-DLPFC + tDCS"
+  best_second_line: "TPS bilateral + tACS 7Hz"
+  fnon_score: 3
+
+
+assessment_profile:
+  primary_clinical_scales: >
+    CAARS (Conners' Adult ADHD Rating Scale — adult); DIVA-2.0 (diagnostic interview); BRIEF-2 (executive function); Brown ADD Rating Scales; ASRS-v1.1 (Adult ADHD Self-Report Scale); QbCheck/QbTest (motion + attention objective); Vanderbilt (paediatric); SNAP-IV; CBCL; PHQ-9 (depression comorbidity); WURS (childhood retrospective)
+  neuropsychological_battery: >
+    CPT-II (Conners' Continuous Performance Test — primary objective ADHD measure; ↑ omission errors, ↑ RT variability); QbTest (motion tracking + attention score); TOVA (Test of Variables of Attention); WAIS Working Memory Index; Digit Span; SDMT; TMT-A&B; Stop-Signal Task (SSRT — response inhibition); Stroop (interference); N-back WM
+  physiological_assessments: >
+    HRV (↓ RMSSD — vagal tone deficit in ADHD); EDA (electrodermal activity — ↑ inattention correlate); QbTest motion tracker (hyperactivity quantification); Actigraphy (activity level, sleep); Cortisol (HPA in ADHD); Heart rate variability biofeedback potential
+  functional_assessments: >
+    CPT-II monitoring (objective attention); QbTest pre/post; CAARS monthly; School/work performance record; Medication effects monitoring; Sleep diary (ADHD sleep dysregulation); Exercise diary (exercise as ADHD intervention); WSAS disability
+  neuroimaging: >
+    Structural MRI (DLPFC, caudate volume ↓ in ADHD); fMRI resting-state (DMN-ECN anti-correlation deficit); DTI (fronto-striatal white matter); fMRI task (N-back, Stop-Signal — reduced frontal activation); PET DA (D2/DAT imaging — striatal dopamine deficit)
+  assessment_rationale: >
+    TBR is primary FNON biomarker for ADHD. TPS bilateral prefrontal + tACS 7 Hz (theta-alpha boundary) target the TBR excess. Neurofeedback TBR training complements FNON protocols.
+  primary_scale: >
+    CAARS-S:L (self-report) + CAARS-O:L (observer) — monthly during treatment
+  screening_scales: >
+    ASRS-v1.1 (6-item ultra-brief screen); WURS (Wender Utah childhood)
+  severity_staging: >
+    Brown ADHD Rating Scales — domain profile; DSM-5 symptom checklist
+  qol_scale: >
+    WSAS; WHODAS-2; AAQoL (Adult ADHD Quality of Life); EQ-5D
+  follow_up_frequency: >
+    Monthly CAARS; 3-monthly AAQoL; 6-weekly QbTest objective
+  comorbidity_screens: >
+    PHQ-9; GAD-7; ISI (sleep dysregulation in ADHD); SRS-2 (if ASD comorbid)
+  safety_screens: >
+    None specific for neuromodulation — medication interaction monitoring
+  score_thresholds: >
+    ASRS: ≥14 = probable ADHD. CAARS ADHD Index >65T = clinically significant. QbCheck: hyperactivity + inattention >1.5SD = ADHD objective support.
+  qeeg_primary_signature: >
+    ↑ TBR (theta/beta ratio at Cz >3.0 — PRIMARY ADHD qEEG biomarker); Excess frontal theta Fz; ↓ Beta Cz; Subtypes: maturational lag vs hyperarousal; ↑ DMN intrusion
+  qeeg_key_electrodes: "Cz (TBR primary ADHD site); Fz (frontal theta); F3/F4 (frontal slowing); C3/C4 (central beta ↓); Pz (attention monitoring)"
+  qeeg_key_metrics: >
+    TBR at Cz (theta/beta ratio: >3.0 = ADHD diagnosis support; most studied ADHD qEEG metric); Absolute theta Fz; Beta power Cz; P300 amplitude Cz/Pz; ERN at FCz (attention monitoring — ↓ in ADHD); CPT-II correlation with TBR
+  qeeg_eyes_open: >
+    ↑ TBR Cz; ↑ Frontal theta Fz; ↓ Beta globally; ↑ Slow-wave activity
+  qeeg_eyes_closed: >
+    ↑ Theta globally (especially Fz/Cz); ↓ Beta Cz; ↑ DMN activity; ↓ Alpha (task-relevant suppression deficit)
+  qeeg_event_related: >
+    P300 (odd-ball at Cz — ↓ amplitude = inattention; ↑ latency = processing speed deficit); ERN at FCz (↓ in ADHD = poor error monitoring); Go/No-Go (↑ commission errors, ↓ N2); Contingent Negative Variation (CNV — expectancy deficit in ADHD); CPT-ERP
+  qeeg_pathological_threshold: >
+    TBR at Cz >3.0 (primary cutoff — FDA-cleared NeuroPace/NEBA threshold); TBR >5.0 = severe ADHD; Frontal theta >8 μV² Fz = significant slowing
+  qeeg_treatment_target: >
+    TBR ↓ at Cz toward <3.0 (primary ADHD treatment response metric); Frontal theta ↓ Fz; Beta ↑ Cz; P300 ↑; DMN-ECN anti-correlation restoration
+  qeeg_response_biomarker: >
+    TBR change per session (primary neurofeedback and TPS/tACS metric); CAARS/Conners correlation with TBR; CPT-II change vs beta power; QbTest motion correlation with theta
+
+
+neuromod_profile:
+  key_symptoms: >
+    Inattention, hyperactivity, impulsivity, difficulty sustaining attention, disorganization, poor time management, fidgeting, interrupting, emotional dysregulation
+  qeeg_patterns: >
+    ↑ theta/beta ratio (TBR at Cz — classic); excess frontal theta; ↓ beta; subtypes: (1) Maturational lag = ↑ theta + ↓ beta; (2) Hyperarousal = ↑ beta; (3) ↑ alpha (anxiety comorbid); (4) Thalamocortical dysrhythmia = ↑ theta+beta; ↑ delta (some)
+  qeeg_electrodes: "Cz (TBR), Fz (frontal theta), F3/F4 (frontal slowing), C3/C4 (central beta ↓), Pz"
+  affected_regions: >
+    DLPFC (R+L — hypoactive), ACC (impaired error monitoring), striatum/caudate (dopamine deficit), SMA, PFC, cerebellum
+  primary_networks_disrupted: >
+    Executive/CEN (hypoactive — poor sustained attention), DMN (fails to deactivate during tasks → DMN interference), Salience (impaired switching), Frontoparietal attention network (underactive), Default-executive anti-correlation (↓)
+  network_dysfunction_pattern: >
+    DLPFC hypoactivity → poor sustained attention; DMN fails to deactivate during cognitive tasks → task-irrelevant mind wandering; CEN-DMN anti-correlation breakdown → ↑ distractibility
+  recommended_techniques: >
+    tDCS anode R-DLPFC or bilateral DLPFC; TMS 10 Hz L-DLPFC; neurofeedback TBR (theta ↓, beta ↑, SMR ↑); tACS; CES
+  primary_stimulation_targets: "R-DLPFC (F4) or bilateral DLPFC (F3/F4), frontal midline (Fz)"
+  stimulation_rationale: >
+    DLPFC excitation ↑ catecholamine-driven executive control; TBR neurofeedback operant conditioning directly addresses maturational lag pattern; tACS at beta frequency ↑ cortical tone

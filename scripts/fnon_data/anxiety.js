@@ -341,4 +341,27 @@ module.exports = {
       "Hilbert K, Lueken U, Beesdo-Baum K. (2014). Neural structures, functioning and connectivity in generalized anxiety disorder and interaction with neuroendocrine systems: A systematic review. J Affect Disord, 158, 114–126. doi:10.1016/j.jad.2014.01.022",
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: 'Salience Network',
+  fnonSecondaryNetwork: 'Limbic amygdala-PFC',
+  fnonFBand: 'Beta + Theta',
+  fnonEegNodes: null,
+  fnonOscillationGoal: null,
+  fnonPrimaryModalityParams: null,
+  fnonAddonModality: null,
+  fnonSessions: null,
+  fnonEvidenceLevel: null,
+  fnonLitCount: null,
+  fnonKeyReferences: null,
+  fnonNotes: 'Full FNON protocol pending — see fnon_protocol_matrix.yaml.',
+  fnonQeegBiomarker: '↑Beta frontal; ↑Theta limbic',
+  fnonPaperCounts: {
+    tps: null, tms: 20, tdcs: 20,
+    tavns: 80, ces: 40, tacs: 10,
+    pbm: 5, lifu: 5, pemf: 10, dbs: null,
+  },
+  fnonBestFirstLine: 'taVNS CE + CES',
+  fnonBestSecondLine: 'TMS L-DLPFC + PBM',
+  fnonScore: 4,
+
 };

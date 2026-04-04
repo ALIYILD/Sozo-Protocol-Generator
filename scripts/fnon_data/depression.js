@@ -364,4 +364,27 @@ module.exports = {
       "Sha, Z., Wager, T. D., Mechelli, A., & He, Y. (2019). Common dysfunction of large-scale neurocognitive networks across psychiatric disorders. Biological Psychiatry: Cognitive Neuroscience and Neuroimaging, 4(5), 425–434. https://doi.org/10.1016/j.bpsc.2018.11.011",
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: 'ECN (L-DLPFC) + DMN',
+  fnonSecondaryNetwork: 'DMN PCC rumination',
+  fnonFBand: 'Alpha asymmetry + Theta suppression',
+  fnonEegNodes: 'F3(L-DLPFC)+Pz(PCC/DMN)+T3/T4 (limbic)',
+  fnonOscillationGoal: 'Correct L>R DLPFC alpha asymmetry (FAA); suppress frontal theta; reduce DMN rumination hyperactivity',
+  fnonPrimaryModalityParams: 'TPS: 6000 pulses, EFD 0.20 mJ/mm², 5 Hz PRF, 6-12 sessions. OR TMS 10Hz L-DLPFC (120%rMT, 3000 pulses, 30 sessions)',
+  fnonAddonModality: 'CES (Alpha-Stim 0.5Hz, 60min daily) for frontal alpha; taVNS (25Hz, 30-60min) for limbic theta',
+  fnonSessions: '6–30',
+  fnonEvidenceLevel: 'Pilot RCT+2025 RCTs (TPS); FDA Cleared (TMS)',
+  fnonLitCount: '14+ TPS; 500+ TMS; 200+ tDCS',
+  fnonKeyReferences: 'Keeser 2023 IJERPH (34 cit); O\'Reardon 2007; CINP 2025 3x TPS RCTs',
+  fnonNotes: 'FAA (F4-F3 alpha) = primary qEEG biomarker for MDD. TPS offers faster treatment (6 vs 30 sessions).',
+  fnonQeegBiomarker: 'FAA R>L; ↑Theta',
+  fnonPaperCounts: {
+    tps: 14, tms: 500, tdcs: 200,
+    tavns: 80, ces: 30, tacs: 20,
+    pbm: 10, lifu: 10, pemf: 15, dbs: 30,
+  },
+  fnonBestFirstLine: 'TMS rTMS/iTBS (FDA cleared)',
+  fnonBestSecondLine: 'TPS (6 sessions) + CES',
+  fnonScore: 5,
+
 };

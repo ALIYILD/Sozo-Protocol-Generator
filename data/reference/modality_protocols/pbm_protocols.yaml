@@ -1,0 +1,193 @@
+# SOZO Brain Center — Photobiomodulation / Low-Level Light Therapy Protocol Reference
+# Source: Master with QEEG places.xlsx, April 2026
+# 9 condition protocols
+
+modality: "pbm"
+name: "Photobiomodulation / Low-Level Light Therapy"
+
+protocols:
+  - condition: "Alzheimer's / Dementia"
+    brain_target: "DMN nodes, bilateral frontal/temporal/parietal"
+    eeg_position: "Fz, F3/F4, T3/T4, Pz"
+    protocol_summary: >
+    Vielight Neuro Gamma: 810 nm NIR, 40 Hz pulsed, DMN targeting via transcranial + intranasal, 20 min daily, 12 weeks. Targets cytochrome c oxidase in mitochondria.
+    intensity: "250 mW/cm²; 810 nm NIR"
+    frequency: "40 Hz pulsed"
+    duration_per_session: "20 min"
+    total_sessions: "Daily × 12 weeks (84 sessions)"
+    pulses_per_session: "N/A (continuous light delivery)"
+    devices: "Vielight Neuro Gamma (810 nm + intranasal), SYMBYX PDCare"
+    montage: "Transcranial helmet + intranasal probe (DMN coverage)"
+    regulatory_status: "Investigational (CE marked in some EU countries)"
+    evidence_level: "RCT, Open-label"
+    literature_count: "20+"
+    key_references: >
+    Saltmarche 2017; Berman 2017; Proposed Vielight RCT
+    side_effects: >
+    Very minimal. Mild warmth sensation. Extremely safe profile.
+    notes: >
+    810 nm: best transcranial penetration. Intranasal reaches hippocampus via cribriform plate. Pulsed 40 Hz for gamma entrainment.
+  - condition: "TBI / Concussion"
+    brain_target: "Frontal, temporal, parietal (injury areas)"
+    eeg_position: "Fz, F3/F4, T3/T4, Pz"
+    protocol_summary: >
+    810 nm NIR transcranial PBM over affected regions; continuous or pulsed; 20 min/day. Reduces neuroinflammation and promotes neuroregeneration.
+    intensity: "250 mW/cm²; 810 nm"
+    frequency: "10–40 Hz pulsed or CW"
+    duration_per_session: "20 min"
+    total_sessions: "20–30 sessions"
+    pulses_per_session: "N/A"
+    devices: "Vielight Neuro, Thor Photomedicine"
+    montage: "Transcranial LED/laser helmet or targeted probes"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, RCT"
+    literature_count: "25+"
+    key_references: >
+    Naeser 2014; Morries 2015; Hipskind 2019
+    side_effects: >
+    Very minimal. Mild warmth. Extremely safe.
+    notes: >
+    Addresses mitochondrial dysfunction post-TBI. Reduces oxidative stress. Promotes ATP production.
+  - condition: "Depression (MDD)"
+    brain_target: "Bilateral DLPFC"
+    eeg_position: "F3/F4"
+    protocol_summary: >
+    810 nm NIR bilateral DLPFC transcranial PBM; 20 min/session. Increases regional cerebral blood flow and mitochondrial function.
+    intensity: "250 mW/cm²; 810 nm"
+    frequency: "10 Hz pulsed"
+    duration_per_session: "20 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A"
+    devices: "Vielight Neuro, SYMBYX"
+    montage: "Bilateral frontal transcranial placement"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot RCT"
+    literature_count: "10+"
+    key_references: >
+    Schiffer 2009; Cassano 2018; Henderson 2016
+    side_effects: >
+    Very minimal. Mild warmth. Extremely safe.
+    notes: >
+    Emerging evidence. May be combined with CES or tDCS for synergistic effects.
+  - condition: "Parkinson's Disease"
+    brain_target: "Motor cortex + intranasal (substantia nigra pathway)"
+    eeg_position: "C3/C4 + intranasal"
+    protocol_summary: >
+    810–1070 nm PBM: transcranial motor cortex + intranasal delivery targeting basal ganglia/substantia nigra pathway. Neuroprotective and anti-inflammatory.
+    intensity: "250 mW/cm²; 810–1070 nm"
+    frequency: "10–40 Hz pulsed"
+    duration_per_session: "20 min"
+    total_sessions: "20–30 sessions"
+    pulses_per_session: "N/A"
+    devices: "Vielight Neuro, SYMBYX PDCare Laser (1070 nm)"
+    montage: "Motor cortex probes + intranasal probe"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "10+"
+    key_references: >
+    Moro 2013; Hamilton 2020 (SYMBYX PD trial)
+    side_effects: >
+    Very minimal. Mild warmth. Extremely safe.
+    notes: >
+    Intranasal delivery reaches deeper structures including basal ganglia. Neuroprotective effect on dopaminergic neurons.
+  - condition: "Cognitive Enhancement"
+    brain_target: "Right PFC"
+    eeg_position: "F4 / right frontal"
+    protocol_summary: >
+    1064 nm NIR right PFC; pulsed; enhances working memory and executive function in healthy aging and MCI.
+    intensity: "250 mW/cm²; 1064 nm"
+    frequency: "10 Hz pulsed"
+    duration_per_session: "12–20 min"
+    total_sessions: "5–10 sessions"
+    pulses_per_session: "N/A"
+    devices: "Vielight Neuro, Thor Photomedicine"
+    montage: "Right PFC transcranial probe"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "15+"
+    key_references: >
+    Blanco 2017 (1064 nm); Hesse 2021
+    side_effects: >
+    Very minimal. Mild warmth. Extremely safe.
+    notes: >
+    1064 nm penetrates deeper than 810 nm. Right PFC for executive function and working memory enhancement.
+  - condition: "Stroke"
+    brain_target: "Ischemic penumbra / affected areas"
+    eeg_position: "Variable (lesion-dependent)"
+    protocol_summary: >
+    808 nm NIR laser (NEST trials); 10–20 J/cm² delivered within 24 h of stroke onset. Reduces infarct volume.
+    intensity: "10–20 J/cm²; 808 nm"
+    frequency: "CW or pulsed"
+    duration_per_session: "40 min (NEST protocol)"
+    total_sessions: "1–5 sessions (acute intervention)"
+    pulses_per_session: "N/A"
+    devices: "PhotoThera NeuroThera (NEST trials), Thor"
+    montage: "Transcranial helmet over ischemic region"
+    regulatory_status: "Investigational (NEST-2 negative, NEST-3 ongoing)"
+    evidence_level: "RCT (conflicting results)"
+    literature_count: "10+"
+    key_references: >
+    Lampl 2007 (NEST-1); Zivin 2009 (NEST-2)
+    side_effects: >
+    Very minimal. Safe profile.
+    notes: >
+    Acute stroke neuroprotection concept. NEST-2 negative for functional outcome but NEST-3 ongoing. Challenging delivery.
+  - condition: "Anxiety"
+    brain_target: "Prefrontal cortex (bilateral)"
+    eeg_position: "F3/F4"
+    protocol_summary: >
+    810 nm NIR bilateral PFC for anxiety reduction; 20 min/session. Limited but emerging evidence.
+    intensity: "250 mW/cm²; 810 nm"
+    frequency: "10–40 Hz pulsed"
+    duration_per_session: "20 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A"
+    devices: "Vielight Neuro"
+    montage: "Bilateral frontal transcranial"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "5+"
+    key_references: >
+    Emerging PBM anxiety literature 2020–2024
+    side_effects: >
+    Very minimal. Extremely safe.
+    notes: >
+    Very preliminary. Mechanism via mitochondrial support in PFC anxiety regulation circuits.
+  - condition: "Chronic Pain"
+    brain_target: "Variable (pain processing areas + local)"
+    eeg_position: "Variable"
+    protocol_summary: >
+    810–1064 nm transcranial PBM over pain-relevant cortical areas; also used locally over pain sites.
+    intensity: "250 mW/cm²; 810–1064 nm"
+    frequency: "10–40 Hz pulsed"
+    duration_per_session: "20 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A"
+    devices: "Vielight, SYMBYX, Thor"
+    montage: "Variable — motor cortex or pain-specific areas"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Small RCT"
+    literature_count: "10+"
+    key_references: >
+    Emerging PBM pain literature
+    side_effects: >
+    Very minimal. Extremely safe.
+    notes: >
+    Transcranial PBM for chronic pain distinct from local PBM (well-established). Central mechanism via anti-inflammatory and mitochondrial effects.
+  - condition: "Source: SOZO Brain Center Clinical Research Compilation | neuromod_data.md | Updated April 2026"
+    brain_target: null
+    eeg_position: null
+    protocol_summary: null
+    intensity: null
+    frequency: null
+    duration_per_session: null
+    total_sessions: null
+    pulses_per_session: null
+    devices: null
+    montage: null
+    regulatory_status: null
+    evidence_level: null
+    literature_count: null
+    key_references: null
+    side_effects: null
+    notes: null

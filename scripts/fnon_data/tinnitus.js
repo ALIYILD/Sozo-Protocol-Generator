@@ -621,4 +621,27 @@ module.exports = {
       { authors: "Rauschecker JP, Leaver AM, Mühlau M", year: 2010, title: "Tuning out the noise: Limbic-auditory interactions in tinnitus", journal: "Neuron", volume: "66(6)", pages: "819–826", doi: "10.1016/j.neuron.2010.04.032" },
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: 'Auditory Network + Limbic distress',
+  fnonSecondaryNetwork: 'Limbic distress',
+  fnonFBand: 'Alpha suppression (auditory cortex) + Beta normalisation',
+  fnonEegNodes: 'T3/T5(L-STG)+T4/T6(R-STG)',
+  fnonOscillationGoal: 'Suppress maladaptive alpha excess in silent auditory cortex; normalise L-STG beta; reduce limbic distress; break auditory-attention hypervigilance',
+  fnonPrimaryModalityParams: 'TMS 1Hz inhibitory L-STG (T3/T5, 110%rMT, 1000 pulses, 10 sessions) OR tRNS bilateral temporal (stochastic resonance, 100-640Hz, 1.5mA, 10min)',
+  fnonAddonModality: 'tDCS cathodal L-temporal (2mA); taVNS paired with tone therapy; tACS (40Hz gamma temporal coherence)',
+  fnonSessions: '10–15',
+  fnonEvidenceLevel: 'RCT, Open-label',
+  fnonLitCount: '40+ tDCS; 15+ tRNS; 15+ taVNS; 25+ TMS',
+  fnonKeyReferences: 'Joos 2015; Vanneste 2013 tRNS; Kraus 2016 taVNS; Fregni 2006 tinnitus tDCS',
+  fnonNotes: 'Tinnitus alpha is paradoxical (↑alpha=maladaptive) — must SUPPRESS. tRNS stochastic resonance for auditory S/N ratio.',
+  fnonQeegBiomarker: '↑Alpha L-STG (maladaptive)',
+  fnonPaperCounts: {
+    tps: null, tms: 40, tdcs: 40,
+    tavns: 15, ces: 5, tacs: 5,
+    pbm: 5, lifu: 5, pemf: null, dbs: null,
+  },
+  fnonBestFirstLine: 'TMS 1Hz L-STG',
+  fnonBestSecondLine: 'tDCS cathodal + taVNS',
+  fnonScore: 3,
+
 };

@@ -41,6 +41,16 @@ search_profiles:
        Symbol Digit Modalities[Title/Abstract]) AND validation[Title/Abstract]
     max_results: 10
 
+
+  tps_protocols:
+    query: >
+      Multiple Sclerosis[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
 priority_pmids:
   - "25907210"  # Palm 2014 tDCS MS
   - "28714773"  # Charvet 2017 remote tDCS MS
@@ -49,3 +59,41 @@ notes: >
   Avoid stimulation during MS relapse/exacerbation.
   Fatigue (FSS) and cognitive domains have separate evidence bases.
   Remote tDCS delivery (home-based with video supervision) has emerging evidence in MS.
+
+tps_priority_dois:
+  - doi: "10.1177/1545968317753681"
+    title: "Pulse Width Does Not Influence the Gains Achieved With Neuromuscular Electrical Stimulation in People With Multiple Scle"
+    authors: "Awad M. Almuklass, Leah A. Davis, Landon Hamilton, J. Heb..."
+    year: 2018
+    study_type: "rct"
+    citations: 13
+    takeaway: "Neuromuscular electrical stimulation (NMES) can improve walking performance and provide symptom relief in individuals with multiple sclerosis, regardl"
+  - doi: "10.1177/1545968317753681"
+    title: "Pulse Width Does Not Influence the Gains Achieved With Neuromuscular Electrical Stimulation in People With Multiple Scle"
+    authors: "Awad M. Almuklass, Leah A. Davis, Landon Hamilton, J. Heb..."
+    year: 2018
+    study_type: "rct"
+    citations: 13
+    takeaway: "Neuromuscular electrical stimulation (NMES) can improve walking performance and provide symptom relief in individuals with multiple sclerosis, regardl"
+  - doi: "10.1111/ner.12123"
+    title: "Investigation of Deep Brain Stimulation Mechanisms During Implantable Pulse Generator Replacement Surgery"
+    authors: "Brandon D. Swan, W. Grill, Dennis A. Turner"
+    year: 2014
+    study_type: "non-rct experimental"
+    citations: 20
+    takeaway: "During implantable pulse generator replacement surgery, novel stimulation patterns can be tested, potentially improving tremor or bradykinesia control"
+  - doi: "10.3171/2018.4.jns172995"
+    title: "Reduced long-term cost and increased patient satisfaction with rechargeable implantable pulse generators for deep brain "
+    authors: "Frederick L. Hitti, Kerry A. Vaughan, Ashwin G. Ramayya, ..."
+    year: 2019
+    study_type: "non-rct observational study"
+    citations: 35
+    takeaway: "Rechargeable implantable pulse generators (RC-IPGs) for deep brain stimulation result in cost savings and high patient satisfaction, providing long-te"
+  - doi: "10.17816/2686-8997-2020-1-01-47-63"
+    title: "Transcranial magnetic stimulation in child neurology"
+    authors: "A. Kurenkov, Алексей Львович Куренков, A. Artemenko, А Р ..."
+    year: 2020
+    study_type: ""
+    citations: 1
+    takeaway: "TMS is a non-invasive technique used in pediatric neurology to assess normal maturation of the corticospinal tract, determine conduction disturbances,"
+  TPS evidence: 5 papers identified (2 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

@@ -1250,3 +1250,142 @@ patient_journey_notes:
     session. Administer PHQ-9 at each visit. Full reassessment at session 5 (early
     response check), session 10 (mid-treatment), and session 15 (endpoint). Adjust
     protocol if early non-response detected.
+
+tps_evidence:
+  total_papers: 203
+  high_quality_count: 53
+  evidence_grade: "strong"
+  key_papers:
+    - doi: "10.1016/j.ajp.2023.103891"
+      title: "The association of total pulses with the efficacy of repetitive transcranial magnetic stimulation for treatment-resistant depression"
+      year: 2023
+      study_type: "meta-analysis"
+      citations: 15
+      takeaway: "Higher doses of transcranial pulse stimulation are not always associated with increased improvement of depressive symptoms; pulse calibration is critical."
+    - doi: "10.3390/neurolint17110188"
+      title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders — A Systematic Review"
+      year: 2025
+      study_type: "meta-analysis"
+      citations: 0
+      takeaway: "TPS shows positive effects on cognitive, motor, and mental health outcomes including depression with a high safety profile."
+    - doi: "10.1007/s13534-024-00369-0"
+      title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+      year: 2024
+      study_type: "systematic review"
+      citations: 32
+      takeaway: "Low-intensity tFUS shows promising potential for non-invasive brain stimulation in patients with central nervous system disorders."
+    - doi: "10.1111/cns.14372"
+      title: "Transcranial pulse stimulation in Alzheimer's disease"
+      year: 2023
+      study_type: "systematic review"
+      citations: 12
+      takeaway: "TPS shows promise in improving cognitive performance and reducing depressive symptoms, with translational implications for primary depression."
+  clinical_note: >
+    Depression has the largest TPS-adjacent evidence base with 203 papers and 53 high-quality studies.
+    Meta-analyses confirm the importance of pulse dosing calibration, and TPS studies in Alzheimer's
+    consistently report significant reductions in comorbid depressive symptoms.
+
+
+fnon_protocol:
+  primary_network: "ECN (L-DLPFC) + DMN"
+  secondary_network: "DMN PCC rumination"
+  f_band: "Alpha asymmetry + Theta suppression"
+  eeg_nodes: "F3(L-DLPFC)+Pz(PCC/DMN)+T3/T4 (limbic)"
+  oscillation_goal: >
+    Correct L>R DLPFC alpha asymmetry (FAA); suppress frontal theta; reduce DMN rumination hyperactivity
+  primary_modality_params: >
+    TPS: 6000 pulses, EFD 0.20 mJ/mm², 5 Hz PRF, 6-12 sessions. OR TMS 10Hz L-DLPFC (120%rMT, 3000 pulses, 30 sessions)
+  addon_modality: >
+    CES (Alpha-Stim 0.5Hz, 60min daily) for frontal alpha; taVNS (25Hz, 30-60min) for limbic theta
+  sessions: "6–30"
+  evidence_level: "Pilot RCT+2025 RCTs (TPS); FDA Cleared (TMS)"
+  lit_count: "14+ TPS; 500+ TMS; 200+ tDCS"
+  key_references: "Keeser 2023 IJERPH (34 cit); O'Reardon 2007; CINP 2025 3x TPS RCTs"
+  fnon_notes: >
+    FAA (F4-F3 alpha) = primary qEEG biomarker for MDD. TPS offers faster treatment (6 vs 30 sessions).
+
+qeeg_biomarkers:
+  primary_biomarker: "FAA R>L; ↑Theta"
+  f_band_target: "Alpha asymmetry + Theta"
+
+modality_evidence_counts:
+  tps: 14
+  tms: 500
+  tdcs: 200
+  tavns: 80
+  ces: 30
+  tacs: 20
+  pbm: 10
+  lifu: 10
+  pemf: 15
+  dbs: 30
+  best_first_line: "TMS rTMS/iTBS (FDA cleared)"
+  best_second_line: "TPS (6 sessions) + CES"
+  fnon_score: 5
+
+
+assessment_profile:
+  primary_clinical_scales: >
+    PHQ-9, HAM-D (Hamilton Depression Rating), MADRS, BDI-II, Columbia Suicide Severity Rating (C-SSRS), GAD-7 (comorbid anxiety), IDS-SR, QIDS-SR, Anhedonia Scale (SHAPS)
+  neuropsychological_battery: >
+    Stroop Color-Word (cognitive inhibition), TMT-A&B (executive), RAVLT (verbal memory), WAIS Processing Speed, WSCT (cognitive flexibility), FAS verbal fluency, MoCA (global screen), CANTAB emotional battery
+  physiological_assessments: >
+    HRV (↓ RMSSD, vagal tone index); Sleep study/actigraphy (insomnia pattern — early morning waking); Cortisol awakening response; QIDS sleep subscale; HPA axis markers
+  functional_assessments: >
+    PHQ-9 depression severity; WSAS (work/social functioning); WHODAS disability; Columbia C-SSRS (safety); Mood diary/app
+  neuroimaging: >
+    MRI volumetrics (hippocampal volume, PFC grey matter); fMRI resting-state (DMN hyperconnectivity); FDG-PET (↓ prefrontal metabolism, ↑ subgenual ACC)
+  assessment_rationale: >
+    FAA is the primary qEEG biomarker for MDD severity and TMS response prediction. F3 is primary TMS/TPS stimulation site.
+  primary_scale: >
+    PHQ-9 (weekly/monthly baseline & follow-up)
+  screening_scales: >
+    PHQ-2 (screening); ZUNG; CES-D
+  severity_staging: >
+    HAM-D-17; MADRS; IDS-SR; QIDS-SR
+  qol_scale: >
+    WHODAS-2; WSAS; Q-LES-Q (Quality of Life Enjoyment and Satisfaction)
+  follow_up_frequency: >
+    Weekly PHQ-9 during treatment; Monthly follow-up
+  comorbidity_screens: >
+    GAD-7 (anxiety); ISI (insomnia); AUDIT (alcohol); DAST-10
+  safety_screens: >
+    C-SSRS (suicide risk — every session); PHQ-9 Q9 screen
+  score_thresholds: >
+    PHQ-9: 0-4 None; 5-9 Mild; 10-14 Moderate; 15-19 Mod-Severe; ≥20 Severe. MADRS ≥20 = treatment candidate. HAM-D ≥17 = moderate.
+  qeeg_primary_signature: >
+    ↑ Frontal theta (Fz); Frontal alpha asymmetry (FAA: F4>F3 = ↓ L-DLPFC activity); ↑ Beta eyes-open; ↓ Alpha globally; ↑ Delta+Theta broad
+  qeeg_key_electrodes: "F3, F4 (FAA primary); Fz (theta); Fp1/Fp2 (prefrontal); Cz; C4 (R-central AEC)"
+  qeeg_key_metrics: >
+    FAA (F4-F3 alpha, mV²); Absolute theta Fz; APF; TBR; Alpha/theta ratio; wPLI coherence F3-Fz
+  qeeg_eyes_open: >
+    ↑ Beta globally; ↑ Frontal alpha asymmetry (R>L activity); ↑ Frontal theta; ↓ Alpha asymmetry
+  qeeg_eyes_closed: >
+    ↑ Frontal theta (Fz) — most consistent marker; ↓ Global alpha; ↑ Delta; Asymmetric frontal alpha
+  qeeg_event_related: >
+    P300 at Cz/Pz (cognitive load); N200 (error monitoring); Emotional Stroop ERP; Reward ERP (ERN at FCz)
+  qeeg_pathological_threshold: >
+    FAA >0.3 log units (F4>F3 alpha = L-hypoactivity); Theta Fz >6 μV²; APF <9.5 Hz globally
+  qeeg_treatment_target: >
+    FAA normalisation: L≥R alpha (restore L-DLPFC excitability); Frontal theta ↓ toward <4 μV² at Fz; APF ↑ toward 10 Hz; TMS/TPS F3 target
+  qeeg_response_biomarker: >
+    FAA change pre/post session (F4-F3 alpha); Frontal theta power Fz change; APF shift; PHQ-9 score correlation with qEEG improvement
+
+
+neuromod_profile:
+  key_symptoms: >
+    Persistent sadness, anhedonia, fatigue, concentration difficulties, sleep disturbance, psychomotor retardation/agitation, suicidal ideation, appetite changes, guilt
+  qeeg_patterns: >
+    ↑ frontal theta (Fz), frontal alpha asymmetry (F3<F4 = ↓ L frontal activity), ↑ delta+theta, ↑ beta (eyes-open), ↓ alpha globally, ↑ theta/beta ratio (some subtypes), hyperconnectivity PLV/AEC, ↓ wPLI
+  qeeg_electrodes: "F3, F4 (frontal asymmetry), Fp1/Fp2 (prefrontal slowing), Fz (midline theta), Cz (alpha/beta node), C4 (R centro-parietal AEC hyperconnectivity)"
+  affected_regions: >
+    DLPFC (L: hypoactive), subgenual ACC/Cg25 (hyperactive), OFC, medial PFC, amygdala (hyperactive), hippocampus (↓ volume)
+  primary_networks_disrupted: >
+    DMN (hyperactive/hyperconnected — rumination), CEN/Executive (hypoactive — poor executive control), Salience (impaired DMN↔CEN switching), Frontoparietal (↓ connectivity)
+  network_dysfunction_pattern: >
+    DMN fails to deactivate → persistent rumination; SN cannot switch CEN on to suppress DMN; L-DLPFC hypoactivity impairs top-down regulation
+  recommended_techniques: >
+    rTMS 10 Hz L-DLPFC (F3); iTBS L-DLPFC; tDCS anode F3 cathode Fp2; taVNS left ear 25 Hz; CES 0.5 Hz; tACS 10 Hz alpha or 77.5 Hz; PBM 810 nm bilateral DLPFC; DBS SCC/Cg25, VC/VS, MFB
+  primary_stimulation_targets: "L-DLPFC (F3), subgenual ACC (Cg25), VC/VS, MFB"
+  stimulation_rationale: >
+    Excitatory L-DLPFC to counteract hypoactivity → restore CEN-DMN balance; inhibitory SCC/DBS to ↓ hyperactive subgenual ACC ruminative drive

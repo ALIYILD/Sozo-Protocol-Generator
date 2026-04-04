@@ -41,6 +41,16 @@ search_profiles:
        Barthel index[Title/Abstract]) AND validation[Title/Abstract]
     max_results: 10
 
+
+  tps_protocols:
+    query: >
+      Stroke Rehabilitation[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
 priority_pmids:
   - "10869055"  # Nitsche and Paulus 2000 foundational tDCS
   - "17009929"  # Fregni 2006 tDCS stroke motor
@@ -50,3 +60,41 @@ notes: >
   Contraindicated until at least 6 months post-hemorrhagic stroke.
   Distinguish motor (M1 anodal ipsilesional) from inhibitory (cathodal contralesional) paradigms.
   Include transcallosal inhibition evidence.
+
+tps_priority_dois:
+  - doi: "10.1177/02692155251328945"
+    title: "The impact of the number of sessions and stimulation parameters on repetitive transcranial magnetic stimulation efficacy"
+    authors: "Gabriel Barreto, Paz Sánchez, Rebeca Dias, A. Baltar, Lív..."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 1
+    takeaway: "The optimal repetitive transcranial magnetic stimulation protocol for post-stroke upper extremity function involves at least 15 sessions, frequencies "
+  - doi: "10.1186/s40001-023-01525-5"
+    title: "A literature review and meta-analysis of the optimal factors study of repetitive transcranial magnetic stimulation in po"
+    authors: "Yang Tan, Lin-ming Zhang, Xing-ling Liang, Guei-fei Xiong..."
+    year: 2024
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Optimal treatment effects of repetitive transcranial magnetic stimulation for post-infarction aphasia may be achieved with a total pulse of 40,000, a "
+  - doi: "10.1186/s40001-023-01525-5"
+    title: "A literature review and meta-analysis of the optimal factors study of repetitive transcranial magnetic stimulation in po"
+    authors: "Yang Tan, Lin-ming Zhang, Xing-ling Liang, Guei-fei Xiong..."
+    year: 2024
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Optimal treatment effects of repetitive transcranial magnetic stimulation for post-infarction aphasia may be achieved with a total pulse of 40,000, a "
+  - doi: "10.1007/s13534-024-00369-0"
+    title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+    authors: "Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim"
+    year: 2024
+    study_type: "systematic review"
+    citations: 32
+    takeaway: "Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in healthy humans and patients with central"
+  - doi: "10.3389/fnhum.2016.00668"
+    title: "Comparison of Three Non-Invasive Transcranial Electrical Stimulation Methods for Increasing Cortical Excitability"
+    authors: "Yasuto Inukai, Kei Saito, R. Sasaki, Shota Tsuiki, S. Miy..."
+    year: 2016
+    study_type: "non-rct experimental"
+    citations: 135
+    takeaway: "Transcranial random noise stimulation (tRNS) is the most effective non-invasive brain stimulation method for increasing cortical excitability, potenti"
+  TPS evidence: 64 papers identified (4 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

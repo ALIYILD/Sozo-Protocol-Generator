@@ -1,0 +1,88 @@
+# SOZO Brain Center — qEEG Biomarkers Reference
+# Source: SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026
+
+bands:
+  - name: Infra-slow
+    hz_range: 0.01–0.5 Hz
+    brain_state_normal: Cortical baseline state fluctuations
+    key_regions: ["Global cortex"]
+    eeg_positions: ["All"]
+    clinical_increase: "↑= cortical spreading depression, migraine, DOC"
+    clinical_decrease: "↓= brain death, severe DOC"
+    disorders: ["Migraine", "DOC", "TBI"]
+    fnon_target: Normalise via CES/taVNS
+    modalities: ["CES (0.5 Hz)", "taVNS"]
+    key_metrics: ["ISA amplitude"]
+    notes: CES 0.5 Hz directly entrains this range
+  - name: Delta
+    hz_range: 0.5–4 Hz
+    brain_state_normal: Deep NREM3 sleep, restorative
+    key_regions: ["Frontal", "parietal (sleep); Focal in lesions"]
+    eeg_positions: ["F3/F4", "Cz all (diffuse)"]
+    clinical_increase: "↑focal=lesion/TBI; ↑diffuse=encephalopathy, DOC, dementia"
+    clinical_decrease: "↓= insufficient NREM3, insomnia"
+    disorders: ["TBI", "DOC", "Dementia", "Encephalopathy", "Schizophrenia"]
+    fnon_target: Suppress focal delta (TBI); Facilitate NREM3 delta (insomnia)
+    modalities: ["CES", "PEMF", "tACS delta", "PBM"]
+    key_metrics: ["Absolute delta power; delta/alpha ratio; FIRDA; focal asymmetry"]
+    notes: "↑Frontal delta = encephalopathy marker. Delta/alpha ratio = TBI severity staging"
+  - name: Theta
+    hz_range: 4–8 Hz
+    brain_state_normal: Memory encoding (HC), mind-wandering, drowsiness
+    key_regions: ["Frontal midline Fz (cognition); Temporal T3/T4 (memory); Global in drowsiness"]
+    eeg_positions: ["Fz", "F3/F4", "Pz", "T3/T4"]
+    clinical_increase: "↑Frontal theta=MDD, PTSD, OCD; ↑Temporal=AD memory failure; ↑Global=cognitive slowing"
+    clinical_decrease: "↓Frontal=reduced WM; ↓HC theta=memory failure"
+    disorders: ["MDD", "PTSD", "AD", "MCI", "OCD", "ADHD", "Anxiety"]
+    fnon_target: SUPPRESS frontal theta (MDD/PTSD) via high-freq TMS/TPS; FACILITATE HC theta (4-8 Hz) via taVNS/tACS for memory
+    modalities: ["TMS(10Hz)", "TPS", "tACS(4-8Hz)", "taVNS", "CES"]
+    key_metrics: ["Frontal theta/alpha ratio; absolute theta; HC theta power; theta coherence frontal-parietal; TGC"]
+    notes: "Frontal theta elevation = qEEG fingerprint of MDD. Theta-gamma coupling (TGC) in HC = memory index"
+  - name: Alpha
+    hz_range: 8–12 Hz
+    brain_state_normal: Relaxed wakefulness, cortical idling, thalamocortical relay gating
+    key_regions: ["Occipital (O1/O2) primary; Parietal (P3/P4", "Pz); Frontal (F3/F4 — FAA)"]
+    eeg_positions: ["O1/O2", "Oz", "P3/P4", "Pz", "F3/F4"]
+    clinical_increase: "↑Frontal alpha asymmetry R>L=MDD trait; ↑Alpha=tinnitus (auditory cortex); ↑Mu (motor alpha)=chronic pain"
+    clinical_decrease: "↓Global alpha=AD/MCI slowing; ↓Occipital=migraine hyperexcitability; ↓Mu=central sensitisation"
+    disorders: ["AD", "MCI", "Depression", "Tinnitus", "Chronic pain", "Migraine", "Stroke"]
+    fnon_target: RESTORE alpha (AD/MCI) via TPS/tACS 10 Hz; NORMALISE frontal alpha asymmetry (depression) via L-DLPFC excitation; SUPPRESS maladaptive alpha (tinnitus) inhibitory TMS
+    modalities: ["TPS", "TMS", "tDCS", "tACS(10Hz)", "PBM", "LIFU"]
+    key_metrics: ["Alpha peak frequency (APF); absolute alpha power; frontal alpha asymmetry (FAA=F4-F3 alpha); alpha coherence; alpha/theta ratio; occipital alpha index"]
+    notes: "APF <9 Hz = sensitive AD/MCI marker. FAA key depression biomarker. Mu rhythm (8-12 Hz) = motor/pain biomarker"
+  - name: Beta
+    hz_range: 13–30 Hz
+    brain_state_normal: Active thinking, motor control, alertness, cognitive processing
+    key_regions: ["M1/SMA (C3/C4", "FCz) — sensorimotor beta; DLPFC (F3/F4) — cognitive beta"]
+    eeg_positions: ["C3/C4", "F3/F4", "Fz", "FCz"]
+    clinical_increase: "↑M1/SMA beta=PD bradykinesia (pathological STN-M1 synchrony); ↑Frontal beta=anxiety,OCD; ↑Global=benzodiazepine"
+    clinical_decrease: "↓Beta=cognitive slowing (dementia,TBI); ↓Broca's beta=aphasia; ↓Sensorimotor beta=motor disorders"
+    disorders: ["PD (motor beta excess)", "Anxiety", "OCD", "TBI", "Aphasia", "MS"]
+    fnon_target: SUPPRESS PD beta via TPS/TMS M1+SMA; FACILITATE cognitive beta (depression/dementia) via L-DLPFC TPS/TMS; SUPPRESS frontal beta (anxiety) via CES/taVNS
+    modalities: ["TPS (M1+SMA)", "TMS", "tDCS", "tACS(beta)", "CES", "taVNS"]
+    key_metrics: ["Absolute beta; beta/alpha ratio; sensorimotor beta rebound (SMBR); STN-M1 coherence; ERD"]
+    notes: "PD: ↑Beta in STN (LFP) = signature biomarker. SMBR = motor execution marker. High-beta (20-30) vs low-beta (13-20) differ clinically"
+  - name: Gamma
+    hz_range: 30–80 Hz
+    brain_state_normal: Active sensory processing, feature binding, WM, consciousness integration
+    key_regions: ["Widespread task; 40 Hz thalamo-cortical; Temporal auditory; Parietal WM"]
+    eeg_positions: ["T3/T4", "P3/P4", "Fz (task)", "Global"]
+    clinical_increase: "↑Gamma=chronic pain (neuropathic); ↑Gamma=anxiety/hyperarousal; ↑Gamma=epilepsy; ↑AH=schizophrenia"
+    clinical_decrease: "↓40 Hz gamma=AD (amyloid correlation); ↓Gamma=anaesthesia; ↓TGC=memory failure"
+    disorders: ["AD (↓40 Hz)", "Chronic pain", "Epilepsy", "Schizophrenia", "Anxiety"]
+    fnon_target: FACILITATE 40 Hz gamma (AD) via tACS 40 Hz + PBM 40 Hz; SUPPRESS excess gamma (pain/anxiety) via tDCS,TMS
+    modalities: ["tACS(40Hz)", "PBM(40Hz pulsed)", "TMS", "LIFU", "TPS"]
+    key_metrics: ["Absolute gamma; 40 Hz SSVEP; TGC (theta-gamma coupling); gamma burst duration; gamma coherence"]
+    notes: "40 Hz gamma critical: ↓AD correlates with amyloid/tau. GENUS studies (mice). tACS/PBM = translational."
+  - name: High Gamma / Ripples
+    hz_range: 80–200+ Hz
+    brain_state_normal: Sharp-wave ripples (memory replay), ultra-fast oscillations
+    key_regions: ["Hippocampus", "EC", "Neocortex ripple sites"]
+    eeg_positions: ["T3/T4 surface (deep reference)", "intracranial"]
+    clinical_increase: "↑Pathological ripples=epilepsy,AD cortical spreading; ↑HFOs=epileptogenic zone"
+    clinical_decrease: "↓Sharp-wave ripples=memory consolidation failure (AD)"
+    disorders: ["Epilepsy", "AD", "TBI"]
+    fnon_target: Suppress pathological HFOs (epilepsy); Facilitate physiological ripples (memory)
+    modalities: ["DBS", "LIFU", "implanted VNS"]
+    key_metrics: ["HFO rate; ripple density; ripple-gamma coupling"]
+    notes: HFOs require intracranial recording. LIFU uniquely modulates at depth without surgery.

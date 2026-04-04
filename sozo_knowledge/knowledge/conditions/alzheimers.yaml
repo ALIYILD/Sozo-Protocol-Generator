@@ -503,3 +503,142 @@ governance_rules:
 - TPS hippocampal targeting requires Partner-tier or specialist clinician with neuronavigation training
 - Regulatory status of TPS for Alzheimer's Disease must be confirmed and documented for each patient
 patient_journey_notes: {}
+
+tps_evidence:
+  total_papers: 80
+  high_quality_count: 19
+  evidence_grade: "strong"
+  key_papers:
+    - doi: "10.3390/neurolint17110188"
+      title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders — A Systematic Review"
+      year: 2025
+      study_type: "meta-analysis"
+      citations: 0
+      takeaway: "TPS shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological disorders."
+    - doi: "10.1001/jamaneurol.2017.3129"
+      title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology"
+      year: 2017
+      study_type: "systematic review"
+      citations: 247
+      takeaway: "Transcranial focused ultrasound shows promise for treating neurological conditions including movement disorders and dementia."
+    - doi: "10.1007/s13534-024-00369-0"
+      title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+      year: 2024
+      study_type: "systematic review"
+      citations: 32
+      takeaway: "Low-intensity tFUS shows promising potential for non-invasive brain stimulation in patients with central nervous system disorders."
+    - doi: "10.1111/cns.14372"
+      title: "Transcranial pulse stimulation in Alzheimer's disease"
+      year: 2023
+      study_type: "systematic review"
+      citations: 12
+      takeaway: "TPS shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients."
+  clinical_note: >
+    TPS is CE-marked for Alzheimer's disease and supported by 80 publications including 19 high-quality
+    studies. Evidence consistently demonstrates cognitive improvement and reduction of depressive symptoms,
+    making this the modality's strongest evidence base.
+
+
+fnon_protocol:
+  primary_network: "DMN + Memory Network"
+  secondary_network: "Memory Network (HC-EC)"
+  f_band: "Alpha(8-12Hz) + 40Hz Gamma"
+  eeg_nodes: "Pz(PCC)+Fz/AFz(mPFC)+F3/F4(DLPFC)+P3/P4(LPC)+T3/T4(MTG/HC)"
+  oscillation_goal: >
+    Restore alpha coherence across DMN; induce 40Hz gamma entrainment; suppress theta excess; restore DMN-ECN anti-correlation
+  primary_modality_params: >
+    TPS NEUROLITH: 6000 pulses, EFD 0.20 mJ/mm², 5 Hz PRF, MRI-navigated, 6-site DMN — CE cleared Europe
+  addon_modality: >
+    40Hz tACS bilateral T3-T4 (2mA,20min); PBM Vielight 810nm 40Hz transcranial+intranasal
+  sessions: "6–12"
+  evidence_level: "RCT+Syst Review+Meta-analysis"
+  lit_count: "31+ TPS; 15 tACS; 20+ PBM"
+  key_references: "Beisteiner 2019 Adv Sci (230 cit); JAMA Network Open RCT 2025; Clancy 2022 (40Hz tACS)"
+  fnon_notes: >
+    SOZO FNON primary protocol. CE-cleared TPS core. 40Hz tACS/PBM for gamma entrainment. qEEG: APF monitoring toward 10Hz.
+
+qeeg_biomarkers:
+  primary_biomarker: "↓Alpha APF slowing; ↑Theta"
+  f_band_target: "Alpha + Gamma"
+
+modality_evidence_counts:
+  tps: 31
+  tms: 30
+  tdcs: 20
+  tavns: 5
+  ces: 5
+  tacs: 15
+  pbm: 20
+  lifu: 10
+  pemf: 5
+  dbs: 5
+  best_first_line: "TPS (CE cleared, 31 papers)"
+  best_second_line: "40Hz tACS + PBM"
+  fnon_score: 5
+
+
+assessment_profile:
+  primary_clinical_scales: >
+    MMSE, MoCA, ACE-III (Addenbrooke's Cognitive Examination), CDR (Clinical Dementia Rating), ADAS-Cog, NPI (Neuropsychiatric Inventory), CSDD (Cornell Scale for Depression in Dementia), FAST staging, Barthel Index, Quality of Life-AD
+  neuropsychological_battery: >
+    RAVLT (verbal memory — key AD biomarker), BVMT-R (visual memory), TMT-A&B (executive/processing speed), Letter-Number Sequencing (WM), Boston Naming Test (language), COWA (verbal fluency), Clock Drawing, WASI-II, ADAS-Cog-13, Digital Symbol Coding, Category fluency (Animals)
+  physiological_assessments: >
+    Actigraphy (circadian rhythm disruption); Sleep study (↓ sleep spindles, REM behaviour disorder); Olfactory testing (UPSIT — early marker); Autonomic function; Blood pressure variability
+  functional_assessments: >
+    ADL assessment (Barthel/Bristol ADL); Carer burden (ZBI — Zarit Burden Interview); WHODAS-2; NPI for behavioural symptoms; GPS/wandering assessment; MMSE/MoCA monitoring
+  neuroimaging: >
+    MRI hippocampal volumetry (Scheltens scale/MTA score); FDG-PET (↓ temporoparietal + posterior cingulate); Amyloid-PET (florbetapir/florbetaben); Tau-PET (Flortaucipir); CSF (Aβ42, p-tau, t-tau ratio); Blood biomarkers (pTau217, GFAP, NfL)
+  assessment_rationale: >
+    APF is most sensitive qEEG biomarker for AD/MCI staging. TPS multi-site DMN protocol targets regions corresponding to qEEG slowing sites.
+  primary_scale: >
+    MMSE (monthly); MoCA (quarterly)
+  screening_scales: >
+    GPCOG (GP Cognitive Assessment); 6-Item CIT; AD8
+  severity_staging: >
+    CDR (Clinical Dementia Rating — staging); FAST (functional staging)
+  qol_scale: >
+    QoL-AD; Barthel Index; QADL; NPI (Neuropsychiatric symptoms)
+  follow_up_frequency: >
+    Monthly MMSE; 3-monthly MoCA+CDR; 6-monthly comprehensive
+  comorbidity_screens: >
+    CSDD (Cornell for depression); NPI-Q; PHQ-9 (carer); ZBI (carer burden)
+  safety_screens: >
+    None specific — wander risk assessment
+  score_thresholds: >
+    MMSE: 24-30 Normal; 18-23 Mild; 12-17 Moderate; <12 Severe. MoCA <26 = cognitive impairment. CDR: 0=Normal; 0.5=MCI; 1=Mild AD; 2=Moderate; 3=Severe.
+  qeeg_primary_signature: >
+    Generalised slowing: ↑ Theta + Delta; ↓ Alpha power; ↓ APF (<8 Hz = high-sensitivity AD marker); ↑ Theta/Gamma ratio; ↓ Posterior dominant rhythm
+  qeeg_key_electrodes: "Pz, P3, P4 (primary); O1/O2 (alpha loss); T5/T6 (temporal theta); F3/F4; C3/C4"
+  qeeg_key_metrics: >
+    APF (alpha peak frequency — most sensitive single metric); Delta/alpha ratio (DAR); TGC (theta-gamma coupling HC); Spectral entropy; Inter-hemispheric coherence
+  qeeg_eyes_open: >
+    ↓ Alpha activity parieto-occipital; ↑ Delta globally; Loss of PDR; ↑ Coherence anterior-posterior (pathological)
+  qeeg_eyes_closed: >
+    ↓ Alpha power Pz/O1/O2; ↑ Theta globally; ↓ Alpha peak frequency; ↓ Complexity (approximate entropy); ↑ Delta/theta inter-hemispheric coherence
+  qeeg_event_related: >
+    40 Hz ASSR (gamma deficit in AD — reduced 40 Hz generation); P300 amplitude/latency at Pz; MMN (mismatch); Olfactory-cognitive ERP (combined with olfactory test)
+  qeeg_pathological_threshold: >
+    APF <8 Hz = probable AD/MCI; DAR >3.0 = significant slowing; APF <9 Hz = MCI conversion risk; ↓ spectral entropy <0.6
+  qeeg_treatment_target: >
+    APF ↑ toward 9-10 Hz (primary treatment response measure); ↓ Theta power T5/T6/Pz; 40 Hz gamma ↑ (tACS/PBM 40 Hz target); TGC restoration HC; ↑ Alpha Pz
+  qeeg_response_biomarker: >
+    APF change (Hz shift per session/course); Alpha power Pz change (mV²); 40 Hz SSVEP amplitude; MMSE/MoCA correlation with APF
+
+
+neuromod_profile:
+  key_symptoms: >
+    Progressive memory loss, disorientation, language difficulties, visuospatial impairment, executive dysfunction, personality changes, agitation, wandering
+  qeeg_patterns: >
+    Generalized slowing — ↑ theta + delta, ↓ alpha power, ↓ alpha peak frequency (<8 Hz), ↓ alpha/theta ratio, ↓ beta, ↑ theta/gamma ratio, loss of posterior dominant rhythm, ↓ complexity/entropy, ↑ inter-hemispheric delta coherence
+  qeeg_electrodes: "Pz, P3, P4 (parietal slowing), O1/O2 (occipital alpha loss), T5/T6 (temporal theta), F3/F4 (frontal delta), C3/C4 (central slowing)"
+  affected_regions: >
+    Hippocampus (atrophy), precuneus, posterior cingulate cortex, temporoparietal junction, DLPFC, IFG, entorhinal cortex
+  primary_networks_disrupted: >
+    DMN (disrupted — ↓ connectivity in precuneus, PCC, lateral parietal), Salience (impaired), Frontoparietal/CEN (degraded), Cholinergic pathways (degenerated)
+  network_dysfunction_pattern: >
+    DMN hub failure (precuneus/PCC) → memory consolidation breakdown; cholinergic depletion → global slowing; CEN degradation → executive failure
+  recommended_techniques: >
+    TPS 0.20 mJ/mm² targeting DLPFC/precuneus/LPC/IFG; TMS 20 Hz bilateral DLPFC; tDCS anode temporal/DLPFC; tACS 40 Hz gamma bilateral temporal; PBM 810 nm 40 Hz DMN targeting; DBS fornix
+  primary_stimulation_targets: "DLPFC (bilateral), precuneus, LPC, IFG, fornix (DBS), temporal cortex"
+  stimulation_rationale: >
+    Gamma entrainment (40 Hz) drives glymphatic clearance + gamma oscillatory synchrony restoration; DLPFC excitation to ↑ CEN; TPS/DBS fornix to facilitate hippocampal-cortical connectivity

@@ -341,4 +341,27 @@ module.exports = {
       "Mesulam MM. (2013). Cholinergic circuitry of the human nucleus basalis and its fate in Alzheimer's disease. J Comp Neurol, 521(18), 4124–4144. doi:10.1002/cne.23415",
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: 'DMN + Memory Network',
+  fnonSecondaryNetwork: 'Memory Network (HC-EC)',
+  fnonFBand: 'Alpha(8-12Hz) + 40Hz Gamma',
+  fnonEegNodes: 'Pz(PCC)+Fz/AFz(mPFC)+F3/F4(DLPFC)+P3/P4(LPC)+T3/T4(MTG/HC)',
+  fnonOscillationGoal: 'Restore alpha coherence across DMN; induce 40Hz gamma entrainment; suppress theta excess; restore DMN-ECN anti-correlation',
+  fnonPrimaryModalityParams: 'TPS NEUROLITH: 6000 pulses, EFD 0.20 mJ/mm², 5 Hz PRF, MRI-navigated, 6-site DMN — CE cleared Europe',
+  fnonAddonModality: '40Hz tACS bilateral T3-T4 (2mA,20min); PBM Vielight 810nm 40Hz transcranial+intranasal',
+  fnonSessions: '6–12',
+  fnonEvidenceLevel: 'RCT+Syst Review+Meta-analysis',
+  fnonLitCount: '31+ TPS; 15 tACS; 20+ PBM',
+  fnonKeyReferences: 'Beisteiner 2019 Adv Sci (230 cit); JAMA Network Open RCT 2025; Clancy 2022 (40Hz tACS)',
+  fnonNotes: 'SOZO FNON primary protocol. CE-cleared TPS core. 40Hz tACS/PBM for gamma entrainment. qEEG: APF monitoring toward 10Hz.',
+  fnonQeegBiomarker: '↓Alpha APF slowing; ↑Theta',
+  fnonPaperCounts: {
+    tps: 31, tms: 30, tdcs: 20,
+    tavns: 5, ces: 5, tacs: 15,
+    pbm: 20, lifu: 10, pemf: 5, dbs: 5,
+  },
+  fnonBestFirstLine: 'TPS (CE cleared, 31 papers)',
+  fnonBestSecondLine: '40Hz tACS + PBM',
+  fnonScore: 5,
+
 };

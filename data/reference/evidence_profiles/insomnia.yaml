@@ -46,6 +46,16 @@ search_profiles:
        Insomnia Severity Index[Title/Abstract]) AND validation[Title/Abstract]
     max_results: 10
 
+
+  tps_protocols:
+    query: >
+      Insomnia[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
 priority_pmids:
   - "11438246"  # Bastien 2001 ISI validation
   - "2748771"   # Buysse 1989 PSQI validation
@@ -58,3 +68,41 @@ notes: >
   so-tDCS (slow oscillation) requires EEG-triggered delivery — clearly mark investigational.
   Distinguish CES (sub-sensory microamps) from conventional tDCS (milliamps).
   CBT-I concurrent requirement should be documented in protocols.
+
+tps_priority_dois:
+  - doi: "10.1001/jamanetworkopen.2025.5776"
+    title: "Transcranial Pulsed Current Stimulation and Social Functioning in Children With Autism"
+    authors: "Zhenhuan Liu, Sandra Zhong, Roger C. Ho, Xuguang Qian, Ya..."
+    year: 2025
+    study_type: "rct"
+    citations: 2
+    takeaway: "Transcranial pulsed current stimulation (tPCS) improves social functioning and sleep disorders in children with autism spectrum disorder (ASD), sugges"
+  - doi: "10.1001/jamanetworkopen.2025.5776"
+    title: "Transcranial Pulsed Current Stimulation and Social Functioning in Children With Autism"
+    authors: "Zhenhuan Liu, Sandra Zhong, Roger C. Ho, Xuguang Qian, Ya..."
+    year: 2025
+    study_type: "rct"
+    citations: 2
+    takeaway: "Transcranial pulsed current stimulation (tPCS) improves social functioning and sleep disorders in children with autism spectrum disorder (ASD), sugges"
+  - doi: "10.1001/jamanetworkopen.2025.5776"
+    title: "Transcranial Pulsed Current Stimulation and Social Functioning in Children With Autism"
+    authors: "Zhenhuan Liu, Sandra Zhong, Roger C. Ho, Xuguang Qian, Ya..."
+    year: 2025
+    study_type: "rct"
+    citations: 2
+    takeaway: "Transcranial pulsed current stimulation (tPCS) improves social functioning and sleep disorders in children with autism spectrum disorder (ASD), sugges"
+  - doi: "10.1093/ijnp/pyae059.241"
+    title: "TRANSCRANIAL PULSE STIMULATION FOR THE TREATMENT OF MAJOR DEPRESSIVE DISORDER: A RANDOMIZED, DOUBLE-BLIND, SHAM- CONTROL"
+    authors: "*Penny Ping Qin, A. S. Li, A. Xia, Jimmy Minxia Jin, Bell..."
+    year: 2025
+    study_type: "rct"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) is a feasible and acceptable treatment for major depressive disorder, but current randomized controlled trials la"
+  - doi: "10.1093/ijnp/pyaf052.036"
+    title: "272. EFFECTIVENESS OF TRANSCRANIAL PULSE STIMULATION FOR MAJOR DEPRESSION: PRELIMINARY EVIDENCE FOR CLINICAL RESPONSE AN"
+    authors: "P. Qin, W. Chau, I. Chak, T.T.Z. Lin, M. Jin, A. Xia, B.B..."
+    year: 2025
+    study_type: "rct"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) is a promising and effective therapy for patients with major depressive disorder, with enhanced functional connec"
+  TPS evidence: 16 papers identified (7 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

@@ -341,4 +341,27 @@ module.exports = {
       "Schlaug G, Renga V, Nair D. (2008). Transcranial direct current stimulation in stroke recovery. Arch Neurol, 65(12), 1571–1576. doi:10.1001/archneur.65.12.1571",
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: 'Sensorimotor ipsilesional',
+  fnonSecondaryNetwork: 'Cerebellar-M1',
+  fnonFBand: 'Mu + Beta',
+  fnonEegNodes: null,
+  fnonOscillationGoal: null,
+  fnonPrimaryModalityParams: null,
+  fnonAddonModality: null,
+  fnonSessions: null,
+  fnonEvidenceLevel: null,
+  fnonLitCount: null,
+  fnonKeyReferences: null,
+  fnonNotes: 'Full FNON protocol pending — see fnon_protocol_matrix.yaml.',
+  fnonQeegBiomarker: '↓Mu; ↓Beta ipsilesional',
+  fnonPaperCounts: {
+    tps: 5, tms: 80, tdcs: 100,
+    tavns: 25, ces: null, tacs: 10,
+    pbm: 20, lifu: 5, pemf: 20, dbs: null,
+  },
+  fnonBestFirstLine: 'tDCS anodal ipsilesional M1',
+  fnonBestSecondLine: 'taVNS paired PT + TPS',
+  fnonScore: 4,
+
 };

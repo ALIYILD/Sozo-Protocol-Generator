@@ -1,0 +1,172 @@
+# SOZO Brain Center — Transcranial Pulse Stimulation Protocol Reference
+# Source: Master with QEEG places.xlsx, April 2026
+# 8 condition protocols
+
+modality: "tps"
+name: "Transcranial Pulse Stimulation"
+
+protocols:
+  - condition: "Alzheimer's Disease"
+    brain_target: "dlPFC, IFC, LPC, Precuneus, DMN"
+    eeg_position: "F3, F7, P3, Pz"
+    protocol_summary: >
+    NEUROLITH TPS targeting default mode network nodes; 6 sessions over 2 weeks; 6000 pulses/session at EFD 0.20 mJ/mm², 5 Hz. CE-cleared for Alzheimer's in Europe.
+    intensity: "EFD 0.20 mJ/mm²"
+    frequency: "5 Hz PRF"
+    duration_per_session: "~20 min"
+    total_sessions: "6–12 sessions / 2–4 weeks"
+    pulses_per_session: "6000 pulses"
+    devices: "NEUROLITH (Storz Medical AG)"
+    montage: "Multi-site: dlPFC + IFC + LPC + precuneus"
+    regulatory_status: "CE Marked (Europe, Alzheimer's)"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "15+"
+    key_references: >
+    Beisteiner R 2020 (Adv Sci); Matt L 2025 RCT n=60; Fong 2023 (Neuropsychopharmacology)
+    side_effects: >
+    Transient headache (~4%), mood deterioration (~3%), dizziness, fatigue. 93% no AEs.
+    notes: >
+    Ultrashort pressure pulses (~3 μs); penetrates up to 8 cm; minimal heating (<0.01°C). CE-cleared indication.
+  - condition: "Parkinson's Disease"
+    brain_target: "M1, SMA, DLPFC, Cingulate Motor Area"
+    eeg_position: "C3/C4, FCz, F3"
+    protocol_summary: >
+    NEUROLITH TPS targeting motor and cognitive circuits; 12 sessions over 4 weeks; 10,000 pulses/session (8000 brain + 2000 foot). EFD 0.25 mJ/mm², 4 Hz.
+    intensity: "EFD 0.25 mJ/mm²"
+    frequency: "4 Hz PRF"
+    duration_per_session: "~25–30 min"
+    total_sessions: "12 sessions / 4 weeks"
+    pulses_per_session: "10,000 pulses (8000 brain + 2000 foot)"
+    devices: "NEUROLITH (Storz Medical AG)"
+    montage: "Multi-site: M1 + SMA + DLPFC + foot targets"
+    regulatory_status: "Investigational (CE research use)"
+    evidence_level: "Open-label, Pilot RCT"
+    literature_count: "5+"
+    key_references: >
+    Osou 2023 (n=20); 2025 pilot (n=14)
+    side_effects: >
+    Transient headache, dizziness, fatigue. Generally well tolerated.
+    notes: >
+    Includes peripheral (foot) stimulation as add-on to central brain targets.
+  - condition: "Mild Cognitive Impairment (MCI)"
+    brain_target: "Frontal, Parietal, Temporal, Occipital"
+    eeg_position: "F3/F4, P3/P4, T3/T4, Oz"
+    protocol_summary: >
+    NEUROLITH TPS broad cortical coverage; 6 sessions over 2 weeks; 6000 pulses/session.
+    intensity: "EFD 0.20 mJ/mm²"
+    frequency: "5 Hz PRF"
+    duration_per_session: "~20 min"
+    total_sessions: "6 sessions / 2 weeks"
+    pulses_per_session: "6000 pulses"
+    devices: "NEUROLITH (Storz Medical AG)"
+    montage: "Multi-site cortical coverage (frontal, parietal, temporal, occipital)"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Case series"
+    literature_count: "3+"
+    key_references: >
+    Fong 2023 (Neuropsychopharmacology)
+    side_effects: >
+    Headache, mild fatigue. Very well tolerated.
+    notes: >
+    Earlier-stage cognitive impairment; may benefit more from TPS than overt dementia.
+  - condition: "Depression (MDD)"
+    brain_target: "L-DLPFC, DMN nodes"
+    eeg_position: "F3, Pz"
+    protocol_summary: >
+    NEUROLITH TPS targeting left DLPFC similar to Alzheimer's protocol. Active clinical trials ongoing (NCT05551585).
+    intensity: "EFD 0.20 mJ/mm²"
+    frequency: "5 Hz PRF"
+    duration_per_session: "~20 min"
+    total_sessions: "6–12 sessions"
+    pulses_per_session: "6000 pulses"
+    devices: "NEUROLITH (Storz Medical AG)"
+    montage: "L-DLPFC primary target"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Trial ongoing"
+    literature_count: "3+"
+    key_references: >
+    NCT05551585 (ongoing RCT)
+    side_effects: >
+    Transient headache, mood fluctuation. Well tolerated.
+    notes: >
+    Shared protocol with AD; depression often comorbid with dementia. Awaiting larger RCT data.
+  - condition: "ADHD"
+    brain_target: "Prefrontal Cortex"
+    eeg_position: "Fz, F3/F4"
+    protocol_summary: >
+    NEUROLITH TPS frontal targeting for executive function deficits. Emerging protocol.
+    intensity: "EFD 0.20 mJ/mm²"
+    frequency: "5 Hz PRF"
+    duration_per_session: "~20 min"
+    total_sessions: "6 sessions"
+    pulses_per_session: "6000 pulses"
+    devices: "NEUROLITH (Storz Medical AG)"
+    montage: "Bilateral prefrontal"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label"
+    literature_count: "2+"
+    key_references: >
+    Emerging literature 2023–2024
+    side_effects: >
+    Mild headache, fatigue. Safe profile.
+    notes: >
+    Very early-stage evidence. Protocol based on AD/MCI experience.
+  - condition: "Autism Spectrum Disorder (ASD)"
+    brain_target: "Prefrontal, Social Brain Networks"
+    eeg_position: "F3/F4, P3/P4"
+    protocol_summary: >
+    NEUROLITH TPS targeting prefrontal and posterior parietal social networks. Emerging protocol.
+    intensity: "EFD 0.20 mJ/mm²"
+    frequency: "5 Hz PRF"
+    duration_per_session: "~20 min"
+    total_sessions: "6–12 sessions"
+    pulses_per_session: "6000 pulses"
+    devices: "NEUROLITH (Storz Medical AG)"
+    montage: "Prefrontal + parietal social networks"
+    regulatory_status: "Investigational"
+    evidence_level: "Case series"
+    literature_count: "1–2"
+    key_references: >
+    Emerging literature 2024
+    side_effects: >
+    Well tolerated; standard TPS side effect profile.
+    notes: >
+    Highly preliminary. Very limited data. Clinical judgment required.
+  - condition: "Disorders of Consciousness (DOC)"
+    brain_target: "Frontal, Parietal (consciousness networks)"
+    eeg_position: "Fz, F3, Pz"
+    protocol_summary: >
+    NEUROLITH TPS targeting frontoparietal consciousness network. Emerging application.
+    intensity: "EFD 0.20 mJ/mm²"
+    frequency: "5 Hz PRF"
+    duration_per_session: "~20 min"
+    total_sessions: "6–12 sessions"
+    pulses_per_session: "6000 pulses"
+    devices: "NEUROLITH (Storz Medical AG)"
+    montage: "Frontoparietal network"
+    regulatory_status: "Investigational"
+    evidence_level: "Case series"
+    literature_count: "2+"
+    key_references: >
+    Emerging DOC literature 2024
+    side_effects: >
+    Well tolerated in limited reports.
+    notes: >
+    Extremely early stage. May complement other DOC interventions.
+  - condition: "Source: SOZO Brain Center Clinical Research Compilation | neuromod_data.md | Updated April 2026"
+    brain_target: null
+    eeg_position: null
+    protocol_summary: null
+    intensity: null
+    frequency: null
+    duration_per_session: null
+    total_sessions: null
+    pulses_per_session: null
+    devices: null
+    montage: null
+    regulatory_status: null
+    evidence_level: null
+    literature_count: null
+    key_references: null
+    side_effects: null
+    notes: null

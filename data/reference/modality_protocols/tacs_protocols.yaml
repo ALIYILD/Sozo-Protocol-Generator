@@ -1,0 +1,214 @@
+# SOZO Brain Center — Transcranial Alternating Current Stimulation Protocol Reference
+# Source: Master with QEEG places.xlsx, April 2026
+# 10 condition protocols
+
+modality: "tacs"
+name: "Transcranial Alternating Current Stimulation"
+
+protocols:
+  - condition: "Insomnia"
+    brain_target: "Forehead bilateral (frontal-mastoid pathway)"
+    eeg_position: "Forehead electrodes + bilateral mastoid"
+    protocol_summary: >
+    Nexalin tACS: 15 mA, 77.5 Hz sinusoidal AC, 8-week program. Highest current FDA-compliant device for insomnia. Strong RCT evidence.
+    intensity: "15 mA"
+    frequency: "77.5 Hz"
+    duration_per_session: "~40 min/session"
+    total_sessions: "8 weeks (program)"
+    pulses_per_session: "N/A (sinusoidal AC)"
+    devices: "Nexalin (high-current tACS), Soterix"
+    montage: "Forehead-bilateral mastoid electrode montage"
+    regulatory_status: "Investigational (Nexalin FDA 510(k) cleared for insomnia)"
+    evidence_level: "RCT, High quality"
+    literature_count: "15+"
+    key_references: >
+    Nexalin clinical trials; Emerging RCT data 2022–2024
+    side_effects: >
+    Phosphenes (visual flickers, common at >1 mA), tingling. Safe within limits.
+    notes: >
+    Nexalin uses FDA-cleared 77.5 Hz frequency for sleep. Unique high-current protocol. Entrains sleep-related oscillations.
+  - condition: "Depression (MDD)"
+    brain_target: "Bilateral frontal cortex"
+    eeg_position: "F3/F4 or Fp1/Fp2"
+    protocol_summary: >
+    Alpha (10 Hz) tACS entrainment of frontal alpha oscillations; or 77.5 Hz. Augments frontal alpha known to be deficient in depression.
+    intensity: "2 mA (scalp-to-scalp)"
+    frequency: "10 Hz (alpha) or 77.5 Hz"
+    duration_per_session: "20–30 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics Starstim, Nexalin"
+    montage: "Bilateral frontal / F3-F4"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "20+"
+    key_references: >
+    Kaur 2020; Widge 2019; Emerging literature
+    side_effects: >
+    Phosphenes, tingling. Generally safe.
+    notes: >
+    Frequency specificity key: 10 Hz alpha for depression. Can combine with tDCS for multimodal effects.
+  - condition: "Alzheimer's / MCI (Gamma Entrainment)"
+    brain_target: "Bilateral temporal cortex"
+    eeg_position: "T3/T4 (temporal electrodes)"
+    protocol_summary: >
+    40 Hz gamma tACS targeting bilateral temporal cortex; 2 mA, 20–30 min. Promotes gamma oscillations linked to amyloid clearance (GENUS research).
+    intensity: "2 mA"
+    frequency: "40 Hz (gamma)"
+    duration_per_session: "20–30 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics Starstim"
+    montage: "Bilateral temporal T3-T4 montage"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "15+"
+    key_references: >
+    Clancy 2022; Herrmann 2013; Iaccarino 2016 (40 Hz γ mouse)
+    side_effects: >
+    Phosphenes, tingling. Generally safe.
+    notes: >
+    Strong mechanistic rationale from GENUS work. 40 Hz gamma drives microglia to clear amyloid. Multiple ongoing trials.
+  - condition: "Schizophrenia (Auditory Hallucinations)"
+    brain_target: "Bilateral frontal-temporal"
+    eeg_position: "F3-T3 montage"
+    protocol_summary: >
+    10 Hz tACS frontal-temporal connectivity; 2 mA. Targets disrupted fronto-temporal gamma/alpha rhythms.
+    intensity: "2 mA"
+    frequency: "10 Hz (alpha)"
+    duration_per_session: "20 min"
+    total_sessions: "10–15 sessions"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics"
+    montage: "Frontal-temporal F3-T3 montage"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot RCT"
+    literature_count: "10+"
+    key_references: >
+    Helfrich 2014; Koo 2019
+    side_effects: >
+    Phosphenes, tingling.
+    notes: >
+    Targets fronto-temporal synchrony deficits in schizophrenia. Also 40 Hz gamma studied.
+  - condition: "Schizophrenia (Delusions)"
+    brain_target: "Bilateral frontal (AFz-Cz)"
+    eeg_position: "AFz (Anode) / Cz (Cathode)"
+    protocol_summary: >
+    10 Hz tACS with AFz-Cz montage targeting prefrontal-cingulate circuitry for delusion reduction.
+    intensity: "2 mA"
+    frequency: "10 Hz"
+    duration_per_session: "20 min"
+    total_sessions: "10–15 sessions"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics"
+    montage: "AFz-Cz montage"
+    regulatory_status: "Investigational"
+    evidence_level: "Pilot, Case series"
+    literature_count: "5+"
+    key_references: >
+    Limited pilot literature
+    side_effects: >
+    Phosphenes, tingling. Generally safe.
+    notes: >
+    Very limited evidence for delusions specifically. AFz-Cz targets mPFC/ACC circuit.
+  - condition: "Parkinson's Disease"
+    brain_target: "Motor cortex + sensorimotor areas"
+    eeg_position: "C3/C4, FCz"
+    protocol_summary: >
+    Theta (4 Hz) tACS targeting motor areas to reduce tremor and improve gait. Low current (1–2 mA).
+    intensity: "1–2 mA"
+    frequency: "4 Hz (theta)"
+    duration_per_session: "20–30 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics"
+    montage: "C3/C4 motor cortex electrodes"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot RCT"
+    literature_count: "10+"
+    key_references: >
+    Brittain 2013; Wach 2013
+    side_effects: >
+    Phosphenes (minimal at 4 Hz), mild tingling.
+    notes: >
+    Frequency specificity: 4 Hz (theta) for tremor modulation in PD. Beta frequency also studied.
+  - condition: "ADHD"
+    brain_target: "Central-parietal-temporal"
+    eeg_position: "Cz, P3/P4, T3/T4"
+    protocol_summary: >
+    Theta/alpha tACS targeting default mode and attentional networks; 1 mA; emerging protocol.
+    intensity: "1 mA"
+    frequency: "4–10 Hz (theta/alpha)"
+    duration_per_session: "20 min"
+    total_sessions: "10–15 sessions"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics"
+    montage: "Central-parietal-temporal montage"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "5+"
+    key_references: >
+    Emerging ADHD tACS literature 2020–2024
+    side_effects: >
+    Phosphenes, tingling. Generally safe.
+    notes: >
+    Targets theta/alpha dysregulation in ADHD. Very preliminary evidence.
+  - condition: "Chronic Pain"
+    brain_target: "Frontal/motor cortex"
+    eeg_position: "F3/F4, C3/C4"
+    protocol_summary: >
+    Various frequency tACS for chronic pain; modulates sensorimotor oscillations and descending pain control.
+    intensity: "1–2 mA"
+    frequency: "Various (10–40 Hz)"
+    duration_per_session: "20–30 min"
+    total_sessions: "10–15 sessions"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics"
+    montage: "Various motor/frontal montages"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Small RCT"
+    literature_count: "10+"
+    key_references: >
+    Zaehle 2010; Raco 2016
+    side_effects: >
+    Phosphenes, mild tingling.
+    notes: >
+    Optimal frequency for pain not established. Alpha and gamma both studied.
+  - condition: "Tinnitus"
+    brain_target: "Auditory cortex (bilateral temporal)"
+    eeg_position: "T3/T4, TP7/TP8"
+    protocol_summary: >
+    1–2 mA tACS over bilateral auditory cortex to normalize aberrant oscillations in tinnitus.
+    intensity: "1–2 mA"
+    frequency: "10–40 Hz (alpha/gamma)"
+    duration_per_session: "20–30 min"
+    total_sessions: "10–15 sessions"
+    pulses_per_session: "N/A"
+    devices: "Soterix, Neuroelectrics"
+    montage: "Bilateral temporal T3-T4"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "8+"
+    key_references: >
+    Boyen 2014; Emerging literature
+    side_effects: >
+    Phosphenes, tingling. Generally safe.
+    notes: >
+    Targets hyperactive auditory cortex. Alpha and gamma frequencies under investigation.
+  - condition: "Source: SOZO Brain Center Clinical Research Compilation | neuromod_data.md | Updated April 2026"
+    brain_target: null
+    eeg_position: null
+    protocol_summary: null
+    intensity: null
+    frequency: null
+    duration_per_session: null
+    total_sessions: null
+    pulses_per_session: null
+    devices: null
+    montage: null
+    regulatory_status: null
+    evidence_level: null
+    literature_count: null
+    key_references: null
+    side_effects: null
+    notes: null

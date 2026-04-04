@@ -1371,3 +1371,142 @@ patient_journey_notes:
     Apply responder criteria. For responders: discuss maintenance schedule (monthly booster sessions).
     For non-responders: follow non-responder pathway. Schedule 1-month and 3-month follow-up assessments
     to evaluate durability of benefit. Communicate outcomes to referring neurologist.
+
+tps_evidence:
+  total_papers: 79
+  high_quality_count: 19
+  evidence_grade: "strong"
+  key_papers:
+    - doi: "10.3390/neurolint17110188"
+      title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders — A Systematic Review"
+      year: 2025
+      study_type: "meta-analysis"
+      citations: 0
+      takeaway: "TPS shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological disorders."
+    - doi: "10.1001/jamaneurol.2017.3129"
+      title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology"
+      year: 2017
+      study_type: "systematic review"
+      citations: 247
+      takeaway: "Transcranial focused ultrasound technology shows promise for treating neurological conditions, with potential applications in movement disorders."
+    - doi: "10.1007/s13534-024-00369-0"
+      title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+      year: 2024
+      study_type: "systematic review"
+      citations: 32
+      takeaway: "Low-intensity tFUS shows promising potential for non-invasive brain stimulation in patients with central nervous system disorders."
+    - doi: "10.1101/2025.05.16.25327804"
+      title: "Human Applications of Transcranial Temporal Interference Stimulation: A Systematic Review"
+      year: 2025
+      study_type: "systematic review"
+      citations: 5
+      takeaway: "Transcranial temporal interference stimulation is safe, well-tolerated, can target deep brain regions and improve symptoms in Parkinson's disease."
+  clinical_note: >
+    TPS is off-label for Parkinson's disease but supported by 79 publications and 19 high-quality studies.
+    Evidence focuses on motor improvement via deep brain targeting, with tFUS literature showing meaningful
+    benefits for movement disorder symptoms and neuroplasticity promotion.
+
+
+fnon_protocol:
+  primary_network: "Sensorimotor Network"
+  secondary_network: "Cortico-BG pathway"
+  f_band: "Beta(13-30Hz) suppression"
+  eeg_nodes: "C3/C4(M1)+FCz/Fz(SMA/CMA)+F3(DLPFC)+foot targets"
+  oscillation_goal: >
+    Desynchronise pathological STN-M1 beta; restore sensorimotor beta ERD; normalise mu rhythm
+  primary_modality_params: >
+    TPS NEUROLITH: 10,000 pulses (8000 brain+2000 foot), EFD 0.25 mJ/mm², 4 Hz PRF, 12 sessions/4 weeks
+  addon_modality: >
+    TMS high-freq M1 (10-25Hz); taVNS (25Hz,30min pre) for BDNF; tACS (4Hz theta for SMA)
+  sessions: "12 sessions"
+  evidence_level: "Open-label + Pilot RCT 2025"
+  lit_count: "9+ TPS; 80+ TMS; 10 tACS"
+  key_references: "Osou 2023 J Neurol (20 cit); TPS dexterity RCT 2025; Chou 2015 meta TMS+PD"
+  fnon_notes: >
+    FNON: Beta biomarker = PD qEEG signature. Mu+beta suppression M1+SMA primary target. Foot stimulation adds proprioceptive input.
+
+qeeg_biomarkers:
+  primary_biomarker: "↑Beta M1-STN; ↓Mu"
+  f_band_target: "Beta"
+
+modality_evidence_counts:
+  tps: 9
+  tms: 80
+  tdcs: 15
+  tavns: 10
+  ces: null
+  tacs: 10
+  pbm: 10
+  lifu: 5
+  pemf: null
+  dbs: 1000
+  best_first_line: "DBS STN (FDA approved)"
+  best_second_line: "TPS + TMS M1/SMA"
+  fnon_score: 5
+
+
+assessment_profile:
+  primary_clinical_scales: >
+    UPDRS/MDS-UPDRS (Parts I-IV — primary outcome), H&Y (Hoehn & Yahr staging), PDQ-39 (Quality of Life), NMSQ (Non-Motor Symptoms Questionnaire), PDSS (Sleep Scale), ESS (Epworth Sleepiness), FOGQ (Freezing of Gait), GDS-15 (depression screen)
+  neuropsychological_battery: >
+    MoCA (PD-specific cognitive screen — Montreal Cognitive Assessment), MMSE, SDMT (Symbol Digit Modalities Test), Tower of London (planning), TMT-A&B (processing speed/executive), BVMT-R (visuospatial), Letter fluency, UPDRS Cognitive subscale, DRS-2 (Dementia Rating Scale — for PDD)
+  physiological_assessments: >
+    Polysomnography (REM Sleep Behaviour Disorder — prodromal marker); Actigraphy; UPDRS motor scoring; Gait analysis (ZENO mat or GAITRite); HRV autonomic (cardiac sympathetic denervation); Olfactory testing (University of Pennsylvania Smell ID Test — UPSIT)
+  functional_assessments: >
+    UPDRS motor section; Berg Balance Scale; TUG (Timed Up and Go); 10-Metre Walk Test; 9-Hole Peg Test (dexterity); Unified Dyskinesia Rating Scale; PIGD subscale (posture/instability/gait)
+  neuroimaging: >
+    MRI — Substantia nigra neuromelanin; DATscan (dopamine transporter SPECT); PET FP-CIT; DTI white matter integrity; MRI iron deposition (SWI); 3T structural MRI for PDD
+  assessment_rationale: >
+    UPDRS motor score + qEEG central beta is dual biomarker for PD treatment response. TPS protocol specifically targets M1/SMA corresponding to C3/C4/FCz electrodes.
+  primary_scale: >
+    MDS-UPDRS (Parts I-IV) — monthly during treatment
+  screening_scales: >
+    NMSQ (Non-Motor Symptoms); NMS Burden Scale; PDSS
+  severity_staging: >
+    H&Y (Hoehn & Yahr staging)
+  qol_scale: >
+    PDQ-39 (QoL); PFRS (Parkinson Fatigue); EQ-5D
+  follow_up_frequency: >
+    Monthly MDS-UPDRS; 6-monthly H&Y; Weekly FOGQ during intervention
+  comorbidity_screens: >
+    GDS-15 (depression); ESS (sleepiness); PDSS (sleep); NMS-Q
+  safety_screens: >
+    FOGQ (falls/freezing risk); DemTect (cognitive); CAMCOG
+  score_thresholds: >
+    MDS-UPDRS III: 0-16 Mild; 17-32 Moderate; 33-69 Severe. H&Y: 1=Unilateral; 2=Bilateral; 3=Postural instability; 4=Severe disability; 5=Wheelchair/bed. PDQ-39 <20 = mild impact.
+  qeeg_primary_signature: >
+    ↑ Frontal/temporal theta; ↓ Central beta (C3/C4 — primary motor biomarker); ↑ Theta/alpha ratio; ↓ APF; STN beta synchrony 13-30 Hz (LFP)
+  qeeg_key_electrodes: "C3/C4 (beta ↓ — primary); F3/F4 (theta ↑); T3/T5 (L-temporal theta); Pz (posterior); O1/O2 (PDR)"
+  qeeg_key_metrics: >
+    Central beta power C3/C4; SMBR (sensorimotor beta rebound) post-movement; STN LFP beta (if DBS); APF; DAR; Frontal theta Fz; ERD at C3/C4
+  qeeg_eyes_open: >
+    ↑ Beta globally (some PD subtypes); ↓ ERD during movement; ↑ Frontal theta; ↓ Alpha
+  qeeg_eyes_closed: >
+    ↓ Central beta C3/C4 (primary PD marker); ↑ Frontal theta F3/F4; ↑ Theta globally; ↓ PDR; ↑ Tremor coherence (tremor-dominant PD)
+  qeeg_event_related: >
+    Motor imagery ERD (mu/beta desynchronisation at C3/C4 — reduced in PD); MRCP (movement-related cortical potential — prolonged latency); P300 (cognitive decline assessment)
+  qeeg_pathological_threshold: >
+    Central beta ↓50% vs normative; SMBR absent or reduced; Tremor coherence (4-7 Hz) >threshold; APF <8.5 Hz with cognitive PD
+  qeeg_treatment_target: >
+    Central beta ↑ restoration C3/C4 (via TPS/TMS M1 suppression of pathological synchrony — paradoxical normalisation); Frontal theta ↓; UPDRS correlation with beta power
+  qeeg_response_biomarker: >
+    Central beta power C3/C4 change (pre/post TPS session); UPDRS Part III correlation; SMBR restoration; Tremor amplitude (accelerometry) correlation
+
+
+neuromod_profile:
+  key_symptoms: >
+    Bradykinesia, rigidity, resting tremor, postural instability, gait freezing, cognitive decline, depression, REM sleep behavior disorder, autonomic dysfunction
+  qeeg_patterns: >
+    ↑ frontal/temporal theta, ↓ central beta, ↑ theta/alpha ratio, slowed posterior dominant frequency, ↑ delta, ↓ alpha peak frequency, theta at L temporal predicts cognitive decline, ↓ alpha/theta ratio correlates with cognitive impairment
+  qeeg_electrodes: "C3/C4 (central beta ↓), F3/F4 (frontal theta ↑), T3/T5 (L temporal theta), Pz (posterior slowing), O1/O2 (PDR slowing)"
+  affected_regions: >
+    STN (pathological beta synchrony), GPi, M1, SMA, DLPFC, PPN, cingulate motor area, putamen, caudate, substantia nigra (dopamine loss)
+  primary_networks_disrupted: >
+    Motor/Basal ganglia-thalamocortical loop (disrupted — ↑ beta synchrony), Sensorimotor network (altered beta oscillations), Executive/Frontoparietal (impaired with cognitive decline), DMN (abnormal in PD dementia)
+  network_dysfunction_pattern: >
+    STN/basal ganglia pathological beta (13-30 Hz) hypersynchrony → motor suppression; dopaminergic denervation → circuit-wide oscillation disruption; L temporal theta → cognitive overlay
+  recommended_techniques: >
+    DBS STN 130 Hz or GPi; TMS 10-25 Hz M1/SMA; iTBS L-DLPFC for depression; TPS 0.25 mJ/mm² M1+SMA+DLPFC; tDCS anode M1; tACS 4 Hz theta motor areas; PBM 810 nm motor cortex; PEMF motor cortex
+  primary_stimulation_targets: "STN (DBS), GPi (DBS), M1 (C3/C4), SMA (Cz/FCz), L-DLPFC (F3)"
+  stimulation_rationale: >
+    DBS STN disrupts pathological beta hypersynchrony → ↓ motor suppression; high-freq TMS M1 enhances corticospinal excitability; DLPFC iTBS addresses comorbid depression

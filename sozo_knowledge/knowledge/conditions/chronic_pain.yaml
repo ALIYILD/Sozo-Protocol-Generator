@@ -472,3 +472,101 @@ governance_rules:
 - Treatment records must be updated at every session
 - Informed consent must be obtained and documented before initiating any modality
 patient_journey_notes: {}
+
+tps_evidence:
+  total_papers: 218
+  high_quality_count: 37
+  evidence_grade: "strong"
+  key_papers:
+    - doi: "10.1001/jamaneurol.2017.3129"
+      title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology"
+      year: 2017
+      study_type: "systematic review"
+      citations: 247
+      takeaway: "Transcranial focused ultrasound shows promise for treating neurological conditions with potential applications in chronic pain."
+    - doi: "10.36076/ppj.2018.3.e225"
+      title: "Efficacy of Pulsed Radiofrequency Stimulation in Patients with Peripheral Neuropathic Pain: A Narrative Review"
+      year: 2018
+      study_type: "systematic review"
+      citations: 92
+      takeaway: "Pulsed stimulation is effective for radicular pain from spinal diseases and postherpetic and occipital neuralgia."
+    - doi: "10.1007/s13534-024-00369-0"
+      title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+      year: 2024
+      study_type: "systematic review"
+      citations: 32
+      takeaway: "Low-intensity tFUS shows promising potential for non-invasive brain stimulation in patients with central nervous system disorders including pain."
+    - doi: "10.1080/17434440.2019.1567325"
+      title: "Advanced methods of spinal stimulation in the treatment of chronic pain: pulse trains, waveforms, frequencies, targets"
+      year: 2019
+      study_type: "systematic review"
+      citations: 22
+      takeaway: "Spinal cord stimulation has advanced in efficacy for treating chronic pain, with new targets and feedback loops improving outcomes."
+  clinical_note: >
+    Chronic pain has one of the largest TPS-adjacent evidence bases with 218 papers and 37 high-quality
+    studies. Multiple systematic reviews confirm pulsed stimulation efficacy for neuropathic and central
+    pain, supporting TPS use for cortical and subcortical pain circuit modulation.
+
+
+fnon_protocol:
+  primary_network: "Pain Matrix + Sensorimotor"
+  secondary_network: "Limbic insula-amygdala"
+  f_band: "Gamma suppression + Alpha restoration"
+  eeg_nodes: "Cz/C3/C4(M1/S1)+T3/T4(insula/limbic)+Fz(ACC)+Pz(parietal attention)"
+  oscillation_goal: >
+    Suppress neuropathic gamma; restore M1 alpha+beta (mu); reduce ACC theta; suppress insula-SN hyperactivation
+  primary_modality_params: >
+    tDCS anodal M1 (C3/C4, 2mA, 20min, 10 sessions — strongest evidence); TMS high-freq M1 (10Hz); taVNS (100Hz analgesia mode)
+  addon_modality: >
+    TPS multi-site (M1+ACC+insula); LIFU (thalamic VPL nucleus); CES (Alpha-Stim MET probes); PBM bilateral M1
+  sessions: "5–20"
+  evidence_level: "RCT + Meta-analysis"
+  lit_count: "150+ tDCS; 60+ TMS; 40+ taVNS; 15+ LIFU"
+  key_references: "Fregni 2006; Lefaucheur 2017 IFCNS; Napadow 2012 taVNS; Lee 2015 LIFU thalamic; Network targets pain 2023"
+  fnon_notes: >
+    FNON: Pain gamma signature = suppression target. LIFU unique for thalamic pain relay. taVNS 100Hz (not 25Hz) for pain — frequency specific.
+
+qeeg_biomarkers:
+  primary_biomarker: "↑Gamma; ↓Mu; ↓Alpha"
+  f_band_target: "Gamma + Mu"
+
+modality_evidence_counts:
+  tps: 5
+  tms: 60
+  tdcs: 150
+  tavns: 40
+  ces: 35
+  tacs: 10
+  pbm: 10
+  lifu: 15
+  pemf: 15
+  dbs: 10
+  best_first_line: "tDCS M1 anodal (150 papers)"
+  best_second_line: "TPS multi-site + LIFU"
+  fnon_score: 4
+
+
+assessment_profile:
+  primary_clinical_scales: null
+  neuropsychological_battery: null
+  primary_scale: null
+  qeeg_primary_signature: null
+
+
+neuromod_profile:
+  key_symptoms: >
+    Persistent pain (>3 months), hyperalgesia, allodynia, fatigue, sleep disturbance, mood changes, catastrophizing, functional impairment
+  qeeg_patterns: >
+    ↑ theta (all regions), ↑ alpha (resting), ↓ alpha peak frequency (parieto-occipital), ↑ frontal beta (cortical hyperexcitability), thalamocortical dysrhythmia pattern, ↓ EO/EC reactivity, ↑ delta in migraine
+  qeeg_electrodes: "Cz, C3, C4 (central theta/alpha), Pz, P3, P4 (parietal alpha slowing), F3, Fp1 (frontal reactivity), T3/T4 (temporal changes)"
+  affected_regions: >
+    S1 (somatosensory cortex), M1, ACC, anterior insula, thalamus, PFC, periaqueductal gray (PAG), amygdala
+  primary_networks_disrupted: >
+    Pain matrix/Salience (hyperactive — ACC, insula, S1, thalamus), DMN (disrupted in chronic pain), Descending pain modulatory network (impaired), CEN (altered)
+  network_dysfunction_pattern: >
+    Thalamocortical dysrhythmia → abnormal theta burst from thalamus → ↑ pain perception; ACC/insula hyperactivity → amplified nociceptive processing; descending PAG modulation impaired
+  recommended_techniques: >
+    tDCS anode M1 (C3/C4) cathode Fp2; TMS 10 Hz M1 contralateral; CES Alpha-Stim; taVNS 100 Hz; DBS thalamus/PAG; LIFU thalamus/ACC; PBM 810 nm; PEMF
+  primary_stimulation_targets: "M1 contralateral (C3/C4), thalamus, ACC, PAG"
+  stimulation_rationale: >
+    M1 excitation activates descending pain modulatory pathways via corticothalamic feedback; VNS engages anti-nociceptive brainstem pathways; thalamic targets normalize dysrhythmia

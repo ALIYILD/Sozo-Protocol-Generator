@@ -456,3 +456,136 @@ governance_rules:
 - Informed consent must be obtained and documented before initiating any modality
 - Pulsatile tinnitus requires vascular investigation before treatment — document exclusion of vascular cause
 patient_journey_notes: {}
+
+tps_evidence:
+  total_papers: 48
+  high_quality_count: 25
+  evidence_grade: "strong"
+  key_papers:
+    - doi: "10.1016/j.neubiorev.2015.05.017"
+      title: "Noninvasive stimulation of the temporoparietal junction: A systematic review"
+      year: 2015
+      study_type: "systematic review"
+      citations: 114
+      takeaway: "Noninvasive stimulation of the temporoparietal junction shows potential in treating auditory hallucinations and tinnitus."
+    - doi: "10.1007/s00415-011-6037-6"
+      title: "Short- and long-lasting tinnitus relief induced by transcranial direct current stimulation"
+      year: 2011
+      study_type: "rct"
+      citations: 93
+      takeaway: "Anodal tDCS effectively reduces tinnitus intensity and discomfort, with potential for longer-lasting relief and modulation of tinnitus perception."
+    - doi: "10.1093/brain/awac263"
+      title: "Dual-site transcranial direct current stimulation to treat tinnitus: a randomized controlled trial"
+      year: 2022
+      study_type: "rct"
+      citations: 11
+      takeaway: "Dual-site sequential tDCS of temporal and prefrontal cortex targets tinnitus severity; informs multi-site TPS targeting strategies."
+  clinical_note: >
+    Tinnitus has one of the strongest evidence bases with 48 publications and 25 high-quality studies.
+    Multiple RCTs confirm transcranial stimulation of temporal and prefrontal circuits reduces tinnitus
+    severity, with TPS neuronavigation enabling precise targeting of auditory cortex and thalamic relay nuclei.
+
+
+fnon_protocol:
+  primary_network: "Auditory Network + Limbic distress"
+  secondary_network: "Limbic distress"
+  f_band: "Alpha suppression (auditory cortex) + Beta normalisation"
+  eeg_nodes: "T3/T5(L-STG)+T4/T6(R-STG)"
+  oscillation_goal: >
+    Suppress maladaptive alpha excess in silent auditory cortex; normalise L-STG beta; reduce limbic distress; break auditory-attention hypervigilance
+  primary_modality_params: >
+    TMS 1Hz inhibitory L-STG (T3/T5, 110%rMT, 1000 pulses, 10 sessions) OR tRNS bilateral temporal (stochastic resonance, 100-640Hz, 1.5mA, 10min)
+  addon_modality: >
+    tDCS cathodal L-temporal (2mA); taVNS paired with tone therapy; tACS (40Hz gamma temporal coherence)
+  sessions: "10–15"
+  evidence_level: "RCT, Open-label"
+  lit_count: "40+ tDCS; 15+ tRNS; 15+ taVNS; 25+ TMS"
+  key_references: "Joos 2015; Vanneste 2013 tRNS; Kraus 2016 taVNS; Fregni 2006 tinnitus tDCS"
+  fnon_notes: >
+    Tinnitus alpha is paradoxical (↑alpha=maladaptive) — must SUPPRESS. tRNS stochastic resonance for auditory S/N ratio.
+
+qeeg_biomarkers:
+  primary_biomarker: "↑Alpha L-STG (maladaptive)"
+  f_band_target: "Alpha suppress"
+
+modality_evidence_counts:
+  tps: null
+  tms: 40
+  tdcs: 40
+  tavns: 15
+  ces: 5
+  tacs: 5
+  pbm: 5
+  lifu: 5
+  pemf: null
+  dbs: null
+  best_first_line: "TMS 1Hz L-STG"
+  best_second_line: "tDCS cathodal + taVNS"
+  fnon_score: 3
+
+
+assessment_profile:
+  primary_clinical_scales: >
+    THI (Tinnitus Handicap Inventory — primary); TFI (Tinnitus Functional Index); VAS tinnitus loudness (0-10); TRQ (Tinnitus Reaction Questionnaire); TQ (Tinnitus Questionnaire); GAD-7 (anxiety comorbidity); PHQ-9 (depression comorbidity); HADS; Hyperacusis Questionnaire (HQ); PSQI (sleep)
+  neuropsychological_battery: >
+    Audiological assessment (pure tone audiometry, speech discrimination); Tinnitus pitch/loudness matching; MML (minimum masking level); THI self-report; Auditory processing tests (dichotic listening); Residual inhibition test; Audiogram (4-kHz notch detection); Hyperacusis testing (LDL — loudness discomfort level)
+  physiological_assessments: >
+    Audiometry (full audiological battery); OAE (Otoacoustic Emissions — cochlear function); ABR (Auditory Brainstem Response — retrocochlear pathology); HRV (autonomic-tinnitus link); Blood pressure assessment; Cervical assessment (if cervicogenic tinnitus)
+  functional_assessments: >
+    THI weekly; VAS daily tinnitus loudness; Sound diary (triggers, quiet/noisy environments); Sleep diary (tinnitus-sleep interaction); Hyperacusis monitoring; Hearing aid compliance (if used); Residual inhibition testing pre/post treatment
+  neuroimaging: >
+    MRI — structural brain changes in auditory cortex; MRI white matter (auditory radiation integrity); fMRI resting-state (tinnitus-related network); DTI auditory pathway integrity; BOLD fMRI tinnitus correlate; PET H₂O¹⁵ (auditory cortex hyperactivity)
+  assessment_rationale: >
+    Tinnitus alpha is PARADOXICALLY maladaptive — SUPPRESS, not enhance. This is a critical FNON distinction vs other conditions where alpha is facilitated.
+  primary_scale: >
+    THI (Tinnitus Handicap Inventory — primary; every 4-6 weeks)
+  screening_scales: >
+    TFI (Tinnitus Functional Index); VAS tinnitus loudness daily
+  severity_staging: >
+    THI severity grade; TQ (Tinnitus Questionnaire) — subcategories
+  qol_scale: >
+    SF-36; EQ-5D; HQ (Hyperacusis Questionnaire if comorbid)
+  follow_up_frequency: >
+    Monthly THI; Weekly VAS loudness; Pre/post treatment TFI
+  comorbidity_screens: >
+    PHQ-9; GAD-7; PSQI (insomnia — very common in tinnitus); HADS
+  safety_screens: >
+    Audiogram (rule out progressive hearing loss); DPOAE (cochlear monitoring)
+  score_thresholds: >
+    THI: 0-16 Slight; 18-36 Mild; 38-56 Moderate; 58-76 Severe; 78-100 Catastrophic. TFI ≥25 = clinically significant. Response = THI ≥7-point reduction or TFI ≥13-point change.
+  qeeg_primary_signature: >
+    ↑ Gamma power T3/T4 (auditory cortex — tinnitus generator marker); ↓ Alpha T3/T4 (maladaptive silence-induced); ↑ Theta auditory cortex (thalamocortical dysrhythmia); ↑ Temporal-frontal gamma coherence
+  qeeg_key_electrodes: "T3/T4 (primary tinnitus sites); T5/T6 (posterior temporal); F3/F4 (frontal distress); Fz (entropy); C3/C4"
+  qeeg_key_metrics: >
+    Gamma power T3/T4 (↑ = tinnitus generator); Alpha T3/T4 (↑ maladaptive pattern — suppress target); Theta temporal (thalamocortical dysrhythmia); Temporal-frontal gamma coherence; Alpha/gamma ratio temporal
+  qeeg_eyes_open: >
+    ↑ Gamma T3/T4 during silence (tinnitus percept correlate); ↑ Temporal-frontal high-gamma coherence
+  qeeg_eyes_closed: >
+    ↑ Gamma T3/T4; ↑ Theta T3/T4; ↓ Alpha suppression (maladaptive); ↑ Delta (some tinnitus subtypes)
+  qeeg_event_related: >
+    ASSR 40 Hz (auditory cortex gamma — ↓ in tinnitus paradoxically as inhibition is maladaptive); N1-P2 auditory ERP (↑ amplitude = cortical hyperexcitability); Mismatch Negativity (MMN) to sound changes; Offset response
+  qeeg_pathological_threshold: >
+    Gamma T3/T4 >6 μV² = significant tinnitus generator; Temporal alpha >6 μV² (maladaptive silence pattern); THI score >40 = significant handicap
+  qeeg_treatment_target: >
+    Temporal gamma ↓ T3/T4 (primary); Temporal alpha ↑ suppression (PARADOX: must suppress maladaptive alpha — unique to tinnitus); Theta ↓; Temporal-frontal coherence ↓
+  qeeg_response_biomarker: >
+    THI score correlation with gamma T3/T4 change; Tinnitus loudness VAS vs gamma power; Alpha change T3/T4; Residual inhibition period change
+
+
+neuromod_profile:
+  key_symptoms: >
+    Phantom sound (ringing, buzzing, hissing), hearing difficulty, concentration problems, sleep disturbance, emotional distress, anxiety, depression
+  qeeg_patterns: >
+    ↑ gamma power (auditory cortex); ↓ alpha suppression; ↑ theta (auditory cortex — thalamocortical dysrhythmia); ↑ delta; abnormal beta/gamma connectivity fronto-limbic; ↓ low-freq coherence, ↑ high-freq coherence
+  qeeg_electrodes: "T3/T4 (temporal — auditory cortex), T5/T6 (posterior temporal), F3/F4 (frontal distress), Fz (frontal entropy), C3/C4"
+  affected_regions: >
+    Auditory cortex (hyperactive), inferior colliculus, medial geniculate body, insula, ACC (distress), OFC, parahippocampus, sgACC
+  primary_networks_disrupted: >
+    Auditory network (hyperactive — thalamocortical dysrhythmia), Distress/limbic network (ACC-OFC-insula-parahippocampus), DMN (altered), Salience network
+  network_dysfunction_pattern: >
+    Thalamic deafferentation → thalamocortical theta burst → auditory cortex gamma rebound = phantom sound; limbic distress network amplifies emotional response to tinnitus percept
+  recommended_techniques: >
+    TMS 1 Hz L temporal cortex (T3); tDCS bilateral auditory cortex; tRNS bilateral auditory cortex; taVNS; tACS auditory cortex; neurofeedback alpha/SMR
+  primary_stimulation_targets: "L temporal cortex/auditory cortex (T3), bilateral temporal cortex, medial geniculate (indirect)"
+  stimulation_rationale: >
+    1 Hz TMS inhibits hyperactive auditory cortex gamma burst; tRNS noise stimulation disrupts pathological thalamocortical synchrony; alpha NFB restores inhibitory gating

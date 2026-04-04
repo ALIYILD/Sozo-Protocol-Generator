@@ -497,3 +497,66 @@ governance_rules:
 - Neuroimaging review mandatory before treatment initiation — rule out intracranial metallic fragments and active pathology
 - Minimum 3 months post-TBI before neuromodulation — document injury date in clinical record
 patient_journey_notes: {}
+
+tps_evidence:
+  total_papers: 22
+  high_quality_count: 4
+  evidence_grade: "emerging"
+  key_papers:
+    - doi: "10.3390/brainsci12040429"
+      title: "Transcranial Pulsed-Current Stimulation versus Transcranial Direct Current Stimulation in Patients with Disorders of Consciousness"
+      year: 2022
+      study_type: "rct"
+      citations: 20
+      takeaway: "Transcranial direct-current stimulation improves behavioral outcomes and increases theta frontal functional connectivity in patients with disorders of consciousness post-TBI."
+    - doi: "10.1111/cns.70606"
+      title: "Neuroprotective Effects of Transcranial Pulsed Current Stimulation: Modulation of Microglial Polarization in Traumatic Brain Injury"
+      year: 2025
+      study_type: "non-rct experimental"
+      citations: 0
+      takeaway: "Transcranial pulsed current stimulation reduces neuroinflammation and promotes neurological recovery after TBI by modulating microglial polarization."
+  clinical_note: >
+    TPS is off-label for TBI with 22 publications and 4 high-quality studies. Evidence from pulsed current
+    stimulation RCTs shows improved consciousness outcomes and reduced neuroinflammation, with mechanistic
+    data supporting TPS use in post-TBI neuroplasticity and neuroprotection.
+
+
+fnon_protocol:
+  primary_network: "DMN + ECN"
+  secondary_network: "Frontal executive"
+  f_band: "Delta + Alpha"
+  eeg_nodes: null
+  oscillation_goal: null
+  primary_modality_params: null
+  addon_modality: null
+  sessions: null
+  evidence_level: null
+  lit_count: null
+  key_references: null
+  fnon_notes: "Full FNON protocol pending. See conditions_modality_matrix.yaml."
+
+qeeg_biomarkers:
+  primary_biomarker: "↑Delta focal; ↓Alpha; ↑Theta"
+  f_band_target: "Delta + Alpha"
+
+modality_evidence_counts:
+  tps: null
+  tms: 20
+  tdcs: 30
+  tavns: null
+  ces: null
+  tacs: 10
+  pbm: 25
+  lifu: 5
+  pemf: 10
+  dbs: null
+  best_first_line: "tDCS + TMS combined"
+  best_second_line: "PBM transcranial + PEMF"
+  fnon_score: 3
+
+
+assessment_profile:
+  primary_clinical_scales: null
+  neuropsychological_battery: null
+  primary_scale: null
+  qeeg_primary_signature: null

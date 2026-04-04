@@ -485,3 +485,40 @@ governance_rules:
 - Post-exertional malaise (PEM) monitoring protocol must be documented and followed
 - Informed consent must acknowledge investigational status and evolving evidence
 patient_journey_notes: {}
+
+tps_evidence:
+  total_papers: 2
+  high_quality_count: 0
+  evidence_grade: "none"
+  key_papers:
+    - doi: "10.1093/ijnp/pyae059.360"
+      title: "TRANSCRANIAL PULSE STIMULATION (TPS) OPENS UP NEW HORIZONS IN THE TREATMENT OF PSYCHIATRIC PATIENTS"
+      year: 2025
+      study_type: "conference abstract"
+      citations: 0
+      takeaway: "TPS shows promise in treating psychiatric patients and Alzheimer's disease, with potential for off-label applications in post-COVID conditions."
+  clinical_note: >
+    Long COVID currently has no high-quality TPS studies (2 publications total, 0 HQ). Available evidence
+    consists of conference abstracts noting TPS potential for post-COVID neuropsychiatric symptoms. This
+    application is strictly investigational and requires robust Doctor authorization and informed consent.
+
+
+fnon_protocol:
+  primary_network: null
+  fnon_notes: "No FNON protocol data available for this condition."
+
+qeeg_biomarkers:
+  primary_biomarker: null
+  f_band_target: null
+
+modality_evidence_counts:
+  tps: null
+  best_first_line: null
+  fnon_score: 0
+
+
+assessment_profile:
+  primary_clinical_scales: null
+  neuropsychological_battery: null
+  primary_scale: null
+  qeeg_primary_signature: null

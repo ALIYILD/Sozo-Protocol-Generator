@@ -399,3 +399,72 @@ governance_rules:
 - Treatment records must be updated at every session
 - Informed consent must be obtained and documented before initiating any modality
 patient_journey_notes: {}
+
+tps_evidence:
+  total_papers: 27
+  high_quality_count: 11
+  evidence_grade: "strong"
+  key_papers:
+    - doi: "10.1007/s13534-024-00369-0"
+      title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+      year: 2024
+      study_type: "systematic review"
+      citations: 32
+      takeaway: "Low-intensity tFUS shows promising potential for non-invasive brain stimulation in patients with central nervous system disorders including anxiety."
+    - doi: "10.1080/02656736.2025.2539986"
+      title: "Strengths and weaknesses of transcranial ultrasound stimulation and its promise in psychiatry"
+      year: 2025
+      study_type: "systematic review"
+      citations: 1
+      takeaway: "Transcranial ultrasound stimulation offers precise, noninvasive, reversible brain stimulation with potential psychiatric applications including anxiety."
+    - doi: "10.1093/brain/awac263"
+      title: "Dual-site transcranial direct current stimulation to treat tinnitus: a randomized controlled trial"
+      year: 2022
+      study_type: "rct"
+      citations: 11
+      takeaway: "Dual-site sequential tDCS targeting temporal and prefrontal cortex can modulate anxiety comorbidity in neuromodulation patients."
+  clinical_note: >
+    TPS is off-label for anxiety with 27 papers and 11 high-quality studies. Evidence from transcranial
+    ultrasound stimulation reviews supports neuromodulation targeting amygdala and prefrontal circuits,
+    with emerging data on anxiety reduction as a secondary outcome in broader psychiatric TPS trials.
+
+
+fnon_protocol:
+  primary_network: "Salience Network"
+  secondary_network: "Limbic amygdala-PFC"
+  f_band: "Beta + Theta"
+  eeg_nodes: null
+  oscillation_goal: null
+  primary_modality_params: null
+  addon_modality: null
+  sessions: null
+  evidence_level: null
+  lit_count: null
+  key_references: null
+  fnon_notes: "Full FNON protocol pending. See conditions_modality_matrix.yaml."
+
+qeeg_biomarkers:
+  primary_biomarker: "↑Beta frontal; ↑Theta limbic"
+  f_band_target: "Beta + Theta"
+
+modality_evidence_counts:
+  tps: null
+  tms: 20
+  tdcs: 20
+  tavns: 80
+  ces: 40
+  tacs: 10
+  pbm: 5
+  lifu: 5
+  pemf: 10
+  dbs: null
+  best_first_line: "taVNS CE + CES"
+  best_second_line: "TMS L-DLPFC + PBM"
+  fnon_score: 4
+
+
+assessment_profile:
+  primary_clinical_scales: null
+  neuropsychological_battery: null
+  primary_scale: null
+  qeeg_primary_signature: null

@@ -39,6 +39,16 @@ search_profiles:
        sleep disorder[Title/Abstract]) AND neuromodulation[Title/Abstract]
     max_results: 15
 
+
+  tps_protocols:
+    query: >
+      PTSD[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
 priority_pmids:
   - "28915303"  # Philip 2018 taVNS PTSD
   - "26602222"  # Isserles 2013 TMS PTSD (comparative)
@@ -47,3 +57,41 @@ notes: >
   Trauma-informed approach essential — note psychotherapy concurrent requirement.
   Complex PTSD and combat-related PTSD have distinct evidence bases.
   taVNS cardiac regulation evidence particularly relevant for hyperarousal phenotype.
+
+tps_priority_dois:
+  - doi: "10.1046/j.1525-1594.2002.06944.x"
+    title: "Devices for noninvasive transcranial electrostimulation of the brain endorphinergic system: application for improvement "
+    authors: "V. Lebedev, A. V. Malygin, A. V. Kovalevski, S. V. Rychko..."
+    year: 2002
+    study_type: "rct"
+    citations: 26
+    takeaway: "Activation of brain endorphinergic structures by noninvasive transcranial electrostimulation significantly improves or eliminates fatigue, stress, and"
+  - doi: "10.1046/j.1525-1594.2002.06944.x"
+    title: "Devices for noninvasive transcranial electrostimulation of the brain endorphinergic system: application for improvement "
+    authors: "V. Lebedev, A. V. Malygin, A. V. Kovalevski, S. V. Rychko..."
+    year: 2002
+    study_type: "rct"
+    citations: 26
+    takeaway: "Activation of brain endorphinergic structures by noninvasive transcranial electrostimulation significantly improves or eliminates fatigue, stress, and"
+  - doi: "10.1046/j.1525-1594.2002.06944.x"
+    title: "Devices for noninvasive transcranial electrostimulation of the brain endorphinergic system: application for improvement "
+    authors: "V. Lebedev, A. V. Malygin, A. V. Kovalevski, S. V. Rychko..."
+    year: 2002
+    study_type: "rct"
+    citations: 26
+    takeaway: "Activation of brain endorphinergic structures by noninvasive transcranial electrostimulation significantly improves or eliminates fatigue, stress, and"
+  - doi: "10.1046/j.1525-1594.2002.06944.x"
+    title: "Devices for noninvasive transcranial electrostimulation of the brain endorphinergic system: application for improvement "
+    authors: "V. Lebedev, A. V. Malygin, A. V. Kovalevski, S. V. Rychko..."
+    year: 2002
+    study_type: "rct"
+    citations: 26
+    takeaway: "Activation of brain endorphinergic structures by noninvasive transcranial electrostimulation significantly improves or eliminates fatigue, stress, and"
+  - doi: "10.1109/embc46164.2021.9630415"
+    title: "Transcutaneous Cervical Vagus Nerve Stimulation Inhibits the Reciprocal of the Pulse Transit Time’s Responses to Traumat"
+    authors: "A. Gazi, Srirakshaa Sundararaj, Anna B. Harrison, N. Gure..."
+    year: 2021
+    study_type: "non-rct experimental"
+    citations: 22
+    takeaway: "Transcutaneous cervical vagus nerve stimulation (tcVNS) reduces the reciprocal of the pulse transit time's responses to traumatic stress in individual"
+  TPS evidence: 29 papers identified (4 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

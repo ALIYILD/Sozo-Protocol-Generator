@@ -528,3 +528,130 @@ governance_rules:
 - Trauma-focused psychological support must be documented as concurrent treatment — neuromodulation without this is not approved
 - cPTSD and MST cases require Doctor authorization and specialist psychology coordination
 patient_journey_notes: {}
+
+tps_evidence:
+  total_papers: 25
+  high_quality_count: 0
+  evidence_grade: "none"
+  key_papers:
+    - doi: "10.1109/embc46164.2021.9630415"
+      title: "Transcutaneous Cervical Vagus Nerve Stimulation Inhibits Pulse Transit Time Responses to Traumatic Stress"
+      year: 2021
+      study_type: "non-rct experimental"
+      citations: 22
+      takeaway: "Transcutaneous vagus nerve stimulation reduces physiological stress responses to traumatic cues in PTSD, suggesting autonomic modulation potential."
+    - doi: "10.1177/20503121231160953"
+      title: "Effects of transcranial direct current stimulation (tDCS) in Kiss nightclub fire patients with post-traumatic stress disorder"
+      year: 2023
+      study_type: "non-rct experimental"
+      citations: 4
+      takeaway: "tDCS can effectively reduce PTSD symptoms and improve depression and anxiety in trauma survivors."
+  clinical_note: >
+    PTSD currently has no high-quality TPS or tFUS RCTs in the evidence base (25 papers, 0 HQ studies).
+    Available data is from non-randomised experimental studies of related stimulation modalities; TPS use
+    for PTSD should be considered strictly investigational and requires comprehensive Doctor authorization.
+
+
+fnon_protocol:
+  primary_network: "Limbic + Salience Network"
+  secondary_network: "Salience amygdala-ACC"
+  f_band: "Theta suppression + Alpha facilitation"
+  eeg_nodes: "F4(R-DLPFC)+T3/T4(temporal-limbic)+Fz(ACC)"
+  oscillation_goal: >
+    Suppress limbic theta (hyperarousal); facilitate vmPFC alpha for fear extinction; reduce SN hyperactivation
+  primary_modality_params: >
+    TMS high-freq R-DLPFC (20Hz, 110%rMT, 2400 pulses). OR TPS multi-site (F4+T3/T4+Fz); taVNS (25Hz, 60min)
+  addon_modality: >
+    CES (60min, hyperarousal); PBM bilateral frontal (810nm); EMDR concurrent taVNS
+  sessions: "20–30"
+  evidence_level: "Open-label + Pilot RCT"
+  lit_count: "30+ TMS; 80+ taVNS; 10+ TPS"
+  key_references: "Karsen 2014; Philip 2019; Liu 2020 meta taVNS; Neuromodulation for TRD 2023"
+  fnon_notes: >
+    FNON: PFC-amygdala connectivity biomarker. R-DLPFC TMS activates vmPFC fear extinction. taVNS = primary limbic modulator.
+
+qeeg_biomarkers:
+  primary_biomarker: "↑Theta limbic; ↑Gamma"
+  f_band_target: "Theta + Gamma"
+
+modality_evidence_counts:
+  tps: 5
+  tms: 30
+  tdcs: 10
+  tavns: 80
+  ces: 10
+  tacs: 5
+  pbm: 5
+  lifu: 5
+  pemf: 10
+  dbs: null
+  best_first_line: "taVNS + TMS R-DLPFC"
+  best_second_line: "CES + TPS multi-site"
+  fnon_score: 4
+
+
+assessment_profile:
+  primary_clinical_scales: >
+    PCL-5 (PTSD Checklist — DSM-5); CAPS-5 (Clinician Administered PTSD Scale — gold standard); IES-R (Impact of Event Scale-Revised); ACE-Q (Adverse Childhood Experiences); PHQ-9 (depression comorbidity); C-SSRS (suicide/safety); DES (Dissociation Experiences Scale); AUDIT (alcohol use comorbidity)
+  neuropsychological_battery: >
+    TMT-A&B (executive/processing speed); Stroop (cognitive inhibition); RAVLT (verbal memory — trauma context); WAIS Processing Speed; Emotional Stroop (trauma-related words); CPT-II (sustained attention); Trauma symptom interview; DES (dissociation screen)
+  physiological_assessments: >
+    HRV (↓ vagal tone, HF-HRV deficit — key PTSD biomarker); SCR (skin conductance — trauma cue reactivity); Cortisol (blunted or elevated — pattern specific); Sleep polysomnography (↑ REM latency, nightmares, ↑ N1); Resting respiration rate; Inflammatory markers (IL-6, TNF-α)
+  functional_assessments: >
+    PCL-5 weekly; Trauma narrative (therapy-linked); Safety assessment C-SSRS; Social functioning; WSAS; Sleep diary; Nightmare frequency diary; Alcohol/substance use monitoring (AUDIT)
+  neuroimaging: >
+    MRI hippocampal volume; fMRI amygdala reactivity (trauma scripts/faces); DTI (mPFC-amygdala white matter tract integrity); Functional connectivity PFC-amygdala; MRI cortical thickness prefrontal regions; PET CRF receptor imaging
+  assessment_rationale: >
+    HRV deficit correlates with PTSD severity — taVNS primary neuromodulation via NTS-amygdala pathway directly addresses vagal deficit. FAA L>R pattern = different FNON target to MDD.
+  primary_scale: >
+    PCL-5 (weekly during treatment; monthly maintenance)
+  screening_scales: >
+    PC-PTSD-5 (4-item primary care screen); ITQ
+  severity_staging: >
+    CAPS-5 (clinician gold standard — baseline, 3/6 months)
+  qol_scale: >
+    WSAS; SF-36; WHO-5 wellbeing; SWLS
+  follow_up_frequency: >
+    Weekly PCL-5 during treatment; 3-monthly CAPS-5; Monthly IES-R
+  comorbidity_screens: >
+    PHQ-9; GAD-7; AUDIT (alcohol); DAST; DES (dissociation)
+  safety_screens: >
+    C-SSRS every session (high suicide risk in PTSD); ACE-Q; Safety planning
+  score_thresholds: >
+    PCL-5: ≥33 = probable PTSD diagnosis. Response = ≥10-point reduction. Remission = PCL-5 <28. CAPS-5 ≥25 = moderate-severe.
+  qeeg_primary_signature: >
+    FAA: ↑ L frontal alpha activity (L>R approach/anger bias — OPPOSITE to depression FAA); ↑ High beta (hyperarousal); ↓ Posterior alpha; ↑ R parietal beta; ↓ Total EEG power
+  qeeg_key_electrodes: "F3/F4 (FAA — PTSD L>R activity pattern); FC3/FC4 (fronto-central beta); P3/P4 (R parietal beta); Cz (beta); O1/O2 (↓ alpha)"
+  qeeg_key_metrics: >
+    FAA (F4-F3): In PTSD, L-frontal alpha < R-frontal alpha = ↑ L-frontal activity = approach/anger bias; Global beta power; Posterior alpha; Alpha coherence bilateral; Theta coherence frontal-temporal
+  qeeg_eyes_open: >
+    ↑ High beta globally (hyperarousal); ↑ L-frontal activity (anger/intrusion); ↑ R parietal beta
+  qeeg_eyes_closed: >
+    ↓ Posterior alpha; ↓ Total EEG power; Altered theta frontal-temporal coherence; ↑ L frontal activity
+  qeeg_event_related: >
+    Trauma-cue ERP (P300 to trauma-related stimuli — ↑ in PTSD); Emotional Stroop (reaction time); Startle ERP (↑ N100 to loud sound); Fear-conditioned response ERP
+  qeeg_pathological_threshold: >
+    L-frontal alpha < R-frontal (L-F3 alpha >R-F4 alpha = hyper-approach bias); Global beta >12 μV² (hyperarousal); Alpha coherence <0.5; Posterior alpha <4 μV²
+  qeeg_treatment_target: >
+    FAA balance: approach-withdrawal normalisation; Global beta ↓ (hyperarousal); Posterior alpha ↑; vmPFC-amygdala coherence ↑
+  qeeg_response_biomarker: >
+    FAA direction change (L vs R asymmetry tracking); PCL-5 correlation with beta change; HRV improvement correlation with alpha ↑
+
+
+neuromod_profile:
+  key_symptoms: >
+    Flashbacks, nightmares, hypervigilance, exaggerated startle, avoidance, emotional numbing, dissociation, anger/irritability, sleep disturbance, concentration problems
+  qeeg_patterns: >
+    Frontal alpha asymmetry (↑ L frontal activity = approach/anger bias); ↑ high beta (hyperarousal); ↓ posterior alpha; ↑ R parietal beta; ↓ total EEG power (RMS); ↓ alpha coherence; altered theta power
+  qeeg_electrodes: "F3/F4 (frontal asymmetry), FC3/FC4 (fronto-central), P3/P4 (R parietal beta), Cz (beta excess), O1/O2 (↓ alpha)"
+  affected_regions: >
+    Amygdala (hyperactive), vmPFC (hypoactive — impaired fear extinction), hippocampus (↓ volume), ACC (anterior — hypoactive), insula, locus coeruleus
+  primary_networks_disrupted: >
+    Salience (hyperactive — threat detection), DMN (fragmented — dissociation, impaired self-referential), CEN (impaired — poor executive control), Fear/threat circuit (amygdala-ACC-hippocampus dysregulated)
+  network_dysfunction_pattern: >
+    Amygdala hyperactivity + vmPFC hypoactivity → fear extinction failure; SN hypersensitivity to threat cues → hypervigilance; fragmented DMN → dissociation and impaired trauma memory consolidation
+  recommended_techniques: >
+    TMS 20 Hz R-DLPFC; CES Alpha-Stim 60 min/day; taVNS; tDCS anode L-DLPFC; neurofeedback alpha-theta protocol
+  primary_stimulation_targets: "R-DLPFC (F4) — excitatory; L-DLPFC (F3); vmPFC (indirect via DLPFC)"
+  stimulation_rationale: >
+    R-DLPFC excitation may improve emotional regulation and extinction learning; alpha-theta NFB facilitates trauma reprocessing via thalamocortical relaxation; CES/VNS activates parasympathetic to ↓ hyperarousal

@@ -1,0 +1,582 @@
+# SOZO Brain Center — Assessment Master Reference
+# Source: SOZO_Assessments_Master.xlsx, April 2026
+# 22 conditions x clinical scales x qEEG x brain regions x networks
+
+meta:
+  total_conditions: 22
+  source: "SOZO_Assessments_Master.xlsx"
+  date: "2026-04-04"
+
+conditions:
+  depression:
+    condition: "Depression (MDD)"
+    category: "Mood/Affective"
+    primary_clinical_scales: >
+    PHQ-9, HAM-D (Hamilton Depression Rating), MADRS, BDI-II, Columbia Suicide Severity Rating (C-SSRS), GAD-7 (comorbid anxiety), IDS-SR, QIDS-SR, Anhedonia Scale (SHAPS)
+    neuropsychological_battery: >
+    Stroop Color-Word (cognitive inhibition), TMT-A&B (executive), RAVLT (verbal memory), WAIS Processing Speed, WSCT (cognitive flexibility), FAS verbal fluency, MoCA (global screen), CANTAB emotional battery
+    qeeg_key_bands: >
+    ↑Theta (4-8 Hz) frontal; ↑Frontal alpha asymmetry (F4>F3); ↑Beta (13-30 Hz) eyes-open; ↓Alpha global; ↑Delta+Theta
+    qeeg_key_electrodes: "F3, F4 (frontal alpha asymmetry = FAA primary), Fp1/Fp2 (prefrontal slowing), Fz (midline theta), Cz (alpha/beta node), C4 (R centro-parietal)"
+    qeeg_key_metrics: >
+    FAA (F4-F3 alpha power difference); Frontal theta/alpha ratio; Absolute theta power Fz; Alpha peak frequency (APF); TBR (theta/beta ratio); Coherence F3-Fz; wPLI frontal-parietal
+    brain_regions_affected: >
+    L-DLPFC (hypoactive), Subgenual ACC/Cg25 (hyperactive), OFC, mPFC, Amygdala (hyperactive), Hippocampus (↓ volume)
+    primary_network_disrupted: >
+    DMN (hyperactive/rumination), ECN/CEN (hypoactive), Salience (impaired switching), Frontoparietal (↓ connectivity)
+    neuroimaging: >
+    MRI volumetrics (hippocampal volume, PFC grey matter); fMRI resting-state (DMN hyperconnectivity); FDG-PET (↓ prefrontal metabolism, ↑ subgenual ACC)
+    physiological_assessments: >
+    HRV (↓ RMSSD, vagal tone index); Sleep study/actigraphy (insomnia pattern — early morning waking); Cortisol awakening response; QIDS sleep subscale; HPA axis markers
+    functional_assessments: >
+    PHQ-9 depression severity; WSAS (work/social functioning); WHODAS disability; Columbia C-SSRS (safety); Mood diary/app
+    fnon_qeeg_treatment_target: >
+    FAA normalisation (L>R or symmetric); Frontal theta suppression toward baseline; APF restoration toward 10 Hz
+    assessment_rationale: >
+    FAA is the primary qEEG biomarker for MDD severity and TMS response prediction. F3 is primary TMS/TPS stimulation site.
+  alzheimers:
+    condition: "Alzheimer's Disease / Dementia"
+    category: "Neurodegenerative"
+    primary_clinical_scales: >
+    MMSE, MoCA, ACE-III (Addenbrooke's Cognitive Examination), CDR (Clinical Dementia Rating), ADAS-Cog, NPI (Neuropsychiatric Inventory), CSDD (Cornell Scale for Depression in Dementia), FAST staging, Barthel Index, Quality of Life-AD
+    neuropsychological_battery: >
+    RAVLT (verbal memory — key AD biomarker), BVMT-R (visual memory), TMT-A&B (executive/processing speed), Letter-Number Sequencing (WM), Boston Naming Test (language), COWA (verbal fluency), Clock Drawing, WASI-II, ADAS-Cog-13, Digital Symbol Coding, Category fluency (Animals)
+    qeeg_key_bands: >
+    ↑Theta + Delta (generalised slowing); ↓Alpha power (global); ↓Alpha peak frequency (<8 Hz; key marker); ↓Beta; ↑Theta/Gamma ratio; Loss of posterior dominant rhythm
+    qeeg_key_electrodes: "Pz, P3, P4 (parietal slowing — primary AD signature), O1/O2 (occipital alpha loss), T5/T6 (temporal theta), F3/F4 (frontal delta), C3/C4 (central slowing)"
+    qeeg_key_metrics: >
+    Alpha peak frequency (APF — slowing below 9 Hz = high sensitivity AD marker); Absolute alpha power Pz/P3/P4; Theta/alpha ratio; Delta/alpha ratio (DAR); 40 Hz SSVEP (gamma deficit); Inter-hemispheric coherence; Spectral entropy; Phase-amplitude coupling theta-gamma (TGC)
+    brain_regions_affected: >
+    Hippocampus (atrophy — primary AD structure), Precuneus, Posterior Cingulate Cortex (PCC), Temporoparietal Junction (TPJ), DLPFC, IFG, Entorhinal Cortex (first affected by tau)
+    primary_network_disrupted: >
+    DMN (disrupted — ↓ precuneus/PCC connectivity), Salience (impaired), ECN/Frontoparietal (degraded), Cholinergic pathways (degenerated)
+    neuroimaging: >
+    MRI hippocampal volumetry (Scheltens scale/MTA score); FDG-PET (↓ temporoparietal + posterior cingulate); Amyloid-PET (florbetapir/florbetaben); Tau-PET (Flortaucipir); CSF (Aβ42, p-tau, t-tau ratio); Blood biomarkers (pTau217, GFAP, NfL)
+    physiological_assessments: >
+    Actigraphy (circadian rhythm disruption); Sleep study (↓ sleep spindles, REM behaviour disorder); Olfactory testing (UPSIT — early marker); Autonomic function; Blood pressure variability
+    functional_assessments: >
+    ADL assessment (Barthel/Bristol ADL); Carer burden (ZBI — Zarit Burden Interview); WHODAS-2; NPI for behavioural symptoms; GPS/wandering assessment; MMSE/MoCA monitoring
+    fnon_qeeg_treatment_target: >
+    APF restoration toward 10 Hz (primary SOZO target); ↓ theta power Pz/T5/T6; 40 Hz gamma facilitation (tACS/PBM target)
+    assessment_rationale: >
+    APF is most sensitive qEEG biomarker for AD/MCI staging. TPS multi-site DMN protocol targets regions corresponding to qEEG slowing sites.
+  parkinsons:
+    condition: "Parkinson's Disease"
+    category: "Movement Disorder"
+    primary_clinical_scales: >
+    UPDRS/MDS-UPDRS (Parts I-IV — primary outcome), H&Y (Hoehn & Yahr staging), PDQ-39 (Quality of Life), NMSQ (Non-Motor Symptoms Questionnaire), PDSS (Sleep Scale), ESS (Epworth Sleepiness), FOGQ (Freezing of Gait), GDS-15 (depression screen)
+    neuropsychological_battery: >
+    MoCA (PD-specific cognitive screen — Montreal Cognitive Assessment), MMSE, SDMT (Symbol Digit Modalities Test), Tower of London (planning), TMT-A&B (processing speed/executive), BVMT-R (visuospatial), Letter fluency, UPDRS Cognitive subscale, DRS-2 (Dementia Rating Scale — for PDD)
+    qeeg_key_bands: >
+    ↑Frontal/temporal theta; ↓Central beta (C3/C4); ↑Theta/alpha ratio; ↓Alpha peak frequency; ↑Delta; ↑Beta STN (LFP — 13-30 Hz pathological synchrony)
+    qeeg_key_electrodes: "C3/C4 (central beta ↓ — primary PD motor marker), F3/F4 (frontal theta ↑), T3/T5 (L-temporal theta — cognitive decline predictor), Pz (posterior slowing), O1/O2 (PDR slowing)"
+    qeeg_key_metrics: >
+    Central beta power (C3/C4): ↓ in PD motor deficit; Frontal theta (F3/Fz): correlates with cognitive decline; STN LFP beta (13-30 Hz): pathological synchrony biomarker; APF; DAR (delta-alpha ratio); PDR (posterior dominant rhythm); Motor cortex beta ERD/ERS
+    brain_regions_affected: >
+    STN (pathological beta synchrony), GPi, M1 (C3/C4), SMA (FCz), DLPFC, PPN (Pedunculopontine nucleus — gait), Cingulate Motor Area, Putamen, Caudate, Substantia Nigra (dopamine loss)
+    primary_network_disrupted: >
+    Basal ganglia-thalamocortical motor loop (↑ beta synchrony), Sensorimotor Network (altered oscillations), ECN/Frontoparietal (impaired cognitive), DMN (abnormal in PD dementia)
+    neuroimaging: >
+    MRI — Substantia nigra neuromelanin; DATscan (dopamine transporter SPECT); PET FP-CIT; DTI white matter integrity; MRI iron deposition (SWI); 3T structural MRI for PDD
+    physiological_assessments: >
+    Polysomnography (REM Sleep Behaviour Disorder — prodromal marker); Actigraphy; UPDRS motor scoring; Gait analysis (ZENO mat or GAITRite); HRV autonomic (cardiac sympathetic denervation); Olfactory testing (University of Pennsylvania Smell ID Test — UPSIT)
+    functional_assessments: >
+    UPDRS motor section; Berg Balance Scale; TUG (Timed Up and Go); 10-Metre Walk Test; 9-Hole Peg Test (dexterity); Unified Dyskinesia Rating Scale; PIGD subscale (posture/instability/gait)
+    fnon_qeeg_treatment_target: >
+    Central beta ↓ suppression (C3/C4 primary target); Frontal theta ↓; Restore PDR; STN beta desynchronisation via TPS/TMS M1+SMA
+    assessment_rationale: >
+    UPDRS motor score + qEEG central beta is dual biomarker for PD treatment response. TPS protocol specifically targets M1/SMA corresponding to C3/C4/FCz electrodes.
+  chronic_pain:
+    condition: "Chronic Pain"
+    category: "Pain"
+    primary_clinical_scales: >
+    NRS/VAS (pain intensity 0-10); BPI (Brief Pain Inventory); PCS (Pain Catastrophizing Scale); CSI (Central Sensitization Inventory); HADS (Hospital Anxiety & Depression); DN4/LANSS (neuropathic screening); PROMIS Pain; NPSI (Neuropathic Pain Symptom Inventory); PSEQ (Self-Efficacy); PGIC (Patient Global Impression of Change)
+    neuropsychological_battery: >
+    Stroop Color-Word (attention/pain interference); TMT-A&B; RAVLT (cognitive aspects of chronic pain); CANTAB spatial memory; CPT-II (sustained attention); Emotional Stroop (pain-related words); Pain Sensitivity Questionnaire (PSQ)
+    qeeg_key_bands: >
+    ↑Theta (all regions); ↑Alpha resting; ↓Alpha peak frequency (parieto-occipital); ↑Frontal beta (cortical hyperexcitability); Thalamocortical dysrhythmia pattern; ↓EO/EC reactivity
+    qeeg_key_electrodes: "Cz, C3, C4 (central theta/alpha — primary pain sites), Pz, P3, P4 (parietal alpha slowing), F3/Fp1 (frontal reactivity), T3/T4 (temporal changes)"
+    qeeg_key_metrics: >
+    Central alpha/theta ratio; Occipital APF (↓ correlates with pain severity); Central theta power; Thalamocortical coherence (Cz-Pz); EO/EC reactivity index; Frontal beta power; Gamma (30-80 Hz) at Cz/C3/C4 for neuropathic pain
+    brain_regions_affected: >
+    S1 (Somatosensory cortex — central sensitisation), M1, ACC, Anterior Insula, Thalamus (VPL, VPM), PFC, Periaqueductal Grey (PAG), Amygdala
+    primary_network_disrupted: >
+    Pain Matrix/Salience (hyperactive — ACC, insula, S1, thalamus), DMN (disrupted in chronic pain), Descending Pain Modulatory Network (impaired), ECN (attentional)
+    neuroimaging: >
+    Functional MRI (pain connectivity); DTI (descending pain pathways integrity); Structural MRI (thalamic volume); fMRI task-based (heat pain, mechanical pain stimulus); Neuroinflammation PET (TSPO)
+    physiological_assessments: >
+    Quantitative Sensory Testing (QST) — heat/cold/mechanical thresholds; Conditioned Pain Modulation (CPM — DNIC efficiency); HRV (autonomic pain modulation); Sleep actigraphy; Salivary cortisol; Inflammatory markers (CRP, IL-6)
+    functional_assessments: >
+    Pain diary (7-day NRS morning/evening); 6-Minute Walk Test; Grip strength; PSQI (sleep quality); Fear-Avoidance Beliefs Questionnaire (FABQ); Pain Self-Efficacy Questionnaire
+    fnon_qeeg_treatment_target: >
+    Central theta suppression (Cz/C3/C4); Occipital APF restoration; Gamma suppression (neuropathic target); M1 alpha (mu) normalisation
+    assessment_rationale: >
+    CSI score identifies central sensitisation — guides tDCS M1 vs LIFU thalamic approach. QST CPM predicts response to descending modulation treatments.
+  ocd:
+    condition: "OCD"
+    category: "Anxiety/OCD spectrum"
+    primary_clinical_scales: >
+    Y-BOCS (Yale-Brown Obsessive Compulsive Scale — primary outcome), OCI-R (Obsessive Compulsive Inventory-Revised), DOCS, DASS-21, BDI-II, CGI-OCD, Sheehan Disability Scale (SDS), ICAP (Anxiety & Phobia), Tic disorder scales if comorbid
+    neuropsychological_battery: >
+    Hayling & Brixton (executive/initiation), Stroop (cognitive inhibition — ERN marker), WCST (cognitive flexibility — perseveration), Stop-Signal Task (response inhibition — SSRT), TMT-B, Tower of London (planning), IGT (Iowa Gambling Task — decision making)
+    qeeg_key_bands: >
+    ↑Delta + Theta (frontal); ↓Frontal/central alpha; Excess frontal beta (some subtypes); ↑Theta/beta ratio; ↑Fronto-central coherence; Excess Error-Related Negativity (ERN) at FCz; Abnormal P300
+    qeeg_key_electrodes: "Fz, FCz (frontal midline theta + ERN — primary OCD biomarker), F3/F4 (frontal delta/theta), Cz (central changes), C3/C4"
+    qeeg_key_metrics: >
+    ERN amplitude at FCz (↑ in OCD = error monitoring hyperactivation — primary ERP biomarker); Frontal theta power Fz; Fronto-central coherence; P300 amplitude/latency Cz/Pz; N200 at Fz; Theta/beta ratio; Alpha power F3/F4
+    brain_regions_affected: >
+    ACC (hyperactive — error monitoring), OFC (hyperactive — intrusive thoughts), Caudate Nucleus (compulsive loop), DLPFC, Ventral Striatum, SMA (motor tics), Thalamus, mPFC
+    primary_network_disrupted: >
+    CSTC loop (Cortico-Striato-Thalamo-Cortical — hyperactive), DMN (↑ entropy, hyperconnected), ECN (↑ entropy), DAN (↓ entropy), Salience
+    neuroimaging: >
+    fMRI resting-state (↑ OFC-caudate-thalamus connectivity); PET FDG (hypermetabolism OFC+caudate); Structural MRI (caudate volume, OFC grey matter); DBS target localisation MRI (if DBS considered)
+    physiological_assessments: >
+    HRV (↓ vagal tone); Skin conductance response (SCR — hyperreactivity to OCD triggers); Salivary cortisol; Sleep actigraphy (↑ arousal in OCD); Galvanic skin response
+    functional_assessments: >
+    Y-BOCS symptom checklist (obsession vs compulsion split); DOCS functional domains; OCD symptom diary; CGI severity/improvement
+    fnon_qeeg_treatment_target: >
+    ERN suppression at FCz (reduce ACC hyperactivation); Frontal theta ↓; OFC-caudate coherence normalisation; Alpha ↑ frontal
+    assessment_rationale: >
+    ERN is biomarker for ACC hyperactivation in OCD — high ERN = predict response to H7 TMS. CSTC loop dysfunction drives the compulsive cycle.
+  anxiety___gad:
+    condition: "Anxiety / GAD"
+    category: "Anxiety"
+    primary_clinical_scales: >
+    GAD-7 (primary screen), HAM-A (Hamilton Anxiety Rating), STAI-T/S (State-Trait Anxiety Inventory), DASS-21, PHQ-9 (comorbid depression), PDSS (panic if comorbid), PD-SOAS (somatic anxiety), ACQ (Agoraphobia Cognitions), ISI (insomnia comorbidity)
+    neuropsychological_battery: >
+    Attentional Bias Task (dot-probe for threat), Emotional Stroop (threat-related stimuli), TMT-A&B, WCST, Verbal WM (digit span), LNS, Stroop Color-Word, CPT-II (sustained attention/hypervigilance), IGT
+    qeeg_key_bands: >
+    ↑R frontal alpha (frontal asymmetry R>L activity = withdrawal/approach bias); ↑High beta 20-30 Hz globally; ↑Frontal theta (some); ↓Posterior alpha; ↑Gamma coherence; Hyperarousal EEG pattern
+    qeeg_key_electrodes: "F3/F4 (frontal asymmetry — primary GAD biomarker: R>L indicates anxiety), Fz (frontal theta), Cz (central beta excess), Pz (posterior alpha ↓), C3/C4"
+    qeeg_key_metrics: >
+    Frontal alpha asymmetry FAA (F4-F3): ↑ in anxiety (opposite to depression pattern); Global beta power 20-30 Hz; Posterior alpha power Pz (↓ = hyperarousal); Frontal theta Fz; Alpha/beta ratio global
+    brain_regions_affected: >
+    Amygdala (hyperactive), mPFC/vmPFC (impaired regulation), DLPFC (R>L), ACC, Anterior Insula, Hippocampus (contextual anxiety)
+    primary_network_disrupted: >
+    Salience Network (hyperactive), DMN (rumination component), ECN (underactive — poor top-down regulation), Amygdala-PFC circuit (impaired inhibitory control)
+    neuroimaging: >
+    Functional MRI (amygdala hyperreactivity to threat); Structural MRI (amygdala volume); fMRI task (emotional faces, fear conditioning); PET FDG (metabolic anxiety signature)
+    physiological_assessments: >
+    HRV (↓ RMSSD — vagal tone deficit in anxiety); RSA (respiratory sinus arrhythmia); Skin conductance (↑ tonic SCL); EMG trapezius (tension); Cortisol (↑ diurnal cortisol in GAD); Respiration rate; Sleep actigraphy
+    functional_assessments: >
+    GAD-7 weekly monitoring; Worry Record (CBT tool); Penn State Worry Questionnaire; Subjective wellbeing (SWLS); Safety behaviours inventory; ACT flexibility index
+    fnon_qeeg_treatment_target: >
+    FAA normalisation (L>R or symmetric); Global beta ↓; Posterior alpha ↑; Frontal theta ↓; Amygdala-PFC coherence restoration
+    assessment_rationale: >
+    FAA is opposite in anxiety vs depression — critical for differential diagnosis via qEEG before FNON protocol selection.
+  ptsd:
+    condition: "PTSD"
+    category: "Trauma-related"
+    primary_clinical_scales: >
+    PCL-5 (PTSD Checklist — DSM-5); CAPS-5 (Clinician Administered PTSD Scale — gold standard); IES-R (Impact of Event Scale-Revised); ACE-Q (Adverse Childhood Experiences); PHQ-9 (depression comorbidity); C-SSRS (suicide/safety); DES (Dissociation Experiences Scale); AUDIT (alcohol use comorbidity)
+    neuropsychological_battery: >
+    TMT-A&B (executive/processing speed); Stroop (cognitive inhibition); RAVLT (verbal memory — trauma context); WAIS Processing Speed; Emotional Stroop (trauma-related words); CPT-II (sustained attention); Trauma symptom interview; DES (dissociation screen)
+    qeeg_key_bands: >
+    Frontal alpha asymmetry (↑ L frontal activity = approach/anger bias); ↑High beta (hyperarousal); ↓Posterior alpha; ↑R parietal beta; ↓Total EEG power (RMS); ↓Alpha coherence; Altered theta power
+    qeeg_key_electrodes: "F3/F4 (frontal asymmetry — opposite to depression: L>R in PTSD anger/approach), FC3/FC4 (fronto-central beta), P3/P4 (R parietal beta excess), Cz (beta hyperarousal), O1/O2 (↓ alpha)"
+    qeeg_key_metrics: >
+    FAA (F4-F3): ↑ L frontal activity in PTSD (reversed pattern vs depression); Global beta power (hyperarousal index); Posterior alpha ↓ (hypervigilance); P300 amplitude Cz/Pz (attentional resource); Alpha coherence bilateral; theta coherence frontal-temporal
+    brain_regions_affected: >
+    Amygdala (hyperactive — fear circuit), vmPFC (hypoactive — impaired fear extinction), Hippocampus (↓ volume, contextual fear), ACC (anterior — hypoactive), Anterior Insula, Locus Coeruleus (hyperactive)
+    primary_network_disrupted: >
+    Salience (hyperactive — threat detection), DMN (fragmented — dissociation), ECN (impaired executive control), Fear/Threat Detection Network, Limbic System (hyperactivated), PFC-Amygdala inhibitory circuit (impaired)
+    neuroimaging: >
+    MRI hippocampal volume; fMRI amygdala reactivity (trauma scripts/faces); DTI (mPFC-amygdala white matter tract integrity); Functional connectivity PFC-amygdala; MRI cortical thickness prefrontal regions; PET CRF receptor imaging
+    physiological_assessments: >
+    HRV (↓ vagal tone, HF-HRV deficit — key PTSD biomarker); SCR (skin conductance — trauma cue reactivity); Cortisol (blunted or elevated — pattern specific); Sleep polysomnography (↑ REM latency, nightmares, ↑ N1); Resting respiration rate; Inflammatory markers (IL-6, TNF-α)
+    functional_assessments: >
+    PCL-5 weekly; Trauma narrative (therapy-linked); Safety assessment C-SSRS; Social functioning; WSAS; Sleep diary; Nightmare frequency diary; Alcohol/substance use monitoring (AUDIT)
+    fnon_qeeg_treatment_target: >
+    FAA pattern: restore balance; Global beta ↓ (hyperarousal target); Posterior alpha ↑; vmPFC-amygdala coherence restoration; Theta-alpha boundary normalisation
+    assessment_rationale: >
+    HRV deficit correlates with PTSD severity — taVNS primary neuromodulation via NTS-amygdala pathway directly addresses vagal deficit. FAA L>R pattern = different FNON target to MDD.
+  insomnia:
+    condition: "Insomnia"
+    category: "Sleep Disorder"
+    primary_clinical_scales: >
+    ISI (Insomnia Severity Index — primary); PSQI (Pittsburgh Sleep Quality Index); ESS (Epworth Sleepiness Scale); DBAS-16 (Dysfunctional Beliefs About Sleep); CES-D (depression comorbidity); GAD-7 (anxiety comorbidity); Sleep diary (2-week); Consensus Sleep Diary (CSD); FISI (Ford Insomnia Response to Stress Test)
+    neuropsychological_battery: >
+    MoCA (if cognitive complaints); TMT-A (psychomotor speed); DSST (Digit Symbol Substitution Test — sleep deprivation measure); CPT-II (sustained attention deficit from sleep loss); PVT (Psychomotor Vigilance Task — gold standard sleep deprivation measure)
+    qeeg_key_bands: >
+    ↑High-frequency beta (hyperarousal — 20-30 Hz); ↑Gamma; ↓Delta during NREM3; ↑Alpha intrusion in NREM (CAP pattern); ↓Sleep spindles (sigma 12-15 Hz); ↑Theta/alpha ratio at sleep onset; Cortical hyperarousal markers
+    qeeg_key_electrodes: "Fz, F3/F4 (frontal beta excess — hyperarousal primary marker), Cz (central hyperarousal), Pz (alpha intrusion in NREM), C3/C4 (↓ sleep spindles — sigma 12-15 Hz), Oz (visual arousal)"
+    qeeg_key_metrics: >
+    Sleep spindle density and amplitude (sigma power 12-15 Hz at C3/C4 — ↓ in insomnia); Delta power (0.5-4 Hz) NREM3 (↓ in insomnia); Beta power pre-sleep Fz/F3/F4 (↑ = hyperarousal); Alpha/delta ratio NREM; Sleep EEG complexity/entropy; CAP (Cyclic Alternating Pattern) rate
+    brain_regions_affected: >
+    DLPFC (hyperactive at night — cognitive intrusion), Hypothalamus (SCN/VLPO — circadian dysregulation), Thalamus (reticular nucleus — spindle generation deficit), ACC, Brainstem arousal centres (ARAS)
+    primary_network_disrupted: >
+    ARAS/Ascending Reticular Activating System (hyperactive), Thalamocortical circuits (↓ spindle generation), DMN (fails to deactivate), Sleep-Wake Regulatory Network (disrupted)
+    neuroimaging: >
+    Structural MRI (if indicated — cortical thickness insomnia association); fMRI resting-state (hyperconnected sensorimotor networks during pre-sleep); PET FDG (global ↑ metabolism in insomniacs at sleep onset vs controls)
+    physiological_assessments: >
+    Polysomnography (PSG — gold standard: sleep staging, spindle counting, delta power quantification); Actigraphy (7–14 days); Core body temperature rhythm; Cortisol awakening response; Melatonin onset (DLMO); HRV sleep/wake transitions; Dim Light Melatonin Onset (DLMO)
+    functional_assessments: >
+    Sleep diary (2-week prospective — SE, SOL, WASO, TIB, TWT); Sleep restriction therapy adherence; Light exposure diary; PSQI monthly; ISI weekly; Caffeine/alcohol diary; Nap monitoring
+    fnon_qeeg_treatment_target: >
+    Sleep spindle facilitation (12-15 Hz sigma, C3/C4); NREM delta ↑ (0.5-4 Hz); Pre-sleep beta ↓ Fz/F3/F4; DMN deactivation at sleep onset
+    assessment_rationale: >
+    Sleep spindle density is primary thalamocortical biomarker — CES 0.5 Hz and tACS Nexalin 77.5 Hz directly target thalamocortical spindle circuits. PSG spindle counts pre/post = primary outcome measure.
+  epilepsy:
+    condition: "Epilepsy"
+    category: "Neurological — Seizure"
+    primary_clinical_scales: >
+    Seizure diary (mandatory — frequency, duration, type, triggers); NDDI-E (Neurological Disorders Depression Inventory for Epilepsy); ABNAS (Activity & Participation — AQoL-6D); QOLIE-31 (Quality of Life in Epilepsy); Liverpool Seizure Severity Scale (LSSS); NSES (Side Effects Scale); AEP (Antiepileptic side effect profile); BRIEF (cognitive screening for executive function)
+    neuropsychological_battery: >
+    RAVLT (verbal memory — left TLE focus marker); BVMT-R (visual memory — right TLE); Boston Naming Test (language — left TLE); TMT-A&B; WAIS Full Scale IQ; Wada Test (language lateralisation pre-surgical); COWAT; Category fluency; NAB Memory Module; MMSE/MoCA
+    qeeg_key_bands: >
+    Epileptiform discharges (spikes, sharp waves, spike-wave complexes — primary diagnostic); Focal/generalised slowing; ↑Delta/theta at seizure focus; Interictal epileptiform discharges (IEDs); High-frequency oscillations (HFOs 80-500 Hz); Background alpha suppression
+    qeeg_key_electrodes: "Variable by seizure type: Temporal (T3/T4/T5/T6 — TLE most common), Frontal (F3/F4/F7/F8 — frontal lobe epilepsy), Central (C3/C4), Parietal (P3/P4), Cz (generalised absence); All electrodes for generalised epilepsy"
+    qeeg_key_metrics: >
+    IED rate (primary epilepsy biomarker — spikes/hour); HFO rate (ripples 80-120 Hz + fast ripples 120-500 Hz = epileptogenic zone marker); Background alpha/theta ratio; Delta power at focus; Spectral coherence between seizure networks; Seizure onset zone (SOZ) localisation via qEEG
+    brain_regions_affected: >
+    Seizure Focus (temporal lobe most common — HC/amygdala), Hippocampus, Amygdala, Thalamus (ANT for limbic epilepsy), Cortex at focus, Corpus Callosum (spread pathway), Frontal cortex (FLE focus)
+    primary_network_disrupted: >
+    Epileptogenic Network (hyperexcitable focus + propagation), Thalamocortical circuits (generalised seizures), DMN (disrupted in TLE), Language Network (L TLE at-risk), Limbic Network
+    neuroimaging: >
+    MRI — cortical development anomalies, hippocampal sclerosis (MTA score), FCD detection (3T high-resolution); FDG-PET (interictal hypometabolism at focus); Ictal SPECT (↑ perfusion at onset); MEG (magnetic source imaging); SEEG/ECoG (invasive localisation if surgical candidate); DBS target MRI (ANT)
+    physiological_assessments: >
+    Video-EEG monitoring (seizure semiology + EEG correlation — gold standard); Long-term EEG monitoring; Seizure diary (prospective); Cardiorespiratory monitoring (SUDEP risk); AED blood levels; HRV (autonomic epilepsy); SUDEP risk assessment (SUDEP-7)
+    functional_assessments: >
+    Seizure diary (mandatory); Driver assessment (DVLA notification); School/employment impact; NeuroPace or DBS programming assessment; Vagal nerve stimulator output log; QOLIE-31 QoL tracking
+    fnon_qeeg_treatment_target: >
+    IED ↓ suppression at seizure focus; HFO ↓; Background alpha ↑; ANT-limbic circuit normalisation via DBS/taVNS
+    assessment_rationale: >
+    IED rate is primary treatment response biomarker. Network-guided approach (connectomic epilepsy mapping) identifies optimal DBS/LIFU targets beyond the seizure focus.
+  stroke_rehab:
+    condition: "Stroke Rehabilitation"
+    category: "Neurological — Stroke"
+    primary_clinical_scales: >
+    mRS (Modified Rankin Scale — primary functional outcome); NIHSS (NIH Stroke Scale — acute severity); BI (Barthel Index); FIM (Functional Independence Measure); ARAT (Action Research Arm Test — UL function); FAC (Functional Ambulation Categories — gait); SIS (Stroke Impact Scale); aphasia: WAB (Western Aphasia Battery)
+    neuropsychological_battery: >
+    MoCA (cognitive screen post-stroke); MMSE; RAVLT (verbal memory, if applicable); TMT-A&B (executive/processing speed); Boston Naming (aphasia); Token Test (comprehension); WAIS Processing Speed; SDMT (attention); Cancellation Task (neglect); Catherine Bergego Scale (CBS — neglect)
+    qeeg_key_bands: >
+    ↑Delta/theta in affected hemisphere; ↓Alpha/beta in affected hemisphere; ↑DAR (delta-alpha ratio >3.7 = dysfunction index); Hemispheric asymmetry (BSI — Brain Symmetry Index); ↓Beta in affected M1; Frontal asymmetry; Alpha as motor recovery predictor
+    qeeg_key_electrodes: "C3/C4 (motor cortex asymmetry — primary stroke rehab biomarker), F3/F4 (frontal DAR), T7/T8 (temporal asymmetry), Cz, P3/P4 (parietal if neglect); Contralesional vs ipsilesional comparison"
+    qeeg_key_metrics: >
+    BSI (Brain Symmetry Index — key stroke qEEG biomarker; <0.1 = good recovery predictor); DAR (delta-alpha ratio: ↑ in affected hemisphere predicts worse motor recovery); Beta power affected M1 (C3 or C4); Event-related desynchronisation (ERD) at C3/C4 during motor imagery; Alpha coherence interhemispheric; MRCP (movement-related cortical potential)
+    brain_regions_affected: >
+    Perilesional Cortex (primary recovery target), M1 ipsilesional (hypoactive), Contralesional M1 (may overactivate), Broca's/Wernicke's (if aphasia), Parietal Cortex (if neglect), SMA, Thalamus, Brainstem (if lacunar)
+    primary_network_disrupted: >
+    Sensorimotor (disrupted interhemispheric balance), Language Network (L hemisphere), Attention/DAN (R hemisphere neglect), Corticospinal Tract (structural damage), Cerebellar-M1 circuit (adaptation)
+    neuroimaging: >
+    MRI DWI (acute stroke — infarct core/penumbra); MRI T2/FLAIR (final infarct volume); DTI (corticospinal tract integrity — FA ratio = recovery predictor); fMRI motor task (ipsilesional M1 reactivation); MRI tractography (language pathways if aphasia); PET FDG (diaschisis mapping)
+    physiological_assessments: >
+    TUG (Timed Up and Go — functional mobility); 10MWT (10-Metre Walk Test — gait speed); 6MWT (6-Minute Walk Test); Fugl-Meyer Assessment (FMA — motor impairment); WMFT (Wolf Motor Function Test); BBT (Box and Block Test — hand function); Grip strength dynamometry; HRV (autonomic post-stroke)
+    functional_assessments: >
+    mRS at baseline, 1, 3, 6 months; FIM independence score; Neglect assessment (CBS, line bisection, star cancellation); Aphasia: WAB Aphasia Quotient; Falls diary; Home modification needs; Vocational rehabilitation; Carer burden
+    fnon_qeeg_treatment_target: >
+    BSI ↓ (hemispheric symmetry restoration); DAR ↓ affected hemisphere; Beta ↑ ipsilesional M1; ERD restoration at affected C3/C4
+    assessment_rationale: >
+    BSI and DAR are primary qEEG biomarkers for stroke recovery trajectory. TPS/tDCS anodal ipsilesional M1 + inhibitory contralesional M1 = interhemispheric balance restoration protocol.
+  mci:
+    condition: "MCI (Mild Cognitive Impairment)"
+    category: "Neurodegenerative — Early"
+    primary_clinical_scales: >
+    MoCA (primary screen — score <26 = MCI threshold); ACE-III; CDR 0.5 (MCI staging); ADAS-Cog (milder version); FAQ (Functional Activities Questionnaire — detects functional impact); GDS-15 (depression comorbidity); MMSE; Subjective Cognitive Decline Questionnaire (SCD-Q); Patient Health Questionnaire
+    neuropsychological_battery: >
+    RAVLT Trial 1-5 + delay (verbal learning/memory — most sensitive MCI marker); BVMT-R (visual memory); Digit Span Forward/Backward (WM); TMT-A&B; COWA verbal fluency; BNT Boston Naming; SDMT (processing speed); Clock Drawing; Visuospatial copying (BVMT/ROCF); Category fluency (Animals)
+    qeeg_key_bands: >
+    Intermediate AD-like changes: ↑Theta (less than AD); Mildly ↓Alpha; ↓Alpha peak frequency (below 9 Hz — key marker); ↓Alpha/theta ratio; Mildly ↑Delta; ↓EEG complexity/entropy
+    qeeg_key_electrodes: "Pz (posterior slowing — primary MCI marker), T5/T6 (temporal theta — memory circuit), F3/F4 (frontal changes), O1/O2 (alpha peak frequency assessment)"
+    qeeg_key_metrics: >
+    APF (alpha peak frequency): key single metric — <9 Hz predicts conversion to AD; Alpha/theta ratio Pz; Absolute theta power T5/T6; EEG complexity (approximate entropy, multiscale entropy); Spectral coherence hippocampal-cortical (theta); DAR
+    brain_regions_affected: >
+    Hippocampus (earliest atrophy), Entorhinal Cortex (tau onset), Precuneus, DLPFC, Temporoparietal Cortex
+    primary_network_disrupted: >
+    DMN (early disruption — precuneus/PCC connectivity ↓), ECN/Frontoparietal (mildly impaired), Cholinergic pathways (beginning decline)
+    neuroimaging: >
+    MRI hippocampal volume (MTA score 0-4); MRI cortical thickness (temporal pole, entorhinal); FDG-PET (↓ temporal-parietal — if available); Amyloid-PET/blood biomarkers (pTau217, Aβ42/40 ratio, GFAP, NfL — for conversion prediction); DTI white matter hyperintensities
+    physiological_assessments: >
+    Actigraphy (sleep disruption as MCI risk indicator); Olfactory testing (UPSIT — declining olfaction = AD risk); HRV (autonomic-cognitive link); Cardiac assessment (vascular risk factors); Blood pressure monitoring
+    functional_assessments: >
+    RAVLT — primary outcome for MCI intervention trials; MoCA monitoring (3–6 monthly); CDR SOB (sum of boxes); IADL Questionnaire; Driving assessment; Computer-based cognitive monitoring (Cambridge Brain Sciences, CogniFit)
+    fnon_qeeg_treatment_target: >
+    APF restoration toward 10 Hz; Theta ↓ temporal/parietal; Alpha ↑ Pz; TGC (theta-gamma coupling) in HC restoration
+    assessment_rationale: >
+    APF is most sensitive single qEEG metric for MCI staging and conversion prediction. SOZO TPS MCI protocol targets qEEG slowing sites — Pz, T3/T4, F3/F4.
+  tinnitus:
+    condition: "Tinnitus"
+    category: "Auditory/ENT"
+    primary_clinical_scales: >
+    THI (Tinnitus Handicap Inventory — primary); TFI (Tinnitus Functional Index); VAS tinnitus loudness (0-10); TRQ (Tinnitus Reaction Questionnaire); TQ (Tinnitus Questionnaire); GAD-7 (anxiety comorbidity); PHQ-9 (depression comorbidity); HADS; Hyperacusis Questionnaire (HQ); PSQI (sleep)
+    neuropsychological_battery: >
+    Audiological assessment (pure tone audiometry, speech discrimination); Tinnitus pitch/loudness matching; MML (minimum masking level); THI self-report; Auditory processing tests (dichotic listening); Residual inhibition test; Audiogram (4-kHz notch detection); Hyperacusis testing (LDL — loudness discomfort level)
+    qeeg_key_bands: >
+    ↑Gamma power (auditory cortex — primary tinnitus biomarker); ↓Alpha suppression (auditory cortex); ↑Theta (auditory cortex — thalamocortical dysrhythmia); ↑Delta; Abnormal beta/gamma connectivity fronto-limbic; ↑High-frequency coherence temporal-frontal
+    qeeg_key_electrodes: "T3/T4 (temporal-auditory cortex — primary tinnitus EEG sites), T5/T6 (posterior temporal), F3/F4 (frontal distress component), Fz (frontal entropy), C3/C4"
+    qeeg_key_metrics: >
+    Gamma power T3/T4 (↑ = tinnitus generator biomarker — key); Alpha power T3/T4 (↓ in silence-induced reorganisation); Theta power T3/T4 (thalamocortical dysrhythmia index); Temporal-frontal gamma coherence; Alpha/gamma ratio temporal; Temporal alpha asymmetry
+    brain_regions_affected: >
+    Auditory Cortex/STG (hyperactive), Inferior Colliculus (IC — brainstem relay), Medial Geniculate Body (thalamus), Anterior Insula (distress), ACC (emotional distress), OFC, Parahippocampal Gyrus, Subgenual ACC
+    primary_network_disrupted: >
+    Auditory Network (hyperactive — thalamocortical dysrhythmia), Distress/Limbic Network (ACC-OFC-insula-parahippocampus), DMN (altered), Salience (activated by tinnitus percept)
+    neuroimaging: >
+    MRI — structural brain changes in auditory cortex; MRI white matter (auditory radiation integrity); fMRI resting-state (tinnitus-related network); DTI auditory pathway integrity; BOLD fMRI tinnitus correlate; PET H₂O¹⁵ (auditory cortex hyperactivity)
+    physiological_assessments: >
+    Audiometry (full audiological battery); OAE (Otoacoustic Emissions — cochlear function); ABR (Auditory Brainstem Response — retrocochlear pathology); HRV (autonomic-tinnitus link); Blood pressure assessment; Cervical assessment (if cervicogenic tinnitus)
+    functional_assessments: >
+    THI weekly; VAS daily tinnitus loudness; Sound diary (triggers, quiet/noisy environments); Sleep diary (tinnitus-sleep interaction); Hyperacusis monitoring; Hearing aid compliance (if used); Residual inhibition testing pre/post treatment
+    fnon_qeeg_treatment_target: >
+    Temporal gamma ↓ (T3/T4 — primary treatment target); Temporal alpha ↑ suppression (paradoxical — must suppress maladaptive alpha); Theta ↓ T3/T4; Temporal-frontal coherence normalisation
+    assessment_rationale: >
+    Tinnitus alpha is PARADOXICALLY maladaptive — SUPPRESS, not enhance. This is a critical FNON distinction vs other conditions where alpha is facilitated.
+  schizophrenia:
+    condition: "Schizophrenia"
+    category: "Psychotic"
+    primary_clinical_scales: >
+    PANSS (Positive and Negative Syndrome Scale — primary); BPRS (Brief Psychiatric Rating Scale); CDSS (Calgary Depression Scale for Schizophrenia); UKU Side Effect Rating Scale; SANS/SAPS; PSP (Personal and Social Performance); GAF (Global Assessment of Functioning); BNSS (Brief Negative Symptom Scale); SCI-PANSS
+    neuropsychological_battery: >
+    MATRICS Consensus Cognitive Battery (MCCB — primary standard): Speed of Processing, Attention/Vigilance, Working Memory, Verbal Learning, Visual Learning, Reasoning/Problem Solving, Social Cognition; BACS (Brief Assessment of Cognition in Schizophrenia); HVLT-R; BVMT-R; NAB; CPT-IP (continuous performance)
+    qeeg_key_bands: >
+    ↑Frontal delta + theta; ↓Alpha (resting eyes-closed); ↑Beta (eyes-open, some); ↓Gamma synchrony (40 Hz ASSR deficit — primary schizophrenia biomarker); ↓P300 amplitude; Altered SN-DMN connectivity; ↓Alpha coherence
+    qeeg_key_electrodes: "Fz, F3/F4 (frontal delta/theta), Cz (midline — P300 reference), T3/T4 (temporal — hallucinations), P3/P4 (P300 sites — key ERP biomarker), O1/O2"
+    qeeg_key_metrics: >
+    40 Hz ASSR (Auditory Steady-State Response — ↓ = primary schizophrenia biomarker); P300 amplitude/latency at P3/P4/Cz; MMN (Mismatch Negativity — ↓ in schizophrenia = secondary biomarker); Frontal delta/theta power; Alpha coherence; Gamma power globally; N100/P50 gating (↓ P50 ratio = sensory gating deficit)
+    brain_regions_affected: >
+    DLPFC (hypoactive — negative symptoms), L-TPJ/STG (auditory verbal hallucinations — AH), ACC, Thalamus (mediodorsal — relay), Hippocampus (volume ↓), Anterior Insula
+    primary_network_disrupted: >
+    DMN (hyperactive — failure to deactivate), Salience (impaired SN↔DMN communication), ECN (hypoactive — cognitive), Auditory/Language Network (aberrant — AH), Thalamocortical loops (disrupted gating)
+    neuroimaging: >
+    MRI structural (DLPFC/hippocampal volume ↓, lateral ventricle ↑); DTI (white matter integrity — fronto-limbic tracts); fMRI resting-state (hypofrontality); PET FDG/DA (D2 receptor imaging with raclopride); MRS spectroscopy (glutamate in ACC — Glx); Cortical thickness mapping
+    physiological_assessments: >
+    HRV (autonomic dysregulation — metabolic risk); ECG (QTc — antipsychotic monitoring); BMI/metabolic panel (antipsychotic metabolic side effects); EEG-based P50 gating assessment; Sleep monitoring (↑ sleep onset latency in schizophrenia)
+    functional_assessments: >
+    PANSS positive/negative/general subscores; PSP social functioning; GAF; Symptom diary; Medication adherence monitoring; AIMS (Abnormal Involuntary Movement Scale — for tardive dyskinesia); Cognitive progress (MCCB); Crisis plan
+    fnon_qeeg_treatment_target: >
+    40 Hz gamma ↑ facilitation (ASSR restoration — key target); P300 amplitude ↑; Frontal delta/theta ↓; MMN restoration; Alpha coherence ↑
+    assessment_rationale: >
+    40 Hz ASSR deficit is the most replicable qEEG biomarker in schizophrenia. 40 Hz tACS/gamma entrainment directly targets this. L-STG inhibitory TMS reduces AH — electrode T3/T5 target.
+  tbi___concussion:
+    condition: "TBI / Concussion"
+    category: "Neurological — TBI"
+    primary_clinical_scales: >
+    GOSE (Glasgow Outcome Scale Extended — primary); GCS (Glasgow Coma Scale — acute); RPQ (Rivermead Post-Concussion Questionnaire); NSI (Neurobehavioral Symptom Inventory); PHQ-9; GAD-7; PCL-5 (PTSD comorbidity); ISI (insomnia comorbidity); BRIEF (executive function); DKEFS; BIST (Brain Injury Screening Tool); SCAT5 (Sport Concussion Assessment Tool)
+    neuropsychological_battery: >
+    ImPACT (Immediate Post-Concussion Assessment and Cognitive Testing); ANAM (Automated Neuropsychological Assessment Metrics); King-Devick (eye movement/number reading — sideline tool); CNS Vital Signs; BVMT-R; TMT-A&B; RAVLT; Stroop; WAIS Processing Speed; SDMT; Digit span; CogSport
+    qeeg_key_bands: >
+    ↑Frontal/temporal theta; ↑Delta; ↓Posterior alpha; ↑Theta/beta ratio; ↑Theta/alpha ratio; ↓Global coherence; ↓EEG complexity (multiscale entropy); ↑Slow waves during wakefulness (DAI marker); EEG slowing correlates with injury severity
+    qeeg_key_electrodes: "Fz, F3/F4 (frontal theta/delta — primary TBI site), T3/T4 (temporal slowing), Pz (posterior alpha ↓), Cz (central — global measure), globally ↓ coherence all channels"
+    qeeg_key_metrics: >
+    Global EEG complexity/entropy (↓ correlates with TBI severity — key metric); Theta/alpha ratio (↑ in concussion); Frontal theta power F3/Fz; Global coherence index; Delta asymmetry ratio; EEG quantitative indices (QEEG-based concussion scores); P300 amplitude/latency; ERN at FCz; Alpha power Pz
+    brain_regions_affected: >
+    PFC (frontal vulnerability — primary TBI site), Temporal Lobes, Corpus Callosum (DAI — diffuse axonal injury), Hippocampus (impact-sensitive), Brainstem, Diffuse White Matter (shear forces)
+    primary_network_disrupted: >
+    DMN (disrupted connectivity), Executive/Frontoparietal (impaired), Sensorimotor (if motor symptoms), Global Network Efficiency ↓, White matter structural networks (DAI)
+    neuroimaging: >
+    MRI DWI (acute contusion/DAI); SWI (microbleeds — haemorrhagic contusions); DTI (white matter integrity — FA/RD in corpus callosum = injury marker); fMRI resting-state (functional disconnection); qMRI (iron, myelin mapping); PET tau (chronic TBI/CTE risk in athletes)
+    physiological_assessments: >
+    HRV (↓ vagal tone post-concussion = symptom predictor); Vestibular/ocular motor screening (VOMS — sensitive concussion test); Neurological gait assessment; Balance assessment (BESS); King-Devick eye tracking; Inflammatory markers (serum NfL, GFAP — acute injury biomarkers); Sleep actigraphy
+    functional_assessments: >
+    NSI symptom tracking (22-item); RPQ post-concussion score; Return-to-play/work protocol (graduated stages); BIST follow-up; Sleep diary; Headache diary; Light/noise sensitivity diary; Mood tracking; Exercise tolerance assessment
+    fnon_qeeg_treatment_target: >
+    Global theta ↓ (Fz/T3/T4 — primary TBI recovery target); Posterior alpha ↑; Coherence restoration globally; EEG complexity ↑
+    assessment_rationale: >
+    qEEG provides objective concussion severity grading (QEEG-based concussion index). Return-to-play decisions can incorporate qEEG normalisation alongside symptom resolution.
+  addiction___substance_use_disorder:
+    condition: "Addiction / Substance Use Disorder"
+    category: "Addiction"
+    primary_clinical_scales: >
+    AUDIT (Alcohol Use Disorders Identification Test); DAST-10 (Drug Abuse Screening Test); CAGE; ASI (Addiction Severity Index); TLFB (Timeline Followback — substance use quantification); BIS-11 (Barratt Impulsiveness Scale); VAS craving scales; BDI-II; PHQ-9; CRAFFT (adolescents); Severity of Dependence Scale (SDS)
+    neuropsychological_battery: >
+    IGT (Iowa Gambling Task — decision-making under uncertainty — key addiction biomarker); BART (Balloon Analogue Risk Task); Stop-Signal Task (response inhibition SSRT — ↑ impulsivity); Go/No-Go (inhibitory control); CANTAB IED-ED (reversal learning); TMT-A&B; Stroop; RAVLT; Digit span; Working memory battery (N-back)
+    qeeg_key_bands: >
+    ↑Frontal theta; ↑Beta (alcohol — excess fast beta post-acute withdrawal); ↓P300 amplitude at Cz/Pz (primary addiction biomarker); ↑Alpha in alcohol dependence (resting); ↓Frontal alpha asymmetry; ↓Gamma; Craving-related delta/theta increase
+    qeeg_key_electrodes: "Fz, F3/F4 (frontal theta/beta), Cz (P300 amplitude — primary biomarker), Pz (P300 latency), T3/T4 (temporal changes), Fp1/Fp2 (OFC-related activity)"
+    qeeg_key_metrics: >
+    P300 amplitude Cz/Pz (↓ = inhibitory control deficit — strongest addiction biomarker; predicts relapse); Frontal theta Fz; Beta power (global): ↑ in alcohol withdrawal hyperarousal; Alpha power (resting): ↑ in alcohol dependence; Craving EEG correlate (increased delta/theta); P50 gating
+    brain_regions_affected: >
+    NAc (reward — craving), DLPFC (impaired control — inhibition deficit), OFC (compulsive drive), Anterior Insula (craving/interoception), VTA (dopamine), ACC, Amygdala (conditioned fear/reward memory)
+    primary_network_disrupted: >
+    Reward/Mesolimbic (hyperactive — VTA-NAc-OFC), ECN (hypoactive — impaired inhibition), Salience (biased toward drug cues), DMN (altered self-referential — identity change)
+    neuroimaging: >
+    fMRI cue reactivity (drug-related stimuli — amygdala/NAc activation); Resting-state fMRI (disrupted fronto-limbic connectivity); Structural MRI (OFC/PFC grey matter ↓); PET DA (D2 receptor striatal — ↓ in addiction); PET FDG (↓ prefrontal metabolism during craving inhibition task)
+    physiological_assessments: >
+    HRV (↓ vagal tone — autonomic impairment in addiction); Cortisol (HPA dysregulation); Craving VAS scale (daily); Urinalysis/hair/nail toxicology; Liver function tests; Withdrawal symptom monitoring (CIWA-Ar for alcohol); TLFB substance use diary; Actigraphy
+    functional_assessments: >
+    AUDIT monthly; Craving diary; TLFB follow-up (30/90/180 day); Relapse recording; Social function (WSAS); Employment/housing stability; BRIEF executive; BIS-11 impulsivity change; Peer support assessment
+    fnon_qeeg_treatment_target: >
+    P300 ↑ facilitation (Cz/Pz — inhibitory control restoration); Frontal theta ↓; DLPFC excitability ↑ (TPS/TMS F3/F4); NAc activity ↓ (LIFU target)
+    assessment_rationale: >
+    P300 amplitude at Cz is strongest addiction qEEG biomarker — predicts relapse probability. Correlates directly with DLPFC inhibitory control. SOZO FNON: DLPFC excitation (TPS F3/F4) + NAc suppression (LIFU).
+  adhd:
+    condition: "ADHD"
+    category: "Neurodevelopmental"
+    primary_clinical_scales: >
+    CAARS (Conners' Adult ADHD Rating Scale — adult); DIVA-2.0 (diagnostic interview); BRIEF-2 (executive function); Brown ADD Rating Scales; ASRS-v1.1 (Adult ADHD Self-Report Scale); QbCheck/QbTest (motion + attention objective); Vanderbilt (paediatric); SNAP-IV; CBCL; PHQ-9 (depression comorbidity); WURS (childhood retrospective)
+    neuropsychological_battery: >
+    CPT-II (Conners' Continuous Performance Test — primary objective ADHD measure; ↑ omission errors, ↑ RT variability); QbTest (motion tracking + attention score); TOVA (Test of Variables of Attention); WAIS Working Memory Index; Digit Span; SDMT; TMT-A&B; Stop-Signal Task (SSRT — response inhibition); Stroop (interference); N-back WM
+    qeeg_key_bands: >
+    ↑Theta/beta ratio (TBR at Cz — primary ADHD qEEG biomarker; >3.0 = ADHD signature); Excess frontal theta; ↓Beta globally; Subtypes: (1) Maturational lag=↑theta+↓beta; (2) Hyperarousal=↑beta; (3) ↑Alpha (anxiety comorbid); (4) Thalamocortical dysrhythmia
+    qeeg_key_electrodes: "Cz (TBR — primary ADHD qEEG site), Fz (frontal theta), F3/F4 (frontal slowing), C3/C4 (central beta ↓), Pz (parietal — attention)"
+    qeeg_key_metrics: >
+    TBR at Cz (theta/beta ratio — primary ADHD biomarker; TBR >3.0 = ADHD, TBR <3.0 = normative); Absolute theta Fz; Absolute beta Cz; ADHD subtype determination via qEEG spectral profile; P300 amplitude Pz; ERN at FCz (attention monitoring); CPT-II score correlation with qEEG
+    brain_regions_affected: >
+    DLPFC (R+L — hypoactive), ACC (impaired error monitoring), Striatum/Caudate (dopamine deficit), SMA (motor planning), PFC, Cerebellum (timing)
+    primary_network_disrupted: >
+    Executive/ECN (hypoactive — poor sustained attention), DMN (fails to deactivate during tasks → DMN interference), Salience (impaired switching), Frontoparietal (disrupted)
+    neuroimaging: >
+    Structural MRI (DLPFC, caudate volume ↓ in ADHD); fMRI resting-state (DMN-ECN anti-correlation deficit); DTI (fronto-striatal white matter); fMRI task (N-back, Stop-Signal — reduced frontal activation); PET DA (D2/DAT imaging — striatal dopamine deficit)
+    physiological_assessments: >
+    HRV (↓ RMSSD — vagal tone deficit in ADHD); EDA (electrodermal activity — ↑ inattention correlate); QbTest motion tracker (hyperactivity quantification); Actigraphy (activity level, sleep); Cortisol (HPA in ADHD); Heart rate variability biofeedback potential
+    functional_assessments: >
+    CPT-II monitoring (objective attention); QbTest pre/post; CAARS monthly; School/work performance record; Medication effects monitoring; Sleep diary (ADHD sleep dysregulation); Exercise diary (exercise as ADHD intervention); WSAS disability
+    fnon_qeeg_treatment_target: >
+    TBR ↓ at Cz (primary ADHD treatment target); Frontal theta ↓ Fz; Beta ↑ Cz; DMN-ECN anti-correlation restoration
+    assessment_rationale: >
+    TBR is primary FNON biomarker for ADHD. TPS bilateral prefrontal + tACS 7 Hz (theta-alpha boundary) target the TBR excess. Neurofeedback TBR training complements FNON protocols.
+  essential_tremor:
+    condition: "Essential Tremor"
+    category: "Movement Disorder"
+    primary_clinical_scales: >
+    TETRAS (The Essential Tremor Rating Assessment Scale — primary standard); FTM (Fahn-Tolosa-Marin Tremor Rating Scale); QUEST (Quality of Life in Essential Tremor); SF-36 QoL; BDI-II (depression comorbidity); Spirography (handwriting spiral — quantitative tremor measure); Patient Global Impression of Severity
+    neuropsychological_battery: >
+    TMT-A&B (ET has mild cognitive involvement); MoCA (mild cognitive impairment screen in ET); Processing speed battery; Visuospatial tests; Handwriting analysis; Spiral drawing (quantitative); Grip strength (grip interference from tremor); 9-Hole Peg Test (manual dexterity)
+    qeeg_key_bands: >
+    Tremor-frequency coherence (4-12 Hz — primary ET qEEG biomarker) in SMA/dlPFC/cerebellum; ↑Low beta (14-21 Hz) desynchronization in SMA during movement; ↑Upper beta (18-30 Hz) ERD in dlPFC; Disrupted sequential network engagement; ↑Cerebellar-thalamic synchrony
+    qeeg_key_electrodes: "Cz/FCz (SMA — primary ET tremor coupling site), C3/C4 (motor cortex), F3/F4 (dlPFC), Pz (parietal coherence), Cerebellar electrodes (P9/P10/Oz)"
+    qeeg_key_metrics: >
+    Tremor frequency coherence (4-12 Hz) at Cz/FCz/C3/C4 (↑ = cerebellar-thalamo-cortical synchrony = ET biomarker); Beta ERD at SMA (FCz) during movement; Corticomuscular coherence (EMG-EEG coupling at tremor frequency); Tremor frequency power spectrum; Alpha/beta ratio motor cortex
+    brain_regions_affected: >
+    VIM Thalamus (primary ET target — pathological cerebellar-thalamic synchrony), Cerebellum (Lobule VI — origin), SMA (FCz), M1, Posterior Parietal Cortex (PPC), DLPFC, Premotor Cortex
+    primary_network_disrupted: >
+    Cerebello-Thalamo-Cortical Circuit (pathological synchrony — primary ET circuit), Sensorimotor Network (disrupted beta dynamics), Frontoparietal Network (altered)
+    neuroimaging: >
+    MRI structural brain (rule out secondary causes); DaTscan (if PD differentiation needed — negative in ET); DTI cerebellar-thalamic tract integrity; fMRI resting-state (cerebellar-thalamic hyperconnectivity in ET); MRI VIM targeting (DBS planning: Lead-DBS software); MRgFUS (H₂¹⁵O PET tracking during HIFU ET)
+    physiological_assessments: >
+    Accelerometry (wrist — tremor frequency and amplitude quantification, 1-week diary); Spiral/Archimedes spiral drawing (quantitative tremor app — Tremor12); EMG surface (tremor pattern); Weight-sensitive dining assessment; HRV; Bilateral wrist accelerometry during tasks
+    functional_assessments: >
+    TETRAS or FTM biweekly; Spirography quantitative (app); Daily function (eating, writing, drinking); QUEST QoL; Medication diary (propranolol/primidone effects); DBS/MRgFUS programming log (if applicable); Social impact (embarrassment in public)
+    fnon_qeeg_treatment_target: >
+    Tremor-frequency coherence ↓ at Cz/FCz (desynchronise CTC circuit); Cerebellar-M1 beta coherence normalisation; VIM thalamus activity modulation
+    assessment_rationale: >
+    Corticomuscular coherence at tremor frequency is unique ET biomarker — distinguishes CTC circuit involvement. DBS VIM or MRgFUS is gold standard; cerebellar TMS + TPS emerging alternatives.
+  asd:
+    condition: "Autism Spectrum Disorder (ASD)"
+    category: "Neurodevelopmental"
+    primary_clinical_scales: >
+    ADOS-2 (Autism Diagnostic Observation Schedule — gold standard diagnostic); ADI-R (Autism Diagnostic Interview-Revised — developmental history); SRS-2 (Social Responsiveness Scale); VABS-3 (Vineland Adaptive Behaviour Scales); SCQ (Social Communication Questionnaire); RBS-R (Repetitive Behaviour Scale); CBCL; Sensory Profile-2; PDDBI; ABC (Aberrant Behaviour Checklist)
+    neuropsychological_battery: >
+    ADOS-2 cognitive subscale; WASI-II/WPPSI (IQ); VABS-3 adaptive behaviour; NEPSY-II (social perception, face recognition, attention); BRIEF-2 (executive function); CANTAB social cognition battery; GARS-3; MoCA/MMSE (if adult); ToM tasks (Theory of Mind); Eyes Test (Baron-Cohen reading the mind in the eyes); Emotion recognition (Cambridge face memory)
+    qeeg_key_bands: >
+    U-shaped power profile: ↑Low-freq (delta/theta) + ↑High-freq (beta/gamma); ↓Midrange alpha + beta; ↓Alpha (eyes-open = ↓ inhibitory control); Excess beta in Dup15q; ↓Long-range connectivity; ↑Local connectivity; ↓Mu (8-12 Hz) suppression (mirror neuron marker)
+    qeeg_key_electrodes: "Fz, F3/F4 (frontal changes — social-executive), Cz (central — mu rhythm), T3/T4 (temporal — language/social), P3/P4 (parietal — visuospatial/attention), globally altered long-range coherence"
+    qeeg_key_metrics: >
+    Mu rhythm suppression at Cz/C3/C4 (↓ = impaired mirror neuron function — key ASD biomarker); Long-range coherence (↓ global connectivity); Local coherence (↑ focal); Frontal alpha asymmetry (Fp1/Fp2); N200/P300 event-related; 40 Hz ASSR (altered in ASD); ERP face processing (N170 at T5/T6); Gamma power (sensory cortices)
+    brain_regions_affected: >
+    PFC (social inhibition), Temporal Cortex, Fusiform Gyrus (face processing), Amygdala (emotional response), Cerebellum (motor planning, social timing), STS (Superior Temporal Sulcus — biological motion, ToM), Insula
+    primary_network_disrupted: >
+    Social Brain Network (impaired — STS, fusiform, amygdala, mPFC), DMN (atypical connectivity — over-or under-connected), Mirror Neuron Network (altered — mu suppression deficit), Long-range underconnectivity (frontal-posterior), Short-range overconnectivity
+    neuroimaging: >
+    MRI structural (brain size/growth trajectories in ASD); DTI long-range white matter tracts (↓ FA fronto-temporal); fMRI social tasks (face processing, ToM — ↓ amygdala/STS activation); fMRI resting-state (atypical DMN); MRS (↓ GABA, ↑ glutamate in social brain areas); EEG mu paradigm (action observation)
+    physiological_assessments: >
+    Sensory assessment (sensory profile — tactile, auditory, vestibular); HRV (autonomic dysregulation in ASD); Actigraphy (sleep — significant insomnia comorbidity in 70% ASD); GI assessment (gut-brain axis in ASD); Eye tracking (gaze patterns — social preference); Cortisol (HPA in ASD)
+    functional_assessments: >
+    ADOS-2 social affect + RRB subscores; Vineland adaptive skills; ABC irritability subscale; Sleep diary (critical in ASD); Sensory diary; Social interaction log; School/work participation; CBCL challenging behaviour; Communication progress; Safety assessment (elopement)
+    fnon_qeeg_treatment_target: >
+    Mu suppression restoration at Cz (mirror neuron circuit); Long-range coherence ↑; 40 Hz gamma normalisation (sensory); Frontal alpha ↑; Social brain network connectivity
+    assessment_rationale: >
+    Mu suppression is key ASD qEEG biomarker for mirror neuron circuit function. TPS RCT 2023 (Brain Commun, 21 cit) — multi-site frontal+parietal+temporal covers ASD social brain network nodes.
+  disorders_of_consciousness_(doc):
+    condition: "Disorders of Consciousness (DOC)"
+    category: "Neurological — Consciousness"
+    primary_clinical_scales: >
+    CRS-R (Coma Recovery Scale-Revised — gold standard for DOC differentiation: UWS vs MCS); FOUR (Full Outline of UnResponsiveness Score); WHIM (Wessex Head Injury Matrix); WNSSP (Western Neuro Sensory Stimulation Profile); GCS; Nociception Coma Scale (NCS) — pain assessment; Family/carer burden tools; QoL assessment proxies
+    neuropsychological_battery: >
+    CRS-R subscales (auditory, visual, motor, oromotor, communication, arousal — primary DOC assessment battery); ERP-based command following (covert command paradigm — BCI-based); P300 cognitive probe paradigm (overt/covert); Motor imagery paradigm (fMRI/EEG); Communication device assessment
+    qeeg_key_bands: >
+    Generalised delta/theta dominance; Absent/severely ↓ alpha/beta; Loss of normal sleep architecture; ↓EEG complexity/entropy; Absent posterior dominant rhythm (PDR); ↓Reactivity to stimulation; Theta pattern associated with MCS vs delta with UWS
+    qeeg_key_electrodes: "Global (all channels — 10-20 full montage required), Fz/Cz/Pz (midline — arousal centres), C3/C4 (sensorimotor), O1/O2 (visual — reactivity testing), T3/T4 (auditory — name-calling responses)"
+    qeeg_key_metrics: >
+    EEG reactivity index (change with stimulation — primary DOC qEEG measure; absent = worse prognosis); EEG complexity/entropy (↑ = MCS; ↓ = UWS; key prognostic metric); Delta/theta power (global); PDR (posterior dominant rhythm — absence = UWS); Sleep architecture (presence = good prognostic sign); P300 amplitude (command-following ERP); Alpha/delta ratio; Spectral edge frequency
+    brain_regions_affected: >
+    Thalamus (Intralaminar Nuclei, CL, CM-Pf — consciousness relay), Brainstem Reticular Formation (ARAS), PFC, Precuneus (consciousness), Posterior Cingulate (awareness)
+    primary_network_disrupted: >
+    ARAS/Ascending Arousal System (severely impaired), Thalamocortical System (disconnected), DMN (disrupted — correlates with consciousness level), Frontoparietal Consciousness Network
+    neuroimaging: >
+    MRI structural (lesion mapping — TBI/anoxia/vascular cause); fMRI mental imagery paradigm (tennis/house imagery — covert command following); EEG-fMRI simultaneous (low-resource DOC); DWI tractography (thalamocortical tract integrity = prognosis); 18F-FDG PET (metabolism correlates with consciousness level — most sensitive); PET H₂O¹⁵ during sensory stimulation
+    physiological_assessments: >
+    EEG continuous monitoring (reactivity + sleep-wake cycling — prognostic); HRV (autonomic recovery); Pupillometry (automated — arousal assessment); Serum NfL (neurodegeneration marker); Cortisol circadian rhythm; Skin conductance response (autonomic commands); Respiratory/cardiac monitoring; Temperature regulation
+    functional_assessments: >
+    CRS-R (weekly); FOUR score; Nociception assessment; Family communication plan; Palliative care needs assessment (in prolonged DOC); Communication device trials; RCP/RCOT guidelines adherence
+    fnon_qeeg_treatment_target: >
+    EEG reactivity ↑ (primary treatment target); EEG complexity ↑ (entropy increase = MCS emergence); Delta ↓; Thalamocortical connectivity restoration; PDR emergence
+    assessment_rationale: >
+    EEG complexity (entropy) is primary surrogate biomarker for consciousness level — differentiates UWS from MCS. taVNS + TPS as emerging FNON approaches. CRS-R + qEEG complexity together = best DOC assessment.
+  fibromyalgia:
+    condition: "Fibromyalgia"
+    category: "Pain/Rheumatology"
+    primary_clinical_scales: >
+    FIQ-R (Fibromyalgia Impact Questionnaire-Revised — primary); FMSS (Fibromyalgia Survey Score); NRS pain; BPI-FM; ACR 2010/2016 diagnostic criteria (WPI + SS); HADS; GAD-7; PHQ-9; CSI (Central Sensitization Inventory — critical for FM); PSQI (sleep); FSS (Fatigue Severity Scale); PCS (Pain Catastrophizing Scale)
+    neuropsychological_battery: >
+    Processing Speed (DSST/SDMT — 'fibro fog' assessment); TMT-A&B; Stroop; CPT (sustained attention); RAVLT (verbal memory — fibro fog); N-back (WM); Multidimensional Fatigue Inventory (MFI); Computerised cognitive testing (Cambridge Brain Sciences)
+    qeeg_key_bands: >
+    ↑Theta power (concentrated slowing); ↑Theta/alpha + theta/beta ratios; ↓Delta (R insula); ↑Beta (R middle frontal, midcingulate); ↓Alpha peak frequency; ↓EO/EC reactivity; ↑Centro-parietal theta; Thalamocortical dysrhythmia pattern
+    qeeg_key_electrodes: "Cz, C3/C4 (central theta — primary FM site), Fz (frontal slowing), Pz, P3/P4 (parietal theta), T3/T4 (temporal), O1/O2 (alpha peak frequency tracking)"
+    qeeg_key_metrics: >
+    Central theta (Cz/C3/C4) power (↑ = central sensitisation marker); APF (↓ correlates with FM severity); Thalamocortical coherence (Cz-Pz); EO/EC reactivity (↓ = autonomic dysregulation); Theta/alpha ratio; P300 latency (prolonged in FM); Beta power R-frontal/midcingulate; Gamma (30-80 Hz) C3/C4
+    brain_regions_affected: >
+    Thalamus (↓ activity — central sensitisation gateway), PFC (grey matter loss), ACC (midcingulate), Anterior Insula (interoception), M1, S1, Midcingulate
+    primary_network_disrupted: >
+    Pain Matrix/Salience (sensitised — central sensitisation), DMN (disrupted), Thalamocortical Dysrhythmia Circuit, Descending Pain Modulation (impaired), Interoceptive Network (insula)
+    neuroimaging: >
+    MRI voxel-based morphometry (PFC/thalamus grey matter ↓); fMRI resting-state (hyperconnected pain matrix); fMRI task (↑ pain sensitivity to non-painful stimuli = central sensitisation); PET FDG (thalamic hypometabolism); MRS (↓ GABA in insula/PFC, ↑ Glx)
+    physiological_assessments: >
+    QST Quantitative Sensory Testing (pressure pain thresholds — primary FM objective measure); CPM (Conditioned Pain Modulation — deficient in FM); HRV (↓ vagal tone — FM biomarker); Morning cortisol; Actigraphy (non-restorative sleep); Step count/activity level; EMG paraspinal; Inflammatory markers (↓ in FM = rules out inflammatory cause)
+    functional_assessments: >
+    FIQ-R weekly; NRS pain diary (morning/evening); Sleep diary (PSQI); Fatigue diary (FSS); Activity diary; Tender point count (ACR criteria); CSI monthly; Exercise tolerance; Social participation (SF-36)
+    fnon_qeeg_treatment_target: >
+    Central theta ↓ (Cz/C3/C4 — primary FM target); APF restoration; Thalamocortical coherence normalisation; Insula-pain matrix hyperactivity ↓
+    assessment_rationale: >
+    Central sensitisation is the core FM mechanism — CSI score combined with qEEG central theta is the FNON biomarker pair. tDCS M1 anodal (Cz/C3) is primary FNON treatment. LIFU thalamus for thalamocortical dysrhythmia.
+  multiple_sclerosis:
+    condition: "Multiple Sclerosis"
+    category: "Neurological — MS"
+    primary_clinical_scales: >
+    EDSS (Expanded Disability Status Scale — primary MS staging); MSFC (MS Functional Composite: 9-HPT + T25FW + PASAT); MSIS-29 (MS Impact Scale — QoL); FSS (Fatigue Severity Scale — MS fatigue primary complaint); SDMT (Symbol Digit Modalities Test — FDA-accepted cognitive endpoint in MS); MFIS (Modified Fatigue Impact Scale); PDDS; BDI-II; HADS
+    neuropsychological_battery: >
+    SDMT (primary MS cognitive screen — most sensitive; endorsed by ECTRIMS); PASAT (Paced Auditory Serial Addition Test — MS cognitive test); BVMT-R; RAVLT; WAIS Processing Speed; TMT-A&B; Stroop; LNS; COWA verbal fluency; Brief Visuospatial Memory Test; BRB-N (Brief Repeatable Battery of Neuropsychological Tests)
+    qeeg_key_bands: >
+    ↑Theta + delta; ↓Alpha; ↓Alpha peak frequency; ↑Theta/alpha ratio; ↓P300 amplitude (cognitive fatigue marker); ↑Frontal theta correlates with cognitive fatigue — MS fatigue biomarker
+    qeeg_key_electrodes: "Fz, F3/F4 (frontal theta/fatigue marker — primary MS qEEG site), Pz (posterior alpha ↓), C3/C4 (central — motor correlates), O1/O2 (visual — optic neuritis tracking)"
+    qeeg_key_metrics: >
+    Frontal theta power Fz/F3/F4 (↑ correlates with MS fatigue severity — primary MS qEEG biomarker); APF (↓ with cognitive decline); P300 amplitude/latency Cz/Pz (cognitive processing deficit); Alpha power Pz; Theta/alpha ratio; VEP (Visual Evoked Potential — optic neuritis marker: ↑ P100 latency)
+    brain_regions_affected: >
+    Widespread White Matter Lesions, Corpus Callosum (primary MS site), Periventricular Areas, Brainstem (cranial nerves), Cerebellum, Optic Nerves (optic neuritis)
+    primary_network_disrupted: >
+    Sensorimotor Network (disrupted by demyelination), Executive Network (cognitive fatigue), Visual Network (optic neuritis), Global Connectivity ↓ (lesion load correlation)
+    neuroimaging: >
+    MRI T2/FLAIR (lesion load — Barkhof criteria); MRI Gd+ (active lesions); Spinal cord MRI; DTI (white matter integrity — corpus callosum FA); Optical Coherence Tomography (OCT — retinal nerve fibre layer = neuroaxonal loss marker); VEP P100 latency; fMRI cortical reorganisation; MRS (NAA/Cr ratio — neuronal integrity)
+    physiological_assessments: >
+    HRV (autonomic MS neuropathy); Vestibular assessment (dizziness, ataxia); 9-HPT timed (hand function); T25FW timed gait; VEP P100 (optic nerve conduction); Urodynamics (bladder); Heat sensitivity (Uhthoff phenomenon); Step count actigraphy; Fatigue thermometer daily
+    functional_assessments: >
+    EDSS at baseline/6 monthly; SDMT quarterly (cognitive monitoring); FSS fatigue weekly; T25FW gait; 9-HPT hand function; MRI annually; Relapse diary; JCV index (if Natalizumab); DMT adherence; Bladder/bowel diary; HADS mood
+    fnon_qeeg_treatment_target: >
+    Frontal theta ↓ Fz (fatigue target); APF restoration; P300 amplitude ↑; Global coherence ↑; Sensorimotor beta restoration (motor symptoms)
+    assessment_rationale: >
+    SDMT is the FDA-accepted cognitive endpoint for MS clinical trials — use as primary neuropsychological outcome. Frontal theta is the qEEG biomarker for MS fatigue, which is the most disabling symptom in MS.
+  dystonia:
+    condition: "Dystonia"
+    category: "Movement Disorder"
+    primary_clinical_scales: >
+    BFMDRS (Burke-Fahn-Marsden Dystonia Rating Scale — primary for generalised); TWSTRS (Toronto Western Spasmodic Torticollis Rating Scale — for cervical dystonia); UDRS (Unified Dystonia Rating Scale); Writer's Cramp Rating Scale (task-specific); GDS (Globalised Dystonia Scale); PDQ-39 (if DBS assessment); Quality of Life Dystonia (QoL-EDYS); WSAS
+    neuropsychological_battery: >
+    MMSE/MoCA (cognitive screen, especially for inherited dystonias); Processing speed battery; TMT-A&B; BVMT-R; Neuropsychological screen for DYT gene-related conditions; Social cognition (some DYT1 carriers); Emotional processing
+    qeeg_key_bands: >
+    ↓Sensorimotor beta; Abnormal beta rebound post-movement (↓ PMBR); ↑Alpha coherence (motor cortex); Altered sensorimotor integration; ↓Post-movement beta rebound (PMBR — primary dystonia qEEG biomarker); Maladaptive cortical plasticity (↑ LTP-like changes)
+    qeeg_key_electrodes: "C3/C4 (sensorimotor beta — primary dystonia site), Cz/FCz (SMA — motor planning), F3/F4 (frontal changes), Pz (parietal); Motor-area specific by body part affected (e.g., C3 for right hand writer's cramp)"
+    qeeg_key_metrics: >
+    PMBR (post-movement beta rebound) at C3/C4 (↓ in dystonia — primary biomarker; reflects impaired GABAergic inhibition); Beta power C3/C4 (↓); Alpha coherence M1 (↑ = maladaptive plasticity); EMG-EEG coherence (tremulous dystonia); Cortical silent period (↓ = impaired motor inhibition); Sensorimotor integration (N20/P25 — ↑ amplitude = hyperexcitability)
+    brain_regions_affected: >
+    GPi (pathological low-frequency oscillations), Putamen, SMA, M1, Premotor Cortex, Cerebellum, Sensory Cortex, Thalamus
+    primary_network_disrupted: >
+    Basal Ganglia-Thalamocortical Loop (impaired inhibition — excess pallidal output), Sensorimotor Network (abnormal plasticity — maladaptive LTP), Cerebellar-M1 Circuit
+    neuroimaging: >
+    MRI structural brain (rule out secondary dystonia); DaTscan (if parkinsonism overlap); DTI (motor corticospinal tract + pallidothalamic tract integrity); fMRI task-based (affected body part movement — hyperactivation premotor/SMA); MRI GPi/STN targeting (DBS planning: Lead-DBS); Somatosensory evoked potentials (SEP)
+    physiological_assessments: >
+    EMG (continuous/task-specific dystonia pattern — surface EMG affected muscles); TMS mapping (motor cortex hyperexcitability — lowered rMT); Cortical Silent Period (CSP — ↓ duration = inhibitory deficit); Vibration-induced tremor (VIT assessment); HRV; Botulinum toxin injection response tracking; Kinematic analysis (gait/movement analysis)
+    functional_assessments: >
+    BFMDRS biweekly; TWSTRS monthly (cervical dystonia); Task-specific assessments (writing, musical instrument); Botulinum toxin injection diary (dose, site, duration); DBS programming log; Pain assessment (dystonia pain comorbidity); Social impact (embarrassment); Occupational therapy ADL
+    fnon_qeeg_treatment_target: >
+    PMBR ↑ at C3/C4 (restore post-movement beta rebound — primary dystonia target); Beta ↑ sensorimotor; Alpha coherence ↓ M1; GABAergic inhibitory circuit restoration
+    assessment_rationale: >
+    PMBR deficit is the most reliable qEEG biomarker for dystonia. GPi DBS restores normal motor circuit dynamics. TMS cortical silent period measures inhibitory deficit pre/post intervention.

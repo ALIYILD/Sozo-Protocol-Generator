@@ -1,0 +1,245 @@
+# SOZO Brain Center — Brain Region → EEG Electrode → Network Bridge
+# Source: SOZO_Assessments_Master.xlsx, April 2026
+# Clinical bridge: which assessment leads to which region and FNON approach
+
+regions:
+  dorsolateral_pfc:
+    region: "Dorsolateral PFC"
+    abbreviation: "DLPFC"
+    primary_eeg_positions: "F3 (L), F4 (R)"
+    adjacent_eeg_positions: "AF3/AF4, FC3/FC4"
+    primary_network: "Executive Control (ECN)"
+    secondary_network: "Salience, DMN (anti-correlated)"
+    key_qeeg_biomarker: >
+    Frontal alpha asymmetry (FAA): F4>F3 = L-hypoactivity (depression); F3>F4 = L-hyperactivity (PTSD anger); ↑ Theta Fz/F3 = MDD, PTSD; ↑ Beta F3/F4 = anxiety
+    target_conditions: >
+    Depression, OCD, ADHD, Schizophrenia, MCI, PTSD, Addiction, TBI
+    fnon_approach: >
+    TPS/TMS primary target (F3 for MDD excitation; F4 for anxiety inhibition); tDCS anodal F3 (depression); tRNS DLPFC (cognition)
+    assessment_region_link: >
+    PHQ-9 → F3 (depression screen leads to L-DLPFC TPS/TMS); CAARS → F3/F4 (ADHD → TBR at Cz from DLPFC dysfunction)
+  primary_motor_cortex:
+    region: "Primary Motor Cortex"
+    abbreviation: "M1"
+    primary_eeg_positions: "C3 (L hand/arm), C4 (R hand/arm)"
+    adjacent_eeg_positions: "C5/C6, CP3/CP4"
+    primary_network: "Sensorimotor"
+    secondary_network: "Pain Matrix"
+    key_qeeg_biomarker: >
+    Central beta (C3/C4): ↓ = PD motor deficit; ↑ Beta during rest = pathological (PD); Mu (8-12 Hz): ↓ = chronic pain central sensitisation; ↑ ERD = normal movement
+    target_conditions: >
+    Parkinson's disease, Stroke, Chronic pain, Dystonia, Essential tremor
+    fnon_approach: >
+    TPS/TMS primary target (PD: M1 beta suppression); tDCS anodal M1 (chronic pain, stroke); SMBR tracking post-session
+    assessment_region_link: >
+    MDS-UPDRS III + C3/C4 beta → PD FNON protocol; NRS pain + Mu C3/C4 → pain neuromodulation; FMA stroke + C3/C4 BSI → stroke rehab protocol
+  supplementary_motor_area:
+    region: "Supplementary Motor Area"
+    abbreviation: "SMA"
+    primary_eeg_positions: "Fz, FCz"
+    adjacent_eeg_positions: "FC1/FC2, C1/C2"
+    primary_network: "Sensorimotor"
+    secondary_network: "Salience"
+    key_qeeg_biomarker: >
+    Tremor-frequency coherence (4-12 Hz) at FCz: ↑ = essential tremor CTC circuit; Beta desynchronisation at FCz: ↓ = motor planning deficit (PD, dystonia); PMBR at FCz/Cz
+    target_conditions: >
+    Parkinson's disease, Essential tremor, Dystonia, OCD (motor tics)
+    fnon_approach: >
+    TPS FCz (PD motor sequencing); Cerebellar TMS pre-session then FCz TPS; PMBR tracking at FCz
+    assessment_region_link: >
+    TETRAS + FCz tremor coherence → ET FNON; MDS-UPDRS III + FCz beta → PD SMA protocol; BFMDRS + FCz PMBR → dystonia protocol
+  anterior_cingulate_cortex:
+    region: "Anterior Cingulate Cortex"
+    abbreviation: "ACC"
+    primary_eeg_positions: "Fz / AFz / Cz"
+    adjacent_eeg_positions: "FC1/FC2, Fz, Cz"
+    primary_network: "Salience"
+    secondary_network: "Limbic, Pain"
+    key_qeeg_biomarker: >
+    ERN (error-related negativity) at FCz: ↑ = OCD ACC hyperactivation (primary OCD ERP biomarker); Frontal theta Fz: ↑ = MDD, PTSD, OCD, GAD; N200 Fz: conflict monitoring
+    target_conditions: >
+    OCD, Depression, Chronic pain, ADHD, PTSD
+    fnon_approach: >
+    Deep TMS H7 coil (OCD mPFC/ACC); TPS AFz (multi-site psychiatric protocols); LIFU (ACC deep target)
+    assessment_region_link: >
+    Y-BOCS + ERN at FCz → OCD H7 TMS; PHQ-9 + theta Fz → MDD Fz TPS/TMS; NRS pain + gamma Cz → pain ACC component
+  posterior_cingulate_cortex:
+    region: "Posterior Cingulate Cortex"
+    abbreviation: "PCC"
+    primary_eeg_positions: "Pz, CPz"
+    adjacent_eeg_positions: "P1/P2, POz"
+    primary_network: "DMN (major hub)"
+    secondary_network: "Frontoparietal"
+    key_qeeg_biomarker: >
+    Alpha power Pz: ↓ = AD/MCI (DMN hub failure); Theta Pz: ↑ = rumination (MDD); ↓ Complexity at Pz: MCI/AD; APF assessment best at Pz/O1/O2
+    target_conditions: >
+    Alzheimer's disease, MCI, Depression (rumination), DOC
+    fnon_approach: >
+    TPS Pz (AD multi-site DMN protocol); 40 Hz tACS Pz-bilateral temporal (AD gamma); tDCS parietal montage (MCI)
+    assessment_region_link: >
+    MoCA + APF at Pz/O1/O2 → AD/MCI staging; PHQ-9 + theta Pz → depression DMN rumination protocol
+  inferior_parietal_lobule:
+    region: "Inferior Parietal Lobule"
+    abbreviation: "IPL"
+    primary_eeg_positions: "P3 (L), P4 (R), CP5/CP6"
+    adjacent_eeg_positions: "P5/P6, P7/P8, TP7/TP8"
+    primary_network: "ECN, DMN"
+    secondary_network: "Dorsal Attention"
+    key_qeeg_biomarker: >
+    Alpha power P3/P4: ↓ = AD/MCI (global cortical slowing); LPC (Late Positive Component) attention ERP at P3/P4; N200/P300 at P3/P4
+    target_conditions: >
+    Alzheimer's disease, MCI, Hemineglect, Dyslexia
+    fnon_approach: >
+    TPS P3/P4 (AD protocol parietal nodes); tDCS parietal montage; tRNS (bilateral parietal cognition)
+    assessment_region_link: >
+    MMSE + alpha P3/P4 → AD TPS protocol; Catherine Bergego Scale + alpha asymmetry P3/P4 → hemineglect protocol
+  precuneus:
+    region: "Precuneus"
+    abbreviation: "PCun"
+    primary_eeg_positions: "Pz"
+    adjacent_eeg_positions: "P1/P2, POz, CPz"
+    primary_network: "DMN (core hub)"
+    secondary_network: "Frontoparietal"
+    key_qeeg_biomarker: >
+    ↓ Alpha Pz = AD amyloid accumulation (early biomarker); ↑ Theta Pz = rumination (depression/MCI); APF tracked at Pz/O1/O2
+    target_conditions: >
+    Alzheimer's disease, MCI, Depression, DOC
+    fnon_approach: >
+    TPS Pz (primary AD FNON site); 40 Hz gamma entrainment; PBM posterior transcranial
+    assessment_region_link: >
+    APF at Pz → primary AD assessment link (APF monitoring is the qEEG FNON biomarker for AD treatment response)
+  superior_temporal_gyrus:
+    region: "Superior Temporal Gyrus"
+    abbreviation: "STG"
+    primary_eeg_positions: "T3/T5 (L), T4/T6 (R)"
+    adjacent_eeg_positions: "TP7/TP8, C5/C6"
+    primary_network: "Language, Auditory"
+    secondary_network: "Social Brain"
+    key_qeeg_biomarker: >
+    Gamma T3/T4: ↑ = tinnitus generator (auditory hyperactivity); ↑ = AH in schizophrenia; Beta T3: ↓ = Wernicke's aphasia; 40 Hz ASSR (auditory processing in schizophrenia); N1-P2 auditory ERP
+    target_conditions: >
+    Tinnitus, Schizophrenia (AH), Aphasia, Auditory processing
+    fnon_approach: >
+    TMS 1 Hz inhibitory L-STG (AH, tinnitus); tRNS bilateral temporal (tinnitus); tDCS cathodal T3 (AH)
+    assessment_region_link: >
+    THI + gamma T3/T4 → tinnitus TMS/tRNS protocol; PANSS positive + 40 Hz ASSR T3/T4 → schizophrenia tACS
+  hippocampus:
+    region: "Hippocampus"
+    abbreviation: "HC"
+    primary_eeg_positions: "T3/T4 (surface approximation)"
+    adjacent_eeg_positions: "TP7/TP8, C5/C6"
+    primary_network: "Limbic, DMN, Memory"
+    secondary_network: "Frontoparietal"
+    key_qeeg_biomarker: >
+    Theta-gamma coupling (TGC) in HC: ↓ = AD/MCI memory failure; Theta 4-8 Hz power T3/T4: ↓ = memory deficit; Sharp-wave ripples (only via depth electrode/LIFU)
+    target_conditions: >
+    Alzheimer's disease, MCI, PTSD (fear memory), Epilepsy (TLE)
+    fnon_approach: >
+    LIFU (HC direct targeting); PBM intranasal (cribriform plate access); taVNS (NTS-HC theta facilitation)
+    assessment_region_link: >
+    RAVLT verbal memory + TGC at T3/T4 → HC targeting rationale; CAPS-5 PTSD + HC volume MRI → PTSD limbic protocol
+  amygdala:
+    region: "Amygdala"
+    abbreviation: "Amy"
+    primary_eeg_positions: "T3/T4 approximation, F7/F8"
+    adjacent_eeg_positions: "TP7/TP8"
+    primary_network: "Limbic, Salience"
+    secondary_network: "Fear circuit"
+    key_qeeg_biomarker: >
+    Gamma T3/T4: ↑ = anxiety/PTSD hyperarousal; Theta T3/T4: ↑ = conditioned fear; Cannot directly measure amygdala via scalp EEG — indirect markers
+    target_conditions: >
+    PTSD, Anxiety, Depression, Addiction, Autism
+    fnon_approach: >
+    LIFU (direct amygdala suppression); taVNS (NTS-amygdala via vagal afferents); Deep TMS; Cannot reach with surface TPS/TMS
+    assessment_region_link: >
+    PCL-5 + beta excess FC3/FC4 + HRV deficit → PTSD taVNS protocol; GAD-7 + FAA + SCR hyperreactivity → anxiety taVNS/TMS
+  primary_somatosensory_cortex:
+    region: "Primary Somatosensory Cortex"
+    abbreviation: "S1"
+    primary_eeg_positions: "C3/C4, CP3/CP4"
+    adjacent_eeg_positions: "C1/C2, C5/C6"
+    primary_network: "Sensorimotor"
+    secondary_network: "Pain Matrix"
+    key_qeeg_biomarker: >
+    Mu (8-12 Hz) at CP3/CP4: ↓ = chronic pain central sensitisation (reduced somatosensory inhibition); Gamma CP3/CP4: ↑ = neuropathic pain; N20/P25 SEP at CP3: ↑ amplitude = S1 hyperexcitability
+    target_conditions: >
+    Chronic pain, Fibromyalgia, CRPS, Stroke sensory loss
+    fnon_approach: >
+    TPS/tDCS anodal targeting (pain inhibition); LIFU S1 (finger-level specificity: Lee 2015); taVNS (paired with movement for sensory restoration)
+    assessment_region_link: >
+    NRS pain + CSI + Mu CP3/CP4 → chronic pain S1 protocol; QST CPM + N20 SEP → central sensitisation FNON
+  occipital___v1:
+    region: "Occipital / V1"
+    abbreviation: "V1"
+    primary_eeg_positions: "Oz, O1/O2"
+    adjacent_eeg_positions: "PO3/PO4, PO7/PO8"
+    primary_network: "Visual"
+    secondary_network: "Dorsal/Ventral Stream"
+    key_qeeg_biomarker: >
+    Occipital alpha (8-12 Hz): primary qEEG reference band; ↑ = visual suppression/blindness; ↓ = visual hyperexcitability (migraine); APF tracked at O1/O2; 40 Hz SSVEP (gamma visual response)
+    target_conditions: >
+    Migraine, Visual stroke, Visual rehabilitation, Tinnitus
+    fnon_approach: >
+    TMS phosphene mapping (rMT reference for non-motor targets); LIFU V1 (Lee 2016); tACS occipital alpha; PBM posterior
+    assessment_region_link: >
+    APF at O1/O2 → primary AD/MCI staging electrode site; VEP P100 at Oz → MS optic neuritis; Migraine threshold O1/O2 → TMS protocol
+  thalamus:
+    region: "Thalamus"
+    abbreviation: "Thal"
+    primary_eeg_positions: "No direct EEG (deep) — Cz/Pz reference electrodes"
+    adjacent_eeg_positions: "Cz, Pz, C3/C4 (surface)"
+    primary_network: "Thalamocortical (all networks)"
+    secondary_network: "Sleep regulatory"
+    key_qeeg_biomarker: >
+    Sleep spindles (sigma 12-15 Hz) tracked at C3/C4/Cz: ↓ = thalamocortical dysfunction (insomnia, DOC); Alpha spindles 8-12 Hz; Thalamocortical coherence Cz-Pz: ↑ = dysrhythmia (FM, chronic pain); Global EEG arousal
+    target_conditions: >
+    Insomnia, Chronic pain, Fibromyalgia, Essential tremor (VIM), Epilepsy (ANT), DOC
+    fnon_approach: >
+    DBS (VIM, ANT — only modalities reaching thalamus via surgical approach); LIFU (deep thalamic targeting); MRgFUS (VIM ablation)
+    assessment_region_link: >
+    ISI + sleep spindle density C3/C4 → insomnia tACS/CES protocol; FIQ-R + thalamocortical coherence Cz-Pz → FM FNON; CRS-R + EEG complexity → DOC taVNS
+  basal_ganglia___stn:
+    region: "Basal Ganglia / STN"
+    abbreviation: "STN/BG"
+    primary_eeg_positions: "No direct EEG (deep) — FCz/Fz reference"
+    adjacent_eeg_positions: "FCz, Fz, C3/C4"
+    primary_network: "Basal Ganglia Motor Loop"
+    secondary_network: "Reward (NAc component)"
+    key_qeeg_biomarker: >
+    STN beta (13-30 Hz): only via DBS LFP electrode; Central beta C3/C4 (indirect marker of BG-M1 beta synchrony); ERD reduction reflects BG output dysfunction
+    target_conditions: >
+    Parkinson's disease, OCD (caudate), Dystonia (GPi), Addiction (NAc), Tourette's
+    fnon_approach: >
+    DBS STN/GPi (only direct modality); LIFU (NAc — noninvasive); DBS LFP beta tracking
+    assessment_region_link: >
+    MDS-UPDRS III + central beta C3/C4 → PD BG FNON staging; Y-BOCS + LIFU caudate → OCD FNON; P300 Cz + NAc LIFU → addiction FNON
+  insula:
+    region: "Insula"
+    abbreviation: "Ins"
+    primary_eeg_positions: "No direct EEG (buried cortex) — T3-C3 area approximation"
+    adjacent_eeg_positions: "T7/T8, C5/C6"
+    primary_network: "Salience (anterior hub)"
+    secondary_network: "Pain Matrix"
+    key_qeeg_biomarker: >
+    Gamma T7/T8 area: ↑ = chronic pain, drug craving; Theta T7/T8: ↑ = PTSD insula hyperactivation; Cannot directly access via scalp EEG
+    target_conditions: >
+    Chronic pain, Addiction (craving), Anxiety, PTSD, Tinnitus
+    fnon_approach: >
+    Deep TMS H-coils (H4 for bilateral insula); LIFU (deep insula targeting); DBS (emerging)
+    assessment_region_link: >
+    BPI craving + gamma T7 area → addiction insula LIFU; NRS pain + CSI + insula gamma → pain deep TMS consideration
+  cerebellum:
+    region: "Cerebellum"
+    abbreviation: "CB"
+    primary_eeg_positions: "Oz/Iz (nearest surface reference)"
+    adjacent_eeg_positions: "P9/P10, P7/P8"
+    primary_network: "Cerebellar-Cortical Network"
+    secondary_network: "Sensorimotor"
+    key_qeeg_biomarker: >
+    Corticomuscular coherence (EMG-EEG) at tremor frequency (4-12 Hz): ↑ at Cz/FCz/C3 = CTC involvement (ET/dystonia); No direct EEG from cerebellum
+    target_conditions: >
+    Essential tremor, Ataxia, Stroke (motor rehab), Autism (vermis), Dystonia
+    fnon_approach: >
+    Cerebellar TMS (1 Hz inhibitory for tremor; TBS for plasticity); Transcerebellar tDCS; TPS (emerging cerebellar protocols)
+    assessment_region_link: >
+    TETRAS + corticomuscular coherence Cz → ET cerebellar TMS; BFMDRS + PMBR C3/C4 → dystonia cerebellar-M1 protocol

@@ -1,0 +1,319 @@
+# SOZO Brain Center — Transcranial Magnetic Stimulation / rTMS Protocol Reference
+# Source: Master with QEEG places.xlsx, April 2026
+# 15 condition protocols
+
+modality: "tms"
+name: "Transcranial Magnetic Stimulation / rTMS"
+
+protocols:
+  - condition: "Depression (MDD) — Standard rTMS"
+    brain_target: "L-DLPFC"
+    eeg_position: "F3"
+    protocol_summary: >
+    High-frequency rTMS left DLPFC; FDA cleared; 10 Hz, 120% rMT, 3000 pulses/session, 37.5 min, 30 sessions over 6 weeks. Standard of care.
+    intensity: "120% rMT"
+    frequency: "10 Hz"
+    duration_per_session: "37.5 min"
+    total_sessions: "30 sessions (5/week × 6 weeks)"
+    pulses_per_session: "3000 pulses"
+    devices: "NeuroStar, MagVenture, Magstim"
+    montage: "Figure-8 coil, L-DLPFC"
+    regulatory_status: "FDA Cleared (2008, NeuroStar)"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "500+"
+    key_references: >
+    O'Reardon 2007 (Biol Psychiatry); Carpenter 2012; Blumberger 2018 (THREE-D)
+    side_effects: >
+    Headache (30%), scalp discomfort, rare seizure (<0.1%), tinnitus risk at high frequencies.
+    notes: >
+    Most studied noninvasive brain stimulation intervention. Standard 6-week course. Augment with antidepressants.
+  - condition: "Depression (MDD) — iTBS"
+    brain_target: "L-DLPFC"
+    eeg_position: "F3"
+    protocol_summary: >
+    Intermittent theta burst stimulation (iTBS); FDA cleared; 50 Hz bursts at 5 Hz carrier; 600 pulses in 3 min; non-inferior to standard rTMS in THREE-D trial.
+    intensity: "120% rMT"
+    frequency: "50 Hz (bursts at 5 Hz)"
+    duration_per_session: "3 min"
+    total_sessions: "30 sessions (5/week × 6 weeks)"
+    pulses_per_session: "600 pulses"
+    devices: "MagVenture Cool-B70, Magstim"
+    montage: "Figure-8 coil, L-DLPFC"
+    regulatory_status: "FDA Cleared (2018)"
+    evidence_level: "RCT, Non-inferiority trial"
+    literature_count: "200+"
+    key_references: >
+    Blumberger 2018 (Lancet, THREE-D trial); Huang 2005
+    side_effects: >
+    Headache, scalp discomfort. Lower seizure risk than standard rTMS at short sessions.
+    notes: >
+    Shorter session (3 min vs 37.5 min). Non-inferior to standard rTMS. Useful for high patient volume.
+  - condition: "OCD"
+    brain_target: "mPFC / ACC (H7 coil), DLPFC"
+    eeg_position: "Fz / AFz"
+    protocol_summary: >
+    Deep TMS with BrainsWay H7 coil targeting medial PFC/ACC; 20 Hz; 2000 pulses/session. FDA cleared. Often paired with brief symptom provocation before stimulation.
+    intensity: "100% rMT"
+    frequency: "20 Hz"
+    duration_per_session: "20 min"
+    total_sessions: "29 sessions (5/week × ~6 weeks)"
+    pulses_per_session: "2000 pulses"
+    devices: "BrainsWay H7 coil, MagVenture"
+    montage: "H7 coil (deep TMS), bilateral mPFC/ACC"
+    regulatory_status: "FDA Cleared (2018, deep TMS OCD)"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "100+"
+    key_references: >
+    Carmi 2019 (Am J Psychiatry); Roth 2021
+    side_effects: >
+    Headache, scalp discomfort. Brief symptom provocation required pre-session.
+    notes: >
+    Provocation protocol before stimulation enhances efficacy. Targets corticostriatal circuitry.
+  - condition: "Smoking Cessation"
+    brain_target: "Bilateral Insula, L-DLPFC"
+    eeg_position: "T3/T4, F3"
+    protocol_summary: >
+    Deep TMS targeting bilateral insula and prefrontal cortex; 10 Hz; FDA cleared 2020. Targets craving circuits.
+    intensity: "100% rMT"
+    frequency: "10 Hz"
+    duration_per_session: "18 min"
+    total_sessions: "18 sessions (3/week × 6 weeks)"
+    pulses_per_session: "1980 pulses"
+    devices: "BrainsWay H4 coil"
+    montage: "H4 coil (bilateral insula/PFC)"
+    regulatory_status: "FDA Cleared (2020)"
+    evidence_level: "RCT"
+    literature_count: "30+"
+    key_references: >
+    Dinur-Klein 2014; BrainsWay FDA pivotal trial
+    side_effects: >
+    Headache, scalp discomfort.
+    notes: >
+    Brief script exposure before stimulation (craving induction). Significant abstinence rates vs sham.
+  - condition: "PTSD"
+    brain_target: "R-DLPFC"
+    eeg_position: "F4"
+    protocol_summary: >
+    High-frequency rTMS right DLPFC; 20 Hz, 2400 pulses/session. Growing evidence base.
+    intensity: "110–120% rMT"
+    frequency: "20 Hz"
+    duration_per_session: "20–30 min"
+    total_sessions: "20–30 sessions"
+    pulses_per_session: "2400 pulses"
+    devices: "MagVenture, NeuroStar, Magstim"
+    montage: "Figure-8 coil, R-DLPFC"
+    regulatory_status: "Investigational (off-label USA)"
+    evidence_level: "RCT, Open-label"
+    literature_count: "30+"
+    key_references: >
+    Karsen 2014; Philip 2019; Isserles 2013
+    side_effects: >
+    Headache, scalp discomfort. Generally well tolerated.
+    notes: >
+    Right DLPFC preferred by some protocols; others target L-DLPFC. Often combined with trauma-focused therapy.
+  - condition: "Parkinson's Disease (Motor)"
+    brain_target: "M1, SMA"
+    eeg_position: "C3/C4, FCz"
+    protocol_summary: >
+    High-frequency rTMS motor cortex/SMA; 10–25 Hz, 80–120% rMT. Reduces motor symptoms, improves gait.
+    intensity: "80–120% rMT"
+    frequency: "10–25 Hz"
+    duration_per_session: "20–30 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "1500–3000 pulses"
+    devices: "MagVenture Cool D-B80, Magstim"
+    montage: "Figure-8 or Double-cone coil, M1/SMA"
+    regulatory_status: "Investigational (off-label)"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "80+"
+    key_references: >
+    Repetitive TMS and Parkinson meta-analysis (Chou 2015); Lefaucheur 2014
+    side_effects: >
+    Headache, scalp discomfort.
+    notes: >
+    Often combined with physiotherapy. TBS protocols also used.
+  - condition: "Parkinson's Disease (Depression)"
+    brain_target: "L-DLPFC"
+    eeg_position: "F3"
+    protocol_summary: >
+    iTBS left DLPFC for PD-associated depression; 600 pulses/session.
+    intensity: "120% rMT"
+    frequency: "50 Hz (iTBS)"
+    duration_per_session: "3 min"
+    total_sessions: "20–30 sessions"
+    pulses_per_session: "600 pulses"
+    devices: "MagVenture, Magstim"
+    montage: "Figure-8 coil, L-DLPFC"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "20+"
+    key_references: >
+    Shirota 2012; Ikeda 2019
+    side_effects: >
+    Headache, scalp discomfort.
+    notes: >
+    Addresses PD's high comorbid depression prevalence. iTBS preferred for tolerability.
+  - condition: "Stroke Rehabilitation"
+    brain_target: "Ipsilesional M1 (excitation) or Contralesional M1 (inhibition)"
+    eeg_position: "C3 or C4"
+    protocol_summary: >
+    Dual approach: Inhibitory 1 Hz contralesional M1 or excitatory high-freq ipsilesional M1. Paired with physical therapy.
+    intensity: "90–110% rMT"
+    frequency: "1 Hz (inhibitory) or 10–20 Hz (excitatory)"
+    duration_per_session: "20–30 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "600–3000 pulses"
+    devices: "MagVenture, Magstim, NeuroStar"
+    montage: "Figure-8 coil; contralateral or ipsilateral M1"
+    regulatory_status: "Investigational (off-label)"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "100+"
+    key_references: >
+    Hsu 2012 (meta); Khedr 2005; Lefaucheur 2014
+    side_effects: >
+    Headache, scalp discomfort. Low seizure risk.
+    notes: >
+    Must pair with PT. Evidence strongest for upper limb motor recovery. Timing relative to stroke matters.
+  - condition: "Chronic Pain"
+    brain_target: "Contralateral M1"
+    eeg_position: "C3 or C4"
+    protocol_summary: >
+    High-frequency rTMS contralateral M1; 10 Hz, 2000–3000 pulses/session. Standard pain TMS protocol.
+    intensity: "80–120% rMT"
+    frequency: "10 Hz"
+    duration_per_session: "20–30 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "2000–3000 pulses"
+    devices: "MagVenture, Magstim"
+    montage: "Figure-8 coil, contralateral M1"
+    regulatory_status: "Investigational (CE marked in EU for pain)"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "60+"
+    key_references: >
+    Lefaucheur 2014 (Clin Neurophysiol); Nardone 2017
+    side_effects: >
+    Headache, scalp discomfort.
+    notes: >
+    M1 stimulation modulates descending pain inhibitory pathways. DLPFC also targeted for affective pain component.
+  - condition: "Tinnitus"
+    brain_target: "Temporal Cortex (L-auditory cortex)"
+    eeg_position: "T3/T5"
+    protocol_summary: >
+    Low-frequency inhibitory rTMS (1 Hz) over left temporal auditory cortex; reduces phantom sound perception.
+    intensity: "100–110% rMT"
+    frequency: "1 Hz"
+    duration_per_session: "20–30 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "1200–2000 pulses"
+    devices: "MagVenture, Magstim"
+    montage: "Figure-8 coil, L temporal cortex"
+    regulatory_status: "Investigational (CE use in Europe)"
+    evidence_level: "RCT, Open-label"
+    literature_count: "40+"
+    key_references: >
+    Langguth 2006; Khedr 2010; De Ridder 2011
+    side_effects: >
+    Headache, scalp discomfort. Generally very well tolerated.
+    notes: >
+    1 Hz inhibitory protocol reduces hyperactive auditory cortex. Response rate ~50%.
+  - condition: "Schizophrenia (Auditory Hallucinations)"
+    brain_target: "L Temporoparietal Junction (L-TPJ)"
+    eeg_position: "T3/CP5"
+    protocol_summary: >
+    Low-frequency 1 Hz rTMS over L-TPJ to suppress hyperactive cortex generating hallucinations.
+    intensity: "90–100% rMT"
+    frequency: "1 Hz"
+    duration_per_session: "20 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "1200 pulses"
+    devices: "MagVenture, Magstim"
+    montage: "Figure-8 coil, L-TPJ"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "50+"
+    key_references: >
+    Hoffman 2000; Sommer 2012; Slotema 2011 (meta)
+    side_effects: >
+    Headache, scalp discomfort.
+    notes: >
+    Add-on to antipsychotics. Target: TPJ/Wernicke's area. Reduces auditory verbal hallucinations.
+  - condition: "Alzheimer's Disease"
+    brain_target: "L-DLPFC"
+    eeg_position: "F3"
+    protocol_summary: >
+    High-frequency (20 Hz) rTMS left DLPFC for cognitive enhancement and neuroplasticity in AD.
+    intensity: "90–120% rMT"
+    frequency: "20 Hz"
+    duration_per_session: "20–30 min"
+    total_sessions: "20–30 sessions"
+    pulses_per_session: "2000–3000 pulses"
+    devices: "MagVenture, NeuroStar, Magstim"
+    montage: "Figure-8 coil, L-DLPFC"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "30+"
+    key_references: >
+    Ahmed 2012; Bentwich 2011; Cotelli 2011
+    side_effects: >
+    Headache, scalp discomfort. Generally well tolerated.
+    notes: >
+    Often combined with cognitive training (NeuroAD / NICE protocol targets 6 sites).
+  - condition: "Epilepsy"
+    brain_target: "Epileptogenic Focus / M1"
+    eeg_position: "Variable (focus-dependent)"
+    protocol_summary: >
+    Low-frequency inhibitory 1 Hz rTMS to reduce cortical excitability at seizure focus.
+    intensity: "90–100% rMT"
+    frequency: "1 Hz"
+    duration_per_session: "20 min"
+    total_sessions: "10–20 sessions"
+    pulses_per_session: "1200 pulses"
+    devices: "MagVenture, Magstim"
+    montage: "Figure-8 coil, epileptogenic focus"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Case series"
+    literature_count: "20+"
+    key_references: >
+    Cantello 2007; Fregni 2006; Theodore 2002
+    side_effects: >
+    Headache. Very low seizure risk if protocol followed.
+    notes: >
+    Inhibitory rTMS. Requires EEG/imaging to localize focus precisely.
+  - condition: "Migraine"
+    brain_target: "Occipital cortex (primary visual cortex)"
+    eeg_position: "Oz"
+    protocol_summary: >
+    Single-pulse TMS (sTMS) applied to occipital cortex at migraine onset. FDA cleared (eNeura SpringTMS).
+    intensity: "~0.9 T"
+    frequency: "Single pulse"
+    duration_per_session: "Per episode use"
+    total_sessions: "As needed (up to 3 pulses at onset)"
+    pulses_per_session: "3 pulses/attack"
+    devices: "eNeura SpringTMS"
+    montage: "Single-pulse handheld, Oz"
+    regulatory_status: "FDA Cleared (2013, sTMS for migraine)"
+    evidence_level: "RCT"
+    literature_count: "15+"
+    key_references: >
+    Lipton 2010; Bhola 2015
+    side_effects: >
+    Mild tingling, no serious AEs in trials.
+    notes: >
+    Self-administered device. Applied at onset of aura/migraine. CE marked in Europe as well.
+  - condition: "Source: SOZO Brain Center Clinical Research Compilation | neuromod_data.md | Updated April 2026"
+    brain_target: null
+    eeg_position: null
+    protocol_summary: null
+    intensity: null
+    frequency: null
+    duration_per_session: null
+    total_sessions: null
+    pulses_per_session: null
+    devices: null
+    montage: null
+    regulatory_status: null
+    evidence_level: null
+    literature_count: null
+    key_references: null
+    side_effects: null
+    notes: null

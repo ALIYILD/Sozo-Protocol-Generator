@@ -46,6 +46,16 @@ search_profiles:
        VAS pain[Title/Abstract]) AND validation[Title/Abstract]
     max_results: 10
 
+
+  tps_protocols:
+    query: >
+      Chronic Pain[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
 priority_pmids:
   - "16870487"  # Fregni 2006 tDCS fibromyalgia
   - "21371145"  # Marlow 2013 tDCS chronic pain meta-analysis
@@ -55,3 +65,41 @@ notes: >
   M1 anodal stimulation has strongest evidence for pain reduction.
   DLPFC cathodal as secondary target for affective pain component.
   CES evidence for comorbid anxiety and sleep disturbance in chronic pain.
+
+tps_priority_dois:
+  - doi: "10.1001/jamaneurol.2017.3129"
+    title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology: Adva"
+    authors: "V. Krishna, F. Sammartino, A. Rezai"
+    year: 2017
+    study_type: "systematic review"
+    citations: 247
+    takeaway: "Transcranial focused ultrasound technology shows promise for treating neurological conditions, with potential applications in movement disorders, epil"
+  - doi: "10.36076/ppj.2018.3.e225"
+    title: "Efficacy of Pulsed Radiofrequency Stimulation in Patients with Peripheral Neuropathic Pain: A Narrative Review."
+    authors: "M. Chang"
+    year: 2018
+    study_type: "systematic review"
+    citations: 92
+    takeaway: "Pulsed radiofrequency stimulation is an effective treatment for radicular pain from spinal diseases and postherpetic and occipital neuralgia, but not "
+  - doi: "10.1007/s13534-024-00369-0"
+    title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+    authors: "Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim"
+    year: 2024
+    study_type: "systematic review"
+    citations: 32
+    takeaway: "Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in healthy humans and patients with central"
+  - doi: "10.1080/17434440.2019.1567325"
+    title: "Advanced methods of spinal stimulation in the treatment of chronic pain: pulse trains, waveforms, frequencies, targets, "
+    authors: "Ankit Maheshwari, J. Pope, T. Deer, S. Falowski"
+    year: 2019
+    study_type: "systematic review"
+    citations: 22
+    takeaway: "Spinal cord stimulation has advanced in efficacy for treating chronic pain, with new targets, frequencies, pulse trains, and feedback loops improving "
+  - doi: "10.1111/cns.14372"
+    title: "Transcranial pulse stimulation in Alzheimer's disease"
+    authors: "Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang"
+    year: 2023
+    study_type: "systematic review"
+    citations: 12
+    takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients"
+  TPS evidence: 218 papers identified (37 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

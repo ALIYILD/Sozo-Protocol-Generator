@@ -1,0 +1,214 @@
+# SOZO Brain Center — Deep Brain Stimulation Protocol Reference
+# Source: Master with QEEG places.xlsx, April 2026
+# 10 condition protocols
+
+modality: "dbs"
+name: "Deep Brain Stimulation"
+
+protocols:
+  - condition: "Parkinson's Disease (Motor)"
+    brain_target: "Subthalamic Nucleus (STN) or GPi"
+    eeg_position: "Deep basal ganglia (bilateral implant)"
+    protocol_summary: >
+    Bilateral STN or GPi DBS; 130 Hz, 60–90 μs PW, 2–4 V/mA; 30–60% motor improvement, reduces dyskinesia. Gold standard surgical treatment.
+    intensity: "2–4 V (or mA) per contact"
+    frequency: "130 Hz"
+    duration_per_session: "Continuous (chronic implant)"
+    total_sessions: "Permanent (battery 3–5 yr lifespan)"
+    pulses_per_session: "Continuous (chronic stimulation)"
+    devices: "Medtronic Percept PC, Abbott Infinity, Boston Scientific Vercise"
+    montage: "Bilateral lead in STN or GPi; IPG subclavicular"
+    regulatory_status: "FDA Approved (STN-DBS, 1997; GPi-DBS, 2010)"
+    evidence_level: "RCT, Meta-analysis"
+    literature_count: "1000+"
+    key_references: >
+    Deuschl 2006 (NEJM); Williams 2010 (PD SURG); Weaver 2009
+    side_effects: >
+    Infection risk (~3%), lead migration, dysarthria, eyelid apraxia, mood changes, worsening gait/balance in some. Surgical risks.
+    notes: >
+    Gold standard for motor-predominant PD with good levodopa response. STN allows medication reduction. GPi preferred if dyskinesia prominent.
+  - condition: "Essential Tremor"
+    brain_target: "VIM thalamus (Ventral Intermediate)"
+    eeg_position: "Deep thalamus (bilateral or unilateral)"
+    protocol_summary: >
+    VIM thalamus DBS; highly effective for tremor. Bilateral for bilateral tremor. 130–185 Hz, 60–120 μs.
+    intensity: "1–4 V"
+    frequency: "130–185 Hz"
+    duration_per_session: "Continuous"
+    total_sessions: "Permanent (battery 3–5 yr)"
+    pulses_per_session: "Continuous"
+    devices: "Medtronic, Abbott, Boston Scientific"
+    montage: "Unilateral or bilateral VIM thalamic lead; IPG subclavicular"
+    regulatory_status: "FDA Approved (1997)"
+    evidence_level: "RCT, Case series"
+    literature_count: "200+"
+    key_references: >
+    Koller 1997; Benabid 1991; Pahwa 2006
+    side_effects: >
+    Surgical risks, paresthesias, dysarthria at higher amplitude, tolerance effects over years.
+    notes: >
+    Highly effective (>80% tremor reduction). Also effective for MS tremor. Alternative: MRgFUS (non-invasive).
+  - condition: "Dystonia"
+    brain_target: "Globus Pallidus Internus (GPi)"
+    eeg_position: "Deep GPi (bilateral)"
+    protocol_summary: >
+    Bilateral GPi DBS for generalized or cervical dystonia; 130 Hz, long PW (120–450 μs). Significant muscle tone improvement.
+    intensity: "2–5 V (or mA)"
+    frequency: "130 Hz"
+    duration_per_session: "Continuous"
+    total_sessions: "Permanent (battery 3–5 yr)"
+    pulses_per_session: "Continuous"
+    devices: "Medtronic, Abbott, Boston Scientific"
+    montage: "Bilateral GPi leads; IPG subclavicular"
+    regulatory_status: "FDA Approved (humanitarian device exemption 2003)"
+    evidence_level: "Open-label, Case series"
+    literature_count: "100+"
+    key_references: >
+    Vidailhet 2005; Krauss 1999; Coubes 2000
+    side_effects: >
+    Surgical risks, hardware complications, dysarthria. Generally well tolerated.
+    notes: >
+    Longer PW (120–450 μs) characteristic for dystonia vs PD (60–90 μs). Months to see full benefit.
+  - condition: "OCD (Treatment-Resistant)"
+    brain_target: "VC/VS (Ventral Capsule/Ventral Striatum) or STN"
+    eeg_position: "Deep VC/VS or STN (bilateral)"
+    protocol_summary: >
+    DBS VC/VS or STN for severe treatment-resistant OCD; 130 Hz. Significant Y-BOCS reduction.
+    intensity: "2–8 V"
+    frequency: "130 Hz"
+    duration_per_session: "Continuous"
+    total_sessions: "Permanent"
+    pulses_per_session: "Continuous"
+    devices: "Medtronic, Abbott"
+    montage: "VC/VS or STN bilateral leads; IPG chest"
+    regulatory_status: "FDA Approved (Humanitarian Device Exemption, 2009 — VC/VS)"
+    evidence_level: "Open-label, Case series"
+    literature_count: "50+"
+    key_references: >
+    Greenberg 2010; Mallet 2008 (STN); Denys 2010
+    side_effects: >
+    Surgical risks, mood changes (hypomania risk), stimulation-induced anxiety. Careful programming needed.
+    notes: >
+    VC/VS and STN both FDA HDE approved. Targets corticostriatal-thalamocortical OCD circuit nodes.
+  - condition: "Treatment-Resistant Depression (TRD)"
+    brain_target: "SCC (Cg25), VC/VS, MFB"
+    eeg_position: "Deep subgenual cingulate, VC/VS, or MFB"
+    protocol_summary: >
+    DBS for TRD targeting subgenual cingulate (SCC/Cg25), VC/VS, or medial forebrain bundle (MFB); three dosing combinations trialed.
+    intensity: "2–6 V"
+    frequency: "130 Hz"
+    duration_per_session: "Continuous"
+    total_sessions: "Permanent"
+    pulses_per_session: "Continuous"
+    devices: "Medtronic, Abbott, Boston Scientific"
+    montage: "SCC or VC/VS leads; IPG chest"
+    regulatory_status: "Investigational (no FDA approval for depression yet)"
+    evidence_level: "Open-label, Case series"
+    literature_count: "30+"
+    key_references: >
+    Mayberg 2005 (SCC); Schlaepfer 2014 (MFB); Kennedy 2011
+    side_effects: >
+    Surgical risks, mood instability, suicidality risk in early stimulation period. Careful monitoring required.
+    notes: >
+    Three targets studied: SCC (Cg25) — original Mayberg target; VC/VS — overlap with OCD; MFB — fastest response. No FDA approval yet.
+  - condition: "Epilepsy"
+    brain_target: "Anterior Nucleus of Thalamus (ANT)"
+    eeg_position: "Deep thalamus (bilateral ANT)"
+    protocol_summary: >
+    Bilateral ANT DBS; 145 Hz. SANTE trial: 40% seizure reduction at 2 years, 75% at 7 years. FDA approved 2018.
+    intensity: "2–5 V"
+    frequency: "145 Hz"
+    duration_per_session: "Cycling (1 min ON / 5 min OFF)"
+    total_sessions: "Permanent"
+    pulses_per_session: "Cycling stimulation"
+    devices: "Medtronic DBS (Libra, Activa)"
+    montage: "Bilateral ANT thalamic leads; IPG chest"
+    regulatory_status: "FDA Approved (2018, ANT-DBS for epilepsy)"
+    evidence_level: "RCT"
+    literature_count: "30+"
+    key_references: >
+    Fisher 2010 (SANTE trial); Salanova 2015 (7-year follow-up)
+    side_effects: >
+    Surgical risks, memory concerns, paresthesias, depression.
+    notes: >
+    SANTE trial: 40% seizure reduction at 2 years → 75% at 7 years. Second-line for focal epilepsy after failed AEDs and surgery.
+  - condition: "Tourette's Syndrome"
+    brain_target: "CM-Pf thalamus or GPi"
+    eeg_position: "Deep thalamus (CM-Pf) or GPi"
+    protocol_summary: >
+    DBS for severe Tourette's; CM-Pf thalamus or GPi targets; 130 Hz. Significant tic reduction.
+    intensity: "2–5 V"
+    frequency: "130 Hz"
+    duration_per_session: "Continuous"
+    total_sessions: "Permanent"
+    pulses_per_session: "Continuous"
+    devices: "Medtronic, Abbott"
+    montage: "CM-Pf thalamus or GPi bilateral leads"
+    regulatory_status: "FDA Humanitarian Device Exemption"
+    evidence_level: "Case series, Open-label"
+    literature_count: "20+"
+    key_references: >
+    Porta 2009; Servello 2008; Martino 2010
+    side_effects: >
+    Surgical risks, hardware complications, personality/mood changes.
+    notes: >
+    Two main targets: CM-Pf thalamus (more common) and GPi. Reserved for severe Tourette's refractory to medication and behavioral therapy.
+  - condition: "Alzheimer's Disease"
+    brain_target: "Fornix / Hippocampus / NBM"
+    eeg_position: "Deep limbic (bilateral)"
+    protocol_summary: >
+    DBS targeting fornix (memory circuit) in Alzheimer's; experimental. Also nucleus basalis of Meynert (NBM) studied.
+    intensity: "3.5–6 V"
+    frequency: "130 Hz"
+    duration_per_session: "Continuous"
+    total_sessions: "Permanent"
+    pulses_per_session: "Continuous"
+    devices: "Medtronic"
+    montage: "Bilateral fornix leads; IPG chest"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Phase 2 trial"
+    literature_count: "5+"
+    key_references: >
+    Laxton 2010; Lozano 2016 (ADvance trial)
+    side_effects: >
+    Surgical risks. ADvance trial showed slower decline in some subgroups (younger patients).
+    notes: >
+    ADvance trial (Phase 2): mixed results overall but subgroup of younger patients showed benefit. Phase 3 ongoing.
+  - condition: "Addiction"
+    brain_target: "Nucleus Accumbens (NAc)"
+    eeg_position: "Deep striatum (bilateral NAc)"
+    protocol_summary: >
+    DBS NAc for severe addiction (alcohol, opioid, gambling); disrupts reward circuitry. Emerging investigational use.
+    intensity: "3–6 V"
+    frequency: "130 Hz"
+    duration_per_session: "Continuous"
+    total_sessions: "Permanent"
+    pulses_per_session: "Continuous"
+    devices: "Medtronic, Abbott"
+    montage: "Bilateral NAc leads; IPG chest"
+    regulatory_status: "Investigational"
+    evidence_level: "Case series, Open-label"
+    literature_count: "5+"
+    key_references: >
+    Kuhn 2011; Müller 2016; Voges 2019
+    side_effects: >
+    Surgical risks, mood/personality changes. Very invasive for addiction.
+    notes: >
+    Emerging use for severe refractory addiction. Ethical considerations important. NAc overlap with OCD VC/VS target.
+  - condition: "Source: SOZO Brain Center Clinical Research Compilation | neuromod_data.md | Updated April 2026"
+    brain_target: null
+    eeg_position: null
+    protocol_summary: null
+    intensity: null
+    frequency: null
+    duration_per_session: null
+    total_sessions: null
+    pulses_per_session: null
+    devices: null
+    montage: null
+    regulatory_status: null
+    evidence_level: null
+    literature_count: null
+    key_references: null
+    side_effects: null
+    notes: null

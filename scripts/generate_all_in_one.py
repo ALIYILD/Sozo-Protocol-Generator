@@ -31,6 +31,10 @@ from protocol_data import (
     EVIDENCE_LEVELS, SAFETY_SIDE_EFFECTS, ADVERSE_GRADING,
     CONTRAINDICATIONS_BASE,
 )
+from evidence_data import (
+    CONDITIONS_MATRIX, TPS_EVIDENCE, LIFU_EVIDENCE, STUDY_QUALITY,
+    SLUG_TO_CONDITION, TPS_SLUG_MAP,
+)
 
 # ── Colour palette ──────────────────────────────────────────────────────────
 NAVY   = RGBColor(0x0D, 0x21, 0x37)
@@ -588,6 +592,97 @@ def _build_safety_section(doc, cond: dict):
         _add_notice_box(doc, kom, "lteal")
 
 
+# ── Section 6: Evidence Base ──────────────────────────────────────────────
+
+def _build_evidence_section(doc, slug: str):
+    _page_break(doc)
+    _add_heading_band(doc, "SECTION 6 — EVIDENCE BASE & MODALITY COMPARISON", "navy", WHITE, 13)
+    _spacer(doc, 6)
+
+    matrix_cond = SLUG_TO_CONDITION.get(slug)
+    matrix_data = CONDITIONS_MATRIX.get(matrix_cond, {}) if matrix_cond else {}
+
+    # Modality evidence overview table
+    if matrix_data:
+        _add_heading_band(doc, "Modality Evidence Overview — Published Paper Counts", "teal", WHITE, 10)
+        _spacer(doc, 2)
+        best_str = matrix_data.get("best", "").lower()
+        all_mods = ["TPS", "TMS", "tDCS", "taVNS", "CES", "tACS", "PBM", "PEMF", "LIFU", "tRNS", "DBS"]
+        ev_rows = []
+        for mod in all_mods:
+            cnt = matrix_data.get(mod)
+            if cnt is None:
+                continue
+            is_best = mod.lower() in best_str
+            ev_rows.append([mod, str(cnt), "YES" if is_best else ""])
+        if ev_rows:
+            table = doc.add_table(rows=1 + len(ev_rows), cols=3)
+            table.alignment = WD_TABLE_ALIGNMENT.LEFT
+            for j, h in enumerate(["Modality", "Published Papers", "Recommended?"]):
+                cell = table.rows[0].cells[j]
+                _set_cell_bg(cell, _HEX["teal"])
+                _set_cell_borders(cell)
+                para = cell.paragraphs[0]
+                para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                run = para.add_run(h)
+                run.bold = True; run.font.size = Pt(9); run.font.color.rgb = WHITE
+            for i, (mod, cnt, best) in enumerate(ev_rows):
+                tr = table.rows[i + 1]
+                bg = "D5F5E3" if best == "YES" else ("FFFFFF" if i % 2 == 0 else "F5F5F5")
+                for j, val in enumerate([mod, cnt, best]):
+                    cell = tr.cells[j]
+                    _set_cell_bg(cell, bg)
+                    _set_cell_borders(cell, "CCCCCC", "4")
+                    para = cell.paragraphs[0]
+                    run = para.add_run(str(val))
+                    run.font.size = Pt(9)
+                    run.font.color.rgb = NAVY
+                    if j == 0:
+                        run.bold = True
+                    if best == "YES" and j == 2:
+                        run.bold = True
+                        run.font.color.rgb = RGBColor(0x1E, 0x8B, 0x4C)
+            for row in table.rows:
+                for cell, w in zip(row.cells, [5.5, 5.5, 4.5]):
+                    cell.width = Cm(w)
+        if matrix_data.get("best"):
+            _spacer(doc, 4)
+            _add_notice_box(doc,
+                f"Recommended first-line modality/modalities for this condition: {matrix_data['best']}",
+                "lteal")
+    else:
+        _add_notice_box(doc, "Evidence matrix data not available for this condition.", "lteal")
+
+    _spacer(doc, 8)
+
+    # TPS evidence summary (if available for this condition)
+    tps_cond = TPS_SLUG_MAP.get(slug)
+    tps_ev = TPS_EVIDENCE.get(tps_cond) if tps_cond else None
+    if tps_ev:
+        _add_heading_band(doc, "TPS Evidence Summary", "teal", WHITE, 10)
+        _spacer(doc, 2)
+        summary = (
+            f"Total Papers: {tps_ev['total_papers']}  |  RCTs: {tps_ev['rcts']}  |  "
+            f"Evidence Level: {tps_ev['evidence_level']}\n"
+            f"Year Range: {tps_ev['year_range']}  |  Regulatory: {tps_ev['regulatory']}\n"
+            f"Key Finding: {tps_ev['key_finding']}\n"
+            f"Top RCT Reference: {tps_ev['top_rct_ref']}"
+        )
+        _add_notice_box(doc, summary, "lteal")
+        _spacer(doc, 8)
+
+    # Study quality breakdown
+    _add_heading_band(doc, "TPS Evidence Study Quality Breakdown (1,505 Unique Papers)", "teal", WHITE, 10)
+    _spacer(doc, 2)
+    sq_rows = [[r[0], str(r[1]), r[2], str(r[3])] for r in STUDY_QUALITY]
+    _add_data_table(
+        doc,
+        headers=["Study Type", "Total Count", "% of Total", "TPS-Specific"],
+        rows=sq_rows,
+        col_widths_cm=[5.5, 3.0, 2.5, 2.5],
+    )
+
+
 # ── Main document builder ──────────────────────────────────────────────────
 
 def build_fellow_document(slug: str) -> Path:
@@ -606,6 +701,7 @@ def build_fellow_document(slug: str) -> Path:
     _build_plato_section(doc, cond)
     _build_multimodal_section(doc, cond)
     _build_safety_section(doc, cond)
+    _build_evidence_section(doc, slug)
 
     # Save
     out_dir = ROOT / "outputs" / "documents" / slug / "fellow"

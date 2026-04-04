@@ -1,0 +1,233 @@
+# SOZO Brain Center — Network → Assessment Matrix
+# Source: SOZO_Assessments_Master.xlsx, April 2026
+# Brain network x disorders x assessments x FNON treatment
+
+networks:
+  dmn:
+    network: "Default Mode Network"
+    abbreviation: "DMN"
+    eeg_nodes: "Pz, Fz, F3/F4, P3/P4, T3/T4"
+    qeeg_signature: >
+    Alpha 8-12 Hz dominant at PCC/Pz (↓ in AD); Theta Fz (↑ = rumination); Anti-correlated with task-positive networks; 40 Hz gamma deficit (AD)
+    associated_disorders: >
+    Alzheimer's disease, MCI, Depression (rumination), Schizophrenia, Autism, ADHD, DOC
+    primary_clinical_scale: >
+    MoCA/MMSE (AD/MCI); PHQ-9 (depression rumination); PANSS (schizophrenia)
+    primary_neuropsych_test: >
+    RAVLT (episodic memory — DMN-linked); Stroop (DMN intrusion = off-task thoughts); N-back (DMN suppression during WM)
+    primary_qeeg_biomarker: >
+    APF at Pz/O1/O2 (↓ = AD/MCI); Alpha power Pz (↓); Theta Fz (↑ rumination); DMN coherence P3-Pz; TGC theta-gamma HC
+    primary_physiological_test: >
+    HRV (mind-wandering correlate — low HRV = DMN hyperactivation in depression); Actigraphy (sleep-DMN interaction); Cortisol awakening response
+    fnon_treatment_approach: >
+    TPS multi-site DMN (Pz+F3/F4+P3/P4+T3/T4 — 6 nodes); 40 Hz tACS bilateral temporal; PBM (transcranial+intranasal); tDCS parietal-frontal montages
+    evidence_modalities: "TPS, tACS (40 Hz), PBM, tDCS, LIFU, DBS (fornix for AD)"
+  ecn:
+    network: "Executive Control Network"
+    abbreviation: "ECN"
+    eeg_nodes: "F3/F4, P3/P4"
+    qeeg_signature: >
+    Beta 13-30 Hz dominant; Alpha during WM maintenance; Theta during WM load; L-DLPFC hypoactivation (depression, ADHD, addiction)
+    associated_disorders: >
+    Depression, ADHD, Schizophrenia (cognitive), MCI, OCD, TBI, Addiction
+    primary_clinical_scale: >
+    PHQ-9 (depression); CAARS (ADHD); PANSS negative (schizophrenia); NSI (TBI)
+    primary_neuropsych_test: >
+    WAIS Working Memory Index (WMI); DSST (processing speed); TMT-B (cognitive flexibility); SDMT (MS); Stroop (interference control)
+    primary_qeeg_biomarker: >
+    FAA F3/F4 (depression asymmetry); Beta power F3/F4 (ECN activity); TBR Cz (ADHD); P300 amplitude Cz/Pz (ECN integrity marker)
+    primary_physiological_test: >
+    HRV (vagal tone — ECN top-down control); CPT-II (sustained attention test = ECN function proxy)
+    fnon_treatment_approach: >
+    TPS/TMS L-DLPFC (primary ECN target); tDCS anodal F3; tRNS bilateral DLPFC; PBM F3/F4; tACS 40 Hz ECN nodes
+    evidence_modalities: "TPS, TMS (L-DLPFC), tDCS, tRNS, PBM, tACS"
+  sn:
+    network: "Salience Network"
+    abbreviation: "SN"
+    eeg_nodes: "Fz/AFz (dACC), T3/T4 area (ant. insula)"
+    qeeg_signature: >
+    Gamma during salient events; Beta-Alpha transition during switch; SN hyperactivation = anxiety/OCD/pain; SN hypoactivation = autism social salience
+    associated_disorders: >
+    OCD, Anxiety, PTSD, Chronic pain (insula), Fibromyalgia, Autism, Eating disorders
+    primary_clinical_scale: >
+    Y-BOCS (OCD); GAD-7 (anxiety); PCL-5 (PTSD); FIQ-R (fibromyalgia); NRS pain
+    primary_neuropsych_test: >
+    Hayling/Brixton (executive/SN-driven initiation); Go/No-Go (inhibitory SN control); ERN at FCz (ACC-SN error monitoring); Stroop
+    primary_qeeg_biomarker: >
+    ERN amplitude FCz (ACC SN hyperactivation — OCD biomarker); Gamma Fz/T7 (SN hyperactivation — anxiety/pain); Frontal theta Fz (SN-driven arousal)
+    primary_physiological_test: >
+    HRV (SN-autonomic link — ↓ HRV = SN hyperactivation); SCR electrodermal activity (insula-SN arousal); Cortisol (SN-HPA); Gut microbiome (insula-gut axis)
+    fnon_treatment_approach: >
+    Deep TMS H7 (dACC/mPFC — SN key hub); LIFU (anterior insula deep target); taVNS (NTS-SN via vagal afferents); TPS AFz/Fz
+    evidence_modalities: "Deep TMS, LIFU, taVNS, TPS, tDCS"
+  smn:
+    network: "Sensorimotor Network"
+    abbreviation: "SMN"
+    eeg_nodes: "C3/C4, Cz, FCz, Fz"
+    qeeg_signature: >
+    Mu 8-12 Hz + Beta 13-30 Hz; Both suppress with movement (ERD); SMBR post-movement; ↑ Beta = PD; ↓ Mu = pain
+    associated_disorders: >
+    Parkinson's disease, Stroke (motor), Chronic pain, Dystonia, Essential tremor, MS, TBI
+    primary_clinical_scale: >
+    MDS-UPDRS III (PD); FMA Fugl-Meyer (stroke); TETRAS (ET); BFMDRS (dystonia); NRS pain
+    primary_neuropsych_test: >
+    Fugl-Meyer Motor (stroke); 9-HPT (hand function); T25FW (gait); UPDRS Motor; Motor imagery ERD task (BCI paradigm)
+    primary_qeeg_biomarker: >
+    Central beta C3/C4 (↓ PD motor marker; ↑ ET tremor); SMBR at Cz/FCz (↓ dystonia, ET); PMBR at C3/C4; Mu power CP3/CP4 (↓ pain)
+    primary_physiological_test: >
+    Accelerometry (tremor frequency/amplitude); EMG surface (dystonia pattern); TUG/gait analysis; HRV (autonomic-motor); Grip strength
+    fnon_treatment_approach: >
+    TPS M1+SMA (PD/stroke); TMS M1 high-freq (PD) or 1 Hz (chronic pain); tDCS anodal M1; tACS beta; taVNS+PT; PEMF
+    evidence_modalities: "TPS, TMS, tDCS, tACS, PBM, PEMF, taVNS, DBS"
+  ln:
+    network: "Limbic Network"
+    abbreviation: "LN"
+    eeg_nodes: "T3/T4 (HC/Amy), Fz (vmPFC), Pz (retrosplenial)"
+    qeeg_signature: >
+    Theta 4-8 Hz dominant; Gamma during emotional arousal; Theta-gamma coupling (TGC) in HC; Limbic theta ↑ = PTSD/MDD/anxiety
+    associated_disorders: >
+    PTSD, Anxiety, Depression, Addiction, Eating disorders, Autism, AD (HC)
+    primary_clinical_scale: >
+    PCL-5 (PTSD); GAD-7 (anxiety); PHQ-9 (depression); AUDIT/DAST (addiction); ADOS-2 (ASD)
+    primary_neuropsych_test: >
+    RAVLT (hippocampal memory function); Emotional Stroop (limbic interference); IGT (OFC-limbic); Fear conditioning paradigm; DES (dissociation)
+    primary_qeeg_biomarker: >
+    Theta coherence frontal-temporal (limbic circuit integrity); TGC theta-gamma T3/T4 (HC memory function); Gamma T3/T4 (emotional arousal); Alpha coherence bilateral temporal
+    primary_physiological_test: >
+    HRV RMSSD (vagal tone — primary limbic-autonomic biomarker); Cortisol (HPA axis limbic regulation); SCR (amygdala-derived galvanic response); Salivary α-amylase
+    fnon_treatment_approach: >
+    taVNS (primary limbic modulator — NTS-LC-amygdala-HC axis); TPS vmPFC; DBS sgACC (TRD); LIFU (HC/amygdala deep targets); CES; PBM intranasal
+    evidence_modalities: "taVNS, TPS, DBS, LIFU, CES, PBM, Deep TMS"
+  dan:
+    network: "Dorsal Attention Network"
+    abbreviation: "DAN"
+    eeg_nodes: "P3/P4, F7/F8 (FEF)"
+    qeeg_signature: >
+    Alpha contralateral suppression during spatial attention; ↑ Alpha ipsilesional = hemineglect; DAN-VAN imbalance = attention disorders
+    associated_disorders: >
+    Hemineglect (R-hemisphere stroke), ADHD (inattentive), TBI, Posterior cortex stroke
+    primary_clinical_scale: >
+    Catherine Bergego Scale (CBS — neglect); CAARS (ADHD); NSI (TBI); Star Cancellation Test
+    primary_neuropsych_test: >
+    Cancellation Task (neglect assessment); Line Bisection; Posner spatial attention; CPT-II (sustained attention); Neglect battery (behavioural inattention test)
+    primary_qeeg_biomarker: >
+    Alpha lateralisation P3-P4 (↑ ipsilesional alpha = hemineglect biomarker; asymmetry index); P300 amplitude P3/P4 (attention resource); N2 at P3/P4
+    primary_physiological_test: >
+    Eye tracking (spatial attention bias — automated neglect); Pupillometry (attentional load); Vestibular-ocular assessment (DAN-vestibular link)
+    fnon_treatment_approach: >
+    TMS right TPJ/IPS (neglect); tDCS (cathodal contralesional + anodal ipsilesional); tACS (alpha lateralisation correction); TPS parietal nodes
+    evidence_modalities: "TMS, tDCS, tACS, TPS"
+  reward_network___mesolimbic:
+    network: "Reward Network / Mesolimbic"
+    abbreviation: "Reward"
+    eeg_nodes: "Fp1/Fp2 (OFC), Fz (vmPFC), Cz (NAc indirect)"
+    qeeg_signature: >
+    Theta during reward anticipation; Gamma during reward; P300 at Cz/Pz (inhibitory control reflection of reward circuit function)
+    associated_disorders: >
+    Addiction, Depression (anhedonia), OCD (VC/VS), Eating disorders, Schizophrenia (anhedonia)
+    primary_clinical_scale: >
+    AUDIT/DAST (addiction); SHAPS (anhedonia in depression); Y-BOCS (OCD/reward); BIS-11 (impulsivity)
+    primary_neuropsych_test: >
+    IGT Iowa Gambling Task (reward learning — primary); BART (risk-taking); Reward ERP (feedback-related negativity — FRN); Go/No-Go P300
+    primary_qeeg_biomarker: >
+    P300 amplitude Cz/Pz (↓ = inhibitory control deficit in addiction — primary biomarker); FRN amplitude Cz (reward prediction error); Frontal theta Fz (craving correlate)
+    primary_physiological_test: >
+    HRV (reward-autonomic coupling); Salivary cortisol (HPA-reward axis); Craving VAS (daily); Drug cue SCR reactivity
+    fnon_treatment_approach: >
+    TPS/TMS L-DLPFC (reward inhibitory control restoration); LIFU NAc (noninvasive reward modulation); DBS VC/VS (OCD-reward); taVNS (VTA via LC-dopaminergic)
+    evidence_modalities: "TPS, TMS, LIFU, DBS, taVNS, Deep TMS"
+  audn:
+    network: "Auditory Network"
+    abbreviation: "AudN"
+    eeg_nodes: "T3/T5 (L), T4/T6 (R)"
+    qeeg_signature: >
+    Beta during auditory processing; Gamma during pitch/music; Alpha suppressed by sound; Gamma ↑ = tinnitus; 40 Hz ASSR reduced in schizophrenia
+    associated_disorders: >
+    Tinnitus, Schizophrenia (AH), Auditory processing disorder, Hyperacusis
+    primary_clinical_scale: >
+    THI (tinnitus); PANSS positive (schizophrenia AH); HAD (hyperacusis disability); APD profile
+    primary_neuropsych_test: >
+    Audiometry (primary); Speech discrimination (auditory processing); N1-P2 auditory ERP amplitude; Dichotic listening; ASSR 40 Hz (primary schizophrenia auditory ERP)
+    primary_qeeg_biomarker: >
+    40 Hz ASSR amplitude T3/T4 (↓ = schizophrenia, ↑ = tinnitus hyperactivity); Gamma power T3/T4 (tinnitus generator); Alpha T3/T4 (maladaptive pattern in tinnitus); N1 amplitude
+    primary_physiological_test: >
+    OAE (Otoacoustic emissions — cochlear function test); ABR (auditory brainstem response — retrocochlear); HRV (tinnitus-autonomic); Audiogram (hearing threshold)
+    fnon_treatment_approach: >
+    TMS 1 Hz inhibitory L-STG (AH/tinnitus); tRNS bilateral temporal (stochastic resonance); tDCS cathodal L-temporal; tACS 40 Hz; taVNS+tone therapy
+    evidence_modalities: "TMS, tRNS, tDCS, tACS, taVNS"
+  langn:
+    network: "Language Network"
+    abbreviation: "LangN"
+    eeg_nodes: "F7 (L-Broca), T3/T5 (L-STG), P3 (AG)"
+    qeeg_signature: >
+    Beta dominant during speech; Alpha at rest over language areas; ↓ Beta (L) = aphasia; Inter-hemispheric alpha asymmetry = lateralisation marker
+    associated_disorders: >
+    Stroke aphasia (Broca/Wernicke), Dyslexia, ALS speech, AD language, Stuttering
+    primary_clinical_scale: >
+    WAB (Western Aphasia Battery — primary); Boston Diagnostic Aphasia Exam; BNT (Boston Naming); Dyslexia assessment battery
+    primary_neuropsych_test: >
+    Boston Naming Test (BNT — semantic); Token Test (comprehension); FAS verbal fluency; Repetition subtest WAB; Reading speed/accuracy; CTOPP-2 (dyslexia phonological processing)
+    primary_qeeg_biomarker: >
+    Beta power F7/T3/P3 (L hemisphere — ↓ = aphasia); Inter-hemispheric alpha asymmetry F7-F8 (lateralisation); Laterality Index LI (language dominance from ERP during language task); N400 at T5 (semantic processing)
+    primary_physiological_test: >
+    fTCD (functional transcranial Doppler — language lateralisation, non-invasive); HRV (speech-vagal link); Kinematic speech analysis (stuttering, ALS)
+    fnon_treatment_approach: >
+    TMS L-IFG excitatory + R-IFG inhibitory (aphasia hemispheric rebalancing); tDCS anodal F7 (L-Broca); TPS F7+T3+P3 multi-site; tACS (L-lateralised beta 20 Hz)
+    evidence_modalities: "TMS, tDCS, TPS, tACS, taVNS"
+  ccn:
+    network: "Cerebellar-Cortical Network"
+    abbreviation: "CCN"
+    eeg_nodes: "Oz/Iz (cerebellar approx), C3/C4 (M1), FCz (SMA)"
+    qeeg_signature: >
+    No dominant scalp EEG from cerebellum; Contributes to motor alpha via thalamus; Corticomuscular coherence at tremor frequency (ET); CB-M1 beta coherence (motor coordination)
+    associated_disorders: >
+    Essential tremor, Ataxia, Stroke (motor rehab), Autism (vermis), Dystonia, MS (cerebellar)
+    primary_clinical_scale: >
+    TETRAS/FTM (essential tremor); SARA (spinocerebellar ataxia rating); FMA (stroke); BFMDRS (dystonia)
+    primary_neuropsych_test: >
+    9-HPT (cerebellar hand coordination); BERG Balance Scale; Dynamic Gait Index; Tandem gait; Finger-to-nose accuracy (cerebellar ataxia tests); SDMT (cerebellar-cognitive affiliate syndrome)
+    primary_qeeg_biomarker: >
+    Corticomuscular coherence EMG-EEG at tremor frequency (ET biomarker); CB-M1 beta coherence (CCN integrity); Tremor frequency coherence Cz/FCz; Cerebellar MEP (TMS)
+    primary_physiological_test: >
+    Accelerometry (tremor quantification); Balance platform (postural sway); Kinematic gait analysis; EMG tremor pattern; HRV (cerebellar autonomic projections)
+    fnon_treatment_approach: >
+    Cerebellar TMS (1 Hz inhibitory for ET; TBS for stroke plasticity); Transcerebellar tDCS; TPS emerging; DBS dentate nucleus (experimental)
+    evidence_modalities: "Cerebellar TMS, tDCS, TPS, DBS"
+  thalamocortical_sleep_circuit:
+    network: "Thalamocortical Sleep Circuit"
+    abbreviation: "TCSC"
+    eeg_nodes: "Cz, C3/C4 (spindle generation), Pz (slow oscillation)"
+    qeeg_signature: >
+    Sleep spindles (sigma 12-15 Hz) at C3/C4/Cz; Delta 0.5-4 Hz NREM3 at Fz/Cz; Thalamocortical coherence Cz-Pz; K-complexes
+    associated_disorders: >
+    Insomnia, Chronic pain (thalamocortical dysrhythmia), Fibromyalgia, DOC, Essential tremor (VIM), Epilepsy (ANT)
+    primary_clinical_scale: >
+    ISI (insomnia); FIQ-R (fibromyalgia); CRS-R (DOC); TETRAS (ET)
+    primary_neuropsych_test: >
+    PVT (Psychomotor Vigilance Task — sleep deprivation effects); DSST; PSG sleep staging (spindle counting — primary thalamocortical test)
+    primary_qeeg_biomarker: >
+    Sleep spindle density C3/C4 (12-15 Hz, ↓ = thalamocortical dysfunction — primary insomnia biomarker); Delta power NREM3 Fz/Cz (↓ = restorative sleep deficit); Thalamocortical coherence Cz-Pz; K-complex density
+    primary_physiological_test: >
+    PSG polysomnography (gold standard — sleep staging, spindle quantification, delta power); Actigraphy (14-day, circadian rhythm + sleep efficiency); DLMO (melatonin onset — circadian biomarker); Core body temperature rhythm
+    fnon_treatment_approach: >
+    tACS Nexalin 77.5 Hz (thalamocortical resonance); CES 0.5 Hz (slow oscillation entrainment); PEMF delta-theta; DBS ANT (epilepsy thalamocortical); DBS VIM (ET thalamus); LIFU VPL (pain thalamus)
+    evidence_modalities: "tACS, CES, PEMF, DBS, LIFU"
+  frontoparietal_consciousness_network:
+    network: "Frontoparietal Consciousness Network"
+    abbreviation: "FPCN/FCN"
+    eeg_nodes: "Fz/F3/F4 (frontal), P3/P4 (parietal), Cz (midline)"
+    qeeg_signature: >
+    EEG complexity/entropy (↓ = UWS; ↑ = MCS — primary consciousness biomarker); EEG reactivity to stimulation; PDR presence; Alpha power global
+    associated_disorders: >
+    Disorders of Consciousness (DOC), TBI (severe), Anaesthesia monitoring, Locked-in syndrome
+    primary_clinical_scale: >
+    CRS-R (DOC — primary); FOUR (ICU acute); GCS (acute)
+    primary_neuropsych_test: >
+    ERP command-following (P300 to own name — covert awareness indicator); Mental imagery paradigm (motor/spatial imagery EEG BCI); MMN (change detection — passive awareness)
+    primary_qeeg_biomarker: >
+    EEG complexity/entropy (LZC, MSE, PE — ↑ = consciousness correlate; primary DOC biomarker); EEG reactivity index (absent = UWS; present = MCS); P300 amplitude (command-following ERP); Sleep-wake cycling presence; PDR
+    primary_physiological_test: >
+    Pupillometry (automated arousal assessment); HRV autonomic reactivity; fMRI mental imagery (where available); EEG-fMRI simultaneous; NfL serum (neurodegeneration)
+    fnon_treatment_approach: >
+    taVNS (arousal via ARAS-NTS pathway); TPS (emerging DOC arousal); tDCS (bilateral frontal — DOC emerging); Median nerve stimulation; Sensory stimulation protocols
+    evidence_modalities: "taVNS, TPS (emerging), tDCS, median nerve stim"

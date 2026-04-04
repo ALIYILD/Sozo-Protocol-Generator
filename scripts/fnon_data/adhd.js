@@ -341,4 +341,27 @@ module.exports = {
       "Volkow ND, Wang GJ, Newcorn JH, et al. (2011). Motivation deficit in ADHD is associated with dysfunction of the dopamine reward pathway. Mol Psychiatry, 16(11), 1147–1154. doi:10.1038/mp.2010.97",
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: 'ECN + DAN + DMN suppression',
+  fnonSecondaryNetwork: 'DMN suppress',
+  fnonFBand: 'TBR correction (Theta/Beta ratio)',
+  fnonEegNodes: 'Fz/F3/F4(prefrontal)+Cz/Pz(central-parietal)+P3/P4(parietal attention)',
+  fnonOscillationGoal: 'Correct TBR excess (canonical ADHD qEEG biomarker); suppress DMN intrusion; facilitate ECN-DAN coupling',
+  fnonPrimaryModalityParams: 'TPS: 6000 pulses, EFD 0.20 mJ/mm², 5 Hz PRF, 6 sessions bilateral prefrontal — RCT 2024 Frontiers (11 cit)',
+  fnonAddonModality: 'tACS (7Hz theta-alpha border, Fz/FCz); CES (Alpha-Stim frontal alpha); PBM (F3/F4 bilateral)',
+  fnonSessions: '6–12',
+  fnonEvidenceLevel: 'Pilot RCT 2024 (TPS); Investigational',
+  fnonLitCount: '2+ TPS RCT; 20+ tDCS; 10+ tACS',
+  fnonKeyReferences: 'TPS adolescent RCT 2024 Frontiers (11 cit); ADHD tACS 2020-2024; Meinzer tDCS ADHD',
+  fnonNotes: 'TBR (theta/beta) = primary ADHD qEEG biomarker. NF (neurofeedback) complements TPS for TBR training.',
+  fnonQeegBiomarker: '↑TBR; ↓Beta frontal',
+  fnonPaperCounts: {
+    tps: 2, tms: 30, tdcs: 20,
+    tavns: 5, ces: 5, tacs: 10,
+    pbm: 5, lifu: 3, pemf: 5, dbs: null,
+  },
+  fnonBestFirstLine: 'TMS L-DLPFC + tDCS',
+  fnonBestSecondLine: 'TPS bilateral + tACS 7Hz',
+  fnonScore: 3,
+
 };

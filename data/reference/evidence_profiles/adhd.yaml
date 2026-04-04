@@ -34,6 +34,16 @@ search_profiles:
     filters: [Randomized Controlled Trial]
     max_results: 20
 
+
+  tps_protocols:
+    query: >
+      ADHD[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
 priority_pmids:
   - "33568986"  # Westwood 2021 tDCS ADHD systematic review
   - "28261072"  # Sotnikova 2017 tDCS ADHD networks
@@ -42,3 +52,41 @@ priority_pmids:
 notes: >
   Focus on left DLPFC anodal stimulation for executive function and attention.
   Include both pediatric and adult ADHD literature separately.
+
+tps_priority_dois:
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic R"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schw..."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological"
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic R"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schw..."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological"
+  - doi: "10.3389/fneur.2024.1364270"
+    title: "Efficacy and safety of transcranial pulse stimulation in young adolescents with attention-deficit/hyperactivity disorder"
+    authors: "T. Cheung, Benjamin K. Yee, Bolton Chau, J. Lam, Kwan Hin..."
+    year: 2024
+    study_type: "rct"
+    citations: 11
+    takeaway: "Transcranial pulse stimulation (TPS) is an effective and safe adjunct treatment for ADHD in young adolescents, with a 30% reduction in mean SNAP-IV sc"
+  - doi: "10.3389/fneur.2024.1364270"
+    title: "Efficacy and safety of transcranial pulse stimulation in young adolescents with attention-deficit/hyperactivity disorder"
+    authors: "T. Cheung, Benjamin K. Yee, Bolton Chau, J. Lam, Kwan Hin..."
+    year: 2024
+    study_type: "rct"
+    citations: 11
+    takeaway: "Transcranial pulse stimulation (TPS) is an effective and safe adjunct treatment for ADHD in young adolescents, with a 30% reduction in mean SNAP-IV sc"
+  - doi: "10.3389/fneur.2024.1364270"
+    title: "Efficacy and safety of transcranial pulse stimulation in young adolescents with attention-deficit/hyperactivity disorder"
+    authors: "T. Cheung, Benjamin K. Yee, Bolton Chau, J. Lam, Kwan Hin..."
+    year: 2024
+    study_type: "rct"
+    citations: 11
+    takeaway: "Transcranial pulse stimulation (TPS) is an effective and safe adjunct treatment for ADHD in young adolescents, with a 30% reduction in mean SNAP-IV sc"
+  TPS evidence: 17 papers identified (9 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

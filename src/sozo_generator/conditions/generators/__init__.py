@@ -20,6 +20,11 @@ from .tvns import build_tvns_condition
 from .ces_alphastem import build_ces_alphastem_condition
 from .trd_vns import build_trd_vns_condition
 from .epilepsy import build_epilepsy_condition
+from .mild_cognitive_impairment import build_mild_cognitive_impairment_condition
+from .schizophrenia import build_schizophrenia_condition
+from .essential_tremor import build_essential_tremor_condition
+from .dystonia import build_dystonia_condition
+from .fibromyalgia import build_fibromyalgia_condition
 
 __all__ = [
     "build_parkinsons_condition",
@@ -43,6 +48,11 @@ __all__ = [
     "build_ces_alphastem_condition",
     "build_trd_vns_condition",
     "build_epilepsy_condition",
+    "build_mild_cognitive_impairment_condition",
+    "build_schizophrenia_condition",
+    "build_essential_tremor_condition",
+    "build_dystonia_condition",
+    "build_fibromyalgia_condition",
 ]
 
 CONDITION_BUILDERS = {
@@ -67,4 +77,9 @@ CONDITION_BUILDERS = {
     "ces_alphastem": build_ces_alphastem_condition,
     "trd_vns": build_trd_vns_condition,
     "epilepsy": build_epilepsy_condition,
+    "mild_cognitive_impairment": build_mild_cognitive_impairment_condition,
+    "schizophrenia": build_schizophrenia_condition,
+    "essential_tremor": build_essential_tremor_condition,
+    "dystonia": build_dystonia_condition,
+    "fibromyalgia": build_fibromyalgia_condition,
 }

@@ -337,4 +337,27 @@ module.exports = {
       "Thayer JF, Åhs F, Fredrikson M, Sollers JJ, Wager TD. (2012). Heart rate variability and neuroimaging meta-analysis. Neurosci Biobehav Rev, 36(2), 747–756. doi:10.1016/j.neubiorev.2011.11.009",
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: 'Limbic + Salience Network',
+  fnonSecondaryNetwork: 'Salience amygdala-ACC',
+  fnonFBand: 'Theta suppression + Alpha facilitation',
+  fnonEegNodes: 'F4(R-DLPFC)+T3/T4(temporal-limbic)+Fz(ACC)',
+  fnonOscillationGoal: 'Suppress limbic theta (hyperarousal); facilitate vmPFC alpha for fear extinction; reduce SN hyperactivation',
+  fnonPrimaryModalityParams: 'TMS high-freq R-DLPFC (20Hz, 110%rMT, 2400 pulses). OR TPS multi-site (F4+T3/T4+Fz); taVNS (25Hz, 60min)',
+  fnonAddonModality: 'CES (60min, hyperarousal); PBM bilateral frontal (810nm); EMDR concurrent taVNS',
+  fnonSessions: '20–30',
+  fnonEvidenceLevel: 'Open-label + Pilot RCT',
+  fnonLitCount: '30+ TMS; 80+ taVNS; 10+ TPS',
+  fnonKeyReferences: 'Karsen 2014; Philip 2019; Liu 2020 meta taVNS; Neuromodulation for TRD 2023',
+  fnonNotes: 'FNON: PFC-amygdala connectivity biomarker. R-DLPFC TMS activates vmPFC fear extinction. taVNS = primary limbic modulator.',
+  fnonQeegBiomarker: '↑Theta limbic; ↑Gamma',
+  fnonPaperCounts: {
+    tps: 5, tms: 30, tdcs: 10,
+    tavns: 80, ces: 10, tacs: 5,
+    pbm: 5, lifu: 5, pemf: 10, dbs: null,
+  },
+  fnonBestFirstLine: 'taVNS + TMS R-DLPFC',
+  fnonBestSecondLine: 'CES + TPS multi-site',
+  fnonScore: 4,
+
 };

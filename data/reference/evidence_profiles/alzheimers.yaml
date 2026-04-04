@@ -48,3 +48,41 @@ notes: >
   TPS (NEUROLITH) is FDA-cleared for Alzheimer's — this is the primary modality.
   Distinguish MCI (F06.70) from full AD (G30) in evidence searches.
   Include both cognitive and neuropsychiatric (NPI) outcome data.
+
+tps_priority_dois:
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic R"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schw..."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological"
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic R"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schw..."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological"
+  - doi: "10.1001/jamaneurol.2017.3129"
+    title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology: Adva"
+    authors: "V. Krishna, F. Sammartino, A. Rezai"
+    year: 2017
+    study_type: "systematic review"
+    citations: 247
+    takeaway: "Transcranial focused ultrasound technology shows promise for treating neurological conditions, with potential applications in movement disorders, epil"
+  - doi: "10.1007/s13534-024-00369-0"
+    title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+    authors: "Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim"
+    year: 2024
+    study_type: "systematic review"
+    citations: 32
+    takeaway: "Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in healthy humans and patients with central"
+  - doi: "10.1111/cns.14372"
+    title: "Transcranial pulse stimulation in Alzheimer's disease"
+    authors: "Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang"
+    year: 2023
+    study_type: "systematic review"
+    citations: 12
+    takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance and reducing depressive symptoms in Alzheimer's disease patients"
+  TPS evidence: 80 papers identified (19 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

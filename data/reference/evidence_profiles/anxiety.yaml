@@ -39,6 +39,16 @@ search_profiles:
       validation[Title/Abstract]
     max_results: 10
 
+
+  tps_protocols:
+    query: >
+      Anxiety Disorder[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
 priority_pmids:
   - "15765140"  # Kroenke 2007 GAD-7 validation
   - "26363433"  # Bikson 2016 tDCS anxiety
@@ -46,3 +56,41 @@ priority_pmids:
 notes: >
   Include both GAD-specific and broader anxiety literature.
   CES (Alpha-Stim) has specific FDA clearance for anxiety — prioritize this evidence.
+
+tps_priority_dois:
+  - doi: "10.1007/s13534-024-00369-0"
+    title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+    authors: "Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim"
+    year: 2024
+    study_type: "systematic review"
+    citations: 32
+    takeaway: "Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in healthy humans and patients with central"
+  - doi: "10.1080/02656736.2025.2539986"
+    title: "Strengths and weaknesses of transcranial ultrasound stimulation and its promise in psychiatry: an overview of the techno"
+    authors: "D. Attali, Maxime Daniel, Marion Plaze, Jean-François Aubry"
+    year: 2025
+    study_type: "systematic review"
+    citations: 1
+    takeaway: "Transcranial ultrasound stimulation (TUS) offers precise, noninvasive, and reversible brain stimulation, with potential applications in psychiatry for"
+  - doi: "10.1093/brain/awac263"
+    title: "Dual-site transcranial direct current stimulation to treat tinnitus: a randomized controlled trial"
+    authors: "E. Cardon, L. Jacquemin, Hanne Vermeersch, I. Joossen, Ju..."
+    year: 2022
+    study_type: "rct"
+    citations: 11
+    takeaway: "Dual-site sequential high-definition-tDCS of the left temporal area and right dorsolateral prefrontal cortex does not alleviate tinnitus severity, wit"
+  - doi: "10.1093/brain/awac263"
+    title: "Dual-site transcranial direct current stimulation to treat tinnitus: a randomized controlled trial"
+    authors: "E. Cardon, L. Jacquemin, Hanne Vermeersch, I. Joossen, Ju..."
+    year: 2022
+    study_type: "rct"
+    citations: 11
+    takeaway: "Dual-site sequential high-definition-tDCS of the left temporal area and right dorsolateral prefrontal cortex does not alleviate tinnitus severity, wit"
+  - doi: "10.1093/brain/awac263"
+    title: "Dual-site transcranial direct current stimulation to treat tinnitus: a randomized controlled trial"
+    authors: "E. Cardon, L. Jacquemin, Hanne Vermeersch, I. Joossen, Ju..."
+    year: 2022
+    study_type: "rct"
+    citations: 11
+    takeaway: "Dual-site sequential high-definition-tDCS of the left temporal area and right dorsolateral prefrontal cortex does not alleviate tinnitus severity, wit"
+  TPS evidence: 31 papers identified (11 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

@@ -39,6 +39,16 @@ search_profiles:
       neuromodulation[Title/Abstract]
     max_results: 15
 
+
+  tps_protocols:
+    query: >
+      OCD[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
 priority_pmids:
   - "27527917"  # Mondino 2016 tDCS OCD
   - "26952071"  # Bation 2016 tDCS OCD case series
@@ -47,3 +57,41 @@ notes: >
   Right DLPFC cathodal (inhibit hyperactive CSTC loop) has preliminary evidence.
   SMA cathodal reduces compulsion-related motor hyperactivity.
   Most OCD tDCS evidence is small sample — mark as LOW confidence.
+
+tps_priority_dois:
+  - doi: "10.1001/jamaneurol.2017.3129"
+    title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology: Adva"
+    authors: "V. Krishna, F. Sammartino, A. Rezai"
+    year: 2017
+    study_type: "systematic review"
+    citations: 247
+    takeaway: "Transcranial focused ultrasound technology shows promise for treating neurological conditions, with potential applications in movement disorders, epil"
+  - doi: "10.1016/s0924-977x(07)70102-5"
+    title: "P.3.21 Double-blind, randomized, placebo-controlled addition of quetiapine in non-refractory OCD patients"
+    authors: "N. Vulink, S. Fluitman, J. S. Meinardi, H. Westenberg, D...."
+    year: 2007
+    study_type: "rct"
+    citations: 2
+    takeaway: "OCD patients exhibit inhibitory deficits or increased facilitation in cortical circuits, with reduced motor thresholds and shorter TCI durations compa"
+  - doi: "10.1016/s0924-977x(07)70102-5"
+    title: "P.3.21 Double-blind, randomized, placebo-controlled addition of quetiapine in non-refractory OCD patients"
+    authors: "N. Vulink, S. Fluitman, J. S. Meinardi, H. Westenberg, D...."
+    year: 2007
+    study_type: "rct"
+    citations: 2
+    takeaway: "OCD patients exhibit inhibitory deficits or increased facilitation in cortical circuits, with reduced motor thresholds and shorter TCI durations compa"
+  - doi: "10.1016/s0924-977x(07)70102-5"
+    title: "P.3.21 Double-blind, randomized, placebo-controlled addition of quetiapine in non-refractory OCD patients"
+    authors: "N. Vulink, S. Fluitman, J. S. Meinardi, H. Westenberg, D...."
+    year: 2007
+    study_type: "rct"
+    citations: 2
+    takeaway: "OCD patients exhibit inhibitory deficits or increased facilitation in cortical circuits, with reduced motor thresholds and shorter TCI durations compa"
+  - doi: "10.1016/s0924-977x(07)70102-5"
+    title: "P.3.21 Double-blind, randomized, placebo-controlled addition of quetiapine in non-refractory OCD patients"
+    authors: "N. Vulink, S. Fluitman, J. S. Meinardi, H. Westenberg, D...."
+    year: 2007
+    study_type: "rct"
+    citations: 2
+    takeaway: "OCD patients exhibit inhibitory deficits or increased facilitation in cortical circuits, with reduced motor thresholds and shorter TCI durations compa"
+  TPS evidence: 24 papers identified (5 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

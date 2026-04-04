@@ -337,4 +337,27 @@ module.exports = {
       "Mather M, Harley CW. (2016). The locus coeruleus: Essential for maintaining cognitive function and the aging brain. Trends Cogn Sci, 20(3), 214–226. doi:10.1016/j.tics.2016.01.001",
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: 'DMN + ECN',
+  fnonSecondaryNetwork: 'Frontal executive',
+  fnonFBand: 'Delta + Alpha',
+  fnonEegNodes: null,
+  fnonOscillationGoal: null,
+  fnonPrimaryModalityParams: null,
+  fnonAddonModality: null,
+  fnonSessions: null,
+  fnonEvidenceLevel: null,
+  fnonLitCount: null,
+  fnonKeyReferences: null,
+  fnonNotes: 'Full FNON protocol pending — see fnon_protocol_matrix.yaml.',
+  fnonQeegBiomarker: '↑Delta focal; ↓Alpha; ↑Theta',
+  fnonPaperCounts: {
+    tps: null, tms: 20, tdcs: 30,
+    tavns: null, ces: null, tacs: 10,
+    pbm: 25, lifu: 5, pemf: 10, dbs: null,
+  },
+  fnonBestFirstLine: 'tDCS + TMS combined',
+  fnonBestSecondLine: 'PBM transcranial + PEMF',
+  fnonScore: 3,
+
 };

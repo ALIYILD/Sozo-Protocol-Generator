@@ -615,4 +615,27 @@ module.exports = {
       { authors: "Menon V, Uddin LQ", year: 2010, title: "Saliency, switching, attention and control: A network model of insula function", journal: "Brain Structure and Function", volume: "214(5–6)", pages: "655–667", doi: "10.1007/s00429-010-0262-0" },
     ],
   },
+  // ── FNON Protocol Data (SOZO_Brain_Networks_qEEG_FNON.xlsx, April 2026) ──
+  fnonPrimaryNetwork: 'Social Brain + Cerebellar-Limbic',
+  fnonSecondaryNetwork: 'Cerebellar-Limbic',
+  fnonFBand: 'Alpha facilitation + Theta-gamma coupling',
+  fnonEegNodes: 'F3/F4(DLPFC)+P3/P4(TPJ-ToM)+Pz(DMN)+cerebellar surface',
+  fnonOscillationGoal: 'Improve social brain network coherence; restore TGC; normalise frontal alpha; reduce sensory gamma hyperactivity',
+  fnonPrimaryModalityParams: 'TPS NEUROLITH: 6000 pulses, EFD 0.20 mJ/mm², 5 Hz PRF, 6-12 sessions. Multi-site: prefrontal+parietal+temporal. RCT 2023 Brain Commun (21 cit)',
+  fnonAddonModality: 'tACS 40Hz gamma temporal nodes; taVNS (social via vagal-LC-social axis); Cerebellar TMS (vermis 1Hz)',
+  fnonSessions: '6–12',
+  fnonEvidenceLevel: 'Double-blind RCT 2023',
+  fnonLitCount: '4+ TPS; 20+ TMS; 10+ tDCS',
+  fnonKeyReferences: 'Beisteiner 2023 Brain Commun (21 cit); Autism Research 2025; Asian RCT 2025',
+  fnonNotes: 'Social brain (TPJ+mPFC+STG) = primary target. TPS covers all nodes per session. taVNS for autonomic-social integration.',
+  fnonQeegBiomarker: '↓Alpha social; ↑Gamma sensory',
+  fnonPaperCounts: {
+    tps: 4, tms: 20, tdcs: 10,
+    tavns: 10, ces: null, tacs: 5,
+    pbm: 5, lifu: null, pemf: 5, dbs: null,
+  },
+  fnonBestFirstLine: 'TPS RCT 2023 Brain Commun',
+  fnonBestSecondLine: 'Cerebellar TMS + taVNS',
+  fnonScore: 4,
+
 };

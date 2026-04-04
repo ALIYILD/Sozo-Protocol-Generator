@@ -1,0 +1,235 @@
+# SOZO Brain Center — Pulsed Electromagnetic Field Therapy Protocol Reference
+# Source: Master with QEEG places.xlsx, April 2026
+# 11 condition protocols
+
+modality: "pemf"
+name: "Pulsed Electromagnetic Field Therapy"
+
+protocols:
+  - condition: "Depression (MDD)"
+    brain_target: "Bilateral brain (diffuse cortical)"
+    eeg_position: "Bilateral frontal/temporal"
+    protocol_summary: >
+    PEMF: 1 Hz, 0.19–1.37 mT, 25 min twice daily. 62% reduction on depression scales. Some overlap with rTMS at low intensity.
+    intensity: "0.19–1.37 mT"
+    frequency: "1 Hz"
+    duration_per_session: "25 min × 2/day"
+    total_sessions: "4–6 weeks"
+    pulses_per_session: "N/A"
+    devices: "NeoRhythm, ICES-DigiCeutical, FlexPulse"
+    montage: "Bilateral head coil placement"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "15+"
+    key_references: >
+    Rohan 2014; Martiny 2010; Elkins 2021
+    side_effects: >
+    Very minimal. Mild warmth, occasionally tingling. Very safe.
+    notes: >
+    Low-intensity differentiation from TMS. Home use possible with consumer devices (NeoRhythm). 62% symptom reduction reported.
+  - condition: "Stroke Rehabilitation"
+    brain_target: "Contralateral motor cortex"
+    eeg_position: "C3 or C4 (contralesional)"
+    protocol_summary: >
+    PEMF 1 Hz, 25 min twice daily, 15 days; doubled BDNF levels, 35% better cognition. Promotes neuroplasticity post-stroke.
+    intensity: "0.19–1.37 mT"
+    frequency: "1 Hz"
+    duration_per_session: "25 min × 2/day"
+    total_sessions: "15 days"
+    pulses_per_session: "N/A"
+    devices: "NeoRhythm, FlexPulse, ICES"
+    montage: "Contralateral motor cortex coil"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "20+"
+    key_references: >
+    Nair 2011; Strafella 2020
+    side_effects: >
+    Very minimal. Safe.
+    notes: >
+    Doubles BDNF and VEGF expression. 35% cognitive improvement reported. Should be combined with PT.
+  - condition: "TBI / Concussion"
+    brain_target: "Bilateral brain (diffuse)"
+    eeg_position: "Bilateral frontal/parietal"
+    protocol_summary: >
+    Low-frequency PEMF for TBI; 30 min sessions. Reduces neuroinflammation, promotes healing.
+    intensity: "0.1–1 mT"
+    frequency: "1–10 Hz"
+    duration_per_session: "30 min"
+    total_sessions: "15–30 sessions"
+    pulses_per_session: "N/A"
+    devices: "NeoRhythm, ICES, FlexPulse"
+    montage: "Bilateral head placement"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Case series"
+    literature_count: "10+"
+    key_references: >
+    Emerging PEMF TBI literature
+    side_effects: >
+    Very minimal. Safe.
+    notes: >
+    Animal models strong. Human data emerging. May reduce post-concussion symptoms.
+  - condition: "Multiple Sclerosis (MS)"
+    brain_target: "Bilateral brain + spinal cord"
+    eeg_position: "Bilateral frontal + cervical/lumbar"
+    protocol_summary: >
+    PEMF for MS: various frequencies targeting fatigue, pain, and spasticity. 15–30 min sessions.
+    intensity: "0.1–1 mT"
+    frequency: "5–75 Hz"
+    duration_per_session: "30 min"
+    total_sessions: "4–12 weeks"
+    pulses_per_session: "N/A"
+    devices: "NeoRhythm, Magnopro (EU), FlexPulse"
+    montage: "Head + spine coil placement"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "10+"
+    key_references: >
+    Lappin 2003; Richards 1997
+    side_effects: >
+    Very minimal. Safe.
+    notes: >
+    Addresses MS fatigue and pain most strongly. Spinal cord application for spasticity.
+  - condition: "Epilepsy"
+    brain_target: "Epileptogenic focus (inhibitory)"
+    eeg_position: "Focus-dependent"
+    protocol_summary: >
+    Low-intensity PEMF over epileptogenic focus; 45% response rate, 28% seizure cessation in some series.
+    intensity: "0.1–1 mT"
+    frequency: "1–5 Hz"
+    duration_per_session: "30 min"
+    total_sessions: "4–12 weeks"
+    pulses_per_session: "N/A"
+    devices: "NeoRhythm, ICES"
+    montage: "Variable, over seizure focus"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Case series"
+    literature_count: "20+"
+    key_references: >
+    Sandyk 1992; Anninos 2014
+    side_effects: >
+    Very minimal. Safe.
+    notes: >
+    45% response rate and 28% seizure cessation in case series. Large RCT needed for confirmation.
+  - condition: "Parkinson's Disease"
+    brain_target: "Motor cortex (bilateral)"
+    eeg_position: "C3/C4"
+    protocol_summary: >
+    PEMF for PD tremor reduction; motor cortex targeting; 30 min sessions.
+    intensity: "0.1–1 mT"
+    frequency: "1–10 Hz"
+    duration_per_session: "30 min"
+    total_sessions: "4–8 weeks"
+    pulses_per_session: "N/A"
+    devices: "NeoRhythm, FlexPulse"
+    montage: "Bilateral motor cortex coils"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "5+"
+    key_references: >
+    Emerging PEMF PD literature
+    side_effects: >
+    Very minimal. Safe.
+    notes: >
+    Very limited PD-specific data. Motor cortex targeting for tremor. May complement TPS/TMS.
+  - condition: "Insomnia"
+    brain_target: "Bilateral brain (diffuse)"
+    eeg_position: "Frontal/temporal"
+    protocol_summary: >
+    Theta/delta frequency PEMF to entrain sleep oscillations; 30 min before bed.
+    intensity: "0.1–0.5 mT"
+    frequency: "1–8 Hz (delta/theta)"
+    duration_per_session: "30 min"
+    total_sessions: "4–8 weeks nightly"
+    pulses_per_session: "N/A"
+    devices: "NeoRhythm, FlexPulse"
+    montage: "Bilateral frontal/temporal head placement"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "5+"
+    key_references: >
+    Emerging PEMF sleep literature
+    side_effects: >
+    Very minimal. Safe.
+    notes: >
+    Delta/theta entrainment for sleep stages. Home use possible.
+  - condition: "ADHD"
+    brain_target: "Prefrontal cortex"
+    eeg_position: "Fz, F3/F4"
+    protocol_summary: >
+    Low-frequency PEMF targeting prefrontal regions for ADHD executive function.
+    intensity: "0.1–1 mT"
+    frequency: "1–10 Hz"
+    duration_per_session: "20–30 min"
+    total_sessions: "4–8 weeks"
+    pulses_per_session: "N/A"
+    devices: "NeoRhythm, FlexPulse"
+    montage: "Bilateral prefrontal coil placement"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "5+"
+    key_references: >
+    Emerging PEMF ADHD literature
+    side_effects: >
+    Very minimal. Safe.
+    notes: >
+    Very preliminary. May complement other ADHD interventions.
+  - condition: "Addiction"
+    brain_target: "Prefrontal cortex / reward circuits"
+    eeg_position: "F3/F4, Fz"
+    protocol_summary: >
+    Alpha-frequency PEMF for addiction craving reduction; frontal targeting.
+    intensity: "0.1–1 mT"
+    frequency: "8–12 Hz (alpha)"
+    duration_per_session: "30 min"
+    total_sessions: "4–8 weeks"
+    pulses_per_session: "N/A"
+    devices: "NeoRhythm, FlexPulse"
+    montage: "Prefrontal coil placement"
+    regulatory_status: "Investigational"
+    evidence_level: "Open-label, Pilot"
+    literature_count: "3+"
+    key_references: >
+    Emerging PEMF addiction literature
+    side_effects: >
+    Very minimal. Safe.
+    notes: >
+    Very preliminary. Alpha PEMF for craving reduction.
+  - condition: "Chronic Pain"
+    brain_target: "Motor cortex + pain processing areas"
+    eeg_position: "C3/C4, Fz"
+    protocol_summary: >
+    PEMF for chronic pain; various frequencies (1–75 Hz); 15–30 min sessions. Good peripheral and central data.
+    intensity: "0.19–1.37 mT"
+    frequency: "1–75 Hz"
+    duration_per_session: "15–30 min"
+    total_sessions: "4–12 weeks"
+    pulses_per_session: "N/A"
+    devices: "NeoRhythm, ICES, FlexPulse"
+    montage: "Motor cortex and/or local pain area placement"
+    regulatory_status: "Investigational"
+    evidence_level: "RCT, Open-label"
+    literature_count: "15+"
+    key_references: >
+    Sutbeyaz 2009; Thomas 2007
+    side_effects: >
+    Very minimal. Safe.
+    notes: >
+    Strong peripheral PEMF evidence for musculoskeletal pain. Central brain PEMF emerging.
+  - condition: "Source: SOZO Brain Center Clinical Research Compilation | neuromod_data.md | Updated April 2026"
+    brain_target: null
+    eeg_position: null
+    protocol_summary: null
+    intensity: null
+    frequency: null
+    duration_per_session: null
+    total_sessions: null
+    pulses_per_session: null
+    devices: null
+    montage: null
+    regulatory_status: null
+    evidence_level: null
+    literature_count: null
+    key_references: null
+    side_effects: null
+    notes: null
