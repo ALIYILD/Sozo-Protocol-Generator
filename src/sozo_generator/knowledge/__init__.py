@@ -41,6 +41,18 @@ from .evidence_matrix import (
     list_conditions,
 )
 
+from .network_neuroscience import (
+    ALL_PAPERS,
+    LANDMARK_PAPERS,
+    PAPERS_BY_CONDITION,
+    PAPERS_BY_TOPIC,
+    FNON_SUPPORTING_PAPERS,
+    get_papers_for_condition,
+    get_top_papers,
+    format_citation,
+    get_fnon_evidence_paragraph,
+)
+
 __all__ = [
     # tps_knowledge
     "TPS_DEVICE_SPECS",
@@ -75,4 +87,14 @@ __all__ = [
     "get_best_modality",
     "get_ranked_modalities",
     "list_conditions",
+    # network_neuroscience
+    "ALL_PAPERS",
+    "LANDMARK_PAPERS",
+    "PAPERS_BY_CONDITION",
+    "PAPERS_BY_TOPIC",
+    "FNON_SUPPORTING_PAPERS",
+    "get_papers_for_condition",
+    "get_top_papers",
+    "format_citation",
+    "get_fnon_evidence_paragraph",
 ]
