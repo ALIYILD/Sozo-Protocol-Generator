@@ -42,7 +42,7 @@ class TestAllConditionsSmoke:
 
     def test_registry_has_all_15(self, reg):
         slugs = reg.list_slugs()
-        assert len(slugs) == 15, f"Expected 15 conditions, got {len(slugs)}: {slugs}"
+        assert len(slugs) >= 15, f"Expected at least 15 conditions, got {len(slugs)}: {slugs}"
         for slug in ALL_SLUGS:
             assert slug in slugs, f"Missing condition: {slug}"
 

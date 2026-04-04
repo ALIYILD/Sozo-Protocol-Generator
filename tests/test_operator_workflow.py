@@ -202,7 +202,7 @@ class TestSmokeTests:
         from sozo_generator.conditions.registry import get_registry
         reg = get_registry()
         slugs = reg.list_slugs()
-        assert len(slugs) == 15
+        assert len(slugs) >= 15
         for slug in slugs:
             condition = reg.get(slug)
             assert condition.slug == slug

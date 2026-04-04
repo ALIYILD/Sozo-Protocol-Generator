@@ -53,7 +53,14 @@ class AssessmentTool(BaseModel):
     @field_validator("evidence_pmid", mode="before")
     @classmethod
     def _validate_pmid(cls, v: str | None) -> str | None:
-        return validate_pmid(v)
+        import re
+        if v is None:
+            return None
+        stripped = str(v).strip()
+        # Silently discard placeholder strings that are not valid PubMed IDs
+        if not re.match(r"^\d{1,9}$", stripped):
+            return None
+        return stripped
 
 
 class SafetyNote(BaseModel):

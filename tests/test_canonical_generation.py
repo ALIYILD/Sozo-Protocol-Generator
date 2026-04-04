@@ -131,7 +131,7 @@ class TestCanonicalAssembler:
     def test_assemble_pd_fellow(self, kb):
         from sozo_generator.knowledge.assembler import CanonicalDocumentAssembler
         assembler = CanonicalDocumentAssembler(kb)
-        spec = assembler.assemble("parkinsons", "evidence_based_protocol", "fellow")
+        spec, _ = assembler.assemble("parkinsons", "evidence_based_protocol", "fellow")
         assert spec.condition_slug == "parkinsons"
         assert spec.tier.value == "fellow"
         assert len(spec.sections) >= 10
@@ -143,7 +143,7 @@ class TestCanonicalAssembler:
     def test_assemble_pd_partners(self, kb):
         from sozo_generator.knowledge.assembler import CanonicalDocumentAssembler
         assembler = CanonicalDocumentAssembler(kb)
-        spec = assembler.assemble("parkinsons", "evidence_based_protocol", "partners")
+        spec, _ = assembler.assemble("parkinsons", "evidence_based_protocol", "partners")
         section_ids = [s.section_id for s in spec.sections]
         # Partners SHOULD have network sections
         assert "network_profiles" in section_ids
@@ -152,7 +152,7 @@ class TestCanonicalAssembler:
     def test_assemble_depression(self, kb):
         from sozo_generator.knowledge.assembler import CanonicalDocumentAssembler
         assembler = CanonicalDocumentAssembler(kb)
-        spec = assembler.assemble("depression", "evidence_based_protocol", "fellow")
+        spec, _ = assembler.assemble("depression", "evidence_based_protocol", "fellow")
         assert spec.condition_name == "Major Depressive Disorder"
         assert len(spec.sections) >= 10
 
@@ -160,7 +160,7 @@ class TestCanonicalAssembler:
         """Migraine only exists in knowledge system — proves YAML-only generation."""
         from sozo_generator.knowledge.assembler import CanonicalDocumentAssembler
         assembler = CanonicalDocumentAssembler(kb)
-        spec = assembler.assemble("migraine", "evidence_based_protocol", "fellow")
+        spec, _ = assembler.assemble("migraine", "evidence_based_protocol", "fellow")
         assert spec.condition_name == "Migraine"
         assert len(spec.sections) >= 10
 
@@ -179,7 +179,7 @@ class TestCanonicalAssembler:
     def test_sections_have_content_or_tables(self, kb):
         from sozo_generator.knowledge.assembler import CanonicalDocumentAssembler
         assembler = CanonicalDocumentAssembler(kb)
-        spec = assembler.assemble("parkinsons", "evidence_based_protocol", "fellow")
+        spec, _ = assembler.assemble("parkinsons", "evidence_based_protocol", "fellow")
         populated = 0
         for s in spec.sections:
             if s.content or s.tables or s.subsections:
@@ -189,7 +189,7 @@ class TestCanonicalAssembler:
     def test_protocol_tables_filtered_by_modality(self, kb):
         from sozo_generator.knowledge.assembler import CanonicalDocumentAssembler
         assembler = CanonicalDocumentAssembler(kb)
-        spec = assembler.assemble("parkinsons", "evidence_based_protocol", "fellow")
+        spec, _ = assembler.assemble("parkinsons", "evidence_based_protocol", "fellow")
         # Find tDCS section
         tdcs_section = next((s for s in spec.sections if s.section_id == "protocols_tdcs"), None)
         if tdcs_section and tdcs_section.tables:
@@ -201,7 +201,7 @@ class TestCanonicalAssembler:
     def test_references_included(self, kb):
         from sozo_generator.knowledge.assembler import CanonicalDocumentAssembler
         assembler = CanonicalDocumentAssembler(kb)
-        spec = assembler.assemble("parkinsons", "evidence_based_protocol", "fellow")
+        spec, _ = assembler.assemble("parkinsons", "evidence_based_protocol", "fellow")
         assert len(spec.references) >= 3
 
 
