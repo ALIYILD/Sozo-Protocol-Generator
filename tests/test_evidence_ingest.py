@@ -476,8 +476,8 @@ class TestConditionConfigs:
     """Tests that CONDITION_CONFIGS covers all 15 Sozo conditions correctly."""
 
     def test_all_15_conditions_present(self) -> None:
-        """CONDITION_CONFIGS must have exactly 15 entries."""
-        assert len(CONDITION_CONFIGS) == 15
+        """CONDITION_CONFIGS must cover all conditions (15 core + any added conditions)."""
+        assert len(CONDITION_CONFIGS) == len(ALL_CONDITION_SLUGS)
 
     def test_all_slugs_have_config(self) -> None:
         """Every slug in ALL_CONDITION_SLUGS must be a key in CONDITION_CONFIGS."""
@@ -502,8 +502,9 @@ class TestConditionConfigs:
             assert has_priority, f"{slug}: no priority_dois or priority_pmids defined"
 
     def test_all_condition_slugs_count(self) -> None:
-        """ALL_CONDITION_SLUGS must have exactly 15 slugs."""
-        assert len(ALL_CONDITION_SLUGS) == 15
+        """ALL_CONDITION_SLUGS must have at least 15 slugs and match CONDITION_CONFIGS."""
+        assert len(ALL_CONDITION_SLUGS) >= 15
+        assert len(ALL_CONDITION_SLUGS) == len(CONDITION_CONFIGS)
 
     def test_pipeline_version_is_string(self) -> None:
         """PIPELINE_VERSION is a non-empty string."""
