@@ -19,7 +19,7 @@ from typing import Any, Optional
 # FastAPI may not be installed in all environments. The module remains valid Python
 # regardless; callers get a clear ImportError with install instructions if missing.
 try:
-    from fastapi import FastAPI, HTTPException, Query
+    from fastapi import Depends, FastAPI, HTTPException, Query
     from fastapi.middleware.cors import CORSMiddleware
     from fastapi.responses import JSONResponse, StreamingResponse
     from pydantic import BaseModel
@@ -44,7 +44,7 @@ class CanonicalGenerateRequest(BaseModel):
 
 class GraphGenerateRequest(BaseModel):
     """Request body for graph-based protocol generation."""
-    condition_slug: str
+    condition_slug: Optional[str] = None
     modality: Optional[str] = None
     tier: str = "fellow"
     doc_type: str = "evidence_based_protocol"
@@ -69,17 +69,35 @@ class GraphReviewRequest(BaseModel):
 def create_app() -> FastAPI:
     """Build and return the configured FastAPI application."""
 
+    # Fail fast for production-like profiles (JWT secret, CORS).
+    from sozo_auth.config import AuthConfig, auth_config
+    from sozo_auth.dependencies import (
+        require_clinician,
+        require_reviewer,
+        require_role,
+    )
+    from sozo_auth.models import UserResponse
+    from sozo_api.cors_config import resolve_cors_allow_origins_and_credentials
+
+    _require_operator_or_admin = [Depends(require_role("operator", "admin"))]
+    _require_clinician = [Depends(require_clinician)]
+
+    # Validate against the **current** process environment (not only the import-time
+    # singleton), so a second create_app() under tests or dynamic reload still enforces secrets.
+    AuthConfig()
+    _ = auth_config
+
+    cors_origins, cors_credentials = resolve_cors_allow_origins_and_credentials()
     application = FastAPI(
         title="SOZO Protocol API",
         version="1.0.0",
         description="HTTP interface for SOZO visualization, generation, knowledge, and cockpit services.",
     )
 
-    # CORS — allow any frontend origin during development; tighten in prod.
     application.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],
-        allow_credentials=True,
+        allow_origins=cors_origins,
+        allow_credentials=cors_credentials,
         allow_methods=["*"],
         allow_headers=["*"],
     )
@@ -158,7 +176,10 @@ def create_app() -> FastAPI:
         svc = VisualizationService()
         return {"types": svc.list_types()}
 
-    @application.post("/api/visuals/render")
+    @application.post(
+        "/api/visuals/render",
+        dependencies=_require_clinician,
+    )
     async def render_visual(request_body: dict[str, Any]) -> Any:
         """Render a visualization from a VisualizationRequest JSON body.
 
@@ -216,7 +237,10 @@ def create_app() -> FastAPI:
 
     # ── Generation ────────────────────────────────────────────────────
 
-    @application.post("/api/generate/canonical")
+    @application.post(
+        "/api/generate/canonical",
+        dependencies=_require_clinician,
+    )
     async def generate_canonical(body: CanonicalGenerateRequest) -> dict:
         """Generate a document via the canonical blueprint-driven path."""
         from sozo_generator.generation.service import GenerationService
@@ -276,7 +300,10 @@ def create_app() -> FastAPI:
 
     # ── Cockpit ───────────────────────────────────────────────────────
 
-    @application.get("/api/cockpit/overview")
+    @application.get(
+        "/api/cockpit/overview",
+        dependencies=_require_operator_or_admin,
+    )
     async def cockpit_overview() -> dict:
         """Platform-wide operational overview."""
         from sozo_generator.knowledge.cockpit import CockpitService
@@ -284,7 +311,10 @@ def create_app() -> FastAPI:
         ov = svc.overview()
         return {"overview": asdict(ov)}
 
-    @application.get("/api/cockpit/conditions")
+    @application.get(
+        "/api/cockpit/conditions",
+        dependencies=_require_operator_or_admin,
+    )
     async def cockpit_conditions() -> dict:
         """Per-condition operational summaries."""
         from sozo_generator.knowledge.cockpit import CockpitService
@@ -310,7 +340,10 @@ def create_app() -> FastAPI:
     # ── Graph-based generation ─────────────────────────────────────────
 
     @application.post("/api/graph/generate")
-    async def generate_via_graph(body: GraphGenerateRequest) -> dict:
+    async def generate_via_graph(
+        body: GraphGenerateRequest,
+        current_user: UserResponse = Depends(require_clinician),
+    ) -> dict:
         """Start a protocol generation pipeline via LangGraph.
 
         The pipeline runs through evidence search, safety checks, and
@@ -323,17 +356,39 @@ def create_app() -> FastAPI:
             create_initial_state,
         )
 
+        logger.info("Graph generate started for user_id=%s", current_user.id)
+
         try:
-            effective_prompt = body.prompt or f"Generate {body.doc_type} for {body.condition_slug}"
+            if body.prompt is not None and str(body.prompt).strip():
+                effective_prompt = str(body.prompt).strip()
+            elif body.condition_slug:
+                effective_prompt = f"Generate {body.doc_type} for {body.condition_slug}"
+            else:
+                effective_prompt = f"Generate {body.doc_type}"
+
+            structured: dict = {}
+            if body.doc_type:
+                structured["doc_type"] = body.doc_type
+            if body.modality is not None:
+                structured["modality"] = body.modality
+            if body.patient_id is not None:
+                structured["patient_id"] = body.patient_id
+            if body.condition_slug:
+                structured["condition_slug"] = body.condition_slug.strip()
 
             checkpointer = _get_checkpointer()
             graph = build_unified_graph(checkpointer=checkpointer)
 
+            explicit_slug = (
+                body.condition_slug.strip() if body.condition_slug else None
+            )
             initial_state = create_initial_state(
                 source_mode="prompt",
                 user_prompt=effective_prompt,
                 patient_context=body.patient_context,
                 tier=body.tier,
+                condition_slug=explicit_slug,
+                normalized_request=structured or None,
             )
 
             thread_id = initial_state["request_id"]
@@ -359,6 +414,23 @@ def create_app() -> FastAPI:
             except Exception as db_err:
                 logger.warning("GraphRun DB persist skipped: %s", db_err)
 
+            try:
+                from sozo_api.routes.audit_service import audit_service
+
+                audit_service.log_event(
+                    entity_type="graph_run",
+                    entity_id=thread_id,
+                    action="generation_started",
+                    actor=current_user.email,
+                    details={
+                        "thread_id": thread_id,
+                        "generation_method": "unified_graph",
+                        "condition_slug": result.get("condition", {}).get("slug"),
+                    },
+                )
+            except Exception as audit_err:
+                logger.warning("Audit log (graph_run start) skipped: %s", audit_err)
+
             return {
                 "success": True,
                 "thread_id": thread_id,
@@ -367,6 +439,15 @@ def create_app() -> FastAPI:
                     "slug": result.get("condition", {}).get("slug"),
                     "display_name": result.get("condition", {}).get("display_name"),
                     "valid": result.get("condition", {}).get("condition_valid"),
+                    "resolution_source": result.get("condition", {}).get(
+                        "resolution_source"
+                    ),
+                    "intake_conflict": result.get("condition", {}).get(
+                        "intake_conflict", False
+                    ),
+                    "intake_conflict_note": result.get("condition", {}).get(
+                        "intake_conflict_note"
+                    ),
                 },
                 "evidence_summary": {
                     "total_articles": result.get("evidence", {}).get("screened_article_count", 0),
@@ -393,7 +474,10 @@ def create_app() -> FastAPI:
             raise HTTPException(status_code=500, detail=str(exc))
 
     @application.get("/api/graph/status/{thread_id}")
-    async def graph_status(thread_id: str) -> dict:
+    async def graph_status(
+        thread_id: str,
+        _user: UserResponse = Depends(require_clinician),
+    ) -> dict:
         """Get the current status of a graph execution by thread_id.
 
         Returns the full review payload if the graph is paused at the
@@ -480,7 +564,10 @@ def create_app() -> FastAPI:
             raise HTTPException(status_code=500, detail=str(exc))
 
     @application.post("/api/graph/review")
-    async def submit_graph_review(body: GraphReviewRequest) -> dict:
+    async def submit_graph_review(
+        body: GraphReviewRequest,
+        _user: UserResponse = Depends(require_reviewer),
+    ) -> dict:
         """Submit a clinician review decision and resume the graph.
 
         The graph will:
@@ -543,13 +630,19 @@ def create_app() -> FastAPI:
 
     # Keep legacy endpoint as alias
     @application.post("/api/generate/graph")
-    async def generate_via_graph_legacy(body: GraphGenerateRequest) -> dict:
+    async def generate_via_graph_legacy(
+        body: GraphGenerateRequest,
+        current_user: UserResponse = Depends(require_clinician),
+    ) -> dict:
         """Legacy alias for /api/graph/generate."""
-        return await generate_via_graph(body)
+        return await generate_via_graph(body, current_user)
 
     # ── Evidence staleness ─────────────────────────────────────────────
 
-    @application.get("/api/evidence/staleness")
+    @application.get(
+        "/api/evidence/staleness",
+        dependencies=_require_operator_or_admin,
+    )
     async def evidence_staleness() -> dict:
         """Get evidence freshness report across all conditions."""
         from sozo_generator.evidence.staleness import get_staleness_report
@@ -577,7 +670,10 @@ def create_app() -> FastAPI:
 
     # ── Safety check endpoint ──────────────────────────────────────────
 
-    @application.post("/api/safety/check")
+    @application.post(
+        "/api/safety/check",
+        dependencies=_require_clinician,
+    )
     async def safety_check(body: dict) -> dict:
         """Run patient safety evaluation."""
         from sozo_generator.safety import evaluate_patient_safety
@@ -599,7 +695,10 @@ def create_app() -> FastAPI:
 
     # ── Personalization endpoint ───────────────────────────────────────
 
-    @application.post("/api/personalization/run")
+    @application.post(
+        "/api/personalization/run",
+        dependencies=_require_clinician,
+    )
     async def run_personalization(body: dict) -> dict:
         """Run the personalization engine for a patient."""
         from sozo_personalization import PersonalizationEngine

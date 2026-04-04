@@ -17,9 +17,11 @@ from enum import Enum
 from typing import Any, Optional
 from uuid import UUID, uuid4
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
+
+from sozo_auth.dependencies import get_current_user, require_clinician, require_reviewer
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +29,13 @@ logger = logging.getLogger(__name__)
 # Router
 # ---------------------------------------------------------------------------
 
-router = APIRouter(prefix="/api/protocols", tags=["protocols"])
+_clinician_writes = [Depends(require_clinician)]
+
+router = APIRouter(
+    prefix="/api/protocols",
+    tags=["protocols"],
+    dependencies=[Depends(get_current_user)],
+)
 
 # ---------------------------------------------------------------------------
 # Enums
@@ -478,6 +486,7 @@ async def list_protocols(
     "/",
     status_code=status.HTTP_201_CREATED,
     summary="Create / generate a protocol",
+    dependencies=_clinician_writes,
 )
 async def create_protocol(request: GenerateProtocolRequest) -> dict[str, Any]:
     """Create a new protocol.
@@ -788,7 +797,11 @@ async def get_protocol_version(
     }
 
 
-@router.put("/{protocol_id}", summary="Update protocol (new version)")
+@router.put(
+    "/{protocol_id}",
+    summary="Update protocol (new version)",
+    dependencies=_clinician_writes,
+)
 async def update_protocol(
     protocol_id: UUID, data: dict[str, Any]
 ) -> dict[str, Any]:
@@ -861,6 +874,7 @@ async def update_protocol(
 @router.post(
     "/{protocol_id}/submit-review",
     summary="Submit protocol for review",
+    dependencies=_clinician_writes,
 )
 async def submit_for_review(
     protocol_id: UUID,
@@ -920,7 +934,9 @@ async def submit_for_review(
 
 
 @router.post(
-    "/{protocol_id}/transition", summary="Transition protocol status"
+    "/{protocol_id}/transition",
+    summary="Transition protocol status",
+    dependencies=[Depends(require_reviewer)],
 )
 async def transition_status(
     protocol_id: UUID,
@@ -981,7 +997,11 @@ async def transition_status(
     }
 
 
-@router.post("/{protocol_id}/clone", summary="Clone protocol as new draft")
+@router.post(
+    "/{protocol_id}/clone",
+    summary="Clone protocol as new draft",
+    dependencies=_clinician_writes,
+)
 async def clone_protocol(protocol_id: UUID) -> dict[str, Any]:
     """Clone an existing protocol as a new DRAFT."""
     pid = str(protocol_id)
@@ -1038,6 +1058,7 @@ async def clone_protocol(protocol_id: UUID) -> dict[str, Any]:
 @router.get(
     "/{protocol_id}/export/{fmt}",
     summary="Export protocol as DOCX or PDF",
+    dependencies=_clinician_writes,
 )
 async def export_protocol(protocol_id: UUID, fmt: str) -> dict[str, Any]:
     """Export protocol as DOCX or PDF.

@@ -1,0 +1,126 @@
+# Internal benchmark lab — not a clinical safety gate by itself. Pair with human review.
+name: AutoAgent-Clinical
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/autoagent_clinical/**"
+      - "tests/test_autoagent*.py"
+      - ".github/workflows/autoagent-clinical.yml"
+  pull_request:
+    paths:
+      - "src/autoagent_clinical/**"
+      - "tests/test_autoagent*.py"
+      - ".github/workflows/autoagent-clinical.yml"
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install package
+        run: pip install -e .
+
+      - name: Run suite (benchmark expectations)
+        run: >
+          autoagent-clinical run -h baseline_fixture
+          --strict-exit-code -q
+          --out-json autoagent-run.json
+          --out-md autoagent-run.md
+          --out-junit autoagent-run.xml
+          --emit-github-step-summary
+
+      - name: Compare harnesses (Parkinsons category)
+        run: >
+          autoagent-clinical compare
+          -b baseline_fixture -p generator_with_qa_stub
+          -c parkinsons_protocol
+          --strict-exit-code -q
+          --min-mean-delta -0.05
+          --out-json autoagent-compare.json
+          --out-junit autoagent-compare.xml
+          --emit-github-step-summary
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autoagent-clinical
+          path: |
+            autoagent-run.json
+            autoagent-run.md
+            autoagent-run.xml
+            autoagent-compare.json
+            autoagent-compare.xml
+
+  pytest-autoagent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install package
+        run: pip install -e .
+
+      - name: Tests (autoagent)
+        run: >
+          python -m pytest
+          tests/test_autoagent_clinical.py
+          tests/test_autoagent_clinical_cli.py
+          tests/test_autoagent_report_writer.py
+          tests/test_autoagent_generation_harness.py
+          tests/test_autoagent_structured_phase3.py
+          tests/test_autoagent_document_spec_invariants.py
+          -q --tb=short
+
+  regression-gates:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install package
+        run: pip install -e .
+
+      - name: Run with regression_gate_cases.yaml
+        run: >
+          autoagent-clinical run -h baseline_fixture
+          --include-regression-gates
+          --strict-exit-code -q
+          --out-json autoagent-regression-gates.json
+          --out-junit autoagent-regression-gates.xml
+          --emit-github-step-summary
+
+      - name: Upload regression gate report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autoagent-regression-gates
+          path: |
+            autoagent-regression-gates.json
+            autoagent-regression-gates.xml

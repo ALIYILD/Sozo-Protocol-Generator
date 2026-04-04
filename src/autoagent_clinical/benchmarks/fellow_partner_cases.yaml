@@ -1,0 +1,54 @@
+suite: autoagent_clinical
+version: "1"
+cases:
+  - id: fellow_foundational_tone_v1
+    category: fellow_partner
+    title: Fellow draft emphasizes mechanism / background
+    inputs:
+      audience: fellow
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Fellow-oriented synopsis
+
+      *Internal drafting only.*
+
+      ## Pathophysiology and mechanism background
+      Introductory summary of loop circuitry for learners; discusses what is known vs
+      uncertain before any stimulation recipe.
+
+      PMID: 60000001
+    expectations:
+      expect_pass: true
+      min_overall_score: 0.55
+
+  - id: partner_workflow_tone_v1
+    category: fellow_partner
+    title: Partner draft emphasizes implementation
+    inputs:
+      audience: partner
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Partner operations brief
+
+      ## Implementation
+      Clinic workflow for device checkout, scheduling, and FNON communication templates.
+
+      PMID: 60000002
+    expectations:
+      expect_pass: true
+
+  - id: audience_mismatch_fellow_with_ops_only_v1
+    category: fellow_partner
+    title: Claimed fellow doc but only partner idioms
+    inputs:
+      audience: fellow
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Misaligned audience fixture
+
+      Billing throughput, operator scheduling, and FNON-only checklists for
+      clinic throughput metrics (no trainee teaching objectives).
+
+      PMID: 60000003
+    expectations:
+      expect_pass: false

@@ -1,0 +1,44 @@
+# Opt-in regression gates (see load_all_benchmark_files(include_regression_gates=True)).
+# Intended for generation_service harness + live KB; baseline_fixture still satisfies
+# expectations via fixture_markdown for CI matrix splits.
+suite: autoagent_clinical
+version: "1"
+cases:
+  - id: gate_pd_ebp_relaxed_invariants
+    category: regression_gate
+    title: PD evidence protocol — relaxed structure-native gate
+    description: >
+      Exercises document_spec_invariants in relaxed (emit-aligned) mode with a
+      reference floor. Use --harness generation_service for real DocumentSpec.
+    inputs:
+      condition: parkinsons
+      tier: fellow
+      doc_type: evidence_based_protocol
+      document_invariant_mode: relaxed
+      min_document_references: 5
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Fixture for baseline harness
+
+      ## References
+      - PMID: 31111111
+    expectations: {}
+
+  - id: gate_pd_ebp_strict_invariants_smoke
+    category: regression_gate
+    title: PD evidence protocol — strict definition mode smoke
+    description: >
+      Full DocumentDefinition requirements + aliases; may emit LOW order findings
+      vs canonical assembler ordering (informational).
+    inputs:
+      condition: parkinsons
+      tier: fellow
+      doc_type: evidence_based_protocol
+      document_invariant_mode: strict
+      min_document_references: 3
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Fixture for baseline harness
+      ## References
+      PMID: 32222222
+    expectations: {}

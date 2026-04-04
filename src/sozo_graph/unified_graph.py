@@ -18,7 +18,7 @@ import json
 import logging
 import uuid
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Any, Optional
 
 from .audit.logger import audited_node
 from .state import SozoGraphState
@@ -67,25 +67,87 @@ def intake_router_node(state: SozoGraphState) -> dict:
 def condition_resolver_node(state: SozoGraphState) -> dict:
     """Resolve condition using the shared ConditionRegistry.
 
-    Delegates to integration.resolve_condition which calls
-    sozo_generator.conditions.registry.get_registry().
+    Precedence: explicit ``intake.condition_slug`` → ``normalized_request.condition_slug``
+    → template ``inferred_condition`` → existing ``state.condition.slug`` → prompt heuristic.
+
+    When structured intake yields a valid slug that disagrees with prompt inference,
+    resolution still follows structured intake, but ``intake_conflict`` and
+    ``parse_warnings`` flag clinician review.
     """
     decisions: list[str] = []
-
-    # Determine slug from various intake sources
-    intake = state.get("intake", {})
-    normalized = intake.get("normalized_request") or {}
+    intake = dict(state.get("intake") or {})
+    normalized = dict(intake.get("normalized_request") or {})
     template = intake.get("template_profile") or {}
 
-    slug = (
-        normalized.get("condition_slug")
-        or template.get("inferred_condition")
-        or state.get("condition", {}).get("slug")
+    explicit = (intake.get("condition_slug") or "").strip() or None
+    norm_slug = (normalized.get("condition_slug") or "").strip() or None
+
+    warnings = list(intake.get("parse_warnings") or [])
+
+    if explicit and norm_slug and explicit != norm_slug:
+        msg = (
+            f"intake_condition_slug_mismatch: explicit={explicit!r} "
+            f"normalized_request={norm_slug!r}"
+        )
+        warnings.append(msg)
+        decisions.append(msg)
+
+    chosen_slug: Optional[str] = None
+    slug_source = "none"
+
+    if explicit:
+        chosen_slug = explicit
+        slug_source = "explicit_intake"
+    elif norm_slug:
+        chosen_slug = norm_slug
+        slug_source = "normalized_request"
+    else:
+        t_slug = (template.get("inferred_condition") or "").strip() or None
+        if t_slug:
+            chosen_slug = t_slug
+            slug_source = "template_inferred"
+
+    if not chosen_slug:
+        carried = (state.get("condition") or {}).get("slug")
+        if carried:
+            chosen_slug = str(carried).strip() or None
+            slug_source = "state_carryover"
+
+    inferred_prompt = integration.infer_condition_slug_from_prompt(
+        intake.get("user_prompt")
     )
 
-    if not slug:
+    intake_conflict = False
+    intake_conflict_note: Optional[str] = None
+    if (
+        chosen_slug
+        and inferred_prompt
+        and inferred_prompt != chosen_slug
+    ):
+        res_struct = integration.resolve_condition(chosen_slug)
+        res_inf = integration.resolve_condition(inferred_prompt)
+        if res_struct.get("condition_valid") and res_inf.get("condition_valid"):
+            intake_conflict = True
+            intake_conflict_note = (
+                f"prompt suggests {inferred_prompt!r} but structured "
+                f"intake used {chosen_slug!r}"
+            )
+            w = f"condition_intake_conflict: {intake_conflict_note}"
+            warnings.append(w)
+            decisions.append(intake_conflict_note)
+
+    if not chosen_slug and inferred_prompt:
+        chosen_slug = inferred_prompt
+        slug_source = "prompt_inferred"
+        decisions.append(
+            f"No structured condition slug; inferred {chosen_slug!r} from prompt"
+        )
+
+    if not chosen_slug:
         decisions.append("No condition slug found in intake -- condition_valid=false")
+        intake["parse_warnings"] = warnings
         return {
+            "intake": intake,
             "condition": {
                 "slug": "",
                 "display_name": "",
@@ -94,28 +156,32 @@ def condition_resolver_node(state: SozoGraphState) -> dict:
                 "resolution_source": "none",
                 "condition_valid": False,
             },
+            "status": "intake",
             "_decisions": decisions,
         }
 
-    condition_data = integration.resolve_condition(slug)
+    condition_data = integration.resolve_condition(chosen_slug)
 
-    # Refine resolution_source based on where the slug came from
-    if condition_data["condition_valid"]:
-        if normalized.get("condition_slug"):
-            condition_data["resolution_source"] = "prompt_inferred"
-        elif template.get("inferred_condition"):
-            condition_data["resolution_source"] = "template_inferred"
+    if intake_conflict and condition_data.get("condition_valid"):
+        condition_data["intake_conflict"] = True
+        if intake_conflict_note:
+            condition_data["intake_conflict_note"] = intake_conflict_note
+
+    if condition_data["condition_valid"] and slug_source != "none":
+        condition_data["resolution_source"] = slug_source
 
     decisions.append(
-        f"Resolved '{slug}' -> "
+        f"Resolved '{chosen_slug}' -> "
         f"{condition_data.get('display_name', '?')} "
         f"(ICD-10: {condition_data.get('icd10', '?')}) "
         f"via {condition_data.get('resolution_source', '?')} "
         f"[valid={condition_data.get('condition_valid')}]"
     )
 
+    intake["parse_warnings"] = warnings
     return {
         "condition": condition_data,
+        "intake": intake,
         "status": "intake",
         "_decisions": decisions,
     }
@@ -814,9 +880,34 @@ def create_initial_state(
     uploaded_filename: str = "",
     patient_context: Optional[dict] = None,
     tier: str = "fellow",
+    condition_slug: Optional[str] = None,
+    normalized_request: Optional[dict[str, Any]] = None,
 ) -> SozoGraphState:
-    """Create the initial state for a unified protocol generation run."""
+    """Create the initial state for a unified protocol generation run.
+
+    Args:
+        condition_slug: Optional explicit registry slug (e.g. from REST API). Highest
+            precedence in ``condition_resolver_node``.
+        normalized_request: Optional structured intake dict (may include
+            ``condition_slug``). Explicit ``condition_slug`` overwrites
+            ``normalized_request['condition_slug']`` when both are provided so the
+            API contract remains single-sourced.
+    """
     now = datetime.now(timezone.utc).isoformat()
+
+    norm: dict[str, Any] = dict(normalized_request) if normalized_request else {}
+    explicit = (condition_slug or "").strip() or None
+    if explicit:
+        norm["condition_slug"] = explicit
+
+    intake: dict[str, Any] = {
+        "user_prompt": user_prompt or None,
+        "uploaded_filename": uploaded_filename or None,
+    }
+    if explicit:
+        intake["condition_slug"] = explicit
+    if norm:
+        intake["normalized_request"] = norm
 
     return {
         "request_id": str(uuid.uuid4()),
@@ -824,10 +915,7 @@ def create_initial_state(
         "updated_at": now,
         "status": "intake",
         "source_mode": source_mode,
-        "intake": {
-            "user_prompt": user_prompt or None,
-            "uploaded_filename": uploaded_filename or None,
-        },
+        "intake": intake,
         "condition": {},
         "patient_context": patient_context,
         "evidence": {},

@@ -15,12 +15,18 @@ from datetime import date, datetime, timedelta
 from typing import Optional
 from uuid import UUID, uuid4
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from pydantic import BaseModel, Field
+
+from sozo_auth.dependencies import require_clinician
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/api/patients", tags=["patients"])
+router = APIRouter(
+    prefix="/api/patients",
+    tags=["patients"],
+    dependencies=[Depends(require_clinician)],
+)
 
 
 # ---------------------------------------------------------------------------

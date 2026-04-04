@@ -1,0 +1,54 @@
+suite: autoagent_clinical
+version: "1"
+cases:
+  - id: montage_conflict_anodes_v1
+    category: montage_consistency
+    title: Conflicting anode laterality cues
+    inputs:
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Montage error fixture
+
+      Place the anode over left DLPFC (F3) with cathode right supraorbital.
+      Later in the same document the anode is placed over right DLPFC (F4) for
+      the same intervention phase without justification.
+
+      PMID: 30000001
+    expectations:
+      expect_pass: false
+      expected_failure_codes:
+        - montage_contradiction
+
+  - id: montage_coherent_v1
+    category: montage_consistency
+    title: Consistent left M1 montage language
+    inputs:
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Consistent montage
+
+      Anode over contralateral M1 representatives (C3 when stimulating right hemisphere
+      priority) with large frontal cathode — bilateral language avoided; rationale ties
+      ROI to clinical goal.
+
+      PMID: 30000002
+    expectations:
+      expect_pass: true
+
+  - id: montage_tps_tdcs_contamination_v1
+    category: montage_consistency
+    title: TPS block with stray tDCS electrode-pair instructions
+    inputs:
+      modality: tps
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Mixed modality language
+
+      TPS session planning with pulse dosing is described, but the same section instructs
+      operators to pair an anode and cathode sponge electrodes for simultaneous delivery.
+
+      PMID: 30000003
+    expectations:
+      expect_pass: false
+      expected_failure_codes:
+        - wrong_modality

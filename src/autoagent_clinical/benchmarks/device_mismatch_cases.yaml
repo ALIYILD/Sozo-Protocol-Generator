@@ -1,0 +1,56 @@
+suite: autoagent_clinical
+version: "1"
+cases:
+  - id: device_tps_with_tdcs_noise_v1
+    category: device_mismatch
+    title: Declared TPS with classic tDCS montage section
+    inputs:
+      modality: tps
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # TPS protocol draft
+
+      Transcranial pulse stimulation dosing is summarized, then operators are told to
+      place an anode at F3 and a cathode at F4 using sponge electrodes per tDCS SOP.
+
+      PMID: 70000001
+    expectations:
+      expect_pass: false
+      expected_failure_codes:
+        - wrong_modality
+
+  - id: device_tdcs_consistent_v1
+    category: device_mismatch
+    title: tDCS modality consistent language
+    inputs:
+      modality: tdcs
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # tDCS consistent
+
+      Transcranial direct current parameters with ramped 1 mA delivery and sponge
+      electrodes; no ultrasound pulse dosing mixed into the same step.
+
+      PMID: 70000002
+    expectations:
+      expect_pass: true
+
+  - id: device_name_must_appear_v1
+    category: device_mismatch
+    title: Device label expected in text (soft check)
+    inputs:
+      modality: tdcs
+      device_name: NeuroSozo-Stim-ModelX
+      device_must_appear: true
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Generic tDCS text
+
+      Montage and dose described without naming the specific hardware revision.
+
+      PMID: 70000003
+      # NOTE: Evaluators may still “pass” overall on this soft signal; the benchmark
+      # only requires that validators emit `device_mismatch` for metric / taxonomy use.
+    expectations:
+      expected_failure_codes:
+        - device_mismatch

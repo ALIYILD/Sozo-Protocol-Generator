@@ -1,0 +1,49 @@
+suite: autoagent_clinical
+version: "1"
+cases:
+  - id: evidence_missing_refs_section_v1
+    category: evidence_mapping
+    title: Mapping task without references section
+    inputs:
+      require_references_section: true
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Draft without references block
+
+      Stimulation details are described inline only.
+    expectations:
+      expect_pass: false
+      expected_failure_codes:
+        - missing_citation
+
+  - id: evidence_strong_claim_no_cite_v1
+    category: evidence_mapping
+    title: Outcome claim without adjacent citation
+    inputs:
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Strong claim
+
+      This protocol reduces bradykinesia within one week in all enrolled cohorts.
+
+      No DOI or PMID is provided here.
+    expectations:
+      expect_pass: false
+      expected_failure_codes:
+        - citation_weak_or_mismatched
+
+  - id: evidence_pmids_and_refs_v1
+    category: evidence_mapping
+    title: PMID-rich mapping (positive control)
+    inputs:
+      require_references_section: true
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Mapped draft
+
+      Clinically reduces bradykinesia only where supported by pilot data PMID: 50000001.
+
+      ## References
+      - PubMed PMID:50000001
+    expectations:
+      expect_pass: true

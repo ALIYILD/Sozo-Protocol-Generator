@@ -47,3 +47,4 @@ where = ["src"]
 
 [project.scripts]
 sozo = "sozo_generator.cli.main:app"
+autoagent-clinical = "autoagent_clinical.cli:app"

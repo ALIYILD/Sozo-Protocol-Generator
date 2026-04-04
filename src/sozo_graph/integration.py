@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import re
 from datetime import datetime, timezone
 from typing import Optional
 
@@ -51,6 +52,72 @@ def resolve_condition(slug: str) -> dict:
         "resolution_source": "registry",
         "condition_valid": True,
     }
+
+
+# Heuristic phrases → help disambiguate common clinical phrases in free text.
+_PROMPT_INFER_ALIASES: dict[str, tuple[str, ...]] = {
+    "parkinsons": ("parkinson's", "parkinson disease", "parkinsons disease"),
+    "depression": ("major depression", "mdd", "unipolar depression"),
+    "alzheimers": ("alzheimer's", "alzheimer disease"),
+    "stroke_rehab": (
+        "stroke rehabilitation",
+        "post-stroke",
+        "hemiparesis after stroke",
+    ),
+    "chronic_pain": ("chronic pain",),
+    "long_covid": ("long covid", "post-covid"),
+}
+
+
+def _term_matches_in_prompt(term: str, text: str) -> bool:
+    """Match a token or phrase inside lowercased prompt text.
+
+    Single tokens use non-alphanumeric boundaries so short slugs (e.g. ``ms``)
+    do not match unrelated substrings (e.g. inside *terms*).
+    """
+    t = (term or "").strip().lower()
+    if not t:
+        return False
+    if " " in t or "_" in t:
+        return t.replace("_", " ") in text.replace("_", " ")
+    return (
+        re.search(rf"(?<![a-z0-9]){re.escape(t)}(?![a-z0-9])", text) is not None
+    )
+
+
+def infer_condition_slug_from_prompt(prompt: Optional[str]) -> Optional[str]:
+    """Best-effort deterministic slug inference from user prompt (unified graph fallback).
+
+    Returns a single registry slug when exactly one condition matches; otherwise None
+    (ambiguous or no match). Does not call an LLM.
+    """
+    if not prompt or not str(prompt).strip():
+        return None
+    text = str(prompt).lower()
+
+    from sozo_generator.conditions.registry import get_registry
+
+    registry = get_registry()
+    matches: list[str] = []
+    for slug in registry.list_slugs():
+        candidates = [slug, slug.replace("_", " ")]
+        extras = _PROMPT_INFER_ALIASES.get(slug, ())
+        if any(_term_matches_in_prompt(c, text) for c in candidates if c):
+            matches.append(slug)
+        elif any(_term_matches_in_prompt(extra, text) for extra in extras if extra):
+            matches.append(slug)
+
+    # De-duplicate while preserving order
+    seen: set[str] = set()
+    unique = []
+    for m in matches:
+        if m not in seen:
+            seen.add(m)
+            unique.append(m)
+
+    if len(unique) == 1:
+        return unique[0]
+    return None
 
 
 # ---------------------------------------------------------------------------

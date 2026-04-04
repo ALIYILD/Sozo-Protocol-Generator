@@ -1,0 +1,51 @@
+suite: autoagent_clinical
+version: "1"
+cases:
+  - id: unsupported_fda_language_v1
+    category: unsupported_claim
+    title: Regulatory overclaim heuristic
+    inputs:
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Overclaim fixture
+
+      This handheld device is FDA approved for curing Parkinson motor symptoms
+      in all patients.
+
+      PMID: 40000001
+    expectations:
+      expect_pass: false
+      expected_failure_codes:
+        - regulatory_overclaim
+
+  - id: unsupported_mechanism_certainty_v1
+    category: unsupported_claim
+    title: Mechanism certainty without support
+    inputs:
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Mechanism certainty
+
+      We know with certainty that this single session reverses the pathophysiology
+      of Parkinson disease in humans.
+
+      PMID: 40000002
+    expectations:
+      expect_pass: false
+      expected_failure_codes:
+        - unsupported_claim
+
+  - id: conservative_language_ok_v1
+    category: unsupported_claim
+    title: Conservative wording (positive control)
+    inputs:
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Conservative draft
+
+      Evidence from small trials suggests possible adjunct motor benefits; claims
+      require independent confirmation. For internal review only.
+
+      PMID: 40000003
+    expectations:
+      expect_pass: true

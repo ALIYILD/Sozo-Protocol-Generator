@@ -15,13 +15,19 @@ from datetime import date, datetime, timedelta, timezone
 from typing import Any, Optional
 from uuid import UUID
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
+from sozo_auth.rbac import Permission, require_permission
+
 from .audit_service import audit_service
 
-router = APIRouter(prefix="/api/audit", tags=["audit"])
+router = APIRouter(
+    prefix="/api/audit",
+    tags=["audit"],
+    dependencies=[Depends(require_permission(Permission.VIEW_AUDIT))],
+)
 
 
 # ---------------------------------------------------------------------------
@@ -313,5 +319,6 @@ async def list_entity_types():
             "protocol", "protocol_version", "patient",
             "assessment", "review", "evidence",
             "user", "system", "treatment_session",
+            "graph_run",
         ]
     }

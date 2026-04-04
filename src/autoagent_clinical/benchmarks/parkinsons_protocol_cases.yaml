@@ -1,0 +1,93 @@
+suite: autoagent_clinical
+version: "1"
+cases:
+  - id: pd_tdcs_fellow_v1
+    category: parkinsons_protocol
+    title: Parkinson disease tDCS — fellow draft (MVP fixture)
+    description: >
+      Internal drafting exercise for PD motor symptom adjunct protocol using tDCS.
+    inputs:
+      condition: parkinsons
+      modality: tdcs
+      audience: fellow
+      required_headings:
+        - Overview
+        - Stimulation parameters
+        - Safety and monitoring
+      require_monitoring_section: true
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Parkinson disease — adjunct tDCS (fellow draft)
+
+      *For internal drafting and supervising clinician review only.*
+
+      ## Overview
+      Background-level summary for fellows: basal ganglia loop dysfunction contributes
+      to motor signs; non-invasive stimulation is examined as an adjunct, not a replacement
+      for standard PD care.
+
+      ## Stimulation parameters
+      High-definition tDCS-style targeting discussion uses contralateral M1 / premotor
+      frameworks consistent with literature summaries. Example exploratory session: up to
+      1.5 mA for 20 minutes, ramped, 3x/week during supervised visits (protocolized
+      locally — verify against current evidence tables).
+
+      ## Safety and monitoring
+      Skin checks, impedance monitoring, and stopping rules for headache or abnormal
+      sensation; escalate to on-call per clinic policy.
+
+      ## References
+      PMID: 31234567 (placeholder fixture reference for benchmark traceability).
+    expectations:
+      expect_pass: true
+      min_overall_score: 0.55
+
+  - id: pd_tdcs_partner_v1
+    category: parkinsons_protocol
+    title: Parkinson disease tDCS — partner / ops-oriented draft
+    description: Partner audience should surface implementation and workflow cues.
+    inputs:
+      condition: parkinsons
+      modality: tdcs
+      audience: partner
+      required_headings:
+        - Overview
+        - Clinic workflow
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Parkinson disease — tDCS adjunct (partner draft)
+
+      *For internal drafting; align with site SOPs before use.*
+
+      ## Overview
+      Short clinical synopsis for operators.
+
+      ## Clinic workflow
+      Scheduling three supervised visits weekly, FNON handoff notes, and impedance
+      logging in the EHR. Implementation checklist for device prep and teardown.
+
+      ## References
+      PMID: 31234567
+    expectations:
+      expect_pass: true
+
+  - id: pd_structure_negative_v1
+    category: parkinsons_protocol
+    title: PD draft missing required sections (negative control)
+    description: Should fail structure expectations.
+    inputs:
+      condition: parkinsons
+      modality: tdcs
+      audience: fellow
+      required_headings:
+        - Stimulation parameters
+        - Safety and monitoring
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Incomplete PD note
+
+      Free text only — no structured stimulation or safety blocks in this fixture.
+    expectations:
+      expect_pass: false
+      expected_failure_codes:
+        - structure_violation

@@ -40,7 +40,9 @@ from typing import Optional
 from ..conditions.registry import get_registry
 from ..core.enums import DocumentType, Tier
 from ..core.settings import get_settings
+from ..knowledge.assembler import AssemblyProvenance
 from ..schemas.condition import ConditionSchema
+from ..schemas.documents import DocumentSpec
 from ..schemas.definitions import (
     DocumentDefinition,
     GenerationRequest,
@@ -48,6 +50,25 @@ from ..schemas.definitions import (
 )
 
 logger = logging.getLogger(__name__)
+
+
+@dataclass
+class CanonicalAssemblyResult:
+    """Structured canonical document state immediately before DOCX rendering.
+
+    Produced by :meth:`GenerationService.assemble_canonical_document` for QA,
+    benchmarking, and any consumer that needs :class:`~sozo_generator.schemas.documents.DocumentSpec`
+    without a render step.
+    """
+
+    spec: Optional[DocumentSpec] = None
+    provenance: Optional[AssemblyProvenance] = None
+    safety_qa_issues: list[str] = field(default_factory=list)
+    error: Optional[str] = None
+
+    @property
+    def ok(self) -> bool:
+        return self.error is None and self.spec is not None
 
 
 @dataclass
@@ -285,6 +306,59 @@ class GenerationService:
             "knowledge_base_summary": kb.summary(),
         }
 
+    def assemble_canonical_document(
+        self,
+        condition: str,
+        doc_type: str = "evidence_based_protocol",
+        tier: str = "fellow",
+    ) -> CanonicalAssemblyResult:
+        """Assemble the canonical :class:`~sozo_generator.schemas.documents.DocumentSpec` without rendering DOCX.
+
+        Use this when structured document content is needed for QA, benchmarks, or
+        custom render paths. For full DOCX output, use :meth:`generate_canonical`.
+        """
+        assembled = CanonicalAssemblyResult()
+        try:
+            kb = self.knowledge_base
+            if not kb:
+                assembled.error = "Knowledge base not available"
+                return assembled
+
+            from ..knowledge.assembler import CanonicalDocumentAssembler
+
+            assembler = CanonicalDocumentAssembler(kb)
+            spec, provenance = assembler.assemble(condition, doc_type, tier)
+
+            safety_issues: list[str] = []
+            cond_obj = kb.get_condition(condition)
+            if cond_obj:
+                from ..knowledge.safety import SafetyValidator
+
+                validator = SafetyValidator()
+                safety_report = validator.validate_protocol(
+                    condition_slug=condition,
+                    protocols=[p.model_dump() for p in cond_obj.protocols],
+                    safety_rules=[s.model_dump() for s in cond_obj.safety_rules],
+                    doc_type=doc_type,
+                    tier=tier,
+                )
+                if not safety_report.passed:
+                    safety_issues.extend(
+                        [
+                            f"[SAFETY BLOCK] {c.message}"
+                            for c in safety_report.checks
+                            if c.severity == "block"
+                        ]
+                    )
+
+            assembled.spec = spec
+            assembled.provenance = provenance
+            assembled.safety_qa_issues = safety_issues
+        except Exception as e:
+            assembled.error = str(e)
+            logger.error(f"Canonical assembly failed: {e}", exc_info=True)
+        return assembled
+
     def generate_canonical(
         self,
         condition: str,
@@ -311,31 +385,17 @@ class GenerationService:
         )
 
         try:
-            kb = self.knowledge_base
-            if not kb:
-                result.error = "Knowledge base not available"
+            assembled = self.assemble_canonical_document(condition, doc_type, tier)
+            if not assembled.ok:
+                result.error = assembled.error or "canonical assembly failed"
                 return result
 
-            # Assemble document from blueprint + knowledge
-            from ..knowledge.assembler import CanonicalDocumentAssembler
-            assembler = CanonicalDocumentAssembler(kb)
-            spec, provenance = assembler.assemble(condition, doc_type, tier)
+            spec = assembled.spec
+            provenance = assembled.provenance
+            assert spec is not None and provenance is not None
 
-            # Run safety validation before rendering
-            cond_obj = kb.get_condition(condition)
-            if cond_obj:
-                from ..knowledge.safety import SafetyValidator
-                validator = SafetyValidator()
-                safety_report = validator.validate_protocol(
-                    condition_slug=condition,
-                    protocols=[p.model_dump() for p in cond_obj.protocols],
-                    safety_rules=[s.model_dump() for s in cond_obj.safety_rules],
-                    doc_type=doc_type, tier=tier,
-                )
-                if not safety_report.passed:
-                    result.qa_issues.extend(
-                        [f"[SAFETY BLOCK] {c.message}" for c in safety_report.checks if c.severity == "block"]
-                    )
+            result.qa_issues = list(assembled.safety_qa_issues)
+            result.qa_issues.extend(provenance.warnings)
 
             # Render using existing renderer
             output_path = self.exporter.renderer.render(spec)
@@ -346,8 +406,6 @@ class GenerationService:
             import json
             prov_path = Path(str(output_path)).with_suffix(".provenance.json")
             prov_path.write_text(json.dumps(provenance.to_dict(), indent=2))
-
-            result.qa_issues = provenance.warnings
 
             # Visuals
             if self.with_visuals:

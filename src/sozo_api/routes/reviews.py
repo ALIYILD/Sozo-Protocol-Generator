@@ -14,12 +14,18 @@ from datetime import datetime, timezone
 from typing import Optional
 from uuid import UUID, uuid4
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from pydantic import BaseModel, Field
+
+from sozo_auth.dependencies import require_reviewer
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/api/reviews", tags=["reviews"])
+router = APIRouter(
+    prefix="/api/reviews",
+    tags=["reviews"],
+    dependencies=[Depends(require_reviewer)],
+)
 
 # ---------------------------------------------------------------------------
 # Pydantic models

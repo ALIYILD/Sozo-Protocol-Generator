@@ -1,0 +1,38 @@
+# Opt-in suite (see runner.load_all_benchmark_files(include_adapter_benchmarks=True)).
+# Baseline fixture harness uses fixture_markdown; generation_service harness calls
+# GenerationService and replaces body with DOCX-derived markdown on success.
+suite: autoagent_clinical
+version: "1"
+cases:
+  - id: gen_pd_fellow_ebp_v1
+    category: generation_adapter
+    title: Live GenerationService — parkinsons evidence protocol (fellow)
+    description: Canonical path smoke; expectations intentionally loose (real documents vary).
+    inputs:
+      condition: parkinsons
+      tier: fellow
+      doc_type: evidence_based_protocol
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Placeholder fixture
+
+      Baseline harness uses this text. PMID: 31234567
+
+      ## References
+      - PubMed PMID:31234567
+    expectations: {}
+
+  - id: gen_unknown_condition_v1
+    category: generation_adapter
+    title: GenerationService — unknown condition surfaces error
+    description: Negative control; generation_service should emit a failure markdown doc.
+    inputs:
+      condition: "__unknown_autoagent_condition__"
+      tier: fellow
+      doc_type: evidence_based_protocol
+      relaxed_citation_check: true
+    fixture_markdown: |
+      # Fixture-only stub
+
+      PMID: 39999999
+    expectations: {}

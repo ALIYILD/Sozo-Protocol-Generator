@@ -165,4 +165,14 @@ class TestGenerationService:
             tier="fellow",
             doc_type="handbook",
         )
-        assert results[0].build_id.startswith("build-")
+        bid = results[0].build_id
+        assert bid.startswith("build-") or bid.startswith("canon-")
+
+    def test_assemble_canonical_document_returns_spec(self, svc):
+        out = svc.assemble_canonical_document(
+            "parkinsons", "evidence_based_protocol", "fellow"
+        )
+        assert out.ok, out.error
+        assert out.spec is not None
+        assert len(out.spec.sections) >= 1
+        assert out.provenance is not None

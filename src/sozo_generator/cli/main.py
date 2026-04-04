@@ -69,6 +69,12 @@ except ImportError as e:
     typer.echo(typer.style(f"Warning: could not load 'manifests' command: {e}", fg=typer.colors.YELLOW))
     manifest_app = typer.Typer(name="manifests", help="(unavailable — import error)")
 
+try:
+    from autoagent_clinical.cli import app as autoagent_clinical_app
+except ImportError as e:
+    typer.echo(typer.style(f"Warning: could not load 'autoagent-clinical' command: {e}", fg=typer.colors.YELLOW))
+    autoagent_clinical_app = typer.Typer(name="autoagent-clinical", help="(unavailable — import error)")
+
 # ---------------------------------------------------------------------------
 # Top-level Typer app
 # ---------------------------------------------------------------------------
@@ -89,6 +95,7 @@ app.add_typer(qa_engine_app, name="qa2")
 app.add_typer(review_app, name="review")
 app.add_typer(evidence_cli_app, name="evidence")
 app.add_typer(manifest_app, name="manifests")
+app.add_typer(autoagent_clinical_app, name="autoagent-clinical")
 
 # Merge build-all commands into the build group
 if _build_all_available:

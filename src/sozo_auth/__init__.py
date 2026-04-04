@@ -14,7 +14,6 @@ from sozo_auth.models import (
     UserCreate,
     UserResponse,
 )
-from sozo_auth.passwords import hash_password, validate_password_strength, verify_password
 from sozo_auth.tokens import (
     create_access_token,
     create_refresh_token,
@@ -34,7 +33,6 @@ from sozo_auth.rbac import (
     has_permission,
     require_permission,
 )
-from sozo_auth.router import auth_router
 
 __all__ = [
     # Config
@@ -45,7 +43,7 @@ __all__ = [
     "TokenPair",
     "TokenPayload",
     "PasswordChange",
-    # Passwords
+    # Passwords (lazy — requires passlib)
     "hash_password",
     "verify_password",
     "validate_password_strength",
@@ -65,6 +63,18 @@ __all__ = [
     "ROLE_PERMISSIONS",
     "has_permission",
     "require_permission",
-    # Router
+    # Router (lazy — pulls password hashing)
     "auth_router",
 ]
+
+
+def __getattr__(name: str):
+    if name in ("hash_password", "verify_password", "validate_password_strength"):
+        from sozo_auth import passwords as _pw
+
+        return getattr(_pw, name)
+    if name == "auth_router":
+        from sozo_auth.router import auth_router as _router
+
+        return _router
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

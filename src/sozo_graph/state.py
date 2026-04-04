@@ -18,6 +18,7 @@ class IntakeState(TypedDict, total=False):
     user_prompt: Optional[str]
     uploaded_file: Optional[bytes]
     uploaded_filename: Optional[str]
+    condition_slug: Optional[str]  # explicit API / client slug; takes precedence over normalized_request
     template_profile: Optional[dict]
     normalized_request: Optional[dict]
     parse_warnings: list[str]
@@ -30,8 +31,11 @@ class ConditionState(TypedDict, total=False):
     display_name: str
     icd10: str
     schema_dict: dict  # serialized ConditionSchema — not named 'schema' to avoid conflict
-    resolution_source: str  # registry | template_inferred | prompt_inferred
+    resolution_source: str  # explicit_intake | normalized_request | template_inferred | prompt_inferred | state_carryover | registry | ...
     condition_valid: bool
+    """When True, structured intake disagrees with heuristic prompt inference (both slugs valid)."""
+    intake_conflict: bool
+    intake_conflict_note: Optional[str]
 
 
 class PatientContextState(TypedDict, total=False):
@@ -117,6 +121,8 @@ class OutputState(TypedDict, total=False):
     output_paths: dict[str, str]
     output_formats: list[str]
     audit_record_id: Optional[str]
+    #: REST `protocol_id` when this run is linked to `sozo_api` protocol rows.
+    protocol_id: Optional[str]
 
 
 class NodeHistoryEntry(TypedDict):

@@ -1,7 +1,11 @@
 """Shared pytest fixtures for sozo_generator tests."""
+import os
 import sys
 from pathlib import Path
 import pytest
+
+# Default relaxed deployment profile before any code imports auth_config / create_app.
+os.environ.setdefault("SOZO_ENV", "development")
 
 # Ensure src/ is on the path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
