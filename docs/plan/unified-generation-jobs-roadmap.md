@@ -16,14 +16,13 @@ This plan distills parallel codebase reviews (graph/DB, checkpointer, audit). Ph
 
 ## Phase 2 — Durable checkpoints
 
-- **Applied (dev default):** `sozo_api.graph_checkpointer.get_graph_checkpointer()` uses **`SqliteSaver`** at `outputs/langgraph_checkpoints.db` (or `SOZO_GRAPH_CHECKPOINT_SQLITE`). Set **`SOZO_GRAPH_CHECKPOINTER=memory`** for ephemeral checkpoints (tests default this in `conftest.py`).
-- **Production:** prefer **Postgres** checkpoint backend + shared DB across **workers/instances** when you scale past one process.
+- **Applied (dev default):** `SOZO_GRAPH_CHECKPOINTER=sqlite` → **`SqliteSaver`** at `outputs/langgraph_checkpoints.db` (or **`SOZO_GRAPH_CHECKPOINT_SQLITE`**). **`memory`** for ephemeral (tests). **`postgres`** → **`PostgresSaver`** + **`psycopg_pool.ConnectionPool`** (optional install: **`pip install '.[postgres-checkpoint]'`**); connection from **`SOZO_GRAPH_CHECKPOINT_POSTGRES`** or **`DATABASE_URL`** (postgresql, sync URI derived from `+asyncpg`). Pool sizing: **`SOZO_GRAPH_CHECKPOINT_POOL_MIN_SIZE`**, **`SOZO_GRAPH_CHECKPOINT_POOL_MAX_SIZE`**. On misconfiguration or import failure, falls back to **sqlite** with a warning.
 - Align product errors: unknown thread vs **checkpoint missing after restart**.
 
 ## Phase 3 — Audit as single compliance path
 
 - Route **all** significant actions through `audit_service.log_event` (or formally deprecate duplicate `protocols.py` audit table with a migration plan).
-- Extend **`/api/audit/events` filters** with `thread_id` / `build_id` when present in `details`.
+- **Applied:** **`GET /api/audit/events`** and **`GET /api/audit/export`** accept **`thread_id`** (JSON `details.thread_id` or **`entity_id`**) and **`build_id`** (`details.build_id`, SQLite **`json_extract`**). **`GET /api/audit/build-trace/{build_id}`** uses the **`build_id`** filter server-side. Audit UI includes thread/build filters.
 - On graph milestones (review submitted, approved, failed), emit events with **`details.thread_id`** and **`protocol_id`** when known.
 
 ## Phase 4 — Clinical UX & evaluation
@@ -34,7 +33,7 @@ This plan distills parallel codebase reviews (graph/DB, checkpointer, audit). Ph
 ## Subagent references (files)
 
 - Graph/API: `src/sozo_api/server.py`, `src/sozo_graph/unified_graph.py`, `src/sozo_db/models/graph_run.py`, `src/sozo_db/repositories/graph_run_repo.py`
-- Checkpointer: `src/sozo_api/server.py` (`_get_checkpointer`), `src/sozo_graph/unified_graph.py` (`build_unified_graph`)
+- Checkpointer: `src/sozo_api/graph_checkpointer.py`, `src/sozo_graph/unified_graph.py` (`build_unified_graph`)
 - Audit: `src/sozo_api/routes/audit_service.py`, `src/sozo_api/routes/audit.py`, `src/sozo_graph/unified_graph.py` (`audit_logger_node`)
 
 ## Ownership

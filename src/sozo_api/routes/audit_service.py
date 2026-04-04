@@ -224,12 +224,18 @@ class AuditService:
         action: Optional[str] = None,
         actor: Optional[str] = None,
         node_name: Optional[str] = None,
+        thread_id: Optional[str] = None,
+        build_id: Optional[str] = None,
         date_from: Optional[str] = None,
         date_to: Optional[str] = None,
         page: int = 1,
         page_size: int = 50,
     ) -> tuple[list[dict[str, Any]], int]:
-        """Query audit_log with filters. Returns (rows, total_count)."""
+        """Query audit_log with filters. Returns (rows, total_count).
+
+        ``thread_id`` matches ``details.thread_id`` (JSON) or ``entity_id`` (e.g. graph runs).
+        ``build_id`` matches ``details.build_id`` (JSON).
+        """
         conn = self._get_db()
         try:
             where_clauses: list[str] = []
@@ -250,6 +256,14 @@ class AuditService:
             if node_name:
                 where_clauses.append("node_name = ?")
                 params.append(node_name)
+            if thread_id:
+                where_clauses.append(
+                    "(json_extract(details, '$.thread_id') = ? OR entity_id = ?)"
+                )
+                params.extend([thread_id, thread_id])
+            if build_id:
+                where_clauses.append("json_extract(details, '$.build_id') = ?")
+                params.append(build_id)
             if date_from:
                 where_clauses.append("timestamp >= ?")
                 params.append(date_from)

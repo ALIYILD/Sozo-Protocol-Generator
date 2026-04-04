@@ -7,6 +7,10 @@ export type AuditEventFilters = {
   entity_id?: string;
   action?: string;
   actor?: string;
+  /** Graph run id: matches details.thread_id or entity_id. */
+  thread_id?: string;
+  /** Protocol / LangGraph build id in event details. */
+  build_id?: string;
   date_from?: string;
   date_to?: string;
   node_name?: string;
@@ -22,6 +26,8 @@ export function auditFiltersToQueryParams(
     ['entity_id', 'entity_id'],
     ['action', 'action'],
     ['actor', 'actor'],
+    ['thread_id', 'thread_id'],
+    ['build_id', 'build_id'],
     ['date_from', 'date_from'],
     ['date_to', 'date_to'],
     ['node_name', 'node_name'],

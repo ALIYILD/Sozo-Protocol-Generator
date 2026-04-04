@@ -100,13 +100,16 @@ async def list_audit_events(
     entity_id: Optional[str] = None,
     action: Optional[str] = None,
     actor: Optional[str] = None,
+    thread_id: Optional[str] = None,
+    build_id: Optional[str] = None,
     date_from: Optional[date] = None,
     date_to: Optional[date] = None,
     node_name: Optional[str] = None,
 ):
     """List audit events with filtering.
 
-    Admin/operator only. Supports filtering by entity, action, actor, date range.
+    Admin/operator only. Supports filtering by entity, action, actor, date range,
+    ``thread_id`` (graph / ``details.thread_id``), and ``build_id`` (``details.build_id``).
     Results are ordered by timestamp descending (newest first).
     """
     events, total = audit_service.query_events(
@@ -115,6 +118,8 @@ async def list_audit_events(
         action=action,
         actor=actor,
         node_name=node_name,
+        thread_id=thread_id,
+        build_id=build_id,
         date_from=str(date_from) if date_from else None,
         date_to=str(date_to) if date_to else None,
         page=page,
@@ -174,14 +179,12 @@ async def get_build_trace(build_id: str):
     # We search all node-related events and filter by build_id in details
     events, _ = audit_service.query_events(
         action="node_executed",
+        build_id=build_id,
         page=1,
         page_size=500,
     )
 
-    build_events = [
-        e for e in events
-        if e.get("details", {}).get("build_id") == build_id
-    ]
+    build_events = list(events)
 
     if not build_events:
         raise HTTPException(
@@ -236,6 +239,8 @@ async def export_audit_log(
     entity_id: Optional[str] = None,
     action: Optional[str] = None,
     actor: Optional[str] = None,
+    thread_id: Optional[str] = None,
+    build_id: Optional[str] = None,
     date_from: Optional[date] = None,
     date_to: Optional[date] = None,
     format: str = Query("json", pattern="^(json|csv)$"),
@@ -249,6 +254,8 @@ async def export_audit_log(
         entity_id=entity_id,
         action=action,
         actor=actor,
+        thread_id=thread_id,
+        build_id=build_id,
         date_from=str(date_from) if date_from else None,
         date_to=str(date_to) if date_to else None,
         page=1,

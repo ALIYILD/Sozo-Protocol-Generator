@@ -20,6 +20,8 @@ type AuditFilterForm = {
   entity_id: string;
   action: string;
   actor: string;
+  thread_id: string;
+  build_id: string;
   date_from: string;
   date_to: string;
   node_name: string;
@@ -30,6 +32,8 @@ const INITIAL_FORM: AuditFilterForm = {
   entity_id: '',
   action: '',
   actor: '',
+  thread_id: '',
+  build_id: '',
   date_from: '',
   date_to: '',
   node_name: '',
@@ -207,6 +211,26 @@ export default function AuditLogPage() {
               onChange={setField('actor')}
               className="mt-1 block w-full rounded-md border border-gray-300 px-2 py-2 text-sm"
               placeholder="Email or system"
+            />
+          </label>
+          <label className="block text-xs font-medium text-gray-600">
+            Thread ID
+            <input
+              type="text"
+              value={draft.thread_id}
+              onChange={setField('thread_id')}
+              className="mt-1 block w-full rounded-md border border-gray-300 px-2 py-2 text-sm font-mono text-xs"
+              placeholder="Graph run / details.thread_id"
+            />
+          </label>
+          <label className="block text-xs font-medium text-gray-600">
+            Build ID
+            <input
+              type="text"
+              value={draft.build_id}
+              onChange={setField('build_id')}
+              className="mt-1 block w-full rounded-md border border-gray-300 px-2 py-2 text-sm font-mono text-xs"
+              placeholder="details.build_id"
             />
           </label>
           <label className="block text-xs font-medium text-gray-600">
