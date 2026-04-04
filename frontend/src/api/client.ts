@@ -18,7 +18,18 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Don't redirect on 401 in dev mode — auth is bypassed
+    if (!axios.isAxiosError(error) || error.response?.status !== 401) {
+      return Promise.reject(error);
+    }
+    const url = String(error.config?.url ?? '');
+    if (url.includes('/auth/login') || url.includes('/auth/register')) {
+      return Promise.reject(error);
+    }
+    localStorage.removeItem('sozo_token');
+    localStorage.removeItem('sozo_refresh_token');
+    if (!window.location.pathname.startsWith('/login')) {
+      window.location.replace('/login');
+    }
     return Promise.reject(error);
   },
 );

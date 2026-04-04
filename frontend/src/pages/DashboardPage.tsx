@@ -6,12 +6,26 @@ import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import Table, { type Column } from '../components/ui/Table';
-import { listConditions, getStalenessReport } from '../api/evidence';
+import {
+  listConditions,
+  getStalenessReport,
+  getCockpitOverview,
+  getCockpitConditions,
+} from '../api/evidence';
 import { listProtocols } from '../api/protocols';
-import type { ProtocolListItem, StalenessCondition } from '../types';
+import type {
+  ProtocolListItem,
+  StalenessCondition,
+  CockpitConditionSummary,
+  CockpitOverview,
+} from '../types';
+import { canViewStaleness } from '../auth/permissions';
+import { useAuth } from '../hooks/useAuth';
 
 export default function DashboardPage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const showStaleness = canViewStaleness(user);
 
   const { data: conditions, isLoading: conditionsLoading } = useQuery({
     queryKey: ['conditions'],
@@ -21,6 +35,19 @@ export default function DashboardPage() {
   const { data: staleness, isLoading: stalenessLoading } = useQuery({
     queryKey: ['staleness'],
     queryFn: getStalenessReport,
+    enabled: showStaleness,
+  });
+
+  const { data: cockpit, isLoading: cockpitLoading } = useQuery({
+    queryKey: ['cockpit-overview'],
+    queryFn: getCockpitOverview,
+    enabled: showStaleness,
+  });
+
+  const { data: cockpitConditions, isLoading: cockpitConditionsLoading } = useQuery({
+    queryKey: ['cockpit-conditions'],
+    queryFn: getCockpitConditions,
+    enabled: showStaleness,
   });
 
   const { data: protocolsData, isLoading: protocolsLoading } = useQuery({
@@ -28,13 +55,48 @@ export default function DashboardPage() {
     queryFn: () => listProtocols(1, 5),
   });
 
-  const isLoading = conditionsLoading || stalenessLoading || protocolsLoading;
+  const isLoading =
+    conditionsLoading ||
+    protocolsLoading ||
+    (showStaleness && stalenessLoading) ||
+    (showStaleness && cockpitLoading) ||
+    (showStaleness && cockpitConditionsLoading);
 
   if (isLoading) {
     return <LoadingSpinner size="lg" className="mt-20" />;
   }
 
   const recentProtocols = protocolsData?.items ?? [];
+
+  const conditionsCount =
+    showStaleness && cockpit != null
+      ? cockpit.conditions_count
+      : conditions?.length ?? 0;
+
+  const cockpitDocTotal = (c: CockpitOverview) =>
+    c.documents_ready + c.documents_review_required + c.documents_incomplete;
+
+  const protocolsTotal =
+    showStaleness && cockpit != null
+      ? cockpitDocTotal(cockpit)
+      : protocolsData?.total ?? 0;
+
+  const cockpitConditionColumns: Column<
+    CockpitConditionSummary & Record<string, unknown>
+  >[] = [
+    {
+      key: 'condition',
+      header: 'Condition',
+      sortable: true,
+      render: (row) =>
+        String(row.condition).replace(/_/g, ' ').replace(/\b\w/g, (x) => x.toUpperCase()),
+    },
+    { key: 'total_docs', header: 'Paths' },
+    { key: 'ready', header: 'Ready' },
+    { key: 'review_required', header: 'Review' },
+    { key: 'incomplete', header: 'Incomplete' },
+    { key: 'total_pmids', header: 'PMIDs' },
+  ];
 
   const protocolColumns: Column<ProtocolListItem & Record<string, unknown>>[] = [
     {
@@ -98,9 +160,7 @@ export default function DashboardPage() {
             </div>
             <div>
               <p className="text-sm text-gray-500">Conditions</p>
-              <p className="text-2xl font-bold text-sozo-text">
-                {conditions?.length ?? 0}
-              </p>
+              <p className="text-2xl font-bold text-sozo-text">{conditionsCount}</p>
             </div>
           </div>
         </Card>
@@ -110,10 +170,15 @@ export default function DashboardPage() {
               <BookOpen className="h-6 w-6 text-sozo-secondary" />
             </div>
             <div>
-              <p className="text-sm text-gray-500">Protocols</p>
-              <p className="text-2xl font-bold text-sozo-text">
-                {protocolsData?.total ?? 0}
+              <p className="text-sm text-gray-500">
+                {showStaleness && cockpit != null ? 'Knowledge docs' : 'Protocols'}
               </p>
+              <p className="text-2xl font-bold text-sozo-text">{protocolsTotal}</p>
+              {showStaleness && cockpit != null && cockpit.documents_review_required > 0 && (
+                <p className="text-xs text-amber-700 mt-1">
+                  {cockpit.documents_review_required} in review
+                </p>
+              )}
             </div>
           </div>
         </Card>
@@ -125,8 +190,11 @@ export default function DashboardPage() {
             <div>
               <p className="text-sm text-gray-500">Evidence Health</p>
               <p className="text-lg font-semibold text-sozo-text capitalize">
-                {staleness?.overall_health ?? 'Unknown'}
+                {showStaleness ? staleness?.overall_health ?? 'Unknown' : '—'}
               </p>
+              {!showStaleness && (
+                <p className="text-xs text-gray-400">Operators / admins only</p>
+              )}
             </div>
           </div>
         </Card>
@@ -138,7 +206,7 @@ export default function DashboardPage() {
             <div>
               <p className="text-sm text-gray-500">Needs Refresh</p>
               <p className="text-2xl font-bold text-sozo-text">
-                {staleness?.high_priority_refreshes?.length ?? 0}
+                {showStaleness ? staleness?.high_priority_refreshes?.length ?? 0 : '—'}
               </p>
             </div>
           </div>
@@ -193,6 +261,19 @@ export default function DashboardPage() {
               </div>
             ))}
           </div>
+        </Card>
+      )}
+
+      {showStaleness && cockpitConditions && cockpitConditions.length > 0 && (
+        <Card title="Knowledge cockpit by condition">
+          <Table
+            columns={cockpitConditionColumns}
+            data={
+              cockpitConditions as (CockpitConditionSummary & Record<string, unknown>)[]
+            }
+            keyExtractor={(row) => row.condition}
+            emptyMessage="No cockpit rows yet."
+          />
         </Card>
       )}
 

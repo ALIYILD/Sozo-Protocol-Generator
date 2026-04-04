@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { ArrowLeft, Send, CheckCircle, Copy } from 'lucide-react';
 import { getProtocol, submitForReview, cloneProtocol } from '../api/protocols';
+import { ProtocolAuditSection } from '../components/protocol/ProtocolAuditSection';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
@@ -194,6 +195,8 @@ export default function ProtocolDetailPage() {
               )}
             </Card>
           )}
+
+          {id && <ProtocolAuditSection protocolId={id} />}
 
           {/* Raw data fallback */}
           {Object.keys(data).length > 0 && !sections.stimulation_parameters && (

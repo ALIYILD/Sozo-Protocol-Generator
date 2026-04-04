@@ -10,7 +10,7 @@ import { createElement } from 'react';
 import type { User, LoginRequest } from '../types';
 import * as authApi from '../api/auth';
 
-interface AuthContextValue {
+export interface AuthContextValue {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
@@ -18,7 +18,7 @@ interface AuthContextValue {
   logout: () => void;
 }
 
-const AuthContext = createContext<AuthContextValue | null>(null);
+export const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);

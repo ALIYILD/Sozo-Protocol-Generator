@@ -1,7 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from './hooks/useAuth';
 import AppLayout from './components/layout/AppLayout';
-import LoadingSpinner from './components/ui/LoadingSpinner';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import ProtocolListPage from './pages/ProtocolListPage';
@@ -13,11 +11,7 @@ import SafetyCheckPage from './pages/SafetyCheckPage';
 import PersonalizationPage from './pages/PersonalizationPage';
 import AuditLogPage from './pages/AuditLogPage';
 import PlaceholderPage from './pages/PlaceholderPage';
-
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  // Auth bypass for development — all routes accessible without login
-  return <>{children}</>;
-}
+import { ProtectedRoute, RequireRoles, ROLES_AUDIT_AND_OPS } from './auth';
 
 export default function App() {
   return (
@@ -46,7 +40,14 @@ export default function App() {
         <Route path="patients/:id" element={<PlaceholderPage />} />
         <Route path="patients/:id/eeg" element={<PlaceholderPage />} />
 
-        <Route path="admin/audit" element={<AuditLogPage />} />
+        <Route
+          path="admin/audit"
+          element={
+            <RequireRoles roles={ROLES_AUDIT_AND_OPS}>
+              <AuditLogPage />
+            </RequireRoles>
+          }
+        />
       </Route>
 
       {/* Catch-all */}

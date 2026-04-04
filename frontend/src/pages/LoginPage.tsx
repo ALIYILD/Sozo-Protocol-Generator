@@ -1,6 +1,7 @@
-import { useState, type FormEvent } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Brain } from 'lucide-react';
+import { isAuthBypassEnabled } from '../auth/authBypass';
 import { useAuth } from '../hooks/useAuth';
 import Button from '../components/ui/Button';
 
@@ -9,8 +10,15 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, isAuthenticated, isLoading: authLoading } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthBypassEnabled() || authLoading) return;
+    if (isAuthenticated) {
+      navigate('/', { replace: true });
+    }
+  }, [authLoading, isAuthenticated, navigate]);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();

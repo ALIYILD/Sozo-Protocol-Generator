@@ -3,16 +3,27 @@ import { useQuery } from '@tanstack/react-query';
 import { Search, RefreshCw } from 'lucide-react';
 import Card from '../components/ui/Card';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
-import { getStalenessReport, getCondition } from '../api/evidence';
+import { getStalenessReport, getCondition, listConditions } from '../api/evidence';
 import type { StalenessCondition } from '../types';
+import { canViewStaleness } from '../auth/permissions';
+import { useAuth } from '../hooks/useAuth';
 
 export default function EvidenceExplorerPage() {
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const { user } = useAuth();
+  const showStalenessMetrics = canViewStaleness(user);
 
   const { data: staleness, isLoading, error } = useQuery({
     queryKey: ['staleness'],
     queryFn: getStalenessReport,
+    enabled: showStalenessMetrics,
+  });
+
+  const { data: knowledgeConditions, isLoading: knowledgeLoading } = useQuery({
+    queryKey: ['knowledge-conditions'],
+    queryFn: listConditions,
+    enabled: !showStalenessMetrics,
   });
 
   const { data: conditionDetail, isLoading: detailLoading } = useQuery({
@@ -56,9 +67,11 @@ export default function EvidenceExplorerPage() {
     }
   };
 
-  if (isLoading) return <LoadingSpinner size="lg" className="mt-20" />;
+  if ((showStalenessMetrics && isLoading) || (!showStalenessMetrics && knowledgeLoading)) {
+    return <LoadingSpinner size="lg" className="mt-20" />;
+  }
 
-  if (error) {
+  if (showStalenessMetrics && error) {
     return (
       <div className="mt-20 text-center">
         <p className="text-red-600">Failed to load evidence data.</p>
@@ -67,7 +80,16 @@ export default function EvidenceExplorerPage() {
     );
   }
 
-  const conditions = staleness?.conditions ?? [];
+  const conditions: StalenessCondition[] = showStalenessMetrics
+    ? staleness?.conditions ?? []
+    : (knowledgeConditions ?? []).map((c) => ({
+        slug: c.slug,
+        name: c.display_name,
+        freshness: 'fresh',
+        days_since_search: 0,
+        evidence_level: '—',
+        needs_refresh: false,
+      }));
   const filtered = searchQuery
     ? conditions.filter(
         (c) =>
@@ -78,6 +100,14 @@ export default function EvidenceExplorerPage() {
 
   return (
     <div className="space-y-6">
+      {!showStalenessMetrics && (
+        <p className="rounded-md border border-amber-100 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          Evidence freshness metrics are available to <strong>operator</strong> and{' '}
+          <strong>admin</strong> roles. You can still browse conditions from the public
+          knowledge catalog below.
+        </p>
+      )}
+
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-sozo-text">Evidence Explorer</h1>
         <div className="relative">

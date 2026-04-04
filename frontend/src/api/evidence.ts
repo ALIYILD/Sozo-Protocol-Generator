@@ -6,7 +6,7 @@ import type {
   ConditionInfo,
   StalenessReport,
   CockpitOverview,
-  ConditionSummary,
+  CockpitConditionSummary,
   SafetyCheckRequest,
   SafetyCheckResponse,
   PersonalizationRequest,
@@ -62,8 +62,8 @@ export async function getCockpitOverview(): Promise<CockpitOverview> {
   return res.data.overview;
 }
 
-export async function getCockpitConditions(): Promise<ConditionSummary[]> {
-  const res = await api.get<{ conditions: ConditionSummary[] }>('/cockpit/conditions');
+export async function getCockpitConditions(): Promise<CockpitConditionSummary[]> {
+  const res = await api.get<{ conditions: CockpitConditionSummary[] }>('/cockpit/conditions');
   return res.data.conditions;
 }
 

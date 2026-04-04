@@ -10,18 +10,39 @@ import {
   ShieldAlert,
   Brain,
 } from 'lucide-react';
+import { canAccessAdmin } from '../../auth/permissions';
+import { useAuth } from '../../hooks/useAuth';
+import type { User } from '../../types';
 
-const navItems = [
+type NavItem = {
+  to: string;
+  label: string;
+  icon: typeof LayoutDashboard;
+  badge?: string;
+  visibleIf?: (user: User | null | undefined) => boolean;
+};
+
+const navItems: NavItem[] = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/protocols', label: 'Protocols', icon: FileText },
   { to: '/evidence', label: 'Evidence', icon: Search },
   { to: '/safety', label: 'Safety', icon: ShieldAlert },
   { to: '/personalization', label: 'Personalization', icon: Sliders },
   { to: '/patients', label: 'Patients', icon: Users, badge: 'V2' },
-  { to: '/admin/audit', label: 'Admin', icon: Shield },
+  {
+    to: '/admin/audit',
+    label: 'Admin',
+    icon: Shield,
+    visibleIf: canAccessAdmin,
+  },
 ];
 
 export default function Sidebar() {
+  const { user } = useAuth();
+  const visible = navItems.filter(
+    (item) => !item.visibleIf || item.visibleIf(user),
+  );
+
   return (
     <aside className="flex h-full w-64 flex-col border-r border-gray-200 bg-white">
       {/* Logo */}
@@ -32,7 +53,7 @@ export default function Sidebar() {
 
       {/* Navigation */}
       <nav className="flex-1 space-y-1 px-3 py-4">
-        {navItems.map((item) => (
+        {visible.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}

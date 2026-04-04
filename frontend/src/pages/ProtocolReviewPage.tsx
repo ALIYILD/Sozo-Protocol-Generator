@@ -4,11 +4,12 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { ArrowLeft, CheckCircle, XCircle } from 'lucide-react';
 import { getProtocol, transitionStatus } from '../api/protocols';
 import { getGraphStatus, submitReview } from '../api/graph';
+import { ProtocolAuditSection } from '../components/protocol/ProtocolAuditSection';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
-import type { GraphStatusResponse } from '../types';
+import { protocolIdFromGraphOutput } from '../utils/protocolIdFromGraphOutput';
 
 export default function ProtocolReviewPage() {
   const { id, threadId } = useParams<{ id?: string; threadId?: string }>();
@@ -57,6 +58,8 @@ export default function ProtocolReviewPage() {
   if (isGraphReview) {
     if (graphLoading) return <LoadingSpinner size="lg" className="mt-20" />;
     if (!graphState) return <p className="mt-20 text-center text-gray-500">Thread not found.</p>;
+
+    const graphLinkedProtocolId = protocolIdFromGraphOutput(graphState.output);
 
     return (
       <div className="mx-auto max-w-3xl space-y-6">
@@ -163,8 +166,7 @@ export default function ProtocolReviewPage() {
           </div>
         </Card>
 
-        {/* Audit trail */}
-        <Card title="Pipeline Audit">
+        <Card title="Node execution log">
           <div className="space-y-1">
             {graphState.node_history.map((n, i) => (
               <div key={i} className="flex items-center gap-2 text-xs">
@@ -175,6 +177,10 @@ export default function ProtocolReviewPage() {
             ))}
           </div>
         </Card>
+
+        {graphLinkedProtocolId && (
+          <ProtocolAuditSection protocolId={graphLinkedProtocolId} />
+        )}
 
         {/* Review form */}
         <Card title="Your Decision">
@@ -292,6 +298,8 @@ export default function ProtocolReviewPage() {
           </div>
         </dl>
       </Card>
+
+      {id && <ProtocolAuditSection protocolId={id} />}
 
       {canReview ? (
         <Card title="Submit Review">

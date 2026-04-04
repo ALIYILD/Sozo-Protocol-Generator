@@ -229,15 +229,24 @@ export interface PersonalizationResponse {
 
 // ── User / Auth Types ───────────────────────────────────────────────
 
-export type UserRole = 'admin' | 'clinician' | 'researcher' | 'viewer';
+/** Matches sozo_auth role pattern (plus legacy labels for older seeds/UI). */
+export type UserRole =
+  | 'admin'
+  | 'clinician'
+  | 'reviewer'
+  | 'readonly'
+  | 'operator'
+  | 'researcher'
+  | 'viewer';
 
+/** Matches GET /api/auth/me (UserResponse). */
 export interface User {
   id: string;
   email: string;
-  full_name: string;
+  name: string;
   role: UserRole;
+  active: boolean;
   created_at: string;
-  is_active: boolean;
 }
 
 export interface TokenPair {
@@ -254,18 +263,43 @@ export interface LoginRequest {
 export interface RegisterRequest {
   email: string;
   password: string;
-  full_name: string;
+  name: string;
   role?: UserRole;
+}
+
+// ── Audit Types ────────────────────────────────────────────────────
+// Matches sozo_api.routes.audit models (GET /api/audit/events).
+
+export interface AuditEvent {
+  id: number;
+  entity_type: string;
+  entity_id: string;
+  action: string;
+  actor: string | null;
+  timestamp: string;
+  node_name?: string | null;
+  input_hash?: string | null;
+  output_hash?: string | null;
+  details: Record<string, unknown>;
+}
+
+export interface AuditEventList {
+  items: AuditEvent[];
+  total: number;
+  page: number;
+  page_size: number;
 }
 
 // ── Graph Pipeline Types ────────────────────────────────────────────
 
 export interface GraphGenerateRequest {
-  condition_slug: string;
+  /** Registry slug; optional when prompt alone should drive inference. */
+  condition_slug?: string;
   modality?: string;
   tier?: string;
   doc_type?: string;
   prompt?: string;
+  patient_id?: string;
   patient_context?: {
     age?: number;
     sex?: string;
@@ -282,6 +316,9 @@ export interface GraphGenerateResponse {
     slug: string;
     display_name: string;
     valid: boolean;
+    resolution_source?: string;
+    intake_conflict?: boolean;
+    intake_conflict_note?: string | null;
   };
   evidence_summary: {
     total_articles: number;
@@ -353,6 +390,7 @@ export interface GraphStatusResponse {
     duration_ms: number;
     status: string;
   }>;
+  /** Often includes `audit_record_id`, `output_paths`; may include `protocol_id` when linked to REST protocol. */
   output: Record<string, unknown>;
 }
 
@@ -402,19 +440,27 @@ export interface ApiError {
 }
 
 // ── Cockpit Types ───────────────────────────────────────────────────
+// Shapes match sozo_generator.knowledge.cockpit (asdict, GET /api/cockpit/*).
 
 export interface CockpitOverview {
-  total_conditions: number;
-  total_protocols: number;
-  pending_reviews: number;
-  evidence_freshness: string;
-  last_updated: string;
+  conditions_count: number;
+  blueprints_count: number;
+  total_generation_paths: number;
+  documents_ready: number;
+  documents_review_required: number;
+  documents_incomplete: number;
+  total_pmids: number;
+  total_sections: number;
+  promotion_proposals_pending: number;
+  regeneration_history_count: number;
+  knowledge_valid: boolean;
 }
 
-export interface ConditionSummary {
-  slug: string;
-  display_name: string;
-  protocol_count: number;
-  evidence_count: number;
-  coverage_score: number;
+export interface CockpitConditionSummary {
+  condition: string;
+  total_docs: number;
+  ready: number;
+  review_required: number;
+  incomplete: number;
+  total_pmids: number;
 }
