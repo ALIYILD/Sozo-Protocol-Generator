@@ -2,8 +2,9 @@
 from __future__ import annotations
 
 import logging
+import uuid
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Any, Optional
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -11,6 +12,19 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from ..models.graph_run import GraphRun
 
 logger = logging.getLogger(__name__)
+
+
+def _protocol_uuid_from_output(output: dict[str, Any]) -> Optional[uuid.UUID]:
+    raw = output.get("protocol_id")
+    if raw is None or raw == "":
+        return None
+    if isinstance(raw, uuid.UUID):
+        return raw
+    try:
+        return uuid.UUID(str(raw))
+    except ValueError:
+        logger.warning("Invalid protocol_id in graph state output: %r", raw)
+        return None
 
 
 class GraphRunRepository:
@@ -53,6 +67,7 @@ class GraphRunRepository:
             ),
             output_paths=output.get("output_paths"),
             audit_record_id=output.get("audit_record_id"),
+            protocol_id=_protocol_uuid_from_output(output),
             final_state=state,
             node_history=state.get("node_history"),
             errors=state.get("errors"),
@@ -88,6 +103,9 @@ class GraphRunRepository:
         run.revision_number = review.get("revision_number", run.revision_number)
         run.output_paths = output.get("output_paths") or run.output_paths
         run.audit_record_id = output.get("audit_record_id") or run.audit_record_id
+        pid = _protocol_uuid_from_output(output)
+        if pid is not None:
+            run.protocol_id = pid
         run.composed_sections = protocol.get("composed_sections") or run.composed_sections
         run.grounding_score = protocol.get("grounding_score") or run.grounding_score
         run.final_state = state
@@ -97,6 +115,25 @@ class GraphRunRepository:
         if review.get("status") == "approved":
             run.approved_at = datetime.now(timezone.utc)
 
+        await self.session.flush()
+        return run
+
+    async def set_protocol_id(
+        self,
+        thread_id: str,
+        protocol_id: uuid.UUID,
+    ) -> Optional[GraphRun]:
+        """Persist protocol linkage on the GraphRun row (column + final_state.output)."""
+        run = await self.get_by_thread_id(thread_id)
+        if not run:
+            return None
+        run.protocol_id = protocol_id
+        if run.final_state:
+            fs = {**run.final_state}
+            out = {**(fs.get("output") or {})}
+            out["protocol_id"] = str(protocol_id)
+            fs["output"] = out
+            run.final_state = fs
         await self.session.flush()
         return run
 

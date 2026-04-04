@@ -121,6 +121,17 @@ class TestInlineRoutesRoles:
         )
         assert r.status_code == 403
 
+    def test_graph_link_protocol_requires_clinician(self, client: TestClient):
+        r = client.post(
+            "/api/graph/link-protocol",
+            json={
+                "thread_id": "00000000-0000-0000-0000-000000000001",
+                "protocol_id": "550e8400-e29b-41d4-a716-446655440000",
+            },
+            headers=_bearer("readonly"),
+        )
+        assert r.status_code == 403
+
 
 class TestPublicReferenceRoutes:
     def test_health_and_knowledge_unauthenticated(self, client: TestClient):

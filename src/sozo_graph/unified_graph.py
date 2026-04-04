@@ -599,7 +599,7 @@ def document_renderer_node(state: SozoGraphState) -> dict:
         decisions.append(f"Rendered {fmt}: {path}")
 
     return {
-        "output": output,
+        "output": {**state.get("output", {}), **output},
         "status": "released",
         "_decisions": decisions,
     }

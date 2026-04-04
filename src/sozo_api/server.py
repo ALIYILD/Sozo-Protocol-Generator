@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import io
 import logging
+import uuid
 from dataclasses import asdict
 from typing import Any, Optional
 
@@ -62,6 +63,14 @@ class GraphReviewRequest(BaseModel):
     review_notes: str = ""
     section_edits: Optional[list] = None
     parameter_overrides: Optional[list] = None
+    #: Optional REST `protocols.id` to attach when submitting review.
+    protocol_id: Optional[str] = None
+
+
+class GraphLinkProtocolRequest(BaseModel):
+    """Attach an existing REST protocol row to a graph run (checkpoint + DB)."""
+    thread_id: str
+    protocol_id: str
 
 
 # ── App factory ───────────────────────────────────────────────────────────
@@ -456,6 +465,7 @@ def create_app() -> FastAPI:
                     "nodes_executed": len(result.get("node_history", [])),
                     "errors": len(result.get("errors", [])),
                 },
+                "protocol_id": result.get("output", {}).get("protocol_id"),
             }
         except Exception as exc:
             logger.exception("Graph generation failed")
@@ -487,10 +497,28 @@ def create_app() -> FastAPI:
             evidence = values.get("evidence", {})
             safety = values.get("safety", {})
             protocol = values.get("protocol", {})
+            output_state = dict(values.get("output") or {})
+            if not output_state.get("protocol_id"):
+                try:
+                    from sozo_db.repositories.graph_run_repo import GraphRunRepository
+                    from sozo_db.engine import get_session_factory
+
+                    factory = get_session_factory()
+                    async with factory() as session:
+                        repo = GraphRunRepository(session)
+                        db_run = await repo.get_by_thread_id(thread_id)
+                        if db_run and db_run.protocol_id:
+                            output_state["protocol_id"] = str(db_run.protocol_id)
+                except Exception:
+                    logger.debug(
+                        "graph_status protocol_id DB fallback failed",
+                        exc_info=True,
+                    )
 
             return {
                 "thread_id": thread_id,
                 "status": values.get("status", "unknown"),
+                "protocol_id": output_state.get("protocol_id"),
                 "review_status": review.get("status", "pending"),
                 "revision_number": review.get("revision_number", 0),
                 "condition": {
@@ -542,13 +570,64 @@ def create_app() -> FastAPI:
                     }
                     for n in values.get("node_history", [])
                 ],
-                "output": values.get("output", {}),
+                "output": output_state,
             }
 
         except HTTPException:
             raise
         except Exception as exc:
             logger.exception("Graph status check failed")
+            raise HTTPException(status_code=500, detail=str(exc))
+
+    @application.post("/api/graph/link-protocol")
+    async def link_graph_protocol(
+        body: GraphLinkProtocolRequest,
+        _user: UserResponse = Depends(require_clinician),
+    ) -> dict:
+        """Attach a REST protocol id to a graph run (checkpoint `output` + GraphRun row)."""
+        from sozo_graph.unified_graph import build_unified_graph
+
+        try:
+            try:
+                pid = uuid.UUID(body.protocol_id.strip())
+            except ValueError:
+                raise HTTPException(status_code=400, detail="Invalid protocol_id")
+
+            checkpointer = get_graph_checkpointer()
+            graph = build_unified_graph(checkpointer=checkpointer)
+            config = {"configurable": {"thread_id": body.thread_id}}
+            state = graph.get_state(config)
+            if not state or not state.values:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"Thread {body.thread_id} not found",
+                )
+
+            merged = dict(state.values.get("output") or {})
+            merged["protocol_id"] = str(pid)
+            graph.update_state(config, {"output": merged})
+
+            try:
+                from sozo_db.repositories.graph_run_repo import GraphRunRepository
+                from sozo_db.engine import get_session_factory
+
+                factory = get_session_factory()
+                async with factory() as session:
+                    repo = GraphRunRepository(session)
+                    await repo.set_protocol_id(body.thread_id, pid)
+                    await session.commit()
+            except Exception as db_err:
+                logger.warning("GraphRun protocol link DB persist skipped: %s", db_err)
+
+            return {
+                "success": True,
+                "thread_id": body.thread_id,
+                "protocol_id": str(pid),
+            }
+        except HTTPException:
+            raise
+        except Exception as exc:
+            logger.exception("Graph protocol link failed")
             raise HTTPException(status_code=500, detail=str(exc))
 
     @application.post("/api/graph/review")
@@ -583,8 +662,7 @@ def create_app() -> FastAPI:
             status_map = {"approve": "approved", "reject": "rejected", "edit": "edited"}
             review_status = status_map.get(body.decision, body.decision)
 
-            # Update state with review decision
-            graph.update_state(config, {
+            update_payload: dict[str, Any] = {
                 "review": {
                     "status": review_status,
                     "reviewer_id": body.reviewer_id,
@@ -595,10 +673,32 @@ def create_app() -> FastAPI:
                     "edits_applied": body.section_edits or [],
                     "parameter_overrides": body.parameter_overrides or [],
                 },
-            })
+            }
+            if body.protocol_id is not None and str(body.protocol_id).strip():
+                try:
+                    link_pid = uuid.UUID(str(body.protocol_id).strip())
+                except ValueError:
+                    raise HTTPException(status_code=400, detail="Invalid protocol_id")
+                out = dict(state.values.get("output") or {})
+                out["protocol_id"] = str(link_pid)
+                update_payload["output"] = out
+
+            graph.update_state(config, update_payload)
 
             # Resume graph execution
             result = graph.invoke(None, config=config)
+
+            try:
+                from sozo_db.repositories.graph_run_repo import GraphRunRepository
+                from sozo_db.engine import get_session_factory
+
+                factory = get_session_factory()
+                async with factory() as session:
+                    repo = GraphRunRepository(session)
+                    await repo.update_from_state(body.thread_id, result)
+                    await session.commit()
+            except Exception as db_err:
+                logger.warning("GraphRun DB update after review skipped: %s", db_err)
 
             try:
                 from sozo_api.routes.audit_service import audit_service
@@ -613,6 +713,7 @@ def create_app() -> FastAPI:
                         "decision": body.decision,
                         "review_status": review_status,
                         "reviewer_id": body.reviewer_id,
+                        "protocol_id": result.get("output", {}).get("protocol_id"),
                     },
                 )
             except Exception as audit_err:
@@ -626,6 +727,7 @@ def create_app() -> FastAPI:
                 "revision_number": result.get("review", {}).get("revision_number", 0),
                 "output": result.get("output", {}),
                 "audit_record_id": result.get("output", {}).get("audit_record_id"),
+                "protocol_id": result.get("output", {}).get("protocol_id"),
             }
 
         except HTTPException:

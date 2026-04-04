@@ -10,9 +10,9 @@ This plan distills parallel codebase reviews (graph/DB, checkpointer, audit). Ph
 
 ## Phase 1 — Single logical “job” record
 
-- Add **`protocol_id` + `thread_id` FK-style columns** on `GraphRun` (or a new `generation_jobs` table) once protocol rows exist for graph runs.
-- When creating or attaching a REST protocol from a run, **write `protocol_id` into graph state `output`** and return it from `GET /api/graph/status`.
-- **Unify storage strategy:** resolve SQLite (protocol routes) vs Postgres (`graph_runs`) split (migrate one direction or document a sync boundary).
+- **Applied:** `graph_runs.protocol_id` (nullable FK → `protocols.id`), Alembic `003_graph_run_protocol_id`; `GraphRunRepository` reads/writes from `output.protocol_id`; render nodes **merge** `output` so `protocol_id` survives `document_renderer` / `protocol_reporter`.
+- **API:** `POST /api/graph/link-protocol` merges into checkpoint + DB; optional **`protocol_id`** on `POST /api/graph/review`; **`GET /api/graph/status/{thread_id}`** returns top-level **`protocol_id`** and **`output.protocol_id`** (DB fallback if checkpoint lacks it); **`POST /api/graph/generate`** response includes **`protocol_id`** when present in state.
+- **Unify storage strategy:** SQLite (`protocols.py`) vs Postgres (`graph_runs`) split remains — linking assumes a **`protocols`** row exists in the **same** DB as `graph_runs` when the FK is enforced.
 
 ## Phase 2 — Durable checkpoints
 

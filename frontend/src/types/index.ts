@@ -339,11 +339,15 @@ export interface GraphGenerateResponse {
     nodes_executed: number;
     errors: number;
   };
+  /** Set when `output.protocol_id` is populated (e.g. after link-protocol or review). */
+  protocol_id?: string | null;
 }
 
 export interface GraphStatusResponse {
   thread_id: string;
   status: string;
+  /** Same as `output.protocol_id` when known. */
+  protocol_id?: string | null;
   review_status: string;
   revision_number: number;
   condition: {
@@ -398,6 +402,8 @@ export interface GraphReviewRequest {
   thread_id: string;
   decision: 'approve' | 'reject' | 'edit';
   reviewer_id: string;
+  /** Optional REST protocol UUID to attach with this review. */
+  protocol_id?: string | null;
   reviewer_credentials?: string;
   review_notes?: string;
   section_edits?: Array<{
@@ -422,6 +428,18 @@ export interface GraphReviewResponse {
   revision_number: number;
   output: Record<string, unknown>;
   audit_record_id: string | null;
+  protocol_id?: string | null;
+}
+
+export interface GraphLinkProtocolRequest {
+  thread_id: string;
+  protocol_id: string;
+}
+
+export interface GraphLinkProtocolResponse {
+  success: boolean;
+  thread_id: string;
+  protocol_id: string;
 }
 
 // ── Generic Types ───────────────────────────────────────────────────

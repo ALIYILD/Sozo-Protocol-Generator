@@ -198,6 +198,7 @@ def protocol_reporter(state: SozoGraphState) -> dict:
 
     return {
         "output": {
+            **state.get("output", {}),
             "output_paths": output_paths,
             "output_formats": list(output_paths.keys()),
         },

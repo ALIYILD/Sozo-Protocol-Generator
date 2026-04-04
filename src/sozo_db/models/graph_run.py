@@ -56,6 +56,13 @@ class GraphRun(UUIDMixin, TimestampMixin, Base):
     # Output
     output_paths: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
     audit_record_id: Mapped[str | None] = mapped_column(String(256), nullable=True)
+    #: Linked REST `protocols` row when a graph run is attached to protocol storage.
+    protocol_id: Mapped[uuid.UUID | None] = mapped_column(
+        PG_UUID(as_uuid=True),
+        ForeignKey("protocols.id", ondelete="SET NULL"),
+        nullable=True,
+        index=True,
+    )
 
     # Full state snapshot (for reconstruction)
     final_state: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
