@@ -1,4 +1,4 @@
-# Internal benchmark lab — not a clinical safety gate by itself. Pair with human review.
+# Internal benchmark lab — not a clinical safety gate. Pair with human review.
 name: AutoAgent-Clinical
 
 on:
@@ -7,15 +7,38 @@ on:
     paths:
       - "src/autoagent_clinical/**"
       - "tests/test_autoagent*.py"
+      - "scripts/autoagent_metrics_summary.py"
       - ".github/workflows/autoagent-clinical.yml"
   pull_request:
     paths:
       - "src/autoagent_clinical/**"
       - "tests/test_autoagent*.py"
+      - "scripts/autoagent_metrics_summary.py"
       - ".github/workflows/autoagent-clinical.yml"
   schedule:
     - cron: "0 6 * * 1"
   workflow_dispatch:
+    inputs:
+      benchmark_category:
+        description: "Category slug for run/compare (empty = full default suite)"
+        required: false
+        default: ""
+      include_adapter_benchmarks:
+        description: "Include generation_adapter_cases.yaml in run"
+        type: boolean
+        default: false
+      include_regression_gates:
+        description: "Include regression_gate_cases.yaml in run"
+        type: boolean
+        default: false
+      run_compare_step:
+        description: "Run Parkinsons harness compare after run"
+        type: boolean
+        default: true
+      run_live_generation_pytest:
+        description: "Run pytest with SOZO_AUTOAGENT_LIVE=1 (live GenerationService; may fail without KB)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -36,15 +59,28 @@ jobs:
         run: pip install -e .
 
       - name: Run suite (benchmark expectations)
-        run: >
-          autoagent-clinical run -h baseline_fixture
-          --strict-exit-code -q
-          --out-json autoagent-run.json
-          --out-md autoagent-run.md
-          --out-junit autoagent-run.xml
-          --emit-github-step-summary
+        env:
+          INPUT_CATEGORY: ${{ github.event.inputs.benchmark_category || '' }}
+          INPUT_ADAPTER: ${{ github.event.inputs.include_adapter_benchmarks || false }}
+          INPUT_REGR: ${{ github.event.inputs.include_regression_gates || false }}
+        run: |
+          set -euo pipefail
+          EXTRA=()
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            [ -n "${INPUT_CATEGORY}" ] && EXTRA+=(-c "${INPUT_CATEGORY}")
+            [ "${INPUT_ADAPTER}" = "true" ] && EXTRA+=(--include-adapter-benchmarks)
+            [ "${INPUT_REGR}" = "true" ] && EXTRA+=(--include-regression-gates)
+          fi
+          autoagent-clinical run -h baseline_fixture \
+            --strict-exit-code -q \
+            --out-json autoagent-run.json \
+            --out-md autoagent-run.md \
+            --out-junit autoagent-run.xml \
+            --emit-github-step-summary \
+            "${EXTRA[@]}"
 
       - name: Compare harnesses (Parkinsons category)
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.run_compare_step != 'false'
         run: >
           autoagent-clinical compare
           -b baseline_fixture -p generator_with_qa_stub
@@ -55,8 +91,21 @@ jobs:
           --out-junit autoagent-compare.xml
           --emit-github-step-summary
 
-      - name: Upload reports
-        if: always()
+      - name: Metrics summary (markdown)
+        run: |
+          if [ -f autoagent-compare.json ]; then
+            python scripts/autoagent_metrics_summary.py \
+              --run-json autoagent-run.json \
+              --compare-json autoagent-compare.json \
+              -o autoagent-metrics.md
+          else
+            python scripts/autoagent_metrics_summary.py \
+              --run-json autoagent-run.json \
+              -o autoagent-metrics.md
+          fi
+
+      - name: Upload reports (run + compare)
+        if: always() && (github.event_name != 'workflow_dispatch' || github.event.inputs.run_compare_step != 'false')
         uses: actions/upload-artifact@v4
         with:
           name: autoagent-clinical
@@ -66,6 +115,18 @@ jobs:
             autoagent-run.xml
             autoagent-compare.json
             autoagent-compare.xml
+            autoagent-metrics.md
+
+      - name: Upload reports (run only)
+        if: always() && github.event_name == 'workflow_dispatch' && github.event.inputs.run_compare_step == 'false'
+        uses: actions/upload-artifact@v4
+        with:
+          name: autoagent-clinical
+          path: |
+            autoagent-run.json
+            autoagent-run.md
+            autoagent-run.xml
+            autoagent-metrics.md
 
   pytest-autoagent:
     runs-on: ubuntu-latest
@@ -81,7 +142,7 @@ jobs:
       - name: Install package
         run: pip install -e .
 
-      - name: Tests (autoagent)
+      - name: Tests (autoagent, mock-first)
         run: >
           python -m pytest
           tests/test_autoagent_clinical.py
@@ -90,7 +151,31 @@ jobs:
           tests/test_autoagent_generation_harness.py
           tests/test_autoagent_structured_phase3.py
           tests/test_autoagent_document_spec_invariants.py
-          -q --tb=short
+          -q --tb=short -m "not live_generation"
+
+  pytest-autoagent-live:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.run_live_generation_pytest == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install package
+        run: pip install -e .
+
+      - name: Live GenerationService tests
+        env:
+          SOZO_AUTOAGENT_LIVE: "1"
+        run: >
+          python -m pytest
+          tests/test_autoagent_generation_harness.py
+          tests/test_autoagent_structured_phase3.py
+          -m live_generation -v --tb=short
 
   regression-gates:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
@@ -116,6 +201,12 @@ jobs:
           --out-junit autoagent-regression-gates.xml
           --emit-github-step-summary
 
+      - name: Regression metrics
+        run: >
+          python scripts/autoagent_metrics_summary.py
+          --run-json autoagent-regression-gates.json
+          -o autoagent-regression-metrics.md
+
       - name: Upload regression gate report
         if: always()
         uses: actions/upload-artifact@v4
@@ -124,3 +215,4 @@ jobs:
           path: |
             autoagent-regression-gates.json
             autoagent-regression-gates.xml
+            autoagent-regression-metrics.md

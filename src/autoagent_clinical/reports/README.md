@@ -24,7 +24,11 @@ software and does not replace clinician review.
 - **`--out-junit`:** write JUnit XML (`run` = each benchmark case as a test; `compare` = challenger full-pass per case). Use with CI “test results” UIs.
 - **`--emit-github-step-summary`:** append a short Markdown summary to **`GITHUB_STEP_SUMMARY`** when that environment variable is set (GitHub Actions job summaries).
 
-Repository workflow: **`.github/workflows/autoagent-clinical.yml`** — PR/main runs the default suite + a Parkinsons compare (with a **mean score Δ** floor), uploads JSON/MD/JUnit artifacts, runs **`pytest`** for `test_autoagent*`. **Schedule / `workflow_dispatch`** runs **`--include-regression-gates`** with **`--strict-exit-code`**.
+Repository workflow: **`.github/workflows/autoagent-clinical.yml`** — PR/main runs the default suite + a Parkinsons compare (with a **mean score Δ** floor), uploads JSON/MD/JUnit/**`autoagent-metrics.md`** (from **`scripts/autoagent_metrics_summary.py`**), runs **`pytest`** for `test_autoagent*` with **`live_generation` excluded**. **Schedule / `workflow_dispatch`** runs **`--include-regression-gates`** with **`--strict-exit-code`**.
+
+**Manual runs:** use **Actions → AutoAgent-Clinical → Run workflow** to set category, optional adapter/regression YAML flags, skip compare, or run **live GenerationService** pytest (opt-in; may fail without KB).
+
+Contributor expectations (merge gates, live tests, frontend): see **`CONTRIBUTING.md`** at repo root.
 
 ## Add a benchmark case
 

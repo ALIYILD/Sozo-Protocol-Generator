@@ -1,6 +1,7 @@
 """Tests for AutoAgent-Clinical GenerationService harness adapter."""
 from __future__ import annotations
 
+import os
 from pathlib import Path
 from unittest.mock import MagicMock
 
@@ -152,8 +153,11 @@ def test_opt_in_suite_sizes() -> None:
 
 
 @pytest.mark.integration
+@pytest.mark.live_generation
 def test_live_generation_service_harness_parkinsons(tmp_path: Path) -> None:
     """In-process GenerationService (requires knowledge base + data on disk)."""
+    if os.environ.get("SOZO_AUTOAGENT_LIVE") != "1":
+        pytest.skip("Set SOZO_AUTOAGENT_LIVE=1 for live GenerationService tests")
 
     def factory():
         from sozo_generator.generation.service import GenerationService

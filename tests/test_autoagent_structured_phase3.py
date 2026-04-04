@@ -1,6 +1,7 @@
 """Phase 3: structured DocumentSpec path for AutoAgent-Clinical."""
 from __future__ import annotations
 
+import os
 from pathlib import Path
 from unittest.mock import MagicMock
 
@@ -59,7 +60,10 @@ def test_structured_spec_evaluator_neutral_when_no_spec() -> None:
 
 
 @pytest.mark.integration
+@pytest.mark.live_generation
 def test_live_harness_uses_structured_source_when_canonical(tmp_path: Path) -> None:
+    if os.environ.get("SOZO_AUTOAGENT_LIVE") != "1":
+        pytest.skip("Set SOZO_AUTOAGENT_LIVE=1 for live GenerationService tests")
     from sozo_generator.generation.service import GenerationService
 
     def factory():
@@ -92,7 +96,10 @@ def test_live_harness_uses_structured_source_when_canonical(tmp_path: Path) -> N
     assert "#" in res.output_text
 
 
+@pytest.mark.live_generation
 def test_benchmark_text_source_docx_only(tmp_path: Path) -> None:
+    if os.environ.get("SOZO_AUTOAGENT_LIVE") != "1":
+        pytest.skip("Set SOZO_AUTOAGENT_LIVE=1 for live GenerationService tests")
     from sozo_generator.generation.service import GenerationService
 
     def factory():
@@ -186,7 +193,10 @@ def test_benchmark_run_report_top_level_stable() -> None:
     assert {"run_id", "summary", "case_results", "harness_id", "suite"}.issubset(keys)
 
 
+@pytest.mark.live_generation
 def test_runner_preserves_report_fields_with_document_spec() -> None:
+    if os.environ.get("SOZO_AUTOAGENT_LIVE") != "1":
+        pytest.skip("Set SOZO_AUTOAGENT_LIVE=1 for live GenerationService tests")
     from sozo_generator.generation.service import GenerationService
 
     svc = GenerationService(with_visuals=False, with_qa=False)
