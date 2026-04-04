@@ -557,7 +557,10 @@ class TestPICOExtractorSchemaValidation:
         extractor = self._make_extractor()
         paper = self._make_paper()
 
-        with patch.object(extractor, "_call_llm", return_value=MOCK_LLM_RESPONSE):
+        # Patch _extract_single_batch (the method that calls the LLM and returns
+        # parsed dicts) so no real API call is made.
+        with patch.object(extractor, "_extract_single_batch",
+                          return_value=json.loads(MOCK_LLM_RESPONSE)):
             results = extractor.extract_batch(
                 papers=[paper],
                 condition_slug="depression",
@@ -580,7 +583,9 @@ class TestPICOExtractorSchemaValidation:
         extractor = self._make_extractor()
         paper = self._make_paper()
 
-        with patch.object(extractor, "_call_llm", return_value="NOT VALID JSON {{{{"):
+        # _extract_single_batch returns [] when the LLM response cannot be parsed;
+        # extract_batch then yields (None, None) per paper rather than crashing.
+        with patch.object(extractor, "_extract_single_batch", return_value=[]):
             results = extractor.extract_batch(
                 papers=[paper],
                 condition_slug="depression",
@@ -588,7 +593,8 @@ class TestPICOExtractorSchemaValidation:
                 primary_modalities=["tDCS"],
             )
 
-        assert results == []
+        assert len(results) == 1
+        assert results[0] == (None, None)
 
     def test_pico_extractor_marks_irrelevant_below_threshold(self) -> None:
         """A response with relevance_score=1 causes the paper to be marked irrelevant."""
@@ -611,7 +617,8 @@ class TestPICOExtractorSchemaValidation:
         extractor = self._make_extractor()
         paper = self._make_paper()
 
-        with patch.object(extractor, "_call_llm", return_value=low_relevance_response):
+        with patch.object(extractor, "_extract_single_batch",
+                          return_value=json.loads(low_relevance_response)):
             results = extractor.extract_batch(
                 papers=[paper],
                 condition_slug="depression",

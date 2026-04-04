@@ -199,3 +199,21 @@ conditions:
     fda_approved: true
     notes: "Window 5 — implantable neuromodulation benchmark; 1:1 RCT vs BMT (RECOVER 2022)"
 
+  - slug: "epilepsy"
+    display_name: "Epilepsy / Drug-Resistant Epilepsy"
+    icd10: "G40.9"
+    aliases: ["epilepsy", "DRE", "drug-resistant epilepsy", "focal epilepsy", "TLE", "temporal lobe epilepsy", "seizure disorder"]
+    template_status: "generated"
+    evidence_quality: "low"
+    modalities: ["taVNS", "tDCS", "TMS"]
+    subagents:
+      - seizure_frequency_tracker
+      - taVNS_parameter_optimizer
+      - epileptogenic_zone_localizer
+      - EEG_guided_electrode_placer
+      - AED_interaction_monitor
+      - qol_outcome_formatter
+      - seizure_emergency_protocol_generator
+      - rTMS_safety_validator
+      - comorbid_depression_router
+      - surgical_candidacy_screener

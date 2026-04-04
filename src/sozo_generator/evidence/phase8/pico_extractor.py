@@ -87,7 +87,8 @@ def grade_evidence(
         if pico.relevance_score <= 2:
             return "expert_opinion"
 
-    design = (study_design or "").lower().strip()
+    # Normalise to underscores so both "meta-analysis" and "meta_analysis" match.
+    design = (study_design or "").lower().strip().replace("-", "_")
     confidence = pico.extraction_confidence if pico else None
 
     if design in {"meta_analysis", "systematic_review"}:

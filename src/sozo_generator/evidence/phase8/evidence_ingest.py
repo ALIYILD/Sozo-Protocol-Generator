@@ -96,7 +96,9 @@ class EvidenceIngestor:
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
         self.openalex_client = OpenAlexClient(email=settings.ncbi_email)
-        self.s2_client = SemanticScholarClient()
+        self.s2_client = SemanticScholarClient(
+            api_key=settings.semantic_scholar_api_key or None
+        )
         self.pubmed_client = PubMedClient(email=settings.ncbi_email)
         self.pico_extractor = PICOExtractor(
             anthropic_api_key=settings.anthropic_api_key,

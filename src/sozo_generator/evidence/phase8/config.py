@@ -43,6 +43,7 @@ ALL_CONDITION_SLUGS: list[str] = [
     "tinnitus",
     "insomnia",
     "parkinsons",
+    "epilepsy",
 ]
 
 
@@ -804,6 +805,59 @@ CONDITION_CONFIGS: dict[str, ConditionQueryConfig] = {
             "Distinguish on- vs off-medication assessment timing. "
             "High-frequency (10 Hz) rTMS over M1 and DLPFC is best supported. "
             "NFB beta-band suppression / mu-rhythm are emerging targets."
+        ),
+    ),
+
+    # ── 16. Epilepsy / Drug-Resistant Epilepsy ───────────────────────────────
+    "epilepsy": ConditionQueryConfig(
+        condition_slug="epilepsy",
+        condition_name="Epilepsy / Drug-Resistant Epilepsy",
+        icd10="G40.9",
+        aliases=[
+            "epilepsy", "DRE", "drug-resistant epilepsy", "focal epilepsy",
+            "temporal lobe epilepsy", "TLE", "seizure disorder", "refractory epilepsy",
+        ],
+        primary_modalities=["taVNS", "tDCS", "TMS"],
+        consensus_queries=[
+            "Does transcutaneous vagus nerve stimulation reduce seizure frequency in drug-resistant epilepsy?",
+            "Is cathodal tDCS effective for reducing seizures in focal epilepsy?",
+            "Does low-frequency rTMS reduce seizure frequency in drug-resistant epilepsy?",
+            "What are the optimal taVNS parameters for seizure reduction in epilepsy?",
+        ],
+        openalex_queries=[
+            "transcutaneous auricular vagus nerve stimulation drug-resistant epilepsy seizure RCT",
+            "cathodal transcranial direct current stimulation epilepsy seizure reduction randomized",
+            "low-frequency repetitive transcranial magnetic stimulation epilepsy seizure intractable",
+        ],
+        s2_queries=[
+            "taVNS auricular vagus nerve epilepsy drug-resistant seizure frequency RCT",
+            "tDCS cathodal epileptogenic focus focal epilepsy seizure reduction",
+            "1Hz rTMS epilepsy epileptogenic zone refractory seizure pilot trial",
+        ],
+        pubmed_mesh_query=(
+            '("Epilepsy"[MeSH] OR "Drug Resistant Epilepsy"[MeSH] OR '
+            '"Epilepsies, Partial"[MeSH]) AND '
+            '("Vagus Nerve Stimulation"[MeSH] OR '
+            '"Transcranial Direct Current Stimulation"[MeSH] OR '
+            '"Transcranial Magnetic Stimulation"[MeSH]) AND '
+            '("Randomized Controlled Trial"[pt] OR "Meta-Analysis"[pt] OR '
+            '"Systematic Review"[pt] OR "Pilot Projects"[MeSH])'
+        ),
+        priority_dois=[
+            "10.1212/WNL.0b013e3182a838e3",   # DeGiorgio 2013 taVNS RPED RCT — Neurology
+            "10.1111/epi.13492",               # Bauer 2016 taVNS epilepsy RCT — Epilepsia
+            "10.1212/01.WNL.0000231507.42543.D1",  # Fregni 2006 tDCS focal epilepsy
+            "10.1016/S0140-6736(99)02383-5",   # Tergau 1999 1Hz rTMS epilepsy — Lancet
+        ],
+        priority_pmids=["23966253", "26919778", "16831966", "10376627"],
+        max_papers_per_source=40,
+        min_year=2000,
+        notes=(
+            "SAFETY CRITICAL: high-frequency TMS and anodal tDCS are absolutely contraindicated. "
+            "taVNS is the best-evidenced non-invasive modality (RPED trial, DeGiorgio 2013). "
+            "Cathodal tDCS and 1 Hz rTMS are pilot-level only. "
+            "Seizure frequency (50% responder rate) is the primary endpoint. "
+            "EEG-confirmed epileptogenic zone localization required for tDCS/TMS targeting."
         ),
     ),
 }

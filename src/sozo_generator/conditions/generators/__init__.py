@@ -19,6 +19,7 @@ from .neuroonica_combo import build_neuroonica_combo_condition
 from .tvns import build_tvns_condition
 from .ces_alphastem import build_ces_alphastem_condition
 from .trd_vns import build_trd_vns_condition
+from .epilepsy import build_epilepsy_condition
 
 __all__ = [
     "build_parkinsons_condition",
@@ -41,6 +42,7 @@ __all__ = [
     "build_tvns_condition",
     "build_ces_alphastem_condition",
     "build_trd_vns_condition",
+    "build_epilepsy_condition",
 ]
 
 CONDITION_BUILDERS = {
@@ -64,4 +66,5 @@ CONDITION_BUILDERS = {
     "tvns": build_tvns_condition,
     "ces_alphastem": build_ces_alphastem_condition,
     "trd_vns": build_trd_vns_condition,
+    "epilepsy": build_epilepsy_condition,
 }
