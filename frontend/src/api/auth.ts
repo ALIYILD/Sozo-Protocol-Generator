@@ -36,3 +36,13 @@ export async function getMe(): Promise<User> {
 export async function logout(): Promise<void> {
   await api.post('/auth/logout');
 }
+
+export interface ChangePasswordRequest {
+  current_password: string;
+  new_password: string;
+}
+
+/** Change the current user's password. Returns 204 No Content on success. */
+export async function changePassword(data: ChangePasswordRequest): Promise<void> {
+  await api.put('/auth/password', data);
+}

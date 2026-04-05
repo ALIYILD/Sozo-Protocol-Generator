@@ -1,16 +1,27 @@
 import { useState, useEffect, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { listConditions } from '../api/evidence';
-import { createProtocol, getGenerationStatus } from '../api/protocols';
+import {
+  createProtocol,
+  getGenerationStatus,
+  listProtocolTemplates,
+  cloneProtocol,
+} from '../api/protocols';
 import { generateProtocol } from '../api/graph';
-import type { ProtocolCreateResponse, GraphGenerateResponse } from '../types';
+import type {
+  ProtocolCreateResponse,
+  GraphGenerateResponse,
+  ProtocolListItem,
+} from '../types';
 
 export default function ProtocolBuilderPage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [cloningId, setCloningId] = useState<string | null>(null);
   const [conditionSlug, setConditionSlug] = useState('');
   const [modality, setModality] = useState('');
   const [docType, setDocType] = useState('evidence_based_protocol');
@@ -38,6 +49,33 @@ export default function ProtocolBuilderPage() {
   const { data: conditions, isLoading: conditionsLoading } = useQuery({
     queryKey: ['conditions'],
     queryFn: listConditions,
+  });
+
+  const {
+    data: templates,
+    isLoading: templatesLoading,
+    isError: templatesError,
+  } = useQuery({
+    queryKey: ['protocols', 'templates'],
+    queryFn: listProtocolTemplates,
+  });
+
+  const cloneMutation = useMutation({
+    mutationFn: (templateId: string) => cloneProtocol(templateId),
+    onMutate: (templateId: string) => {
+      setCloningId(templateId);
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['protocols'] });
+      const newId = (data as { protocol_id?: string }).protocol_id;
+      setCloningId(null);
+      if (newId) {
+        navigate(`/protocols/${newId}`);
+      }
+    },
+    onError: () => {
+      setCloningId(null);
+    },
   });
 
   // Legacy mutation
@@ -127,6 +165,86 @@ export default function ProtocolBuilderPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <h1 className="text-2xl font-bold text-sozo-text">New Protocol</h1>
+
+      <Card>
+        <div className="space-y-4">
+          <div>
+            <h2 className="text-lg font-semibold text-sozo-text">Start from a template</h2>
+            <p className="text-xs text-gray-500">
+              Clone a curated template to bootstrap your protocol, or fill in the form below to start from scratch.
+            </p>
+          </div>
+
+          {templatesLoading && (
+            <div className="flex justify-center py-4">
+              <LoadingSpinner size="md" />
+            </div>
+          )}
+
+          {templatesError && !templatesLoading && (
+            <div className="rounded-md bg-red-50 p-3 text-sm text-red-700">
+              Failed to load templates. You can still create a protocol manually below.
+            </div>
+          )}
+
+          {!templatesLoading && !templatesError && (templates?.length ?? 0) === 0 && (
+            <div className="rounded-md bg-gray-50 p-3 text-sm text-gray-600">
+              No templates available yet. Use the form below to create a protocol from scratch.
+            </div>
+          )}
+
+          {!templatesLoading && !templatesError && (templates?.length ?? 0) > 0 && (
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {(templates ?? []).map((t: ProtocolListItem) => {
+                const isCloning = cloningId === t.protocol_id && cloneMutation.isPending;
+                return (
+                  <div
+                    key={t.protocol_id}
+                    className="flex flex-col justify-between rounded-lg border border-gray-200 p-3 hover:border-sozo-secondary"
+                  >
+                    <div className="space-y-1">
+                      <div className="text-sm font-semibold text-sozo-text">
+                        {t.condition_name}
+                      </div>
+                      <div className="flex flex-wrap gap-1 text-xs text-gray-500">
+                        <span className="rounded bg-gray-100 px-1.5 py-0.5 uppercase">
+                          {t.modality}
+                        </span>
+                        <span className="rounded bg-gray-100 px-1.5 py-0.5">
+                          {t.evidence_level}
+                        </span>
+                        <span className="rounded bg-gray-100 px-1.5 py-0.5">
+                          v{t.version}
+                        </span>
+                      </div>
+                      <div className="text-xs text-gray-600">
+                        {t.condition_slug}
+                      </div>
+                    </div>
+                    <div className="mt-3">
+                      <Button
+                        type="button"
+                        size="sm"
+                        isLoading={isCloning}
+                        disabled={cloneMutation.isPending}
+                        onClick={() => cloneMutation.mutate(t.protocol_id)}
+                      >
+                        Clone
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {cloneMutation.isError && (
+            <div className="rounded-md bg-red-50 p-3 text-sm text-red-700">
+              Failed to clone template. Please try again.
+            </div>
+          )}
+        </div>
+      </Card>
 
       <Card>
         <form onSubmit={handleSubmit} className="space-y-5">

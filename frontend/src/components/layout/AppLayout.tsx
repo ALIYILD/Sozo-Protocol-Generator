@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { LogOut, Menu, Moon, Sun, User, X } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useDarkMode } from '../../hooks/useDarkMode';
@@ -44,13 +44,17 @@ export default function AppLayout() {
 
           <div className="flex items-center gap-4">
             {user && (
-              <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+              <Link
+                to="/profile"
+                className="flex items-center gap-2 rounded-md px-2 py-1 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+                title="View profile & change password"
+              >
                 <User className="h-4 w-4" />
                 <span>{user.email}</span>
                 <span className="rounded bg-gray-100 px-1.5 py-0.5 text-xs font-medium text-gray-500 dark:bg-gray-700 dark:text-gray-400">
                   {user.role}
                 </span>
-              </div>
+              </Link>
             )}
             <button
               onClick={toggleDark}

@@ -161,6 +161,63 @@ export async function getPatientEEG(_id: string): Promise<[]> {
   return [];
 }
 
+// ── Assessment scales & trajectory (read-only) ───────────────────────────────
+
+export interface ScaleDefinition {
+  scale_name: string;
+  abbreviation: string;
+  full_name: string;
+  domains?: string[];
+  score_range: { min: number; max: number };
+  severity_bands?: Record<string, { min: number; max: number }>;
+  scoring_direction?: string;
+  administration_time_minutes?: number | null;
+  validated_for?: string[];
+}
+
+interface ScalesAvailableResponse {
+  scales: ScaleDefinition[];
+  total: number;
+}
+
+export async function listAvailableScales(): Promise<ScaleDefinition[]> {
+  const res = await api.get<ScalesAvailableResponse>('/patients/scales/available');
+  return res.data.scales ?? [];
+}
+
+export interface TrajectoryPoint {
+  date: string;
+  score: number;
+  severity_band: string;
+  session_number: number | null;
+}
+
+interface TrajectoryResponse {
+  patient_id: string;
+  scale_name: string;
+  abbreviation: string;
+  data_points: TrajectoryPoint[];
+  summary: {
+    total_assessments: number;
+    first_score: number | null;
+    latest_score: number | null;
+    min_score: number | null;
+    max_score: number | null;
+    trend: string;
+  };
+}
+
+export async function getAssessmentTrajectory(
+  patient_id: string,
+  scale_name?: string,
+): Promise<TrajectoryPoint[]> {
+  const res = await api.get<TrajectoryResponse>(
+    `/patients/${patient_id}/assessments/trajectory`,
+    { params: scale_name ? { scale_name } : undefined },
+  );
+  return res.data.data_points ?? [];
+}
+
 // ── Write operation request types ────────────────────────────────────────────
 
 export interface UpdatePatientRequest {

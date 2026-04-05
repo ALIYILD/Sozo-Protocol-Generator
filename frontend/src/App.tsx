@@ -13,6 +13,7 @@ import PersonalizationPage from './pages/PersonalizationPage';
 import AuditLogPage from './pages/AuditLogPage';
 import ReviewQueuePage from './pages/ReviewQueuePage';
 import ReviewDetailPage from './pages/ReviewDetailPage';
+import ProfilePage from './pages/ProfilePage';
 import VisualsPage from './pages/VisualsPage';
 import PatientsListPage from './pages/PatientsListPage';
 import PatientDetailPage from './pages/PatientDetailPage';
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="review/:threadId" element={<ProtocolReviewPage />} />
         <Route path="reviews" element={<ReviewQueuePage />} />
         <Route path="reviews/:protocolId" element={<ReviewDetailPage />} />
+        <Route path="profile" element={<ProfilePage />} />
         <Route path="evidence" element={<EvidenceExplorerPage />} />
         <Route path="safety" element={<SafetyCheckPage />} />
         <Route path="personalization" element={<PersonalizationPage />} />

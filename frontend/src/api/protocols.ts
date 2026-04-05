@@ -8,6 +8,10 @@ import type {
   PaginatedResponse,
 } from '../types';
 
+export interface ProtocolTemplateListResponse {
+  templates: ProtocolListItem[];
+}
+
 export interface ProtocolVersionSummary {
   version_id: string;
   version: number;
@@ -124,6 +128,11 @@ export async function getProtocolVersion(
 ): Promise<ProtocolVersionDetail> {
   const res = await api.get<ProtocolVersionDetail>(`/protocols/${id}/versions/${version}`);
   return res.data;
+}
+
+export async function listProtocolTemplates(): Promise<ProtocolListItem[]> {
+  const res = await api.get<ProtocolTemplateListResponse>('/protocols/templates');
+  return res.data.templates;
 }
 
 export async function listAvailableConditions(): Promise<Record<string, unknown>[]> {

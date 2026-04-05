@@ -19,6 +19,7 @@ const authDefaults: AuthContextValue = {
   login: vi.fn(),
   signup: vi.fn(),
   logout: vi.fn(),
+  changePassword: vi.fn(),
 };
 
 function renderProtected(

@@ -14,6 +14,7 @@ import {
   getCockpitConditions,
 } from '../api/evidence';
 import { listProtocols } from '../api/protocols';
+import { getAuditSummary } from '../api/audit';
 import type {
   ProtocolListItem,
   StalenessCondition,
@@ -54,6 +55,15 @@ export default function DashboardPage() {
   const { data: protocolsData, isLoading: protocolsLoading } = useQuery({
     queryKey: ['protocols-recent'],
     queryFn: () => listProtocols(1, 5),
+  });
+
+  const {
+    data: auditSummary,
+    isLoading: auditSummaryLoading,
+    error: auditSummaryError,
+  } = useQuery({
+    queryKey: ['audit-summary'],
+    queryFn: getAuditSummary,
   });
 
   const isLoading =
@@ -311,6 +321,70 @@ export default function DashboardPage() {
           />
         </div>
       )}
+
+      {/* Audit activity summary */}
+      <Card title="Audit activity">
+        {auditSummaryLoading ? (
+          <LoadingSpinner size="md" />
+        ) : auditSummaryError ? (
+          <p className="text-sm text-red-600">Failed to load audit summary.</p>
+        ) : !auditSummary ? (
+          <p className="text-sm text-gray-500">No audit data available.</p>
+        ) : (
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+              <div className="rounded-md border border-gray-100 px-3 py-2">
+                <p className="text-xs text-gray-500">Events (24h)</p>
+                <p className="text-xl font-bold text-sozo-text">
+                  {auditSummary.total_events_24h}
+                </p>
+              </div>
+              <div className="rounded-md border border-gray-100 px-3 py-2">
+                <p className="text-xs text-gray-500">Events (7d)</p>
+                <p className="text-xl font-bold text-sozo-text">
+                  {auditSummary.total_events_7d}
+                </p>
+              </div>
+              <div className="rounded-md border border-gray-100 px-3 py-2">
+                <p className="text-xs text-gray-500">Active users (24h)</p>
+                <p className="text-xl font-bold text-sozo-text">
+                  {auditSummary.active_users_24h}
+                </p>
+              </div>
+              <div className="rounded-md border border-gray-100 px-3 py-2">
+                <p className="text-xs text-gray-500">Recent approvals</p>
+                <p className="text-xl font-bold text-green-600">
+                  {auditSummary.recent_approvals}
+                </p>
+              </div>
+              <div className="rounded-md border border-gray-100 px-3 py-2">
+                <p className="text-xs text-gray-500">Recent rejections</p>
+                <p className="text-xl font-bold text-red-600">
+                  {auditSummary.recent_rejections}
+                </p>
+              </div>
+            </div>
+
+            {Object.keys(auditSummary.events_by_action).length > 0 && (
+              <div>
+                <p className="mb-2 text-xs font-medium uppercase text-gray-500">
+                  Events by action
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {Object.entries(auditSummary.events_by_action).map(([action, count]) => (
+                    <span
+                      key={action}
+                      className="rounded bg-gray-100 px-2 py-1 text-xs text-gray-700"
+                    >
+                      {action.replace(/_/g, ' ')}: <span className="font-semibold">{count}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </Card>
     </div>
   );
 }

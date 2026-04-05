@@ -15,15 +15,19 @@ import {
   addPatientAssessment,
   addPatientMedication,
   addPatientTreatment,
+  getAssessmentTrajectory,
   getPatient,
   getPatientAssessments,
   getPatientTreatments,
   getPatientMedications,
+  listAvailableScales,
   removePatientMedication,
   updatePatient,
   type AddAssessmentRequest,
   type AddMedicationRequest,
   type AddTreatmentRequest,
+  type ScaleDefinition,
+  type TrajectoryPoint,
   type UpdatePatientRequest,
 } from '../api/patients';
 import Card from '../components/ui/Card';
@@ -32,7 +36,7 @@ import Badge from '../components/ui/Badge';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import Table, { type Column } from '../components/ui/Table';
 import type { TreatmentRecord, AssessmentRecord, MedicationRecord } from '../api/patients';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 // ── Severity band → badge status mapping ──────────────────────────────────────
 
@@ -58,17 +62,6 @@ function outcomeStatus(outcome: string): string {
 }
 
 // ── Page ──────────────────────────────────────────────────────────────────────
-
-const ASSESSMENT_SCALES = [
-  'PHQ-9',
-  'GAD-7',
-  'HAM-D',
-  'HAM-A',
-  'MADRS',
-  'YBOCS',
-  'PCL-5',
-  'MMSE',
-] as const;
 
 const TREATMENT_OUTCOMES = [
   { value: 'responder', label: 'Responder' },
@@ -160,6 +153,7 @@ export default function PatientDetailPage() {
   const [medForm, setMedForm] = useState<MedicationForm>(emptyMedicationForm);
   const [assessForm, setAssessForm] = useState<AssessmentForm>(emptyAssessmentForm);
   const [treatForm, setTreatForm] = useState<TreatmentForm>(emptyTreatmentForm);
+  const [trajectoryScale, setTrajectoryScale] = useState<string>('');
 
   const invalidatePatient = () => {
     queryClient.invalidateQueries({ queryKey: ['patient', id] });
@@ -314,6 +308,24 @@ export default function PatientDetailPage() {
     queryFn: () => getPatientMedications(id!, true),
     enabled: !!id,
   });
+
+  const {
+    data: availableScales = [],
+    isError: scalesError,
+  } = useQuery<ScaleDefinition[]>({
+    queryKey: ['available-scales'],
+    queryFn: listAvailableScales,
+  });
+
+  const { data: trajectoryPoints = [], isLoading: trajectoryLoading } = useQuery<
+    TrajectoryPoint[]
+  >({
+    queryKey: ['assessment-trajectory', id, trajectoryScale],
+    queryFn: () => getAssessmentTrajectory(id!, trajectoryScale),
+    enabled: !!id && !!trajectoryScale,
+  });
+
+  const scalesUnavailable = scalesError || availableScales.length === 0;
 
   if (patientLoading) return <LoadingSpinner size="lg" className="mt-20" />;
 
@@ -549,20 +561,33 @@ export default function PatientDetailPage() {
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 <label className="block text-sm">
                   <span className="mb-1 block text-xs text-gray-600">Scale *</span>
-                  <select
-                    required
-                    value={assessForm.scale_name}
-                    onChange={(e) =>
-                      setAssessForm({ ...assessForm, scale_name: e.target.value })
-                    }
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-sozo-primary focus:outline-none focus:ring-1 focus:ring-sozo-primary"
-                  >
-                    {ASSESSMENT_SCALES.map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
+                  {scalesUnavailable ? (
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. PHQ-9"
+                      value={assessForm.scale_name}
+                      onChange={(e) =>
+                        setAssessForm({ ...assessForm, scale_name: e.target.value })
+                      }
+                      className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-sozo-primary focus:outline-none focus:ring-1 focus:ring-sozo-primary"
+                    />
+                  ) : (
+                    <select
+                      required
+                      value={assessForm.scale_name}
+                      onChange={(e) =>
+                        setAssessForm({ ...assessForm, scale_name: e.target.value })
+                      }
+                      className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-sozo-primary focus:outline-none focus:ring-1 focus:ring-sozo-primary"
+                    >
+                      {availableScales.map((s) => (
+                        <option key={s.scale_name} value={s.scale_name}>
+                          {s.abbreviation} — {s.full_name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
                 </label>
                 <label className="block text-sm">
                   <span className="mb-1 block text-xs text-gray-600">Score *</span>
@@ -622,6 +647,54 @@ export default function PatientDetailPage() {
                 Record assessment
               </Button>
             </form>
+          </Card>
+
+          {/* Score trajectory */}
+          <Card title="Score Trajectory">
+            <div className="space-y-4">
+              <label className="block text-sm">
+                <span className="mb-1 block text-xs text-gray-600">Scale</span>
+                {scalesUnavailable ? (
+                  <input
+                    type="text"
+                    placeholder="Enter scale name (e.g. PHQ-9)"
+                    value={trajectoryScale}
+                    onChange={(e) => setTrajectoryScale(e.target.value)}
+                    className="w-full max-w-xs rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-sozo-primary focus:outline-none focus:ring-1 focus:ring-sozo-primary"
+                  />
+                ) : (
+                  <select
+                    value={trajectoryScale}
+                    onChange={(e) => setTrajectoryScale(e.target.value)}
+                    className="w-full max-w-xs rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-sozo-primary focus:outline-none focus:ring-1 focus:ring-sozo-primary"
+                  >
+                    <option value="">Select a scale…</option>
+                    {availableScales.map((s) => (
+                      <option key={s.scale_name} value={s.scale_name}>
+                        {s.abbreviation} — {s.full_name}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </label>
+
+              {!trajectoryScale ? (
+                <p className="py-6 text-center text-sm text-gray-400">
+                  Select a scale to view its trajectory.
+                </p>
+              ) : trajectoryLoading ? (
+                <LoadingSpinner size="sm" className="py-6" />
+              ) : trajectoryPoints.length === 0 ? (
+                <p className="py-6 text-center text-sm text-gray-400">
+                  No data yet for this scale.
+                </p>
+              ) : (
+                <TrajectoryChart
+                  points={trajectoryPoints}
+                  scaleName={trajectoryScale}
+                />
+              )}
+            </div>
           </Card>
 
           {/* Active medications */}
@@ -1011,6 +1084,150 @@ export default function PatientDetailPage() {
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+// ── Trajectory chart (raw SVG) ────────────────────────────────────────────────
+
+interface TrajectoryChartProps {
+  points: TrajectoryPoint[];
+  scaleName: string;
+}
+
+function TrajectoryChart({ points, scaleName }: TrajectoryChartProps) {
+  const width = 400;
+  const height = 240;
+  const padLeft = 40;
+  const padRight = 12;
+  const padTop = 24;
+  const padBottom = 30;
+  const innerW = width - padLeft - padRight;
+  const innerH = height - padTop - padBottom;
+
+  const scores = points.map((p) => p.score);
+  const minScore = Math.min(...scores);
+  const maxScore = Math.max(...scores);
+  // Avoid zero-range: pad if all equal
+  const yMin = minScore === maxScore ? minScore - 1 : minScore;
+  const yMax = minScore === maxScore ? maxScore + 1 : maxScore;
+  const yRange = yMax - yMin || 1;
+
+  const n = points.length;
+  const xFor = (i: number) =>
+    padLeft + (n === 1 ? innerW / 2 : (i / (n - 1)) * innerW);
+  const yFor = (score: number) =>
+    padTop + innerH - ((score - yMin) / yRange) * innerH;
+
+  // y-axis ticks (4)
+  const yTicks = 4;
+  const yTickValues = Array.from({ length: yTicks + 1 }, (_, i) => yMin + (yRange * i) / yTicks);
+
+  // x-axis ticks: 4–6 evenly spaced indices
+  const desiredTicks = Math.min(6, Math.max(2, n));
+  const xTickIndices =
+    n <= desiredTicks
+      ? points.map((_, i) => i)
+      : Array.from({ length: desiredTicks }, (_, i) =>
+          Math.round((i / (desiredTicks - 1)) * (n - 1)),
+        );
+
+  const pathD = points
+    .map((p, i) => `${i === 0 ? 'M' : 'L'} ${xFor(i)} ${yFor(p.score)}`)
+    .join(' ');
+
+  return (
+    <div className="w-full">
+      <p className="mb-2 text-sm font-medium text-sozo-text">{scaleName} over time</p>
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        className="w-full max-w-[400px]"
+        role="img"
+        aria-label={`${scaleName} score trajectory`}
+      >
+        {/* y-axis gridlines + labels */}
+        {yTickValues.map((val, i) => {
+          const y = yFor(val);
+          return (
+            <g key={`y-${i}`}>
+              <line
+                x1={padLeft}
+                x2={width - padRight}
+                y1={y}
+                y2={y}
+                className="stroke-gray-200"
+                strokeWidth={1}
+              />
+              <text
+                x={padLeft - 6}
+                y={y + 3}
+                textAnchor="end"
+                className="fill-gray-500"
+                fontSize={10}
+              >
+                {Number.isInteger(val) ? val : val.toFixed(1)}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* x-axis labels */}
+        {xTickIndices.map((idx) => {
+          const p = points[idx];
+          const x = xFor(idx);
+          return (
+            <text
+              key={`x-${idx}`}
+              x={x}
+              y={height - padBottom + 16}
+              textAnchor="middle"
+              className="fill-gray-500"
+              fontSize={10}
+            >
+              {format(parseISO(p.date), 'MMM d')}
+            </text>
+          );
+        })}
+
+        {/* axes baseline */}
+        <line
+          x1={padLeft}
+          x2={width - padRight}
+          y1={height - padBottom}
+          y2={height - padBottom}
+          className="stroke-gray-300"
+          strokeWidth={1}
+        />
+        <line
+          x1={padLeft}
+          x2={padLeft}
+          y1={padTop}
+          y2={height - padBottom}
+          className="stroke-gray-300"
+          strokeWidth={1}
+        />
+
+        {/* line */}
+        <path
+          d={pathD}
+          fill="none"
+          className="stroke-sozo-primary"
+          strokeWidth={2}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+
+        {/* points */}
+        {points.map((p, i) => (
+          <circle
+            key={`pt-${i}`}
+            cx={xFor(i)}
+            cy={yFor(p.score)}
+            r={3.5}
+            className="fill-sozo-primary"
+          />
+        ))}
+      </svg>
     </div>
   );
 }

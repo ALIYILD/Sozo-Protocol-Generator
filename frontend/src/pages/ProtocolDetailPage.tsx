@@ -12,6 +12,12 @@ import {
   type ProtocolVersionSummary,
 } from '../api/protocols';
 import { ProtocolAuditSection } from '../components/protocol/ProtocolAuditSection';
+import {
+  getEntityAuditTrail,
+  getBuildTrace,
+  type AuditEvent,
+  type NodeTraceEntry,
+} from '../api/audit';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
@@ -28,6 +34,9 @@ export default function ProtocolDetailPage() {
   const [exportingFormat, setExportingFormat] = useState<'docx' | 'pdf' | null>(null);
   const [versionsOpen, setVersionsOpen] = useState(false);
   const [selectedVersion, setSelectedVersion] = useState<number | null>(null);
+  const [auditTrailOpen, setAuditTrailOpen] = useState(false);
+  const [buildTraceOpen, setBuildTraceOpen] = useState(false);
+  const [expandedNodes, setExpandedNodes] = useState<Record<number, boolean>>({});
 
   const handleExport = async (fmt: 'docx' | 'pdf') => {
     if (!id) return;
@@ -79,6 +88,29 @@ export default function ProtocolDetailPage() {
       const newId = (data as Record<string, string>).protocol_id;
       if (newId) navigate(`/protocols/${newId}`);
     },
+  });
+
+  // Derive build_id from the protocol envelope. Backend may place it at
+  // data.build_id, data.last_build_id, or data.metadata.build_id.
+  const protocolData = (protocol?.data ?? {}) as Record<string, unknown>;
+  const protocolMeta = (protocolData.metadata ?? {}) as Record<string, unknown>;
+  const rawBuildId =
+    protocolData.build_id ??
+    protocolData.last_build_id ??
+    protocolMeta.build_id ??
+    protocolMeta.last_build_id;
+  const buildId = typeof rawBuildId === 'string' && rawBuildId ? rawBuildId : null;
+
+  const auditTrailQuery = useQuery({
+    queryKey: ['protocol-audit-trail', id],
+    queryFn: () => getEntityAuditTrail('protocol', id!),
+    enabled: !!id && auditTrailOpen,
+  });
+
+  const buildTraceQuery = useQuery({
+    queryKey: ['protocol-build-trace', buildId],
+    queryFn: () => getBuildTrace(buildId!),
+    enabled: buildTraceOpen && !!buildId,
   });
 
   if (isLoading) return <LoadingSpinner size="lg" className="mt-20" />;
@@ -410,6 +442,213 @@ export default function ProtocolDetailPage() {
                     )}
                   </>
                 )}
+              </div>
+            )}
+          </Card>
+
+          {/* Audit trail (collapsible) */}
+          <Card>
+            <button
+              type="button"
+              onClick={() => setAuditTrailOpen((o) => !o)}
+              className="flex w-full items-center justify-between text-left"
+            >
+              <span className="text-base font-semibold text-sozo-text">Audit trail</span>
+              {auditTrailOpen ? (
+                <ChevronDown className="h-4 w-4 text-gray-500" />
+              ) : (
+                <ChevronRight className="h-4 w-4 text-gray-500" />
+              )}
+            </button>
+            {auditTrailOpen && (
+              <div className="mt-4">
+                {auditTrailQuery.isLoading && <LoadingSpinner size="md" />}
+                {auditTrailQuery.error && (
+                  <p className="text-sm text-red-600">
+                    Failed to load audit trail.
+                  </p>
+                )}
+                {auditTrailQuery.data && (
+                  <Table<AuditEvent & Record<string, unknown>>
+                    columns={[
+                      {
+                        key: 'timestamp',
+                        header: 'Time',
+                        sortable: true,
+                        render: (row) => {
+                          try {
+                            return format(new Date(row.timestamp), 'dd MMM yyyy HH:mm:ss');
+                          } catch {
+                            return row.timestamp;
+                          }
+                        },
+                      },
+                      {
+                        key: 'actor',
+                        header: 'Actor',
+                        render: (row) => row.actor ?? 'system',
+                      },
+                      {
+                        key: 'action',
+                        header: 'Action',
+                        render: (row) => (
+                          <span className="font-medium">{row.action}</span>
+                        ),
+                      },
+                      {
+                        key: 'details',
+                        header: 'Details',
+                        render: (row) => {
+                          const detailStr = JSON.stringify(row.details ?? {});
+                          const preview =
+                            detailStr.length > 80
+                              ? detailStr.slice(0, 80) + '…'
+                              : detailStr;
+                          return (
+                            <span className="font-mono text-xs text-gray-500">
+                              {preview}
+                            </span>
+                          );
+                        },
+                      },
+                    ] as Column<AuditEvent & Record<string, unknown>>[]}
+                    data={
+                      auditTrailQuery.data as (AuditEvent & Record<string, unknown>)[]
+                    }
+                    keyExtractor={(row) => String(row.id)}
+                    emptyMessage="No audit events for this protocol."
+                  />
+                )}
+              </div>
+            )}
+          </Card>
+
+          {/* Build trace (collapsible) */}
+          <Card>
+            <button
+              type="button"
+              onClick={() => setBuildTraceOpen((o) => !o)}
+              className="flex w-full items-center justify-between text-left"
+            >
+              <span className="text-base font-semibold text-sozo-text">Build trace</span>
+              {buildTraceOpen ? (
+                <ChevronDown className="h-4 w-4 text-gray-500" />
+              ) : (
+                <ChevronRight className="h-4 w-4 text-gray-500" />
+              )}
+            </button>
+            {buildTraceOpen && (
+              <div className="mt-4">
+                {!buildId ? (
+                  <p className="text-sm text-gray-500">
+                    No build trace available for this protocol.
+                  </p>
+                ) : buildTraceQuery.isLoading ? (
+                  <LoadingSpinner size="md" />
+                ) : buildTraceQuery.error ? (
+                  <p className="text-sm text-red-600">Failed to load build trace.</p>
+                ) : buildTraceQuery.data ? (
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-2 gap-3 text-xs sm:grid-cols-4">
+                      <div>
+                        <p className="text-gray-500">Build ID</p>
+                        <p className="font-mono break-all">
+                          {buildTraceQuery.data.build_id}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-gray-500">Generation</p>
+                        <p className="font-medium">
+                          {buildTraceQuery.data.generation_method}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-gray-500">Total duration</p>
+                        <p className="font-medium">
+                          {buildTraceQuery.data.total_duration_ms} ms
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-gray-500">Nodes</p>
+                        <p className="font-medium">
+                          {buildTraceQuery.data.nodes.length}
+                        </p>
+                      </div>
+                    </div>
+                    <ol className="relative space-y-3 border-l border-gray-200 pl-4">
+                      {buildTraceQuery.data.nodes.map((node: NodeTraceEntry, idx: number) => {
+                        const expanded = !!expandedNodes[idx];
+                        const statusColor =
+                          node.status === 'success'
+                            ? 'text-green-600'
+                            : node.status === 'error'
+                              ? 'text-red-600'
+                              : 'text-gray-500';
+                        const statusIcon =
+                          node.status === 'success'
+                            ? '●'
+                            : node.status === 'error'
+                              ? '✕'
+                              : '○';
+                        let ts = node.timestamp;
+                        try {
+                          ts = format(new Date(node.timestamp), 'HH:mm:ss.SSS');
+                        } catch {
+                          /* keep raw */
+                        }
+                        return (
+                          <li key={idx} className="ml-1">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setExpandedNodes((prev) => ({
+                                  ...prev,
+                                  [idx]: !prev[idx],
+                                }))
+                              }
+                              className="flex w-full items-center justify-between rounded-md border border-gray-100 bg-gray-50 px-3 py-2 text-left hover:bg-gray-100"
+                            >
+                              <div className="flex items-center gap-3">
+                                <span className={`text-lg ${statusColor}`}>{statusIcon}</span>
+                                <div>
+                                  <p className="text-sm font-medium text-sozo-text">
+                                    {node.node_name}
+                                  </p>
+                                  <p className="text-xs text-gray-500">
+                                    {ts} &middot; {node.duration_ms} ms
+                                    {node.decision ? ` · ${node.decision}` : ''}
+                                  </p>
+                                </div>
+                              </div>
+                              {expanded ? (
+                                <ChevronDown className="h-4 w-4 text-gray-500" />
+                              ) : (
+                                <ChevronRight className="h-4 w-4 text-gray-500" />
+                              )}
+                            </button>
+                            {expanded && (
+                              <pre className="mt-2 max-h-64 overflow-auto rounded-md bg-gray-900 p-3 text-xs text-gray-100">
+                                {JSON.stringify(
+                                  {
+                                    node_name: node.node_name,
+                                    timestamp: node.timestamp,
+                                    duration_ms: node.duration_ms,
+                                    status: node.status,
+                                    decision: node.decision,
+                                    input_hash: node.input_hash,
+                                    output_hash: node.output_hash,
+                                  },
+                                  null,
+                                  2,
+                                )}
+                              </pre>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ol>
+                  </div>
+                ) : null}
               </div>
             )}
           </Card>

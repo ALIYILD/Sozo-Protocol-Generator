@@ -1,8 +1,19 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { Download, ImageOff } from 'lucide-react';
-import { listVisualsLibrary } from '../api/visuals';
-import type { VisualItem } from '../api/visuals';
+import axios from 'axios';
+import {
+  listVisualTypes,
+  listVisualsLibrary,
+  renderVisual,
+} from '../api/visuals';
+import type {
+  RenderVisualRequest,
+  RenderVisualResponse,
+  VisualItem,
+} from '../api/visuals';
+import Card from '../components/ui/Card';
+import Button from '../components/ui/Button';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 
 const ALL_CONDITIONS = [
@@ -107,6 +118,145 @@ function VisualCard({ item }: { item: VisualItem }) {
   );
 }
 
+function humanizeTypeKey(key: string): string {
+  return key
+    .split('_')
+    .map((w) => (w.length === 0 ? w : w[0].toUpperCase() + w.slice(1)))
+    .join(' ');
+}
+
+function RenderOnDemandSection() {
+  const [selectedType, setSelectedType] = useState('');
+  const [conditionSlug, setConditionSlug] = useState('');
+  const [result, setResult] = useState<RenderVisualResponse | null>(null);
+
+  const typesQuery = useQuery({
+    queryKey: ['visual-types'],
+    queryFn: listVisualTypes,
+  });
+
+  const renderMutation = useMutation({
+    mutationFn: (body: RenderVisualRequest) => renderVisual(body),
+    onSuccess: (data) => setResult(data),
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedType) return;
+    setResult(null);
+    renderMutation.mutate({
+      visual_type: selectedType,
+      condition_slug: conditionSlug.trim(),
+    });
+  };
+
+  const errorMessage = (() => {
+    const err = renderMutation.error;
+    if (!err) return null;
+    if (axios.isAxiosError(err)) {
+      const detail = (err.response?.data as { detail?: unknown } | undefined)?.detail;
+      if (typeof detail === 'string') return detail;
+      return err.message;
+    }
+    return err instanceof Error ? err.message : 'Render failed';
+  })();
+
+  const plotlyTraceCount = (() => {
+    const data = result?.plotly_json?.data;
+    return Array.isArray(data) ? data.length : 0;
+  })();
+
+  // Encode each path segment individually so forward slashes are preserved
+  // but spaces and other special characters get escaped safely.
+  const encodedImagePath = result?.image_path
+    ? result.image_path.split('/').map(encodeURIComponent).join('/')
+    : '';
+
+  return (
+    <Card title="Render on demand">
+      <form onSubmit={handleSubmit} className="flex flex-wrap items-end gap-3">
+        <div className="flex flex-col">
+          <label className="mb-1 text-xs font-medium text-gray-600">Visual type</label>
+          <select
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
+            disabled={typesQuery.isLoading}
+            className="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sozo-primary"
+          >
+            <option value="">
+              {typesQuery.isLoading ? 'Loading types…' : 'Select a type…'}
+            </option>
+            {(typesQuery.data ?? []).map((t) => (
+              <option key={t} value={t}>
+                {humanizeTypeKey(t)}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col">
+          <label className="mb-1 text-xs font-medium text-gray-600">Condition slug</label>
+          <input
+            type="text"
+            value={conditionSlug}
+            onChange={(e) => setConditionSlug(e.target.value)}
+            placeholder="e.g. depression"
+            className="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sozo-primary"
+          />
+        </div>
+
+        <Button
+          type="submit"
+          isLoading={renderMutation.isPending}
+          disabled={!selectedType || renderMutation.isPending}
+        >
+          {renderMutation.isPending ? 'Rendering…' : 'Render'}
+        </Button>
+
+        {typesQuery.error && (
+          <span className="text-xs text-red-600">Failed to load visual types.</span>
+        )}
+      </form>
+
+      {errorMessage && (
+        <div className="mt-4 rounded-md bg-red-50 px-4 py-3 text-sm text-red-600">
+          {errorMessage}
+        </div>
+      )}
+
+      {result && (
+        <div className="mt-4 space-y-2">
+          <div className="text-xs text-gray-500">
+            Rendered <span className="font-medium text-gray-700">{result.visual_type}</span>
+            {' · '}confidence {(result.confidence ?? 0).toFixed(2)}
+            {result.warnings?.length > 0 && (
+              <span className="ml-2 text-amber-600">({result.warnings.length} warning(s))</span>
+            )}
+          </div>
+
+          {encodedImagePath ? (
+            <img
+              src={`/api/visuals/file/${encodedImagePath}`}
+              alt={result.visual_type}
+              style={{ maxWidth: '100%' }}
+              className="rounded border border-gray-200 bg-gray-50 p-2"
+            />
+          ) : plotlyTraceCount > 0 ? (
+            <div className="rounded-md bg-blue-50 px-4 py-3 text-sm text-blue-700">
+              Interactive plot ready ({plotlyTraceCount} trace
+              {plotlyTraceCount === 1 ? '' : 's'}) — download to view
+            </div>
+          ) : (
+            <div className="rounded-md bg-gray-50 px-4 py-3 text-sm text-gray-600">
+              Render returned no output
+            </div>
+          )}
+        </div>
+      )}
+    </Card>
+  );
+}
+
 export default function VisualsPage() {
   const [conditionFilter, setConditionFilter] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
@@ -128,6 +278,9 @@ export default function VisualsPage() {
           across all neuromodulation conditions.
         </p>
       </div>
+
+      {/* Render on demand */}
+      <RenderOnDemandSection />
 
       {/* Filters */}
       <div className="flex flex-wrap gap-3">

@@ -19,6 +19,7 @@ export interface AuthContextValue {
   login: (data: LoginRequest) => Promise<void>;
   signup: (data: authApi.SignupRequest) => Promise<void>;
   logout: () => Promise<void>;
+  changePassword: (data: authApi.ChangePasswordRequest) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextValue | null>(null);
@@ -61,6 +62,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(me);
   }, []);
 
+  const changePassword = useCallback(async (data: authApi.ChangePasswordRequest) => {
+    await authApi.changePassword(data);
+  }, []);
+
   const logout = useCallback(async () => {
     try {
       await authApi.logout();
@@ -85,6 +90,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         login,
         signup,
         logout,
+        changePassword,
       },
     },
     children,
