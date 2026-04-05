@@ -11,9 +11,15 @@ primary_region = "lhr"
 [http_service]
   internal_port = 8080
   force_https = true
-  auto_stop_machines = "stop"
+  # Background Celery workers process long-running protocol generation
+  # tasks that Fly's HTTP-activity auto-stop can't see. Previously with
+  # auto_stop_machines="stop" + min_machines_running=0, Fly SIGTERM-ed
+  # the machine while a worker was mid-pipeline (1247 articles collected,
+  # LLM synthesis pending), wiping the in-container Redis queue and
+  # freezing every pending thread. Keep at least one machine alive.
+  auto_stop_machines = "off"
   auto_start_machines = true
-  min_machines_running = 0
+  min_machines_running = 1
 
 [[vm]]
   memory = "2gb"
