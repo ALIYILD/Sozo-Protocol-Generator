@@ -1,0 +1,36 @@
+# SOZO unified reverse proxy
+# Public port 8080 (Fly internal_port). Three upstreams.
+
+{
+	admin off
+	persist_config off
+	auto_https off
+}
+
+:8080 {
+	encode gzip
+
+	# ── Ops area: Streamlit, gated by HTTP basic auth ─────────────
+	# OPS_PASSWORD_HASH must be a bcrypt hash set as a Fly secret and
+	# materialised into the Caddyfile at container start by sozo-start.
+	# Username is fixed to "ops".
+	@ops path /ops /ops/*
+	handle @ops {
+		basic_auth {
+			ops {$OPS_PASSWORD_HASH}
+		}
+		reverse_proxy localhost:8501
+	}
+
+	# ── API: FastAPI (JWT-authenticated inside the app) ───────────
+	handle /api/* {
+		reverse_proxy localhost:8000
+	}
+
+	# ── SPA fallback: serve React bundle, client-side routes ──────
+	handle {
+		root * /app/frontend/dist
+		try_files {path} /index.html
+		file_server
+	}
+}

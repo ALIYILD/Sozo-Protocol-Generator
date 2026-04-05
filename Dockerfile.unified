@@ -1,0 +1,83 @@
+# ─────────────────────────────────────────────────────────────────────
+# SOZO Unified Container
+#   :8080  Caddy (public)
+#     /           → React SPA (static)         frontend/dist
+#     /api/*      → FastAPI                    uvicorn :8000
+#     /ops, /ops/*→ Streamlit (basic-auth)     streamlit :8501
+#
+#   Processes are supervised by supervisord.
+# ─────────────────────────────────────────────────────────────────────
+
+# ── Stage 1: build React frontend ────────────────────────────────────
+FROM node:20-slim AS frontend-build
+WORKDIR /build
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci
+COPY frontend/ ./
+RUN npm run build
+
+
+# ── Stage 2: runtime ─────────────────────────────────────────────────
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# System deps:
+#   - lxml / pillow / matplotlib build deps
+#   - libreoffice-writer-nogui for PDF export
+#   - caddy (reverse proxy)
+#   - supervisor (process manager)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      gcc g++ \
+      libxml2-dev libxslt-dev libffi-dev libfreetype6-dev libpng-dev \
+      libreoffice-writer-nogui \
+      supervisor \
+      curl gnupg debian-keyring debian-archive-keyring apt-transport-https \
+    && curl -fsSL 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' \
+         | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg \
+    && curl -fsSL 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' \
+         > /etc/apt/sources.list.d/caddy-stable.list \
+    && apt-get update && apt-get install -y --no-install-recommends caddy \
+    && rm -rf /var/lib/apt/lists/*
+
+# Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt scipy httpx uvicorn[standard]
+
+# App source
+COPY src/ ./src/
+COPY data/ ./data/
+COPY configs/ ./configs/
+COPY templates/ ./templates/
+COPY docs/ ./docs/
+COPY scripts/ ./scripts/
+COPY handbooks/ ./handbooks/
+COPY handbooks_partners/ ./handbooks_partners/
+COPY app.py .
+COPY generate_all.py .
+COPY create_gold_standard_templates.py .
+COPY .streamlit/ ./.streamlit/
+COPY legacy/ ./legacy/
+
+# Static React bundle from stage 1
+COPY --from=frontend-build /build/dist ./frontend/dist
+
+# Caddy + supervisor config
+COPY deploy/Caddyfile /etc/caddy/Caddyfile
+COPY deploy/supervisord.conf /etc/supervisor/conf.d/sozo.conf
+COPY deploy/start.sh /usr/local/bin/sozo-start
+RUN chmod +x /usr/local/bin/sozo-start
+
+# Writable runtime dirs
+RUN mkdir -p outputs/documents outputs/manifests outputs/visuals \
+    reviews pilot_logs data/learned data/raw/pubmed_cache \
+    data/evidence_snapshots outputs/reviews \
+    data/image_cache data/images \
+    /var/log/sozo
+
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/app/src
+
+EXPOSE 8080
+
+CMD ["/usr/local/bin/sozo-start"]
