@@ -5,6 +5,7 @@ import logging
 from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel, EmailStr, Field
 
 from sozo_auth.dependencies import get_current_user, require_admin
 from sozo_auth.models import (
@@ -264,6 +265,65 @@ async def change_password(
 
     user["password_hash"] = hash_password(body.new_password)
     logger.info("User %s changed their password", current_user.id)
+
+
+# ── POST /auth/signup (public self-service) ─────────────────────────
+
+
+class SignupRequest(BaseModel):
+    """Public self-service signup. Role is forced to ``clinician``."""
+
+    email: EmailStr
+    name: str = Field(..., min_length=1, max_length=200)
+    password: str = Field(..., min_length=1)
+
+
+@auth_router.post(
+    "/signup",
+    response_model=TokenPair,
+    status_code=status.HTTP_201_CREATED,
+)
+async def signup(body: SignupRequest) -> TokenPair:
+    """Create a new clinician account and return an auto-login token pair.
+
+    Unlike ``/register`` (which is admin-only), this endpoint is public so
+    users can create their own account from the SPA. Role is always forced
+    to ``clinician``; elevated roles still require an admin to provision.
+    """
+    # Duplicate check
+    if _find_user_by_email(body.email):
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="A user with this email already exists",
+        )
+
+    # Password strength check
+    issues = validate_password_strength(body.password)
+    if issues:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={"password_issues": issues},
+        )
+
+    import uuid as _uuid
+    from datetime import datetime, timezone
+
+    user_id = _uuid.uuid4().hex
+    now = datetime.now(timezone.utc)
+
+    user_record: dict[str, Any] = {
+        "id": user_id,
+        "email": body.email,
+        "name": body.name,
+        "role": "clinician",  # forced — cannot be elevated via self-signup
+        "active": True,
+        "created_at": now,
+        "password_hash": hash_password(body.password),
+    }
+    _users_db[user_id] = user_record
+    logger.info("User %s (%s) self-registered as clinician", user_id, body.email)
+
+    return create_token_pair(user_id, "clinician")
 
 
 # ── POST /auth/logout ────────────────────────────────────────────────

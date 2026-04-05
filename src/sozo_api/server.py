@@ -14,6 +14,7 @@ import io
 import logging
 import uuid
 from dataclasses import asdict
+from pathlib import Path
 from typing import Any, Optional
 
 # --- Conditional FastAPI import ---------------------------------------------------
@@ -149,6 +150,45 @@ def create_app() -> FastAPI:
                 logger.info("Database migration complete")
         except Exception as exc:
             logger.warning("Auto-migration skipped: %s", exc)
+
+        # Seed demo + admin users if the in-memory user store is empty.
+        # NOTE: _users_db is in-memory; seeds are recreated on every cold
+        # start. Self-signups evaporate on restart until a real user DB
+        # replaces _users_db.
+        try:
+            from sozo_auth.router import _users_db
+            from sozo_auth.passwords import hash_password
+            from datetime import datetime, timezone
+            import uuid as _uuid
+
+            if not _users_db:
+                now = datetime.now(timezone.utc)
+                demo_id = _uuid.uuid4().hex
+                admin_id = _uuid.uuid4().hex
+                _users_db[demo_id] = {
+                    "id": demo_id,
+                    "email": "demo@sozo.app",
+                    "name": "Demo Clinician",
+                    "role": "clinician",
+                    "active": True,
+                    "created_at": now,
+                    "password_hash": hash_password("SozoDemo2026!"),
+                }
+                _users_db[admin_id] = {
+                    "id": admin_id,
+                    "email": "admin@sozo.app",
+                    "name": "Demo Admin",
+                    "role": "admin",
+                    "active": True,
+                    "created_at": now,
+                    "password_hash": hash_password("SozoAdmin2026!"),
+                }
+                logger.info(
+                    "Seeded demo users: demo@sozo.app/SozoDemo2026! (clinician), "
+                    "admin@sozo.app/SozoAdmin2026! (admin)"
+                )
+        except Exception as exc:
+            logger.warning("Demo user seeding skipped: %s", exc)
 
     # ── Health ────────────────────────────────────────────────────────
 
@@ -941,7 +981,6 @@ def create_app() -> FastAPI:
     # ── Serve React frontend (static files) ──────────────────────────
     # Must be LAST — catch-all for non-API routes serves index.html
     import os
-    from pathlib import Path
 
     frontend_dir = Path(__file__).resolve().parents[2] / "frontend" / "dist"
     if not frontend_dir.exists():
