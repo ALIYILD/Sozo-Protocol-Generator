@@ -11,12 +11,58 @@ import {
   listProtocolTemplates,
   cloneProtocol,
 } from '../api/protocols';
-import { generateProtocol } from '../api/graph';
+import { generateProtocol, getGraphStatus } from '../api/graph';
+import type { GraphGenerateResponse } from '../api/graph';
 import type {
   ProtocolCreateResponse,
-  GraphGenerateResponse,
   ProtocolListItem,
+  GraphStatusResponse,
 } from '../types';
+
+/** Terminal graph statuses — polling stops when we see one of these. */
+const TERMINAL_STATUSES = new Set([
+  'complete',
+  'completed',
+  'failed',
+  'error',
+  'cancelled',
+  'canceled',
+  'awaiting_review',
+  'pending_review',
+]);
+
+function isTerminalStatus(status: string | undefined): boolean {
+  return !!status && TERMINAL_STATUSES.has(status);
+}
+
+function progressLabel(status: string | undefined): string {
+  switch (status) {
+    case 'queued':
+      return 'Waiting for a worker…';
+    case 'running':
+    case 'in_progress':
+      return 'Generating protocol… (evidence pipeline + LLM synthesis can take 1–3 minutes)';
+    case 'complete':
+    case 'completed':
+    case 'awaiting_review':
+    case 'pending_review':
+      return 'Complete — ready for review';
+    case 'failed':
+    case 'error':
+      return 'Generation failed';
+    case 'cancelled':
+    case 'canceled':
+      return 'Generation cancelled';
+    default:
+      return status ? `Status: ${status}` : 'Starting…';
+  }
+}
+
+function formatElapsed(seconds: number): string {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return m > 0 ? `${m}m ${s}s` : `${s}s`;
+}
 
 export default function ProtocolBuilderPage() {
   const navigate = useNavigate();
@@ -45,6 +91,11 @@ export default function ProtocolBuilderPage() {
   // Graph pipeline state
   const [threadId, setThreadId] = useState<string | null>(null);
   const [graphResult, setGraphResult] = useState<GraphGenerateResponse | null>(null);
+  const [graphStatus, setGraphStatus] = useState<string>('queued');
+  const [graphStatusData, setGraphStatusData] = useState<GraphStatusResponse | null>(null);
+  const [graphError, setGraphError] = useState<string | null>(null);
+  const [graphStartedAt, setGraphStartedAt] = useState<number | null>(null);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
   const { data: conditions, isLoading: conditionsLoading } = useQuery({
     queryKey: ['conditions'],
@@ -119,6 +170,14 @@ export default function ProtocolBuilderPage() {
     onSuccess: (data: GraphGenerateResponse) => {
       setThreadId(data.thread_id);
       setGraphResult(data);
+      setGraphStatus(data.status || 'queued');
+      setGraphStatusData(null);
+      setGraphError(null);
+      setGraphStartedAt(Date.now());
+      setElapsedSeconds(0);
+    },
+    onError: () => {
+      setGraphStartedAt(null);
     },
   });
 
@@ -147,6 +206,82 @@ export default function ProtocolBuilderPage() {
     }, 2000);
     return () => clearInterval(interval);
   }, [polling, taskId, protocolId, navigate]);
+
+  // Elapsed-time counter — runs while a thread is active and not terminal.
+  useEffect(() => {
+    if (!graphStartedAt) return;
+    if (isTerminalStatus(graphStatus)) return;
+    const interval = setInterval(() => {
+      setElapsedSeconds(Math.floor((Date.now() - graphStartedAt) / 1000));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [graphStartedAt, graphStatus]);
+
+  // Poll graph status every 2s while queued/running. The first few polls may
+  // race the Celery worker creating the checkpoint — getGraphStatus returns
+  // null on 404 and we silently retry for up to ~10s before surfacing it.
+  useEffect(() => {
+    if (!threadId) return;
+    if (isTerminalStatus(graphStatus)) return;
+
+    let cancelled = false;
+    let notFoundStreak = 0;
+    const MAX_NOT_FOUND_STREAK = 5; // ~10s of grace
+
+    const poll = async () => {
+      try {
+        const status = await getGraphStatus(threadId);
+        if (cancelled) return;
+
+        if (!status) {
+          notFoundStreak += 1;
+          if (notFoundStreak > MAX_NOT_FOUND_STREAK) {
+            setGraphError('Thread not found after multiple retries.');
+            setGraphStatus('failed');
+          }
+          return;
+        }
+
+        notFoundStreak = 0;
+        setGraphStatusData(status);
+        setGraphStatus(status.status);
+
+        if (status.status === 'failed' || status.status === 'error') {
+          const msg =
+            (status.output && typeof status.output === 'object'
+              ? (status.output as Record<string, unknown>).error
+              : undefined) ??
+            (status.output && typeof status.output === 'object'
+              ? (status.output as Record<string, unknown>).message
+              : undefined);
+          setGraphError(typeof msg === 'string' ? msg : 'Generation failed.');
+          return;
+        }
+
+        if (
+          status.status === 'complete' ||
+          status.status === 'completed' ||
+          status.status === 'awaiting_review' ||
+          status.status === 'pending_review'
+        ) {
+          // Preserve existing navigate-to-review behavior.
+          navigate(`/review/${threadId}`);
+        }
+      } catch (err) {
+        if (cancelled) return;
+        setGraphError(err instanceof Error ? err.message : 'Status poll failed.');
+        setGraphStatus('failed');
+      }
+    };
+
+    // Kick off an immediate poll, then on an interval.
+    void poll();
+    const interval = setInterval(poll, 2000);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [threadId, graphStatus, navigate]);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -431,49 +566,97 @@ export default function ProtocolBuilderPage() {
             </div>
           )}
 
-          {/* Graph pipeline result */}
-          {useGraphPipeline && graphResult && (
-            <div className="rounded-md bg-green-50 p-4 space-y-3">
-              <h3 className="text-sm font-semibold text-green-800">Pipeline Complete — Awaiting Review</h3>
-              <div className="grid grid-cols-3 gap-3 text-center text-xs">
-                <div>
-                  <div className="text-lg font-bold text-green-700">
-                    {graphResult.evidence_summary.total_articles}
+          {/* Graph pipeline progress panel */}
+          {useGraphPipeline && graphResult && threadId && (
+            <div
+              className={`rounded-md p-4 space-y-3 ${
+                graphStatus === 'failed' || graphStatus === 'error'
+                  ? 'bg-red-50'
+                  : isTerminalStatus(graphStatus)
+                    ? 'bg-green-50'
+                    : 'bg-blue-50'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                {!isTerminalStatus(graphStatus) && <LoadingSpinner size="sm" />}
+                <div className="flex-1">
+                  <div
+                    className={`text-sm font-semibold ${
+                      graphStatus === 'failed' || graphStatus === 'error'
+                        ? 'text-red-800'
+                        : isTerminalStatus(graphStatus)
+                          ? 'text-green-800'
+                          : 'text-blue-800'
+                    }`}
+                  >
+                    {progressLabel(graphStatus)}
                   </div>
-                  <div className="text-gray-500">Articles</div>
-                </div>
-                <div>
-                  <div className="text-lg font-bold text-green-700">
-                    {graphResult.safety.cleared ? 'Cleared' : 'BLOCKED'}
+                  <div className="mt-1 flex items-center gap-3 text-xs text-gray-600">
+                    <span>
+                      Elapsed: <span className="font-mono">{formatElapsed(elapsedSeconds)}</span>
+                    </span>
+                    <span className="text-gray-300">|</span>
+                    <span>
+                      Thread: <code className="font-mono text-[11px]">{threadId}</code>
+                    </span>
                   </div>
-                  <div className="text-gray-500">Safety</div>
-                </div>
-                <div>
-                  <div className="text-lg font-bold text-green-700">
-                    {graphResult.protocol.sections_count}
-                  </div>
-                  <div className="text-gray-500">Sections</div>
                 </div>
               </div>
-              {graphResult.safety.off_label.length > 0 && (
-                <div className="text-xs text-amber-700 bg-amber-50 rounded p-2">
-                  Off-label: {graphResult.safety.off_label.join('; ')}
+
+              {graphError && (
+                <div className="rounded bg-red-100 p-2 text-xs text-red-800">
+                  {graphError}
                 </div>
               )}
-              <Button
-                type="button"
-                size="sm"
-                onClick={() => navigate(`/review/${graphResult.thread_id}`)}
-              >
-                Review Protocol
-              </Button>
+
+              {graphStatusData && isTerminalStatus(graphStatus) && graphStatus !== 'failed' && graphStatus !== 'error' && (
+                <>
+                  <div className="grid grid-cols-3 gap-3 text-center text-xs">
+                    <div>
+                      <div className="text-lg font-bold text-green-700">
+                        {graphStatusData.evidence.article_count}
+                      </div>
+                      <div className="text-gray-500">Articles</div>
+                    </div>
+                    <div>
+                      <div className="text-lg font-bold text-green-700">
+                        {graphStatusData.safety.cleared ? 'Cleared' : 'BLOCKED'}
+                      </div>
+                      <div className="text-gray-500">Safety</div>
+                    </div>
+                    <div>
+                      <div className="text-lg font-bold text-green-700">
+                        {graphStatusData.protocol.sections.length}
+                      </div>
+                      <div className="text-gray-500">Sections</div>
+                    </div>
+                  </div>
+                  {graphStatusData.safety.off_label.length > 0 && (
+                    <div className="text-xs text-amber-700 bg-amber-50 rounded p-2">
+                      Off-label: {graphStatusData.safety.off_label.join('; ')}
+                    </div>
+                  )}
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={() => navigate(`/review/${threadId}`)}
+                  >
+                    Review Protocol
+                  </Button>
+                </>
+              )}
             </div>
           )}
 
           <div className="flex gap-3 pt-2">
             <Button
               type="submit"
-              isLoading={createMutation.isPending || graphMutation.isPending || polling}
+              isLoading={
+                createMutation.isPending ||
+                graphMutation.isPending ||
+                polling ||
+                (useGraphPipeline && !!threadId && !isTerminalStatus(graphStatus))
+              }
               disabled={!conditionSlug}
             >
               {useGraphPipeline ? 'Run Graph Pipeline' : 'Generate Protocol'}

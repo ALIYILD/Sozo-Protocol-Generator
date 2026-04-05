@@ -1,14 +1,58 @@
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { LogOut, Menu, Moon, Sun, User, X } from 'lucide-react';
+import { AlertTriangle, LogOut, Menu, Moon, Sun, User, X } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { useDarkMode } from '../../hooks/useDarkMode';
+import { getHealth } from '../../api/health';
 import Sidebar from './Sidebar';
+
+const API_KEY_BANNER_DISMISS_KEY = 'sozo_api_key_banner_dismissed';
+
+/**
+ * Safely probe `checks.anthropic_key_configured` on a loose health payload.
+ * Returns `true` only when the backend has explicitly reported the key as
+ * missing. Any other shape (field absent, request failed, unexpected types)
+ * returns `false` so the banner stays hidden — it's a helpful hint, not a gate.
+ */
+function anthropicKeyMissing(health: Record<string, unknown> | undefined): boolean {
+  if (!health) return false;
+  const checks = health.checks;
+  if (!checks || typeof checks !== 'object') return false;
+  const value = (checks as Record<string, unknown>).anthropic_key_configured;
+  return value === false;
+}
 
 export default function AppLayout() {
   const { user, logout } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isDark, toggleDark] = useDarkMode();
+  const [bannerDismissed, setBannerDismissed] = useState<boolean>(() => {
+    try {
+      return sessionStorage.getItem(API_KEY_BANNER_DISMISS_KEY) === '1';
+    } catch {
+      return false;
+    }
+  });
+
+  const { data: health } = useQuery({
+    queryKey: ['health'],
+    queryFn: getHealth,
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
+
+  const showApiKeyBanner = !bannerDismissed && anthropicKeyMissing(health);
+
+  const dismissBanner = () => {
+    try {
+      sessionStorage.setItem(API_KEY_BANNER_DISMISS_KEY, '1');
+    } catch {
+      /* sessionStorage unavailable — dismiss in-memory only */
+    }
+    setBannerDismissed(true);
+  };
 
   return (
     <div className="flex h-screen overflow-hidden bg-sozo-surface dark:bg-gray-950">
@@ -79,6 +123,30 @@ export default function AppLayout() {
 
         {/* Main content */}
         <main className="flex-1 overflow-y-auto p-6 dark:bg-gray-950">
+          {showApiKeyBanner && (
+            <div
+              role="alert"
+              className="mb-4 flex items-start gap-3 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900 dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-200"
+            >
+              <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-600 dark:text-amber-400" />
+              <div className="flex-1">
+                <span className="font-semibold">Generation disabled</span>
+                {' — '}
+                <code className="rounded bg-amber-100 px-1 py-0.5 font-mono text-xs dark:bg-amber-900/60">
+                  ANTHROPIC_API_KEY
+                </code>
+                {" isn't configured on the server. Protocol generation will fail until an admin sets it. (Contact your ops team.)"}
+              </div>
+              <button
+                type="button"
+                onClick={dismissBanner}
+                className="flex-shrink-0 rounded p-1 text-amber-700 hover:bg-amber-100 dark:text-amber-300 dark:hover:bg-amber-900/60"
+                aria-label="Dismiss warning"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          )}
           <Outlet />
         </main>
       </div>
