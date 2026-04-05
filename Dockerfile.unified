@@ -53,6 +53,9 @@ COPY docs/ ./docs/
 COPY scripts/ ./scripts/
 COPY handbooks/ ./handbooks/
 COPY handbooks_partners/ ./handbooks_partners/
+# Knowledge base: YAML-driven conditions/modalities/assessments.
+# sozo_generator/knowledge/loader.py expects /app/sozo_knowledge/knowledge/
+COPY sozo_knowledge/ ./sozo_knowledge/
 COPY app.py .
 COPY generate_all.py .
 COPY create_gold_standard_templates.py .
