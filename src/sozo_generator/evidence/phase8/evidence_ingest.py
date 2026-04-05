@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 import logging
 import time
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -178,12 +177,12 @@ class EvidenceIngestor:
         if self.skip_llm or not papers:
             extractions = [(None, None)] * len(papers)
         else:
-            modalities: list[str] = list(cfg.primary_modalities)
+            primary_modalities: list[str] = list(cfg.primary_modalities)
             extractions = self.pico_extractor.extract_batch(
                 papers=papers,
                 condition_slug=slug,
                 condition_name=cfg.condition_name,
-                modalities=modalities,
+                primary_modalities=primary_modalities,
             )
 
         # ---- build records -----------------------------------------------
@@ -201,7 +200,6 @@ class EvidenceIngestor:
             condition_slug=slug,
             condition_name=cfg.condition_name,
             pipeline_version=PIPELINE_VERSION,
-            generated_at=datetime.now(timezone.utc),
             records=records,
         )
         corpus = self._compute_corpus_stats(corpus)
@@ -374,11 +372,15 @@ class EvidenceIngestor:
         modality_tags: list[str] = list(cfg.primary_modalities)
 
         # ---- PubMed priority PMIDs --------------------------------------
+        # PubMedClient.search() is the only public fetch method; build a
+        # UID-list query to retrieve specific PMIDs.
         priority_pmids: list[str] = list(cfg.priority_pmids or [])
         if priority_pmids:
             try:
-                articles: list[ArticleMetadata] = self.pubmed_client.fetch_by_pmids(
-                    priority_pmids
+                pmid_query = " OR ".join(f"{pmid}[PMID]" for pmid in priority_pmids)
+                articles: list[ArticleMetadata] = self.pubmed_client.search(
+                    query=pmid_query,
+                    max_results=len(priority_pmids),
                 )
                 for article in articles:
                     raw = article_metadata_to_paper_raw(
@@ -386,7 +388,12 @@ class EvidenceIngestor:
                         condition_slug=cfg.condition_slug,
                         modality_tags=modality_tags,
                     )
-                    raw = raw.model_copy(update={"is_priority": True})
+                    # PaperRaw has no is_priority field; store via condition_tags prefix
+                    # so downstream code can detect priority papers via the tag.
+                    priority_tags = list(raw.condition_tags)
+                    if "_priority" not in priority_tags:
+                        priority_tags.insert(0, "_priority")
+                    raw = raw.model_copy(update={"condition_tags": priority_tags})
                     papers.append(raw)
                 logger.debug(
                     "Priority PMIDs for '%s': fetched %d/%d",
@@ -402,16 +409,24 @@ class EvidenceIngestor:
                 )
 
         # ---- OpenAlex priority DOIs -------------------------------------
+        # OpenAlexClient.fetch_by_doi(doi) accepts only the doi positional arg.
         priority_dois: list[str] = list(cfg.priority_dois or [])
         for doi in priority_dois:
             try:
-                raw: Optional[PaperRaw] = self.openalex_client.fetch_by_doi(
-                    doi=doi,
-                    condition_tags=[cfg.condition_slug],
-                    modality_tags=modality_tags,
-                )
+                raw: Optional[PaperRaw] = self.openalex_client.fetch_by_doi(doi=doi)
                 if raw is not None:
-                    raw = raw.model_copy(update={"is_priority": True})
+                    # Tag paper as priority; backfill condition/modality tags.
+                    tags = list(raw.condition_tags)
+                    if "_priority" not in tags:
+                        tags.insert(0, "_priority")
+                    if cfg.condition_slug not in tags:
+                        tags.append(cfg.condition_slug)
+                    raw = raw.model_copy(
+                        update={
+                            "condition_tags": tags,
+                            "modality_tags": list(raw.modality_tags) or modality_tags,
+                        }
+                    )
                     papers.append(raw)
             except Exception as exc:  # noqa: BLE001
                 logger.warning(
@@ -525,8 +540,11 @@ class EvidenceIngestor:
                 included = False
                 exclusion_reason = getattr(pico, "irrelevance_reason", None)
 
-            # Priority papers are never excluded via the LLM filter
-            if getattr(paper, "is_priority", False):
+            # Priority papers are never excluded via the LLM filter.
+            # Priority status is encoded by the "_priority" tag in condition_tags
+            # (PaperRaw has no is_priority field).
+            is_priority = "_priority" in (paper.condition_tags or [])
+            if is_priority:
                 included = True
                 exclusion_reason = None
 

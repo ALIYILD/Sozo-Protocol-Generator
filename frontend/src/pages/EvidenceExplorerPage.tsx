@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Search, RefreshCw } from 'lucide-react';
+import { Search, RefreshCw, BookOpen } from 'lucide-react';
 import Card from '../components/ui/Card';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
+import EmptyState from '../components/ui/EmptyState';
 import { getStalenessReport, getCondition, listConditions } from '../api/evidence';
 import type { StalenessCondition } from '../types';
 import { canViewStaleness } from '../auth/permissions';
@@ -261,19 +262,18 @@ export default function EvidenceExplorerPage() {
                 </div>
               </Card>
             ) : (
-              <Card>
-                <p className="text-sm text-gray-500">Could not load condition details.</p>
-              </Card>
+              <EmptyState
+                icon={Search}
+                title="No evidence articles found"
+                description="No evidence articles were found for this condition. Try selecting a different condition."
+              />
             )
           ) : (
-            <Card>
-              <div className="text-center py-12">
-                <Search className="mx-auto h-12 w-12 text-gray-300" />
-                <p className="mt-4 text-sm text-gray-500">
-                  Select a condition from the list to view its knowledge detail and evidence freshness.
-                </p>
-              </div>
-            </Card>
+            <EmptyState
+              icon={BookOpen}
+              title="Select a condition"
+              description="Select a condition to explore its evidence base and view knowledge detail."
+            />
           )}
         </div>
       </div>

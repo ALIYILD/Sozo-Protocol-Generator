@@ -1,0 +1,109 @@
+# Evidence search profile — Essential Tremor
+# Used by: python -m sozo_generator.cli.main ingest-evidence --condition essential_tremor
+
+condition_slug: essential_tremor
+condition_name: "Essential Tremor"
+icd10: G25.0
+
+search_profiles:
+  pathophysiology:
+    query: >
+      essential tremor[Title/Abstract] AND
+      (cerebello-thalamo-cortical network[Title/Abstract] OR
+       olivocerebellar[Title/Abstract] OR cerebellar[Title/Abstract] OR
+       tremor oscillations[Title/Abstract] OR GABA[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis, Review]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      essential tremor[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Clinical Trial, Systematic Review]
+    max_results: 25
+
+  cerebellar_tdcs:
+    query: >
+      essential tremor[Title/Abstract] AND
+      (cerebellar transcranial direct current stimulation[Title/Abstract] OR
+       cerebellar tDCS[Title/Abstract] OR cerebellum stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Clinical Trial]
+    max_results: 20
+
+  tacs_protocols:
+    query: >
+      essential tremor[Title/Abstract] AND
+      (transcranial alternating current stimulation[Title/Abstract] OR
+       tACS[Title/Abstract] OR oscillatory interference[Title/Abstract])
+    filters: [Randomized Controlled Trial, Clinical Trial]
+    max_results: 15
+
+  tps_protocols:
+    query: >
+      essential tremor[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract])
+    max_results: 15
+
+  motor_outcomes:
+    query: >
+      essential tremor[Title/Abstract] AND
+      (tremor severity[Title/Abstract] OR spiral drawing[Title/Abstract] OR
+       accelerometry[Title/Abstract]) AND
+      (neuromodulation[Title/Abstract] OR brain stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 20
+
+  assessment_scales:
+    query: >
+      essential tremor[Title/Abstract] AND
+      (TETRAS[Title/Abstract] OR Fahn-Tolosa-Marin tremor scale[Title/Abstract] OR
+       QUEST[Title/Abstract]) AND validation[Title/Abstract]
+    max_results: 10
+
+  safety:
+    query: >
+      essential tremor[Title/Abstract] AND
+      (transcranial direct current stimulation[Title/Abstract] OR
+       non-invasive brain stimulation[Title/Abstract]) AND
+      (safety[Title/Abstract] OR adverse effects[Title/Abstract])
+    max_results: 10
+
+priority_pmids:
+  - "24913495"  # Popa 2013 cerebellar tDCS essential tremor
+  - "29249735"  # Bhatt 2017 cerebellar tDCS tremor review
+  - "26547484"  # Quartarone 2018 cerebellar stimulation movement disorders
+  - "31082466"  # Ni 2019 tACS essential tremor case series
+
+notes: >
+  Cerebellar cathodal tDCS is the primary target, suppressing cerebellar output via
+  Purkinje cell inhibition. M1 cathodal secondary.
+  tACS at tremor frequency (5–12 Hz) shows entrainment effects.
+  High-intensity focused ultrasound (FUS) to VIM thalamus is FDA-cleared but invasive;
+  low-intensity TPS/LIFU is investigational.
+  Distinguish from enhanced physiological tremor and drug-induced tremor.
+
+tps_priority_dois:
+  - doi: "10.1001/jamaneurol.2017.3129"
+    title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology"
+    authors: "V. Krishna, F. Sammartino, A. Rezai"
+    year: 2017
+    study_type: "systematic review"
+    citations: 247
+    takeaway: "Transcranial focused ultrasound shows strong evidence for VIM thalamus targeting in essential tremor; low-intensity variants are under investigation."
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwab et al."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on motor outcomes with a high safety profile in neurological conditions."
+  - doi: "10.1007/s13534-024-00369-0"
+    title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+    authors: "Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim"
+    year: 2024
+    study_type: "systematic review"
+    citations: 32
+    takeaway: "Low-intensity transcranial focused ultrasound shows promising potential for non-invasive neuromodulation targeting subcortical structures."
+  TPS evidence: 24 papers identified (7 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

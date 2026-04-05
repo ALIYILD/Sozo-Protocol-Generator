@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, Send, CheckCircle, Copy } from 'lucide-react';
-import { getProtocol, submitForReview, cloneProtocol } from '../api/protocols';
+import { ArrowLeft, Send, CheckCircle, Copy, FileDown, FileText } from 'lucide-react';
+import { getProtocol, submitForReview, cloneProtocol, exportProtocol } from '../api/protocols';
 import { ProtocolAuditSection } from '../components/protocol/ProtocolAuditSection';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
@@ -13,6 +14,30 @@ export default function ProtocolDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
+  const [exportError, setExportError] = useState<string | null>(null);
+  const [exportingFormat, setExportingFormat] = useState<'docx' | 'pdf' | null>(null);
+
+  const handleExport = async (fmt: 'docx' | 'pdf') => {
+    if (!id) return;
+    setExportError(null);
+    setExportingFormat(fmt);
+    try {
+      const blob = await exportProtocol(id, fmt);
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = `protocol-${id}.${fmt}`;
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      URL.revokeObjectURL(url);
+    } catch {
+      setExportError(`Failed to export as ${fmt.toUpperCase()}. Please try again.`);
+    } finally {
+      setExportingFormat(null);
+    }
+  };
 
   const { data: protocol, isLoading, error } = useQuery({
     queryKey: ['protocol', id],
@@ -248,6 +273,35 @@ export default function ProtocolDetailPage() {
               >
                 View Review Details
               </Button>
+
+              <hr className="border-gray-200" />
+
+              <Button
+                variant="secondary"
+                className="w-full"
+                onClick={() => handleExport('docx')}
+                isLoading={exportingFormat === 'docx'}
+                disabled={exportingFormat !== null}
+              >
+                <FileDown className="mr-2 h-4 w-4" />
+                Export DOCX
+              </Button>
+              <Button
+                variant="secondary"
+                className="w-full"
+                onClick={() => handleExport('pdf')}
+                isLoading={exportingFormat === 'pdf'}
+                disabled={exportingFormat !== null}
+              >
+                <FileText className="mr-2 h-4 w-4" />
+                Export PDF
+              </Button>
+
+              {exportError && (
+                <p className="rounded-md bg-red-50 px-3 py-2 text-xs text-red-600">
+                  {exportError}
+                </p>
+              )}
             </div>
           </Card>
 

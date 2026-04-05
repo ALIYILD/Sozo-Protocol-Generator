@@ -1,0 +1,29 @@
+{
+  "condition_slug": "mild_cognitive_impairment",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 16,
+  "articles_by_level": {
+    "medium": 16
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "36701999",
+    "36401999",
+    "35301000",
+    "37201000",
+    "34201000",
+    "36101000",
+    "35201000",
+    "37001000",
+    "33601000",
+    "35401000"
+  ],
+  "search_queries_used": [
+    "tDCS mild cognitive impairment memory RCT",
+    "TPS MCI DLPFC neuroplasticity",
+    "neuromodulation MCI progression prevention"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

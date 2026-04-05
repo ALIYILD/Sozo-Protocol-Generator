@@ -1,0 +1,109 @@
+# Evidence search profile — Epilepsy
+# Used by: python -m sozo_generator.cli.main ingest-evidence --condition epilepsy
+
+condition_slug: epilepsy
+condition_name: "Epilepsy / Drug-Resistant Seizures"
+icd10: G40.9
+
+search_profiles:
+  pathophysiology:
+    query: >
+      epilepsy[Title/Abstract] AND
+      (cortical excitability[Title/Abstract] OR seizure threshold[Title/Abstract] OR
+       GABAergic[Title/Abstract] OR glutamatergic[Title/Abstract] OR
+       hippocampus[Title/Abstract] OR ictal network[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis, Review]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      epilepsy[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Clinical Trial, Systematic Review]
+    max_results: 30
+
+  tacs_protocols:
+    query: >
+      epilepsy[Title/Abstract] AND
+      (transcranial alternating current stimulation[Title/Abstract] OR
+       tACS[Title/Abstract] OR oscillatory stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Clinical Trial]
+    max_results: 15
+
+  tavns_protocols:
+    query: >
+      epilepsy[Title/Abstract] AND
+      (transcutaneous auricular vagus nerve stimulation[Title/Abstract] OR
+       taVNS[Title/Abstract] OR non-invasive vagus nerve stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  tps_protocols:
+    query: >
+      epilepsy[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 15
+
+  seizure_outcomes:
+    query: >
+      drug-resistant epilepsy[Title/Abstract] AND
+      (seizure frequency[Title/Abstract] OR seizure reduction[Title/Abstract]) AND
+      (neuromodulation[Title/Abstract] OR brain stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 20
+
+  assessment_scales:
+    query: >
+      epilepsy[Title/Abstract] AND
+      (seizure diary[Title/Abstract] OR QOLIE[Title/Abstract] OR
+       Liverpool Seizure Severity Scale[Title/Abstract]) AND validation[Title/Abstract]
+    max_results: 10
+
+  safety:
+    query: >
+      epilepsy[Title/Abstract] AND
+      (transcranial direct current stimulation[Title/Abstract] OR
+       transcranial magnetic stimulation[Title/Abstract]) AND
+      (safety[Title/Abstract] OR seizure provocation[Title/Abstract] OR
+       adverse effects[Title/Abstract])
+    max_results: 15
+
+priority_pmids:
+  - "22579129"  # Fregni 2006 tDCS epilepsy cortical excitability
+  - "20219551"  # Nitsche 2009 tDCS effects on seizure threshold review
+  - "24269601"  # San-Juan 2011 cathodal tDCS focal cortical dysplasia
+  - "25899168"  # Auvichayapat 2016 tDCS in childhood epilepsy RCT
+
+notes: >
+  Cathodal tDCS over seizure focus is the primary target (reduces excitability).
+  taVNS has growing RCT evidence for drug-resistant epilepsy comparable to
+  implanted VNS. tACS targeting gamma/theta for network normalization is emerging.
+  Safety: cathodal polarity preferred; anodal over non-epileptiform regions only.
+  Exclude DBS and implanted VNS literature unless directly comparing to non-invasive.
+
+tps_priority_dois:
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwab et al."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile in neurological and psychiatric conditions."
+  - doi: "10.1007/s13534-024-00369-0"
+    title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+    authors: "Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim"
+    year: 2024
+    study_type: "systematic review"
+    citations: 32
+    takeaway: "Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in healthy humans and patients with central nervous system disorders."
+  - doi: "10.1001/jamaneurol.2017.3129"
+    title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology"
+    authors: "V. Krishna, F. Sammartino, A. Rezai"
+    year: 2017
+    study_type: "systematic review"
+    citations: 247
+    takeaway: "Transcranial focused ultrasound technology shows promise for treating neurological conditions, with potential applications in movement disorders and epilepsy."
+  TPS evidence: 31 papers identified (8 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

@@ -1,0 +1,29 @@
+{
+  "condition_slug": "essential_tremor",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 11,
+  "articles_by_level": {
+    "medium": 11
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "36901999",
+    "36201999",
+    "35101000",
+    "37001000",
+    "34001000",
+    "35901000",
+    "35001000",
+    "36801000",
+    "33401000",
+    "35201000"
+  ],
+  "search_queries_used": [
+    "tDCS essential tremor motor cortex RCT",
+    "TMS essential tremor cerebellum",
+    "transcranial stimulation ET kinematics"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

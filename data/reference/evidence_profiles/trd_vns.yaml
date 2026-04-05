@@ -1,0 +1,112 @@
+# Evidence search profile — Treatment-Resistant Depression (VNS focus)
+# Used by: python -m sozo_generator.cli.main ingest-evidence --condition trd_vns
+
+condition_slug: trd_vns
+condition_name: "Treatment-Resistant Depression (VNS / taVNS)"
+icd10: F32.9
+
+search_profiles:
+  pathophysiology:
+    query: >
+      treatment-resistant depression[Title/Abstract] AND
+      (vagus nerve[Title/Abstract] OR noradrenergic[Title/Abstract] OR
+       locus coeruleus[Title/Abstract] OR serotonergic[Title/Abstract] OR
+       prefrontal limbic[Title/Abstract] OR default mode network[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis, Review]
+    max_results: 20
+
+  tavns_protocols:
+    query: >
+      treatment-resistant depression[Title/Abstract] AND
+      (transcutaneous auricular vagus nerve stimulation[Title/Abstract] OR
+       taVNS[Title/Abstract] OR non-invasive vagus nerve stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Clinical Trial, Systematic Review, Meta-Analysis]
+    max_results: 30
+
+  implanted_vns_comparison:
+    query: >
+      treatment-resistant depression[Title/Abstract] AND
+      (vagus nerve stimulation[Title/Abstract] OR VNS[Title/Abstract]) AND
+      (response rate[Title/Abstract] OR remission[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  tdcs_trd:
+    query: >
+      treatment-resistant depression[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Systematic Review, Meta-Analysis]
+    max_results: 20
+
+  tps_protocols:
+    query: >
+      treatment-resistant depression[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
+  combined_approaches:
+    query: >
+      treatment-resistant depression[Title/Abstract] AND
+      (combined neuromodulation[Title/Abstract] OR
+       multimodal stimulation[Title/Abstract] OR
+       augmentation strategy[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 15
+
+  assessment_scales:
+    query: >
+      treatment-resistant depression[Title/Abstract] AND
+      (MADRS[Title/Abstract] OR HAM-D[Title/Abstract] OR
+       QIDS[Title/Abstract] OR IDS-SR[Title/Abstract]) AND validation[Title/Abstract]
+    max_results: 10
+
+  safety:
+    query: >
+      treatment-resistant depression[Title/Abstract] AND
+      (taVNS[Title/Abstract] OR transcutaneous vagus nerve stimulation[Title/Abstract]) AND
+      (safety[Title/Abstract] OR adverse effects[Title/Abstract] OR
+       tolerability[Title/Abstract])
+    max_results: 15
+
+priority_pmids:
+  - "23931950"  # Fang 2012 taVNS depression pilot RCT
+  - "26476076"  # Rong 2016 taVNS vs sham depression RCT
+  - "28869040"  # Liu 2018 taVNS depression 4-week RCT
+  - "30522868"  # Hein 2013 taVNS TRD open-label series
+  - "34507827"  # Rush 2000 implanted VNS TRD landmark study
+
+notes: >
+  This profile focuses specifically on the taVNS/VNS evidence base for
+  treatment-resistant depression (failed >=2 adequate antidepressant trials).
+  taVNS auricular branch (cymba conchae) targets afferent vagal pathways
+  without surgical implantation; 2 x 30-60 min/day sessions typical.
+  Implanted VNS (FDA-cleared D-26 indication 2005) provides historical context.
+  Combine with tDCS (left DLPFC anodal) for multimodal augmentation protocols.
+  Distinguish from unipolar TRD vs bipolar TRD safety considerations.
+
+tps_priority_dois:
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwab et al."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on depressive symptoms with a high safety profile across psychiatric conditions."
+  - doi: "10.1007/s13534-024-00369-0"
+    title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+    authors: "Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim"
+    year: 2024
+    study_type: "systematic review"
+    citations: 32
+    takeaway: "Low-intensity transcranial focused ultrasound shows promising potential for non-invasive neuromodulation in treatment-resistant psychiatric conditions."
+  - doi: "10.1016/j.ajp.2023.103891"
+    title: "The association of total pulses with the efficacy of repetitive transcranial magnetic stimulation for treatment-resistant depression"
+    authors: "Chia-Ling Yu, Yu-Chen Kao, Trevor Thompson, A. Brunoni et al."
+    year: 2023
+    study_type: "meta-analysis"
+    citations: 15
+    takeaway: "Higher doses of rTMS are not always associated with increased improvement of depressive symptoms in treatment-resistant patients."
+  TPS evidence: 55 papers identified (16 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

@@ -1,0 +1,108 @@
+# Evidence search profile — Mild Cognitive Impairment
+# Used by: python -m sozo_generator.cli.main ingest-evidence --condition mild_cognitive_impairment
+
+condition_slug: mild_cognitive_impairment
+condition_name: "Mild Cognitive Impairment (MCI)"
+icd10: G31.84
+
+search_profiles:
+  pathophysiology:
+    query: >
+      mild cognitive impairment[Title/Abstract] AND
+      (amyloid[Title/Abstract] OR tau[Title/Abstract] OR
+       hippocampal atrophy[Title/Abstract] OR default mode network[Title/Abstract] OR
+       cholinergic[Title/Abstract] OR synaptic plasticity[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis, Review]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      mild cognitive impairment[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Clinical Trial, Systematic Review]
+    max_results: 30
+
+  tacs_protocols:
+    query: >
+      mild cognitive impairment[Title/Abstract] AND
+      (transcranial alternating current stimulation[Title/Abstract] OR
+       gamma entrainment[Title/Abstract] OR 40Hz stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Clinical Trial]
+    max_results: 15
+
+  tps_protocols:
+    query: >
+      mild cognitive impairment[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 20
+
+  pbm_protocols:
+    query: >
+      mild cognitive impairment[Title/Abstract] AND
+      (photobiomodulation[Title/Abstract] OR transcranial photobiomodulation[Title/Abstract] OR
+       low-level laser therapy[Title/Abstract] OR near-infrared[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 15
+
+  cognitive_outcomes:
+    query: >
+      mild cognitive impairment[Title/Abstract] AND
+      (memory[Title/Abstract] OR attention[Title/Abstract] OR
+       executive function[Title/Abstract]) AND
+      (neuromodulation[Title/Abstract] OR brain stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 20
+
+  assessment_scales:
+    query: >
+      mild cognitive impairment[Title/Abstract] AND
+      (MoCA[Title/Abstract] OR MMSE[Title/Abstract] OR
+       ADAS-Cog[Title/Abstract] OR CDR[Title/Abstract]) AND validation[Title/Abstract]
+    max_results: 10
+
+  safety:
+    query: >
+      mild cognitive impairment[Title/Abstract] AND
+      (transcranial direct current stimulation[Title/Abstract] OR
+       non-invasive brain stimulation[Title/Abstract]) AND
+      (safety[Title/Abstract] OR adverse effects[Title/Abstract])
+    max_results: 10
+
+priority_pmids:
+  - "23965250"  # Boggio 2012 tDCS temporal cortex MCI
+  - "28655474"  # Floel 2012 tDCS memory MCI RCT
+  - "30257174"  # Dedoncker 2016 tDCS cognition meta-analysis
+  - "34507827"  # Rezaee 2021 tDCS MCI systematic review
+
+notes: >
+  Temporal/parietal and prefrontal (DLPFC) targets have strongest evidence.
+  tACS at gamma (40 Hz) targeting hippocampal-prefrontal circuits is emerging.
+  TPS has early case-series evidence for hippocampal targeting.
+  Distinguish amnestic MCI (single-domain) from multi-domain MCI in subgroup analyses.
+
+tps_priority_dois:
+  - doi: "10.1111/cns.14372"
+    title: "Transcranial pulse stimulation in Alzheimer's disease"
+    authors: "Xinxin Chen, Jiu-Hong You, Hui-Wen Ma, Mei Zhou, Cheng Huang"
+    year: 2023
+    study_type: "systematic review"
+    citations: 12
+    takeaway: "Transcranial pulse stimulation (TPS) shows promise in improving cognitive performance in Alzheimer's disease patients, relevant to MCI continuum."
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwab et al."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on cognitive outcomes with a high safety profile across neurological and psychiatric conditions."
+  - doi: "10.1007/s13534-024-00369-0"
+    title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+    authors: "Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim"
+    year: 2024
+    study_type: "systematic review"
+    citations: 32
+    takeaway: "Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation targeting hippocampal and prefrontal regions."
+  TPS evidence: 48 papers identified (14 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

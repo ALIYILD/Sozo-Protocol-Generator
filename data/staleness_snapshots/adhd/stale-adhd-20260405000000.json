@@ -1,0 +1,29 @@
+{
+  "condition_slug": "adhd",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 18,
+  "articles_by_level": {
+    "medium": 18
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "33861948",
+    "34822723",
+    "35346787",
+    "32559498",
+    "36191756",
+    "33619330",
+    "34697862",
+    "37001234",
+    "36499123",
+    "33751234"
+  ],
+  "search_queries_used": [
+    "tDCS ADHD executive function RCT",
+    "transcranial stimulation ADHD attention meta-analysis",
+    "neuromodulation ADHD DLPFC"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

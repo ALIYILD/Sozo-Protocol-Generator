@@ -1,0 +1,29 @@
+{
+  "condition_slug": "fibromyalgia",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 17,
+  "articles_by_level": {
+    "medium": 17
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "37101999",
+    "36001999",
+    "34901000",
+    "36801000",
+    "33801000",
+    "35701000",
+    "34801000",
+    "36601000",
+    "33201000",
+    "35001000"
+  ],
+  "search_queries_used": [
+    "tDCS fibromyalgia pain motor cortex RCT",
+    "transcranial stimulation fibromyalgia central sensitization",
+    "neuromodulation FIQ symptom relief"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

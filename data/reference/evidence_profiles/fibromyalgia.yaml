@@ -1,0 +1,123 @@
+# Evidence search profile — Fibromyalgia
+# Used by: python -m sozo_generator.cli.main ingest-evidence --condition fibromyalgia
+
+condition_slug: fibromyalgia
+condition_name: "Fibromyalgia Syndrome"
+icd10: M79.7
+
+search_profiles:
+  pathophysiology:
+    query: >
+      fibromyalgia[Title/Abstract] AND
+      (central sensitization[Title/Abstract] OR descending pain inhibition[Title/Abstract] OR
+       salience network[Title/Abstract] OR thalamic dysrhythmia[Title/Abstract] OR
+       substance P[Title/Abstract] OR glial activation[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis, Review]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      fibromyalgia[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Clinical Trial, Systematic Review, Meta-Analysis]
+    max_results: 30
+
+  motor_cortex_tdcs:
+    query: >
+      fibromyalgia[Title/Abstract] AND
+      (motor cortex stimulation[Title/Abstract] OR M1 tDCS[Title/Abstract] OR
+       primary motor cortex[Title/Abstract]) AND
+      (pain[Title/Abstract] OR analgesia[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 20
+
+  ces_protocols:
+    query: >
+      fibromyalgia[Title/Abstract] AND
+      (cranial electrotherapy stimulation[Title/Abstract] OR CES[Title/Abstract] OR
+       Alpha-Stim[Title/Abstract])
+    filters: [Randomized Controlled Trial, Meta-Analysis]
+    max_results: 15
+
+  pemf_protocols:
+    query: >
+      fibromyalgia[Title/Abstract] AND
+      (pulsed electromagnetic field[Title/Abstract] OR PEMF[Title/Abstract] OR
+       repetitive transcranial magnetic stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 15
+
+  tps_protocols:
+    query: >
+      fibromyalgia[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract] OR
+       transcranial ultrasound[Title/Abstract])
+    max_results: 15
+
+  sleep_fatigue_outcomes:
+    query: >
+      fibromyalgia[Title/Abstract] AND
+      (sleep quality[Title/Abstract] OR fatigue[Title/Abstract] OR
+       cognitive fog[Title/Abstract]) AND
+      (neuromodulation[Title/Abstract] OR brain stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 15
+
+  assessment_scales:
+    query: >
+      fibromyalgia[Title/Abstract] AND
+      (FIQ[Title/Abstract] OR FIQR[Title/Abstract] OR
+       BPI[Title/Abstract] OR VAS[Title/Abstract] OR
+       widespread pain index[Title/Abstract]) AND validation[Title/Abstract]
+    max_results: 10
+
+  safety:
+    query: >
+      fibromyalgia[Title/Abstract] AND
+      (transcranial direct current stimulation[Title/Abstract] OR
+       cranial electrotherapy stimulation[Title/Abstract]) AND
+      (safety[Title/Abstract] OR adverse effects[Title/Abstract])
+    max_results: 10
+
+priority_pmids:
+  - "16870487"  # Fregni 2006 tDCS fibromyalgia pilot RCT
+  - "22579129"  # Valle 2009 tDCS fibromyalgia 5-session RCT
+  - "22878286"  # Castillo-Saavedra 2016 tDCS fibromyalgia RCT
+  - "25812906"  # Marlow 2013 tDCS chronic pain/fibromyalgia meta-analysis
+  - "23583115"  # Hargrove 2012 CES fibromyalgia RCT
+
+notes: >
+  M1 anodal tDCS has the strongest evidence base for fibromyalgia pain reduction
+  (5–10 sessions); effect maintained at follow-up in several RCTs.
+  DLPFC cathodal as adjunct for affective/cognitive dimensions of pain.
+  CES shows evidence for comorbid anxiety, sleep, and fatigue components.
+  PEMF literature overlaps with general musculoskeletal pain; distinguish central
+  sensitization phenotype from peripheral pain generators.
+  Note: chronic_pain.yaml covers overlapping conditions; this file focuses on
+  the primary fibromyalgia diagnosis and ACR 2010/2016 criteria populations.
+
+tps_priority_dois:
+  - doi: "10.1001/jamaneurol.2017.3129"
+    title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology"
+    authors: "V. Krishna, F. Sammartino, A. Rezai"
+    year: 2017
+    study_type: "systematic review"
+    citations: 247
+    takeaway: "Transcranial focused ultrasound shows potential for treating central sensitization pain conditions via thalamic and anterior cingulate targeting."
+  - doi: "10.1007/s13534-024-00369-0"
+    title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+    authors: "Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim"
+    year: 2024
+    study_type: "systematic review"
+    citations: 32
+    takeaway: "Low-intensity transcranial focused ultrasound shows promising potential for non-invasive neuromodulation in chronic pain and central sensitization."
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwab et al."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on pain and mental health outcomes with a high safety profile."
+  TPS evidence: 19 papers identified (5 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

@@ -1,0 +1,29 @@
+{
+  "condition_slug": "insomnia",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 14,
+  "articles_by_level": {
+    "medium": 14
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "35701999",
+    "36801999",
+    "34901000",
+    "37201000",
+    "33901000",
+    "36001000",
+    "35101000",
+    "37001000",
+    "34301000",
+    "36201000"
+  ],
+  "search_queries_used": [
+    "CES insomnia sleep quality RCT",
+    "tACS insomnia slow oscillation",
+    "transcranial stimulation insomnia slow-wave"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

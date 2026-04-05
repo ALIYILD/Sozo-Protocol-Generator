@@ -373,11 +373,11 @@ def _enrich_abstracts_s2(
 
         try:
             if doi:
-                results = s2_client.fetch_by_doi(doi)
-                s2_paper = results[0] if results else None
+                # fetch_by_doi returns Optional[PaperRaw], not a list.
+                s2_paper = s2_client.fetch_by_doi(doi)
             elif pmid:
-                results = s2_client.fetch_by_pmid(pmid)
-                s2_paper = results[0] if results else None
+                # Use fetch_by_paper_id with "PMID:<id>" prefix (no fetch_by_pmid).
+                s2_paper = s2_client.fetch_by_paper_id(f"PMID:{pmid}")
         except Exception as exc:  # noqa: BLE001
             logger.debug("[%s] S2 lookup failed for %r: %s", slug, rec.paper.title[:50], exc)
 
@@ -448,8 +448,8 @@ def _fetch_paper_s2_doi(
     if not s2_client:
         return None
     try:
-        results = s2_client.fetch_by_doi(doi)
-        return results[0] if results else None
+        # SemanticScholarClient.fetch_by_doi returns Optional[PaperRaw], not a list.
+        return s2_client.fetch_by_doi(doi)
     except Exception as exc:  # noqa: BLE001
         logger.debug("[%s] S2 DOI fetch failed for %r: %s", slug, doi, exc)
         return None
@@ -463,8 +463,9 @@ def _fetch_paper_s2_pmid(
     if not s2_client:
         return None
     try:
-        results = s2_client.fetch_by_pmid(pmid)
-        return results[0] if results else None
+        # SemanticScholarClient.fetch_by_paper_id supports "PMID:<id>" prefixed IDs.
+        # There is no separate fetch_by_pmid method; use fetch_by_paper_id instead.
+        return s2_client.fetch_by_paper_id(f"PMID:{pmid}")
     except Exception as exc:  # noqa: BLE001
         logger.debug("[%s] S2 PMID fetch failed for %r: %s", slug, pmid, exc)
         return None

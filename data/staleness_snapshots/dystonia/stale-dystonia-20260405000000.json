@@ -1,0 +1,29 @@
+{
+  "condition_slug": "dystonia",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 10,
+  "articles_by_level": {
+    "low": 10
+  },
+  "overall_evidence_level": "low",
+  "top_pmids": [
+    "37001999",
+    "36101999",
+    "35001000",
+    "36901000",
+    "33901000",
+    "35801000",
+    "34901000",
+    "36701000",
+    "33301000",
+    "35101000"
+  ],
+  "search_queries_used": [
+    "tDCS dystonia motor cortex RCT",
+    "TMS cervical dystonia meta-analysis",
+    "neuromodulation focal dystonia SMA"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

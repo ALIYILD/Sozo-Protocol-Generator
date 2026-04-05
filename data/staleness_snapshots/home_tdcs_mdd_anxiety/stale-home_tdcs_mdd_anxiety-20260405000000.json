@@ -1,0 +1,29 @@
+{
+  "condition_slug": "home_tdcs_mdd_anxiety",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 11,
+  "articles_by_level": {
+    "medium": 11
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "36101999",
+    "36901999",
+    "34801000",
+    "37001000",
+    "33801000",
+    "35901000",
+    "35001000",
+    "36901000",
+    "34201000",
+    "36101000"
+  ],
+  "search_queries_used": [
+    "home tDCS depression remote monitoring RCT",
+    "self-administered tDCS MDD anxiety safety",
+    "telehealth tDCS major depressive disorder"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

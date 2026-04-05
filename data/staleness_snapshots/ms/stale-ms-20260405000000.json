@@ -1,0 +1,29 @@
+{
+  "condition_slug": "ms",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 13,
+  "articles_by_level": {
+    "medium": 13
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "35401999",
+    "36501999",
+    "34802000",
+    "37002000",
+    "33702000",
+    "36302000",
+    "35702000",
+    "37402000",
+    "34202000",
+    "36602000"
+  ],
+  "search_queries_used": [
+    "tDCS multiple sclerosis fatigue RCT",
+    "neuromodulation MS motor rehabilitation",
+    "transcranial stimulation MS cognitive"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

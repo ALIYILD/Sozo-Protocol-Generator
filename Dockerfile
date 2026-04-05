@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt scipy httpx
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy all source and data
 COPY src/ ./src/
@@ -51,7 +51,8 @@ RUN mkdir -p outputs/documents outputs/manifests outputs/visuals \
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONPATH=/app/src
-ENV DATABASE_URL=sqlite+aiosqlite:///app/sozo.db
+# SQLite on persistent Fly.io volume — matches fly.toml DATABASE_URL
+ENV DATABASE_URL=sqlite+aiosqlite:////app/data/sozo.db
 
 EXPOSE 8080
 

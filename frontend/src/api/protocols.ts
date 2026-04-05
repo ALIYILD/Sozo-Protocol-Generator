@@ -71,9 +71,11 @@ export async function cloneProtocol(id: string): Promise<Record<string, unknown>
 export async function exportProtocol(
   id: string,
   format: 'docx' | 'pdf',
-): Promise<Record<string, unknown>> {
-  const res = await api.get<Record<string, unknown>>(`/protocols/${id}/export/${format}`);
-  return res.data;
+): Promise<Blob> {
+  const res = await api.get(`/protocols/${id}/export/${format}`, {
+    responseType: 'blob',
+  });
+  return res.data as Blob;
 }
 
 export async function getProtocolEvidence(id: string): Promise<Record<string, unknown>> {

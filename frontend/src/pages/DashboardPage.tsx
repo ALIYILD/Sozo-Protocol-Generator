@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { Plus, BookOpen, AlertCircle, CheckCircle, Clock, Shield, Sliders } from 'lucide-react';
+import { Plus, BookOpen, AlertCircle, CheckCircle, Clock, Shield, Sliders, FileText, Activity } from 'lucide-react';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import Table, { type Column } from '../components/ui/Table';
+import EmptyState from '../components/ui/EmptyState';
 import {
   listConditions,
   getStalenessReport,
@@ -246,22 +247,30 @@ export default function DashboardPage() {
       </div>
 
       {/* Evidence freshness by condition */}
-      {staleness && staleness.conditions.length > 0 && (
-        <Card title="Evidence Freshness by Condition">
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-            {staleness.conditions.map((c: StalenessCondition) => (
-              <div
-                key={c.slug}
-                className="flex items-center justify-between rounded-md border border-gray-100 px-3 py-2"
-              >
-                <span className="text-sm text-gray-700 truncate mr-2">{c.name}</span>
-                <span className={`text-xs font-medium capitalize ${freshnessColor(c.freshness)}`}>
-                  {c.freshness}
-                </span>
-              </div>
-            ))}
-          </div>
-        </Card>
+      {showStaleness && staleness && (
+        staleness.conditions.length > 0 ? (
+          <Card title="Evidence Freshness by Condition">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+              {staleness.conditions.map((c: StalenessCondition) => (
+                <div
+                  key={c.slug}
+                  className="flex items-center justify-between rounded-md border border-gray-100 px-3 py-2"
+                >
+                  <span className="text-sm text-gray-700 truncate mr-2">{c.name}</span>
+                  <span className={`text-xs font-medium capitalize ${freshnessColor(c.freshness)}`}>
+                    {c.freshness}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </Card>
+        ) : (
+          <EmptyState
+            icon={Activity}
+            title="No evidence data yet"
+            description="Evidence freshness metrics will appear here once conditions have been indexed."
+          />
+        )
       )}
 
       {showStaleness && cockpitConditions && cockpitConditions.length > 0 && (
@@ -278,15 +287,30 @@ export default function DashboardPage() {
       )}
 
       {/* Recent protocols */}
-      <Card title="Recent Protocols">
-        <Table
-          columns={protocolColumns}
-          data={recentProtocols as (ProtocolListItem & Record<string, unknown>)[]}
-          keyExtractor={(row) => row.protocol_id as string}
-          onRowClick={(row) => navigate(`/protocols/${row.protocol_id}`)}
-          emptyMessage="No protocols yet. Create your first one!"
-        />
-      </Card>
+      {recentProtocols.length > 0 ? (
+        <Card title="Recent Protocols">
+          <Table
+            columns={protocolColumns}
+            data={recentProtocols as (ProtocolListItem & Record<string, unknown>)[]}
+            keyExtractor={(row) => row.protocol_id as string}
+            onRowClick={(row) => navigate(`/protocols/${row.protocol_id}`)}
+            emptyMessage="No protocols yet. Create your first one!"
+          />
+        </Card>
+      ) : (
+        <div>
+          <h3 className="text-lg font-semibold text-sozo-text mb-3">Recent Protocols</h3>
+          <EmptyState
+            icon={FileText}
+            title="No protocols yet"
+            description="Generate your first protocol to get started."
+            action={{
+              label: 'Create Protocol',
+              onClick: () => navigate('/protocols/new'),
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

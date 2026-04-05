@@ -1,0 +1,29 @@
+{
+  "condition_slug": "ptsd",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 14,
+  "articles_by_level": {
+    "medium": 14
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "35201999",
+    "36302000",
+    "34902001",
+    "37102002",
+    "33802003",
+    "36402004",
+    "35802005",
+    "37502006",
+    "34402007",
+    "36702008"
+  ],
+  "search_queries_used": [
+    "tDCS PTSD prefrontal cortex RCT",
+    "neuromodulation PTSD taVNS",
+    "transcranial stimulation PTSD anxiety"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "condition_slug": "tinnitus",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 17,
+  "articles_by_level": {
+    "medium": 17
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "35601999",
+    "36701999",
+    "35001000",
+    "37301000",
+    "34001000",
+    "36101000",
+    "35201000",
+    "37101000",
+    "34401000",
+    "36301000"
+  ],
+  "search_queries_used": [
+    "tDCS tinnitus temporal cortex RCT",
+    "TMS tinnitus auditory cortex meta-analysis",
+    "neuromodulation tinnitus DLPFC"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

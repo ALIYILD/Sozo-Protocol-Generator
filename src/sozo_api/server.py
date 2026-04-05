@@ -244,6 +244,93 @@ def create_app() -> FastAPI:
             json_envelope["image_path"] = response.image_path
         return JSONResponse(content=json_envelope)
 
+    # ── Visuals Library (pre-rendered PNGs) ──────────────────────────
+
+    _VISUALS_OUTPUT_DIR = Path(__file__).resolve().parents[2] / "outputs" / "visuals"
+
+    _VISUAL_TYPE_MAP = {
+        "brain_map": "Brain Map",
+        "network_diagram": "Network Diagram",
+        "symptom_flow": "Symptom Flow",
+        "patient_journey": "Patient Journey",
+    }
+
+    def _condition_display_name(slug: str) -> str:
+        """Convert slug to a human-readable name."""
+        return slug.replace("_", " ").title()
+
+    def _infer_visual_type(filename: str) -> str:
+        """Derive a visual type key from a filename."""
+        stem = filename.replace(".png", "")
+        for key in _VISUAL_TYPE_MAP:
+            if stem.endswith(key):
+                return key
+        # Fallback: use the part after the condition slug
+        parts = stem.split("_")
+        if len(parts) >= 2:
+            return "_".join(parts[1:])
+        return "other"
+
+    @application.get("/api/visuals/library")
+    async def list_visuals_library(condition: str = "", visual_type: str = "") -> dict:
+        """Return a manifest of all pre-rendered PNG visuals in outputs/visuals/.
+
+        Each entry has: condition, condition_name, visual_type, visual_type_label,
+        filename, url (relative path for browser fetch).
+        """
+        from fastapi.responses import JSONResponse as _JSON
+
+        items: list[dict] = []
+
+        if not _VISUALS_OUTPUT_DIR.exists():
+            return {"items": items, "total": 0}
+
+        for cond_dir in sorted(_VISUALS_OUTPUT_DIR.iterdir()):
+            if not cond_dir.is_dir():
+                continue
+            cond_slug = cond_dir.name
+            if condition and cond_slug != condition:
+                continue
+
+            # PNGs may sit directly in cond_dir OR in cond_dir/visuals/
+            search_dirs = [cond_dir, cond_dir / "visuals"]
+            for search_dir in search_dirs:
+                if not search_dir.is_dir():
+                    continue
+                for png in sorted(search_dir.glob("*.png")):
+                    vtype = _infer_visual_type(png.name)
+                    if visual_type and vtype != visual_type:
+                        continue
+                    # Build a URL the frontend can use to fetch the image
+                    rel = png.relative_to(_VISUALS_OUTPUT_DIR)
+                    url = f"/api/visuals/file/{rel.as_posix()}"
+                    items.append({
+                        "condition": cond_slug,
+                        "condition_name": _condition_display_name(cond_slug),
+                        "visual_type": vtype,
+                        "visual_type_label": _VISUAL_TYPE_MAP.get(vtype, vtype.replace("_", " ").title()),
+                        "filename": png.name,
+                        "url": url,
+                    })
+
+        return {"items": items, "total": len(items)}
+
+    @application.get("/api/visuals/file/{file_path:path}")
+    async def serve_visual_file(file_path: str) -> Any:
+        """Serve a pre-rendered PNG from outputs/visuals/."""
+        from fastapi.responses import FileResponse as _FR
+        import re as _re
+
+        # Safety: reject any path traversal attempts
+        if ".." in file_path or _re.search(r"[\\:]", file_path):
+            raise HTTPException(status_code=400, detail="Invalid path")
+
+        abs_path = _VISUALS_OUTPUT_DIR / file_path
+        if not abs_path.exists() or not abs_path.is_file():
+            raise HTTPException(status_code=404, detail="Visual not found")
+
+        return _FR(str(abs_path), media_type="image/png")
+
     # ── Generation ────────────────────────────────────────────────────
 
     @application.post(

@@ -1,3 +1,6 @@
+# Local development only — this Compose stack uses PostgreSQL + Redis + Celery.
+# The Fly.io production deployment uses SQLite (see fly.toml and Dockerfile).
+# To run against SQLite locally, use the app directly: streamlit run app.py
 version: "3.9"
 
 services:

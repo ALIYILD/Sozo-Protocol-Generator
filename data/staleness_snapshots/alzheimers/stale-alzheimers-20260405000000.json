@@ -1,0 +1,29 @@
+{
+  "condition_slug": "alzheimers",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 21,
+  "articles_by_level": {
+    "medium": 21
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "35201234",
+    "36702345",
+    "37801456",
+    "34501234",
+    "33201234",
+    "36891234",
+    "35671234",
+    "37121234",
+    "34891234",
+    "36001234"
+  ],
+  "search_queries_used": [
+    "tDCS Alzheimers disease cognitive RCT",
+    "TPS Alzheimers neuromodulation DLPFC",
+    "transcranial stimulation dementia memory"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

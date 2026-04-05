@@ -272,17 +272,33 @@ def _apply_extraction(
         return rec
 
     try:
+        # Map LLM response keys → PICOExtract model fields.
+        # The LLM schema uses "primary_outcome" / "secondary_outcomes" /
+        # "outcome_direction" / "study_design" / "extraction_notes" but the
+        # PICOExtract model stores outcomes in outcomes_primary / outcomes_secondary
+        # and does not have outcome_direction / study_design / extraction_notes fields.
+        primary_outcomes_text = raw.get("primary_outcome") or raw.get("outcomes_primary")
+        secondary_text = raw.get("secondary_outcomes") or raw.get("outcomes_secondary")
+        if isinstance(secondary_text, list):
+            secondary_text = "; ".join(str(s) for s in secondary_text if s) or None
+        result_summary = raw.get("result_summary")
+        # Fold outcome_direction into result_summary when there is no dedicated field.
+        outcome_dir = raw.get("outcome_direction")
+        if outcome_dir and not result_summary:
+            result_summary = f"Outcome direction: {outcome_dir}"
+
         pico = PICOExtract(
             population=raw.get("population"),
+            population_n=raw.get("sample_size"),
             intervention=raw.get("intervention"),
             comparator=raw.get("comparator"),
-            primary_outcome=raw.get("primary_outcome"),
-            secondary_outcomes=raw.get("secondary_outcomes") or [],
-            outcome_direction=raw.get("outcome_direction"),  # type: ignore[arg-type]
-            sample_size=raw.get("sample_size"),
-            study_design=raw.get("study_design"),
+            outcomes_primary=primary_outcomes_text,
+            outcomes_secondary=secondary_text,
+            result_summary=result_summary,
             extraction_confidence=raw.get("extraction_confidence"),  # type: ignore[arg-type]
-            extraction_notes=raw.get("extraction_notes"),
+            relevance_score=5 if raw.get("is_relevant", True) else 1,
+            irrelevant=not bool(raw.get("is_relevant", True)),
+            irrelevance_reason=raw.get("irrelevance_reason"),
         )
     except (ValidationError, TypeError) as exc:
         logger.warning("PICO validation failed for %r: %s", rec.paper.title[:60], exc)
@@ -291,18 +307,49 @@ def _apply_extraction(
     protocol_params: Optional[ProtocolParameters] = None
     if raw.get("modality"):
         try:
+            # Map LLM response keys → ProtocolParameters model fields.
+            # "laterality" and "pulse_width_us" are not on the model; fold them
+            # into existing fields or drop gracefully.
+            laterality = raw.get("laterality")
+            target_region = raw.get("target_region")
+            if laterality and target_region:
+                target_region = f"{laterality} {target_region}"
+            elif laterality:
+                target_region = laterality
+
+            # weeks_total → sessions_total proxy when sessions_total missing
+            sessions_total = raw.get("sessions_total")
+            if sessions_total is None:
+                weeks = raw.get("weeks_total")
+                spw = raw.get("sessions_per_week")
+                if weeks is not None and spw is not None:
+                    try:
+                        sessions_total = int(float(weeks) * float(spw))
+                    except (TypeError, ValueError):
+                        pass
+
+            # intensity: accept numeric from LLM; store as float in intensity_value,
+            # then build human-readable string for the intensity field.
+            raw_intensity = raw.get("intensity")
+            intensity_value: Optional[float] = None
+            intensity_str: Optional[str] = None
+            if raw_intensity is not None:
+                try:
+                    intensity_value = float(raw_intensity)
+                    intensity_str = str(raw_intensity)
+                except (TypeError, ValueError):
+                    intensity_str = str(raw_intensity)
+
             protocol_params = ProtocolParameters(
                 modality=raw.get("modality"),
-                target_region=raw.get("target_region"),
-                laterality=raw.get("laterality"),
+                target_region=target_region,
                 frequency_hz=raw.get("frequency_hz"),
-                intensity=raw.get("intensity"),
-                intensity_unit=raw.get("intensity_unit"),
-                pulse_width_us=raw.get("pulse_width_us"),
-                sessions_total=raw.get("sessions_total"),
+                intensity=intensity_str,
+                intensity_value=intensity_value,
+                intensity_unit=raw.get("intensity_unit"),  # type: ignore[arg-type]
+                sessions_total=sessions_total,
                 sessions_per_week=raw.get("sessions_per_week"),
                 session_duration_min=raw.get("session_duration_min"),
-                weeks_total=raw.get("weeks_total"),
             )
         except (ValidationError, TypeError) as exc:
             logger.warning(
@@ -319,7 +366,7 @@ def _apply_extraction(
             "pico": pico,
             "protocol_params": protocol_params,
             "included": is_relevant,
-            "exclusion_reason": exclusion_reason,
+            "exclusion_reason": exclusion_reason or pico.irrelevance_reason,
         }
     )
 

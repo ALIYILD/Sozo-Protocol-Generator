@@ -1,0 +1,29 @@
+{
+  "condition_slug": "chronic_pain",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 23,
+  "articles_by_level": {
+    "high": 23
+  },
+  "overall_evidence_level": "high",
+  "top_pmids": [
+    "34201234",
+    "36101234",
+    "35101234",
+    "37301234",
+    "33701234",
+    "36601234",
+    "35601234",
+    "37401234",
+    "34501234",
+    "36901234"
+  ],
+  "search_queries_used": [
+    "tDCS chronic pain motor cortex RCT",
+    "neuromodulation chronic pain central sensitization",
+    "transcranial stimulation pain meta-analysis"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

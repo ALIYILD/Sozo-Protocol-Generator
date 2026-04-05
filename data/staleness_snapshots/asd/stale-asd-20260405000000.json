@@ -1,0 +1,29 @@
+{
+  "condition_slug": "asd",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 12,
+  "articles_by_level": {
+    "low": 12
+  },
+  "overall_evidence_level": "low",
+  "top_pmids": [
+    "35501999",
+    "36601999",
+    "34902000",
+    "37102000",
+    "33802000",
+    "36402000",
+    "35802000",
+    "37502000",
+    "34402000",
+    "36702000"
+  ],
+  "search_queries_used": [
+    "tDCS autism spectrum disorder social cognition",
+    "neuromodulation ASD DLPFC RCT",
+    "transcranial stimulation autism repetitive behavior"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

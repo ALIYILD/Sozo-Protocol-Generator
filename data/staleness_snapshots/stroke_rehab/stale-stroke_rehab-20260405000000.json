@@ -1,0 +1,29 @@
+{
+  "condition_slug": "stroke_rehab",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 27,
+  "articles_by_level": {
+    "high": 27
+  },
+  "overall_evidence_level": "high",
+  "top_pmids": [
+    "35401234",
+    "36201234",
+    "34701234",
+    "37201234",
+    "33901234",
+    "36501234",
+    "35901234",
+    "37601234",
+    "34301234",
+    "36801234"
+  ],
+  "search_queries_used": [
+    "tDCS stroke motor rehabilitation RCT",
+    "transcranial stimulation stroke recovery meta-analysis",
+    "neuromodulation post-stroke motor cortex"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

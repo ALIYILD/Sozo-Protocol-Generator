@@ -10,7 +10,10 @@ import EvidenceExplorerPage from './pages/EvidenceExplorerPage';
 import SafetyCheckPage from './pages/SafetyCheckPage';
 import PersonalizationPage from './pages/PersonalizationPage';
 import AuditLogPage from './pages/AuditLogPage';
-import PlaceholderPage from './pages/PlaceholderPage';
+import VisualsPage from './pages/VisualsPage';
+import PatientsListPage from './pages/PatientsListPage';
+import PatientDetailPage from './pages/PatientDetailPage';
+import PatientEEGPage from './pages/PatientEEGPage';
 import { ProtectedRoute, RequireRoles, ROLES_AUDIT_AND_OPS } from './auth';
 
 export default function App() {
@@ -34,11 +37,12 @@ export default function App() {
         <Route path="evidence" element={<EvidenceExplorerPage />} />
         <Route path="safety" element={<SafetyCheckPage />} />
         <Route path="personalization" element={<PersonalizationPage />} />
+        <Route path="visuals" element={<VisualsPage />} />
 
-        {/* V2 placeholders */}
-        <Route path="patients" element={<PlaceholderPage />} />
-        <Route path="patients/:id" element={<PlaceholderPage />} />
-        <Route path="patients/:id/eeg" element={<PlaceholderPage />} />
+        {/* Patients */}
+        <Route path="patients" element={<PatientsListPage />} />
+        <Route path="patients/:id" element={<PatientDetailPage />} />
+        <Route path="patients/:id/eeg" element={<PatientEEGPage />} />
 
         <Route
           path="admin/audit"

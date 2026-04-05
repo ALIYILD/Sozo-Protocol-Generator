@@ -1,0 +1,29 @@
+{
+  "condition_slug": "ces_alphastem",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 13,
+  "articles_by_level": {
+    "medium": 13
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "36401999",
+    "36701999",
+    "35601000",
+    "37501000",
+    "34501000",
+    "36401000",
+    "35501000",
+    "37301000",
+    "33901000",
+    "35701000"
+  ],
+  "search_queries_used": [
+    "cranial electrotherapy stimulation anxiety RCT",
+    "Alpha-Stim CES insomnia depression",
+    "CES FDA cleared anxiety pain"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

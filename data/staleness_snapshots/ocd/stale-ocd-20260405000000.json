@@ -1,0 +1,29 @@
+{
+  "condition_slug": "ocd",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 16,
+  "articles_by_level": {
+    "medium": 16
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "35301234",
+    "36401234",
+    "35101999",
+    "37201999",
+    "33901999",
+    "36501999",
+    "35901999",
+    "37601999",
+    "34301999",
+    "36801999"
+  ],
+  "search_queries_used": [
+    "tDCS OCD SMA motor cortex RCT",
+    "neuromodulation OCD TMS meta-analysis",
+    "transcranial stimulation OCD prefrontal"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

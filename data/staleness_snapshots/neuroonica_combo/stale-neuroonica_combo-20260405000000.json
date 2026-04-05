@@ -1,0 +1,29 @@
+{
+  "condition_slug": "neuroonica_combo",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 8,
+  "articles_by_level": {
+    "low": 8
+  },
+  "overall_evidence_level": "low",
+  "top_pmids": [
+    "36201999",
+    "37001999",
+    "34701000",
+    "36801000",
+    "33701000",
+    "35801000",
+    "34901000",
+    "36801000",
+    "34101000",
+    "36001000"
+  ],
+  "search_queries_used": [
+    "tDCS neurofeedback combination ADHD RCT",
+    "combined neuromodulation EEG biofeedback depression",
+    "tDCS NFB motor rehabilitation"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

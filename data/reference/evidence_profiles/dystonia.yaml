@@ -1,0 +1,104 @@
+# Evidence search profile — Dystonia
+# Used by: python -m sozo_generator.cli.main ingest-evidence --condition dystonia
+
+condition_slug: dystonia
+condition_name: "Dystonia (Focal and Generalized)"
+icd10: G24.9
+
+search_profiles:
+  pathophysiology:
+    query: >
+      dystonia[Title/Abstract] AND
+      (basal ganglia[Title/Abstract] OR sensorimotor cortex[Title/Abstract] OR
+       maladaptive plasticity[Title/Abstract] OR inhibitory deficit[Title/Abstract] OR
+       cerebellum[Title/Abstract] OR striatum[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis, Review]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      dystonia[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Clinical Trial, Systematic Review]
+    max_results: 25
+
+  focal_dystonia_stimulation:
+    query: >
+      (focal dystonia[Title/Abstract] OR writer's cramp[Title/Abstract] OR
+       cervical dystonia[Title/Abstract] OR blepharospasm[Title/Abstract]) AND
+      (non-invasive brain stimulation[Title/Abstract] OR
+       transcranial direct current stimulation[Title/Abstract] OR
+       transcranial magnetic stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 25
+
+  tps_protocols:
+    query: >
+      dystonia[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract])
+    max_results: 15
+
+  motor_outcomes:
+    query: >
+      dystonia[Title/Abstract] AND
+      (motor learning[Title/Abstract] OR sensorimotor integration[Title/Abstract] OR
+       cortical plasticity[Title/Abstract]) AND
+      neuromodulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 15
+
+  assessment_scales:
+    query: >
+      dystonia[Title/Abstract] AND
+      (Burke-Fahn-Marsden dystonia rating[Title/Abstract] OR
+       TWSTRS[Title/Abstract] OR Toronto Western Spasmodic Torticollis[Title/Abstract] OR
+       Arm Dystonia Disability Scale[Title/Abstract]) AND validation[Title/Abstract]
+    max_results: 10
+
+  safety:
+    query: >
+      dystonia[Title/Abstract] AND
+      (transcranial direct current stimulation[Title/Abstract] OR
+       non-invasive brain stimulation[Title/Abstract]) AND
+      (safety[Title/Abstract] OR adverse effects[Title/Abstract])
+    max_results: 10
+
+priority_pmids:
+  - "16227393"  # Siebner 1999 tDCS writer's cramp cortical excitability
+  - "23083783"  # Quartarone 2012 plasticity dystonia review
+  - "20673763"  # Hosseini 2011 tDCS focal hand dystonia RCT
+  - "25982428"  # Benninger 2011 tDCS cervical dystonia pilot
+
+notes: >
+  M1 cathodal tDCS to suppress pathologically increased cortical excitability is
+  the primary rationale. Cerebellar cathodal tDCS is a secondary target given
+  cerebellar-basal ganglia circuit involvement.
+  Focal hand dystonia (musician's cramp, writer's cramp) has the most evidence.
+  Cervical dystonia evidence is largely open-label.
+  Evidence base is smaller than tremor/Parkinson's; realistic evidence level C-D.
+
+tps_priority_dois:
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwab et al."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on motor outcomes with a high safety profile across neurological conditions."
+  - doi: "10.1001/jamaneurol.2017.3129"
+    title: "A Review of the Current Therapies, Challenges, and Future Directions of Transcranial Focused Ultrasound Technology"
+    authors: "V. Krishna, F. Sammartino, A. Rezai"
+    year: 2017
+    study_type: "systematic review"
+    citations: 247
+    takeaway: "Transcranial focused ultrasound shows potential for targeting deep motor circuits relevant to dystonia and movement disorders."
+  - doi: "10.1007/s13534-024-00369-0"
+    title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+    authors: "Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim"
+    year: 2024
+    study_type: "systematic review"
+    citations: 32
+    takeaway: "Low-intensity transcranial focused ultrasound shows promising potential for non-invasive neuromodulation in movement disorders."
+  TPS evidence: 12 papers identified (3 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

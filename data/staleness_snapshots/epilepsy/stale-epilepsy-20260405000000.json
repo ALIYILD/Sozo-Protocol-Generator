@@ -1,0 +1,29 @@
+{
+  "condition_slug": "epilepsy",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 14,
+  "articles_by_level": {
+    "medium": 14
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "36601999",
+    "36501999",
+    "35401000",
+    "37301000",
+    "34301000",
+    "36201000",
+    "35301000",
+    "37101000",
+    "33701000",
+    "35501000"
+  ],
+  "search_queries_used": [
+    "tDCS epilepsy seizure reduction RCT",
+    "transcranial stimulation refractory seizure",
+    "VNS epilepsy meta-analysis adjunct"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

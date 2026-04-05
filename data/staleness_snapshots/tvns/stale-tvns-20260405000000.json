@@ -1,0 +1,29 @@
+{
+  "condition_slug": "tvns",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 16,
+  "articles_by_level": {
+    "medium": 16
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "36301999",
+    "36801999",
+    "35701000",
+    "37601000",
+    "34601000",
+    "36501000",
+    "35601000",
+    "37401000",
+    "34001000",
+    "35801000"
+  ],
+  "search_queries_used": [
+    "taVNS transcutaneous vagus nerve stimulation depression RCT",
+    "non-invasive VNS anxiety meta-analysis",
+    "taVNS inflammation autonomic nervous system"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

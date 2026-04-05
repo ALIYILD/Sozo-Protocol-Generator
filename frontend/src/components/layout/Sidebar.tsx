@@ -9,6 +9,7 @@ import {
   Users,
   ShieldAlert,
   Brain,
+  Images,
 } from 'lucide-react';
 import { canAccessAdmin } from '../../auth/permissions';
 import { useAuth } from '../../hooks/useAuth';
@@ -28,6 +29,7 @@ const navItems: NavItem[] = [
   { to: '/evidence', label: 'Evidence', icon: Search },
   { to: '/safety', label: 'Safety', icon: ShieldAlert },
   { to: '/personalization', label: 'Personalization', icon: Sliders },
+  { to: '/visuals', label: 'Visuals', icon: Images },
   { to: '/patients', label: 'Patients', icon: Users, badge: 'V2' },
   {
     to: '/admin/audit',
@@ -37,16 +39,35 @@ const navItems: NavItem[] = [
   },
 ];
 
-export default function Sidebar() {
+type SidebarProps = {
+  isOpen?: boolean;
+  onClose?: () => void;
+};
+
+export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const { user } = useAuth();
   const visible = navItems.filter(
     (item) => !item.visibleIf || item.visibleIf(user),
   );
 
+  const handleNavClick = () => {
+    if (onClose) onClose();
+  };
+
   return (
-    <aside className="flex h-full w-64 flex-col border-r border-gray-200 bg-white">
+    <aside
+      className={clsx(
+        // Base styles shared across breakpoints
+        'flex h-full w-64 flex-col border-r border-gray-200 bg-white dark:bg-gray-900 dark:border-gray-700',
+        // Mobile: fixed overlay that slides in/out
+        'fixed inset-y-0 left-0 z-50 transform transition-transform duration-300 ease-in-out',
+        isOpen ? 'translate-x-0' : '-translate-x-full',
+        // Desktop: always visible, static in flow
+        'md:translate-x-0 md:static md:inset-auto md:z-auto md:transition-none',
+      )}
+    >
       {/* Logo */}
-      <div className="flex h-16 items-center gap-3 border-b border-gray-200 px-6">
+      <div className="flex h-16 items-center gap-3 border-b border-gray-200 px-6 dark:border-gray-700">
         <Brain className="h-8 w-8 text-sozo-primary" />
         <span className="text-xl font-bold text-sozo-primary">SOZO</span>
       </div>
@@ -58,12 +79,13 @@ export default function Sidebar() {
             key={item.to}
             to={item.to}
             end={item.to === '/'}
+            onClick={handleNavClick}
             className={({ isActive }) =>
               clsx(
                 'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors',
                 isActive
-                  ? 'bg-sozo-primary text-white'
-                  : 'text-gray-700 hover:bg-gray-100',
+                  ? 'bg-sozo-primary text-white dark:bg-gray-800'
+                  : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800',
               )
             }
           >
@@ -79,9 +101,9 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="border-t border-gray-200 px-6 py-4">
-        <p className="text-xs text-gray-400">SOZO Protocol Generator</p>
-        <p className="text-xs text-gray-400">v0.2.0</p>
+      <div className="border-t border-gray-200 px-6 py-4 dark:border-gray-700">
+        <p className="text-xs text-gray-400 dark:text-gray-500">SOZO Protocol Generator</p>
+        <p className="text-xs text-gray-400 dark:text-gray-500">v0.2.0</p>
       </div>
     </aside>
   );

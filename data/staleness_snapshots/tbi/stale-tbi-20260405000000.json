@@ -1,0 +1,29 @@
+{
+  "condition_slug": "tbi",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 15,
+  "articles_by_level": {
+    "medium": 15
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "35001234",
+    "36301234",
+    "34901234",
+    "37101234",
+    "33801234",
+    "36401234",
+    "35801234",
+    "37501234",
+    "34401234",
+    "36701234"
+  ],
+  "search_queries_used": [
+    "tDCS traumatic brain injury cognitive RCT",
+    "neuromodulation TBI rehabilitation",
+    "transcranial stimulation TBI working memory"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

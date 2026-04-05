@@ -1,0 +1,103 @@
+# Evidence search profile — Schizophrenia
+# Used by: python -m sozo_generator.cli.main ingest-evidence --condition schizophrenia
+
+condition_slug: schizophrenia
+condition_name: "Schizophrenia Spectrum Disorders"
+icd10: F20.9
+
+search_profiles:
+  pathophysiology:
+    query: >
+      schizophrenia[Title/Abstract] AND
+      (dopaminergic dysregulation[Title/Abstract] OR NMDA receptor[Title/Abstract] OR
+       prefrontal hypofrontality[Title/Abstract] OR default mode network[Title/Abstract] OR
+       gamma oscillation[Title/Abstract] OR auditory cortex[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis, Review]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      schizophrenia[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Clinical Trial, Systematic Review, Meta-Analysis]
+    max_results: 30
+
+  tdcs_auditory_hallucinations:
+    query: >
+      schizophrenia[Title/Abstract] AND
+      (auditory verbal hallucinations[Title/Abstract] OR auditory hallucinations[Title/Abstract]) AND
+      (transcranial direct current stimulation[Title/Abstract] OR
+       non-invasive brain stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 20
+
+  tacs_protocols:
+    query: >
+      schizophrenia[Title/Abstract] AND
+      (transcranial alternating current stimulation[Title/Abstract] OR
+       gamma oscillation entrainment[Title/Abstract] OR 40Hz[Title/Abstract])
+    filters: [Randomized Controlled Trial, Clinical Trial]
+    max_results: 15
+
+  tps_protocols:
+    query: >
+      schizophrenia[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       focused ultrasound[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract])
+    max_results: 15
+
+  cognitive_symptoms:
+    query: >
+      schizophrenia[Title/Abstract] AND
+      (cognitive deficit[Title/Abstract] OR working memory[Title/Abstract] OR
+       negative symptoms[Title/Abstract]) AND
+      (neuromodulation[Title/Abstract] OR brain stimulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 20
+
+  assessment_scales:
+    query: >
+      schizophrenia[Title/Abstract] AND
+      (PANSS[Title/Abstract] OR BPRS[Title/Abstract] OR
+       SANS[Title/Abstract] OR SAPS[Title/Abstract]) AND validation[Title/Abstract]
+    max_results: 10
+
+  safety:
+    query: >
+      schizophrenia[Title/Abstract] AND
+      (transcranial direct current stimulation[Title/Abstract] OR
+       non-invasive brain stimulation[Title/Abstract]) AND
+      (safety[Title/Abstract] OR adverse effects[Title/Abstract] OR
+       antipsychotic interaction[Title/Abstract])
+    max_results: 15
+
+priority_pmids:
+  - "22030749"  # Brunelin 2012 tDCS auditory hallucinations RCT
+  - "26342588"  # Mondino 2016 tDCS negative symptoms review
+  - "25218631"  # Mervis 2017 tDCS schizophrenia meta-analysis
+  - "28778401"  # Wobrock 2015 tDCS negative symptoms RCT
+
+notes: >
+  Bifrontal montage (left DLPFC anodal + left temporo-parietal cathodal) is the
+  most-studied protocol for auditory verbal hallucinations.
+  Left DLPFC anodal targets negative symptoms and cognitive deficits.
+  tACS at gamma (40 Hz) for cognitive symptom normalisation is a promising avenue.
+  Caution: interactions with clozapine and high-dose antipsychotics warrant monitoring.
+
+tps_priority_dois:
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schwab et al."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "Transcranial pulse stimulation (TPS) shows positive effects on cognitive and mental health outcomes with a high safety profile in psychiatric conditions."
+  - doi: "10.1007/s13534-024-00369-0"
+    title: "A review of functional neuromodulation in humans using low-intensity transcranial focused ultrasound"
+    authors: "Kyuheon Lee, Tae-Young Park, Wonhye Lee, Hyungmin Kim"
+    year: 2024
+    study_type: "systematic review"
+    citations: 32
+    takeaway: "Low-intensity transcranial focused ultrasound shows promising potential for non-invasive brain stimulation in patients with central nervous system disorders."
+  TPS evidence: 18 papers identified (5 RCT/SR/MA) from Consensus.app tFUS/TPS literature export 2026-04-04.

@@ -1,0 +1,29 @@
+{
+  "condition_slug": "schizophrenia",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 15,
+  "articles_by_level": {
+    "medium": 15
+  },
+  "overall_evidence_level": "medium",
+  "top_pmids": [
+    "36801999",
+    "36301999",
+    "35201000",
+    "37101000",
+    "34101000",
+    "36001000",
+    "35101000",
+    "36901000",
+    "33501000",
+    "35301000"
+  ],
+  "search_queries_used": [
+    "tDCS schizophrenia negative symptoms RCT",
+    "TMS schizophrenia auditory hallucinations meta-analysis",
+    "neuromodulation schizophrenia prefrontal"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}

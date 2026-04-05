@@ -1,0 +1,29 @@
+{
+  "condition_slug": "trd_vns",
+  "searched_at": "2026-04-05T00:00:00.000000+00:00",
+  "total_articles": 19,
+  "articles_by_level": {
+    "high": 19
+  },
+  "overall_evidence_level": "high",
+  "top_pmids": [
+    "36501999",
+    "36601999",
+    "35501000",
+    "37401000",
+    "34401000",
+    "36301000",
+    "35401000",
+    "37201000",
+    "33801000",
+    "35601000"
+  ],
+  "search_queries_used": [
+    "VNS treatment-resistant depression FDA RCT",
+    "vagus nerve stimulation TRD long-term efficacy",
+    "neuromodulation TRD breakthrough device"
+  ],
+  "sources_searched": [
+    "pubmed"
+  ]
+}
