@@ -134,20 +134,35 @@ def create_app() -> FastAPI:
     @application.on_event("startup")
     async def _on_startup() -> None:
         logger.info("SOZO API started")
-        # Auto-run Alembic migration on startup (SQLite safe)
+        # Auto-run Alembic migration on startup (SQLite safe).
+        # Run as a subprocess so alembic's env.py can call asyncio.run()
+        # without conflicting with FastAPI's already-running event loop.
         try:
             import os
+            import subprocess
             from pathlib import Path
             alembic_ini = Path(__file__).resolve().parents[2] / "alembic.ini"
             if alembic_ini.exists():
-                from alembic.config import Config
-                from alembic import command
-                config = Config(str(alembic_ini))
-                db_url = os.environ.get("DATABASE_URL", "sqlite:///sozo.db")
-                sync_url = db_url.replace("+aiosqlite", "").replace("+asyncpg", "")
-                config.set_main_option("sqlalchemy.url", sync_url)
-                command.upgrade(config, "head")
-                logger.info("Database migration complete")
+                env = os.environ.copy()
+                env.setdefault("PYTHONPATH", "/app/src")
+                result = subprocess.run(
+                    ["alembic", "-c", str(alembic_ini), "upgrade", "head"],
+                    cwd=str(alembic_ini.parent),
+                    env=env,
+                    capture_output=True,
+                    text=True,
+                    timeout=60,
+                )
+                if result.returncode == 0:
+                    logger.info("Database migration complete")
+                else:
+                    logger.warning(
+                        "Alembic upgrade returned %s; stderr=%s",
+                        result.returncode,
+                        result.stderr[-500:] if result.stderr else "",
+                    )
+            else:
+                logger.warning("alembic.ini not found at %s", alembic_ini)
         except Exception as exc:
             logger.warning("Auto-migration skipped: %s", exc)
 
