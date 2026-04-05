@@ -34,13 +34,17 @@ class TableIntegrityValidator(BaseDocumentValidator):
         start = time.monotonic()
         issues: list[QAValidationIssue] = []
 
+        # Deduplicate: same asset may appear in document.assets AND block.asset_record
+        checked_ids: set[str] = set()
+
         # Check assets registered at document level
         for ar in document.assets:
-            if ar.asset_type == "table":
+            if ar.asset_type == "table" and ar.asset_id not in checked_ids:
+                checked_ids.add(ar.asset_id)
                 self._check_table_asset(ar, issues)
 
         # Also check inline asset_records embedded in blocks
-        self._check_sections(document.sections, issues)
+        self._check_sections(document.sections, issues, checked_ids)
 
         duration = time.monotonic() - start
         return self._result(
@@ -54,13 +58,18 @@ class TableIntegrityValidator(BaseDocumentValidator):
         self,
         sections: list[CanonicalSection],
         issues: list[QAValidationIssue],
+        checked_ids: set[str] | None = None,
     ) -> None:
+        if checked_ids is None:
+            checked_ids = set()
         for section in sections:
             for block in section.blocks:
-                if block.asset_record and block.asset_record.asset_type == "table":
+                if (block.asset_record and block.asset_record.asset_type == "table"
+                        and block.asset_record.asset_id not in checked_ids):
+                    checked_ids.add(block.asset_record.asset_id)
                     self._check_table_asset(block.asset_record, issues)
             if section.subsections:
-                self._check_sections(section.subsections, issues)
+                self._check_sections(section.subsections, issues, checked_ids)
 
     def _check_table_asset(
         self,
@@ -91,7 +100,11 @@ class TableIntegrityValidator(BaseDocumentValidator):
         headers: list[Any] = source.get("headers", [])
         rows: list[Any] = source.get("rows", [])
 
-        # 0 headers → BLOCK
+        # 0 headers on a pending/unbuilt table is expected — skip
+        if not headers and ar.status not in ("generated", "validated"):
+            return
+
+        # 0 headers on a generated table → BLOCK
         if not headers:
             issues.append(
                 self._issue(

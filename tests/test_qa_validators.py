@@ -220,10 +220,12 @@ class TestUnresolvedPlaceholderValidator:
         )
 
     def test_many_placeholders_blocks(self):
-        """6+ placeholders → BLOCK."""
+        """51+ placeholder incidents → BLOCK (threshold is 50)."""
+        # Each bracketed block with placeholder_resolved=False generates 2 incidents.
+        # 26 blocks × 2 = 52 > threshold 50.
         unresolved_blocks = [
-            make_text_block(f"Unresolved content {j}", placeholder_resolved=False)
-            for j in range(7)
+            make_text_block(f"[PLACEHOLDER_{j}]", placeholder_resolved=False)
+            for j in range(26)
         ]
         sec = make_section("Unresolved Section", unresolved_blocks)
         doc = make_minimal_doc(

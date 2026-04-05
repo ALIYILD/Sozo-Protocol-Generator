@@ -71,23 +71,25 @@ class NumberingConsistencyValidator(BaseDocumentValidator):
         # From blocks embedded in sections
         self._collect_from_sections(document.sections, label_entries, issues)
 
-        # Deduplicate label_entries by label
-        seen_labels: dict[str, list[str]] = defaultdict(list)
+        # Deduplicate label_entries by (label, asset_id) — same asset may appear
+        # in both document.assets and as an embedded block.asset_record.
+        seen_labels: dict[str, set[str]] = defaultdict(set)
         for label, asset_id, asset_type, loc in label_entries:
-            seen_labels[label].append(asset_id)
+            seen_labels[label].add(asset_id)
 
         for label, asset_ids in seen_labels.items():
             if len(asset_ids) > 1:
+                asset_ids_list = sorted(asset_ids)
                 issues.append(
                     self._issue(
                         severity="block",
                         category="duplicate_numbering",
                         message=(
                             f"Numbering label '{label}' is used by multiple "
-                            f"assets: {asset_ids}."
+                            f"assets: {asset_ids_list}."
                         ),
                         location="document",
-                        context={"label": label, "asset_ids": asset_ids},
+                        context={"label": label, "asset_ids": asset_ids_list},
                     )
                 )
 

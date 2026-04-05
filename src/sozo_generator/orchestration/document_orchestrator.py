@@ -443,36 +443,108 @@ class DocumentOrchestrator:
                         logger.warning("Asset register error for %s: %s", asset_id, exc)
 
     def _build_assets(self, condition: Any, variant: str) -> None:
+        """Build all pending assets: figures/charts via VisualAssetBuilder, tables inline."""
+        if condition is None:
+            logger.warning("_build_assets: no condition, skipping")
+            return
         registry = self._get("asset_registry")
         table_builder = self._get("table_builder")
-        condition_slug = condition.slug if condition else "unknown"
 
-        for record in registry.get_pending_assets():
+        # --- Step 1: hydrate blueprint-registered table assets with real data ---
+        _TABLE_BUILDERS = {
+            "protocol_parameters": "build_protocol_parameters_table",
+            "contraindications": "build_contraindications_table",
+            "safety_checklist": "build_contraindications_table",
+            "session_schedule": "build_session_schedule_table",
+            "eeg_positions_by_protocol": "build_stimulation_targets_table",
+            "outcome_measures_schedule": "build_monitoring_outcomes_table",
+            "assessment_tools": "build_assessment_tools_table",
+            "phenotype": "build_phenotype_table",
+            "network_profiles": "build_network_profiles_table",
+            "evidence_summary": "build_evidence_summary_table",
+            "modality_comparison": "build_modality_comparison_table",
+        }
+        for record in list(registry.get_pending_assets()):
+            if record.asset_type != "table":
+                continue
             try:
-                if record.asset_type == "table":
-                    table = table_builder.build_protocol_parameters_table(condition) if condition else None
-                    if table:
-                        registry.update_status(
-                            record.asset_id,
-                            "generated",
-                            output_path=None,
-                        )
-                        # Store table data in source_data for DOCX renderer
-                        record.source_data = {
-                            "headers": table.headers,
-                            "rows": table.rows,
-                            "title": table.title,
-                            "landscape": table.landscape,
-                        }
-                    else:
-                        registry.update_status(record.asset_id, "failed", error_message="No condition data")
-                else:
-                    # Figures/charts: mark as pending — FigureBuilder delegates to visuals
-                    # which may not be available in all environments
-                    registry.update_status(record.asset_id, "failed", error_message="Renderer not invoked")
+                # Determine which table builder to call based on asset_id suffix
+                method_name = None
+                for key, mname in _TABLE_BUILDERS.items():
+                    if key in record.asset_id:
+                        method_name = mname
+                        break
+                if method_name is None:
+                    method_name = "build_protocol_parameters_table"
+                build_fn = getattr(table_builder, method_name, None)
+                if build_fn is None:
+                    build_fn = table_builder.build_protocol_parameters_table
+                table = build_fn(condition)
+                record.source_data = {
+                    "headers": table.headers,
+                    "rows": table.rows,
+                    "title": table.title,
+                    "landscape": table.landscape,
+                    "footer": table.footer,
+                }
+                registry.update_status(record.asset_id, "generated")
             except Exception as exc:
                 registry.update_status(record.asset_id, "failed", error_message=str(exc))
-                logger.warning("Asset build failed [%s]: %s", record.asset_id, exc)
+                logger.warning("Table asset [%s] failed: %s", record.asset_id, exc)
+
+        # --- Step 2: build figures/charts via FigureBuilder + ChartBuilder only ---
+        # (tables were already handled above — skip table registration in VisualAssetBuilder)
+        try:
+            from sozo_generator.assets.figure_builder import FigureBuilder
+            from sozo_generator.assets.chart_builder import ChartBuilder
+            asset_dir = os.path.join(self.output_base_dir, "assets")
+            figure_builder = FigureBuilder(output_dir=asset_dir)
+            chart_builder = ChartBuilder(output_dir=asset_dir)
+            condition_slug = getattr(condition, "slug", "unknown")
+
+            _fig_section_defaults = {
+                "qeeg_topomap": "neuromodulation_targets",
+                "montage_diagram": "protocol_parameters",
+                "network_diagram": "network_involvement",
+                "patient_journey": "patient_pathway",
+                "treatment_timeline": "treatment_protocol",
+                "symptom_flow": "clinical_presentation",
+                "connectivity_map": "network_involvement",
+                "protocol_panel": "protocol_parameters",
+                "brain_map": "neuromodulation_targets",
+                "spectral_topomap": "neuromodulation_targets",
+                "dose_response": "clinical_outcomes",
+                "impedance_map": "protocol_parameters",
+            }
+            for ft, section_target in _fig_section_defaults.items():
+                try:
+                    _, _ = figure_builder.build_and_register(
+                        ft, condition, registry,
+                        section_target=section_target,
+                        variant=variant,
+                    )
+                except Exception as exc:
+                    logger.debug("Figure %s skipped: %s", ft, exc)
+
+            for chart_type, build_fn in [
+                ("evidence_bar", chart_builder.build_evidence_bar_chart),
+                ("session_timeline", chart_builder.build_session_timeline_chart),
+                ("network_radar", chart_builder.build_network_dysfunction_radar),
+            ]:
+                try:
+                    chart, chart_path = build_fn(condition)
+                    rec = registry.register(asset_type="chart", condition_slug=condition_slug,
+                                            section_target="section_charts", renderer_type=chart_type,
+                                            source_data={"chart_type": chart_type}, caption=chart.title,
+                                            variant_tags=[variant])
+                    if chart_path and os.path.exists(chart_path):
+                        registry.update_status(rec.asset_id, "generated", output_path=chart_path)
+                except Exception as exc:
+                    logger.debug("Chart %s skipped: %s", chart_type, exc)
+
+            logger.info("Figures/charts built for %s/%s", condition_slug, variant)
+        except Exception as exc:
+            logger.warning("VisualAssetBuilder failed: %s", exc)
 
     def _save_canonical_document(self, document: Any, output_dir: str) -> str:
         os.makedirs(output_dir, exist_ok=True)
