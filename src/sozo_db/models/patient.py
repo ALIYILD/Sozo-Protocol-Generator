@@ -18,14 +18,14 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import JSONB, UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..base import Base, UUIDMixin, TimestampMixin
+from ..base import Base, UUIDMixin, TimestampMixin, JSON_VARIANT
 
 
 class Patient(UUIDMixin, TimestampMixin, Base):
     __tablename__ = "patients"
 
     external_id: Mapped[str | None] = mapped_column(String(256), nullable=True, unique=True)
-    demographics: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
+    demographics: Mapped[dict | None] = mapped_column(JSON_VARIANT, nullable=True)
     created_by: Mapped[uuid.UUID | None] = mapped_column(
         PG_UUID(as_uuid=True), ForeignKey("users.id"), nullable=True
     )
@@ -66,7 +66,7 @@ class Assessment(UUIDMixin, Base):
     scale_name: Mapped[str] = mapped_column(String(256), nullable=False)
     abbreviation: Mapped[str | None] = mapped_column(String(32), nullable=True)
     score: Mapped[float | None] = mapped_column(Float, nullable=True)
-    subscale_scores: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
+    subscale_scores: Mapped[dict | None] = mapped_column(JSON_VARIANT, nullable=True)
     severity_band: Mapped[str | None] = mapped_column(String(64), nullable=True)
     assessed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     assessed_by: Mapped[uuid.UUID | None] = mapped_column(
@@ -95,11 +95,11 @@ class TreatmentRecord(UUIDMixin, Base):
     )
     modality: Mapped[str] = mapped_column(String(64), nullable=False)
     target: Mapped[str | None] = mapped_column(String(128), nullable=True)
-    parameters: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
+    parameters: Mapped[dict | None] = mapped_column(JSON_VARIANT, nullable=True)
     sessions_completed: Mapped[int | None] = mapped_column(Integer, nullable=True, default=0)
     outcome: Mapped[str | None] = mapped_column(String(128), nullable=True)
-    outcome_measures: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
-    adverse_events: Mapped[list | None] = mapped_column(JSONB, nullable=True)
+    outcome_measures: Mapped[dict | None] = mapped_column(JSON_VARIANT, nullable=True)
+    adverse_events: Mapped[list | None] = mapped_column(JSON_VARIANT, nullable=True)
     start_date: Mapped[date | None] = mapped_column(Date, nullable=True)
     end_date: Mapped[date | None] = mapped_column(Date, nullable=True)
 
@@ -126,7 +126,7 @@ class Medication(UUIDMixin, Base):
     dose: Mapped[str | None] = mapped_column(String(128), nullable=True)
     start_date: Mapped[date | None] = mapped_column(Date, nullable=True)
     end_date: Mapped[date | None] = mapped_column(Date, nullable=True)
-    interaction_flags: Mapped[list | None] = mapped_column(JSONB, nullable=True)
+    interaction_flags: Mapped[list | None] = mapped_column(JSON_VARIANT, nullable=True)
 
     # Relationships
     patient: Mapped["Patient"] = relationship("Patient", back_populates="medications")

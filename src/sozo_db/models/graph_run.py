@@ -8,7 +8,7 @@ from sqlalchemy import DateTime, ForeignKey, Integer, String, Text, Index, func
 from sqlalchemy.dialects.postgresql import JSONB, UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
-from ..base import Base, UUIDMixin, TimestampMixin
+from ..base import Base, UUIDMixin, TimestampMixin, JSON_VARIANT
 
 
 class GraphRun(UUIDMixin, TimestampMixin, Base):
@@ -35,16 +35,16 @@ class GraphRun(UUIDMixin, TimestampMixin, Base):
     # Evidence summary
     evidence_article_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     evidence_sufficient: Mapped[bool | None] = mapped_column(nullable=True)
-    evidence_grade_distribution: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
+    evidence_grade_distribution: Mapped[dict | None] = mapped_column(JSON_VARIANT, nullable=True)
 
     # Safety
     safety_cleared: Mapped[bool | None] = mapped_column(nullable=True)
-    blocking_contraindications: Mapped[list | None] = mapped_column(JSONB, nullable=True)
+    blocking_contraindications: Mapped[list | None] = mapped_column(JSON_VARIANT, nullable=True)
 
     # Protocol
     sections_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     grounding_score: Mapped[float | None] = mapped_column(nullable=True)
-    composed_sections: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
+    composed_sections: Mapped[dict | None] = mapped_column(JSON_VARIANT, nullable=True)
 
     # Review
     reviewer_id: Mapped[str | None] = mapped_column(String(256), nullable=True)
@@ -54,7 +54,7 @@ class GraphRun(UUIDMixin, TimestampMixin, Base):
     approved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     # Output
-    output_paths: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
+    output_paths: Mapped[dict | None] = mapped_column(JSON_VARIANT, nullable=True)
     audit_record_id: Mapped[str | None] = mapped_column(String(256), nullable=True)
     #: Linked REST `protocols` row when a graph run is attached to protocol storage.
     protocol_id: Mapped[uuid.UUID | None] = mapped_column(
@@ -65,9 +65,9 @@ class GraphRun(UUIDMixin, TimestampMixin, Base):
     )
 
     # Full state snapshot (for reconstruction)
-    final_state: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
-    node_history: Mapped[list | None] = mapped_column(JSONB, nullable=True)
-    errors: Mapped[list | None] = mapped_column(JSONB, nullable=True)
+    final_state: Mapped[dict | None] = mapped_column(JSON_VARIANT, nullable=True)
+    node_history: Mapped[list | None] = mapped_column(JSON_VARIANT, nullable=True)
+    errors: Mapped[list | None] = mapped_column(JSON_VARIANT, nullable=True)
 
     # Graph metadata
     graph_version: Mapped[str | None] = mapped_column(String(64), nullable=True)

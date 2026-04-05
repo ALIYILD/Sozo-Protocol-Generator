@@ -9,7 +9,7 @@ from sqlalchemy import DateTime, ForeignKey, String, Index
 from sqlalchemy.dialects.postgresql import JSONB, UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..base import Base, UUIDMixin
+from ..base import Base, UUIDMixin, JSON_VARIANT
 
 
 class ReviewStatus(str, enum.Enum):
@@ -31,7 +31,7 @@ class Review(UUIDMixin, Base):
         PG_UUID(as_uuid=True), ForeignKey("users.id"), nullable=False
     )
     status: Mapped[ReviewStatus] = mapped_column(nullable=False, default=ReviewStatus.PENDING)
-    comments: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
+    comments: Mapped[dict | None] = mapped_column(JSON_VARIANT, nullable=True)
     reviewed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     signature_hash: Mapped[str | None] = mapped_column(String(256), nullable=True)
 

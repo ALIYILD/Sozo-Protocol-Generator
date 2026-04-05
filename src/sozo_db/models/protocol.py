@@ -18,7 +18,7 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import JSONB, UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..base import Base, UUIDMixin, TimestampMixin
+from ..base import Base, UUIDMixin, TimestampMixin, JSON_VARIANT
 
 
 class VersionStatus(str, enum.Enum):
@@ -86,7 +86,7 @@ class ProtocolVersion(UUIDMixin, Base):
     )
     version_number: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
     status: Mapped[VersionStatus] = mapped_column(nullable=False, default=VersionStatus.DRAFT)
-    data: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
+    data: Mapped[dict] = mapped_column(JSON_VARIANT, nullable=False, default=dict)
     parent_version_id: Mapped[uuid.UUID | None] = mapped_column(
         PG_UUID(as_uuid=True),
         ForeignKey("protocol_versions.id"),

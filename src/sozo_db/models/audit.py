@@ -8,7 +8,7 @@ from sqlalchemy import BigInteger, DateTime, ForeignKey, String, Text, Index, fu
 from sqlalchemy.dialects.postgresql import JSONB, UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
-from ..base import Base
+from ..base import Base, JSON_VARIANT
 
 
 class AuditEvent(Base):
@@ -27,7 +27,7 @@ class AuditEvent(Base):
     input_hash: Mapped[str | None] = mapped_column(String(128), nullable=True)
     output_hash: Mapped[str | None] = mapped_column(String(128), nullable=True)
     node_name: Mapped[str | None] = mapped_column(String(128), nullable=True)
-    details: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
+    details: Mapped[dict | None] = mapped_column(JSON_VARIANT, nullable=True)
 
     __table_args__ = (
         Index("ix_audit_entity", "entity_type", "entity_id"),

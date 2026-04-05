@@ -8,7 +8,7 @@ from sqlalchemy import DateTime, ForeignKey, Integer, Text, Index
 from sqlalchemy.dialects.postgresql import JSONB, UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..base import Base, UUIDMixin
+from ..base import Base, UUIDMixin, JSON_VARIANT
 
 
 class TreatmentSession(UUIDMixin, Base):
@@ -25,10 +25,10 @@ class TreatmentSession(UUIDMixin, Base):
     session_number: Mapped[int] = mapped_column(Integer, nullable=False)
     scheduled_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
-    parameters_used: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
-    side_effects: Mapped[list | None] = mapped_column(JSONB, nullable=True)
+    parameters_used: Mapped[dict | None] = mapped_column(JSON_VARIANT, nullable=True)
+    side_effects: Mapped[list | None] = mapped_column(JSON_VARIANT, nullable=True)
     clinician_notes: Mapped[str | None] = mapped_column(Text, nullable=True)
-    outcome_measures: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
+    outcome_measures: Mapped[dict | None] = mapped_column(JSON_VARIANT, nullable=True)
     conducted_by: Mapped[uuid.UUID | None] = mapped_column(
         PG_UUID(as_uuid=True), ForeignKey("users.id"), nullable=True
     )

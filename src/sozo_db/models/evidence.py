@@ -19,7 +19,7 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import JSONB, UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from ..base import Base
+from ..base import Base, JSON_VARIANT
 
 
 class EvidenceSource(str, enum.Enum):
@@ -37,7 +37,7 @@ class EvidenceArticle(Base):
     pmid: Mapped[str] = mapped_column(String(32), primary_key=True)
     doi: Mapped[str | None] = mapped_column(String(256), nullable=True, index=True)
     title: Mapped[str] = mapped_column(Text, nullable=False)
-    authors: Mapped[list | None] = mapped_column(JSONB, nullable=True)
+    authors: Mapped[list | None] = mapped_column(JSON_VARIANT, nullable=True)
     journal: Mapped[str | None] = mapped_column(String(512), nullable=True)
     year: Mapped[int | None] = mapped_column(Integer, nullable=True, index=True)
     abstract: Mapped[str | None] = mapped_column(Text, nullable=True)
@@ -49,7 +49,7 @@ class EvidenceArticle(Base):
     )
     is_internal: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     fetched_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
-    raw_metadata: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
+    raw_metadata: Mapped[dict | None] = mapped_column(JSON_VARIANT, nullable=True)
 
     # Relationships
     protocol_links: Mapped[list["ProtocolEvidence"]] = relationship(
