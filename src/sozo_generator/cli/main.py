@@ -75,6 +75,12 @@ except ImportError as e:
     typer.echo(typer.style(f"Warning: could not load 'autoagent-clinical' command: {e}", fg=typer.colors.YELLOW))
     autoagent_clinical_app = typer.Typer(name="autoagent-clinical", help="(unavailable — import error)")
 
+try:
+    from .canonical_cli import app as canonical_app
+except ImportError as e:
+    typer.echo(typer.style(f"Warning: could not load 'canonical' command: {e}", fg=typer.colors.YELLOW))
+    canonical_app = typer.Typer(name="canonical", help="(unavailable — import error)")
+
 # ---------------------------------------------------------------------------
 # Top-level Typer app
 # ---------------------------------------------------------------------------
@@ -96,6 +102,7 @@ app.add_typer(review_app, name="review")
 app.add_typer(evidence_cli_app, name="evidence")
 app.add_typer(manifest_app, name="manifests")
 app.add_typer(autoagent_clinical_app, name="autoagent-clinical")
+app.add_typer(canonical_app, name="canonical")
 
 # Merge build-all commands into the build group
 if _build_all_available:

@@ -46,3 +46,22 @@ from sozo_generator.schemas.eeg import (
     AsymmetryIndex,
     QEEGNormativeComparison,
 )
+from sozo_generator.schemas.canonical import (
+    ContentBlockSpec,
+    SubsectionSpec,
+    SectionSpec,
+    DocumentBlueprint,
+    AssetRecord,
+    CanonicalBlock,
+    CanonicalSection,
+    CanonicalTable,
+    CanonicalFigure,
+    CanonicalChart,
+    CanonicalImage,
+    CanonicalCitation,
+    AssemblyProvenance,
+    QAValidationIssue,
+    QAValidationResult,
+    DocumentQAReport,
+    CanonicalDocument,
+)
