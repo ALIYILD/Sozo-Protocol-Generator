@@ -57,6 +57,12 @@ COPY handbooks_partners/ ./handbooks_partners/
 # Knowledge base: YAML-driven conditions/modalities/assessments.
 # sozo_generator/knowledge/loader.py expects /app/sozo_knowledge/knowledge/
 COPY sozo_knowledge/ ./sozo_knowledge/
+
+# Alembic migrations: auto-run on FastAPI startup (see server.py _on_startup).
+# Without these, no tables are created and /api/auth/login 500s because the
+# `users` table doesn't exist.
+COPY alembic/ ./alembic/
+COPY alembic.ini ./alembic.ini
 COPY app.py .
 COPY generate_all.py .
 COPY create_gold_standard_templates.py .
