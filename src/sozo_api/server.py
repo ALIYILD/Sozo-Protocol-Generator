@@ -135,36 +135,82 @@ def create_app() -> FastAPI:
     async def _on_startup() -> None:
         logger.info("SOZO API started")
         # Auto-run Alembic migration on startup (SQLite safe).
-        # Run as a subprocess so alembic's env.py can call asyncio.run()
-        # without conflicting with FastAPI's already-running event loop.
+        # Runs as a subprocess so alembic's env.py can spin up its own
+        # event loop without colliding with FastAPI's running loop.
+        # If an older deploy created tables via Base.metadata.create_all()
+        # without stamping alembic_version, `upgrade head` fails with
+        # "table ... already exists". In that case we `stamp head` and
+        # retry, bringing the existing schema under alembic's control.
         try:
             import os
             import subprocess
             from pathlib import Path
             alembic_ini = Path(__file__).resolve().parents[2] / "alembic.ini"
-            if alembic_ini.exists():
+            if not alembic_ini.exists():
+                logger.warning("alembic.ini not found at %s", alembic_ini)
+            else:
                 env = os.environ.copy()
                 env.setdefault("PYTHONPATH", "/app/src")
-                result = subprocess.run(
-                    ["alembic", "-c", str(alembic_ini), "upgrade", "head"],
-                    cwd=str(alembic_ini.parent),
-                    env=env,
-                    capture_output=True,
-                    text=True,
-                    timeout=60,
-                )
+
+                def _run_alembic(*args: str) -> subprocess.CompletedProcess[str]:
+                    return subprocess.run(
+                        ["alembic", "-c", str(alembic_ini), *args],
+                        cwd=str(alembic_ini.parent),
+                        env=env,
+                        capture_output=True,
+                        text=True,
+                        timeout=60,
+                    )
+
+                result = _run_alembic("upgrade", "head")
                 if result.returncode == 0:
                     logger.info("Database migration complete")
+                elif "already exists" in (result.stderr or ""):
+                    logger.warning(
+                        "Alembic upgrade hit 'already exists' — DB has tables "
+                        "without a version stamp. Stamping head and retrying."
+                    )
+                    stamp = _run_alembic("stamp", "head")
+                    if stamp.returncode == 0:
+                        retry = _run_alembic("upgrade", "head")
+                        if retry.returncode == 0:
+                            logger.info(
+                                "Database migration complete after stamp+retry"
+                            )
+                        else:
+                            logger.warning(
+                                "Alembic retry after stamp failed: %s",
+                                (retry.stderr or "")[-500:],
+                            )
+                    else:
+                        logger.warning(
+                            "Alembic stamp head failed: %s",
+                            (stamp.stderr or "")[-500:],
+                        )
                 else:
                     logger.warning(
                         "Alembic upgrade returned %s; stderr=%s",
                         result.returncode,
-                        result.stderr[-500:] if result.stderr else "",
+                        (result.stderr or "")[-500:],
                     )
-            else:
-                logger.warning("alembic.ini not found at %s", alembic_ini)
         except Exception as exc:
             logger.warning("Auto-migration skipped: %s", exc)
+
+        # If a previous machine left a DB with tables but no `users` table,
+        # we need to create it now. `Base.metadata.create_all()` is safe —
+        # it only issues CREATE TABLE IF NOT EXISTS for missing tables.
+        try:
+            from sozo_db.base import Base
+            from sozo_db.engine import get_engine
+            # Import all models so they're registered on Base.metadata.
+            import sozo_db.models  # noqa: F401
+
+            engine = get_engine()
+            async with engine.begin() as conn:
+                await conn.run_sync(Base.metadata.create_all)
+            logger.info("Base.metadata.create_all completed (idempotent backstop)")
+        except Exception as exc:
+            logger.warning("Base.metadata.create_all skipped: %s", exc)
 
         # Seed demo + admin users into the DB if the users table is empty.
         try:
