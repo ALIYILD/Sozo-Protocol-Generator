@@ -1,15 +1,19 @@
 import { useState, useEffect, type FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Brain } from 'lucide-react';
 import { isAuthBypassEnabled } from '../auth/authBypass';
 import { useAuth } from '../hooks/useAuth';
 import Button from '../components/ui/Button';
+
+const DEMO_EMAIL = 'demo@sozo.app';
+const DEMO_PASSWORD = 'SozoDemo2026!';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isDemoLoading, setIsDemoLoading] = useState(false);
   const { login, isAuthenticated, isLoading: authLoading } = useAuth();
   const navigate = useNavigate();
 
@@ -33,6 +37,23 @@ export default function LoginPage() {
       setError(msg);
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  async function handleDemo() {
+    setError('');
+    setIsDemoLoading(true);
+    try {
+      await login({ email: DEMO_EMAIL, password: DEMO_PASSWORD });
+      navigate('/');
+    } catch (err: unknown) {
+      const msg =
+        err instanceof Error
+          ? err.message
+          : 'Demo login failed. The demo account may not be seeded yet.';
+      setError(msg);
+    } finally {
+      setIsDemoLoading(false);
     }
   }
 
@@ -89,6 +110,36 @@ export default function LoginPage() {
               Sign in
             </Button>
           </form>
+
+          <div className="my-6 flex items-center gap-3">
+            <div className="h-px flex-1 bg-gray-200" />
+            <span className="text-xs uppercase tracking-wide text-gray-400">or</span>
+            <div className="h-px flex-1 bg-gray-200" />
+          </div>
+
+          <div className="space-y-3">
+            <Button
+              type="button"
+              variant="secondary"
+              isLoading={isDemoLoading}
+              onClick={handleDemo}
+              className="w-full"
+            >
+              Try demo (no account needed)
+            </Button>
+
+            <Link
+              to="/signup"
+              className="block w-full rounded-md border border-sozo-primary/20 bg-sozo-primary/5 px-4 py-2 text-center text-sm font-medium text-sozo-primary transition-colors hover:bg-sozo-primary/10"
+            >
+              Create an account
+            </Link>
+          </div>
+
+          <p className="mt-6 text-center text-xs text-gray-400">
+            Demo credentials: <span className="font-mono">{DEMO_EMAIL}</span> /{' '}
+            <span className="font-mono">{DEMO_PASSWORD}</span>
+          </p>
         </div>
       </div>
     </div>

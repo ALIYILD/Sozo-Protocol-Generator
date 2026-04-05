@@ -1,8 +1,5 @@
 import api from './client';
 import type {
-  EvidenceArticle,
-  EvidenceClaim,
-  PaginatedResponse,
   ConditionInfo,
   StalenessReport,
   CockpitOverview,
@@ -12,33 +9,6 @@ import type {
   PersonalizationRequest,
   PersonalizationResponse,
 } from '../types';
-
-export async function listArticles(
-  page = 1,
-  pageSize = 20,
-  conditionSlug?: string,
-): Promise<PaginatedResponse<EvidenceArticle>> {
-  const params: Record<string, unknown> = { page, page_size: pageSize };
-  if (conditionSlug) params.condition = conditionSlug;
-  const res = await api.get<PaginatedResponse<EvidenceArticle>>('/evidence/articles', { params });
-  return res.data;
-}
-
-export async function getArticle(id: string): Promise<EvidenceArticle> {
-  const res = await api.get<EvidenceArticle>(`/evidence/articles/${id}`);
-  return res.data;
-}
-
-export async function listClaims(
-  articleId?: string,
-  conditionSlug?: string,
-): Promise<EvidenceClaim[]> {
-  const params: Record<string, unknown> = {};
-  if (articleId) params.article_id = articleId;
-  if (conditionSlug) params.condition = conditionSlug;
-  const res = await api.get<EvidenceClaim[]>('/evidence/claims', { params });
-  return res.data;
-}
 
 export async function listConditions(): Promise<ConditionInfo[]> {
   const res = await api.get<{ conditions: ConditionInfo[] }>('/knowledge/conditions');

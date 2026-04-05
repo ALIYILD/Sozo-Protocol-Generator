@@ -63,3 +63,14 @@ export async function getAuditActions(): Promise<string[]> {
   const res = await api.get<{ actions: string[] }>('/audit/actions');
   return res.data.actions;
 }
+
+export async function exportAuditEvents(filters: AuditEventFilters): Promise<Blob> {
+  const res = await api.get('/audit/export', {
+    params: {
+      format: 'csv',
+      ...auditFiltersToQueryParams(filters),
+    },
+    responseType: 'blob',
+  });
+  return res.data as Blob;
+}

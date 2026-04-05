@@ -46,7 +46,7 @@ export default function AppLayout() {
             {user && (
               <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                 <User className="h-4 w-4" />
-                <span>{user.name}</span>
+                <span>{user.email}</span>
                 <span className="rounded bg-gray-100 px-1.5 py-0.5 text-xs font-medium text-gray-500 dark:bg-gray-700 dark:text-gray-400">
                   {user.role}
                 </span>

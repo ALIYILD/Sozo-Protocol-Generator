@@ -8,6 +8,31 @@ import type {
   PaginatedResponse,
 } from '../types';
 
+export interface ProtocolVersionSummary {
+  version_id: string;
+  version: number;
+  status: string;
+  created_at: string;
+  created_by: string;
+  generation_method: string;
+}
+
+export interface ProtocolVersionListResponse {
+  protocol_id: string;
+  versions: ProtocolVersionSummary[];
+}
+
+export interface ProtocolVersionDetail {
+  protocol_id: string;
+  version_id: string;
+  version: number;
+  status: string;
+  created_at: string;
+  created_by: string;
+  generation_method: string;
+  data: Record<string, unknown>;
+}
+
 export async function listProtocols(
   page = 1,
   pageSize = 20,
@@ -85,6 +110,19 @@ export async function getProtocolEvidence(id: string): Promise<Record<string, un
 
 export async function getProtocolAudit(id: string): Promise<Record<string, unknown>> {
   const res = await api.get<Record<string, unknown>>(`/protocols/${id}/audit`);
+  return res.data;
+}
+
+export async function listProtocolVersions(id: string): Promise<ProtocolVersionListResponse> {
+  const res = await api.get<ProtocolVersionListResponse>(`/protocols/${id}/versions`);
+  return res.data;
+}
+
+export async function getProtocolVersion(
+  id: string,
+  version: number,
+): Promise<ProtocolVersionDetail> {
+  const res = await api.get<ProtocolVersionDetail>(`/protocols/${id}/versions/${version}`);
   return res.data;
 }
 

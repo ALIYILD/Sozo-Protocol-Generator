@@ -1,13 +1,22 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, Send, CheckCircle, Copy, FileDown, FileText } from 'lucide-react';
-import { getProtocol, submitForReview, cloneProtocol, exportProtocol } from '../api/protocols';
+import { ArrowLeft, Send, CheckCircle, Copy, FileDown, FileText, ChevronDown, ChevronRight } from 'lucide-react';
+import {
+  getProtocol,
+  submitForReview,
+  cloneProtocol,
+  exportProtocol,
+  listProtocolVersions,
+  getProtocolVersion,
+  type ProtocolVersionSummary,
+} from '../api/protocols';
 import { ProtocolAuditSection } from '../components/protocol/ProtocolAuditSection';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
+import Table, { type Column } from '../components/ui/Table';
 import { format } from 'date-fns';
 
 export default function ProtocolDetailPage() {
@@ -17,6 +26,8 @@ export default function ProtocolDetailPage() {
 
   const [exportError, setExportError] = useState<string | null>(null);
   const [exportingFormat, setExportingFormat] = useState<'docx' | 'pdf' | null>(null);
+  const [versionsOpen, setVersionsOpen] = useState(false);
+  const [selectedVersion, setSelectedVersion] = useState<number | null>(null);
 
   const handleExport = async (fmt: 'docx' | 'pdf') => {
     if (!id) return;
@@ -48,6 +59,18 @@ export default function ProtocolDetailPage() {
   const submitMutation = useMutation({
     mutationFn: () => submitForReview(id!),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['protocol', id] }),
+  });
+
+  const versionsQuery = useQuery({
+    queryKey: ['protocol-versions', id],
+    queryFn: () => listProtocolVersions(id!),
+    enabled: !!id && versionsOpen,
+  });
+
+  const versionDetailQuery = useQuery({
+    queryKey: ['protocol-version', id, selectedVersion],
+    queryFn: () => getProtocolVersion(id!, selectedVersion!),
+    enabled: !!id && selectedVersion !== null,
   });
 
   const cloneMutation = useMutation({
@@ -222,6 +245,174 @@ export default function ProtocolDetailPage() {
           )}
 
           {id && <ProtocolAuditSection protocolId={id} />}
+
+          <Card>
+            <button
+              type="button"
+              onClick={() => setVersionsOpen((o) => !o)}
+              className="flex w-full items-center justify-between text-left"
+            >
+              <span className="text-base font-semibold text-sozo-text">Version history</span>
+              {versionsOpen ? (
+                <ChevronDown className="h-4 w-4 text-gray-500" />
+              ) : (
+                <ChevronRight className="h-4 w-4 text-gray-500" />
+              )}
+            </button>
+
+            {versionsOpen && (
+              <div className="mt-4">
+                {versionsQuery.isLoading && <LoadingSpinner size="md" />}
+                {versionsQuery.error && (
+                  <p className="text-sm text-red-600">
+                    Failed to load versions. Please try again.
+                  </p>
+                )}
+                {versionsQuery.data && (
+                  <>
+                    <Table<ProtocolVersionSummary & Record<string, unknown>>
+                      columns={[
+                        {
+                          key: 'version',
+                          header: 'Version',
+                          sortable: true,
+                          render: (row) => <span className="font-medium">v{row.version}</span>,
+                        },
+                        {
+                          key: 'created_at',
+                          header: 'Created',
+                          sortable: true,
+                          render: (row) => {
+                            try {
+                              return format(new Date(row.created_at), 'dd MMM yyyy HH:mm');
+                            } catch {
+                              return row.created_at;
+                            }
+                          },
+                        },
+                        {
+                          key: 'created_by',
+                          header: 'Author',
+                          render: (row) => row.created_by || '—',
+                        },
+                        {
+                          key: 'status',
+                          header: 'Status',
+                          render: (row) => <Badge status={row.status} />,
+                        },
+                        {
+                          key: 'actions',
+                          header: '',
+                          render: (row) => (
+                            <Button
+                              variant="ghost"
+                              onClick={() =>
+                                setSelectedVersion((v) =>
+                                  v === row.version ? null : row.version,
+                                )
+                              }
+                            >
+                              {selectedVersion === row.version ? 'Hide' : 'View'}
+                            </Button>
+                          ),
+                        },
+                      ] as Column<ProtocolVersionSummary & Record<string, unknown>>[]}
+                      data={
+                        versionsQuery.data.versions as (ProtocolVersionSummary &
+                          Record<string, unknown>)[]
+                      }
+                      keyExtractor={(row) => String(row.version_id)}
+                      emptyMessage="No previous versions."
+                    />
+
+                    {selectedVersion !== null && (
+                      <div className="mt-4 rounded-md border border-gray-200 bg-gray-50 p-4">
+                        {versionDetailQuery.isLoading && <LoadingSpinner size="sm" />}
+                        {versionDetailQuery.error && (
+                          <p className="text-sm text-red-600">
+                            Could not load version {selectedVersion}.
+                          </p>
+                        )}
+                        {versionDetailQuery.data && (
+                          <div className="space-y-3 text-sm">
+                            <div className="flex items-center justify-between">
+                              <h3 className="text-sm font-semibold text-sozo-text">
+                                Version {versionDetailQuery.data.version} snapshot
+                              </h3>
+                              <Badge status={versionDetailQuery.data.status} />
+                            </div>
+                            <div className="grid grid-cols-2 gap-3">
+                              <div>
+                                <p className="text-gray-500">Created</p>
+                                <p className="font-medium">
+                                  {(() => {
+                                    try {
+                                      return format(
+                                        new Date(versionDetailQuery.data.created_at),
+                                        'dd MMM yyyy HH:mm',
+                                      );
+                                    } catch {
+                                      return versionDetailQuery.data.created_at;
+                                    }
+                                  })()}
+                                </p>
+                              </div>
+                              <div>
+                                <p className="text-gray-500">Author</p>
+                                <p className="font-medium">
+                                  {versionDetailQuery.data.created_by}
+                                </p>
+                              </div>
+                              <div>
+                                <p className="text-gray-500">Generation method</p>
+                                <p className="font-medium">
+                                  {versionDetailQuery.data.generation_method}
+                                </p>
+                              </div>
+                              <div>
+                                <p className="text-gray-500">Version ID</p>
+                                <p className="font-mono text-xs break-all">
+                                  {versionDetailQuery.data.version_id}
+                                </p>
+                              </div>
+                            </div>
+                            {(() => {
+                              const vdata = (versionDetailQuery.data.data ?? {}) as Record<
+                                string,
+                                unknown
+                              >;
+                              const vsections = (vdata.sections ?? {}) as Record<
+                                string,
+                                unknown
+                              >;
+                              const summary = vsections.evidence_summary ?? vdata.summary;
+                              const changeNotes = vdata.change_notes ?? vdata.notes;
+                              return (
+                                <>
+                                  {!!summary && (
+                                    <div>
+                                      <p className="text-gray-500">Summary</p>
+                                      <p className="text-gray-700">{String(summary)}</p>
+                                    </div>
+                                  )}
+                                  {!!changeNotes && (
+                                    <div>
+                                      <p className="text-gray-500">Change notes</p>
+                                      <p className="text-gray-700">{String(changeNotes)}</p>
+                                    </div>
+                                  )}
+                                </>
+                              );
+                            })()}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            )}
+          </Card>
 
           {/* Raw data fallback */}
           {Object.keys(data).length > 0 && !sections.stimulation_parameters && (

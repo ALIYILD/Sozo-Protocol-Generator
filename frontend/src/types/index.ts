@@ -129,29 +129,6 @@ export interface ProtocolUpdateRequest {
 
 // ── Evidence Types ──────────────────────────────────────────────────
 
-export interface EvidenceArticle {
-  id: string;
-  pmid?: string;
-  doi?: string;
-  title: string;
-  authors: string[];
-  journal: string;
-  year: number;
-  abstract?: string;
-  url?: string;
-}
-
-export interface EvidenceClaim {
-  id: string;
-  article_id: string;
-  claim_text: string;
-  evidence_level: 'high' | 'moderate' | 'low' | 'very_low';
-  confidence: number;
-  condition_slug: string;
-  modality?: string;
-  extracted_at: string;
-}
-
 export interface StalenessCondition {
   slug: string;
   name: string;

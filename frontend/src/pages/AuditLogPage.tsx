@@ -1,5 +1,5 @@
 import { useEffect, useState, type ChangeEvent } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { format, parseISO } from 'date-fns';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
@@ -9,6 +9,7 @@ import {
   listAuditEvents,
   getAuditActions,
   getAuditEntityTypes,
+  exportAuditEvents,
   type AuditEventFilters,
 } from '../api/audit';
 import type { AuditEvent } from '../types';
@@ -87,6 +88,21 @@ export default function AuditLogPage() {
     const totalPages = Math.max(1, Math.ceil(data.total / ps));
     if (page > totalPages) setPage(totalPages);
   }, [data, page]);
+
+  const exportMutation = useMutation({
+    mutationFn: (filters: AuditEventFilters) => exportAuditEvents(filters),
+    onSuccess: (blob) => {
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      const stamp = format(new Date(), 'yyyyMMdd-HHmm');
+      anchor.download = `sozo-audit-${stamp}.csv`;
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      URL.revokeObjectURL(url);
+    },
+  });
 
   const applyFilters = () => {
     setApplied(formToFilters(draft));
@@ -273,6 +289,20 @@ export default function AuditLogPage() {
             >
               Clear
             </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => exportMutation.mutate(applied)}
+              isLoading={exportMutation.isPending}
+              disabled={exportMutation.isPending}
+            >
+              Export CSV
+            </Button>
+            {exportMutation.isError && (
+              <p className="w-full text-xs text-red-600 lg:col-span-3">
+                Failed to export audit events. Please try again.
+              </p>
+            )}
           </div>
         </form>
 

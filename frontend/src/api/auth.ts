@@ -11,6 +11,18 @@ export async function register(data: RegisterRequest): Promise<User> {
   return res.data;
 }
 
+export interface SignupRequest {
+  email: string;
+  name: string;
+  password: string;
+}
+
+/** Public self-service signup. Creates a clinician account and returns tokens. */
+export async function signup(data: SignupRequest): Promise<TokenPair> {
+  const res = await api.post<TokenPair>('/auth/signup', data);
+  return res.data;
+}
+
 export async function refreshToken(refresh_token: string): Promise<TokenPair> {
   const res = await api.post<TokenPair>('/auth/refresh', { refresh_token });
   return res.data;
@@ -19,4 +31,8 @@ export async function refreshToken(refresh_token: string): Promise<TokenPair> {
 export async function getMe(): Promise<User> {
   const res = await api.get<User>('/auth/me');
   return res.data;
+}
+
+export async function logout(): Promise<void> {
+  await api.post('/auth/logout');
 }

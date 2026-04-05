@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AppLayout from './components/layout/AppLayout';
 import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import DashboardPage from './pages/DashboardPage';
 import ProtocolListPage from './pages/ProtocolListPage';
 import ProtocolBuilderPage from './pages/ProtocolBuilderPage';
@@ -10,6 +11,8 @@ import EvidenceExplorerPage from './pages/EvidenceExplorerPage';
 import SafetyCheckPage from './pages/SafetyCheckPage';
 import PersonalizationPage from './pages/PersonalizationPage';
 import AuditLogPage from './pages/AuditLogPage';
+import ReviewQueuePage from './pages/ReviewQueuePage';
+import ReviewDetailPage from './pages/ReviewDetailPage';
 import VisualsPage from './pages/VisualsPage';
 import PatientsListPage from './pages/PatientsListPage';
 import PatientDetailPage from './pages/PatientDetailPage';
@@ -20,6 +23,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
 
       <Route
         element={
@@ -34,6 +38,8 @@ export default function App() {
         <Route path="protocols/:id" element={<ProtocolDetailPage />} />
         <Route path="protocols/:id/review" element={<ProtocolReviewPage />} />
         <Route path="review/:threadId" element={<ProtocolReviewPage />} />
+        <Route path="reviews" element={<ReviewQueuePage />} />
+        <Route path="reviews/:protocolId" element={<ReviewDetailPage />} />
         <Route path="evidence" element={<EvidenceExplorerPage />} />
         <Route path="safety" element={<SafetyCheckPage />} />
         <Route path="personalization" element={<PersonalizationPage />} />

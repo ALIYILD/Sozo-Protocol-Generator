@@ -17,6 +17,7 @@ const authDefaults: AuthContextValue = {
   isLoading: false,
   isAuthenticated: false,
   login: vi.fn(),
+  signup: vi.fn(),
   logout: vi.fn(),
 };
 

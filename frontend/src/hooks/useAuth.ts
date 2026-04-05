@@ -7,6 +7,8 @@ import {
   type ReactNode,
 } from 'react';
 import { createElement } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import type { User, LoginRequest } from '../types';
 import * as authApi from '../api/auth';
 
@@ -15,7 +17,8 @@ export interface AuthContextValue {
   isLoading: boolean;
   isAuthenticated: boolean;
   login: (data: LoginRequest) => Promise<void>;
-  logout: () => void;
+  signup: (data: authApi.SignupRequest) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextValue | null>(null);
@@ -23,6 +26,8 @@ export const AuthContext = createContext<AuthContextValue | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const token = localStorage.getItem('sozo_token');
@@ -48,12 +53,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(me);
   }, []);
 
-  const logout = useCallback(() => {
+  const signup = useCallback(async (data: authApi.SignupRequest) => {
+    const tokens = await authApi.signup(data);
+    localStorage.setItem('sozo_token', tokens.access_token);
+    localStorage.setItem('sozo_refresh_token', tokens.refresh_token);
+    const me = await authApi.getMe();
+    setUser(me);
+  }, []);
+
+  const logout = useCallback(async () => {
+    try {
+      await authApi.logout();
+    } catch {
+      // Ignore server-side failure — we still clear local state so
+      // the user isn't stuck on a broken session.
+    }
     localStorage.removeItem('sozo_token');
     localStorage.removeItem('sozo_refresh_token');
     setUser(null);
-    window.location.href = '/login';
-  }, []);
+    queryClient.clear();
+    navigate('/login');
+  }, [navigate, queryClient]);
 
   return createElement(
     AuthContext.Provider,
@@ -63,6 +83,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isLoading,
         isAuthenticated: !!user,
         login,
+        signup,
         logout,
       },
     },

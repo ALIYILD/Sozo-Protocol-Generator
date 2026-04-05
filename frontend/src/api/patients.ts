@@ -160,3 +160,89 @@ export async function getPatientTimeline(id: string, limit = 50): Promise<Timeli
 export async function getPatientEEG(_id: string): Promise<[]> {
   return [];
 }
+
+// ── Write operation request types ────────────────────────────────────────────
+
+export interface UpdatePatientRequest {
+  external_id?: string | null;
+  demographics: {
+    age: number;
+    sex: string;
+    handedness?: string;
+  };
+  conditions?: string[];
+  notes?: string | null;
+}
+
+export interface AddMedicationRequest {
+  name: string;
+  drug_class: string;
+  dose?: string | null;
+  start_date: string; // ISO date (YYYY-MM-DD)
+  end_date?: string | null;
+}
+
+export interface AddAssessmentRequest {
+  scale_name: string;
+  score: number;
+  subscale_scores?: Record<string, number> | null;
+  session_number?: number | null;
+  notes?: string | null;
+}
+
+export interface AddTreatmentRequest {
+  modality: string;
+  condition_slug: string;
+  target: string;
+  parameters?: Record<string, unknown>;
+  sessions_completed: number;
+  outcome: string; // responder | partial_responder | non_responder | not_assessed
+  outcome_measures?: Record<string, unknown>;
+  adverse_events?: string[];
+  start_date: string; // ISO date
+  end_date?: string | null;
+}
+
+// ── Write API functions ──────────────────────────────────────────────────────
+
+export async function updatePatient(
+  id: string,
+  data: UpdatePatientRequest,
+): Promise<PatientListItem> {
+  const res = await api.put<PatientListItem>(`/patients/${id}`, data);
+  return res.data;
+}
+
+export async function addPatientMedication(
+  id: string,
+  data: AddMedicationRequest,
+): Promise<MedicationRecord> {
+  const res = await api.post<MedicationRecord>(`/patients/${id}/medications`, data);
+  return res.data;
+}
+
+export async function removePatientMedication(
+  id: string,
+  medicationId: string,
+): Promise<{ status: string; medication_id: string }> {
+  const res = await api.delete<{ status: string; medication_id: string }>(
+    `/patients/${id}/medications/${medicationId}`,
+  );
+  return res.data;
+}
+
+export async function addPatientAssessment(
+  id: string,
+  data: AddAssessmentRequest,
+): Promise<AssessmentRecord> {
+  const res = await api.post<AssessmentRecord>(`/patients/${id}/assessments`, data);
+  return res.data;
+}
+
+export async function addPatientTreatment(
+  id: string,
+  data: AddTreatmentRequest,
+): Promise<TreatmentRecord> {
+  const res = await api.post<TreatmentRecord>(`/patients/${id}/treatments`, data);
+  return res.data;
+}

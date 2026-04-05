@@ -10,6 +10,7 @@ import {
   ShieldAlert,
   Brain,
   Images,
+  ClipboardCheck,
 } from 'lucide-react';
 import { canAccessAdmin } from '../../auth/permissions';
 import { useAuth } from '../../hooks/useAuth';
@@ -26,6 +27,7 @@ type NavItem = {
 const navItems: NavItem[] = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/protocols', label: 'Protocols', icon: FileText },
+  { to: '/reviews', label: 'Review queue', icon: ClipboardCheck },
   { to: '/evidence', label: 'Evidence', icon: Search },
   { to: '/safety', label: 'Safety', icon: ShieldAlert },
   { to: '/personalization', label: 'Personalization', icon: Sliders },
