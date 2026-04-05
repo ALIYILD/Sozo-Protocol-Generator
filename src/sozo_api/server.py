@@ -687,9 +687,11 @@ def create_app() -> FastAPI:
                         repo = GraphRunRepository(session)
                         db_run = await repo.get_by_thread_id(thread_id)
                         if db_run is not None:
+                            db_hist = list(db_run.node_history or [])
                             return {
                                 "thread_id": thread_id,
                                 "status": db_run.status or "queued",
+                                "status_source": "graph_run_db",
                                 "protocol_id": (
                                     str(db_run.protocol_id)
                                     if db_run.protocol_id else None
@@ -704,7 +706,17 @@ def create_app() -> FastAPI:
                                 "safety": {},
                                 "protocol": {"sections": []},
                                 "evidence_articles": [],
-                                "node_history": [],
+                                "node_history": [
+                                    {
+                                        "node_id": n.get("node_id") or n.get("node_name"),
+                                        "duration_ms": n.get("duration_ms"),
+                                        "status": n.get("status"),
+                                        "started_at": n.get("started_at"),
+                                        "completed_at": n.get("completed_at"),
+                                        "source": n.get("source"),
+                                    }
+                                    for n in db_hist
+                                ],
                                 "output": {},
                             }
                 except HTTPException:
@@ -722,26 +734,62 @@ def create_app() -> FastAPI:
             safety = values.get("safety", {})
             protocol = values.get("protocol", {})
             output_state = dict(values.get("output") or {})
-            if not output_state.get("protocol_id"):
-                try:
-                    from sozo_db.repositories.graph_run_repo import GraphRunRepository
-                    from sozo_db.engine import get_session_factory
 
-                    factory = get_session_factory()
-                    async with factory() as session:
-                        repo = GraphRunRepository(session)
-                        db_run = await repo.get_by_thread_id(thread_id)
-                        if db_run and db_run.protocol_id:
-                            output_state["protocol_id"] = str(db_run.protocol_id)
-                except Exception:
-                    logger.debug(
-                        "graph_status protocol_id DB fallback failed",
-                        exc_info=True,
-                    )
+            # Always consult the GraphRun row so that (a) we can surface
+            # the protocol_id when the checkpointer hasn't seen it yet,
+            # and (b) we can report fine-grained in-node progress from
+            # the node_tracker decorator between sparse LangGraph
+            # checkpoint writes.
+            db_run = None
+            try:
+                from sozo_db.repositories.graph_run_repo import GraphRunRepository
+                from sozo_db.engine import get_session_factory
+
+                factory = get_session_factory()
+                async with factory() as session:
+                    repo = GraphRunRepository(session)
+                    db_run = await repo.get_by_thread_id(thread_id)
+                    if db_run and db_run.protocol_id and not output_state.get("protocol_id"):
+                        output_state["protocol_id"] = str(db_run.protocol_id)
+            except Exception:
+                logger.debug(
+                    "graph_status GraphRun lookup failed",
+                    exc_info=True,
+                )
+
+            checkpoint_history = list(values.get("node_history") or [])
+            db_history = list((db_run.node_history or []) if db_run else [])
+            # Prefer DB history when it has more entries — the
+            # node_tracker decorator writes row-level progress on every
+            # node entry/exit, while LangGraph only checkpoints at
+            # sparse boundaries, so a running super-node is only visible
+            # through the DB row.
+            if len(db_history) > len(checkpoint_history):
+                effective_history = db_history
+                _history_source = "graph_run_db"
+            else:
+                effective_history = checkpoint_history
+                _history_source = "checkpointer"
+
+            # Status: terminal states from either source win; otherwise
+            # if the DB row says running and the last history entry is
+            # not a terminal node_tracker "failed" entry, report running.
+            ckpt_status = values.get("status", "unknown")
+            db_status = (db_run.status if db_run else None) or None
+            terminal_states = {"complete", "approved", "released", "error", "rejected", "failed"}
+            if ckpt_status in terminal_states:
+                effective_status = ckpt_status
+            elif db_status in terminal_states:
+                effective_status = db_status
+            elif db_status == "running":
+                effective_status = "running"
+            else:
+                effective_status = ckpt_status or db_status or "unknown"
 
             return {
                 "thread_id": thread_id,
-                "status": values.get("status", "unknown"),
+                "status": effective_status,
+                "status_source": _history_source,
                 "protocol_id": output_state.get("protocol_id"),
                 "review_status": review.get("status", "pending"),
                 "revision_number": review.get("revision_number", 0),
@@ -788,11 +836,14 @@ def create_app() -> FastAPI:
                 ],
                 "node_history": [
                     {
-                        "node_id": n.get("node_id"),
+                        "node_id": n.get("node_id") or n.get("node_name"),
                         "duration_ms": n.get("duration_ms"),
                         "status": n.get("status"),
+                        "started_at": n.get("started_at"),
+                        "completed_at": n.get("completed_at"),
+                        "source": n.get("source"),
                     }
-                    for n in values.get("node_history", [])
+                    for n in effective_history
                 ],
                 "output": output_state,
             }

@@ -5,6 +5,7 @@ and Semantic Scholar. Provides merged, deduplicated results.
 from __future__ import annotations
 
 import logging
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -39,12 +40,19 @@ class MultiSourceSearch:
         self,
         use_pubmed: bool = True,
         use_crossref: bool = True,
-        use_semantic_scholar: bool = True,
+        use_semantic_scholar: Optional[bool] = None,
         cache_dir: Optional[Path] = None,
         force_refresh: bool = False,
     ):
         self.use_pubmed = use_pubmed
         self.use_crossref = use_crossref
+        if use_semantic_scholar is None:
+            use_semantic_scholar = bool(os.environ.get("SEMANTIC_SCHOLAR_API_KEY"))
+            if not use_semantic_scholar:
+                logger.info(
+                    "Semantic Scholar disabled (SEMANTIC_SCHOLAR_API_KEY not set). "
+                    "Evidence pipeline will use PubMed + Crossref only."
+                )
         self.use_semantic_scholar = use_semantic_scholar
         self._cache_dir = cache_dir
         self._force_refresh = force_refresh

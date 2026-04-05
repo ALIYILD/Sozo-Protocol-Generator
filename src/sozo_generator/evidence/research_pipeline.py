@@ -92,7 +92,7 @@ class ResearchPipeline:
         self,
         use_pubmed: bool = True,
         use_crossref: bool = True,
-        use_semantic_scholar: bool = True,
+        use_semantic_scholar: Optional[bool] = None,
         max_results_per_source: int = 30,
         years_back: int = 10,
         force_refresh: bool = False,

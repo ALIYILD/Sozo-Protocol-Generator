@@ -21,6 +21,7 @@ from datetime import datetime, timezone
 from typing import Any, Optional
 
 from .audit.logger import audited_node
+from .observability import node_tracker
 from .state import SozoGraphState
 from . import integration
 
@@ -34,6 +35,7 @@ GRAPH_VERSION = "2.0.0-unified"
 # =====================================================================
 
 
+@node_tracker("intake_router")
 @audited_node("intake_router")
 def intake_router_node(state: SozoGraphState) -> dict:
     """Route intake by source mode (upload vs prompt).
@@ -63,6 +65,7 @@ def intake_router_node(state: SozoGraphState) -> dict:
     }
 
 
+@node_tracker("condition_resolver")
 @audited_node("condition_resolver")
 def condition_resolver_node(state: SozoGraphState) -> dict:
     """Resolve condition using the shared ConditionRegistry.
@@ -187,6 +190,7 @@ def condition_resolver_node(state: SozoGraphState) -> dict:
     }
 
 
+@node_tracker("evidence_search")
 @audited_node("evidence_search")
 def evidence_search_node(state: SozoGraphState) -> dict:
     """Run evidence pipeline via integration layer.
@@ -230,6 +234,7 @@ def evidence_search_node(state: SozoGraphState) -> dict:
     }
 
 
+@node_tracker("evidence_gate")
 @audited_node("evidence_gate")
 def evidence_sufficiency_node(state: SozoGraphState) -> dict:
     """Check if evidence is sufficient to proceed.
@@ -274,6 +279,7 @@ def evidence_sufficiency_node(state: SozoGraphState) -> dict:
     }
 
 
+@node_tracker("safety_check")
 @audited_node("safety_check")
 def safety_check_node(state: SozoGraphState) -> dict:
     """Run safety evaluation via integration layer.
@@ -321,6 +327,7 @@ def safety_check_node(state: SozoGraphState) -> dict:
     }
 
 
+@node_tracker("contraindication_gate")
 @audited_node("contraindication_gate")
 def contraindication_gate_node(state: SozoGraphState) -> dict:
     """Hard gate on absolute contraindications.
@@ -344,6 +351,7 @@ def contraindication_gate_node(state: SozoGraphState) -> dict:
     }
 
 
+@node_tracker("personalization")
 @audited_node("personalization")
 def personalization_node(state: SozoGraphState) -> dict:
     """V2 stub: Run personalization engine if patient data is present.
@@ -370,6 +378,7 @@ def personalization_node(state: SozoGraphState) -> dict:
     return {"_decisions": decisions}
 
 
+@node_tracker("protocol_composer")
 @audited_node("protocol_composer")
 def protocol_composer_node(state: SozoGraphState) -> dict:
     """Compose protocol sections via integration layer.
@@ -413,6 +422,7 @@ def protocol_composer_node(state: SozoGraphState) -> dict:
     }
 
 
+@node_tracker("grounding_validator")
 @audited_node("grounding_validator")
 def grounding_validator_node(state: SozoGraphState) -> dict:
     """Validate evidence grounding via integration layer.
@@ -447,6 +457,7 @@ def grounding_validator_node(state: SozoGraphState) -> dict:
     }
 
 
+@node_tracker("qa_engine")
 @audited_node("qa_engine")
 def qa_engine_node(state: SozoGraphState) -> dict:
     """Run QA checks via integration layer.
@@ -481,6 +492,7 @@ def qa_engine_node(state: SozoGraphState) -> dict:
     }
 
 
+@node_tracker("clinician_review")
 @audited_node("clinician_review")
 def clinician_review_node(state: SozoGraphState) -> dict:
     """Human-in-the-loop review interrupt.
@@ -574,6 +586,7 @@ def clinician_review_node(state: SozoGraphState) -> dict:
     return {"_decisions": decisions}
 
 
+@node_tracker("document_renderer")
 @audited_node("document_renderer")
 def document_renderer_node(state: SozoGraphState) -> dict:
     """Render final output via integration layer.
@@ -605,6 +618,7 @@ def document_renderer_node(state: SozoGraphState) -> dict:
     }
 
 
+@node_tracker("audit_logger")
 @audited_node("audit_logger")
 def audit_logger_node(state: SozoGraphState) -> dict:
     """Log complete audit trail.

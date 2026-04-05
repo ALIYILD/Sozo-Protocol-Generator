@@ -5,8 +5,15 @@ primary_region = "lhr"
 
 [env]
   PYTHONPATH = "/app/src"
-  DATABASE_URL = "sqlite+aiosqlite:////app/data/sozo.db"
+  # SQLite lives on the mounted Fly volume (see [mounts]) so users and
+  # generated protocols survive machine recreation. /app/data stays baked
+  # from the image for things like learned/raw/cache subdirs.
+  DATABASE_URL = "sqlite+aiosqlite:////data/sozo.db"
   PYTHONUNBUFFERED = "1"
+
+[[mounts]]
+  source = "sozo_data"
+  destination = "/data"
 
 [http_service]
   internal_port = 8080

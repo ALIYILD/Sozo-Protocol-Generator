@@ -7,6 +7,7 @@ Free tier: 100 requests per 5 minutes (no key required).
 from __future__ import annotations
 
 import logging
+import os
 import time
 from pathlib import Path
 from typing import Optional
@@ -57,7 +58,7 @@ class SemanticScholarClient:
     ):
         settings = get_settings()
         self._has_requests = _requests is not None
-        self._api_key = api_key
+        self._api_key = api_key or os.environ.get("SEMANTIC_SCHOLAR_API_KEY")
         self.cache = EvidenceCache(cache_dir or settings.cache_dir)
         self.force_refresh = force_refresh
         self._request_delay = 3.1  # ~100 req per 5 min → ~3s between calls
