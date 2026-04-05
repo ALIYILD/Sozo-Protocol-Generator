@@ -63,3 +63,7 @@ Thumbs.db
 
 # Processed condition JSON (derived from generators)
 data/processed/
+
+# Local job / workspace run state (operator or tooling)
+jobs/
+workspaces/

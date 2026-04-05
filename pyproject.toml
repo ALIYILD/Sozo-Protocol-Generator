@@ -51,6 +51,11 @@ postgres-checkpoint = [
     "langgraph-checkpoint-postgres>=2.0,<3",
     "psycopg[binary]>=3.1,<4",
 ]
+# Phase 8 evidence clients (OpenAlex / Semantic Scholar); required for import-all deployment smoke.
+evidence-phase8 = [
+    "pyalex>=0.15,<1",
+    "semanticscholar>=0.8,<1",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
