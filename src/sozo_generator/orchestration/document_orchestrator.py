@@ -93,7 +93,12 @@ class DocumentOrchestrator:
             return AssetRegistry()
         if name == "section_generator":
             from sozo_generator.generation.section_generator import SectionGenerator
-            return SectionGenerator(asset_registry=self._get("asset_registry"))
+            api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+            return SectionGenerator(
+                asset_registry=self._get("asset_registry"),
+                use_llm=bool(api_key),
+                api_key=api_key or None,
+            )
         if name == "table_builder":
             from sozo_generator.assets.table_builder import TableBuilder
             return TableBuilder()

@@ -49,6 +49,10 @@ elif page == "Studio":
     from ui.page_studio import render
     render(ROOT, DEFAULT_OUTPUT_DIR, REVIEWS_DIR, bool(_IS_CLOUD))
 
+elif page == "Canonical Pipeline":
+    from ui.page_canonical_pipeline import render
+    render(DEFAULT_OUTPUT_DIR)
+
 elif page == "Protocol Graph":
     from ui.page_protocol_graph import render
     render(DEFAULT_OUTPUT_DIR)

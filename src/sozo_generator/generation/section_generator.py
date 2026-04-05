@@ -2,7 +2,7 @@
 
 Transforms SectionSpec and SubsectionSpec planning objects into fully populated
 CanonicalSection instances. Works section-by-section; each section independently
-generates its blocks via BlockGenerator.
+generates its blocks via BlockGenerator (or LLMBlockGenerator when available).
 """
 from __future__ import annotations
 
@@ -21,11 +21,32 @@ class SectionGenerator:
 
     Works section-by-section, not whole-document-at-once.
     Each section independently generates its blocks.
+
+    When ``llm_block_generator`` is provided (or ``use_llm``/``api_key`` triggers
+    auto-creation), text blocks are generated via the Claude API.  All other block
+    types and any LLM failures fall back to the deterministic BlockGenerator.
     """
 
-    def __init__(self, asset_registry: Optional[Any] = None) -> None:
+    def __init__(
+        self,
+        asset_registry: Optional[Any] = None,
+        llm_block_generator: Optional[Any] = None,  # LLMBlockGenerator instance
+        use_llm: bool = False,                       # convenience flag
+        api_key: Optional[str] = None,               # auto-create LLMBlockGenerator if provided
+    ) -> None:
         self.block_generator = BlockGenerator()
         self.asset_registry = asset_registry
+
+        # Set up LLM generator
+        if llm_block_generator:
+            self._llm_gen = llm_block_generator
+        elif use_llm or api_key:
+            from .llm_block_generator import LLMBlockGenerator
+            self._llm_gen = LLMBlockGenerator(api_key=api_key)
+        else:
+            self._llm_gen = None
+
+        self._active_generator = self._llm_gen or self.block_generator
 
     # ------------------------------------------------------------------
     # Public API
@@ -180,7 +201,7 @@ class SectionGenerator:
                 )
                 continue
             try:
-                block = self.block_generator.generate(
+                block = self._active_generator.generate(
                     spec=bspec,
                     condition=condition,
                     variant=variant,

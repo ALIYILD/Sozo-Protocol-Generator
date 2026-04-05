@@ -6,6 +6,7 @@ import streamlit as st
 PAGES = [
     "Chat",
     "Studio",
+    "Canonical Pipeline",
     "Protocol Graph",
     "Template Studio",
     "Generate from Template",
