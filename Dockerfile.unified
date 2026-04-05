@@ -32,6 +32,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       libxml2-dev libxslt-dev libffi-dev libfreetype6-dev libpng-dev \
       libreoffice-writer-nogui \
       supervisor \
+      redis-server \
       curl gnupg debian-keyring debian-archive-keyring apt-transport-https \
     && curl -fsSL 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' \
          | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg \

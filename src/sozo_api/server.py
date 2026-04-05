@@ -151,38 +151,40 @@ def create_app() -> FastAPI:
         except Exception as exc:
             logger.warning("Auto-migration skipped: %s", exc)
 
-        # Seed demo + admin users if the in-memory user store is empty.
-        # NOTE: _users_db is in-memory; seeds are recreated on every cold
-        # start. Self-signups evaporate on restart until a real user DB
-        # replaces _users_db.
+        # Seed demo + admin users into the DB if the users table is empty.
         try:
-            from sozo_auth.router import _users_db
+            from sozo_auth.router import _insert_user
             from sozo_auth.passwords import hash_password
+            from sozo_db.engine import get_session_factory
+            from sozo_db.models.user import User
+            from sqlalchemy import func, select
             from datetime import datetime, timezone
             import uuid as _uuid
 
-            if not _users_db:
+            factory = get_session_factory()
+            async with factory() as session:
+                count = (await session.execute(select(func.count()).select_from(User))).scalar_one()
+
+            if count == 0:
                 now = datetime.now(timezone.utc)
-                demo_id = _uuid.uuid4().hex
-                admin_id = _uuid.uuid4().hex
-                _users_db[demo_id] = {
-                    "id": demo_id,
+                await _insert_user({
+                    "id": _uuid.uuid4().hex,
                     "email": "demo@sozo.app",
                     "name": "Demo Clinician",
                     "role": "clinician",
                     "active": True,
                     "created_at": now,
                     "password_hash": hash_password("SozoDemo2026!"),
-                }
-                _users_db[admin_id] = {
-                    "id": admin_id,
+                })
+                await _insert_user({
+                    "id": _uuid.uuid4().hex,
                     "email": "admin@sozo.app",
                     "name": "Demo Admin",
                     "role": "admin",
                     "active": True,
                     "created_at": now,
                     "password_hash": hash_password("SozoAdmin2026!"),
-                }
+                })
                 logger.info(
                     "Seeded demo users: demo@sozo.app/SozoDemo2026! (clinician), "
                     "admin@sozo.app/SozoAdmin2026! (admin)"
@@ -194,7 +196,8 @@ def create_app() -> FastAPI:
 
     @application.get("/api/health")
     async def health() -> dict:
-        checks = {"api": "ok"}
+        import os as _os
+        checks: dict[str, Any] = {"api": "ok"}
         # DB check
         try:
             from sozo_db.engine import get_engine
@@ -213,7 +216,17 @@ def create_app() -> FastAPI:
         except Exception as e:
             checks["graph"] = f"error: {e}"
 
-        overall = "ok" if all(v == "ok" for v in checks.values()) else "degraded"
+        # API key presence (booleans, not gated in overall status so a
+        # missing key produces a "degraded" warning but never a hard fail).
+        checks["anthropic_key_configured"] = bool(_os.environ.get("ANTHROPIC_API_KEY"))
+        checks["semantic_scholar_key_configured"] = bool(
+            _os.environ.get("SEMANTIC_SCHOLAR_API_KEY")
+        )
+
+        string_checks = {k: v for k, v in checks.items() if isinstance(v, str)}
+        overall = "ok" if all(v == "ok" for v in string_checks.values()) else "degraded"
+        if not checks["anthropic_key_configured"]:
+            overall = "degraded"
         return {"status": overall, "checks": checks}
 
     # ── Visuals ───────────────────────────────────────────────────────
@@ -468,75 +481,86 @@ def create_app() -> FastAPI:
         body: GraphGenerateRequest,
         current_user: UserResponse = Depends(require_clinician),
     ) -> dict:
-        """Start a protocol generation pipeline via LangGraph.
+        """Enqueue a protocol generation pipeline on the Celery worker.
 
-        The pipeline runs through evidence search, safety checks, and
-        composition, then pauses at the clinician review interrupt.
-
-        Returns the thread_id needed to resume after review.
+        The LangGraph pipeline (evidence search, safety, composition,
+        clinician-review interrupt) runs in a background Celery worker
+        process with a local Redis broker, so the single uvicorn worker
+        is never blocked for minutes. This endpoint returns immediately
+        with a ``thread_id``; the client polls
+        ``GET /api/graph/status/{thread_id}`` for progress. The worker
+        writes to the same LangGraph SQLite checkpointer, so polling
+        surfaces state transitions transparently once execution starts.
         """
-        from sozo_graph.unified_graph import (
-            build_unified_graph,
-            create_initial_state,
-        )
+        # Lazy import: avoids pulling celery/redis client into the cold
+        # path of unrelated endpoints.
+        from sozo_api.tasks.graph_generate import run_graph_generate
 
-        logger.info("Graph generate started for user_id=%s", current_user.id)
+        logger.info("Graph generate enqueue for user_id=%s", current_user.id)
 
         try:
-            if body.prompt is not None and str(body.prompt).strip():
-                effective_prompt = str(body.prompt).strip()
-            elif body.condition_slug:
-                effective_prompt = f"Generate {body.doc_type} for {body.condition_slug}"
-            else:
-                effective_prompt = f"Generate {body.doc_type}"
+            # Input validation — same spirit as the previous handler.
+            if body.condition_slug is not None and not body.condition_slug.strip():
+                raise HTTPException(
+                    status_code=400, detail="condition_slug cannot be blank"
+                )
+            if (
+                (body.prompt is None or not str(body.prompt).strip())
+                and not body.condition_slug
+            ):
+                raise HTTPException(
+                    status_code=400,
+                    detail="Either prompt or condition_slug is required",
+                )
 
-            structured: dict = {}
-            if body.doc_type:
-                structured["doc_type"] = body.doc_type
-            if body.modality is not None:
-                structured["modality"] = body.modality
-            if body.patient_id is not None:
-                structured["patient_id"] = body.patient_id
-            if body.condition_slug:
-                structured["condition_slug"] = body.condition_slug.strip()
+            thread_id = str(uuid.uuid4())
 
-            checkpointer = get_graph_checkpointer()
-            graph = build_unified_graph(checkpointer=checkpointer)
-
-            explicit_slug = (
-                body.condition_slug.strip() if body.condition_slug else None
-            )
-            initial_state = create_initial_state(
-                source_mode="prompt",
-                user_prompt=effective_prompt,
-                patient_context=body.patient_context,
-                tier=body.tier,
-                condition_slug=explicit_slug,
-                normalized_request=structured or None,
-            )
-
-            thread_id = initial_state["request_id"]
-            config = {"configurable": {"thread_id": thread_id}}
-
-            # Run until clinician review interrupt
-            result = graph.invoke(initial_state, config=config)
-
-            # Persist GraphRun to database (non-blocking)
+            # Best-effort: insert a 'queued' stub GraphRun row so the
+            # status endpoint can report queued/running state before the
+            # LangGraph checkpointer has written anything.
             try:
                 from sozo_db.repositories.graph_run_repo import GraphRunRepository
                 from sozo_db.engine import get_session_factory
-                import asyncio
 
-                async def _persist():
-                    factory = get_session_factory()
-                    async with factory() as session:
-                        repo = GraphRunRepository(session)
-                        await repo.create(result)
-                        await session.commit()
-
-                asyncio.get_event_loop().run_until_complete(_persist())
+                stub_state = {
+                    "request_id": thread_id,
+                    "status": "queued",
+                    "source_mode": "prompt",
+                    "condition": {
+                        "slug": (body.condition_slug or "").strip(),
+                        "display_name": None,
+                    },
+                    "intake": {"user_prompt": body.prompt or ""},
+                    "evidence": {},
+                    "safety": {},
+                    "protocol": {},
+                    "review": {},
+                    "output": {},
+                    "node_history": [],
+                    "errors": [],
+                }
+                factory = get_session_factory()
+                async with factory() as session:
+                    repo = GraphRunRepository(session)
+                    await repo.create(stub_state)
+                    await session.commit()
             except Exception as db_err:
-                logger.warning("GraphRun DB persist skipped: %s", db_err)
+                logger.warning(
+                    "GraphRun queued-stub persist skipped: %s", db_err
+                )
+
+            async_result = run_graph_generate.delay(
+                thread_id=thread_id,
+                condition_slug=body.condition_slug,
+                modality=body.modality,
+                tier=body.tier,
+                doc_type=body.doc_type,
+                prompt=body.prompt,
+                patient_id=body.patient_id,
+                patient_context=body.patient_context,
+                user_id=str(current_user.id),
+                user_role=getattr(current_user, "role", "clinician") or "clinician",
+            )
 
             try:
                 from sozo_api.routes.audit_service import audit_service
@@ -544,58 +568,30 @@ def create_app() -> FastAPI:
                 audit_service.log_event(
                     entity_type="graph_run",
                     entity_id=thread_id,
-                    action="generation_started",
+                    action="generation_enqueued",
                     actor=current_user.email,
                     details={
                         "thread_id": thread_id,
-                        "generation_method": "unified_graph",
-                        "condition_slug": result.get("condition", {}).get("slug"),
+                        "generation_method": "unified_graph_async",
+                        "celery_task_id": async_result.id,
+                        "condition_slug": (body.condition_slug or None),
                     },
                 )
             except Exception as audit_err:
-                logger.warning("Audit log (graph_run start) skipped: %s", audit_err)
+                logger.warning(
+                    "Audit log (graph_run enqueue) skipped: %s", audit_err
+                )
 
             return {
                 "success": True,
                 "thread_id": thread_id,
-                "status": result.get("status", "pending_review"),
-                "condition": {
-                    "slug": result.get("condition", {}).get("slug"),
-                    "display_name": result.get("condition", {}).get("display_name"),
-                    "valid": result.get("condition", {}).get("condition_valid"),
-                    "resolution_source": result.get("condition", {}).get(
-                        "resolution_source"
-                    ),
-                    "intake_conflict": result.get("condition", {}).get(
-                        "intake_conflict", False
-                    ),
-                    "intake_conflict_note": result.get("condition", {}).get(
-                        "intake_conflict_note"
-                    ),
-                },
-                "evidence_summary": {
-                    "total_articles": result.get("evidence", {}).get("screened_article_count", 0),
-                    "sufficient": result.get("evidence", {}).get("evidence_sufficient", False),
-                    "grade_distribution": result.get("evidence", {}).get("evidence_summary", {}).get("grade_distribution", {}),
-                },
-                "safety": {
-                    "cleared": result.get("safety", {}).get("safety_cleared"),
-                    "blocking": result.get("safety", {}).get("blocking_contraindications", []),
-                    "off_label": result.get("safety", {}).get("off_label_flags", []),
-                },
-                "protocol": {
-                    "sections_count": len(result.get("protocol", {}).get("composed_sections", [])),
-                    "grounding_score": result.get("protocol", {}).get("grounding_score"),
-                    "qa_passed": result.get("protocol", {}).get("qa_passed"),
-                },
-                "audit": {
-                    "nodes_executed": len(result.get("node_history", [])),
-                    "errors": len(result.get("errors", [])),
-                },
-                "protocol_id": result.get("output", {}).get("protocol_id"),
+                "status": "queued",
+                "task_id": async_result.id,
             }
+        except HTTPException:
+            raise
         except Exception as exc:
-            logger.exception("Graph generation failed")
+            logger.exception("Graph generation enqueue failed")
             raise HTTPException(status_code=500, detail=str(exc))
 
     @application.get("/api/graph/status/{thread_id}")
@@ -617,6 +613,46 @@ def create_app() -> FastAPI:
 
             state = graph.get_state(config)
             if not state or not state.values:
+                # No LangGraph checkpoint yet — the Celery worker may not
+                # have started executing. Fall back to the GraphRun DB
+                # row for queued/running visibility before the first
+                # checkpoint is written.
+                try:
+                    from sozo_db.repositories.graph_run_repo import GraphRunRepository
+                    from sozo_db.engine import get_session_factory
+
+                    factory = get_session_factory()
+                    async with factory() as session:
+                        repo = GraphRunRepository(session)
+                        db_run = await repo.get_by_thread_id(thread_id)
+                        if db_run is not None:
+                            return {
+                                "thread_id": thread_id,
+                                "status": db_run.status or "queued",
+                                "protocol_id": (
+                                    str(db_run.protocol_id)
+                                    if db_run.protocol_id else None
+                                ),
+                                "review_status": "pending",
+                                "revision_number": db_run.revision_number or 0,
+                                "condition": {
+                                    "slug": db_run.condition_slug,
+                                    "display_name": db_run.condition_name,
+                                },
+                                "evidence": {},
+                                "safety": {},
+                                "protocol": {"sections": []},
+                                "evidence_articles": [],
+                                "node_history": [],
+                                "output": {},
+                            }
+                except HTTPException:
+                    raise
+                except Exception:
+                    logger.debug(
+                        "graph_status queued-row fallback failed",
+                        exc_info=True,
+                    )
                 raise HTTPException(status_code=404, detail=f"Thread {thread_id} not found")
 
             values = state.values

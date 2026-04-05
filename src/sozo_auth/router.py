@@ -2,10 +2,14 @@
 from __future__ import annotations
 
 import logging
+import uuid
+from datetime import datetime, timezone
 from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, EmailStr, Field
+from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 
 from sozo_auth.dependencies import get_current_user, require_admin
 from sozo_auth.models import (
@@ -18,80 +22,115 @@ from sozo_auth.models import (
 )
 from sozo_auth.passwords import hash_password, validate_password_strength, verify_password
 from sozo_auth.tokens import create_token_pair, decode_token
+from sozo_db.engine import get_session_factory
+from sozo_db.models.user import User, UserRole
 
 logger = logging.getLogger(__name__)
 
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
 
 # ---------------------------------------------------------------------------
-# User store — tries SQLite/PostgreSQL database first, falls back to in-memory.
+# User store — backed by the SQLAlchemy `users` table.
 # ---------------------------------------------------------------------------
-_users_db: dict[str, dict[str, Any]] = {}
 
 # Blacklisted JTIs for logout support.
 _token_blacklist: set[str] = set()
 
 
-def _find_user_by_email(email: str) -> dict[str, Any] | None:
-    """Look up user by email — database first, then in-memory fallback."""
-    # Try database
+def _user_row_to_dict(row: User) -> dict[str, Any]:
+    """Serialize a User ORM row into the dict shape the router handlers expect."""
+    created_at = row.created_at
+    if created_at is None:
+        created_at_str: Any = datetime.now(timezone.utc)
+    else:
+        created_at_str = created_at
+    return {
+        "id": row.id.hex if isinstance(row.id, uuid.UUID) else str(row.id).replace("-", ""),
+        "email": row.email,
+        "name": row.name,
+        "role": row.role.value if isinstance(row.role, UserRole) else str(row.role),
+        "password_hash": row.credentials_hash,
+        "active": bool(row.active),
+        "created_at": created_at_str,
+    }
+
+
+async def _find_user_by_email(email: str) -> dict[str, Any] | None:
+    """Look up user by email from the database."""
+    factory = get_session_factory()
+    async with factory() as session:
+        result = await session.execute(select(User).where(User.email == email))
+        row = result.scalar_one_or_none()
+        if row is None:
+            return None
+        return _user_row_to_dict(row)
+
+
+async def _find_user_by_id(user_id: str) -> dict[str, Any] | None:
+    """Look up user by hex-string ID from the database."""
     try:
-        from sozo_api.routes.db_helper import get_db
-        conn = get_db()
-        row = conn.execute(
-            "SELECT id, email, name, role, credentials_hash, active, created_at "
-            "FROM users WHERE email = ? AND active = 1",
-            (email,),
-        ).fetchone()
-        conn.close()
-        if True:
-            if row:
-                return {
-                    "id": row["id"],
-                    "email": row["email"],
-                    "name": row["name"],
-                    "role": row["role"],
-                    "password_hash": row["credentials_hash"],
-                    "active": bool(row["active"]),
-                    "created_at": row["created_at"] or "2026-01-01T00:00:00",
-                }
-    except Exception as exc:
-        logger.debug("DB lookup failed, using in-memory: %s", exc)
-
-    # Fallback to in-memory
-    for user in _users_db.values():
-        if user["email"] == email:
-            return user
-    return None
+        uid = uuid.UUID(user_id)
+    except (ValueError, TypeError):
+        return None
+    factory = get_session_factory()
+    async with factory() as session:
+        row = await session.get(User, uid)
+        if row is None:
+            return None
+        return _user_row_to_dict(row)
 
 
-def _find_user_by_id(user_id: str) -> dict[str, Any] | None:
-    """Look up user by ID — database first, then in-memory fallback."""
+async def _insert_user(record: dict[str, Any]) -> None:
+    """Insert a new user row. Raises HTTPException(409) on duplicate email."""
     try:
-        import os
-        import sqlite3
-        from sozo_api.routes.db_helper import get_db
-        conn = get_db()
-        row = conn.execute(
-            "SELECT id, email, name, role, credentials_hash, active, created_at "
-            "FROM users WHERE id = ?",
-            (user_id,),
-        ).fetchone()
-        conn.close()
-        if row:
-                return {
-                    "id": row["id"],
-                    "email": row["email"],
-                    "name": row["name"],
-                    "role": row["role"],
-                    "password_hash": row["credentials_hash"],
-                    "active": bool(row["active"]),
-                    "created_at": row["created_at"] or "2026-01-01T00:00:00",
-                }
-    except Exception as exc:
-        logger.debug("DB lookup failed, using in-memory: %s", exc)
+        uid = uuid.UUID(record["id"])
+    except (ValueError, TypeError):
+        uid = uuid.uuid4()
 
-    return _users_db.get(user_id)
+    role_value = record["role"]
+    try:
+        role_enum = role_value if isinstance(role_value, UserRole) else UserRole(role_value)
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=f"Invalid role: {role_value}",
+        ) from exc
+
+    factory = get_session_factory()
+    async with factory() as session:
+        user = User(
+            id=uid,
+            email=record["email"],
+            name=record["name"],
+            role=role_enum,
+            credentials_hash=record.get("password_hash"),
+            active=bool(record.get("active", True)),
+        )
+        session.add(user)
+        try:
+            await session.commit()
+        except IntegrityError as exc:
+            await session.rollback()
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail="A user with this email already exists",
+            ) from exc
+
+
+async def _update_password(user_id: str, new_hash: str) -> bool:
+    """Update credentials_hash for a user. Returns True if updated."""
+    try:
+        uid = uuid.UUID(user_id)
+    except (ValueError, TypeError):
+        return False
+    factory = get_session_factory()
+    async with factory() as session:
+        row = await session.get(User, uid)
+        if row is None:
+            return False
+        row.credentials_hash = new_hash
+        await session.commit()
+        return True
 
 
 def _user_to_response(user: dict[str, Any]) -> UserResponse:
@@ -111,8 +150,8 @@ def _user_to_response(user: dict[str, Any]) -> UserResponse:
 @auth_router.post("/login", response_model=TokenPair)
 async def login(body: LoginRequest) -> TokenPair:
     """Authenticate with email + password and receive a token pair."""
-    user = _find_user_by_email(body.email)
-    if user is None or not verify_password(body.password, user["password_hash"]):
+    user = await _find_user_by_email(body.email)
+    if user is None or not verify_password(body.password, user["password_hash"] or ""):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid email or password",
@@ -156,7 +195,7 @@ async def refresh(body: RefreshRequest) -> TokenPair:
         )
 
     # Look up the user to get the current role (may have changed since last login).
-    user = _find_user_by_id(payload.sub)
+    user = await _find_user_by_id(payload.sub)
     if user is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -187,7 +226,7 @@ async def refresh(body: RefreshRequest) -> TokenPair:
 async def register(body: UserCreate) -> UserResponse:
     """Create a new user account. Admin-only."""
     # Check for duplicate email.
-    if _find_user_by_email(body.email):
+    if await _find_user_by_email(body.email):
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail="A user with this email already exists",
@@ -201,9 +240,6 @@ async def register(body: UserCreate) -> UserResponse:
             detail={"password_issues": issues},
         )
 
-    import uuid
-    from datetime import datetime, timezone
-
     user_id = uuid.uuid4().hex
     now = datetime.now(timezone.utc)
 
@@ -216,7 +252,7 @@ async def register(body: UserCreate) -> UserResponse:
         "created_at": now,
         "password_hash": hash_password(body.password),
     }
-    _users_db[user_id] = user_record
+    await _insert_user(user_record)
     logger.info("User %s (%s) registered by admin", user_id, body.email)
     return _user_to_response(user_record)
 
@@ -227,8 +263,7 @@ async def register(body: UserCreate) -> UserResponse:
 @auth_router.get("/me", response_model=UserResponse)
 async def me(current_user: UserResponse = Depends(get_current_user)) -> UserResponse:
     """Return the currently authenticated user's profile."""
-    # If a real DB exists, look up full record; otherwise use the token-derived user.
-    user = _users_db.get(current_user.id)
+    user = await _find_user_by_id(current_user.id)
     if user:
         return _user_to_response(user)
     return current_user
@@ -243,14 +278,14 @@ async def change_password(
     current_user: UserResponse = Depends(get_current_user),
 ) -> None:
     """Change the current user's password."""
-    user = _users_db.get(current_user.id)
+    user = await _find_user_by_id(current_user.id)
     if user is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="User not found in store",
         )
 
-    if not verify_password(body.current_password, user["password_hash"]):
+    if not verify_password(body.current_password, user["password_hash"] or ""):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Current password is incorrect",
@@ -263,7 +298,7 @@ async def change_password(
             detail={"password_issues": issues},
         )
 
-    user["password_hash"] = hash_password(body.new_password)
+    await _update_password(current_user.id, hash_password(body.new_password))
     logger.info("User %s changed their password", current_user.id)
 
 
@@ -291,7 +326,7 @@ async def signup(body: SignupRequest) -> TokenPair:
     to ``clinician``; elevated roles still require an admin to provision.
     """
     # Duplicate check
-    if _find_user_by_email(body.email):
+    if await _find_user_by_email(body.email):
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail="A user with this email already exists",
@@ -305,10 +340,7 @@ async def signup(body: SignupRequest) -> TokenPair:
             detail={"password_issues": issues},
         )
 
-    import uuid as _uuid
-    from datetime import datetime, timezone
-
-    user_id = _uuid.uuid4().hex
+    user_id = uuid.uuid4().hex
     now = datetime.now(timezone.utc)
 
     user_record: dict[str, Any] = {
@@ -320,7 +352,7 @@ async def signup(body: SignupRequest) -> TokenPair:
         "created_at": now,
         "password_hash": hash_password(body.password),
     }
-    _users_db[user_id] = user_record
+    await _insert_user(user_record)
     logger.info("User %s (%s) self-registered as clinician", user_id, body.email)
 
     return create_token_pair(user_id, "clinician")
