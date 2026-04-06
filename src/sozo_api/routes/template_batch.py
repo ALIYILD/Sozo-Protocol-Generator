@@ -20,6 +20,13 @@ from sozo_generator.template.template_driven_generator import TemplateDrivenGene
 
 logger = logging.getLogger(__name__)
 
+
+def _form_bool(val: str | None) -> bool:
+    if val is None or not str(val).strip():
+        return False
+    return str(val).strip().lower() in ("1", "true", "yes", "on")
+
+
 router = APIRouter(
     prefix="/api/generate",
     tags=["generation"],
@@ -41,6 +48,10 @@ def post_template_batch(
     document_type: str | None = Form(
         None,
         description="Optional DocumentType enum value to override inference from filename",
+    ),
+    preserve_template_stationery: str | None = Form(
+        None,
+        description="If true/1/on/yes, keep Word headers/footers from the template; skip SOZO cover",
     ),
 ):
     """
@@ -96,6 +107,8 @@ def post_template_batch(
     finally:
         template.file.close()
 
+    preserve_stationery = _form_bool(preserve_template_stationery)
+
     try:
         buf = io.BytesIO()
         with tempfile.TemporaryDirectory(prefix="sozo_template_batch_") as tmp:
@@ -138,6 +151,7 @@ def post_template_batch(
                             spec,
                             out_file,
                             layout_template_path=template_path,
+                            preserve_template_stationery=preserve_stationery,
                         )
                         zf.write(out_file, arcname=spec.output_filename)
 

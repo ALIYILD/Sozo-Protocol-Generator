@@ -117,3 +117,101 @@ def test_template_driven_document_type_override(tmp_path: Path, parkinsons_condi
         document_type=DocumentType.CLINICAL_EXAM,
     )
     assert spec_override.document_type == DocumentType.CLINICAL_EXAM
+
+
+def _write_template_with_stationery_markers(path: Path) -> None:
+    """Minimal template with recognizable header/footer text and one heading."""
+    doc = Document()
+    sec = doc.sections[0]
+    sec.header.paragraphs[0].text = "TPL_HDR_MARKER_STATIONERY"
+    sec.footer.paragraphs[0].text = "TPL_FTR_MARKER_STATIONERY"
+    doc.add_heading("Clinical Overview", level=1)
+    doc.add_paragraph("Template body to clear.")
+    doc.save(str(path))
+
+
+def _header_and_footer_joined(doc: Document) -> tuple[str, str]:
+    sec = doc.sections[0]
+    header_text = " ".join(p.text for p in sec.header.paragraphs)
+    footer_text = " ".join(p.text for p in sec.footer.paragraphs)
+    return header_text, footer_text
+
+
+def test_preserve_template_stationery_keeps_word_header_footer(
+    parkinsons_condition, tmp_path: Path
+):
+    from sozo_generator.docx.renderer import DocumentRenderer
+    from sozo_generator.template.doc_structure import build_document_spec
+    from sozo_generator.core.enums import DocumentType, Tier
+
+    tpl = tmp_path / "tpl_stationery.docx"
+    _write_template_with_stationery_markers(tpl)
+
+    spec = build_document_spec(
+        condition=parkinsons_condition,
+        doc_type=DocumentType.EVIDENCE_BASED_PROTOCOL,
+        tier=Tier.FELLOW,
+    )
+    out_path = tmp_path / "out_stationery.docx"
+    renderer = DocumentRenderer(output_dir=str(tmp_path))
+    renderer.render(
+        spec,
+        str(out_path),
+        layout_template_path=tpl,
+        preserve_template_stationery=True,
+    )
+
+    out = Document(str(out_path))
+    hdr, ftr = _header_and_footer_joined(out)
+    assert "TPL_HDR_MARKER_STATIONERY" in hdr
+    assert "TPL_FTR_MARKER_STATIONERY" in ftr
+    assert "SOZO BRAIN CENTER" not in hdr
+
+
+def test_layout_only_mode_replaces_template_header_with_soz(
+    parkinsons_condition, tmp_path: Path
+):
+    from sozo_generator.docx.renderer import DocumentRenderer
+    from sozo_generator.template.doc_structure import build_document_spec
+    from sozo_generator.core.enums import DocumentType, Tier
+
+    tpl = tmp_path / "tpl_replace.docx"
+    _write_template_with_stationery_markers(tpl)
+
+    spec = build_document_spec(
+        condition=parkinsons_condition,
+        doc_type=DocumentType.EVIDENCE_BASED_PROTOCOL,
+        tier=Tier.FELLOW,
+    )
+    out_path = tmp_path / "out_replace.docx"
+    renderer = DocumentRenderer(output_dir=str(tmp_path))
+    renderer.render(
+        spec,
+        str(out_path),
+        layout_template_path=tpl,
+        preserve_template_stationery=False,
+    )
+
+    out = Document(str(out_path))
+    hdr, _ = _header_and_footer_joined(out)
+    assert "TPL_HDR_MARKER_STATIONERY" not in hdr
+    assert "SOZO BRAIN CENTER" in hdr
+
+
+def test_preserve_stationery_requires_layout_template(parkinsons_condition, tmp_path: Path):
+    from sozo_generator.docx.renderer import DocumentRenderer
+    from sozo_generator.template.doc_structure import build_document_spec
+    from sozo_generator.core.enums import DocumentType, Tier
+
+    spec = build_document_spec(
+        condition=parkinsons_condition,
+        doc_type=DocumentType.EVIDENCE_BASED_PROTOCOL,
+        tier=Tier.FELLOW,
+    )
+    renderer = DocumentRenderer(output_dir=str(tmp_path))
+    with pytest.raises(ValueError, match="preserve_template_stationery requires"):
+        renderer.render(
+            spec,
+            str(tmp_path / "x.docx"),
+            preserve_template_stationery=True,
+        )

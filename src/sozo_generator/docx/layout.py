@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
 from docx import Document
 from docx.shared import Inches, Cm, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml.ns import qn
 
 if TYPE_CHECKING:
     from docx.section import Section
@@ -32,6 +33,18 @@ def _copy_section_page_geometry(source: Section, target: Section) -> None:
     target.header_distance = source.header_distance
     target.footer_distance = source.footer_distance
     target.orientation = source.orientation
+
+
+def clear_document_body_keep_sect_pr(doc: Document) -> None:
+    """
+    Remove all block-level body children except trailing ``w:sectPr``.
+    Preserves section properties and header/footer relationships from the source file.
+    """
+    body = doc.element.body
+    sect_tag = qn("w:sectPr")
+    for child in list(body):
+        if child.tag != sect_tag:
+            body.remove(child)
 
 
 def apply_template_page_setup(target_doc: Document, template_path: str | Path) -> None:

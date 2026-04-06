@@ -77,6 +77,15 @@ def render(default_output_dir: str) -> None:
     with col2:
         output_dir = st.text_input("Output directory", value=default_output_dir, key="template_output_dir")
 
+    preserve_stationery = st.checkbox(
+        "Preserve template header/footer (skip SOZO cover, header, and footer)",
+        value=False,
+        help=(
+            "Open the uploaded DOCX as the base document and keep its Word headers/footers. "
+            "Skips the SOZO title block and branded header/footer."
+        ),
+    )
+
     st.divider()
 
     if not st.button("Generate Documents from Template", type="primary", use_container_width=True):
@@ -112,7 +121,10 @@ def render(default_output_dir: str) -> None:
                 tier_dir.mkdir(parents=True, exist_ok=True)
                 out_path = tier_dir / spec.output_filename
                 rendered_path = renderer.render(
-                    spec, out_path, layout_template_path=template_path
+                    spec,
+                    out_path,
+                    layout_template_path=template_path,
+                    preserve_template_stationery=preserve_stationery,
                 )
                 all_outputs[f"{slug}_{tier.value}"] = rendered_path
             except Exception as e:

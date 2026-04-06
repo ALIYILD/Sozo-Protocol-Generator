@@ -12,7 +12,12 @@ from ..schemas.branding import BrandingConfig
 from ..core.enums import Tier
 from ..core.utils import ensure_dir, current_month_year
 from .styles import COLOR_DARK_BLUE, COLOR_ACCENT_RED, FONT_HEADING, FONT_BODY, apply_heading_style
-from .layout import configure_page_layout, add_title_block, apply_template_page_setup
+from .layout import (
+    configure_page_layout,
+    add_title_block,
+    apply_template_page_setup,
+    clear_document_body_keep_sect_pr,
+)
 from .headers import add_header, add_footer
 from .sections import render_section
 from .tables import add_clinical_table, add_warning_box
@@ -40,16 +45,27 @@ class DocumentRenderer:
         image_manifest=None,
         *,
         layout_template_path: Path | str | None = None,
+        preserve_template_stationery: bool = False,
     ) -> Path:
         """
         Render a DocumentSpec to a .docx file. Returns output path.
         output_path is optional — if omitted, a path is built from spec fields.
         image_manifest: optional DocumentImageManifest for inline image insertion.
         layout_template_path: if set, copy page size/margins from this DOCX instead of SOZO A4.
+        preserve_template_stationery: load template as base, clear body only, skip SOZO header/footer/title.
         """
-        doc = Document()
-        if not layout_template_path:
-            configure_page_layout(doc)
+        if preserve_template_stationery and not layout_template_path:
+            raise ValueError(
+                "preserve_template_stationery requires layout_template_path to the source .docx"
+            )
+
+        if preserve_template_stationery:
+            doc = Document(str(layout_template_path))
+            clear_document_body_keep_sect_pr(doc)
+        else:
+            doc = Document()
+            if not layout_template_path:
+                configure_page_layout(doc)
 
         # Determine tier labels
         tier = spec.tier
@@ -62,29 +78,28 @@ class DocumentRenderer:
 
         version_str = f"Version {spec.version}"
 
-        # Header + footer
-        add_header(
-            doc,
-            condition_name=spec.condition_name,
-            tier_label=tier_label,
-            version=version_str,
-            confidentiality=spec.confidentiality_mark,
-            document_title=spec.title,
-        )
-        add_footer(doc, condition_name=spec.condition_name, organization=self.branding.organization)
+        if not preserve_template_stationery:
+            add_header(
+                doc,
+                condition_name=spec.condition_name,
+                tier_label=tier_label,
+                version=version_str,
+                confidentiality=spec.confidentiality_mark,
+                document_title=spec.title,
+            )
+            add_footer(doc, condition_name=spec.condition_name, organization=self.branding.organization)
 
-        # Title block
-        add_title_block(
-            doc,
-            title=spec.title,
-            subtitle=spec.subtitle or "",
-            condition_name=spec.condition_name,
-            tier_label=tier_label,
-            tier_description=tier_desc,
-            version=version_str,
-            date_label=spec.date_label or current_month_year(),
-            confidentiality=spec.confidentiality_mark,
-        )
+            add_title_block(
+                doc,
+                title=spec.title,
+                subtitle=spec.subtitle or "",
+                condition_name=spec.condition_name,
+                tier_label=tier_label,
+                tier_description=tier_desc,
+                version=version_str,
+                date_label=spec.date_label or current_month_year(),
+                confidentiality=spec.confidentiality_mark,
+            )
 
         # Table of Contents placeholder
         self._add_toc_placeholder(doc)
@@ -149,7 +164,7 @@ class DocumentRenderer:
             out_path = self._build_output_path(spec)
 
         ensure_dir(out_path.parent)
-        if layout_template_path:
+        if layout_template_path and not preserve_template_stationery:
             apply_template_page_setup(doc, layout_template_path)
 
         doc.save(str(out_path))

@@ -29,6 +29,7 @@ export default function TemplateBatchPage() {
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>([]);
   const [tier, setTier] = useState('fellow');
   const [docType, setDocType] = useState('');
+  const [preserveStationery, setPreserveStationery] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
@@ -79,6 +80,7 @@ export default function TemplateBatchPage() {
     form.append('condition_slugs', selectedSlugs.join(','));
     form.append('tier', tier);
     if (docType) form.append('document_type', docType);
+    if (preserveStationery) form.append('preserve_template_stationery', 'true');
 
     setBusy(true);
     try {
@@ -208,6 +210,18 @@ export default function TemplateBatchPage() {
               ))}
             </select>
           </div>
+          <label className="flex cursor-pointer items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
+            <input
+              type="checkbox"
+              className="mt-1"
+              checked={preserveStationery}
+              onChange={(e) => setPreserveStationery(e.target.checked)}
+            />
+            <span>
+              Preserve template header/footer — skip SOZO cover block and branded header/footer (uses
+              the uploaded DOCX as the document base).
+            </span>
+          </label>
         </Card>
 
         {error && (
