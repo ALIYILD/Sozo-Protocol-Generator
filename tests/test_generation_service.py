@@ -116,8 +116,11 @@ class TestGenerationService:
         return GenerationService(with_visuals=False, with_qa=False)
 
     def test_list_conditions(self, svc):
+        from sozo_generator.conditions.registry import get_registry
+
         conditions = svc.list_conditions()
-        assert len(conditions) >= 15
+        registry_slugs = get_registry().list_slugs()
+        assert set(conditions) == set(registry_slugs)
         assert "parkinsons" in conditions
 
     def test_list_doc_types(self, svc):

@@ -46,22 +46,38 @@ from sozo_generator.schemas.eeg import (
     AsymmetryIndex,
     QEEGNormativeComparison,
 )
+# Long-document pipeline — canonical models
 from sozo_generator.schemas.canonical import (
+    # Literal type aliases
+    AssemblyStatus,
+    AssetStatus,
+    AssetType,
+    BlockType,
+    SectionVariant,
+    ValidationSeverity,
+    # Planning-time specs
     ContentBlockSpec,
     SubsectionSpec,
     SectionSpec,
     DocumentBlueprint,
+    # Asset tracking
     AssetRecord,
+    # Resolved content models
     CanonicalBlock,
     CanonicalSection,
-    CanonicalTable,
-    CanonicalFigure,
+    # Standalone asset content models
     CanonicalChart,
+    CanonicalFigure,
     CanonicalImage,
+    CanonicalTable,
+    # Citations
     CanonicalCitation,
-    AssemblyProvenance,
+    # QA
+    DocumentQAReport,
     QAValidationIssue,
     QAValidationResult,
-    DocumentQAReport,
+    # Provenance
+    AssemblyProvenance,
+    # Root document model
     CanonicalDocument,
 )
