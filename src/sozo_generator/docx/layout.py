@@ -11,6 +11,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 if TYPE_CHECKING:
     from docx.section import Section
+
 from .styles import (
     COLOR_DARK_BLUE, COLOR_PRIMARY_BLUE, COLOR_BROWN, COLOR_GRAY,
     COLOR_ACCENT_RED, FONT_HEADING, FONT_BODY, add_horizontal_rule,

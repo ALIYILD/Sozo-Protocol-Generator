@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   canAccessAdmin,
+  canRunTemplateBatch,
   canViewAudit,
   canViewStaleness,
 } from '../permissions';
@@ -43,4 +44,18 @@ describe('permission helpers', () => {
     expect(canViewStaleness(undefined)).toBe(false);
     expect(canAccessAdmin(null)).toBe(false);
   });
+
+  it.each(['clinician', 'reviewer', 'admin'] as const)(
+    'canRunTemplateBatch is true for %s',
+    (role) => {
+      expect(canRunTemplateBatch(makeUser(role))).toBe(true);
+    },
+  );
+
+  it.each(['readonly', 'operator', 'researcher', 'viewer'] as const)(
+    'canRunTemplateBatch is false for %s',
+    (role) => {
+      expect(canRunTemplateBatch(makeUser(role))).toBe(false);
+    },
+  );
 });
