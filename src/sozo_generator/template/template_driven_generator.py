@@ -145,6 +145,8 @@ class TemplateDrivenGenerator:
         self,
         condition: ConditionSchema,
         tier: Tier = Tier.FELLOW,
+        *,
+        document_type: Optional[DocumentType] = None,
     ) -> DocumentSpec:
         """
         Generate a DocumentSpec for one condition, mirroring the template structure.
@@ -164,8 +166,7 @@ class TemplateDrivenGenerator:
         # Build references from condition
         references = condition.references or []
 
-        # Determine doc type from template name
-        doc_type = self._infer_doc_type()
+        doc_type = document_type if document_type is not None else self._infer_doc_type()
 
         title = self._build_title(condition, tier)
 

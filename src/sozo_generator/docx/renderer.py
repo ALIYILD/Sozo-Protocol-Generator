@@ -12,7 +12,7 @@ from ..schemas.branding import BrandingConfig
 from ..core.enums import Tier
 from ..core.utils import ensure_dir, current_month_year
 from .styles import COLOR_DARK_BLUE, COLOR_ACCENT_RED, FONT_HEADING, FONT_BODY, apply_heading_style
-from .layout import configure_page_layout, add_title_block
+from .layout import configure_page_layout, add_title_block, apply_template_page_setup
 from .headers import add_header, add_footer
 from .sections import render_section
 from .tables import add_clinical_table, add_warning_box
@@ -33,14 +33,23 @@ class DocumentRenderer:
         ensure_dir(self.output_dir)
         self.branding = branding or BrandingConfig()
 
-    def render(self, spec: DocumentSpec, output_path=None, image_manifest=None) -> Path:
+    def render(
+        self,
+        spec: DocumentSpec,
+        output_path=None,
+        image_manifest=None,
+        *,
+        layout_template_path: Path | str | None = None,
+    ) -> Path:
         """
         Render a DocumentSpec to a .docx file. Returns output path.
         output_path is optional — if omitted, a path is built from spec fields.
         image_manifest: optional DocumentImageManifest for inline image insertion.
+        layout_template_path: if set, copy page size/margins from this DOCX instead of SOZO A4.
         """
         doc = Document()
-        configure_page_layout(doc)
+        if not layout_template_path:
+            configure_page_layout(doc)
 
         # Determine tier labels
         tier = spec.tier
@@ -140,6 +149,9 @@ class DocumentRenderer:
             out_path = self._build_output_path(spec)
 
         ensure_dir(out_path.parent)
+        if layout_template_path:
+            apply_template_page_setup(doc, layout_template_path)
+
         doc.save(str(out_path))
         logger.info(f"Saved: {out_path}")
         return out_path

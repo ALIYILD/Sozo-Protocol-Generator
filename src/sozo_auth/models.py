@@ -4,7 +4,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import AliasChoices, BaseModel, EmailStr, Field
 
 
 class UserCreate(BaseModel):
@@ -43,6 +43,11 @@ class TokenPayload(BaseModel):
     exp: datetime
     iat: Optional[datetime] = None
     jti: Optional[str] = None
+    #: JWT claim ``type``: ``access`` or ``refresh`` (older tokens may omit).
+    token_type: Optional[str] = Field(
+        default=None,
+        validation_alias=AliasChoices("type", "token_type"),
+    )
 
 
 class PasswordChange(BaseModel):

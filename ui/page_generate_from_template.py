@@ -111,7 +111,9 @@ def render(default_output_dir: str) -> None:
                 tier_dir = condition_dir / tier.value.capitalize()
                 tier_dir.mkdir(parents=True, exist_ok=True)
                 out_path = tier_dir / spec.output_filename
-                rendered_path = renderer.render(spec, out_path)
+                rendered_path = renderer.render(
+                    spec, out_path, layout_template_path=template_path
+                )
                 all_outputs[f"{slug}_{tier.value}"] = rendered_path
             except Exception as e:
                 errors.append(f"{slug}/{tier.value}: {e}")

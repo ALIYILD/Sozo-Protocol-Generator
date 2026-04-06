@@ -5,6 +5,7 @@ import SignupPage from './pages/SignupPage';
 import DashboardPage from './pages/DashboardPage';
 import ProtocolListPage from './pages/ProtocolListPage';
 import ProtocolBuilderPage from './pages/ProtocolBuilderPage';
+import TemplateBatchPage from './pages/TemplateBatchPage';
 import ProtocolDetailPage from './pages/ProtocolDetailPage';
 import ProtocolReviewPage from './pages/ProtocolReviewPage';
 import EvidenceExplorerPage from './pages/EvidenceExplorerPage';
@@ -36,6 +37,14 @@ export default function App() {
         <Route index element={<DashboardPage />} />
         <Route path="protocols" element={<ProtocolListPage />} />
         <Route path="protocols/new" element={<ProtocolBuilderPage />} />
+        <Route
+          path="tools/template-batch"
+          element={
+            <RequireRoles roles={['clinician', 'reviewer', 'admin']}>
+              <TemplateBatchPage />
+            </RequireRoles>
+          }
+        />
         <Route path="protocols/:id" element={<ProtocolDetailPage />} />
         <Route path="protocols/:id/review" element={<ProtocolReviewPage />} />
         <Route path="review/:threadId" element={<ProtocolReviewPage />} />

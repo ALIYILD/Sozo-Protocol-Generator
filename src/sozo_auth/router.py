@@ -187,6 +187,13 @@ async def refresh(body: RefreshRequest) -> TokenPair:
             detail=f"Invalid refresh token: {exc}",
         )
 
+    # Reject access tokens; allow ``type=refresh`` or legacy tokens with no ``type`` claim.
+    if payload.token_type == "access":
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Refresh token required",
+        )
+
     # Check blacklist.
     if payload.jti and payload.jti in _token_blacklist:
         raise HTTPException(

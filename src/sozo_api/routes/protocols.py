@@ -22,8 +22,30 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from sozo_auth.dependencies import get_current_user, require_clinician, require_reviewer
+from sozo_auth.models import UserResponse
+from sozo_api.error_responses import INTERNAL_SERVER_DETAIL
 
 logger = logging.getLogger(__name__)
+
+
+def _is_privileged_protocol_user(user: UserResponse) -> bool:
+    return user.role in ("admin", "operator")
+
+
+def _can_access_protocol(created_by: str | None, user: UserResponse) -> bool:
+    if _is_privileged_protocol_user(user):
+        return True
+    if created_by is None or created_by == "":
+        return True
+    return created_by in (user.id, user.email)
+
+
+def _assert_protocol_access(created_by: str | None, user: UserResponse) -> None:
+    if not _can_access_protocol(created_by, user):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not allowed to access this protocol",
+        )
 
 # ---------------------------------------------------------------------------
 # Router
@@ -407,6 +429,7 @@ async def list_protocols(
     search: Optional[str] = None,
     sort_by: str = Query("created_at", pattern="^(created_at|condition_name|modality|status)$"),
     sort_order: str = Query("desc", pattern="^(asc|desc)$"),
+    current_user: UserResponse = Depends(get_current_user),
 ) -> PaginatedResponse:
     """List protocols with filtering, pagination, and sorting."""
     try:
@@ -440,6 +463,11 @@ async def list_protocols(
         if search:
             where_clauses.append("(p.condition_slug LIKE ? OR p.primary_modality LIKE ?)")
             params.extend([f"%{search}%", f"%{search}%"])
+        if not _is_privileged_protocol_user(current_user):
+            where_clauses.append(
+                "(p.created_by IS NULL OR p.created_by = ? OR p.is_template = 1)"
+            )
+            params.append(current_user.id)
 
         if where_clauses:
             base_query += " WHERE " + " AND ".join(where_clauses)
@@ -488,7 +516,10 @@ async def list_protocols(
     summary="Create / generate a protocol",
     dependencies=_clinician_writes,
 )
-async def create_protocol(request: GenerateProtocolRequest) -> dict[str, Any]:
+async def create_protocol(
+    request: GenerateProtocolRequest,
+    current_user: UserResponse = Depends(get_current_user),
+) -> dict[str, Any]:
     """Create a new protocol.
 
     * If *prompt* is provided, the LangGraph pipeline is queued.
@@ -637,22 +668,22 @@ async def create_protocol(request: GenerateProtocolRequest) -> dict[str, Any]:
         conn = _db()
         conn.execute(
             """INSERT INTO protocols (id, condition_slug, primary_modality, is_template, created_by, created_at, updated_at, current_version_id)
-               VALUES (?, ?, ?, 0, NULL, ?, ?, ?)""",
-            (pid, request.condition_slug, chosen_modality, now, now, vid),
+               VALUES (?, ?, ?, 0, ?, ?, ?, ?)""",
+            (pid, request.condition_slug, chosen_modality, current_user.id, now, now, vid),
         )
         conn.execute(
             """INSERT INTO protocol_versions (id, protocol_id, version_number, status, data, build_id, generation_method, created_at, created_by)
-               VALUES (?, ?, 1, 'draft', ?, ?, ?, ?, NULL)""",
-            (vid, pid, version_data, build_id, gen_method, now),
+               VALUES (?, ?, 1, 'draft', ?, ?, ?, ?, ?)""",
+            (vid, pid, version_data, build_id, gen_method, now, current_user.id),
         )
         _insert_audit(conn, pid, "protocol_created", f"Protocol created via {gen_method}")
         conn.commit()
         conn.close()
-    except Exception as e:
-        logger.error(f"DB insert failed: {e}")
+    except Exception:
+        logger.exception("DB insert failed while creating protocol")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Failed to store protocol: {e}",
+            detail="Failed to store protocol.",
         )
 
     return {
@@ -663,7 +694,10 @@ async def create_protocol(request: GenerateProtocolRequest) -> dict[str, Any]:
 
 
 @router.get("/{protocol_id}", summary="Get full protocol")
-async def get_protocol(protocol_id: UUID) -> dict[str, Any]:
+async def get_protocol(
+    protocol_id: UUID,
+    current_user: UserResponse = Depends(get_current_user),
+) -> dict[str, Any]:
     """Get complete protocol with current version data, evidence, and safety info."""
     pid = str(protocol_id)
     try:
@@ -678,15 +712,20 @@ async def get_protocol(protocol_id: UUID) -> dict[str, Any]:
             WHERE p.id = ?
         """, (pid,)).fetchone()
         conn.close()
-    except Exception as e:
-        logger.error(f"get_protocol DB error: {e}")
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    except Exception:
+        logger.exception("get_protocol DB error")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=INTERNAL_SERVER_DETAIL,
+        )
 
     if row is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Protocol {protocol_id} not found",
         )
+
+    _assert_protocol_access(row["created_by"], current_user)
 
     data = _parse_json(row["data"])
     evidence = data.get("evidence", {})
@@ -715,19 +754,23 @@ async def get_protocol(protocol_id: UUID) -> dict[str, Any]:
 )
 async def list_protocol_versions(
     protocol_id: UUID,
+    current_user: UserResponse = Depends(get_current_user),
 ) -> dict[str, Any]:
     """List all versions of a protocol."""
     pid = str(protocol_id)
     try:
         conn = _db()
         # Verify protocol exists
-        proto = conn.execute("SELECT id FROM protocols WHERE id = ?", (pid,)).fetchone()
+        proto = conn.execute(
+            "SELECT id, created_by FROM protocols WHERE id = ?", (pid,)
+        ).fetchone()
         if proto is None:
             conn.close()
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Protocol {protocol_id} not found",
             )
+        _assert_protocol_access(proto["created_by"], current_user)
         rows = conn.execute("""
             SELECT id, version_number, status, created_at, created_by, generation_method
             FROM protocol_versions
@@ -737,9 +780,12 @@ async def list_protocol_versions(
         conn.close()
     except HTTPException:
         raise
-    except Exception as e:
-        logger.error(f"list_protocol_versions DB error: {e}")
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    except Exception:
+        logger.exception("list_protocol_versions DB error")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=INTERNAL_SERVER_DETAIL,
+        )
 
     versions = [
         {
@@ -760,7 +806,9 @@ async def list_protocol_versions(
     summary="Get specific protocol version",
 )
 async def get_protocol_version(
-    protocol_id: UUID, version: int
+    protocol_id: UUID,
+    version: int,
+    current_user: UserResponse = Depends(get_current_user),
 ) -> dict[str, Any]:
     """Get a specific version of a protocol."""
     pid = str(protocol_id)
@@ -768,21 +816,27 @@ async def get_protocol_version(
         conn = _db()
         row = conn.execute("""
             SELECT pv.id, pv.version_number, pv.status, pv.created_at,
-                   pv.created_by, pv.generation_method, pv.data
+                   pv.created_by, pv.generation_method, pv.data,
+                   p.created_by as protocol_created_by
             FROM protocol_versions pv
             JOIN protocols p ON p.id = pv.protocol_id
             WHERE pv.protocol_id = ? AND pv.version_number = ?
         """, (pid, version)).fetchone()
         conn.close()
-    except Exception as e:
-        logger.error(f"get_protocol_version DB error: {e}")
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    except Exception:
+        logger.exception("get_protocol_version DB error")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=INTERNAL_SERVER_DETAIL,
+        )
 
     if row is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Version {version} not found for protocol {protocol_id}",
         )
+
+    _assert_protocol_access(row["protocol_created_by"], current_user)
 
     data = _parse_json(row["data"])
     return {
@@ -803,7 +857,9 @@ async def get_protocol_version(
     dependencies=_clinician_writes,
 )
 async def update_protocol(
-    protocol_id: UUID, data: dict[str, Any]
+    protocol_id: UUID,
+    data: dict[str, Any],
+    current_user: UserResponse = Depends(get_current_user),
 ) -> dict[str, Any]:
     """Update a protocol by creating a new version.
 
@@ -816,7 +872,7 @@ async def update_protocol(
         conn = _db()
         # Get current state
         row = conn.execute("""
-            SELECT p.id, p.current_version_id,
+            SELECT p.id, p.current_version_id, p.created_by,
                    pv.version_number, pv.status
             FROM protocols p
             LEFT JOIN protocol_versions pv ON pv.id = p.current_version_id
@@ -829,6 +885,8 @@ async def update_protocol(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Protocol {protocol_id} not found",
             )
+
+        _assert_protocol_access(row["created_by"], current_user)
 
         current_status = row["status"] or "draft"
         if current_status != "draft":
@@ -846,8 +904,8 @@ async def update_protocol(
 
         conn.execute(
             """INSERT INTO protocol_versions (id, protocol_id, version_number, status, data, parent_version_id, generation_method, created_at, created_by)
-               VALUES (?, ?, ?, 'draft', ?, ?, 'manual_edit', ?, NULL)""",
-            (new_vid, pid, new_version, version_data, parent_vid, now),
+               VALUES (?, ?, ?, 'draft', ?, ?, 'manual_edit', ?, ?)""",
+            (new_vid, pid, new_version, version_data, parent_vid, now, current_user.id),
         )
         conn.execute(
             "UPDATE protocols SET current_version_id = ?, updated_at = ? WHERE id = ?",
@@ -858,9 +916,12 @@ async def update_protocol(
         conn.close()
     except HTTPException:
         raise
-    except Exception as e:
-        logger.error(f"update_protocol DB error: {e}")
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    except Exception:
+        logger.exception("update_protocol DB error")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=INTERNAL_SERVER_DETAIL,
+        )
 
     return {
         "protocol_id": pid,
@@ -879,6 +940,7 @@ async def update_protocol(
 async def submit_for_review(
     protocol_id: UUID,
     request: SubmitReviewRequest,
+    current_user: UserResponse = Depends(get_current_user),
 ) -> dict[str, Any]:
     """Submit protocol for clinician review. Transitions DRAFT -> PENDING_REVIEW."""
     pid = str(protocol_id)
@@ -887,7 +949,7 @@ async def submit_for_review(
     try:
         conn = _db()
         row = conn.execute("""
-            SELECT p.current_version_id, pv.status
+            SELECT p.current_version_id, p.created_by, pv.status
             FROM protocols p
             LEFT JOIN protocol_versions pv ON pv.id = p.current_version_id
             WHERE p.id = ?
@@ -899,6 +961,8 @@ async def submit_for_review(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Protocol {protocol_id} not found",
             )
+
+        _assert_protocol_access(row["created_by"], current_user)
 
         current_status = ProtocolStatusEnum(row["status"] or "draft")
         _validate_transition(current_status, ProtocolStatusEnum.PENDING_REVIEW)
@@ -921,9 +985,12 @@ async def submit_for_review(
         conn.close()
     except HTTPException:
         raise
-    except Exception as e:
-        logger.error(f"submit_for_review DB error: {e}")
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    except Exception:
+        logger.exception("submit_for_review DB error")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=INTERNAL_SERVER_DETAIL,
+        )
 
     return {
         "protocol_id": pid,
@@ -985,9 +1052,12 @@ async def transition_status(
         conn.close()
     except HTTPException:
         raise
-    except Exception as e:
-        logger.error(f"transition_status DB error: {e}")
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    except Exception:
+        logger.exception("transition_status DB error")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=INTERNAL_SERVER_DETAIL,
+        )
 
     return {
         "protocol_id": pid,
@@ -1002,7 +1072,10 @@ async def transition_status(
     summary="Clone protocol as new draft",
     dependencies=_clinician_writes,
 )
-async def clone_protocol(protocol_id: UUID) -> dict[str, Any]:
+async def clone_protocol(
+    protocol_id: UUID,
+    current_user: UserResponse = Depends(get_current_user),
+) -> dict[str, Any]:
     """Clone an existing protocol as a new DRAFT."""
     pid = str(protocol_id)
     now = datetime.now(timezone.utc).isoformat()
@@ -1011,7 +1084,7 @@ async def clone_protocol(protocol_id: UUID) -> dict[str, Any]:
         conn = _db()
         row = conn.execute("""
             SELECT p.id, p.condition_slug, p.primary_modality, p.is_template,
-                   pv.data
+                   p.created_by, pv.data
             FROM protocols p
             LEFT JOIN protocol_versions pv ON pv.id = p.current_version_id
             WHERE p.id = ?
@@ -1024,27 +1097,32 @@ async def clone_protocol(protocol_id: UUID) -> dict[str, Any]:
                 detail=f"Protocol {protocol_id} not found",
             )
 
+        _assert_protocol_access(row["created_by"], current_user)
+
         new_pid = str(uuid4())
         new_vid = str(uuid4())
 
         conn.execute(
             """INSERT INTO protocols (id, condition_slug, primary_modality, is_template, created_by, created_at, updated_at, current_version_id)
-               VALUES (?, ?, ?, 0, NULL, ?, ?, ?)""",
-            (new_pid, row["condition_slug"], row["primary_modality"], now, now, new_vid),
+               VALUES (?, ?, ?, 0, ?, ?, ?, ?)""",
+            (new_pid, row["condition_slug"], row["primary_modality"], current_user.id, now, now, new_vid),
         )
         conn.execute(
             """INSERT INTO protocol_versions (id, protocol_id, version_number, status, data, generation_method, created_at, created_by)
-               VALUES (?, ?, 1, 'draft', ?, 'template_clone', ?, NULL)""",
-            (new_vid, new_pid, row["data"] or "{}", now),
+               VALUES (?, ?, 1, 'draft', ?, 'template_clone', ?, ?)""",
+            (new_vid, new_pid, row["data"] or "{}", now, current_user.id),
         )
         _insert_audit(conn, new_pid, "protocol_cloned", f"Cloned from protocol {pid}")
         conn.commit()
         conn.close()
     except HTTPException:
         raise
-    except Exception as e:
-        logger.error(f"clone_protocol DB error: {e}")
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    except Exception:
+        logger.exception("clone_protocol DB error")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=INTERNAL_SERVER_DETAIL,
+        )
 
     return {
         "protocol_id": new_pid,
@@ -1060,7 +1138,11 @@ async def clone_protocol(protocol_id: UUID) -> dict[str, Any]:
     summary="Export protocol as DOCX or PDF",
     dependencies=_clinician_writes,
 )
-async def export_protocol(protocol_id: UUID, fmt: str) -> dict[str, Any]:
+async def export_protocol(
+    protocol_id: UUID,
+    fmt: str,
+    current_user: UserResponse = Depends(get_current_user),
+) -> dict[str, Any]:
     """Export protocol as DOCX or PDF.
 
     Checks for a real output_path in version data; falls back to queuing an export task.
@@ -1076,21 +1158,26 @@ async def export_protocol(protocol_id: UUID, fmt: str) -> dict[str, Any]:
     try:
         conn = _db()
         row = conn.execute("""
-            SELECT pv.data
+            SELECT pv.data, p.created_by
             FROM protocols p
             LEFT JOIN protocol_versions pv ON pv.id = p.current_version_id
             WHERE p.id = ?
         """, (pid,)).fetchone()
         conn.close()
-    except Exception as e:
-        logger.error(f"export_protocol DB error: {e}")
-        row = None
+    except Exception:
+        logger.exception("export_protocol DB error")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=INTERNAL_SERVER_DETAIL,
+        )
 
     if row is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Protocol {protocol_id} not found",
         )
+
+    _assert_protocol_access(row["created_by"], current_user)
 
     data = _parse_json(row["data"])
     generation = data.get("generation", {})
@@ -1128,28 +1215,36 @@ async def export_protocol(protocol_id: UUID, fmt: str) -> dict[str, Any]:
 @router.get(
     "/{protocol_id}/evidence", summary="Get protocol evidence summary"
 )
-async def get_protocol_evidence(protocol_id: UUID) -> dict[str, Any]:
+async def get_protocol_evidence(
+    protocol_id: UUID,
+    current_user: UserResponse = Depends(get_current_user),
+) -> dict[str, Any]:
     """Get evidence summary for a protocol from its version data JSON."""
     pid = str(protocol_id)
 
     try:
         conn = _db()
         row = conn.execute("""
-            SELECT pv.data
+            SELECT pv.data, p.created_by
             FROM protocols p
             LEFT JOIN protocol_versions pv ON pv.id = p.current_version_id
             WHERE p.id = ?
         """, (pid,)).fetchone()
         conn.close()
-    except Exception as e:
-        logger.error(f"get_protocol_evidence DB error: {e}")
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    except Exception:
+        logger.exception("get_protocol_evidence DB error")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=INTERNAL_SERVER_DETAIL,
+        )
 
     if row is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Protocol {protocol_id} not found",
         )
+
+    _assert_protocol_access(row["created_by"], current_user)
 
     data = _parse_json(row["data"])
     evidence = data.get("evidence", {})
@@ -1171,20 +1266,27 @@ async def get_protocol_evidence(protocol_id: UUID) -> dict[str, Any]:
 @router.get(
     "/{protocol_id}/audit", summary="Get protocol audit trail"
 )
-async def get_protocol_audit_trail(protocol_id: UUID) -> dict[str, Any]:
+async def get_protocol_audit_trail(
+    protocol_id: UUID,
+    current_user: UserResponse = Depends(get_current_user),
+) -> dict[str, Any]:
     """Get the full audit trail for a protocol from audit_events table."""
     pid = str(protocol_id)
 
     try:
         conn = _db()
         # Verify protocol exists
-        proto = conn.execute("SELECT id FROM protocols WHERE id = ?", (pid,)).fetchone()
+        proto = conn.execute(
+            "SELECT id, created_by FROM protocols WHERE id = ?", (pid,)
+        ).fetchone()
         if proto is None:
             conn.close()
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Protocol {protocol_id} not found",
             )
+
+        _assert_protocol_access(proto["created_by"], current_user)
 
         rows = conn.execute("""
             SELECT action, actor_id, timestamp, details
@@ -1195,9 +1297,12 @@ async def get_protocol_audit_trail(protocol_id: UUID) -> dict[str, Any]:
         conn.close()
     except HTTPException:
         raise
-    except Exception as e:
-        logger.error(f"get_protocol_audit_trail DB error: {e}")
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    except Exception:
+        logger.exception("get_protocol_audit_trail DB error")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=INTERNAL_SERVER_DETAIL,
+        )
 
     events = []
     for r in rows:

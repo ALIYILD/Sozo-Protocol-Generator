@@ -76,6 +76,7 @@ class TestTokenCreation:
         assert payload.sub == "user123"
         assert payload.role == "clinician"
         assert payload.jti is not None
+        assert payload.token_type == "access"
 
     def test_token_pair_returns_both_tokens(self):
         pair = create_token_pair("user456", "admin")
@@ -88,6 +89,7 @@ class TestTokenCreation:
         payload = decode_token(pair.refresh_token)
         # Refresh token defaults to readonly since no role is set
         assert payload.role == "readonly"
+        assert payload.token_type == "refresh"
 
     def test_access_token_has_expiry(self):
         token = create_access_token("user123", "admin")

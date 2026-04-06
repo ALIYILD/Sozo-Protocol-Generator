@@ -62,4 +62,5 @@ def decode_token(token: str) -> TokenPayload:
         exp=datetime.fromtimestamp(raw["exp"], tz=timezone.utc),
         iat=datetime.fromtimestamp(raw["iat"], tz=timezone.utc) if "iat" in raw else None,
         jti=raw.get("jti"),
+        token_type=raw.get("type"),
     )

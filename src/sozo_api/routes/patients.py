@@ -18,7 +18,8 @@ from uuid import UUID, uuid4
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from pydantic import BaseModel, Field
 
-from sozo_auth.dependencies import require_clinician
+from sozo_auth.dependencies import get_current_user, require_clinician
+from sozo_auth.models import UserResponse
 
 logger = logging.getLogger(__name__)
 
@@ -47,6 +48,7 @@ def _ensure_tables(conn: sqlite3.Connection) -> None:
         demographics TEXT DEFAULT '{}',
         conditions TEXT DEFAULT '[]',
         notes TEXT,
+        created_by TEXT,
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL
     );
@@ -96,6 +98,9 @@ def _ensure_tables(conn: sqlite3.Connection) -> None:
     CREATE INDEX IF NOT EXISTS ix_assessments_patient_scale ON assessments(patient_id, scale_name);
     CREATE INDEX IF NOT EXISTS ix_treatment_records_patient ON treatment_records(patient_id);
     """)
+    cols = {r[1] for r in conn.execute("PRAGMA table_info(patients)").fetchall()}
+    if "created_by" not in cols:
+        conn.execute("ALTER TABLE patients ADD COLUMN created_by TEXT")
     conn.commit()
 
 
@@ -260,6 +265,32 @@ def _resolve_abbreviation(scale_name: str) -> str:
     return scale_name
 
 
+def _is_privileged_patient_user(user: UserResponse) -> bool:
+    return user.role in ("admin", "operator")
+
+
+def _can_access_patient(created_by: str | None, user: UserResponse) -> bool:
+    if _is_privileged_patient_user(user):
+        return True
+    if created_by is None or created_by == "":
+        return True
+    return created_by in (user.id, user.email)
+
+
+def _assert_patient_access(patient: dict, user: UserResponse) -> None:
+    if not _can_access_patient(patient.get("created_by"), user):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not allowed to access this patient",
+        )
+
+
+def _get_patient_for_user(patient_id: UUID, user: UserResponse) -> dict:
+    patient = _get_patient_or_404(patient_id)
+    _assert_patient_access(patient, user)
+    return patient
+
+
 def _validate_score_range(scale_name: str, score: float) -> None:
     """Raise 422 if the score is outside the scale's valid range."""
     try:
@@ -333,7 +364,10 @@ def _patient_response(patient: dict) -> PatientResponse:
     response_model=PatientResponse,
     summary="Create a new patient",
 )
-async def create_patient(request: CreatePatientRequest):
+async def create_patient(
+    request: CreatePatientRequest,
+    current_user: UserResponse = Depends(get_current_user),
+):
     """Create a new patient record.
 
     Accepts demographics, active conditions, and optional notes.
@@ -344,14 +378,15 @@ async def create_patient(request: CreatePatientRequest):
     conn = _get_db()
     try:
         conn.execute(
-            "INSERT INTO patients (id, external_id, demographics, conditions, notes, created_at, updated_at) "
-            "VALUES (?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO patients (id, external_id, demographics, conditions, notes, created_by, created_at, updated_at) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
             (
                 pid,
                 request.external_id,
                 json.dumps(request.demographics.model_dump()),
                 json.dumps(request.conditions),
                 request.notes,
+                current_user.id,
                 now,
                 now,
             ),
@@ -374,6 +409,7 @@ async def list_patients(
     page_size: int = Query(20, ge=1, le=100),
     search: Optional[str] = None,
     condition: Optional[str] = None,
+    current_user: UserResponse = Depends(get_current_user),
 ):
     """List patients with pagination and optional filtering.
 
@@ -382,7 +418,16 @@ async def list_patients(
     """
     conn = _get_db()
     try:
-        rows = conn.execute("SELECT * FROM patients ORDER BY created_at DESC").fetchall()
+        if _is_privileged_patient_user(current_user):
+            rows = conn.execute(
+                "SELECT * FROM patients ORDER BY created_at DESC"
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                "SELECT * FROM patients WHERE created_by IS NULL OR created_by = ? "
+                "ORDER BY created_at DESC",
+                (current_user.id,),
+            ).fetchall()
     finally:
         conn.close()
 
@@ -418,9 +463,13 @@ async def list_patients(
     response_model=PatientResponse,
     summary="Get patient details",
 )
-async def get_patient(patient_id: UUID):
+async def get_patient(
+    patient_id: UUID,
+    current_user: UserResponse = Depends(get_current_user),
+):
     """Retrieve full details for a single patient."""
     patient = _get_patient_or_404(patient_id)
+    _assert_patient_access(patient, current_user)
     return _patient_response(patient)
 
 
@@ -429,12 +478,16 @@ async def get_patient(patient_id: UUID):
     response_model=PatientResponse,
     summary="Update patient",
 )
-async def update_patient(patient_id: UUID, request: CreatePatientRequest):
+async def update_patient(
+    patient_id: UUID,
+    request: CreatePatientRequest,
+    current_user: UserResponse = Depends(get_current_user),
+):
     """Update patient demographics, conditions, and notes.
 
     Replaces the existing values wholesale (PUT semantics).
     """
-    _get_patient_or_404(patient_id)
+    _assert_patient_access(_get_patient_or_404(patient_id), current_user)
     now = datetime.utcnow().isoformat()
     conn = _get_db()
     try:
@@ -468,12 +521,16 @@ async def update_patient(patient_id: UUID, request: CreatePatientRequest):
     response_model=MedicationResponse,
     summary="Add medication",
 )
-async def add_medication(patient_id: UUID, request: MedicationRequest):
+async def add_medication(
+    patient_id: UUID,
+    request: MedicationRequest,
+    current_user: UserResponse = Depends(get_current_user),
+):
     """Add a medication to the patient's profile.
 
     Records the drug name, class, dose, and date range.
     """
-    _get_patient_or_404(patient_id)
+    _get_patient_for_user(patient_id, current_user)
     med_id = str(uuid4())
     now = datetime.utcnow().isoformat()
     conn = _get_db()
@@ -513,13 +570,17 @@ async def add_medication(patient_id: UUID, request: MedicationRequest):
     response_model=list[MedicationResponse],
     summary="List medications",
 )
-async def list_medications(patient_id: UUID, active_only: bool = True):
+async def list_medications(
+    patient_id: UUID,
+    active_only: bool = True,
+    current_user: UserResponse = Depends(get_current_user),
+):
     """List patient medications.
 
     By default returns only active medications (no end_date). Pass
     ``active_only=false`` to include discontinued medications.
     """
-    _get_patient_or_404(patient_id)
+    _get_patient_for_user(patient_id, current_user)
     conn = _get_db()
     try:
         if active_only:
@@ -556,12 +617,16 @@ async def list_medications(patient_id: UUID, active_only: bool = True):
     status_code=status.HTTP_200_OK,
     summary="Discontinue medication",
 )
-async def remove_medication(patient_id: UUID, medication_id: UUID):
+async def remove_medication(
+    patient_id: UUID,
+    medication_id: UUID,
+    current_user: UserResponse = Depends(get_current_user),
+):
     """Discontinue a medication by setting its end_date to today.
 
     Does not physically delete the record — treatment history is preserved.
     """
-    _get_patient_or_404(patient_id)
+    _get_patient_for_user(patient_id, current_user)
     conn = _get_db()
     try:
         row = conn.execute(
@@ -594,13 +659,17 @@ async def remove_medication(patient_id: UUID, medication_id: UUID):
     response_model=AssessmentResponse,
     summary="Record assessment",
 )
-async def record_assessment(patient_id: UUID, request: AssessmentRequest):
+async def record_assessment(
+    patient_id: UUID,
+    request: AssessmentRequest,
+    current_user: UserResponse = Depends(get_current_user),
+):
     """Record a new assessment score for a patient.
 
     Automatically resolves the severity band from the SOZO validated scales
     registry. Returns 422 if the score is outside the scale's valid range.
     """
-    _get_patient_or_404(patient_id)
+    _get_patient_for_user(patient_id, current_user)
     _validate_score_range(request.scale_name, request.score)
 
     aid = str(uuid4())
@@ -656,12 +725,13 @@ async def list_assessments(
     patient_id: UUID,
     scale: Optional[str] = None,
     limit: int = Query(50, ge=1, le=200),
+    current_user: UserResponse = Depends(get_current_user),
 ):
     """List assessments for a patient.
 
     Optionally filter by ``scale`` name. Results are ordered most-recent-first.
     """
-    _get_patient_or_404(patient_id)
+    _get_patient_for_user(patient_id, current_user)
     conn = _get_db()
     try:
         if scale:
@@ -698,13 +768,17 @@ async def list_assessments(
     "/{patient_id}/assessments/trajectory",
     summary="Assessment score trajectory",
 )
-async def get_assessment_trajectory(patient_id: UUID, scale_name: str):
+async def get_assessment_trajectory(
+    patient_id: UUID,
+    scale_name: str,
+    current_user: UserResponse = Depends(get_current_user),
+):
     """Get score trajectory over time for a specific assessment scale.
 
     Returns an ordered list of ``{date, score, severity_band, session_number}``
     entries suitable for line chart rendering.
     """
-    _get_patient_or_404(patient_id)
+    _get_patient_for_user(patient_id, current_user)
     conn = _get_db()
     try:
         rows = conn.execute(
@@ -760,9 +834,13 @@ async def get_assessment_trajectory(patient_id: UUID, scale_name: str):
     response_model=TreatmentRecordResponse,
     summary="Record treatment",
 )
-async def add_treatment_record(patient_id: UUID, request: TreatmentRecordRequest):
+async def add_treatment_record(
+    patient_id: UUID,
+    request: TreatmentRecordRequest,
+    current_user: UserResponse = Depends(get_current_user),
+):
     """Record a prior or ongoing neuromodulation treatment course."""
-    _get_patient_or_404(patient_id)
+    _get_patient_for_user(patient_id, current_user)
 
     valid_outcomes = {"responder", "partial_responder", "non_responder", "not_assessed"}
     if request.outcome not in valid_outcomes:
@@ -827,9 +905,12 @@ async def add_treatment_record(patient_id: UUID, request: TreatmentRecordRequest
     response_model=list[TreatmentRecordResponse],
     summary="List treatment history",
 )
-async def list_treatment_history(patient_id: UUID):
+async def list_treatment_history(
+    patient_id: UUID,
+    current_user: UserResponse = Depends(get_current_user),
+):
     """List all treatment records for a patient, ordered most-recent-first."""
-    _get_patient_or_404(patient_id)
+    _get_patient_for_user(patient_id, current_user)
     conn = _get_db()
     try:
         rows = conn.execute(
@@ -940,6 +1021,7 @@ async def check_patient_safety(
         None,
         description="Comma-separated modality list, e.g. 'tms,tdcs'. Defaults to all.",
     ),
+    current_user: UserResponse = Depends(get_current_user),
 ):
     """Run safety check for a patient against target modalities.
 
@@ -951,7 +1033,7 @@ async def check_patient_safety(
 
     Returns clearance status and itemised findings.
     """
-    patient = _get_patient_or_404(patient_id)
+    patient = _get_patient_for_user(patient_id, current_user)
     demographics = patient["demographics"]
     conditions = patient.get("conditions", [])
 
@@ -1072,13 +1154,17 @@ async def check_patient_safety(
     response_model=list[PatientTimelineEntry],
     summary="Patient event timeline",
 )
-async def get_patient_timeline(patient_id: UUID, limit: int = Query(50, ge=1, le=500)):
+async def get_patient_timeline(
+    patient_id: UUID,
+    limit: int = Query(50, ge=1, le=500),
+    current_user: UserResponse = Depends(get_current_user),
+):
     """Get chronological timeline of all patient events.
 
     Merges assessments, treatments, and medication changes into a single
     ordered stream for display in a timeline component.
     """
-    _get_patient_or_404(patient_id)
+    _get_patient_for_user(patient_id, current_user)
     pid_str = str(patient_id)
     entries: list[dict] = []
 

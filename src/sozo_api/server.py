@@ -13,6 +13,7 @@ from __future__ import annotations
 import io
 import logging
 import uuid
+from contextlib import asynccontextmanager
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Optional
@@ -32,6 +33,8 @@ except ImportError as _exc:
     ) from _exc
 
 from sqlalchemy import text as sa_text
+
+from sozo_api.error_responses import INTERNAL_SERVER_DETAIL
 
 logger = logging.getLogger(__name__)
 
@@ -98,49 +101,10 @@ def create_app() -> FastAPI:
     _ = auth_config
 
     cors_origins, cors_credentials = resolve_cors_allow_origins_and_credentials()
-    application = FastAPI(
-        title="SOZO Protocol API",
-        version="1.0.0",
-        description="HTTP interface for SOZO visualization, generation, knowledge, and cockpit services.",
-    )
 
-    application.add_middleware(
-        CORSMiddleware,
-        allow_origins=cors_origins,
-        allow_credentials=cors_credentials,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-
-    # ── Router includes ──────────────────────────────────────────────
-    from sozo_api.routes.protocols import router as protocols_router
-    from sozo_api.routes.patients import router as patients_router
-    from sozo_api.routes.reviews import router as reviews_router
-    from sozo_api.routes.audit import router as audit_router
-
-    try:
-        from sozo_auth import auth_router
-        application.include_router(auth_router, prefix="/api")
-    except ImportError:
-        logger.warning("sozo_auth not available — auth endpoints disabled")
-
-    application.include_router(protocols_router)
-    application.include_router(patients_router)
-    application.include_router(reviews_router)
-    application.include_router(audit_router)
-
-    # ── Startup event ─────────────────────────────────────────────────
-
-    @application.on_event("startup")
-    async def _on_startup() -> None:
+    @asynccontextmanager
+    async def lifespan(_app: FastAPI):
         logger.info("SOZO API started")
-        # Auto-run Alembic migration on startup (SQLite safe).
-        # Runs as a subprocess so alembic's env.py can spin up its own
-        # event loop without colliding with FastAPI's running loop.
-        # If an older deploy created tables via Base.metadata.create_all()
-        # without stamping alembic_version, `upgrade head` fails with
-        # "table ... already exists". In that case we `stamp head` and
-        # retry, bringing the existing schema under alembic's control.
         try:
             import os
             import subprocess
@@ -196,13 +160,10 @@ def create_app() -> FastAPI:
         except Exception as exc:
             logger.warning("Auto-migration skipped: %s", exc)
 
-        # If a previous machine left a DB with tables but no `users` table,
-        # we need to create it now. `Base.metadata.create_all()` is safe —
-        # it only issues CREATE TABLE IF NOT EXISTS for missing tables.
         try:
             from sozo_db.base import Base
             from sozo_db.engine import get_engine
-            # Import all models so they're registered on Base.metadata.
+
             import sozo_db.models  # noqa: F401
 
             engine = get_engine()
@@ -212,7 +173,6 @@ def create_app() -> FastAPI:
         except Exception as exc:
             logger.warning("Base.metadata.create_all skipped: %s", exc)
 
-        # Seed demo + admin users into the DB if the users table is empty.
         try:
             from sozo_auth.router import _insert_user
             from sozo_auth.passwords import hash_password
@@ -253,6 +213,42 @@ def create_app() -> FastAPI:
         except Exception as exc:
             logger.warning("Demo user seeding skipped: %s", exc)
 
+        yield
+
+    application = FastAPI(
+        title="SOZO Protocol API",
+        version="1.0.0",
+        description="HTTP interface for SOZO visualization, generation, knowledge, and cockpit services.",
+        lifespan=lifespan,
+    )
+
+    application.add_middleware(
+        CORSMiddleware,
+        allow_origins=cors_origins,
+        allow_credentials=cors_credentials,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    # ── Router includes ──────────────────────────────────────────────
+    from sozo_api.routes.protocols import router as protocols_router
+    from sozo_api.routes.patients import router as patients_router
+    from sozo_api.routes.reviews import router as reviews_router
+    from sozo_api.routes.audit import router as audit_router
+    from sozo_api.routes.template_batch import router as template_batch_router
+
+    try:
+        from sozo_auth import auth_router
+        application.include_router(auth_router, prefix="/api")
+    except ImportError:
+        logger.warning("sozo_auth not available — auth endpoints disabled")
+
+    application.include_router(protocols_router)
+    application.include_router(patients_router)
+    application.include_router(reviews_router)
+    application.include_router(audit_router)
+    application.include_router(template_batch_router)
+
     # ── Health ────────────────────────────────────────────────────────
 
     @application.get("/api/health")
@@ -266,16 +262,18 @@ def create_app() -> FastAPI:
             async with engine.connect() as conn:
                 await conn.execute(sa_text("SELECT 1"))
             checks["database"] = "ok"
-        except Exception as e:
-            checks["database"] = f"error: {e}"
+        except Exception:
+            logger.warning("Health check: database unreachable", exc_info=True)
+            checks["database"] = "unavailable"
 
         # Graph check
         try:
             from sozo_graph.unified_graph import build_unified_graph
             build_unified_graph()  # compile check
             checks["graph"] = "ok"
-        except Exception as e:
-            checks["graph"] = f"error: {e}"
+        except Exception:
+            logger.warning("Health check: graph compile failed", exc_info=True)
+            checks["graph"] = "unavailable"
 
         # API key presence (booleans, not gated in overall status so a
         # missing key produces a "degraded" warning but never a hard fail).
@@ -314,8 +312,12 @@ def create_app() -> FastAPI:
 
         try:
             req = VisualizationRequest(**request_body)
-        except Exception as exc:
-            raise HTTPException(status_code=422, detail=f"Invalid request: {exc}")
+        except Exception:
+            logger.warning("Visual render: invalid request body", exc_info=True)
+            raise HTTPException(
+                status_code=422,
+                detail="Invalid visualization request body.",
+            )
 
         svc = VisualizationService()
         response = svc.render(req)
@@ -651,9 +653,9 @@ def create_app() -> FastAPI:
             }
         except HTTPException:
             raise
-        except Exception as exc:
+        except Exception:
             logger.exception("Graph generation enqueue failed")
-            raise HTTPException(status_code=500, detail=str(exc))
+            raise HTTPException(status_code=500, detail=INTERNAL_SERVER_DETAIL)
 
     @application.get("/api/graph/status/{thread_id}")
     async def graph_status(
@@ -850,9 +852,9 @@ def create_app() -> FastAPI:
 
         except HTTPException:
             raise
-        except Exception as exc:
+        except Exception:
             logger.exception("Graph status check failed")
-            raise HTTPException(status_code=500, detail=str(exc))
+            raise HTTPException(status_code=500, detail=INTERNAL_SERVER_DETAIL)
 
     @application.post("/api/graph/link-protocol")
     async def link_graph_protocol(
@@ -901,9 +903,9 @@ def create_app() -> FastAPI:
             }
         except HTTPException:
             raise
-        except Exception as exc:
+        except Exception:
             logger.exception("Graph protocol link failed")
-            raise HTTPException(status_code=500, detail=str(exc))
+            raise HTTPException(status_code=500, detail=INTERNAL_SERVER_DETAIL)
 
     @application.post("/api/graph/review")
     async def submit_graph_review(
@@ -940,7 +942,7 @@ def create_app() -> FastAPI:
             update_payload: dict[str, Any] = {
                 "review": {
                     "status": review_status,
-                    "reviewer_id": body.reviewer_id,
+                    "reviewer_id": current_user.id,
                     "reviewer_credentials": body.reviewer_credentials,
                     "review_timestamp": now,
                     "review_notes": body.review_notes,
@@ -987,7 +989,7 @@ def create_app() -> FastAPI:
                         "thread_id": body.thread_id,
                         "decision": body.decision,
                         "review_status": review_status,
-                        "reviewer_id": body.reviewer_id,
+                        "reviewer_id": current_user.id,
                         "protocol_id": result.get("output", {}).get("protocol_id"),
                     },
                 )
@@ -1007,9 +1009,9 @@ def create_app() -> FastAPI:
 
         except HTTPException:
             raise
-        except Exception as exc:
+        except Exception:
             logger.exception("Graph review submission failed")
-            raise HTTPException(status_code=500, detail=str(exc))
+            raise HTTPException(status_code=500, detail=INTERNAL_SERVER_DETAIL)
 
     # Keep legacy endpoint as alias
     @application.post("/api/generate/graph")

@@ -24,3 +24,8 @@ export function canViewStaleness(user: User | null | undefined): boolean {
 export function canAccessAdmin(user: User | null | undefined): boolean {
   return hasRole(user, ROLES_AUDIT_AND_OPS);
 }
+
+/** POST /api/generate/template-batch (aligned with require_clinician). */
+export function canRunTemplateBatch(user: User | null | undefined): boolean {
+  return hasRole(user, ['clinician', 'reviewer', 'admin']);
+}

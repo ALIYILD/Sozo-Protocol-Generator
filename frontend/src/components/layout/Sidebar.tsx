@@ -11,8 +11,9 @@ import {
   Brain,
   Images,
   ClipboardCheck,
+  Layers,
 } from 'lucide-react';
-import { canAccessAdmin } from '../../auth/permissions';
+import { canAccessAdmin, canRunTemplateBatch } from '../../auth/permissions';
 import { useAuth } from '../../hooks/useAuth';
 import type { User } from '../../types';
 
@@ -27,6 +28,12 @@ type NavItem = {
 const navItems: NavItem[] = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/protocols', label: 'Protocols', icon: FileText },
+  {
+    to: '/tools/template-batch',
+    label: 'Template batch',
+    icon: Layers,
+    visibleIf: canRunTemplateBatch,
+  },
   { to: '/reviews', label: 'Review queue', icon: ClipboardCheck },
   { to: '/evidence', label: 'Evidence', icon: Search },
   { to: '/safety', label: 'Safety', icon: ShieldAlert },

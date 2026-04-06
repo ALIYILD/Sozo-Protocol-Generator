@@ -39,6 +39,13 @@ async def get_current_user(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
+    if payload.token_type == "refresh":
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Access token required",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
     # TODO: Replace with a real DB lookup using payload.sub as user_id.
     return UserResponse(
         id=payload.sub,

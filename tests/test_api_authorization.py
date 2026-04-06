@@ -13,6 +13,24 @@ def _bearer(role: str) -> dict[str, str]:
     return {"Authorization": f"Bearer {create_access_token('test-user', role)}"}
 
 
+def _minimal_template_docx_bytes() -> bytes:
+    """Tiny DOCX with one Heading for template-batch tests."""
+    import io
+
+    from docx import Document
+    from docx.shared import Cm
+
+    buf = io.BytesIO()
+    doc = Document()
+    sec = doc.sections[0]
+    sec.page_width = Cm(21.59)
+    sec.page_height = Cm(27.94)
+    doc.add_heading("Clinical Overview", level=1)
+    doc.add_paragraph("x")
+    doc.save(buf)
+    return buf.getvalue()
+
+
 @pytest.fixture(autouse=True, scope="module")
 def _ensure_audit_log_table():
     """Create audit_log table in the test DB if it doesn't already exist."""
@@ -111,6 +129,35 @@ class TestAuditRouterAuth:
         assert r3.status_code == 200
 
 
+class TestTemplateBatchAuth:
+    def test_template_batch_requires_clinician(self, client: TestClient):
+        docx = _minimal_template_docx_bytes()
+        files = {
+            "template": (
+                "tpl.docx",
+                docx,
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            )
+        }
+        data = {"condition_slugs": "parkinsons", "tier": "fellow"}
+        assert client.post("/api/generate/template-batch", files=files, data=data).status_code == 403
+        r_ro = client.post(
+            "/api/generate/template-batch",
+            files=files,
+            data=data,
+            headers=_bearer("readonly"),
+        )
+        assert r_ro.status_code == 403
+        r_ok = client.post(
+            "/api/generate/template-batch",
+            files=files,
+            data=data,
+            headers=_bearer("clinician"),
+        )
+        assert r_ok.status_code == 200
+        assert r_ok.content[:2] == b"PK"
+
+
 class TestInlineRoutesRoles:
     def test_cockpit_requires_operator_or_admin(self, client: TestClient):
         r = client.get("/api/cockpit/overview", headers=_bearer("clinician"))
@@ -165,3 +212,23 @@ class TestPublicReferenceRoutes:
         assert client.get("/api/health").status_code == 200
         assert client.get("/api/knowledge/conditions").status_code == 200
         assert client.get("/api/visuals/types").status_code == 200
+
+
+class TestRefreshTokenType:
+    def test_refresh_endpoint_rejects_access_token(self, client: TestClient):
+        from sozo_auth.tokens import create_access_token
+
+        access = create_access_token("user-refresh-test", "clinician")
+        r = client.post("/api/auth/refresh", json={"refresh_token": access})
+        assert r.status_code == 401
+        assert r.json().get("detail") == "Refresh token required"
+
+    def test_bearer_refresh_token_rejected_for_api(self, client: TestClient):
+        from sozo_auth.tokens import create_refresh_token
+
+        refresh = create_refresh_token("user-bearer-test")
+        r = client.get(
+            "/api/protocols/",
+            headers={"Authorization": f"Bearer {refresh}"},
+        )
+        assert r.status_code == 401

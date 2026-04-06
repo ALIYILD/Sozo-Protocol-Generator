@@ -1,16 +1,57 @@
 """Page layout and section configuration."""
+from __future__ import annotations
+
+import logging
+from pathlib import Path
+from typing import TYPE_CHECKING
+
 from docx import Document
 from docx.shared import Inches, Cm, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+
+if TYPE_CHECKING:
+    from docx.section import Section
 from .styles import (
     COLOR_DARK_BLUE, COLOR_PRIMARY_BLUE, COLOR_BROWN, COLOR_GRAY,
     COLOR_ACCENT_RED, FONT_HEADING, FONT_BODY, add_horizontal_rule,
 )
-import logging
-
 logger = logging.getLogger(__name__)
 
 PAGE_MARGIN_CM = 2.54  # Standard 1 inch
+
+
+def _copy_section_page_geometry(source: Section, target: Section) -> None:
+    """Copy page size, margins, header/footer gaps, and orientation."""
+    target.page_width = source.page_width
+    target.page_height = source.page_height
+    target.left_margin = source.left_margin
+    target.right_margin = source.right_margin
+    target.top_margin = source.top_margin
+    target.bottom_margin = source.bottom_margin
+    target.header_distance = source.header_distance
+    target.footer_distance = source.footer_distance
+    target.orientation = source.orientation
+
+
+def apply_template_page_setup(target_doc: Document, template_path: str | Path) -> None:
+    """
+    Apply page dimensions and margins from the first section of template_path
+    to all sections in target_doc. Does not copy headers/footers or styles.
+    """
+    path = Path(template_path)
+    if not path.is_file():
+        logger.warning("Layout template not found: %s — keeping default section layout", path)
+        return
+    try:
+        source_doc = Document(str(path))
+    except Exception as exc:
+        logger.warning("Could not open layout template %s: %s", path, exc)
+        return
+    if not source_doc.sections:
+        return
+    src = source_doc.sections[0]
+    for section in target_doc.sections:
+        _copy_section_page_geometry(src, section)
 
 
 def configure_page_layout(doc: Document) -> None:
