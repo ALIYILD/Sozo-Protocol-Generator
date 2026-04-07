@@ -11,7 +11,7 @@ from .styles import (
     COLOR_WARNING_ORANGE, COLOR_MEDIUM_GRAY, FONT_HEADING, FONT_BODY,
     add_horizontal_rule, apply_heading_style, apply_body_style,
 )
-from .tables import add_clinical_table, add_warning_box
+from .tables import add_clinical_table, add_warning_box, add_image_param_table
 
 logger = logging.getLogger(__name__)
 
@@ -54,12 +54,21 @@ def render_section(doc: Document, section: SectionContent, level: int = 1, depth
     # Tables
     for table_def in section.tables:
         if isinstance(table_def, dict):
-            add_clinical_table(
-                doc,
-                headers=table_def.get("headers", []),
-                rows=table_def.get("rows", []),
-                caption=table_def.get("caption"),
-            )
+            if table_def.get("type") == "image_table":
+                add_image_param_table(
+                    doc,
+                    image_path=table_def.get("image_path", ""),
+                    headers=table_def.get("headers", []),
+                    rows=table_def.get("rows", []),
+                    caption=table_def.get("caption"),
+                )
+            else:
+                add_clinical_table(
+                    doc,
+                    headers=table_def.get("headers", []),
+                    rows=table_def.get("rows", []),
+                    caption=table_def.get("caption"),
+                )
 
     # Data-driven callout boxes
     for box_def in section.callout_boxes:

@@ -187,12 +187,21 @@ def _build_protocol_block(
         "caption": f"S-O-Z-O sequencing — {proto.protocol_id}",
     })
 
-    # Figures (montage diagram if available)
+    # Montage image embedded alongside parameter table (reference format: 1×2 table with image|params)
     figures = []
     if vis_path and include_montage:
         montage_file = vis_path / f"{condition.slug}_montage_{proto.protocol_id.lower().replace('-', '_')}.png"
         if montage_file.exists():
-            figures.append(str(montage_file))
+            # Add as image_table: renderer will create a 1×2 table with image in left cell
+            tables.insert(0, {
+                "type": "image_table",
+                "image_path": str(montage_file),
+                "headers": ["Parameter", "Value"],
+                "rows": param_rows,
+                "caption": f"Montage & parameters — {proto.protocol_id}",
+            })
+            # Remove the standalone param table since it's now in the image_table
+            tables = [t for t in tables if t.get("caption", "") != f"Protocol {proto.protocol_id} — {proto.label}"]
 
     # Callout boxes
     callouts = []

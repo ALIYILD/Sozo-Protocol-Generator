@@ -168,6 +168,87 @@ def add_warning_box(doc: Document, text: str, box_type: str = "warning", severit
     p.paragraph_format.space_after = Pt(4)
 
 
+def add_image_param_table(
+    doc: Document,
+    image_path: str,
+    headers: list,
+    rows: list,
+    caption: Optional[str] = None,
+) -> None:
+    """Add a 1×2 table with image in left cell and parameter table in right cell.
+    Matches the reference document format for protocol blocks."""
+    from pathlib import Path
+
+    table = doc.add_table(rows=1, cols=2)
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+
+    # Set column widths (40% image, 60% params)
+    for cell in table.columns[0].cells:
+        cell.width = Cm(7)
+    for cell in table.columns[1].cells:
+        cell.width = Cm(10)
+
+    # Left cell: image
+    left_cell = table.rows[0].cells[0]
+    left_cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    img_path = Path(image_path)
+    if img_path.exists():
+        try:
+            run = left_cell.paragraphs[0].add_run()
+            run.add_picture(str(img_path), width=Cm(6.5))
+        except Exception as e:
+            left_cell.paragraphs[0].add_run(f"[Image: {img_path.name}]").font.italic = True
+    else:
+        left_cell.paragraphs[0].add_run(f"[Image: {img_path.name}]").font.italic = True
+
+    # Right cell: parameter table as formatted text
+    right_cell = table.rows[0].cells[1]
+    # Clear default paragraph
+    right_cell.paragraphs[0].text = ""
+
+    for row_data in rows:
+        if len(row_data) >= 2:
+            p = right_cell.add_paragraph()
+            p.paragraph_format.space_before = Pt(1)
+            p.paragraph_format.space_after = Pt(1)
+            # Bold label
+            run_label = p.add_run(f"{row_data[0]}: ")
+            run_label.bold = True
+            run_label.font.size = Pt(9)
+            run_label.font.name = FONT_BODY
+            run_label.font.color.rgb = COLOR_DARK_BLUE
+            # Value
+            run_val = p.add_run(str(row_data[1]))
+            run_val.font.size = Pt(9)
+            run_val.font.name = FONT_BODY
+
+    # Remove borders for clean look
+    tbl = table._tbl
+    tblPr = tbl.tblPr if tbl.tblPr is not None else OxmlElement("w:tblPr")
+    borders = OxmlElement("w:tblBorders")
+    for edge in ["top", "left", "bottom", "right", "insideH", "insideV"]:
+        border = OxmlElement(f"w:{edge}")
+        border.set(qn("w:val"), "none")
+        border.set(qn("w:sz"), "0")
+        border.set(qn("w:space"), "0")
+        border.set(qn("w:color"), "auto")
+        borders.append(border)
+    tblPr.append(borders)
+
+    # Caption
+    if caption:
+        cap = doc.add_paragraph()
+        run = cap.add_run(f"Table: {caption}")
+        run.italic = True
+        run.font.size = Pt(8)
+        run.font.name = FONT_BODY
+        run.font.color.rgb = COLOR_MEDIUM_GRAY
+        cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        cap.paragraph_format.space_after = Pt(6)
+
+    doc.add_paragraph()  # spacing
+
+
 def add_scoring_table(
     doc: Document,
     items: list,

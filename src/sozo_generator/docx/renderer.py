@@ -104,6 +104,15 @@ class DocumentRenderer:
         # Table of Contents placeholder
         self._add_toc_placeholder(doc)
 
+        # Set updateFields so Word auto-populates TOC on open
+        try:
+            settings = doc.settings.element
+            update_fields = OxmlElement("w:updateFields")
+            update_fields.set(qn("w:val"), "true")
+            settings.append(update_fields)
+        except Exception:
+            pass
+
         # Page break before content sections
         doc.add_page_break()
 
@@ -128,7 +137,13 @@ class DocumentRenderer:
                 evidence_pmids=section.evidence_pmids,
                 confidence_label=section.confidence_label,
                 is_placeholder=section.is_placeholder,
+                callout_boxes=section.callout_boxes,
             )
+
+            # Page break before major sections (H1)
+            if idx > 1:
+                doc.add_page_break()
+
             render_section(doc, numbered_section, level=1, image_manifest=image_manifest)
 
         # Top-level figures list
