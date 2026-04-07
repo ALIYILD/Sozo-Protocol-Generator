@@ -101,18 +101,34 @@ class MontageDiagramGenerator:
         ax.add_patch(left_ear)
         ax.add_patch(right_ear)
 
-        # Draw all electrodes
-        anode_upper = anode.upper() if anode else ""
-        cathode_upper = cathode.upper() if cathode else ""
+        # Parse electrode strings — handle "C3 + C4 (bilateral M1)" patterns
+        def _parse_electrodes(raw: str) -> set[str]:
+            """Extract individual electrode names from a compound string."""
+            if not raw:
+                return set()
+            import re
+            cleaned = re.sub(r'\([^)]*\)', '', raw)
+            parts = re.split(r'[+/,\s]+', cleaned)
+            # Build case-insensitive lookup
+            key_map = {k.upper(): k for k in ELECTRODES_10_20}
+            valid = set()
+            for p in parts:
+                p_upper = p.strip().upper()
+                if p_upper in key_map:
+                    valid.add(key_map[p_upper])  # Use original case from ELECTRODES_10_20
+            return valid
+
+        anode_set = _parse_electrodes(anode)
+        cathode_set = _parse_electrodes(cathode)
 
         for name, (x, y) in ELECTRODES_10_20.items():
             if name in ("A1", "A2"):
                 continue
-            if name == anode_upper:
+            if name in anode_set:
                 color = ANODE_COLOR
                 size = 0.10
                 zorder = 10
-            elif name == cathode_upper:
+            elif name in cathode_set:
                 color = CATHODE_COLOR
                 size = 0.10
                 zorder = 10
@@ -125,8 +141,9 @@ class MontageDiagramGenerator:
                            linewidth=1, zorder=zorder)
             ax.add_patch(circle)
             # Label
-            fontsize = 8 if name not in (anode_upper, cathode_upper) else 10
-            fontweight = "bold" if name in (anode_upper, cathode_upper) else "normal"
+            is_active = name in anode_set or name in cathode_set
+            fontsize = 8 if not is_active else 10
+            fontweight = "bold" if is_active else "normal"
             ax.text(x, y - size - 0.06, name, ha="center", va="top",
                    fontsize=fontsize, fontweight=fontweight, color="#333333")
 
@@ -139,9 +156,11 @@ class MontageDiagramGenerator:
         ax.set_title(title, fontsize=14, fontweight="bold", pad=20)
 
         # Legend
-        ax.text(-1.3, -1.15, f"● Anode: {anode_upper}", color=ANODE_COLOR,
+        anode_label = ", ".join(sorted(anode_set)) if anode_set else anode
+        cathode_label = ", ".join(sorted(cathode_set)) if cathode_set else cathode
+        ax.text(-1.3, -1.15, f"● Anode: {anode_label}", color=ANODE_COLOR,
                fontsize=11, fontweight="bold")
-        ax.text(-1.3, -1.25, f"● Cathode: {cathode_upper}", color=CATHODE_COLOR,
+        ax.text(-1.3, -1.25, f"● Cathode: {cathode_label}", color=CATHODE_COLOR,
                fontsize=11, fontweight="bold")
         ax.text(0.5, -1.15, f"SOZO Brain Center", color="#666666",
                fontsize=8, style="italic")
