@@ -37,7 +37,7 @@ from ...core.enums import (
 from ...core.utils import current_date_str
 from ..shared_condition_schema import (
     make_network, make_safety,
-    SHARED_GOVERNANCE_RULES,
+    SHARED_GOVERNANCE_RULES, SHARED_ADVERSE_EVENT_GRADES, SHARED_SIDE_EFFECTS,
 )
 
 logger = logging.getLogger(__name__)
@@ -1003,5 +1003,7 @@ def build_trd_vns_condition() -> ConditionSchema:
             "before increasing output current. Do not titrate during hypomanic symptoms — the "
             "short-term mood elevation may mask early mania and VNS titration may exacerbate it.",
         ],
+        adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
+        side_effects=SHARED_SIDE_EFFECTS,
         governance_rules=VNS_GOVERNANCE_RULES,
     )

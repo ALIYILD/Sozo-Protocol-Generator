@@ -29,7 +29,7 @@ from ...core.enums import (
 from ...core.utils import current_date_str
 from ..shared_condition_schema import (
     make_network, make_tdcs_target, make_safety,
-    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES
+    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES, SHARED_ADVERSE_EVENT_GRADES, SHARED_SIDE_EFFECTS
 )
 
 logger = logging.getLogger(__name__)
@@ -955,6 +955,8 @@ def build_home_tdcs_mdd_anxiety_condition() -> ConditionSchema:
             "Skin burn at electrode site → stop protocol; same-day clinic contact",
         ],
 
+        adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
+        side_effects=SHARED_SIDE_EFFECTS,
         governance_rules=SHARED_GOVERNANCE_RULES + [
             "Home tDCS requires completed device training program (3 supervised sessions) before unsupervised use",
             "Doctor must authorize the home protocol — Fellow or Clinical Assistant may not independently enroll patients",

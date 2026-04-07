@@ -14,7 +14,9 @@ Key references:
 import logging
 from ...schemas.condition import (
     ConditionSchema, PhenotypeSubtype, NetworkProfile,
-    StimulationTarget, AssessmentTool, SafetyNote, ProtocolEntry
+    StimulationTarget, AssessmentTool, SafetyNote, ProtocolEntry,
+    PlatoScienceVariant, MultimodalCombo, HomeBasedProtocol,
+    SideEffectEntry,
 )
 from ...core.enums import (
     NetworkKey, NetworkDysfunction, Modality, EvidenceLevel
@@ -22,7 +24,7 @@ from ...core.enums import (
 from ...core.utils import current_date_str
 from ..shared_condition_schema import (
     make_network, make_tdcs_target, make_tps_target, make_safety,
-    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES
+    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES, SHARED_ADVERSE_EVENT_GRADES, SHARED_SIDE_EFFECTS
 )
 
 logger = logging.getLogger(__name__)
@@ -526,6 +528,122 @@ def build_parkinsons_condition() -> ConditionSchema:
                 evidence_level=EvidenceLevel.LOW, off_label=True, session_count=6,
             ),
             ProtocolEntry(
+                protocol_id="C5", label="Apathy & Motivation", modality=Modality.TDCS,
+                target_region="Anterior Cingulate Cortex / Medial Prefrontal Cortex", target_abbreviation="ACC/mPFC",
+                phenotype_slugs=["la", "fe", "mn"],
+                network_targets=[NetworkKey.SN, NetworkKey.LIMBIC],
+                parameters={
+                    "device": "Newronika HDCkit or PlatoScience",
+                    "anode": "Fz / AFz (medial frontal)",
+                    "cathode": "Fp2 (right supraorbital)",
+                    "intensity": "2.0 mA",
+                    "duration": "20 min",
+                    "sessions": "10-15",
+                    "electrode_size": "35 cm2",
+                },
+                rationale="ACC/mPFC hypoactivation underlies apathy in PD (prevalence 40%). Anodal stimulation of medial frontal cortex targets salience network entry point and motivational drive circuits.",
+                evidence_level=EvidenceLevel.LOW, off_label=True, session_count=15,
+            ),
+            ProtocolEntry(
+                protocol_id="C6", label="Sleep Quality & Circadian", modality=Modality.TDCS,
+                target_region="Right Dorsolateral Prefrontal Cortex / Temporal", target_abbreviation="R-DLPFC",
+                phenotype_slugs=["la", "mn"],
+                network_targets=[NetworkKey.DMN, NetworkKey.LIMBIC],
+                parameters={
+                    "device": "Newronika HDCkit or PlatoScience",
+                    "anode": "F4 (right DLPFC)",
+                    "cathode": "Left mastoid",
+                    "intensity": "1.5 mA",
+                    "duration": "20 min",
+                    "sessions": "10",
+                    "timing": "Evening session (2-3 hours before bedtime)",
+                },
+                rationale="REM sleep behaviour disorder and insomnia are prevalent in PD. Right DLPFC cathodal inhibition may reduce hyperarousal; adjunct to CES for comprehensive sleep management.",
+                evidence_level=EvidenceLevel.LOW, off_label=True, session_count=10,
+            ),
+            ProtocolEntry(
+                protocol_id="C7", label="Pain & Sensory Modulation", modality=Modality.TDCS,
+                target_region="Primary Motor Cortex (contralateral to pain)", target_abbreviation="M1-contra",
+                phenotype_slugs=["pa", "mn"],
+                network_targets=[NetworkKey.SMN, NetworkKey.SN],
+                parameters={
+                    "device": "Newronika HDCkit or PlatoScience",
+                    "anode": "C3 or C4 (contralateral to dominant pain)",
+                    "cathode": "Fp2 or Fp1 (ipsilateral supraorbital)",
+                    "intensity": "2.0 mA",
+                    "duration": "20 min",
+                    "sessions": "10-15",
+                },
+                rationale="M1 anodal stimulation activates descending pain modulation pathways. Effective for central neuropathic pain in PD. Contralateral targeting essential for lateralised pain.",
+                evidence_level=EvidenceLevel.MEDIUM, off_label=True, session_count=15,
+            ),
+            ProtocolEntry(
+                protocol_id="C8", label="Autonomic & Visceral Regulation", modality=Modality.TDCS,
+                target_region="Left Temporal / Insular Cortex (proxy)", target_abbreviation="T3/Insula",
+                phenotype_slugs=["mn"],
+                network_targets=[NetworkKey.SN, NetworkKey.LIMBIC],
+                parameters={
+                    "device": "Newronika HDCkit or PlatoScience",
+                    "anode": "T3 (left temporal — insula proxy)",
+                    "cathode": "Fp2 (right supraorbital)",
+                    "intensity": "1.5 mA",
+                    "duration": "20 min",
+                    "sessions": "10",
+                },
+                rationale="Autonomic dysfunction (orthostatic hypotension, constipation, urinary urgency) is driven by insula and autonomic network involvement. Insular cortex stimulation via temporal electrode is exploratory.",
+                evidence_level=EvidenceLevel.VERY_LOW, off_label=True, session_count=10,
+                notes="EXPLORATORY protocol. Limited evidence base. Requires Doctor authorisation and explicit research consent.",
+            ),
+            ProtocolEntry(
+                protocol_id="T3", label="Cognition — TPS", modality=Modality.TPS,
+                target_region="Dorsolateral Prefrontal Cortex", target_abbreviation="DLPFC",
+                phenotype_slugs=["fe", "mn"],
+                network_targets=[NetworkKey.CEN, NetworkKey.ATTENTION],
+                parameters={
+                    "device": "NEUROLITH (Storz Medical)",
+                    "target": "DLPFC bilateral (neuronavigation-guided)",
+                    "pulses": "300-400 per session",
+                    "frequency": "5 Hz",
+                    "energy": "0.20 mJ/mm2",
+                    "sessions": "6-9 over 3 weeks",
+                },
+                rationale="TPS targeting of DLPFC may modulate executive function via deep cortical-subcortical connectivity pathways not accessible to surface tDCS. Exploratory application based on Alzheimer's TPS evidence.",
+                evidence_level=EvidenceLevel.LOW, off_label=True, session_count=9,
+            ),
+            ProtocolEntry(
+                protocol_id="T4", label="Gait & SMA — TPS", modality=Modality.TPS,
+                target_region="Supplementary Motor Area", target_abbreviation="SMA",
+                phenotype_slugs=["pigd", "ar"],
+                network_targets=[NetworkKey.SMN],
+                parameters={
+                    "device": "NEUROLITH (Storz Medical)",
+                    "target": "SMA midline (neuronavigation-guided)",
+                    "pulses": "300 per session",
+                    "frequency": "5 Hz",
+                    "energy": "0.25 mJ/mm2",
+                    "sessions": "6-9",
+                },
+                rationale="SMA hypoactivation contributes to FOG and gait initiation failure. TPS may reach deeper SMA regions than tDCS. Complementary to tDCS C2 gait protocol.",
+                evidence_level=EvidenceLevel.LOW, off_label=True, session_count=9,
+            ),
+            ProtocolEntry(
+                protocol_id="T5", label="Depression & ACC — TPS", modality=Modality.TPS,
+                target_region="Anterior Cingulate Cortex / Medial Prefrontal", target_abbreviation="ACC/mPFC",
+                phenotype_slugs=["la", "mn"],
+                network_targets=[NetworkKey.LIMBIC, NetworkKey.SN],
+                parameters={
+                    "device": "NEUROLITH (Storz Medical)",
+                    "target": "ACC / medial prefrontal (neuronavigation-guided)",
+                    "pulses": "200-300 per session",
+                    "frequency": "5 Hz",
+                    "energy": "0.20 mJ/mm2",
+                    "sessions": "6",
+                },
+                rationale="TPS targeting of ACC/mPFC addresses limbic-affective circuitry implicated in PD depression and apathy. Deep stimulation may modulate subgenual ACC not reachable by tDCS.",
+                evidence_level=EvidenceLevel.VERY_LOW, off_label=True, session_count=6,
+                notes="EXPLORATORY. Limited evidence. Doctor authorisation and research consent required.",
+            ),
+            ProtocolEntry(
                 protocol_id="CES-1", label="Alpha-Stim CES — Anxiety/Sleep (Adjunct)", modality=Modality.CES,
                 target_region="Bilateral earlobe (alpha wave entrainment)", target_abbreviation="CES",
                 phenotype_slugs=["la", "mn"],
@@ -718,9 +836,287 @@ def build_parkinsons_condition() -> ConditionSchema:
             "PIGD phenotype patients benefit from combining tDCS with active physiotherapy during the same session window",
         ],
 
+        adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
+        side_effects=SHARED_SIDE_EFFECTS + [
+            SideEffectEntry(
+                effect="Temporary increase in dyskinesia",
+                frequency="Uncommon (5–10%)",
+                modalities=[Modality.TDCS],
+                management="Reduce intensity to 1.5 mA. If persistent, switch to cathodal montage or pause M1 protocol. Report to Doctor.",
+                severity="moderate",
+            ),
+            SideEffectEntry(
+                effect="Transient worsening of tremor during TPS",
+                frequency="Uncommon (<5%)",
+                modalities=[Modality.TPS],
+                management="Reduce pulse energy. Allow 5 min rest. If persistent, discontinue session.",
+                severity="mild",
+            ),
+            SideEffectEntry(
+                effect="Orthostatic hypotension post-session",
+                frequency="Uncommon (5–10%)",
+                modalities=[Modality.TDCS, Modality.TPS],
+                management="Have patient sit for 5 min post-session. Monitor BP in patients on antihypertensives. Ensure hydration.",
+                severity="moderate",
+            ),
+        ],
         governance_rules=SHARED_GOVERNANCE_RULES + [
             "Levodopa medication state must be documented at every PD session — this is mandatory",
             "TPS for PD is explicitly OFF-LABEL — off-label consent documentation required in patient file before every treatment block",
             "Any worsening of dyskinesia following tDCS must be documented and reported to the treating Doctor same day",
+        ],
+
+        # --- PlatoScience Protocol Variants ---
+        platoscience_variants=[
+            PlatoScienceVariant(
+                variant_id="C1-PS", protocol_id="C1",
+                label="PlatoScience Motor — Focus Program",
+                parameters={"program": "Focus", "electrode_config": "C3-C4 bilateral", "intensity": "2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to C1 Motor protocol. Use PlatoScience Focus program for M1 bilateral stimulation.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C2-PS", protocol_id="C2",
+                label="PlatoScience Gait — Focus Program",
+                parameters={"program": "Focus", "electrode_config": "Fz-C3/C4 (SMA/M1)", "intensity": "2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to C2 Gait protocol. SMA+M1 combined targeting for gait improvement.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C3-PS", protocol_id="C3",
+                label="PlatoScience Cognition — Think Program",
+                parameters={"program": "Think", "electrode_config": "F3-F4 bilateral DLPFC", "intensity": "2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to C3 Cognition protocol. Use PlatoScience Think program for DLPFC targeting.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C4-PS", protocol_id="C4",
+                label="PlatoScience Mood — Relax Program",
+                parameters={"program": "Relax", "electrode_config": "F3 anode / F8 cathode", "intensity": "2.0 mA", "duration": "30 min", "ramp": "30 sec"},
+                notes="Maps to C4 Depression protocol. Left DLPFC lateralisation for mood improvement.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C1-PS-HD", protocol_id="C1",
+                label="PlatoScience Motor — HD Montage",
+                parameters={"program": "Focus HD", "electrode_config": "4×1 ring around C3", "intensity": "2.0 mA", "duration": "20 min", "focality": "High"},
+                notes="High-definition variant for C1. Improved focality using 4×1 ring montage. Requires HD adapter.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C3-PS-HD", protocol_id="C3",
+                label="PlatoScience Cognition — HD Montage",
+                parameters={"program": "Think HD", "electrode_config": "4×1 ring around F3", "intensity": "2.0 mA", "duration": "20 min", "focality": "High"},
+                notes="High-definition variant for C3. Focal left DLPFC for executive function.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C2-PS-GAIT", protocol_id="C2",
+                label="PlatoScience Gait — Active Rehab",
+                parameters={"program": "Focus", "electrode_config": "Fz/FCz (SMA)", "intensity": "2.0 mA", "duration": "20 min", "concurrent_task": "Treadmill walking"},
+                notes="Active rehab variant: tDCS delivered during supervised treadmill gait training for PIGD phenotype.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C4-PS-APATHY", protocol_id="C4",
+                label="PlatoScience Apathy-Specific",
+                parameters={"program": "Relax", "electrode_config": "F3 anode / right supraorbital cathode", "intensity": "2.0 mA", "duration": "20 min"},
+                notes="Apathy-optimised variant. Shorter duration (20 vs 30 min) with emphasis on left DLPFC activation for motivational drive.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C5-PS", protocol_id="C5",
+                label="PlatoScience Motivation — Focus Program",
+                parameters={"program": "Focus", "electrode_config": "Fz/AFz (medial frontal)", "intensity": "2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to C5 Apathy/Motivation protocol. Medial frontal targeting for salience network entry.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C6-PS", protocol_id="C6",
+                label="PlatoScience Sleep — Relax Program",
+                parameters={"program": "Relax", "electrode_config": "F4 anode / left mastoid cathode", "intensity": "1.5 mA", "duration": "20 min", "timing": "Evening"},
+                notes="Maps to C6 Sleep protocol. Use PlatoScience Relax program for evening sessions.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C7-PS", protocol_id="C7",
+                label="PlatoScience Pain — Focus Program",
+                parameters={"program": "Focus", "electrode_config": "C3/C4 contralateral to pain", "intensity": "2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to C7 Pain protocol. Contralateral M1 targeting for descending pain modulation.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C8-PS", protocol_id="C8",
+                label="PlatoScience Autonomic — Exploratory",
+                parameters={"program": "Focus", "electrode_config": "T3 (temporal/insula proxy)", "intensity": "1.5 mA", "duration": "20 min"},
+                notes="EXPLORATORY. Maps to C8 Autonomic protocol. Limited evidence — Doctor authorisation required.",
+            ),
+        ],
+
+        # --- S-O-Z-O Multimodal Combinations ---
+        multimodal_combos=[
+            MultimodalCombo(
+                combo_id="F1", label="Motor Recovery — tDCS + TPS",
+                phenotype_slugs=["ar", "pigd"],
+                tps_protocol_id="T1",
+                non_tps_protocol_ids=["C1", "C2"],
+                sequencing_notes="Week 1-3: tDCS C1 daily (M-F). Week 2-3: Add TPS T1 (3×/week, non-overlapping days). CES-1 adjunct if anxiety/sleep.",
+                rationale="Primary motor phenotypes benefit from dual-modality cortical stimulation. tDCS provides sustained excitability change; TPS provides deep focal mechanical stimulation. Staggered introduction allows monitoring of each modality's contribution.",
+            ),
+            MultimodalCombo(
+                combo_id="F2", label="Motor + Cognition — Triple Modality",
+                phenotype_slugs=["mn", "fe"],
+                tps_protocol_id="T1",
+                non_tps_protocol_ids=["C1", "C3", "CES-1"],
+                sequencing_notes="Block 1 (Week 1-3): tDCS C1 (motor, daily). Block 2 (Week 4-6): tDCS C3 (cognition, daily) + TPS T1 (2×/week). CES-1 throughout for sleep/anxiety.",
+                rationale="Mixed motor-cognitive phenotype requires sequential network targeting. Motor networks stabilised first (S phase), then cognitive optimisation (O phase) with TPS reinforcement.",
+            ),
+            MultimodalCombo(
+                combo_id="F3", label="Tremor Focus — tDCS + TPS",
+                phenotype_slugs=["td"],
+                tps_protocol_id="T2",
+                non_tps_protocol_ids=["C1"],
+                sequencing_notes="Week 1-3: tDCS C1 (M1 bilateral, daily). Week 2-3: Add TPS T2 (M1/cerebellar, 2×/week). Assess tremor at Week 3.",
+                rationale="Tremor-dominant PD targets cerebellar-thalamocortical loop. tDCS increases M1 excitability; TPS provides deep cerebellar modulation. Combined approach for treatment-resistant tremor.",
+            ),
+            MultimodalCombo(
+                combo_id="F4", label="Mood + Motor — Dual Target",
+                phenotype_slugs=["la", "mn"],
+                tps_protocol_id=None,
+                non_tps_protocol_ids=["C4", "C1", "CES-1"],
+                sequencing_notes="Week 1-2: tDCS C4 (mood, daily). Week 3-5: Alternate C4 and C1 (mood + motor, 3×/week each). CES-1 daily for anxiety/sleep throughout.",
+                rationale="Limbic-affective phenotype requires mood stabilisation before motor optimisation. S-O-Z-O principle: Stabilise mood network first, then Optimise motor function.",
+            ),
+            MultimodalCombo(
+                combo_id="F5", label="Gait + Balance — Active Rehab",
+                phenotype_slugs=["pigd"],
+                tps_protocol_id="T1",
+                non_tps_protocol_ids=["C2"],
+                sequencing_notes="Week 1-3: tDCS C2 (SMA/M1) during supervised treadmill/gait training (concurrent delivery). Week 2-3: Add TPS T1 (2×/week). Active physiotherapy at every session.",
+                rationale="PIGD phenotype benefits most from concurrent stimulation + active rehabilitation. SMA targeting during gait exercise enhances motor learning and reduces FOG frequency.",
+            ),
+            MultimodalCombo(
+                combo_id="F6", label="Cognitive Decline — Prevention Protocol",
+                phenotype_slugs=["fe"],
+                tps_protocol_id=None,
+                non_tps_protocol_ids=["C3", "CES-1"],
+                sequencing_notes="Week 1-5: tDCS C3 (DLPFC, 3×/week). CES-1 alternate days for anxiety/sleep support. Cognitive training during tDCS delivery.",
+                rationale="Executive/cognitive phenotype targeted with sustained DLPFC stimulation and concurrent cognitive training. CES adjunct supports sleep quality (neuroprotective).",
+            ),
+            MultimodalCombo(
+                combo_id="F7", label="Pain Management — Multimodal",
+                phenotype_slugs=["pa"],
+                tps_protocol_id="T1",
+                non_tps_protocol_ids=["C1", "CES-1"],
+                sequencing_notes="Week 1-3: tDCS C1 (M1 anodal for pain modulation, daily). CES-1 daily for anxiety/pain. Week 2-3: Add TPS T1 if central pain dominant (2×/week).",
+                rationale="PD pain subtypes benefit from M1 anodal stimulation (descending pain modulation pathway) combined with CES for generalised pain/anxiety reduction. TPS for deep cortical targets if central pain predominates.",
+            ),
+            MultimodalCombo(
+                combo_id="F8", label="Advanced PD — Full Protocol Stack",
+                phenotype_slugs=["mn"],
+                tps_protocol_id="T1",
+                non_tps_protocol_ids=["C1", "C3", "C4", "CES-1"],
+                sequencing_notes="Block 1: Stabilise (C4 mood + CES-1, 2 weeks). Block 2: Optimise (C1 motor + C3 cognition, alternating, 3 weeks). Block 3: Zone (TPS T1 maintenance, 2×/week). Block 4: Outcome assessment.",
+                rationale="Full S-O-Z-O protocol for complex mixed phenotype. Requires Doctor supervision throughout. Each block targets a different treatment phase with staged introduction of modalities.",
+            ),
+            MultimodalCombo(
+                combo_id="F9", label="Maintenance — Post-Responder",
+                phenotype_slugs=["ar", "td", "pigd", "fe", "la", "pa", "mn"],
+                tps_protocol_id=None,
+                non_tps_protocol_ids=["C1", "CES-1"],
+                sequencing_notes="Post-initial block responders: tDCS C1 (or primary protocol) 2×/week for 4 weeks, then 1×/week. CES-1 as needed. Reassess at Month 3.",
+                rationale="Maintenance phase preserves treatment gains. Gradual taper from acute block frequency. CES for ongoing mood/sleep support.",
+            ),
+        ],
+
+        # --- S-O-Z-O Sequencing Framework ---
+        sequencing_framework={
+            "S — Stabilise": "Address the most acute clinical burden first. For PD: mood/anxiety stabilisation (C4/CES-1) if limbic phenotype; motor stabilisation (C1) if motor-dominant. Goal: establish baseline symptom control before multi-network targeting.",
+            "O — Optimise": "Introduce secondary protocol(s) targeting the next-priority dysfunctional network. Sequential or alternating montage based on phenotype. Add TPS if Doctor-authorised. Concurrent rehabilitation (physio, cognitive training) enhances outcomes.",
+            "Z — Zone": "Fine-tune stimulation parameters based on Week 4 response data. Adjust intensity, electrode placement, or session frequency. Transition to maintenance frequency. Introduce home-based protocols if eligible.",
+            "O — Outcome": "Formal outcome assessment at Week 8-10. Apply responder/non-responder classification. Document maintenance plan for responders. Activate non-responder pathway (re-phenotype, protocol switch) for non-responders.",
+        },
+
+        # --- Modality-Specific Contraindications ---
+        modality_specific_contraindications={
+            "tdcs": [
+                "Active DBS system (unless cleared by DBS neurologist — field interaction risk)",
+                "Skull defect or craniectomy at electrode placement sites",
+                "Metallic implants in the head within stimulation field",
+                "Skin lesions, dermatitis, or wounds at electrode sites",
+                "Severe seborrheic dermatitis on scalp (common in PD — assess electrode sites)",
+            ],
+            "tps": [
+                "Active DBS system (mechanical resonance risk with focused ultrasound)",
+                "Skull defect or craniectomy (acoustic impedance mismatch)",
+                "Metallic implants in the head (ultrasound reflection risk)",
+                "Anticoagulation therapy (bleeding risk at deep stimulation targets)",
+                "Intracranial aneurysm or AVM (mechanical stress contraindication)",
+                "Pregnancy (insufficient safety data for focused ultrasound)",
+            ],
+            "ces": [
+                "Implanted neurostimulator in the head/neck",
+                "Skin lesions at earlobe electrode sites",
+            ],
+            "tavns": [
+                "Active ear infection or otitis",
+                "Skin lesions on tragus or concha",
+                "Known cardiac arrhythmia (vagal stimulation may affect heart rate)",
+            ],
+        },
+
+        # --- Home-Based Treatment Protocols ---
+        home_based_protocols=[
+            HomeBasedProtocol(
+                protocol_id="HOME-C1",
+                label="Home tDCS Motor Maintenance",
+                modality=Modality.TDCS,
+                device="PlatoScience (patient-operated)",
+                parameters={
+                    "program": "Focus",
+                    "electrode_config": "C3-C4 bilateral M1",
+                    "intensity": "1.5 mA (reduced from clinic 2.0 mA)",
+                    "duration": "20 min",
+                    "frequency": "3×/week",
+                },
+                eligibility_criteria=[
+                    "Completed minimum 10 supervised clinic sessions without adverse events",
+                    "Demonstrated correct self-application of electrode placement (assessed by clinician)",
+                    "Stable medication regimen for >=8 weeks",
+                    "Caregiver available during first 5 home sessions",
+                    "Adequate cognitive function to follow safety protocol (MoCA >= 22)",
+                    "Written Doctor approval for home-based treatment",
+                ],
+                safety_notes=[
+                    "Reduced intensity (1.5 mA vs 2.0 mA clinic) as safety margin",
+                    "Patient must complete pre-session checklist (medication state, skin check, device check)",
+                    "Stop session immediately if: unusual headache, dizziness, skin burning, or any unexpected symptom",
+                    "Report any adverse event within 24 hours via SOZO patient portal or phone",
+                ],
+                monitoring_requirements=[
+                    "Weekly remote check-in with SOZO clinician (video or phone)",
+                    "SOZO PRS self-assessment after each session (submitted via patient portal)",
+                    "Fortnightly in-clinic review for first 2 months",
+                    "Monthly in-clinic review thereafter",
+                    "Device usage data reviewed at each clinic visit",
+                ],
+            ),
+            HomeBasedProtocol(
+                protocol_id="HOME-CES",
+                label="Home CES Anxiety/Sleep Support",
+                modality=Modality.CES,
+                device="Alpha-Stim (patient-operated)",
+                parameters={
+                    "frequency": "0.5 Hz",
+                    "intensity": "100-300 uA (patient-titrated to subsensory)",
+                    "duration": "40-60 min",
+                    "frequency_schedule": "Daily or as needed",
+                },
+                eligibility_criteria=[
+                    "Completed minimum 3 supervised CES sessions",
+                    "Demonstrated correct self-application",
+                    "No adverse events during supervised sessions",
+                    "Clinician assessment of suitability",
+                ],
+                safety_notes=[
+                    "CES has FDA clearance — lower risk profile than tDCS",
+                    "Patient adjusts intensity to subsensory threshold",
+                    "Discontinue if skin irritation at earclip sites",
+                ],
+                monitoring_requirements=[
+                    "Self-report via SOZO PRS (sleep quality, anxiety) weekly",
+                    "Monthly clinician review",
+                    "Device usage log reviewed quarterly",
+                ],
+            ),
         ],
     )

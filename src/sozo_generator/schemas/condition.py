@@ -70,6 +70,51 @@ class SafetyNote(BaseModel):
     source: Optional[str] = None
 
 
+class AdverseEventGrade(BaseModel):
+    grade: int  # 1-4
+    label: str  # "Mild", "Moderate", "Severe", "Life-threatening"
+    description: str
+    examples: list[str] = Field(default_factory=list)
+    action: str = ""
+
+
+class SideEffectEntry(BaseModel):
+    effect: str
+    frequency: str  # "Common (>30%)", "Uncommon (1-10%)", etc.
+    modalities: list[Modality] = Field(default_factory=list)
+    management: str
+    severity: str = "mild"
+
+
+class PlatoScienceVariant(BaseModel):
+    variant_id: str
+    protocol_id: str  # links to parent ProtocolEntry
+    label: str
+    parameters: dict[str, str | int | float] = Field(default_factory=dict)
+    notes: str = ""
+
+
+class MultimodalCombo(BaseModel):
+    combo_id: str
+    label: str
+    phenotype_slugs: list[str] = Field(default_factory=list)
+    tps_protocol_id: Optional[str] = None
+    non_tps_protocol_ids: list[str] = Field(default_factory=list)
+    sequencing_notes: str = ""
+    rationale: str = ""
+
+
+class HomeBasedProtocol(BaseModel):
+    protocol_id: str
+    label: str
+    modality: Modality
+    device: str
+    parameters: dict[str, str | int | float] = Field(default_factory=dict)
+    eligibility_criteria: list[str] = Field(default_factory=list)
+    safety_notes: list[str] = Field(default_factory=list)
+    monitoring_requirements: list[str] = Field(default_factory=list)
+
+
 class ProtocolEntry(BaseModel):
     protocol_id: str
     label: str
@@ -148,3 +193,12 @@ class ConditionSchema(BaseModel):
     decision_tree_notes: list[str] = Field(default_factory=list)
     clinical_tips: list[str] = Field(default_factory=list)
     governance_rules: list[str] = Field(default_factory=list)
+
+    # Rich protocol data (optional — builders skip when empty)
+    adverse_event_grades: list[AdverseEventGrade] = Field(default_factory=list)
+    side_effects: list[SideEffectEntry] = Field(default_factory=list)
+    platoscience_variants: list[PlatoScienceVariant] = Field(default_factory=list)
+    multimodal_combos: list[MultimodalCombo] = Field(default_factory=list)
+    home_based_protocols: list[HomeBasedProtocol] = Field(default_factory=list)
+    sequencing_framework: dict[str, str] = Field(default_factory=dict)
+    modality_specific_contraindications: dict[str, list[str]] = Field(default_factory=dict)

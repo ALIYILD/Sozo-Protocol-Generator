@@ -21,7 +21,7 @@ from ...core.enums import (
 from ...core.utils import current_date_str
 from ..shared_condition_schema import (
     make_network, make_tdcs_target, make_tps_target, make_safety,
-    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES
+    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES, SHARED_ADVERSE_EVENT_GRADES, SHARED_SIDE_EFFECTS
 )
 
 logger = logging.getLogger(__name__)
@@ -537,6 +537,8 @@ def build_long_covid_condition() -> ConditionSchema:
             "Inform patients this is investigational — limited evidence exists and outcomes are uncertain",
         ],
 
+        adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
+        side_effects=SHARED_SIDE_EFFECTS,
         governance_rules=SHARED_GOVERNANCE_RULES + [
             "Treating physician coordination mandatory for long COVID cases",
             "Post-exertional malaise (PEM) monitoring protocol must be documented and followed",

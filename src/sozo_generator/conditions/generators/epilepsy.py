@@ -22,7 +22,7 @@ from ...core.enums import (
 from ...core.utils import current_date_str
 from ..shared_condition_schema import (
     make_network, make_tdcs_target, make_safety,
-    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES
+    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES, SHARED_ADVERSE_EVENT_GRADES, SHARED_SIDE_EFFECTS
 )
 
 logger = logging.getLogger(__name__)
@@ -665,6 +665,8 @@ def build_epilepsy_condition() -> ConditionSchema:
             "for antiepileptic trials — use 3-month baseline seizure diary to establish accurate baseline.",
         ],
 
+        adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
+        side_effects=SHARED_SIDE_EFFECTS,
         governance_rules=SHARED_GOVERNANCE_RULES + [
             "All epilepsy neuromodulation requires joint approval from SOZO clinician AND treating "
             "neurologist before protocol initiation",

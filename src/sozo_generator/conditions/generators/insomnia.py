@@ -21,7 +21,7 @@ from ...core.enums import (
 from ...core.utils import current_date_str
 from ..shared_condition_schema import (
     make_network, make_tdcs_target, make_safety,
-    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES
+    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES, SHARED_ADVERSE_EVENT_GRADES, SHARED_SIDE_EFFECTS
 )
 
 logger = logging.getLogger(__name__)
@@ -716,6 +716,8 @@ def build_insomnia_condition() -> ConditionSchema:
             "Sleep diary data is essential for treatment monitoring — 2-week baseline before starting, maintained throughout. Objective actigraphy adds value if available.",
         ],
 
+        adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
+        side_effects=SHARED_SIDE_EFFECTS,
         governance_rules=SHARED_GOVERNANCE_RULES + [
             "OSA exclusion documentation required before commencing CES or any sleep-promoting neurostimulation (ESS ≤ 10 or known-treated OSA with stable CPAP).",
             "INVESTIGATIONAL NOTICE: Slow-oscillation tDCS for insomnia is investigational. Requires ethics board approval for research protocols. Not for routine clinical use without sleep laboratory EEG infrastructure.",

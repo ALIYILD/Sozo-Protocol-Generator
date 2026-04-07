@@ -29,6 +29,8 @@ class SectionContent(BaseModel):
     evidence_pmids: list[str] = Field(default_factory=list)
     confidence_label: Optional[str] = None
     is_placeholder: bool = False
+    # Data-driven callout boxes: [{"text": "...", "box_type": "warning|info|critical|tip|governance|offlabel"}]
+    callout_boxes: list[dict] = Field(default_factory=list)
     # Phase 2: claim traceability
     claims: list[SectionClaim] = Field(default_factory=list)
     evidence_bundle_id: Optional[str] = None

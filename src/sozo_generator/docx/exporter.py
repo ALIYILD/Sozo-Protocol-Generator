@@ -8,16 +8,61 @@ from ..core.utils import ensure_dir, current_month_year
 from ..conditions.builders.clinical_overview import build_overview_section, build_pathophysiology_section
 from ..conditions.builders.anatomy import build_anatomy_section
 from ..conditions.builders.networks import build_networks_section, build_symptom_network_section
-from ..conditions.builders.phenotype import build_phenotype_section
-from ..conditions.builders.assessments import build_assessments_section
+from ..conditions.builders.phenotype import build_phenotype_section, build_phenotype_classification_algorithm
+from ..conditions.builders.assessments import build_assessments_section, build_clinical_exam_sections
 from ..conditions.builders.protocols import build_protocols_section, build_inclusion_exclusion_section
 from ..conditions.builders.safety import build_safety_section
 from ..conditions.builders.responder_logic import build_responder_section
-from ..conditions.builders.handbook_logic import build_handbook_sections
+from ..conditions.builders.handbook_logic import build_handbook_sections, build_handbook_appendices
 from ..conditions.builders.common import build_references_section, build_evidence_gaps_section
+from ..conditions.builders.rich_protocols import (
+    build_evidence_level_definitions_section,
+    build_per_protocol_parameter_tables,
+    build_phenotype_protocol_matrix,
+    build_platoscience_variants_section,
+    build_multimodal_combos_section,
+    build_sequencing_framework_section,
+    build_modality_contraindications_section,
+    build_side_effects_section,
+    build_adverse_event_grading_section,
+    build_home_based_treatment_section,
+    build_governance_section,
+)
+from ..conditions.builders.fnon_protocols import (
+    build_fnon_tps_variants,
+    build_fnon_tdcs_variants,
+)
 from .renderer import DocumentRenderer
 
 logger = logging.getLogger(__name__)
+
+# Maps section_id to visual file suffixes that should be attached
+_SECTION_VISUAL_MAP = {
+    "clinical_overview": ["brain_map"],
+    "neuroanatomy": ["brain_map", "axial_targets", "coronal_targets"],
+    "pathophysiology": ["mri_targets"],
+    "networks": ["network_diagram", "connectivity"],
+    "symptom_network_mapping": ["symptom_flow"],
+    "phenotypes": ["symptom_flow"],
+    "protocols": ["brain_map", "tdcs_panel", "tps_panel"],
+    "per_protocol_parameters": ["axial_targets", "coronal_targets", "mri_targets"],
+    "tdcs_protocols": ["tdcs_panel"],
+    "tps_protocols": ["tps_panel"],
+    "platoscience_variants": ["tdcs_panel"],
+    "multimodal_combos": ["network_diagram"],
+    "sequencing_framework": ["treatment_timeline"],
+    "evidence_level_definitions": [],
+    "inclusion_exclusion": [],
+    "modality_contraindications": [],
+    "side_effects": [],
+    "adverse_event_grading": [],
+    "home_based_treatment": [],
+    "governance": [],
+    "assessments": ["qeeg_topomap", "spectral_topomap"],
+    "safety": ["impedance_map"],
+    "stage_1": ["patient_journey"],
+    "stage_6": ["treatment_timeline"],
+}
 
 
 class DocumentExporter:
@@ -95,9 +140,30 @@ class DocumentExporter:
         path = self._get_output_path(condition.slug, tier, doc_type)
         return self.renderer.render(spec, path)
 
+    def _attach_visuals_to_sections(self, sections: list[SectionContent], condition_slug: str) -> None:
+        """Attach visual file paths to sections based on section_id mapping."""
+        visuals_dir = self.output_base / ".." / "visuals" / condition_slug
+        if not visuals_dir.exists():
+            # Try common output location
+            visuals_dir = Path("outputs/visuals") / condition_slug
+        if not visuals_dir.exists():
+            return
+
+        for section in sections:
+            suffixes = _SECTION_VISUAL_MAP.get(section.section_id, [])
+            for suffix in suffixes:
+                fig_path = visuals_dir / f"{condition_slug}_{suffix}.png"
+                if fig_path.exists() and str(fig_path) not in section.figures:
+                    section.figures.append(str(fig_path))
+            # Recurse into subsections
+            if section.subsections:
+                self._attach_visuals_to_sections(section.subsections, condition_slug)
+
     def _build_spec(self, condition: ConditionSchema, doc_type: DocumentType, tier: Tier) -> DocumentSpec:
         """Build a DocumentSpec for one document type."""
         title, sections = self._get_content(condition, doc_type, tier)
+        if self.with_visuals:
+            self._attach_visuals_to_sections(sections, condition.slug)
         return DocumentSpec(
             document_type=doc_type,
             tier=tier,
@@ -114,6 +180,11 @@ class DocumentExporter:
             output_filename=self._get_output_path(condition.slug, tier, doc_type).name,
         )
 
+    @staticmethod
+    def _optional_sections(*sections) -> list[SectionContent]:
+        """Filter out None results from optional builders."""
+        return [s for s in sections if s is not None]
+
     def _get_content(self, condition: ConditionSchema, doc_type: DocumentType, tier: Tier):
         """Return (title, sections) for a document type."""
         condition_name = condition.display_name
@@ -122,6 +193,7 @@ class DocumentExporter:
             title = f"SOZO Evidence-Based Protocol \u2014 {condition_name}"
             sections = [
                 self._build_document_control(condition, tier),
+                build_evidence_level_definitions_section(),
                 build_inclusion_exclusion_section(condition),
                 build_overview_section(condition),
                 build_pathophysiology_section(condition),
@@ -133,7 +205,30 @@ class DocumentExporter:
             sections += [
                 build_phenotype_section(condition),
                 build_protocols_section(condition),
+                build_phenotype_protocol_matrix(condition),
+                build_per_protocol_parameter_tables(condition),
+                *self._optional_sections(
+                    build_platoscience_variants_section(condition),
+                    build_multimodal_combos_section(condition),
+                    build_sequencing_framework_section(condition),
+                ),
+            ]
+            if tier == Tier.PARTNERS:
+                sections += self._optional_sections(
+                    build_fnon_tps_variants(condition),
+                    build_fnon_tdcs_variants(condition),
+                )
+            sections += [
+                *self._optional_sections(
+                    build_modality_contraindications_section(condition),
+                    build_side_effects_section(condition),
+                    build_adverse_event_grading_section(condition),
+                ),
                 build_safety_section(condition),
+                *self._optional_sections(
+                    build_home_based_treatment_section(condition),
+                    build_governance_section(condition),
+                ),
                 SectionContent(
                     section_id="followup",
                     title="Follow-Up Assessments and Decision-Making",
@@ -146,23 +241,57 @@ class DocumentExporter:
                 build_references_section(condition),
                 build_evidence_gaps_section(condition),
             ]
+            sections = [s for s in sections if s is not None]
 
         elif doc_type == DocumentType.ALL_IN_ONE_PROTOCOL:
             title = f"{'FNON ' if tier == Tier.PARTNERS else ''}All-in-One Protocol \u2014 {condition_name}"
             sections = [
                 self._build_document_control(condition, tier),
+                build_evidence_level_definitions_section(),
                 build_protocols_section(condition),
+                build_phenotype_protocol_matrix(condition),
+                build_per_protocol_parameter_tables(condition),
+                *self._optional_sections(
+                    build_platoscience_variants_section(condition),
+                    build_multimodal_combos_section(condition),
+                    build_sequencing_framework_section(condition),
+                ),
+            ]
+            if tier == Tier.PARTNERS:
+                sections += self._optional_sections(
+                    build_fnon_tps_variants(condition),
+                    build_fnon_tdcs_variants(condition),
+                )
+            sections += [
                 build_inclusion_exclusion_section(condition),
+                *self._optional_sections(
+                    build_modality_contraindications_section(condition),
+                    build_side_effects_section(condition),
+                    build_adverse_event_grading_section(condition),
+                ),
                 build_safety_section(condition),
+                *self._optional_sections(
+                    build_home_based_treatment_section(condition),
+                    build_governance_section(condition),
+                ),
                 build_references_section(condition),
             ]
+            sections = [s for s in sections if s is not None]
 
         elif doc_type == DocumentType.HANDBOOK:
             title = f"SOZO {'FNON ' if tier == Tier.PARTNERS else ''}Clinical Handbook \u2014 {condition_name}"
             handbook_sections = build_handbook_sections(condition)
+            handbook_appendices = build_handbook_appendices(condition)
             sections = (
                 [self._build_document_control(condition, tier), self._build_handbook_intro(condition, tier)]
                 + handbook_sections
+                + self._optional_sections(
+                    build_side_effects_section(condition),
+                    build_adverse_event_grading_section(condition),
+                    build_home_based_treatment_section(condition),
+                    build_governance_section(condition),
+                )
+                + handbook_appendices
                 + [build_references_section(condition)]
             )
 
@@ -171,20 +300,20 @@ class DocumentExporter:
             sections = [
                 self._build_document_control(condition, tier),
                 self._build_patient_info_section(),
+                build_clinical_exam_sections(condition, tier),
                 build_assessments_section(condition),
                 build_phenotype_section(condition),
             ]
-            if tier == Tier.PARTNERS:
-                sections.insert(2, build_networks_section(condition))
 
         elif doc_type == DocumentType.PHENOTYPE_CLASSIFICATION:
             title = f"{'FNON ' if tier == Tier.PARTNERS else ''}Phenotype Classification \u2014 {condition_name}"
             sections = [
                 self._build_document_control(condition, tier),
-                build_phenotype_section(condition),
-                build_networks_section(condition) if tier == Tier.PARTNERS else build_anatomy_section(condition),
-                build_protocols_section(condition),
+                build_phenotype_classification_algorithm(condition),
             ]
+            if tier == Tier.PARTNERS:
+                sections.append(build_networks_section(condition))
+            sections.append(build_protocols_section(condition))
 
         elif doc_type == DocumentType.RESPONDER_TRACKING:
             title = f"Responder Tracking \u2014 {condition_name}"

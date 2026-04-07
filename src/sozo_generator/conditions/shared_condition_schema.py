@@ -6,7 +6,8 @@ from __future__ import annotations
 
 from ..schemas.condition import (
     ConditionSchema, PhenotypeSubtype, NetworkProfile,
-    StimulationTarget, AssessmentTool, SafetyNote, ProtocolEntry
+    StimulationTarget, AssessmentTool, SafetyNote, ProtocolEntry,
+    AdverseEventGrade, SideEffectEntry,
 )
 from ..core.enums import (
     NetworkKey, NetworkDysfunction, Modality, EvidenceLevel
@@ -128,4 +129,76 @@ SHARED_GOVERNANCE_RULES = [
     "Adverse events must be documented within 24 hours and escalated per clinic protocol",
     "Treatment records must be updated at every session",
     "Informed consent must be obtained and documented before initiating any modality",
+]
+
+SHARED_ADVERSE_EVENT_GRADES = [
+    AdverseEventGrade(
+        grade=1, label="Mild",
+        description="Transient, self-resolving without intervention",
+        examples=["Tingling at electrode site", "Mild headache (<30 min)", "Skin redness (resolves <1 hr)", "Slight dizziness"],
+        action="Continue treatment with monitoring. Document in session record.",
+    ),
+    AdverseEventGrade(
+        grade=2, label="Moderate",
+        description="Requires intervention or protocol parameter adjustment",
+        examples=["Persistent headache (>1 hr)", "Skin irritation requiring topical treatment", "Nausea", "Increased anxiety or agitation"],
+        action="Pause session. Assess and adjust parameters or electrode placement. Resume only if resolved.",
+    ),
+    AdverseEventGrade(
+        grade=3, label="Severe",
+        description="Requires immediate treatment discontinuation",
+        examples=["New seizure", "Severe headache unresponsive to analgesics", "Syncope", "Skin burn", "Acute psychiatric worsening"],
+        action="STOP treatment immediately. Escalate to supervising Doctor. Document within 24 hours.",
+    ),
+    AdverseEventGrade(
+        grade=4, label="Life-threatening",
+        description="Emergency medical response required",
+        examples=["Status epilepticus", "Cardiac event", "Severe allergic reaction", "Loss of consciousness"],
+        action="Activate emergency protocol. Call emergency services. Do NOT resume treatment.",
+    ),
+]
+
+SHARED_SIDE_EFFECTS = [
+    SideEffectEntry(
+        effect="Tingling or itching at electrode site",
+        frequency="Very common (>30%)",
+        modalities=[Modality.TDCS],
+        management="Normal sensation; typically reduces within 2–3 minutes. Adjust electrode contact if persistent.",
+        severity="mild",
+    ),
+    SideEffectEntry(
+        effect="Mild headache",
+        frequency="Common (10–20%)",
+        modalities=[Modality.TDCS, Modality.TPS],
+        management="Self-resolving within 1 hour. Paracetamol PRN if needed.",
+        severity="mild",
+    ),
+    SideEffectEntry(
+        effect="Skin redness at electrode site",
+        frequency="Common (10–30%)",
+        modalities=[Modality.TDCS],
+        management="Transient erythema; resolves within 1 hour. Check electrode sponge moisture and contact quality.",
+        severity="mild",
+    ),
+    SideEffectEntry(
+        effect="Scalp discomfort during TPS pulse delivery",
+        frequency="Common (15–25%)",
+        modalities=[Modality.TPS],
+        management="Adjust pulse energy if tolerable threshold exceeded. Brief breaks between pulse trains.",
+        severity="mild",
+    ),
+    SideEffectEntry(
+        effect="Ear discomfort or tingling (taVNS)",
+        frequency="Common (10–20%)",
+        modalities=[Modality.TAVNS],
+        management="Adjust electrode clip position on tragus/cymba conchae. Reduce current if persistent.",
+        severity="mild",
+    ),
+    SideEffectEntry(
+        effect="Fatigue or drowsiness post-session",
+        frequency="Uncommon (5–10%)",
+        modalities=[Modality.TDCS, Modality.TPS, Modality.CES],
+        management="Expected in some patients. Schedule sessions to accommodate. Monitor for pattern.",
+        severity="mild",
+    ),
 ]

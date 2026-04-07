@@ -21,7 +21,7 @@ from ...core.enums import (
 from ...core.utils import current_date_str
 from ..shared_condition_schema import (
     make_network, make_tdcs_target, make_tps_target, make_safety,
-    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES
+    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES, SHARED_ADVERSE_EVENT_GRADES, SHARED_SIDE_EFFECTS
 )
 
 logger = logging.getLogger(__name__)
@@ -830,6 +830,8 @@ def build_depression_condition() -> ConditionSchema:
             "Medication stability: SSRI/SNRI combined with tDCS may have synergistic effects — avoid changing medications during treatment block",
         ],
 
+        adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
+        side_effects=SHARED_SIDE_EFFECTS,
         governance_rules=SHARED_GOVERNANCE_RULES + [
             "Bipolar disorder must be screened and exclusion documented in patient record before first session",
             "C-SSRS suicidality assessment is mandatory at every session — failure to administer is a protocol violation",

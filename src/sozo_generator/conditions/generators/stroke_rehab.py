@@ -20,7 +20,7 @@ from ...core.enums import (
 from ...core.utils import current_date_str
 from ..shared_condition_schema import (
     make_network, make_tdcs_target, make_tps_target, make_safety,
-    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES
+    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES, SHARED_ADVERSE_EVENT_GRADES, SHARED_SIDE_EFFECTS
 )
 
 logger = logging.getLogger(__name__)
@@ -582,6 +582,8 @@ def build_stroke_rehab_condition() -> ConditionSchema:
             "For aphasia protocols, coordinate with speech-language therapist to perform naming/repetition tasks during stimulation.",
         ],
 
+        adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
+        side_effects=SHARED_SIDE_EFFECTS,
         governance_rules=SHARED_GOVERNANCE_RULES + [
             "Hemorrhagic stroke cases require explicit physician neurology clearance before tDCS initiation — document in clinical record",
             "Post-stroke depression monitoring (PHQ-9, C-SSRS) mandatory at every session for PSD phenotype",

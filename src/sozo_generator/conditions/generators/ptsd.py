@@ -20,7 +20,7 @@ from ...core.enums import (
 from ...core.utils import current_date_str
 from ..shared_condition_schema import (
     make_network, make_tdcs_target, make_tps_target, make_safety,
-    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES
+    SHARED_ABSOLUTE_CONTRAINDICATIONS, SHARED_SAFETY_NOTES, SHARED_GOVERNANCE_RULES, SHARED_ADVERSE_EVENT_GRADES, SHARED_SIDE_EFFECTS
 )
 
 logger = logging.getLogger(__name__)
@@ -566,6 +566,8 @@ def build_ptsd_condition() -> ConditionSchema:
             "Consider right DLPFC for predominant fear/hyperarousal features; left DLPFC for predominant depression/anhedonia features",
         ],
 
+        adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
+        side_effects=SHARED_SIDE_EFFECTS,
         governance_rules=SHARED_GOVERNANCE_RULES + [
             "C-SSRS mandatory at every session for PTSD patients — suicidality escalation protocol must be documented and accessible",
             "Trauma-focused psychological support must be documented as concurrent treatment — neuromodulation without this is not approved",

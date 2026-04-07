@@ -61,6 +61,11 @@ def render_section(doc: Document, section: SectionContent, level: int = 1, depth
                 caption=table_def.get("caption"),
             )
 
+    # Data-driven callout boxes
+    for box_def in section.callout_boxes:
+        if isinstance(box_def, dict):
+            add_warning_box(doc, box_def.get("text", ""), box_type=box_def.get("box_type", "info"))
+
     # Figures (placeholders for now — actual figures inserted by images.py)
     for fig_path in section.figures:
         _add_figure_placeholder(doc, fig_path)
