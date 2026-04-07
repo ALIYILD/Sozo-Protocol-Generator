@@ -67,69 +67,151 @@ def build_phenotype_classification_algorithm(condition: ConditionSchema) -> Sect
         }],
     ))
 
-    # Step 2: Phenotype Identification
+    # Step 2: Phenotype Identification — summary + per-phenotype detail
     pheno_rows = []
     for ph in condition.phenotypes:
         features = "; ".join(ph.key_features[:4]) if ph.key_features else "—"
         pheno_rows.append([ph.slug.upper(), ph.label, features])
+
+    step2_subsections = []
+    for ph in condition.phenotypes:
+        feature_rows = [[f, "☐ Present  ☐ Absent"] for f in ph.key_features] if ph.key_features else []
+        if feature_rows:
+            step2_subsections.append(SectionContent(
+                section_id=f"pheno_detail_{ph.slug}",
+                title=f"{ph.slug.upper()}: {ph.label}",
+                content=ph.description,
+                tables=[{
+                    "headers": ["Feature", "Assessment"],
+                    "rows": feature_rows,
+                    "caption": f"Phenotype scoring — {ph.label}",
+                }],
+            ))
+
     steps.append(SectionContent(
         section_id="step_2",
         title="Step 2: Phenotype Identification",
-        content="Match clinical presentation to the phenotype categories below.",
+        content="Match clinical presentation to the phenotype categories below. Score each feature.",
         tables=[{
             "headers": ["Code", "Phenotype Label", "Key Distinguishing Features"],
             "rows": pheno_rows,
             "caption": "Step 2 — Phenotype identification criteria",
         }],
+        subsections=step2_subsections,
     ))
 
-    # Step 3: Network Dysfunction Mapping
+    # Step 3: Network Dysfunction Mapping — summary + per-phenotype network detail
     net_rows = []
     for ph in condition.phenotypes:
         primary = ", ".join(n.value.upper() for n in ph.primary_networks)
         secondary = ", ".join(n.value.upper() for n in ph.secondary_networks) if ph.secondary_networks else "—"
         net_rows.append([ph.slug.upper(), ph.label, primary, secondary])
+
+    step3_tables = [{
+        "headers": ["Code", "Phenotype", "Primary Network(s)", "Secondary Network(s)"],
+        "rows": net_rows,
+        "caption": "Step 3 — Phenotype-to-network mapping",
+    }]
+    # Add network dysfunction severity matrix
+    if condition.network_profiles:
+        severity_rows = []
+        for np in condition.network_profiles:
+            severity_rows.append([
+                np.network.value.upper(),
+                np.dysfunction.value,
+                np.severity,
+                "✓" if np.primary else "—",
+                np.relevance[:80] if np.relevance else "—",
+            ])
+        step3_tables.append({
+            "headers": ["Network", "Dysfunction", "Severity", "Primary?", "Clinical Relevance"],
+            "rows": severity_rows,
+            "caption": "Step 3 — Network dysfunction severity profile",
+        })
+
     steps.append(SectionContent(
         section_id="step_3",
         title="Step 3: Network Dysfunction Mapping",
         content="Map each phenotype to its primary and secondary dysfunctional networks.",
-        tables=[{
-            "headers": ["Code", "Phenotype", "Primary Network(s)", "Secondary Network(s)"],
-            "rows": net_rows,
-            "caption": "Step 3 — Phenotype-to-network mapping",
-        }],
+        tables=step3_tables,
     ))
 
-    # Step 4: tDCS Target Selection
-    tdcs_rows = []
+    # Step 4: tDCS Target Selection — with montage detail per phenotype
+    tdcs_summary_rows = []
+    step4_subsections = []
     for ph in condition.phenotypes:
         target = ph.tdcs_target or "See protocol selection"
-        tdcs_rows.append([ph.slug.upper(), ph.label, target])
+        tdcs_summary_rows.append([ph.slug.upper(), ph.label, target])
+
+        # Find matching tDCS protocols for this phenotype
+        matching_tdcs = [p for p in condition.protocols
+                        if p.modality.value == "tdcs" and ph.slug in p.phenotype_slugs]
+        if matching_tdcs:
+            montage_rows = []
+            for p in matching_tdcs:
+                anode = p.parameters.get("anode", "—")
+                cathode = p.parameters.get("cathode", "—")
+                intensity = p.parameters.get("intensity", "2.0 mA")
+                duration = p.parameters.get("duration", "20 min")
+                montage_rows.append([p.protocol_id, anode, cathode, intensity, duration, p.evidence_level.value])
+            step4_subsections.append(SectionContent(
+                section_id=f"montage_{ph.slug}",
+                title=f"Montage Detail: {ph.label}",
+                tables=[{
+                    "headers": ["Protocol", "Anode", "Cathode", "Intensity", "Duration", "Evidence"],
+                    "rows": montage_rows,
+                    "caption": f"tDCS montage specifications — {ph.label}",
+                }],
+            ))
+
     steps.append(SectionContent(
         section_id="step_4",
         title="Step 4: tDCS Montage Selection by Phenotype",
         content="Select tDCS electrode montage based on identified phenotype.",
         tables=[{
             "headers": ["Code", "Phenotype", "Recommended tDCS Target / Montage"],
-            "rows": tdcs_rows,
+            "rows": tdcs_summary_rows,
             "caption": "Step 4 — Phenotype-to-tDCS montage mapping",
         }],
+        subsections=step4_subsections,
     ))
 
-    # Step 5: TPS Protocol Selection
-    tps_rows = []
+    # Step 5: TPS Protocol Selection — with per-phenotype TPS detail
+    tps_summary_rows = []
+    step5_subsections = []
     for ph in condition.phenotypes:
         target = ph.tps_target or "Not indicated / see clinician"
-        tps_rows.append([ph.slug.upper(), ph.label, target])
+        tps_summary_rows.append([ph.slug.upper(), ph.label, target])
+
+        matching_tps = [p for p in condition.protocols
+                       if p.modality.value == "tps" and ph.slug in p.phenotype_slugs]
+        if matching_tps:
+            tps_detail_rows = []
+            for p in matching_tps:
+                pulses = p.parameters.get("pulses", "—")
+                energy = p.parameters.get("energy", "—")
+                freq = p.parameters.get("frequency", "—")
+                tps_detail_rows.append([p.protocol_id, p.target_region, pulses, energy, freq, p.evidence_level.value])
+            step5_subsections.append(SectionContent(
+                section_id=f"tps_{ph.slug}",
+                title=f"TPS Detail: {ph.label}",
+                tables=[{
+                    "headers": ["Protocol", "Target Region", "Pulses", "Energy", "Frequency", "Evidence"],
+                    "rows": tps_detail_rows,
+                    "caption": f"TPS parameters — {ph.label}",
+                }],
+            ))
+
     steps.append(SectionContent(
         section_id="step_5",
         title="Step 5: TPS Protocol Selection",
         content="Determine TPS targeting if Doctor-authorised. All TPS is OFF-LABEL.",
         tables=[{
             "headers": ["Code", "Phenotype", "Recommended TPS Target"],
-            "rows": tps_rows,
+            "rows": tps_summary_rows,
             "caption": "Step 5 — Phenotype-to-TPS protocol assignment",
         }],
+        subsections=step5_subsections,
         callout_boxes=[{
             "text": "All TPS applications are OFF-LABEL. Requires explicit Doctor authorisation and documented informed consent.",
             "box_type": "offlabel",

@@ -155,6 +155,65 @@ def build_responder_section(condition: ConditionSchema) -> SectionContent:
                 "caption": "Protocol adjustment decision matrix",
             }],
         ),
+        # 9. Maintenance Protocol Schedule
+        SectionContent(
+            section_id="maintenance_schedule",
+            title="Maintenance Protocol Schedule",
+            tables=[{
+                "headers": ["Phase", "Frequency", "Duration", "Assessment"],
+                "rows": [
+                    ["Acute Block", "Daily (Mon-Fri) or 3×/week", "3-5 weeks (10-15 sessions)", "Baseline + Week 4"],
+                    ["Transition", "2×/week", "4 weeks", "Week 8-10 assessment"],
+                    ["Early Maintenance", "1×/week", "4-8 weeks", "Monthly PRS check"],
+                    ["Stable Maintenance", "Fortnightly or monthly", "Ongoing", "Quarterly full assessment"],
+                    ["Booster (if relapse)", "3×/week for 2 weeks", "2 weeks", "Pre/post booster assessment"],
+                ],
+                "caption": "Maintenance protocol frequency taper schedule",
+            }],
+        ),
+
+        # 10. Regulator-Safe Language Guide
+        SectionContent(
+            section_id="language_guide",
+            title="Regulator-Safe Language Guide",
+            content="Use the following language in all documentation, reports, and patient communications.",
+            tables=[{
+                "headers": ["DO Use", "DO NOT Use"],
+                "rows": [
+                    ["Neuromodulation protocol", "Treatment / therapy / cure"],
+                    ["Evidence-informed", "Proven / guaranteed"],
+                    ["May improve symptoms", "Will improve / fixes"],
+                    ["Investigational / exploratory", "Experimental (unless IRB context)"],
+                    ["OFF-LABEL (for TPS in non-AD)", "Unapproved / unlicensed"],
+                    ["Adjunct to standard care", "Replacement for medication"],
+                    ["Response observed in studies", "Clinical trial results show"],
+                    ["Individual results may vary", "Typical results / expected outcome"],
+                ],
+                "caption": "Regulator-safe language reference for clinical documentation",
+            }],
+        ),
+
+        # 11. Signature Data Collection
+        SectionContent(
+            section_id="signature_collection",
+            title="SOZO Responder Signature Data Collection",
+            tables=[{
+                "headers": ["Data Field", "Baseline", "Week 4", "Week 8-10", "Maintenance"],
+                "rows": [
+                    ["Primary outcome scale score", "", "", "", ""],
+                    ["SOZO PRS total", "", "", "", ""],
+                    ["Phenotype classification", "", "", "", ""],
+                    ["Protocol(s) delivered", "", "", "", ""],
+                    ["Total sessions completed", "", "", "", ""],
+                    ["Adverse events (Grade 2+)", "", "", "", ""],
+                    ["Medication changes", "", "", "", ""],
+                    ["Response classification", "—", "", "", ""],
+                    ["Clinician signature", "", "", "", ""],
+                    ["Date", "", "", "", ""],
+                ],
+                "caption": "Responder signature data — longitudinal tracking",
+            }],
+        ),
     ]
 
     # Levodopa scheduling (PD-specific)
