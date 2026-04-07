@@ -19,6 +19,8 @@ from ..conditions.builders.rich_protocols import (
     build_evidence_level_definitions_section,
     build_per_protocol_parameter_tables,
     build_phenotype_protocol_matrix,
+    build_device_specifications_section,
+    build_per_phenotype_sozo_tables,
     build_platoscience_variants_section,
     build_multimodal_combos_section,
     build_sequencing_framework_section,
@@ -204,11 +206,13 @@ class DocumentExporter:
                 sections.append(build_symptom_network_section(condition))
             sections += [
                 build_phenotype_section(condition),
+                build_device_specifications_section(condition),
                 build_protocols_section(condition),
                 build_phenotype_protocol_matrix(condition),
                 build_per_protocol_parameter_tables(condition),
                 *self._optional_sections(
                     build_platoscience_variants_section(condition),
+                    build_per_phenotype_sozo_tables(condition),
                     build_multimodal_combos_section(condition),
                     build_sequencing_framework_section(condition),
                 ),
@@ -248,11 +252,13 @@ class DocumentExporter:
             sections = [
                 self._build_document_control(condition, tier),
                 build_evidence_level_definitions_section(),
+                build_device_specifications_section(condition),
                 build_protocols_section(condition),
                 build_phenotype_protocol_matrix(condition),
                 build_per_protocol_parameter_tables(condition),
                 *self._optional_sections(
                     build_platoscience_variants_section(condition),
+                    build_per_phenotype_sozo_tables(condition),
                     build_multimodal_combos_section(condition),
                     build_sequencing_framework_section(condition),
                 ),

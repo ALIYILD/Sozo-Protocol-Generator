@@ -191,6 +191,182 @@ def build_phenotype_protocol_matrix(condition: ConditionSchema) -> Optional[Sect
 
 
 # ---------------------------------------------------------------------------
+# 2c. Device Specification Tables
+# ---------------------------------------------------------------------------
+
+def build_device_specifications_section(condition: ConditionSchema) -> Optional[SectionContent]:
+    """Device specification tables for each modality used in this condition."""
+    if not condition.protocols:
+        return None
+
+    # Collect unique devices
+    devices_seen = set()
+    modalities_used = set()
+    for p in condition.protocols:
+        modalities_used.add(p.modality.value)
+        device = p.parameters.get("device", "")
+        if device:
+            devices_seen.add(device)
+
+    subsections = []
+
+    # tDCS devices
+    from ...core.enums import Modality
+    if Modality.TDCS.value in modalities_used:
+        subsections.append(SectionContent(
+            section_id="device_tdcs",
+            title="tDCS Device Specifications",
+            tables=[{
+                "headers": ["Specification", "Newronika HDCkit", "PlatoScience"],
+                "rows": [
+                    ["Type", "Clinical tDCS system", "Wireless consumer/clinical tDCS"],
+                    ["Channels", "Up to 8 (HD capability)", "1-2"],
+                    ["Current Range", "0.1–4.0 mA", "0.5–2.0 mA"],
+                    ["Max Current Density", "Configurable per electrode", "Fixed based on electrode"],
+                    ["Electrode Size", "Standard 35 cm² or HD 1 cm²", "Standard sponge"],
+                    ["Session Timer", "Programmable 1-40 min", "Pre-set 20/30 min programs"],
+                    ["Ramp Up/Down", "Configurable 10-60 sec", "30 sec automatic"],
+                    ["Programs", "Custom clinician-programmed", "Focus, Think, Relax, Create"],
+                    ["Impedance Check", "Real-time with abort", "Pre-session check"],
+                    ["Clinical Setting", "In-clinic (primary)", "In-clinic or home-based"],
+                ],
+                "caption": "tDCS device comparison — Newronika HDCkit vs PlatoScience",
+            }],
+        ))
+
+    # TPS device
+    if Modality.TPS.value in modalities_used:
+        subsections.append(SectionContent(
+            section_id="device_tps",
+            title="TPS Device Specifications — NEUROLITH®",
+            tables=[{
+                "headers": ["Specification", "Value"],
+                "rows": [
+                    ["Manufacturer", "Storz Medical AG (Switzerland)"],
+                    ["Device", "NEUROLITH® TPS System"],
+                    ["Technology", "Transcranial Pulse Stimulation (focused shockwave)"],
+                    ["Penetration Depth", "Up to 8 cm (deep brain structures)"],
+                    ["Pulse Energy", "0.10–0.40 mJ/mm²"],
+                    ["Frequency", "1–8 Hz (typical: 4–5 Hz)"],
+                    ["Pulses per Session", "200–1000 (typical: 300–600)"],
+                    ["Navigation", "Neuronavigation-guided (MRI-based)"],
+                    ["Session Duration", "20–30 min"],
+                    ["Regulatory Status", "CE marked (EU). OFF-LABEL for non-Alzheimer's conditions."],
+                ],
+                "caption": "NEUROLITH® TPS system specifications",
+            }],
+            callout_boxes=[{
+                "text": "TPS use for this condition is INVESTIGATIONAL and OFF-LABEL. "
+                        "Requires Doctor authorisation and documented informed consent for every treatment block.",
+                "box_type": "offlabel",
+            }],
+        ))
+
+    # CES device
+    if Modality.CES.value in modalities_used:
+        subsections.append(SectionContent(
+            section_id="device_ces",
+            title="CES Device Specifications — Alpha-Stim®",
+            tables=[{
+                "headers": ["Specification", "Value"],
+                "rows": [
+                    ["Manufacturer", "Electromedical Products International"],
+                    ["Device", "Alpha-Stim® AID / M"],
+                    ["Technology", "Cranial Electrotherapy Stimulation"],
+                    ["Waveform", "Modified square wave, biphasic"],
+                    ["Frequency", "0.5 Hz (fixed)"],
+                    ["Current Range", "10–600 µA (typical: 100–300 µA)"],
+                    ["Electrode", "Earclip electrodes (bilateral earlobe)"],
+                    ["Session Duration", "20–60 min"],
+                    ["Regulatory Status", "FDA cleared for anxiety, depression, insomnia"],
+                ],
+                "caption": "Alpha-Stim® CES device specifications",
+            }],
+        ))
+
+    if not subsections:
+        return None
+
+    return SectionContent(
+        section_id="device_specifications",
+        title="Device Specifications & Technical Information",
+        content=(
+            "The following tables provide technical specifications for the neuromodulation "
+            f"devices used in {condition.display_name} protocols at SOZO Brain Center."
+        ),
+        subsections=subsections,
+    )
+
+
+# ---------------------------------------------------------------------------
+# 2d. Per-Phenotype S-O-Z-O Treatment Tables
+# ---------------------------------------------------------------------------
+
+def build_per_phenotype_sozo_tables(condition: ConditionSchema) -> Optional[SectionContent]:
+    """For each phenotype, generate a treatment plan table showing protocol assignments."""
+    if not condition.phenotypes or not condition.protocols:
+        return None
+
+    subsections = []
+    for pheno in condition.phenotypes:
+        # Find protocols that target this phenotype
+        matching = [p for p in condition.protocols if pheno.slug in p.phenotype_slugs]
+        if not matching:
+            continue
+
+        # Build protocol assignment table
+        proto_rows = []
+        for p in matching:
+            proto_rows.append([
+                p.protocol_id, p.label, p.modality.value.upper(),
+                p.target_abbreviation, p.evidence_level.value,
+            ])
+
+        # Build S-O-Z-O plan for this phenotype
+        primary = matching[0] if matching else None
+        adjuncts = matching[1:] if len(matching) > 1 else []
+        sozo_rows = [
+            ["S — Stabilise", f"Initiate {primary.protocol_id} ({primary.label})" if primary else "—",
+             "Week 1-2"],
+            ["O — Optimise", f"Add {', '.join(p.protocol_id for p in adjuncts[:2])}" if adjuncts else "Maintain primary protocol",
+             "Week 3-5"],
+            ["Z — Zone", "Fine-tune parameters based on response data", "Week 4-6"],
+            ["O — Outcome", "Formal assessment and response classification", "Week 8-10"],
+        ]
+
+        subsections.append(SectionContent(
+            section_id=f"sozo_{pheno.slug}",
+            title=f"S-O-Z-O Plan: {pheno.label}",
+            content=pheno.description,
+            tables=[
+                {
+                    "headers": ["Protocol", "Label", "Modality", "Target", "Evidence"],
+                    "rows": proto_rows,
+                    "caption": f"Protocol assignments for {pheno.label}",
+                },
+                {
+                    "headers": ["S-O-Z-O Stage", "Action", "Timeline"],
+                    "rows": sozo_rows,
+                    "caption": f"S-O-Z-O treatment plan — {pheno.label}",
+                },
+            ],
+        ))
+
+    if not subsections:
+        return None
+
+    return SectionContent(
+        section_id="per_phenotype_sozo",
+        title="Per-Phenotype S-O-Z-O Treatment Plans",
+        content=(
+            "The following section provides phenotype-specific treatment plans "
+            "with protocol assignments and S-O-Z-O sequencing."
+        ),
+        subsections=subsections,
+    )
+
+
+# ---------------------------------------------------------------------------
 # 3. PlatoScience Protocol Variants
 # ---------------------------------------------------------------------------
 
