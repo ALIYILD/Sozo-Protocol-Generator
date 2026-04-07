@@ -20,6 +20,7 @@ Subagent modules embedded:
 """
 import logging
 from ...schemas.condition import (
+    PlatoScienceVariant, MultimodalCombo,
     ConditionSchema, PhenotypeSubtype, NetworkProfile,
     StimulationTarget, AssessmentTool, SafetyNote, ProtocolEntry
 )
@@ -954,6 +955,58 @@ def build_home_tdcs_mdd_anxiety_condition() -> ConditionSchema:
             "AE score ≥2 (app) → supervisor review within 24 h; assess for stopping-rule trigger",
             "Skin burn at electrode site → stop protocol; same-day clinic contact",
         ],
+
+
+        # --- Auto-enriched: PlatoScience Variants ---
+        platoscience_variants=[
+            PlatoScienceVariant(
+                variant_id="HOME-STD-PS", protocol_id="HOME-STD",
+                label="PlatoScience Home tDCS — Standard Bilateral DLPFC Protocol",
+                parameters={"program": "Think", "electrode_config": "F3 — Left DLPFC (10-20 EEG landmark)", "intensity": "2.0 mA", "duration": "30 min", "ramp": "30 sec"},
+                notes="Maps to HOME-STD protocol. PlatoScience Think program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="HOME-ANX-PS", protocol_id="HOME-ANX",
+                label="PlatoScience Home tDCS — Anxiety-Adapted Brunoni Montage (F3-Fp2)",
+                parameters={"program": "Think", "electrode_config": "F3 — Left DLPFC", "intensity": "2.0 mA", "duration": "30 min", "ramp": "30 sec"},
+                notes="Maps to HOME-ANX protocol. PlatoScience Think program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="HOME-SHAM-PS", protocol_id="HOME-SHAM",
+                label="PlatoScience Home tDCS — Sham Control Arm",
+                parameters={"program": "Think", "electrode_config": "F3 (identical positioning)", "intensity": "2.0 mA (ramp only)", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to HOME-SHAM protocol. PlatoScience Think program.",
+            ),
+        ],
+
+        # --- Auto-enriched: S-O-Z-O Framework ---
+        sequencing_framework={
+            "S — Stabilise": "Address the most acute clinical burden first. Initiate primary tDCS protocol. Goal: establish baseline symptom control.",
+            "O — Optimise": "Introduce secondary protocols or adjunct modalities. Add TPS if Doctor-authorised. Concurrent rehabilitation enhances outcomes.",
+            "Z — Zone": "Fine-tune stimulation parameters based on Week 4 response. Adjust intensity, placement, or frequency. Transition to maintenance.",
+            "O — Outcome": "Formal outcome assessment at Week 8-10. Apply responder/non-responder classification. Plan maintenance or escalation.",
+        },
+
+        # --- Auto-enriched: Modality-Specific Contraindications ---
+        modality_specific_contraindications={
+            "tdcs": [
+                "Active DBS system (unless cleared by managing neurologist)",
+                "Skull defect or craniectomy at electrode placement sites",
+                "Metallic implants in the head within stimulation field",
+                "Skin lesions or wounds at electrode sites",
+            ],
+            "tps": [
+                "Active DBS system (mechanical resonance risk)",
+                "Skull defect or craniectomy (acoustic impedance mismatch)",
+                "Metallic implants in the head (ultrasound reflection risk)",
+                "Anticoagulation therapy (bleeding risk at deep targets)",
+                "Intracranial aneurysm or AVM",
+            ],
+            "ces": [
+                "Implanted neurostimulator in head/neck",
+                "Skin lesions at earlobe electrode sites",
+            ],
+        },
 
         adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
         side_effects=SHARED_SIDE_EFFECTS,

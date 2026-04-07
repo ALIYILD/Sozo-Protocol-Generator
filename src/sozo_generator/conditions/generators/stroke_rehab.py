@@ -11,6 +11,7 @@ Key references:
 """
 import logging
 from ...schemas.condition import (
+    PlatoScienceVariant, MultimodalCombo,
     ConditionSchema, PhenotypeSubtype, NetworkProfile,
     StimulationTarget, AssessmentTool, SafetyNote, ProtocolEntry
 )
@@ -581,6 +582,64 @@ def build_stroke_rehab_condition() -> ConditionSchema:
             "Screen for post-stroke depression at baseline (PHQ-9) — untreated PSD halves rehabilitation outcomes and is highly treatable with DLPFC tDCS + antidepressants.",
             "For aphasia protocols, coordinate with speech-language therapist to perform naming/repetition tasks during stimulation.",
         ],
+
+
+        # --- Auto-enriched: PlatoScience Variants ---
+        platoscience_variants=[
+            PlatoScienceVariant(
+                variant_id="C-STROKE-MOTOR-PS", protocol_id="C-STROKE-MOTOR",
+                label="PlatoScience Upper Limb Motor Recovery — Bilateral M1 tDCS",
+                parameters={"program": "Focus", "electrode_config": "C3 (left hemisphere ipsilesional if right hemiparesis) OR C4 (right hemisphere ipsilesional if left hemiparesis)", "intensity": "1.0-2.0 mA", "duration": "20-30 min", "ramp": "30 sec"},
+                notes="Maps to C-STROKE-MOTOR protocol. PlatoScience Focus program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C-APHASIA-PS", protocol_id="C-APHASIA",
+                label="PlatoScience Aphasia — Language Rehabilitation tDCS",
+                parameters={"program": "Focus", "electrode_config": "F7 (ipsilesional Broca's area approximation)", "intensity": "1.5-2.0 mA", "duration": "20-30 min", "ramp": "30 sec"},
+                notes="Maps to C-APHASIA protocol. PlatoScience Focus program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C-COG-STROKE-PS", protocol_id="C-COG-STROKE",
+                label="PlatoScience Post-Stroke Cognitive Rehabilitation",
+                parameters={"program": "Think", "electrode_config": "F3 + F4 (bilateral DLPFC) or unilateral ipsilesional", "intensity": "2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to C-COG-STROKE protocol. PlatoScience Think program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C-PSD-PS", protocol_id="C-PSD",
+                label="PlatoScience Post-Stroke Depression — DLPFC tDCS",
+                parameters={"program": "Think", "electrode_config": "F3 (left DLPFC)", "intensity": "2.0 mA", "duration": "30 min", "ramp": "30 sec"},
+                notes="Maps to C-PSD protocol. PlatoScience Think program.",
+            ),
+        ],
+
+        # --- Auto-enriched: S-O-Z-O Framework ---
+        sequencing_framework={
+            "S — Stabilise": "Address the most acute clinical burden first. Initiate primary tDCS protocol. Goal: establish baseline symptom control.",
+            "O — Optimise": "Introduce secondary protocols or adjunct modalities. Add TPS if Doctor-authorised. Concurrent rehabilitation enhances outcomes.",
+            "Z — Zone": "Fine-tune stimulation parameters based on Week 4 response. Adjust intensity, placement, or frequency. Transition to maintenance.",
+            "O — Outcome": "Formal outcome assessment at Week 8-10. Apply responder/non-responder classification. Plan maintenance or escalation.",
+        },
+
+        # --- Auto-enriched: Modality-Specific Contraindications ---
+        modality_specific_contraindications={
+            "tdcs": [
+                "Active DBS system (unless cleared by managing neurologist)",
+                "Skull defect or craniectomy at electrode placement sites",
+                "Metallic implants in the head within stimulation field",
+                "Skin lesions or wounds at electrode sites",
+            ],
+            "tps": [
+                "Active DBS system (mechanical resonance risk)",
+                "Skull defect or craniectomy (acoustic impedance mismatch)",
+                "Metallic implants in the head (ultrasound reflection risk)",
+                "Anticoagulation therapy (bleeding risk at deep targets)",
+                "Intracranial aneurysm or AVM",
+            ],
+            "ces": [
+                "Implanted neurostimulator in head/neck",
+                "Skin lesions at earlobe electrode sites",
+            ],
+        },
 
         adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
         side_effects=SHARED_SIDE_EFFECTS,

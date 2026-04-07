@@ -11,6 +11,7 @@ Key references:
 """
 import logging
 from ...schemas.condition import (
+    PlatoScienceVariant, MultimodalCombo,
     ConditionSchema, PhenotypeSubtype, NetworkProfile,
     StimulationTarget, AssessmentTool, SafetyNote, ProtocolEntry
 )
@@ -569,6 +570,72 @@ def build_alzheimers_condition() -> ConditionSchema:
             "Engage caregiver as active participant in outcome monitoring — carer-reported functional changes are often more clinically meaningful than scale scores",
             "Document regulatory status for TPS in your jurisdiction — approval status for AD indication may affect consent requirements",
         ],
+
+
+        # --- Auto-enriched: PlatoScience Variants ---
+        platoscience_variants=[
+            PlatoScienceVariant(
+                variant_id="C-AD-MEM-PS", protocol_id="C-AD-MEM",
+                label="PlatoScience Memory Enhancement — Temporal-Parietal tDCS",
+                parameters={"program": "Focus", "electrode_config": "P3 + P4 (bilateral parietal) or T5+T6 (temporal-parietal)", "intensity": "1.5-2.0 mA", "duration": "20-30 min (start 15 min in moderate AD)", "ramp": "30 sec"},
+                notes="Maps to C-AD-MEM protocol. PlatoScience Focus program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C-AD-EXEC-PS", protocol_id="C-AD-EXEC",
+                label="PlatoScience Executive Function — DLPFC tDCS",
+                parameters={"program": "Think", "electrode_config": "F3 + F4 (bilateral DLPFC)", "intensity": "1.5-2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to C-AD-EXEC protocol. PlatoScience Think program.",
+            ),
+        ],
+
+        # --- Auto-enriched: Multimodal Combinations ---
+        multimodal_combos=[
+            MultimodalCombo(
+                combo_id="F1", label="Memory Enhancement — Temporal-Parietal tDCS + Hippocampal TPS — Memory (MCI)",
+                phenotype_slugs=['mci_am'],
+                tps_protocol_id="T-AD",
+                non_tps_protocol_ids=["C-AD-MEM"],
+                sequencing_notes="Week 1-3: tDCS C-AD-MEM daily. Week 2-3: Add TPS T-AD (2-3x/week).",
+                rationale="Combined TDCS + TPS targeting for enhanced cortical modulation.",
+            ),
+            MultimodalCombo(
+                combo_id="F2", label="Executive Function — DLPFC tDCS + Hippocampal TPS — Memory (MCI)",
+                phenotype_slugs=['mci_am'],
+                tps_protocol_id="T-AD",
+                non_tps_protocol_ids=["C-AD-EXEC"],
+                sequencing_notes="Week 1-3: tDCS C-AD-EXEC daily. Week 2-3: Add TPS T-AD (2-3x/week).",
+                rationale="Combined TDCS + TPS targeting for enhanced cortical modulation.",
+            ),
+        ],
+
+        # --- Auto-enriched: S-O-Z-O Framework ---
+        sequencing_framework={
+            "S — Stabilise": "Address the most acute clinical burden first. Initiate primary tDCS protocol. Goal: establish baseline symptom control.",
+            "O — Optimise": "Introduce secondary protocols or adjunct modalities. Add TPS if Doctor-authorised. Concurrent rehabilitation enhances outcomes.",
+            "Z — Zone": "Fine-tune stimulation parameters based on Week 4 response. Adjust intensity, placement, or frequency. Transition to maintenance.",
+            "O — Outcome": "Formal outcome assessment at Week 8-10. Apply responder/non-responder classification. Plan maintenance or escalation.",
+        },
+
+        # --- Auto-enriched: Modality-Specific Contraindications ---
+        modality_specific_contraindications={
+            "tdcs": [
+                "Active DBS system (unless cleared by managing neurologist)",
+                "Skull defect or craniectomy at electrode placement sites",
+                "Metallic implants in the head within stimulation field",
+                "Skin lesions or wounds at electrode sites",
+            ],
+            "tps": [
+                "Active DBS system (mechanical resonance risk)",
+                "Skull defect or craniectomy (acoustic impedance mismatch)",
+                "Metallic implants in the head (ultrasound reflection risk)",
+                "Anticoagulation therapy (bleeding risk at deep targets)",
+                "Intracranial aneurysm or AVM",
+            ],
+            "ces": [
+                "Implanted neurostimulator in head/neck",
+                "Skin lesions at earlobe electrode sites",
+            ],
+        },
 
         adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
         side_effects=SHARED_SIDE_EFFECTS,

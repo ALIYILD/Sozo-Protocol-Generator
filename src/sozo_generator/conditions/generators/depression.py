@@ -12,6 +12,7 @@ Key references:
 """
 import logging
 from ...schemas.condition import (
+    PlatoScienceVariant, MultimodalCombo,
     ConditionSchema, PhenotypeSubtype, NetworkProfile,
     StimulationTarget, AssessmentTool, SafetyNote, ProtocolEntry
 )
@@ -829,6 +830,80 @@ def build_depression_condition() -> ConditionSchema:
             "DLPFC–sgACC anti-correlation target: if fcMRI is available, map individual DLPFC seed correlated negatively with sgACC (Cg25) to guide neuronavigation; absent fcMRI, use F3 landmark + neuronavigation",
             "Medication stability: SSRI/SNRI combined with tDCS may have synergistic effects — avoid changing medications during treatment block",
         ],
+
+
+        # --- Auto-enriched: PlatoScience Variants ---
+        platoscience_variants=[
+            PlatoScienceVariant(
+                variant_id="C4-STD-PS", protocol_id="C4-STD",
+                label="PlatoScience Depression — Standard DLPFC Protocol",
+                parameters={"program": "Think", "electrode_config": "F3 (left DLPFC)", "intensity": "2.0 mA", "duration": "30 min", "ramp": "30 sec"},
+                notes="Maps to C4-STD protocol. PlatoScience Think program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C4-TRD-PS", protocol_id="C4-TRD",
+                label="PlatoScience Treatment-Resistant Depression — Intensive Protocol",
+                parameters={"program": "Think", "electrode_config": "F3 (left DLPFC)", "intensity": "2.0 mA", "duration": "30 min", "ramp": "30 sec"},
+                notes="Maps to C4-TRD protocol. PlatoScience Think program.",
+            ),
+        ],
+
+        # --- Auto-enriched: Multimodal Combinations ---
+        multimodal_combos=[
+            MultimodalCombo(
+                combo_id="F1", label="Depression — Standard DLPFC Protocol + TPS — Left DLPFC/sgACC Network (MDD/TRD)",
+                phenotype_slugs=['mel'],
+                tps_protocol_id="T-DEP",
+                non_tps_protocol_ids=["C4-STD"],
+                sequencing_notes="Week 1-3: tDCS C4-STD daily. Week 2-3: Add TPS T-DEP (2-3x/week).",
+                rationale="Combined TDCS + TPS targeting for enhanced cortical modulation.",
+            ),
+            MultimodalCombo(
+                combo_id="F2", label="Treatment-Resistant Depression — Intensive Protocol + TPS — Left DLPFC/sgACC Network (MDD/TRD)",
+                phenotype_slugs=['trd'],
+                tps_protocol_id="T-DEP",
+                non_tps_protocol_ids=["C4-TRD"],
+                sequencing_notes="Week 1-3: tDCS C4-TRD daily. Week 2-3: Add TPS T-DEP (2-3x/week).",
+                rationale="Combined TDCS + TPS targeting for enhanced cortical modulation.",
+            ),
+            MultimodalCombo(
+                combo_id="F3", label="Treatment-Resistant Depression — Intensive Protocol + TPS — DLPFC (AD-Related Depression, Comorbid)",
+                phenotype_slugs=['trd'],
+                tps_protocol_id="T-DEP-AD",
+                non_tps_protocol_ids=["C4-TRD"],
+                sequencing_notes="Week 1-3: tDCS C4-TRD daily. Week 2-3: Add TPS T-DEP-AD (2-3x/week).",
+                rationale="Combined TDCS + TPS targeting for enhanced cortical modulation.",
+            ),
+        ],
+
+        # --- Auto-enriched: S-O-Z-O Framework ---
+        sequencing_framework={
+            "S — Stabilise": "Address the most acute clinical burden first. Initiate primary tDCS protocol. Goal: establish baseline symptom control.",
+            "O — Optimise": "Introduce secondary protocols or adjunct modalities. Add TPS if Doctor-authorised. Concurrent rehabilitation enhances outcomes.",
+            "Z — Zone": "Fine-tune stimulation parameters based on Week 4 response. Adjust intensity, placement, or frequency. Transition to maintenance.",
+            "O — Outcome": "Formal outcome assessment at Week 8-10. Apply responder/non-responder classification. Plan maintenance or escalation.",
+        },
+
+        # --- Auto-enriched: Modality-Specific Contraindications ---
+        modality_specific_contraindications={
+            "tdcs": [
+                "Active DBS system (unless cleared by managing neurologist)",
+                "Skull defect or craniectomy at electrode placement sites",
+                "Metallic implants in the head within stimulation field",
+                "Skin lesions or wounds at electrode sites",
+            ],
+            "tps": [
+                "Active DBS system (mechanical resonance risk)",
+                "Skull defect or craniectomy (acoustic impedance mismatch)",
+                "Metallic implants in the head (ultrasound reflection risk)",
+                "Anticoagulation therapy (bleeding risk at deep targets)",
+                "Intracranial aneurysm or AVM",
+            ],
+            "ces": [
+                "Implanted neurostimulator in head/neck",
+                "Skin lesions at earlobe electrode sites",
+            ],
+        },
 
         adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
         side_effects=SHARED_SIDE_EFFECTS,

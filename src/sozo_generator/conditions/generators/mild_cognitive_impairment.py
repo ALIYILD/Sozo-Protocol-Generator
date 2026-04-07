@@ -11,6 +11,7 @@ Key references:
 """
 import logging
 from ...schemas.condition import (
+    PlatoScienceVariant, MultimodalCombo,
     ConditionSchema, PhenotypeSubtype, NetworkProfile,
     StimulationTarget, AssessmentTool, SafetyNote, ProtocolEntry
 )
@@ -482,6 +483,58 @@ def build_mild_cognitive_impairment_condition() -> ConditionSchema:
             "Screen for depression (PHQ-9) — depression in MCI independently predicts faster progression; treat concurrently",
             "Document baseline MoCA carefully — ceiling effects in mild MCI require follow-up with more sensitive tools (ADAS-Cog)",
         ],
+
+
+        # --- Auto-enriched: PlatoScience Variants ---
+        platoscience_variants=[
+            PlatoScienceVariant(
+                variant_id="C-MCI-DLPFC-PARIETAL-PS", protocol_id="C-MCI-DLPFC-PARIETAL",
+                label="PlatoScience Bifrontal-Parietal tDCS — Memory Enhancement",
+                parameters={"program": "Focus", "electrode_config": "F3 (left DLPFC) or P3 (left parietal)", "intensity": "1.5-2.0 mA", "duration": "20-30 min", "ramp": "30 sec"},
+                notes="Maps to C-MCI-DLPFC-PARIETAL protocol. PlatoScience Focus program.",
+            ),
+        ],
+
+        # --- Auto-enriched: Multimodal Combinations ---
+        multimodal_combos=[
+            MultimodalCombo(
+                combo_id="F1", label="Bifrontal-Parietal tDCS — Memory Enhancement + TPS — Hippocampal-Adjacent Temporal Stimulation",
+                phenotype_slugs=['amnestic_multi', 'amnestic_single'],
+                tps_protocol_id="TPS-MCI-TEMPORAL",
+                non_tps_protocol_ids=["C-MCI-DLPFC-PARIETAL"],
+                sequencing_notes="Week 1-3: tDCS C-MCI-DLPFC-PARIETAL daily. Week 2-3: Add TPS TPS-MCI-TEMPORAL (2-3x/week).",
+                rationale="Combined TDCS + TPS targeting for enhanced cortical modulation.",
+            ),
+        ],
+
+        # --- Auto-enriched: S-O-Z-O Framework ---
+        sequencing_framework={
+            "S — Stabilise": "Address the most acute clinical burden first. Initiate primary tDCS protocol. Goal: establish baseline symptom control.",
+            "O — Optimise": "Introduce secondary protocols or adjunct modalities. Add TPS if Doctor-authorised. Concurrent rehabilitation enhances outcomes.",
+            "Z — Zone": "Fine-tune stimulation parameters based on Week 4 response. Adjust intensity, placement, or frequency. Transition to maintenance.",
+            "O — Outcome": "Formal outcome assessment at Week 8-10. Apply responder/non-responder classification. Plan maintenance or escalation.",
+        },
+
+        # --- Auto-enriched: Modality-Specific Contraindications ---
+        modality_specific_contraindications={
+            "tdcs": [
+                "Active DBS system (unless cleared by managing neurologist)",
+                "Skull defect or craniectomy at electrode placement sites",
+                "Metallic implants in the head within stimulation field",
+                "Skin lesions or wounds at electrode sites",
+            ],
+            "tps": [
+                "Active DBS system (mechanical resonance risk)",
+                "Skull defect or craniectomy (acoustic impedance mismatch)",
+                "Metallic implants in the head (ultrasound reflection risk)",
+                "Anticoagulation therapy (bleeding risk at deep targets)",
+                "Intracranial aneurysm or AVM",
+            ],
+            "ces": [
+                "Implanted neurostimulator in head/neck",
+                "Skin lesions at earlobe electrode sites",
+            ],
+        },
 
         adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
         side_effects=SHARED_SIDE_EFFECTS,

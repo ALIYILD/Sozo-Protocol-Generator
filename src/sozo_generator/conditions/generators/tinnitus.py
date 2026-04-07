@@ -10,6 +10,7 @@ Key references:
 """
 import logging
 from ...schemas.condition import (
+    PlatoScienceVariant, MultimodalCombo,
     ConditionSchema, PhenotypeSubtype, NetworkProfile,
     StimulationTarget, AssessmentTool, SafetyNote, ProtocolEntry
 )
@@ -507,6 +508,52 @@ def build_tinnitus_condition() -> ConditionSchema:
             "Audiological assessment before starting: hearing aid prescription may reduce tinnitus by restoring peripheral auditory input",
             "Pulsatile tinnitus is a red flag — vascular investigation mandatory before any neuromodulation",
         ],
+
+
+        # --- Auto-enriched: PlatoScience Variants ---
+        platoscience_variants=[
+            PlatoScienceVariant(
+                variant_id="C-TIN-BIFRONTAL-PS", protocol_id="C-TIN-BIFRONTAL",
+                label="PlatoScience Bifrontal-Temporal — Dual Target Tinnitus",
+                parameters={"program": "Focus", "electrode_config": "F3 (left DLPFC) or Fp1", "intensity": "1.5-2.0 mA", "duration": "20-30 min", "ramp": "30 sec"},
+                notes="Maps to C-TIN-BIFRONTAL protocol. PlatoScience Focus program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="C-TIN-AC-PS", protocol_id="C-TIN-AC",
+                label="PlatoScience Auditory Cortex Cathodal — Tinnitus Suppression",
+                parameters={"program": "Focus", "electrode_config": "Right shoulder or Fp2", "intensity": "1.5-2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to C-TIN-AC protocol. PlatoScience Focus program.",
+            ),
+        ],
+
+        # --- Auto-enriched: S-O-Z-O Framework ---
+        sequencing_framework={
+            "S — Stabilise": "Address the most acute clinical burden first. Initiate primary tDCS protocol. Goal: establish baseline symptom control.",
+            "O — Optimise": "Introduce secondary protocols or adjunct modalities. Add TPS if Doctor-authorised. Concurrent rehabilitation enhances outcomes.",
+            "Z — Zone": "Fine-tune stimulation parameters based on Week 4 response. Adjust intensity, placement, or frequency. Transition to maintenance.",
+            "O — Outcome": "Formal outcome assessment at Week 8-10. Apply responder/non-responder classification. Plan maintenance or escalation.",
+        },
+
+        # --- Auto-enriched: Modality-Specific Contraindications ---
+        modality_specific_contraindications={
+            "tdcs": [
+                "Active DBS system (unless cleared by managing neurologist)",
+                "Skull defect or craniectomy at electrode placement sites",
+                "Metallic implants in the head within stimulation field",
+                "Skin lesions or wounds at electrode sites",
+            ],
+            "tps": [
+                "Active DBS system (mechanical resonance risk)",
+                "Skull defect or craniectomy (acoustic impedance mismatch)",
+                "Metallic implants in the head (ultrasound reflection risk)",
+                "Anticoagulation therapy (bleeding risk at deep targets)",
+                "Intracranial aneurysm or AVM",
+            ],
+            "ces": [
+                "Implanted neurostimulator in head/neck",
+                "Skin lesions at earlobe electrode sites",
+            ],
+        },
 
         adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
         side_effects=SHARED_SIDE_EFFECTS,

@@ -11,6 +11,7 @@ Key references:
 """
 import logging
 from ...schemas.condition import (
+    PlatoScienceVariant, MultimodalCombo,
     ConditionSchema, PhenotypeSubtype, NetworkProfile,
     StimulationTarget, AssessmentTool, SafetyNote, ProtocolEntry
 )
@@ -768,6 +769,104 @@ def build_migraine_condition() -> ConditionSchema:
             "Chronic migraine: extend assessment period to 8 weeks to capture true treatment effect",
             "Screen PHQ-9 and GAD-7 for comorbid depression and anxiety — high prevalence in chronic migraine",
         ],
+
+
+        # --- Auto-enriched: PlatoScience Variants ---
+        platoscience_variants=[
+            PlatoScienceVariant(
+                variant_id="MIG-C1-PS", protocol_id="MIG-C1",
+                label="PlatoScience M1 Pain Modulation",
+                parameters={"program": "Focus", "electrode_config": "C3 (M1, contralateral to dominant pain side)", "intensity": "2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to MIG-C1 protocol. PlatoScience Focus program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="MIG-C2-PS", protocol_id="MIG-C2",
+                label="PlatoScience DLPFC Migraine Prevention",
+                parameters={"program": "Think", "electrode_config": "F3 (left DLPFC)", "intensity": "2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to MIG-C2 protocol. PlatoScience Think program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="MIG-C3-PS", protocol_id="MIG-C3",
+                label="PlatoScience Occipital Aura Prevention",
+                parameters={"program": "Focus", "electrode_config": "Cz (vertex)", "intensity": "2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to MIG-C3 protocol. PlatoScience Focus program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="MIG-C4-PS", protocol_id="MIG-C4",
+                label="PlatoScience Multi-Target Chronic Migraine",
+                parameters={"program": "Focus", "electrode_config": "C3 (sessions 1-5), F3 (sessions 6-10) — sequential targeting", "intensity": "2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to MIG-C4 protocol. PlatoScience Focus program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="MIG-C5-PS", protocol_id="MIG-C5",
+                label="PlatoScience Bilateral M1 Pain",
+                parameters={"program": "Focus", "electrode_config": "C3 (left M1)", "intensity": "2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to MIG-C5 protocol. PlatoScience Focus program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="MIG-C6-PS", protocol_id="MIG-C6",
+                label="PlatoScience Vestibular Migraine",
+                parameters={"program": "Focus", "electrode_config": "P3 (parietal / vestibular cortex)", "intensity": "1.5 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to MIG-C6 protocol. PlatoScience Focus program.",
+            ),
+        ],
+
+        # --- Auto-enriched: Multimodal Combinations ---
+        multimodal_combos=[
+            MultimodalCombo(
+                combo_id="F1", label="M1 Pain Modulation + TPS Trigeminal/DLPFC",
+                phenotype_slugs=['mwoa', 'chronic'],
+                tps_protocol_id="MIG-T1",
+                non_tps_protocol_ids=["MIG-C1"],
+                sequencing_notes="Week 1-3: tDCS MIG-C1 daily. Week 2-3: Add TPS MIG-T1 (2-3x/week).",
+                rationale="Combined TDCS + TPS targeting for enhanced cortical modulation.",
+            ),
+            MultimodalCombo(
+                combo_id="F2", label="DLPFC Migraine Prevention + TPS Trigeminal/DLPFC",
+                phenotype_slugs=['mwoa', 'chronic'],
+                tps_protocol_id="MIG-T1",
+                non_tps_protocol_ids=["MIG-C2"],
+                sequencing_notes="Week 1-3: tDCS MIG-C2 daily. Week 2-3: Add TPS MIG-T1 (2-3x/week).",
+                rationale="Combined TDCS + TPS targeting for enhanced cortical modulation.",
+            ),
+            MultimodalCombo(
+                combo_id="F3", label="Occipital Aura Prevention + TPS Occipital (Aura)",
+                phenotype_slugs=['mwa'],
+                tps_protocol_id="MIG-T2",
+                non_tps_protocol_ids=["MIG-C3"],
+                sequencing_notes="Week 1-3: tDCS MIG-C3 daily. Week 2-3: Add TPS MIG-T2 (2-3x/week).",
+                rationale="Combined TDCS + TPS targeting for enhanced cortical modulation.",
+            ),
+        ],
+
+        # --- Auto-enriched: S-O-Z-O Framework ---
+        sequencing_framework={
+            "S — Stabilise": "Address the most acute clinical burden first. Initiate primary tDCS protocol. Goal: establish baseline symptom control.",
+            "O — Optimise": "Introduce secondary protocols or adjunct modalities. Add TPS if Doctor-authorised. Concurrent rehabilitation enhances outcomes.",
+            "Z — Zone": "Fine-tune stimulation parameters based on Week 4 response. Adjust intensity, placement, or frequency. Transition to maintenance.",
+            "O — Outcome": "Formal outcome assessment at Week 8-10. Apply responder/non-responder classification. Plan maintenance or escalation.",
+        },
+
+        # --- Auto-enriched: Modality-Specific Contraindications ---
+        modality_specific_contraindications={
+            "tdcs": [
+                "Active DBS system (unless cleared by managing neurologist)",
+                "Skull defect or craniectomy at electrode placement sites",
+                "Metallic implants in the head within stimulation field",
+                "Skin lesions or wounds at electrode sites",
+            ],
+            "tps": [
+                "Active DBS system (mechanical resonance risk)",
+                "Skull defect or craniectomy (acoustic impedance mismatch)",
+                "Metallic implants in the head (ultrasound reflection risk)",
+                "Anticoagulation therapy (bleeding risk at deep targets)",
+                "Intracranial aneurysm or AVM",
+            ],
+            "ces": [
+                "Implanted neurostimulator in head/neck",
+                "Skin lesions at earlobe electrode sites",
+            ],
+        },
 
         adverse_event_grades=SHARED_ADVERSE_EVENT_GRADES,
         side_effects=SHARED_SIDE_EFFECTS,
