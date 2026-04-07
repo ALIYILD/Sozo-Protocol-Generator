@@ -157,6 +157,14 @@ class DocumentExporter:
                 fig_path = visuals_dir / f"{condition_slug}_{suffix}.png"
                 if fig_path.exists() and str(fig_path) not in section.figures:
                     section.figures.append(str(fig_path))
+
+            # Per-protocol montage diagrams: match params_{PROTOCOL_ID} sections
+            if section.section_id.startswith("params_"):
+                proto_id = section.section_id[7:].lower()  # e.g., "c1", "t1"
+                montage_path = visuals_dir / f"{condition_slug}_montage_{proto_id}.png"
+                if montage_path.exists() and str(montage_path) not in section.figures:
+                    section.figures.append(str(montage_path))
+
             # Recurse into subsections
             if section.subsections:
                 self._attach_visuals_to_sections(section.subsections, condition_slug)

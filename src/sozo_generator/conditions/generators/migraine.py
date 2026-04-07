@@ -609,6 +609,60 @@ def build_migraine_condition() -> ConditionSchema:
                 notes="OFF-LABEL. Vestibular migraine application. Assess balance before/after.",
             ),
 
+            # ── C7-C8: Expanded tDCS protocols ──────────────────────
+            ProtocolEntry(
+                protocol_id="MIG-C7", label="Cervical/Brainstem Proxy — Descending Pain Modulation", modality=Modality.TDCS,
+                target_region="C2 Cervical / Brainstem Proxy", target_abbreviation="C2/BSt",
+                phenotype_slugs=["chronic", "mwoa"],
+                network_targets=[NetworkKey.SMN, NetworkKey.SN],
+                parameters={
+                    "device": "Newronika HDCkit or PlatoScience",
+                    "anode": "C2 area (posterior neck — cervicomedullary junction proxy)",
+                    "cathode": "Fp2 (right supraorbital)",
+                    "intensity": "2.0 mA",
+                    "duration": "20 min",
+                    "sessions": "10-15",
+                    "note": "Targets descending pain modulation pathway via cervicomedullary junction. Electrode placement requires careful anatomical landmarking.",
+                },
+                rationale="C2 area tDCS targets the trigeminocervical complex and descending pain modulation pathways (PAG-RVM-TNC axis). Addresses cervicogenic migraine triggers and brainstem sensitization. Particularly relevant for chronic migraine with prominent neck pain and medication overuse. OFF-LABEL.",
+                evidence_level=EvidenceLevel.LOW, off_label=True, session_count=15,
+            ),
+            ProtocolEntry(
+                protocol_id="MIG-C8", label="Bilateral Temporal — Vestibular/Photophobia", modality=Modality.TDCS,
+                target_region="Bilateral Temporal Cortex", target_abbreviation="T3/T4",
+                phenotype_slugs=["vestibular", "mwa", "chronic"],
+                network_targets=[NetworkKey.SN, NetworkKey.SMN],
+                parameters={
+                    "device": "Newronika HDCkit or PlatoScience",
+                    "anode": "T3 (left temporal)",
+                    "cathode": "T4 (right temporal)",
+                    "intensity": "1.5 mA",
+                    "duration": "20 min",
+                    "sessions": "10-15",
+                    "note": "Bilateral temporal montage for vestibular migraine with photophobia. Reduced intensity (1.5 mA) due to temporal cortex sensitivity.",
+                },
+                rationale="Bilateral temporal tDCS targets vestibular cortex processing and multimodal sensory integration areas disrupted in vestibular migraine. Addresses photophobia and phonophobia via temporal-insular cortex modulation. OFF-LABEL.",
+                evidence_level=EvidenceLevel.LOW, off_label=True, session_count=15,
+            ),
+
+            # ── T5: Expanded TPS protocol ──────────────────────────
+            ProtocolEntry(
+                protocol_id="MIG-T5", label="TPS Brainstem — Trigeminal Nucleus Caudalis", modality=Modality.TPS,
+                target_region="Brainstem / Trigeminal Nucleus Caudalis", target_abbreviation="TNC/BSt",
+                phenotype_slugs=["chronic", "mwoa", "mwa"],
+                network_targets=[NetworkKey.SN, NetworkKey.SMN],
+                parameters={
+                    "device": "NEUROLITH (Storz Medical)",
+                    "target": "Trigeminal nucleus caudalis / upper cervical brainstem (neuronavigation-guided)",
+                    "pulses": "300-400 per session",
+                    "frequency": "5 Hz",
+                    "energy": "0.20-0.25 mJ/mm2",
+                    "sessions": "6-9 over 3 weeks",
+                },
+                rationale="TPS targeting the trigeminal nucleus caudalis (TNC) — the primary relay for trigeminal nociceptive input — aims to modulate central sensitization at the brainstem level. Deep acoustic energy can reach TNC depth. Addresses the core pathophysiological node in migraine chronification. OFF-LABEL.",
+                evidence_level=EvidenceLevel.LOW, off_label=True, session_count=9,
+            ),
+
             # ── CES protocol ──────────────────────────────────────
             ProtocolEntry(
                 protocol_id="MIG-CES1", label="Alpha-Stim CES — Anxiety/Sleep (Adjunct)", modality=Modality.CES,
@@ -808,6 +862,18 @@ def build_migraine_condition() -> ConditionSchema:
                 label="PlatoScience Vestibular Migraine",
                 parameters={"program": "Focus", "electrode_config": "P3 (parietal / vestibular cortex)", "intensity": "1.5 mA", "duration": "20 min", "ramp": "30 sec"},
                 notes="Maps to MIG-C6 protocol. PlatoScience Focus program.",
+            ),
+            PlatoScienceVariant(
+                variant_id="MIG-C7-PS", protocol_id="MIG-C7",
+                label="PlatoScience Cervical/Brainstem Proxy",
+                parameters={"program": "Focus", "electrode_config": "C2 area (posterior neck)", "intensity": "2.0 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to MIG-C7 protocol. PlatoScience Focus program. Requires careful electrode placement.",
+            ),
+            PlatoScienceVariant(
+                variant_id="MIG-C8-PS", protocol_id="MIG-C8",
+                label="PlatoScience Bilateral Temporal — Vestibular/Photophobia",
+                parameters={"program": "Relax", "electrode_config": "T3/T4 (bilateral temporal)", "intensity": "1.5 mA", "duration": "20 min", "ramp": "30 sec"},
+                notes="Maps to MIG-C8 protocol. PlatoScience Relax program.",
             ),
         ],
 
