@@ -216,14 +216,12 @@ class GenerationService:
             dt_value = req.doc_type.value if hasattr(req.doc_type, 'value') else str(req.doc_type)
             tier_value = req.tier.value if hasattr(req.tier, 'value') else str(req.tier)
 
-            if self.can_route_canonical(condition, dt_value):
-                # Canonical path (stronger evidence/QA, provenance)
-                result = self.generate_canonical(condition, dt_value, tier_value)
-                result.doc_type = dt_value  # Normalize
-                logger.info(f"Routed to canonical: {condition}/{dt_value}/{tier_value}")
-            else:
-                # Legacy path (fallback)
-                result = self._execute_single(schema, req)
+            # Always use the enhanced DocumentExporter pipeline which includes
+            # rich protocol tables, FNON variants, device specs, per-protocol
+            # montage images, and all system-level builder enhancements.
+            # The canonical assembler path is disabled as it uses a separate
+            # document assembly pipeline that lacks these features.
+            result = self._execute_single(schema, req)
 
             results.append(result)
 
@@ -646,7 +644,12 @@ class GenerationService:
         )
 
         try:
-            # 1. Generate the document via exporter
+            # 1. Generate visuals FIRST so they can be embedded in DOCX
+            if request.with_visuals:
+                visuals = self._generate_visuals(schema, request)
+                result.visuals_generated = visuals
+
+            # 2. Generate the document via exporter (embeds visuals if available)
             output_path = self.exporter.export_single(
                 condition=schema,
                 doc_type=request.doc_type,
@@ -655,17 +658,12 @@ class GenerationService:
             result.output_path = str(output_path)
             result.success = True
 
-            # 2. Run QA if requested
+            # 3. Run QA if requested
             if request.with_qa:
                 qa_result = self._run_qa(schema, request)
                 if qa_result is not None:
                     result.qa_passed = qa_result.get("passed", None)
                     result.qa_issues = qa_result.get("issues", [])
-
-            # 3. Generate visuals if requested
-            if request.with_visuals:
-                visuals = self._generate_visuals(schema, request)
-                result.visuals_generated = visuals
 
             # 4. Curate and insert web images if requested
             if self.with_images:
