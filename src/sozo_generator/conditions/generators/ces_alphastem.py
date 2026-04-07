@@ -383,6 +383,10 @@ def build_ces_alphastem_condition() -> ConditionSchema:
             ),
         ],
 
+        eeg_reference_table=[
+            {"position": "Bilateral earlobes", "brain_region": "Transcranial microcurrent field", "role": "CES electrode placement — sub-sensory microcurrent across cranium; not standard 10-20 EEG position", "protocols_using": ["CES-ANX", "CES-INS", "CES-COMB-TDCS", "CES-TAVNS-ADJ"]},
+        ],
+
         stimulation_targets=[
             StimulationTarget(
                 modality=Modality.CES,
@@ -431,6 +435,27 @@ def build_ces_alphastem_condition() -> ConditionSchema:
                 session_count=30,
                 notes="FDA 510(k) cleared (K133227). NICE MTG reviewed (2014). Prescribe via Alpha-Stim "
                       "prescriber network. Device available by prescription only in UK; OTC in US.",
+                # -- SOZO Protocol Handbook fields --
+                protocol_name="CES-ANX — Alpha-Stim CES Anxiety Protocol (FDA-Cleared)",
+                clinical_objective="Reduce generalized anxiety via thalamocortical alpha upregulation and limbic modulation",
+                primary_targets=["Limbic network (amygdala-cingulate circuit via transcranial microcurrent)"],
+                secondary_targets=["SN downregulation (indirect)", "DMN connectivity reduction (Feusner et al. 2012)"],
+                device_name="Alpha-Stim® CS",
+                session_structure="Bilateral earlobe clip electrodes; 0.5 Hz square wave; 100–500 µA; 20–60 min",
+                frequency="Daily (5×/week minimum) for 4–6 weeks; then 3×/week maintenance",
+                duration="20–60 min per session",
+                intensity_dose="100–500 µA (titrate: start 100 µA, increase by 50 µA to 200–400 µA for anxiety)",
+                montage_roi="Bilateral earlobe clip electrodes",
+                laterality="Bilateral",
+                treatment_course="Daily × 4–6 weeks; maintenance 3×/week",
+                monitoring="GAD-7 at Week 2, 4, endpoint; skin integrity at earlobe sites",
+                expected_response="Reduced anxiety (GAD-7 ≥50% reduction); improved emotional regulation; reduced hyperarousal",
+                evidence_status="Level B — Ching et al. 2022 meta-analysis (11 RCTs, n=794, Hedge's g=-0.625); NICE MTG 2014",
+                cautions="Device-specific evidence — do not substitute generic CES; start at 100 µA for sensitive patients",
+                when_to_escalate="If GAD-7 reduction <30% at Week 4, increase intensity to 400 µA and session to 60 min",
+                when_to_stop_modify="Stop if persistent skin irritation at earlobe sites",
+                clinical_notes_extended="Home-based, self-administered. Primary value as non-pharmacological anxiolytic. Coordinate with prescriber for benzodiazepine dose reduction pathway.",
+                key_citations=["Ching et al., 2022", "Morriss et al., 2019", "Bystritsky et al., 2008", "NICE MTG, 2014"],
             ),
             ProtocolEntry(
                 protocol_id="CES-INS",
@@ -463,6 +488,27 @@ def build_ces_alphastem_condition() -> ConditionSchema:
                 notes="Nightly use enables high cumulative dose. Reduce intensity to 100 μA if patient "
                       "reports excessive drowsiness or reports waking feeling 'too relaxed'. "
                       "Lower intensity (sub-sensory) may be as effective as higher intensity for insomnia.",
+                # -- SOZO Protocol Handbook fields --
+                protocol_name="CES-INS — Alpha-Stim CES Insomnia Protocol (FDA-Cleared)",
+                clinical_objective="Facilitate sleep onset via thalamocortical delta/alpha entrainment and cortical arousal reduction",
+                primary_targets=["Thalamocortical arousal circuit via transcranial microcurrent"],
+                secondary_targets=["Limbic network (anxiety-driven insomnia)", "RAS tone modulation (indirect)"],
+                device_name="Alpha-Stim® CS",
+                session_structure="Bilateral earlobe clip electrodes; 0.5 Hz square wave; 100–200 µA; 20–60 min, 30–60 min before sleep",
+                frequency="Nightly for 4–6 weeks; maintenance 3×/week",
+                duration="20–60 min per session",
+                intensity_dose="100–200 µA (lower intensity for sleep — reduce if excessive drowsiness)",
+                montage_roi="Bilateral earlobe clip electrodes",
+                laterality="Bilateral",
+                treatment_course="Nightly × 6 weeks; then 3×/week maintenance",
+                monitoring="PSQI at Week 4 and endpoint; ISI at Week 4 and endpoint; sleep diary",
+                expected_response="Reduced sleep latency, improved sleep continuity, restored non-restorative sleep",
+                evidence_status="Low-to-moderate — Lande & Gragnani 2013 RCT; Chung et al. 2023 meta-analysis (ES=-1.02 for insomnia)",
+                cautions="Lower intensity (100–200 µA) for insomnia; avoid stimulating effects; reduce if waking too relaxed",
+                when_to_escalate="If PSQI not improving after 3 weeks, add sleep hygiene intervention and review pharmacotherapy",
+                when_to_stop_modify="Stop if excessive next-day drowsiness persists",
+                clinical_notes_extended="No dependence risk — advantage over Z-drugs for long-term use. Nightly use enables high cumulative dose.",
+                key_citations=["Lande & Gragnani, 2013", "Chung et al., 2023"],
             ),
             ProtocolEntry(
                 protocol_id="CES-COMB-TDCS",
@@ -495,6 +541,27 @@ def build_ces_alphastem_condition() -> ConditionSchema:
                       "No known interactions between CES earlobe electrodes and tDCS scalp electrodes "
                       "when used simultaneously — different electrode systems, different targets. "
                       "Monitor for excessive sedation if concurrent use.",
+                # -- SOZO Protocol Handbook fields --
+                protocol_name="CES-COMB-TDCS — CES + tDCS Combination for Mixed Anxiety-Depression",
+                clinical_objective="Dual-mechanism: CES for anxiety/insomnia (limbic) + tDCS for depression (DLPFC CEN upregulation)",
+                primary_targets=["Bilateral earlobes (CES — limbic modulation)", "F3 Left DLPFC (tDCS — CEN upregulation)"],
+                secondary_targets=["DMN connectivity reduction (both modalities)"],
+                device_name="Alpha-Stim® CS + Newronika HDCkit (2-channel)",
+                session_structure="CES: 0.5 Hz, 200–400 µA, 20–40 min. tDCS: F3 anodal, 2 mA, 20 min. Concurrent or sequential.",
+                frequency="tDCS 5×/week × 3 weeks + daily home CES × 6 weeks",
+                duration="CES 20–40 min; tDCS 20 min",
+                intensity_dose="CES: 200–400 µA; tDCS: 2 mA",
+                montage_roi="CES: bilateral earlobes. tDCS: Anode F3, Cathode Fp2/F4",
+                laterality="Bilateral (CES) + Left anodal (tDCS)",
+                treatment_course="tDCS 15 sessions over 3 weeks + CES daily 6 weeks",
+                monitoring="GAD-7 + PHQ-9 at Week 2, 4, endpoint; skin integrity both sites",
+                expected_response="Reduced anxiety AND depression; improved sleep; dual-target symptom relief",
+                evidence_status="Low — no published combination RCT; evidence additive from component trials",
+                cautions="Monitor for excessive sedation if concurrent use; no known electrode interactions",
+                when_to_escalate="If anxiety responds but depression persists, intensify tDCS block",
+                when_to_stop_modify="Standard stop criteria for each modality independently",
+                clinical_notes_extended="No electrode overlap — CES at earlobes, tDCS at scalp. Can be administered concurrently or sequentially.",
+                key_citations=["Brunoni et al., 2013", "Ching et al., 2022"],
             ),
             ProtocolEntry(
                 protocol_id="CES-TAVNS-ADJ",
@@ -521,6 +588,27 @@ def build_ces_alphastem_condition() -> ConditionSchema:
                 session_count=28,
                 notes="Use two separate devices simultaneously. No electrode overlap — CES at earlobes, "
                       "tVNS at cymba concha. Monitor for auricular skin tolerance at both sites.",
+                # -- SOZO Protocol Handbook fields --
+                protocol_name="CES-TAVNS-ADJ — CES + tVNS Combination for Anxiety with Autonomic Dysregulation",
+                clinical_objective="Dual-pathway anxiolysis: CES via thalamocortical alpha + tVNS via NTS-LC noradrenergic and HRV modulation",
+                primary_targets=["Bilateral earlobes (CES — thalamocortical)", "Left cymba conchae (tVNS — NTS-LC pathway)"],
+                secondary_targets=["Amygdala (indirect via both pathways)", "HRV improvement (tVNS)"],
+                device_name="Alpha-Stim® CS + NEMOS (tVNS Technologies) or Parasym",
+                session_structure="tVNS 30 min (start first) + CES 40 min (stagger start). Two separate devices.",
+                frequency="Daily for 4 weeks; then 5×/week × 2 weeks maintenance",
+                duration="tVNS 30 min + CES 40 min",
+                intensity_dose="CES: 200–400 µA; tVNS: sensory threshold (25 Hz, 250 µs)",
+                montage_roi="CES: bilateral earlobes. tVNS: left cymba conchae",
+                laterality="Bilateral (CES) + Left auricular (tVNS)",
+                treatment_course="Daily × 4 weeks; then 5×/week × 2 weeks",
+                monitoring="GAD-7; HRV (RMSSD); PSS-10; auricular skin integrity at both sites",
+                expected_response="Reduced anxiety via dual pathways; improved autonomic balance (HRV increase); reduced hyperarousal",
+                evidence_status="Low — mechanism-based combination; no published combination trial",
+                cautions="Monitor auricular skin tolerance at both earlobe and cymba concha sites",
+                when_to_escalate="If anxiety persists after 4 weeks, add tDCS DLPFC protocol",
+                when_to_stop_modify="Stop if auricular skin reaction at either site",
+                clinical_notes_extended="Dual mechanism reduces dependence on single modality. No electrode overlap. Target population: anxiety with prominent autonomic hyperarousal (HRV <20ms RMSSD, PSS ≥20).",
+                key_citations=["Feusner et al., 2012", "Frangos et al., 2015"],
             ),
         ],
 

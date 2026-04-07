@@ -54,28 +54,119 @@ def build_evidence_level_definitions_section() -> SectionContent:
 # 2. Per-Protocol Detailed Parameter Tables
 # ---------------------------------------------------------------------------
 
+def _proto_field(protocol, attr: str, fallback: str = "N/A") -> str:
+    """Safely retrieve a protocol field, returning fallback if None/empty."""
+    val = getattr(protocol, attr, None)
+    if val is None:
+        return fallback
+    if isinstance(val, list):
+        parts = [str(v).strip() for v in val if str(v).strip()]
+        return ", ".join(parts) if parts else fallback
+    s = str(val).strip()
+    return s if s else fallback
+
+
+def _proto_param(protocol, key: str, fallback: str = "N/A") -> str:
+    """Get a value from protocol.parameters dict with fallback."""
+    params = protocol.parameters or {}
+    val = params.get(key)
+    if val is None:
+        return fallback
+    if isinstance(val, list):
+        parts = [str(v).strip() for v in val if str(v).strip()]
+        return ", ".join(parts) if parts else fallback
+    s = str(val).strip()
+    return s if s else fallback
+
+
+def _build_montage_from_params(protocol) -> str:
+    """Build montage string from anode/cathode parameters if montage_roi is absent."""
+    params = protocol.parameters or {}
+    anode = params.get("anode") or params.get("anode_position")
+    cathode = params.get("cathode") or params.get("cathode_position")
+    if anode and cathode:
+        return f"Anode (+): {anode}; Cathode (−): {cathode}"
+    if anode:
+        return f"Anode (+): {anode}"
+    return "N/A"
+
+
 def build_per_protocol_parameter_tables(condition: ConditionSchema) -> Optional[SectionContent]:
-    """Rich per-protocol tables: parameter detail + S-O-Z-O mapping + evidence combos."""
+    """Rich per-protocol tables: full 20-field two-column format matching SOZO Fellow Handbook."""
     if not condition.protocols:
         return None
 
     subsections = []
     for protocol in condition.protocols:
-        # --- Table 1: Parameter detail ---
-        rows = []
-        if protocol.target_region:
-            rows.append(["Target Region", protocol.target_region])
-        if protocol.target_abbreviation:
-            rows.append(["Target Abbreviation", protocol.target_abbreviation])
-        for key, val in protocol.parameters.items():
-            label = key.replace("_", " ").title()
-            if isinstance(val, list):
-                val = ", ".join(str(v) for v in val)
-            rows.append([label, str(val)])
-        if protocol.session_count:
-            rows.append(["Total Sessions", str(protocol.session_count)])
-        rows.append(["Evidence Level", protocol.evidence_level.value.upper()])
-        rows.append(["Off-Label", "YES — informed consent required" if protocol.off_label else "No"])
+        params = protocol.parameters or {}
+
+        # --- Table 1: Full 20-field Parameter/Value table ---
+        # 1. Protocol Name
+        protocol_name = _proto_field(protocol, "protocol_name") if getattr(protocol, "protocol_name", None) else _proto_field(protocol, "label")
+        # 2. Intended Phenotype
+        phenotypes_str = ", ".join(p.upper() for p in protocol.phenotype_slugs) if protocol.phenotype_slugs else "N/A"
+        # 3. Clinical Objective
+        clinical_objective = _proto_field(protocol, "clinical_objective") if getattr(protocol, "clinical_objective", None) else _proto_field(protocol, "rationale")
+        # 4. Primary Target(s)
+        primary_targets = _proto_field(protocol, "primary_targets") if getattr(protocol, "primary_targets", None) else _proto_field(protocol, "target_region")
+        # 5. Secondary Target(s)
+        secondary_targets = _proto_field(protocol, "secondary_targets")
+        # 6. Device / Modality
+        device_modality = _proto_field(protocol, "device_name") if getattr(protocol, "device_name", None) else protocol.modality.value.upper()
+        # 7. Session Structure
+        session_structure = _proto_field(protocol, "session_structure") if getattr(protocol, "session_structure", None) else _proto_param(protocol, "session_structure")
+        # 8. Frequency
+        frequency = _proto_field(protocol, "frequency") if getattr(protocol, "frequency", None) else _proto_param(protocol, "frequency")
+        # 9. Duration
+        duration = _proto_field(protocol, "duration") if getattr(protocol, "duration", None) else _proto_param(protocol, "duration")
+        # 10. Intensity / Dose
+        intensity_dose = _proto_field(protocol, "intensity_dose") if getattr(protocol, "intensity_dose", None) else _proto_param(protocol, "intensity")
+        # 11. Montage / ROI
+        montage_roi = _proto_field(protocol, "montage_roi") if getattr(protocol, "montage_roi", None) else _build_montage_from_params(protocol)
+        # 12. Laterality
+        laterality = _proto_field(protocol, "laterality")
+        # 13. Treatment Course
+        treatment_course = _proto_field(protocol, "treatment_course") if getattr(protocol, "treatment_course", None) else (f"{protocol.session_count} sessions" if protocol.session_count else "N/A")
+        # 14. Monitoring
+        monitoring = _proto_field(protocol, "monitoring")
+        # 15. Expected Response
+        expected_response = _proto_field(protocol, "expected_response")
+        # 16. Evidence Status
+        evidence_status = _proto_field(protocol, "evidence_status") if getattr(protocol, "evidence_status", None) else protocol.evidence_level.value.upper()
+        # 17. Cautions
+        cautions = _proto_field(protocol, "cautions")
+        # 18. When to Escalate
+        when_to_escalate = _proto_field(protocol, "when_to_escalate")
+        # 19. When to Stop/Modify
+        when_to_stop_modify = _proto_field(protocol, "when_to_stop_modify")
+        # 20. Clinical Notes
+        clinical_notes = _proto_field(protocol, "clinical_notes_extended") if getattr(protocol, "clinical_notes_extended", None) else _proto_field(protocol, "notes")
+        # 21. Key Citation(s)
+        key_citations = _proto_field(protocol, "key_citations")
+
+        rows = [
+            ["Protocol Name", protocol_name],
+            ["Intended Phenotype", phenotypes_str],
+            ["Clinical Objective", clinical_objective],
+            ["Primary Target(s)", primary_targets],
+            ["Secondary Target(s)", secondary_targets],
+            ["Device / Modality", device_modality],
+            ["Session Structure", session_structure],
+            ["Frequency", frequency],
+            ["Duration", duration],
+            ["Intensity / Dose", intensity_dose],
+            ["Montage / ROI", montage_roi],
+            ["Laterality", laterality],
+            ["Treatment Course", treatment_course],
+            ["Monitoring", monitoring],
+            ["Expected Response", expected_response],
+            ["Evidence Status", evidence_status],
+            ["Cautions", cautions],
+            ["When to Escalate", when_to_escalate],
+            ["When to Stop/Modify", when_to_stop_modify],
+            ["Clinical Notes", clinical_notes],
+            ["Key Citation(s)", key_citations],
+        ]
 
         tables = [{
             "headers": ["Parameter", "Value"],

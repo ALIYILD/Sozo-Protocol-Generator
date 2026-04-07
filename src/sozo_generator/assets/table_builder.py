@@ -102,11 +102,16 @@ class TableBuilder:
                 continue
 
             params = proto.parameters or {}
+            # Prefer top-level extended fields, fall back to parameters dict
             frequency = _v(
-                params.get("frequency") or params.get("freq"), fallback="N/A"
+                getattr(proto, "frequency", None)
+                or params.get("frequency")
+                or params.get("freq"),
+                fallback="N/A",
             )
             intensity = _v(
-                params.get("intensity")
+                getattr(proto, "intensity_dose", None)
+                or params.get("intensity")
                 or params.get("current")
                 or params.get("amplitude"),
                 fallback="N/A",
@@ -115,13 +120,16 @@ class TableBuilder:
 
             rows.append(
                 [
-                    _v(proto.label),
+                    _v(getattr(proto, "protocol_name", None) or proto.label),
                     mod_val.upper(),
-                    _v(proto.target_region),
+                    _v(
+                        _join(getattr(proto, "primary_targets", None) or [], fallback="")
+                        or proto.target_region
+                    ),
                     frequency,
                     intensity,
                     sessions,
-                    _ev_label(proto.evidence_level),
+                    _v(getattr(proto, "evidence_status", None)) if getattr(proto, "evidence_status", None) else _ev_label(proto.evidence_level),
                 ]
             )
 
@@ -136,6 +144,42 @@ class TableBuilder:
                 f"All protocols are off-label unless stated otherwise. "
                 f"N={len(rows)} protocols shown."
             ),
+        )
+
+    # ------------------------------------------------------------------
+    # EEG 10-20 Reference Table
+    # ------------------------------------------------------------------
+
+    def build_eeg_reference_table(
+        self,
+        condition: ConditionSchema,
+    ) -> CanonicalTable:
+        """Build a 10-20 EEG system reference table from condition.eeg_reference_table.
+
+        Each entry is a dict with keys: position, brain_region, role, protocols_using.
+        Returns a table with columns: 10-20 Position | Brain Region | Role in Protocols | Used By
+        """
+        headers = ["10-20 Position", "Brain Region", "Role in Protocols", "Used By"]
+        rows: list[list[str]] = []
+
+        eeg_data = getattr(condition, "eeg_reference_table", None) or []
+        for entry in eeg_data:
+            position = _v(entry.get("position"))
+            brain_region = _v(entry.get("brain_region"))
+            role = _v(entry.get("role"))
+            used_by = _join(entry.get("protocols_using") or [])
+            rows.append([position, brain_region, role, used_by])
+
+        if not rows:
+            rows = [["—"] * len(headers)]
+
+        return CanonicalTable(
+            title=(
+                "10-20 EEG System Reference — "
+                "All electrode positions used in SOZO protocols"
+            ),
+            headers=headers,
+            rows=rows,
         )
 
     # ------------------------------------------------------------------

@@ -39,6 +39,9 @@ class StimulationTarget(BaseModel):
     off_label: bool = True
     consent_required: bool = True
     eeg_canonical: Optional[list[str]] = None  # canonical EEG positions from brain_regions data
+    eeg_10_20_positions: Optional[list[str]] = None  # All 10-20 positions this target maps to
+    brain_region_description: Optional[str] = None
+    neuromod_rationale: Optional[str] = None
 
 
 class AssessmentTool(BaseModel):
@@ -130,6 +133,28 @@ class ProtocolEntry(BaseModel):
     session_count: Optional[int] = None
     notes: Optional[str] = None
 
+    # Extended protocol fields matching SOZO Fellow Handbook format
+    protocol_name: Optional[str] = None  # e.g. "TPS-ANX — TPS Protocol for Anxious TRD"
+    clinical_objective: Optional[str] = None
+    primary_targets: Optional[list[str]] = None  # e.g. ["Left DLPFC", "ACC (Fz)", "Amygdala region"]
+    secondary_targets: Optional[list[str]] = None
+    device_name: Optional[str] = None  # Specific device e.g. "NEUROLITH® TPS System (Storz Medical)"
+    session_structure: Optional[str] = None  # e.g. "Neuronavigation setup → Holocranial priming (2,000 pulses) → ..."
+    frequency: Optional[str] = None  # e.g. "3–5 sessions/week"
+    duration: Optional[str] = None  # e.g. "30–45 min per session"
+    intensity_dose: Optional[str] = None  # e.g. "0.20–0.25 mJ/mm²; 1–4 Hz"
+    montage_roi: Optional[str] = None  # e.g. "Anode (+): F3 (L-DLPFC). Cathode (−): F4 (R-DLPFC)"
+    laterality: Optional[str] = None  # e.g. "Left-dominant for DLPFC; bilateral for amygdala region"
+    treatment_course: Optional[str] = None  # e.g. "10–12 sessions over 2–4 weeks; then maintenance 1–2/week"
+    monitoring: Optional[str] = None  # e.g. "GAD-7 weekly; PHQ-9 biweekly; heart rate; tolerability log"
+    expected_response: Optional[str] = None
+    evidence_status: Optional[str] = None  # Narrative evidence text (vs evidence_level enum)
+    cautions: Optional[str] = None
+    when_to_escalate: Optional[str] = None
+    when_to_stop_modify: Optional[str] = None
+    clinical_notes_extended: Optional[str] = None  # Longer clinical notes
+    key_citations: Optional[list[str]] = None  # e.g. ["Cheung et al., 2023", "Qin et al., 2025"]
+
 
 class ConditionSchema(BaseModel):
     """Complete structured representation of one condition for document generation."""
@@ -167,8 +192,12 @@ class ConditionSchema(BaseModel):
     # Inclusion / Exclusion
     inclusion_criteria: list[str] = Field(default_factory=list)
     exclusion_criteria: list[str] = Field(default_factory=list)
+    conditions_requiring_discussion: Optional[list[str]] = None
     contraindications: list[str] = Field(default_factory=list)
     safety_notes: list[SafetyNote] = Field(default_factory=list)
+
+    # EEG reference
+    eeg_reference_table: Optional[list[dict]] = None  # 10-20 EEG positions reference: [{"position": "F3", "brain_region": "Left DLPFC", "role": "...", "protocols_using": [...]}]
 
     # Treatment
     stimulation_targets: list[StimulationTarget] = Field(default_factory=list)
