@@ -47,8 +47,11 @@ class CanonicalDocxExporter:
     - Header/footer with document info
     """
 
-    SOZO_PURPLE = RGBColor(0x6B, 0x4F, 0xA0)
-    SOZO_LIGHT_PURPLE = RGBColor(0xE8, 0xE0, 0xF5)
+    SOZO_TEAL = RGBColor(0x1B, 0x47, 0x4D)          # dark teal — heading text, table header text
+    SOZO_TEAL_LIGHT = RGBColor(0x01, 0x69, 0x6F)     # teal — heading 2
+    TABLE_HEADER_BG = "E8F4F5"                         # light teal bg for table headers
+    TABLE_HEADER_TEXT = RGBColor(0x1B, 0x47, 0x4D)     # dark teal text
+    PROTOCOL_LABEL_BG = "F5F5F5"                       # light gray for protocol table label column
     FONT_HEADING = "Calibri"
     FONT_BODY = "Calibri"
 
@@ -149,7 +152,7 @@ class CanonicalDocxExporter:
         run.font.name = self.FONT_HEADING
         run.font.size = Pt(28)
         run.font.bold = True
-        run.font.color.rgb = self.SOZO_PURPLE
+        run.font.color.rgb = self.SOZO_TEAL
         p_title.paragraph_format.space_after = Pt(12)
 
         # Subtitle
@@ -247,7 +250,10 @@ class CanonicalDocxExporter:
         p_header = header.paragraphs[0] if header.paragraphs else header.add_paragraph()
         p_header.clear()
         p_header.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        run = p_header.add_run(document.title)
+        condition_name = document.condition_slug.replace("_", " ").title()
+        run = p_header.add_run(
+            f"SOZO Brain Center \u2014 {condition_name} \u2014 CONFIDENTIAL"
+        )
         run.font.name = self.FONT_HEADING
         run.font.size = Pt(8)
         run.font.color.rgb = RGBColor(0x88, 0x88, 0x88)
@@ -361,7 +367,7 @@ class CanonicalDocxExporter:
                 p = doc.add_paragraph()
                 run = p.add_run(content)
                 run.font.name = self.FONT_BODY
-                run.font.size = Pt(11)
+                run.font.size = Pt(12)
                 p.paragraph_format.space_after = Pt(6)
 
         elif bt == "list":
@@ -371,21 +377,31 @@ class CanonicalDocxExporter:
                 p = doc.add_paragraph(style="List Bullet")
                 run = p.add_run(line)
                 run.font.name = self.FONT_BODY
-                run.font.size = Pt(11)
+                run.font.size = Pt(12)
 
         elif bt == "callout":
             content = block.content or ""
+            # Determine callout variant from metadata
+            callout_type = (block.metadata or {}).get("callout_type", "info")
+            callout_styles = {
+                "warning":  {"bg": "FFF3CD", "text": RGBColor(0x8B, 0x69, 0x14)},
+                "offlabel": {"bg": "FFF3CD", "text": RGBColor(0x8B, 0x69, 0x14)},
+                "critical": {"bg": "FFF0F0", "text": RGBColor(0xCC, 0x00, 0x00)},
+                "info":     {"bg": "E8F4F5", "text": RGBColor(0x1B, 0x47, 0x4D)},
+            }
+            style = callout_styles.get(callout_type, callout_styles["info"])
             p = doc.add_paragraph()
             run = p.add_run(content)
             run.font.name = self.FONT_BODY
-            run.font.size = Pt(11)
+            run.font.size = Pt(12)
             run.font.bold = True
-            # Light purple shading on the paragraph via XML
+            run.font.color.rgb = style["text"]
+            # Callout shading on the paragraph via XML
             pPr = p._p.get_or_add_pPr()
             shd = OxmlElement("w:shd")
             shd.set(qn("w:val"), "clear")
             shd.set(qn("w:color"), "auto")
-            shd.set(qn("w:fill"), "E8E0F5")
+            shd.set(qn("w:fill"), style["bg"])
             pPr.append(shd)
             p.paragraph_format.space_before = Pt(6)
             p.paragraph_format.space_after = Pt(6)
@@ -404,7 +420,7 @@ class CanonicalDocxExporter:
                 p = doc.add_paragraph()
                 run = p.add_run(content)
                 run.font.name = self.FONT_BODY
-                run.font.size = Pt(11)
+                run.font.size = Pt(12)
 
         elif bt == "toc_entry":
             pass  # TOC entries handled separately
@@ -416,7 +432,7 @@ class CanonicalDocxExporter:
                 p = doc.add_paragraph()
                 run = p.add_run(content)
                 run.font.name = self.FONT_BODY
-                run.font.size = Pt(11)
+                run.font.size = Pt(12)
                 run.font.color.rgb = RGBColor(0x66, 0x66, 0x66)
 
     # ------------------------------------------------------------------
@@ -484,50 +500,117 @@ class CanonicalDocxExporter:
         if col_count == 0:
             return
 
+        # Detect protocol Parameter/Value tables (two-column, no traditional header)
+        is_protocol_table = (
+            col_count == 2
+            and len(headers) == 2
+            and headers[0].strip().lower() == "parameter"
+            and headers[1].strip().lower() == "value"
+        )
+
         table = doc.add_table(rows=1 + len(rows), cols=col_count)
         table.alignment = WD_TABLE_ALIGNMENT.CENTER
         table.style = "Table Grid"
 
-        # Header row
-        hdr_row = table.rows[0]
-        for ci, hdr_text in enumerate(headers):
-            cell = hdr_row.cells[ci]
-            cell.text = ""
-            p_cell = cell.paragraphs[0]
-            run = p_cell.add_run(str(hdr_text))
-            run.font.name = self.FONT_BODY
-            run.font.size = Pt(10)
-            run.font.bold = True
-            run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
-            # Purple header background
-            tc = cell._tc
-            tcPr = tc.get_or_add_tcPr()
-            shd = OxmlElement("w:shd")
-            shd.set(qn("w:val"), "clear")
-            shd.set(qn("w:color"), "auto")
-            shd.set(qn("w:fill"), "6B4FA0")
-            tcPr.append(shd)
+        # Set clean thin borders (auto color) on the whole table
+        tbl = table._tbl
+        tblPr = tbl.tblPr if tbl.tblPr is not None else OxmlElement("w:tblPr")
+        tblBorders = OxmlElement("w:tblBorders")
+        for edge in ("top", "left", "bottom", "right", "insideH", "insideV"):
+            el = OxmlElement(f"w:{edge}")
+            el.set(qn("w:val"), "single")
+            el.set(qn("w:sz"), "4")
+            el.set(qn("w:space"), "0")
+            el.set(qn("w:color"), "auto")
+            tblBorders.append(el)
+        # Remove any existing tblBorders before appending
+        for existing in tblPr.findall(qn("w:tblBorders")):
+            tblPr.remove(existing)
+        tblPr.append(tblBorders)
 
-        # Data rows
-        for ri, row_data in enumerate(rows):
-            tbl_row = table.rows[ri + 1]
-            fill_hex = "F3F0F8" if ri % 2 == 0 else "FFFFFF"
-            for ci in range(col_count):
-                cell = tbl_row.cells[ci]
+        if is_protocol_table:
+            # Protocol table: first row is Parameter/Value header treated as data
+            hdr_row = table.rows[0]
+            for ci, hdr_text in enumerate(headers):
+                cell = hdr_row.cells[ci]
                 cell.text = ""
                 p_cell = cell.paragraphs[0]
-                cell_text = str(row_data[ci]) if ci < len(row_data) else ""
-                run = p_cell.add_run(cell_text)
+                run = p_cell.add_run(str(hdr_text))
                 run.font.name = self.FONT_BODY
-                run.font.size = Pt(10)
-                # Zebra stripe shading
+                run.font.size = Pt(12)
+                run.font.bold = True
+                run.font.color.rgb = self.TABLE_HEADER_TEXT
+                # Left column gray, right column white
+                fill = self.PROTOCOL_LABEL_BG if ci == 0 else "FFFFFF"
                 tc = cell._tc
                 tcPr = tc.get_or_add_tcPr()
                 shd = OxmlElement("w:shd")
                 shd.set(qn("w:val"), "clear")
                 shd.set(qn("w:color"), "auto")
-                shd.set(qn("w:fill"), fill_hex)
+                shd.set(qn("w:fill"), fill)
                 tcPr.append(shd)
+
+            # Data rows for protocol table
+            for ri, row_data in enumerate(rows):
+                tbl_row = table.rows[ri + 1]
+                for ci in range(col_count):
+                    cell = tbl_row.cells[ci]
+                    cell.text = ""
+                    p_cell = cell.paragraphs[0]
+                    cell_text = str(row_data[ci]) if ci < len(row_data) else ""
+                    run = p_cell.add_run(cell_text)
+                    run.font.name = self.FONT_BODY
+                    run.font.size = Pt(12)
+                    if ci == 0:
+                        run.font.bold = True
+                    # Left column shaded, right column white
+                    fill = self.PROTOCOL_LABEL_BG if ci == 0 else "FFFFFF"
+                    tc = cell._tc
+                    tcPr = tc.get_or_add_tcPr()
+                    shd = OxmlElement("w:shd")
+                    shd.set(qn("w:val"), "clear")
+                    shd.set(qn("w:color"), "auto")
+                    shd.set(qn("w:fill"), fill)
+                    tcPr.append(shd)
+        else:
+            # Standard table: light teal header, white data rows
+            hdr_row = table.rows[0]
+            for ci, hdr_text in enumerate(headers):
+                cell = hdr_row.cells[ci]
+                cell.text = ""
+                p_cell = cell.paragraphs[0]
+                run = p_cell.add_run(str(hdr_text))
+                run.font.name = self.FONT_BODY
+                run.font.size = Pt(12)
+                run.font.bold = True
+                run.font.color.rgb = self.TABLE_HEADER_TEXT
+                # Light teal header background
+                tc = cell._tc
+                tcPr = tc.get_or_add_tcPr()
+                shd = OxmlElement("w:shd")
+                shd.set(qn("w:val"), "clear")
+                shd.set(qn("w:color"), "auto")
+                shd.set(qn("w:fill"), self.TABLE_HEADER_BG)
+                tcPr.append(shd)
+
+            # Data rows — all white, no zebra striping
+            for ri, row_data in enumerate(rows):
+                tbl_row = table.rows[ri + 1]
+                for ci in range(col_count):
+                    cell = tbl_row.cells[ci]
+                    cell.text = ""
+                    p_cell = cell.paragraphs[0]
+                    cell_text = str(row_data[ci]) if ci < len(row_data) else ""
+                    run = p_cell.add_run(cell_text)
+                    run.font.name = self.FONT_BODY
+                    run.font.size = Pt(12)
+                    tc = cell._tc
+                    tcPr = tc.get_or_add_tcPr()
+                    shd = OxmlElement("w:shd")
+                    shd.set(qn("w:val"), "clear")
+                    shd.set(qn("w:color"), "auto")
+                    shd.set(qn("w:fill"), "FFFFFF")
+                    tcPr.append(shd)
 
         # Footer row (footnote)
         if footer:
@@ -677,16 +760,16 @@ class CanonicalDocxExporter:
     # ------------------------------------------------------------------
 
     def _apply_heading_style(self, para: Any, level: int) -> None:
-        """Apply SOZO purple heading styles."""
-        sizes = {1: 16, 2: 14, 3: 12, 4: 11}
+        """Apply SOZO teal heading styles (v3 Handbook design)."""
+        sizes = {1: 12, 2: 13, 3: 11, 4: 11}
         colors = {
-            1: self.SOZO_PURPLE,
-            2: RGBColor(0x52, 0x3C, 0x78),
-            3: RGBColor(0x3D, 0x2E, 0x5A),
-            4: RGBColor(0x33, 0x26, 0x4A),
+            1: RGBColor(0x1B, 0x47, 0x4D),   # dark teal
+            2: RGBColor(0x01, 0x69, 0x6F),   # teal
+            3: RGBColor(0x33, 0x33, 0x33),   # dark gray
+            4: RGBColor(0x33, 0x33, 0x33),   # dark gray
         }
         size = sizes.get(level, 11)
-        color = colors.get(level, self.SOZO_PURPLE)
+        color = colors.get(level, self.SOZO_TEAL)
 
         if para.runs:
             for run in para.runs:
@@ -719,7 +802,7 @@ class CanonicalDocxExporter:
         bottom.set(qn("w:val"), "single")
         bottom.set(qn("w:sz"), "4")
         bottom.set(qn("w:space"), "1")
-        bottom.set(qn("w:color"), "6B4FA0")
+        bottom.set(qn("w:color"), "1B474D")
         pBdr.append(bottom)
         pPr.append(pBdr)
         p.paragraph_format.space_after = Pt(8)

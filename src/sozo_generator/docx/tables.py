@@ -34,7 +34,7 @@ def add_clinical_table(
     headers: list,
     rows: list,
     caption: Optional[str] = None,
-    header_color: str = "1B3A5C",
+    header_color: str = "E8F4F5",
     header_text_color: RGBColor = None,
     alternate_rows: bool = True,
     col_widths: Optional[list] = None,
@@ -58,57 +58,102 @@ def add_clinical_table(
     n_cols = len(headers)
     n_rows = len(rows) + 1  # +1 for header row
 
+    # Detect protocol Parameter/Value tables — use special styling
+    is_protocol_table = (
+        n_cols == 2
+        and len(headers) == 2
+        and headers[0].strip().lower() == "parameter"
+        and headers[1].strip().lower() == "value"
+    )
+
     table = doc.add_table(rows=n_rows, cols=n_cols)
     table.alignment = WD_TABLE_ALIGNMENT.LEFT
     table.style = "Table Grid"
 
     if header_text_color is None:
-        header_text_color = RGBColor(0xFF, 0xFF, 0xFF)
+        header_text_color = RGBColor(0x1B, 0x47, 0x4D)
 
-    # Header row
-    header_row = table.rows[0]
-    for j, header_text in enumerate(headers):
-        cell = header_row.cells[j]
-        set_cell_background(cell, header_color)
-        p = cell.paragraphs[0]
-        p.clear()
-        run = p.add_run(str(header_text))
-        run.bold = True
-        run.font.name = FONT_HEADING
-        run.font.size = Pt(10)
-        run.font.color.rgb = header_text_color
-        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.space_before = Pt(3)
-        p.paragraph_format.space_after = Pt(3)
-        cell.vertical_alignment = 1  # WD_ALIGN_VERTICAL.CENTER
-
-    # Data rows
-    for i, row_data in enumerate(rows):
-        table_row = table.rows[i + 1]
-        row_bg = "F2F2F2" if (alternate_rows and i % 2 == 0) else "FFFFFF"
-
-        for j, cell_text in enumerate(row_data):
-            if j >= n_cols:
-                break
-            cell = table_row.cells[j]
-            set_cell_background(cell, row_bg)
+    if is_protocol_table:
+        # Protocol table: no colored header row — Parameter/Value is just labels
+        # Left column: #F5F5F5 gray bg + bold text; Right column: white + regular text
+        hdr_row = table.rows[0]
+        for j, hdr_text in enumerate(headers):
+            cell = hdr_row.cells[j]
+            fill = "F5F5F5" if j == 0 else "FFFFFF"
+            set_cell_background(cell, fill)
             p = cell.paragraphs[0]
             p.clear()
+            run = p.add_run(str(hdr_text))
+            run.bold = True
+            run.font.name = FONT_HEADING
+            run.font.size = Pt(12)
+            run.font.color.rgb = RGBColor(0x1B, 0x47, 0x4D)
+            p.paragraph_format.space_before = Pt(3)
+            p.paragraph_format.space_after = Pt(3)
 
-            cell_str = str(cell_text) if cell_text is not None else ""
-
-            # Handle warning markers
-            if cell_str.startswith("\u26a0") or "OFF-LABEL" in cell_str:
+        for i, row_data in enumerate(rows):
+            table_row = table.rows[i + 1]
+            for j, cell_text in enumerate(row_data):
+                if j >= n_cols:
+                    break
+                cell = table_row.cells[j]
+                fill = "F5F5F5" if j == 0 else "FFFFFF"
+                set_cell_background(cell, fill)
+                p = cell.paragraphs[0]
+                p.clear()
+                cell_str = str(cell_text) if cell_text is not None else ""
                 run = p.add_run(cell_str)
-                run.font.color.rgb = COLOR_ACCENT_RED
-                run.font.bold = True
-            else:
-                run = p.add_run(cell_str)
+                run.font.name = FONT_BODY
+                run.font.size = Pt(12)
+                if j == 0:
+                    run.font.bold = True
+                p.paragraph_format.space_before = Pt(2)
+                p.paragraph_format.space_after = Pt(2)
+    else:
+        # Standard table: teal header, white data rows
+        header_row = table.rows[0]
+        for j, header_text in enumerate(headers):
+            cell = header_row.cells[j]
+            set_cell_background(cell, header_color)
+            p = cell.paragraphs[0]
+            p.clear()
+            run = p.add_run(str(header_text))
+            run.bold = True
+            run.font.name = FONT_HEADING
+            run.font.size = Pt(12)
+            run.font.color.rgb = header_text_color
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+            p.paragraph_format.space_before = Pt(3)
+            p.paragraph_format.space_after = Pt(3)
+            cell.vertical_alignment = 1  # WD_ALIGN_VERTICAL.CENTER
 
-            run.font.name = FONT_BODY
-            run.font.size = Pt(10)
-            p.paragraph_format.space_before = Pt(2)
-            p.paragraph_format.space_after = Pt(2)
+        # Data rows
+        for i, row_data in enumerate(rows):
+            table_row = table.rows[i + 1]
+            row_bg = "FFFFFF"  # v3 design: no zebra stripes, all rows white
+
+            for j, cell_text in enumerate(row_data):
+                if j >= n_cols:
+                    break
+                cell = table_row.cells[j]
+                set_cell_background(cell, row_bg)
+                p = cell.paragraphs[0]
+                p.clear()
+
+                cell_str = str(cell_text) if cell_text is not None else ""
+
+                # Handle warning markers
+                if cell_str.startswith("\u26a0") or "OFF-LABEL" in cell_str:
+                    run = p.add_run(cell_str)
+                    run.font.color.rgb = COLOR_ACCENT_RED
+                    run.font.bold = True
+                else:
+                    run = p.add_run(cell_str)
+
+                run.font.name = FONT_BODY
+                run.font.size = Pt(12)
+                p.paragraph_format.space_before = Pt(2)
+                p.paragraph_format.space_after = Pt(2)
 
     # Set column widths if provided
     if col_widths and len(col_widths) == n_cols:
@@ -141,31 +186,55 @@ def add_warning_box(doc: Document, text: str, box_type: str = "warning", severit
     kind = severity or box_type
 
     colors = {
-        "warning": ("FF8C00", "\u26a0 WARNING:"),
-        "critical": ("CC0000", "\u26a0 CRITICAL:"),
-        "info": ("2E75B6", "\u2139 INFO:"),
-        "tip": ("996600", "CLINICAL TIP:"),
-        "governance": ("1B3A5C", "GOVERNANCE RULE:"),
-        "offlabel": ("CC0000", "\u26a0 OFF-LABEL:"),
+        "warning": ("FFF3CD", "8B6914", "\u26a0 WARNING:"),
+        "critical": ("FFF0F0", "CC0000", "\U0001f534 CRITICAL:"),
+        "info": ("E8F4F5", "1B474D", "\u2139 INFO:"),
+        "tip": ("F5F5F5", "333333", "CLINICAL TIP:"),
+        "governance": ("FFF0F0", "CC0000", "\U0001f534 GOVERNANCE:"),
+        "offlabel": ("FFF3CD", "8B6914", "\u26a0 OFF-LABEL:"),
     }
-    bg_color, prefix = colors.get(kind, colors["warning"])
+    bg_color, text_color_hex, prefix = colors.get(kind, colors["warning"])
+    text_rgb = RGBColor(
+        int(text_color_hex[0:2], 16),
+        int(text_color_hex[2:4], 16),
+        int(text_color_hex[4:6], 16),
+    )
 
-    p = doc.add_paragraph()
-    set_cell_background_para(p, bg_color)
+    # Render as single-cell borderless table (matches v3 reference doc)
+    tbl = doc.add_table(rows=1, cols=1)
+    tbl.alignment = WD_TABLE_ALIGNMENT.LEFT
+    cell = tbl.rows[0].cells[0]
+    set_cell_background(cell, bg_color)
+
+    p = cell.paragraphs[0]
+    p.clear()
 
     run_prefix = p.add_run(f"{prefix} ")
     run_prefix.bold = True
     run_prefix.font.size = Pt(10)
     run_prefix.font.name = FONT_BODY
-    run_prefix.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+    run_prefix.font.color.rgb = text_rgb
 
     run_text = p.add_run(text)
     run_text.font.size = Pt(10)
     run_text.font.name = FONT_BODY
-    run_text.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+    run_text.font.color.rgb = text_rgb
 
     p.paragraph_format.space_before = Pt(4)
     p.paragraph_format.space_after = Pt(4)
+
+    # Remove all borders for clean callout look
+    tbl_element = tbl._tbl
+    tblPr = tbl_element.tblPr if tbl_element.tblPr is not None else OxmlElement("w:tblPr")
+    borders = OxmlElement("w:tblBorders")
+    for edge in ["top", "left", "bottom", "right", "insideH", "insideV"]:
+        border = OxmlElement(f"w:{edge}")
+        border.set(qn("w:val"), "none")
+        border.set(qn("w:sz"), "0")
+        border.set(qn("w:space"), "0")
+        border.set(qn("w:color"), "auto")
+        borders.append(border)
+    tblPr.append(borders)
 
 
 def add_image_param_table(
@@ -216,7 +285,7 @@ def add_image_param_table(
             run_label.bold = True
             run_label.font.size = Pt(9)
             run_label.font.name = FONT_BODY
-            run_label.font.color.rgb = COLOR_DARK_BLUE
+            run_label.font.color.rgb = RGBColor(0x1B, 0x47, 0x4D)  # dark teal
             # Value
             run_val = p.add_run(str(row_data[1]))
             run_val.font.size = Pt(9)
@@ -262,6 +331,6 @@ def add_scoring_table(
     add_clinical_table(
         doc, headers, rows,
         caption=title,
-        header_color="2E75B6",
+        header_color="E8F4F5",
         alternate_rows=True,
     )

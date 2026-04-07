@@ -17,21 +17,29 @@ def hex_to_rgb(hex_color: str) -> RGBColor:
     return RGBColor(r, g, b)
 
 
-# SOZO brand colors
-COLOR_DARK_BLUE = hex_to_rgb("#1B3A5C")
-COLOR_PRIMARY_BLUE = hex_to_rgb("#2E75B6")
-COLOR_BROWN = hex_to_rgb("#996600")
-COLOR_PRIMARY_BROWN = COLOR_BROWN  # alias
-COLOR_RED = hex_to_rgb("#CC0000")
-COLOR_ACCENT_RED = COLOR_RED  # alias
-COLOR_GRAY = hex_to_rgb("#666666")
-COLOR_DARK_GRAY = COLOR_GRAY  # alias
-COLOR_MEDIUM_GRAY = hex_to_rgb("#999999")
-COLOR_LIGHT_GRAY = hex_to_rgb("#F2F2F2")
+# SOZO brand colors — matching Fellow Protocol Handbook v3
+COLOR_DARK_TEAL = hex_to_rgb("#1B474D")      # heading 1, table header text
+COLOR_TEAL = hex_to_rgb("#01696F")            # heading 2
+COLOR_DARK_GRAY = hex_to_rgb("#333333")       # heading 3 color
+COLOR_MEDIUM_GRAY = hex_to_rgb("#999999")     # unchanged
+COLOR_LIGHT_GRAY = hex_to_rgb("#F5F5F5")      # protocol table label column
+COLOR_TABLE_HEADER_BG = hex_to_rgb("#E8F4F5") # light teal for table headers
 COLOR_WHITE = hex_to_rgb("#FFFFFF")
 COLOR_BLACK = hex_to_rgb("#000000")
-COLOR_WARNING = hex_to_rgb("#FF8C00")
-COLOR_WARNING_ORANGE = COLOR_WARNING  # alias
+COLOR_RED = hex_to_rgb("#CC0000")             # unchanged
+COLOR_ACCENT_RED = COLOR_RED
+COLOR_WARNING_AMBER = hex_to_rgb("#8B6914")   # warning text color
+COLOR_WARNING_BG = hex_to_rgb("#FFF3CD")      # amber warning background
+COLOR_CRITICAL_BG = hex_to_rgb("#FFF0F0")     # red critical background
+
+# Keep backward-compatible aliases
+COLOR_DARK_BLUE = COLOR_DARK_TEAL
+COLOR_PRIMARY_BLUE = COLOR_TEAL
+COLOR_WARNING = COLOR_WARNING_AMBER
+COLOR_WARNING_ORANGE = COLOR_WARNING_AMBER
+COLOR_GRAY = COLOR_DARK_GRAY
+COLOR_BROWN = hex_to_rgb("#996600")
+COLOR_PRIMARY_BROWN = COLOR_BROWN
 COLOR_HIGHLIGHT_YELLOW = hex_to_rgb("#FFFF99")
 
 FONT_HEADING = "Calibri"
@@ -55,7 +63,7 @@ def shade_cell(cell, fill_hex: str) -> None:
     set_cell_background(cell, fill_hex)
 
 
-def set_cell_border(cell, border_type: str = "all", size: int = 4, color: str = "2E75B6") -> None:
+def set_cell_border(cell, border_type: str = "all", size: int = 4, color: str = "auto") -> None:
     """Set cell borders."""
     tc = cell._tc
     tcPr = tc.get_or_add_tcPr()
@@ -81,7 +89,7 @@ def set_table_borders(table) -> None:
         border.set(qn("w:val"), "single")
         border.set(qn("w:sz"), "4")
         border.set(qn("w:space"), "0")
-        border.set(qn("w:color"), "1B3A5C")
+        border.set(qn("w:color"), "auto")
         tblBorders.append(border)
     tblPr.append(tblBorders)
     if tbl.tblPr is None:
@@ -104,11 +112,11 @@ def set_cell_text(cell, text: str, bold: bool = False, color: RGBColor = None, s
 
 def apply_heading_style(paragraph, level: int = 1, color: RGBColor = None) -> None:
     """Apply SOZO heading style to a paragraph."""
-    sizes = {1: 16, 2: 14, 3: 12, 4: 11}
-    colors = {1: COLOR_DARK_BLUE, 2: COLOR_PRIMARY_BLUE, 3: COLOR_BROWN, 4: COLOR_GRAY}
+    sizes = {1: 12, 2: 13, 3: 11, 4: 11}
+    colors = {1: COLOR_DARK_TEAL, 2: COLOR_TEAL, 3: COLOR_DARK_GRAY, 4: COLOR_MEDIUM_GRAY}
     run = paragraph.runs[0] if paragraph.runs else paragraph.add_run()
     run.font.size = Pt(sizes.get(level, 11))
-    run.font.color.rgb = color or colors.get(level, COLOR_DARK_BLUE)
+    run.font.color.rgb = color or colors.get(level, COLOR_DARK_TEAL)
     run.font.bold = True
     run.font.name = FONT_HEADING
     paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -116,7 +124,7 @@ def apply_heading_style(paragraph, level: int = 1, color: RGBColor = None) -> No
     paragraph.paragraph_format.space_after = Pt(6)
 
 
-def apply_body_style(paragraph, bold: bool = False, italic: bool = False, size: int = 11) -> None:
+def apply_body_style(paragraph, bold: bool = False, italic: bool = False, size: int = 12) -> None:
     """Apply SOZO body text style."""
     for run in paragraph.runs:
         run.font.name = FONT_BODY
@@ -126,7 +134,7 @@ def apply_body_style(paragraph, bold: bool = False, italic: bool = False, size: 
     paragraph.paragraph_format.space_after = Pt(4)
 
 
-def add_horizontal_rule(doc: Document, color: str = "2E75B6") -> None:
+def add_horizontal_rule(doc: Document, color: str = "1B474D") -> None:
     """Add a horizontal rule paragraph."""
     p = doc.add_paragraph()
     pPr = p._p.get_or_add_pPr()

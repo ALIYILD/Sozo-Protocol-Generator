@@ -119,7 +119,7 @@ def add_title_block(
     p_tag.paragraph_format.space_after = Pt(12)
 
     # Separator
-    add_horizontal_rule(doc, "2E75B6")
+    add_horizontal_rule(doc, "01696F")
 
     # Condition name
     if condition_name:

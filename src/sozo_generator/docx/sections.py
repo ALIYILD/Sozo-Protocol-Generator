@@ -101,10 +101,10 @@ def _add_section_heading(doc: Document, title: str, level: int) -> None:
     - Professional document structure
     """
     heading_colors = {
-        1: COLOR_DARK_BLUE,
-        2: COLOR_PRIMARY_BLUE,
-        3: RGBColor(0x2E, 0x75, 0xB6),
-        4: RGBColor(0x66, 0x66, 0x66),
+        1: RGBColor(0x1B, 0x47, 0x4D),  # dark teal (was dark blue)
+        2: RGBColor(0x01, 0x69, 0x6F),  # teal (was primary blue)
+        3: RGBColor(0x33, 0x33, 0x33),  # dark gray (was brown)
+        4: RGBColor(0x66, 0x66, 0x66),  # gray (unchanged)
     }
     heading_sizes = {1: 14, 2: 12, 3: 11, 4: 10}
 
@@ -116,13 +116,13 @@ def _add_section_heading(doc: Document, title: str, level: int) -> None:
     for run in p.runs:
         run.font.name = FONT_HEADING
         run.font.size = Pt(heading_sizes.get(level, 11))
-        run.font.color.rgb = heading_colors.get(level, COLOR_PRIMARY_BLUE)
+        run.font.color.rgb = heading_colors.get(level, RGBColor(0x01, 0x69, 0x6F))
 
     p.paragraph_format.space_before = Pt(12 if level == 1 else 8)
     p.paragraph_format.space_after = Pt(4)
 
     if level == 1:
-        add_horizontal_rule(doc, "2E75B6")
+        add_horizontal_rule(doc, "01696F")
 
 
 def _render_content_text(doc: Document, content: str, is_placeholder: bool = False) -> None:
