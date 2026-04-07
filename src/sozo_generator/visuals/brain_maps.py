@@ -70,6 +70,17 @@ REGION_POSITIONS_BILATERAL = {
     "ACC/mPFC": {"midline": (0.50, 0.74)},
     "SN/STN":  {"midline": (0.50, 0.50)},
     "T3/Insula": {"left": (0.22, 0.55)},
+    # Migraine-specific targets
+    "TG/DLPFC": {"left": (0.30, 0.72), "right": (0.70, 0.72)},
+    "TG/DLPFC/Occ": {"left": (0.30, 0.72), "right": (0.58, 0.18)},
+    "Par/DLPFC": {"left": (0.35, 0.45), "right": (0.68, 0.76)},
+    "TNC/BSt": {"midline": (0.50, 0.30)},
+    "C2/BSt": {"midline": (0.50, 0.15)},
+    "M1-bilat": {"left": (0.34, 0.63), "right": (0.66, 0.63)},
+    "M1/DLPFC": {"left": (0.34, 0.63), "right": (0.68, 0.76)},
+    "P3/F3": {"left": (0.35, 0.45), "right": (0.32, 0.76)},
+    "T3/T4": {"left": (0.22, 0.55), "right": (0.78, 0.55)},
+    "V1/V2": {"left": (0.42, 0.18), "right": (0.58, 0.18)},
 }
 
 # Protocol → color mapping by modality
@@ -259,16 +270,29 @@ class BrainMapGenerator:
     def _draw_target(self, ax, pos, abbr, proto_labels, color, is_primary=False):
         """Draw a target region with glow effect, label, and protocol ID."""
         x, y = pos
-        radius = 0.035
+
+        # Shorten long abbreviations for display
+        display_abbr = abbr
+        if len(abbr) > 6:
+            # Use first part before / or take first 5 chars
+            if "/" in abbr:
+                display_abbr = abbr.split("/")[0]
+            elif "-" in abbr:
+                display_abbr = abbr.split("-")[0]
+            if len(display_abbr) > 7:
+                display_abbr = display_abbr[:6]
+
+        # Scale radius and font based on label length
+        radius = 0.035 if len(display_abbr) <= 4 else 0.042
 
         # Outer glow
-        glow = Circle((x, y), radius=radius * 2.2, facecolor=color,
-                      alpha=0.15, edgecolor='none', zorder=4)
+        glow = Circle((x, y), radius=radius * 2.0, facecolor=color,
+                      alpha=0.12, edgecolor='none', zorder=4)
         ax.add_patch(glow)
 
         # Mid glow
-        mid_glow = Circle((x, y), radius=radius * 1.5, facecolor=color,
-                          alpha=0.25, edgecolor='none', zorder=4)
+        mid_glow = Circle((x, y), radius=radius * 1.4, facecolor=color,
+                          alpha=0.22, edgecolor='none', zorder=4)
         ax.add_patch(mid_glow)
 
         # Core circle
@@ -276,12 +300,14 @@ class BrainMapGenerator:
                       edgecolor='white', linewidth=1.5, alpha=0.9, zorder=5)
         ax.add_patch(core)
 
-        # Region abbreviation
-        ax.text(x, y, abbr, ha='center', va='center', fontsize=7,
+        # Region abbreviation — scale font to fit
+        fontsize = 7 if len(display_abbr) <= 4 else 6 if len(display_abbr) <= 6 else 5
+        ax.text(x, y, display_abbr, ha='center', va='center', fontsize=fontsize,
                 fontweight='bold', color='white', zorder=6)
 
-        # Protocol label below
-        ax.text(x, y - radius - 0.025, proto_labels, ha='center', va='top',
-                fontsize=5.5, color=color, fontweight='bold', zorder=6,
-                bbox=dict(boxstyle='round,pad=0.15', facecolor='white',
+        # Protocol label below — truncate if too many
+        label_display = proto_labels if len(proto_labels) <= 15 else proto_labels[:12] + "…"
+        ax.text(x, y - radius - 0.022, label_display, ha='center', va='top',
+                fontsize=5, color=color, fontweight='bold', zorder=6,
+                bbox=dict(boxstyle='round,pad=0.12', facecolor='white',
                          edgecolor=color, alpha=0.85, linewidth=0.5))
