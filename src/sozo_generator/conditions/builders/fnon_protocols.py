@@ -23,6 +23,41 @@ _NETWORK_LABELS = {
 }
 
 
+def _get_concurrent_tasks(target_abbr: str, network_targets: list) -> list[list[str]]:
+    """Return concurrent task pairing recommendations based on stimulation target."""
+    tasks = []
+    target_lower = target_abbr.lower()
+    net_vals = {n.value for n in network_targets}
+
+    if "m1" in target_lower or "smn" in net_vals:
+        tasks.append(["Active motor exercise (finger tapping, grip)", "Enhances motor cortex LTP during stimulation", "During tDCS/TPS session"])
+        tasks.append(["Treadmill or gait training", "Concurrent gait rehab amplifies SMA/M1 plasticity", "During tDCS (if PIGD phenotype)"])
+    if "dlpfc" in target_lower or "cen" in net_vals:
+        tasks.append(["Computerised cognitive training (N-back, fluency)", "Engages executive circuits during stimulation", "During tDCS session"])
+        tasks.append(["Problem-solving task", "Activates DLPFC during stimulation window", "During tDCS session"])
+    if "sma" in target_lower:
+        tasks.append(["Rhythmic movement or metronome walking", "Entrains SMA timing circuits", "During tDCS/TPS session"])
+    if "acc" in target_lower or "sn" in net_vals:
+        tasks.append(["Mindfulness or interoceptive awareness task", "Activates salience/ACC networks", "During CES or post-tDCS"])
+    if "limbic" in net_vals:
+        tasks.append(["Relaxation or guided breathing", "Supports limbic network regulation", "During CES session"])
+        tasks.append(["Pleasant activity scheduling review", "Activates reward circuitry during stimulation", "During tDCS session"])
+
+    return tasks[:4]  # Max 4 tasks
+
+
+def _build_network_hypothesis(protocol, networks_str: str) -> str:
+    """Generate a network hypothesis statement for the FNON variant."""
+    target = protocol.target_region
+    return (
+        f"Stimulation of {target} is hypothesised to modulate {networks_str} "
+        f"connectivity and normalise aberrant network dynamics. The FNON model "
+        f"predicts that targeting the identified dysfunctional network hub — rather "
+        f"than the symptomatic cortical region — will produce more durable clinical "
+        f"improvement by addressing the upstream network pathology."
+    )
+
+
 def build_fnon_tps_variants(condition: ConditionSchema) -> Optional[SectionContent]:
     """Generate FNON TPS protocol variants (FT1-FTn) from base TPS protocols.
 
@@ -94,6 +129,49 @@ def build_fnon_tps_variants(condition: ConditionSchema) -> Optional[SectionConte
                 "caption": f"Evidence-based combinations for {ft_id}",
             })
 
+        # Non-TPS combination table
+        non_tps_rows = []
+        for other_p in condition.protocols:
+            if other_p.modality in (Modality.TDCS, Modality.CES, Modality.TAVNS):
+                shared = set(protocol.phenotype_slugs) & set(other_p.phenotype_slugs)
+                if shared or not protocol.phenotype_slugs:
+                    non_tps_rows.append([
+                        f"{ft_id} + {other_p.protocol_id}",
+                        f"{other_p.modality.value.upper()} {other_p.target_abbreviation}",
+                        "Sequential or same-day (4h gap for tDCS)",
+                        ", ".join(p.upper() for p in (shared or other_p.phenotype_slugs[:2])),
+                        other_p.evidence_level.value,
+                    ])
+        if non_tps_rows:
+            tables.append({
+                "headers": ["Combination", "Non-TPS Modality", "Timing", "Indication", "Evidence"],
+                "rows": non_tps_rows[:5],
+                "caption": f"Non-TPS adjunct combinations for {ft_id}",
+            })
+
+        # Concurrent task pairing table
+        task_pairs = _get_concurrent_tasks(protocol.target_abbreviation, protocol.network_targets)
+        if task_pairs:
+            tables.append({
+                "headers": ["Concurrent Task", "Rationale", "When to Apply"],
+                "rows": task_pairs,
+                "caption": f"Concurrent task pairing — {ft_id}",
+            })
+
+        # Network hypothesis box
+        net_hypothesis = _build_network_hypothesis(protocol, networks_str)
+        callout_boxes = [{
+            "text": f"FNON Protocol {ft_id}: All TPS applications are OFF-LABEL. "
+                    "Requires Doctor authorisation, informed consent, and documented "
+                    "network dysfunction assessment (6-Network Bedside Assessment).",
+            "box_type": "offlabel",
+        }]
+        if net_hypothesis:
+            callout_boxes.append({
+                "text": f"Network Hypothesis: {net_hypothesis}",
+                "box_type": "info",
+            })
+
         subsections.append(SectionContent(
             section_id=f"fnon_{ft_id.lower()}",
             title=f"{ft_id}: FNON {protocol.label}",
@@ -103,12 +181,7 @@ def build_fnon_tps_variants(condition: ConditionSchema) -> Optional[SectionConte
                 f"{protocol.rationale}"
             ),
             tables=tables,
-            callout_boxes=[{
-                "text": f"FNON Protocol {ft_id}: All TPS applications are OFF-LABEL. "
-                        "Requires Doctor authorisation, informed consent, and documented "
-                        "network dysfunction assessment (6-Network Bedside Assessment).",
-                "box_type": "offlabel",
-            }],
+            callout_boxes=callout_boxes,
         ))
 
     return SectionContent(
