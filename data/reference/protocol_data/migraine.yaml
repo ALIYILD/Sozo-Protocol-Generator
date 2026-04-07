@@ -1,0 +1,115 @@
+display_name: "Migraine"
+icd10: G43
+short_name: MIG
+
+tps:
+  - code: T1
+    symptom: "Pain: Trigeminal / DLPFC"
+    evidence: Experimental
+    targets: [F3, F4, C3]
+    params_text: "TPS: Trigeminal region + DLPFC - 3,000 pulses - 5 Hz - 0.2 mJ/mm2"
+    rationale: >-
+      TPS targeting trigeminal afferent region and DLPFC for pain modulation
+      and migraine prevention via cortical excitability modulation.
+  - code: T2
+    symptom: "Aura Prevention: Occipital"
+    evidence: Experimental
+    targets: [Oz, O1, O2]
+    params_text: "TPS: Occipital cortex - 3,000 pulses - 5 Hz - 0.2 mJ/mm2"
+    rationale: >-
+      TPS targeting occipital cortex to modulate cortical hyperexcitability
+      and raise CSD threshold in migraine with aura.
+  - code: T3
+    symptom: "Chronic Migraine: Multi-Region"
+    evidence: Experimental
+    targets: [F3, F4, C3, Oz]
+    params_text: "TPS: DLPFC + M1 + Occipital - 5,000 pulses - 5 Hz - 0.2 mJ/mm2"
+    rationale: >-
+      Multi-region TPS protocol targeting pain modulation (M1), cognitive
+      processing (DLPFC), and cortical hyperexcitability (occipital) for
+      treatment-resistant chronic migraine.
+  - code: T4
+    symptom: "Vestibular Migraine"
+    evidence: Experimental
+    targets: [P3, P4, F3]
+    params_text: "TPS: Parietal + DLPFC - 3,000 pulses - 5 Hz - 0.2 mJ/mm2"
+    rationale: >-
+      TPS targeting parietal vestibulo-cortical areas and prefrontal cortex
+      for vestibular migraine symptoms.
+
+tdcs:
+  - code: C1
+    symptom: "Pain Modulation (M1)"
+    anodes: [C3]
+    cathodes: [Fp2]
+    params_text: "2 mA - 20 min | M1 anodal (C3) -> supraorbital cathode (Fp2)"
+    rationale: >-
+      Anodal M1 tDCS activates descending pain inhibition pathways via
+      corticothalamic and cortico-PAG projections. Level B evidence (PMID 28068857).
+  - code: C2
+    symptom: "Migraine Prevention (DLPFC)"
+    anodes: [F3]
+    cathodes: [Fp2]
+    params_text: "2 mA - 20 min | L-DLPFC anodal (F3) -> supraorbital cathode (Fp2)"
+    rationale: >-
+      L-DLPFC anodal tDCS enhances cognitive pain modulation via prefrontal-PAG
+      descending inhibition. Particularly useful for chronic migraine with cognitive symptoms.
+  - code: C3
+    symptom: "Aura Prevention (Occipital)"
+    anodes: [Cz]
+    cathodes: [Oz]
+    params_text: "2 mA - 20 min | Cathodal Oz -> anodal Cz"
+    rationale: >-
+      Cathodal occipital tDCS reduces visual cortex hyperexcitability and raises
+      cortical spreading depression threshold. Cathodal polarity critical — do not reverse.
+  - code: C4
+    symptom: "Multi-Target Chronic Migraine"
+    anodes: [C3, F3]
+    cathodes: [Fp2]
+    params_text: "2 mA - 20 min | C3 (sessions 1-5), F3 (sessions 6-10) -> Fp2"
+    rationale: >-
+      Sequential multi-target protocol addresses both somatosensory pain
+      processing (M1) and cognitive-affective pain modulation (DLPFC).
+  - code: C5
+    symptom: "Bilateral M1 Pain"
+    anodes: [C3]
+    cathodes: [C4]
+    params_text: "2 mA - 20 min | Bilateral M1 (C3 anode -> C4 cathode)"
+    rationale: >-
+      Bilateral M1 montage targets descending pain modulation bilaterally
+      for bilateral or side-shifting migraine headache.
+  - code: C6
+    symptom: "Vestibular Migraine"
+    anodes: [P3]
+    cathodes: [F3]
+    params_text: "1.5 mA - 20 min | Parietal (P3) -> DLPFC (F3)"
+    rationale: >-
+      Parietal stimulation targets vestibulo-cortical processing and sensory
+      integration circuits. Lower current reduces vestibular symptom exacerbation risk.
+
+plato:
+  - code: C1-PS
+    symptom: "Pain Modulation (M1)"
+    anodes: [C3]
+    cathodes: [Fp2]
+    params_text: "Variant 1 - M1 (C3) | 1.2-1.6 mA - 20 min"
+    variant_note: "Variant 1: C3 (M1 contralateral to dominant pain side)"
+  - code: C2-PS
+    symptom: "Migraine Prevention (DLPFC)"
+    anodes: [F3]
+    cathodes: [Fp2]
+    params_text: "Variant 2 - L-DLPFC (F3) | 1.2-1.6 mA - 20 min"
+    variant_note: "Variant 2: F3 (L-DLPFC) for chronic migraine"
+  - code: C3-PS
+    symptom: "Aura Prevention (Occipital)"
+    anodes: [Cz]
+    cathodes: [Oz]
+    params_text: "Variant 3 - Cathodal Occipital | 1.2-1.6 mA - 20 min"
+    variant_note: "Variant 3: CATHODAL Oz — do not reverse polarity"
+
+contraindications_extra:
+  - [Hemiplegic migraine, "tDCS - TPS", "ABSOLUTE -- risk of prolonged aura with stimulation"]
+  - [Active migraine attack, "tDCS - TPS", "RELATIVE -- schedule sessions interictally for preventive protocols"]
+  - [Medication overuse headache (unresolved), "All modalities", "RELATIVE -- may confound response assessment"]
+
+key_outcome_measures: "HIT-6, MIDAS, VAS Pain, Headache Diary, Allodynia-12, SOZO PRS"

@@ -25,6 +25,7 @@ from .schizophrenia import build_schizophrenia_condition
 from .essential_tremor import build_essential_tremor_condition
 from .dystonia import build_dystonia_condition
 from .fibromyalgia import build_fibromyalgia_condition
+from .migraine import build_migraine_condition
 
 __all__ = [
     "build_parkinsons_condition",
@@ -53,6 +54,7 @@ __all__ = [
     "build_essential_tremor_condition",
     "build_dystonia_condition",
     "build_fibromyalgia_condition",
+    "build_migraine_condition",
 ]
 
 CONDITION_BUILDERS = {
@@ -82,4 +84,5 @@ CONDITION_BUILDERS = {
     "essential_tremor": build_essential_tremor_condition,
     "dystonia": build_dystonia_condition,
     "fibromyalgia": build_fibromyalgia_condition,
+    "migraine": build_migraine_condition,
 }

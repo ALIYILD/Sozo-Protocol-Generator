@@ -1,0 +1,96 @@
+# Evidence search profile — Migraine
+# Used by: python -m sozo_generator.cli.main ingest-evidence --condition migraine
+
+condition_slug: migraine
+condition_name: "Migraine"
+icd10: G43
+
+search_profiles:
+  pathophysiology:
+    query: >
+      Migraine[Title/Abstract] AND
+      (trigeminovascular[Title/Abstract] OR
+       cortical spreading depression[Title/Abstract] OR
+       CGRP[Title/Abstract] OR
+       central sensitisation[Title/Abstract])
+    filters: [Systematic Review, Meta-Analysis, Review]
+    max_results: 20
+
+  tdcs_protocols:
+    query: >
+      Migraine[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract]
+    filters: [Randomized Controlled Trial, Clinical Trial, Systematic Review]
+    max_results: 30
+
+  pain_outcomes:
+    query: >
+      Migraine[Title/Abstract] AND
+      (headache frequency[Title/Abstract] OR HIT-6[Title/Abstract] OR MIDAS[Title/Abstract]) AND
+      (brain stimulation[Title/Abstract] OR neuromodulation[Title/Abstract])
+    filters: [Randomized Controlled Trial, Clinical Trial]
+    max_results: 20
+
+  tps_protocols:
+    query: >
+      Migraine[Title/Abstract] AND
+      (transcranial pulse stimulation[Title/Abstract] OR
+       low-intensity focused ultrasound[Title/Abstract])
+    max_results: 15
+
+  aura_prevention:
+    query: >
+      Migraine with aura[Title/Abstract] AND
+      (transcranial direct current stimulation[Title/Abstract] OR
+       occipital stimulation[Title/Abstract] OR
+       cortical spreading depression[Title/Abstract]) AND
+      (prevention[Title/Abstract] OR prophylaxis[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 15
+
+  chronic_migraine:
+    query: >
+      Chronic migraine[Title/Abstract] AND
+      (neuromodulation[Title/Abstract] OR brain stimulation[Title/Abstract] OR
+       tDCS[Title/Abstract])
+    filters: [Randomized Controlled Trial, Systematic Review]
+    max_results: 20
+
+  assessment_scales:
+    query: >
+      Migraine[Title/Abstract] AND
+      (HIT-6[Title/Abstract] OR
+       MIDAS[Title/Abstract] OR
+       "Headache Impact Test"[Title/Abstract] OR
+       migraine disability[Title/Abstract])
+    max_results: 10
+
+  safety:
+    query: >
+      Migraine[Title/Abstract] AND
+      transcranial direct current stimulation[Title/Abstract] AND
+      (safety[Title/Abstract] OR adverse effects[Title/Abstract] OR
+       tolerability[Title/Abstract])
+    max_results: 15
+
+priority_pmids:
+  - "28068857"  # Shirahige 2017 tDCS migraine systematic review meta-analysis
+  - "31278046"  # Stilling 2019 NIBS migraine Cochrane review
+  - "33316392"  # Grazzi 2020 tDCS migraine prevention RCT
+  - "25916334"  # Antal 2011 occipital tDCS migraine with aura
+
+notes: >
+  Focus on M1 and DLPFC stimulation for migraine prevention.
+  Key: cathodal occipital for aura prevention.
+  Chronic migraine with central sensitisation may require multi-target.
+  Screen for medication overuse headache before starting treatment.
+  TPS for migraine is experimental — no published RCTs specific to TPS.
+
+tps_priority_dois:
+  - doi: "10.3390/neurolint17110188"
+    title: "Neuromodulatory Effects of Transcranial Pulse Stimulation (TPS) in Neurological and Psychiatric Disorders—A Systematic Review"
+    authors: "Selma Polte, Larissa Klingmann, Anna Seßmann, Svenja Schw..."
+    year: 2025
+    study_type: "meta-analysis"
+    citations: 0
+    takeaway: "TPS shows positive effects on cognitive, motor, and mental health outcomes with a high safety profile"
