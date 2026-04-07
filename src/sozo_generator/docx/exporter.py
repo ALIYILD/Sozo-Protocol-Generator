@@ -34,6 +34,7 @@ from ..conditions.builders.fnon_protocols import (
     build_fnon_tps_variants,
     build_fnon_tdcs_variants,
 )
+from ..conditions.builders.all_in_one import build_all_in_one_sections
 from .renderer import DocumentRenderer
 
 logger = logging.getLogger(__name__)
@@ -257,39 +258,23 @@ class DocumentExporter:
 
         elif doc_type == DocumentType.ALL_IN_ONE_PROTOCOL:
             title = f"{'FNON ' if tier == Tier.PARTNERS else ''}All-in-One Protocol \u2014 {condition_name}"
-            sections = [
-                self._build_document_control(condition, tier),
-                build_evidence_level_definitions_section(),
-                build_device_specifications_section(condition),
-                build_protocols_section(condition),
-                build_phenotype_protocol_matrix(condition),
-                build_per_protocol_parameter_tables(condition),
-                *self._optional_sections(
-                    build_platoscience_variants_section(condition),
-                    build_per_phenotype_sozo_tables(condition),
-                    build_multimodal_combos_section(condition),
-                    build_sequencing_framework_section(condition),
-                ),
-            ]
+            # Use reference-matching structure: TPS → tDCS → PlatoScience → Combos → Safety
+            all_in_one = build_all_in_one_sections(condition)
+            sections = all_in_one
+            # Partners: add FNON variants after main protocol sections, before safety
             if tier == Tier.PARTNERS:
-                sections += self._optional_sections(
+                fnon_sections = self._optional_sections(
                     build_fnon_tps_variants(condition),
                     build_fnon_tdcs_variants(condition),
                 )
-            sections += [
-                build_inclusion_exclusion_section(condition),
-                *self._optional_sections(
-                    build_modality_contraindications_section(condition),
-                    build_side_effects_section(condition),
-                    build_adverse_event_grading_section(condition),
-                ),
-                build_safety_section(condition),
-                *self._optional_sections(
-                    build_home_based_treatment_section(condition),
-                    build_governance_section(condition),
-                ),
-                build_references_section(condition),
-            ]
+                # Insert FNON before the safety section (last main section)
+                if fnon_sections and sections:
+                    safety_idx = next(
+                        (i for i, s in enumerate(sections) if s.section_id == "safety_monitoring_section"),
+                        len(sections),
+                    )
+                    for j, fs in enumerate(fnon_sections):
+                        sections.insert(safety_idx + j, fs)
             sections = [s for s in sections if s is not None]
 
         elif doc_type == DocumentType.HANDBOOK:
