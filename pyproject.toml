@@ -6,6 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "sozo-generator"
 version = "1.0.0"
 description = "SOZO Brain Center — Clinical Document Generation Platform"
+readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.11"
 dependencies = [
     "python-docx>=1.2.0,<2",
