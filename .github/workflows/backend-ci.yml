@@ -47,6 +47,49 @@ jobs:
       - name: Run tests
         run: python -m pytest -q
 
+  alembic-and-health-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install package (editable)
+        run: pip install -e .
+
+      - name: Alembic upgrade on fresh SQLite DB
+        env:
+          DATABASE_URL: sqlite+aiosqlite:////tmp/sozo_ci_smoke.db
+        run: |
+          rm -f /tmp/sozo_ci_smoke.db
+          alembic upgrade head
+          alembic current
+
+      - name: Uvicorn /api/health smoke
+        env:
+          DATABASE_URL: sqlite+aiosqlite:////tmp/sozo_ci_smoke.db
+          SOZO_AUTH_SECRET_KEY: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          SOZO_CORS_ORIGINS: https://example.com
+          SOZO_ENV: production
+        run: |
+          set -euo pipefail
+          uvicorn sozo_api.server:app --host 127.0.0.1 --port 8000 &
+          PID=$!
+          # Wait for startup
+          for i in {1..30}; do
+            if curl -fsS -m 2 http://127.0.0.1:8000/api/health >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl -fsS -m 5 http://127.0.0.1:8000/api/health
+          kill $PID
+          wait $PID || true
+
   build-artifacts:
     runs-on: ubuntu-latest
     steps:
