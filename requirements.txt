@@ -27,7 +27,7 @@ alembic>=1.13,<2
 # --- Auth ---
 PyJWT>=2.8,<3
 passlib[bcrypt]>=1.7,<2
-bcrypt<4.1  # passlib 1.7 can't read bcrypt 4.1+'s version attribute and misfires its length check
+bcrypt<5.1  # passlib 1.7 can't read bcrypt 4.1+'s version attribute and misfires its length check
 # --- Background jobs ---
 celery>=5.3,<6
 redis>=5.0,<6

@@ -37,7 +37,7 @@ dependencies = [
     # Auth
     "PyJWT>=2.8,<3",
     "passlib[bcrypt]>=1.7,<2",
-    "bcrypt>=3.2,<4",
+    "bcrypt>=3.2,<6",
     # Background jobs
     "celery>=5.3,<6",
     "redis>=5.0,<6",
