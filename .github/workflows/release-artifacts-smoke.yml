@@ -22,7 +22,7 @@ permissions:
   contents: read
 
 jobs:
-  build-and-smoke:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,20 +40,42 @@ jobs:
           python -m build
           python -m twine check dist/*
 
+      - name: Upload dist/
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  install-smoke:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
       - name: Install wheel into clean environment
         run: |
           python -m venv .venv-wheel
           .venv-wheel/bin/python -m pip install --upgrade pip
           .venv-wheel/bin/python -m pip install dist/*.whl
 
-      - name: Console scripts smoke
+      - name: Wheel console + import smoke
         run: |
           .venv-wheel/bin/sozo --help >/dev/null
           .venv-wheel/bin/autoagent-clinical --help >/dev/null
-
-      - name: Import smoke
-        run: |
-          .venv-wheel/bin/python -c "import sozo_generator, sozo_auth, sozo_api; print('imports_ok')"
+          .venv-wheel/bin/python -c "import sozo_generator, sozo_auth, sozo_api; print('wheel_ok', '${{ matrix.python-version }}')"
 
       # Source distribution path (PyPI / pip without wheel) — catches missing MANIFEST data.
       - name: Install sdist into clean environment
@@ -66,10 +88,4 @@ jobs:
         run: |
           .venv-sdist/bin/sozo --help >/dev/null
           .venv-sdist/bin/autoagent-clinical --help >/dev/null
-          .venv-sdist/bin/python -c "import sozo_generator, sozo_auth, sozo_api; print('sdist_imports_ok')"
-
-      - name: Upload dist/
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: dist/
+          .venv-sdist/bin/python -c "import sozo_generator, sozo_auth, sozo_api; print('sdist_ok', '${{ matrix.python-version }}')"
