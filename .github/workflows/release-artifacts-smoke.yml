@@ -55,6 +55,19 @@ jobs:
         run: |
           .venv-wheel/bin/python -c "import sozo_generator, sozo_auth, sozo_api; print('imports_ok')"
 
+      # Source distribution path (PyPI / pip without wheel) — catches missing MANIFEST data.
+      - name: Install sdist into clean environment
+        run: |
+          python -m venv .venv-sdist
+          .venv-sdist/bin/python -m pip install --upgrade pip
+          .venv-sdist/bin/python -m pip install dist/*.tar.gz
+
+      - name: Sdist console + import smoke
+        run: |
+          .venv-sdist/bin/sozo --help >/dev/null
+          .venv-sdist/bin/autoagent-clinical --help >/dev/null
+          .venv-sdist/bin/python -c "import sozo_generator, sozo_auth, sozo_api; print('sdist_imports_ok')"
+
       - name: Upload dist/
         uses: actions/upload-artifact@v4
         with:
