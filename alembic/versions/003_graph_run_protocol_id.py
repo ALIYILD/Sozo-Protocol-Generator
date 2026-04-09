@@ -14,18 +14,27 @@ depends_on = None
 
 
 def upgrade() -> None:
-    op.add_column(
-        "graph_runs",
-        sa.Column(
-            "protocol_id",
-            sa.String(36),
-            sa.ForeignKey("protocols.id", ondelete="SET NULL"),
-            nullable=True,
-        ),
-    )
-    op.create_index("ix_graph_runs_protocol_id", "graph_runs", ["protocol_id"])
+    # SQLite can't ALTER TABLE to add FK constraints; use batch mode copy+move.
+    with op.batch_alter_table("graph_runs") as batch_op:
+        batch_op.add_column(
+            sa.Column(
+                "protocol_id",
+                sa.String(36),
+                sa.ForeignKey(
+                    "protocols.id",
+                    name="fk_graph_runs_protocol_id_protocols",
+                    ondelete="SET NULL",
+                ),
+                nullable=True,
+            )
+        )
+        batch_op.create_index(
+            "ix_graph_runs_protocol_id",
+            ["protocol_id"],
+        )
 
 
 def downgrade() -> None:
-    op.drop_index("ix_graph_runs_protocol_id", table_name="graph_runs")
-    op.drop_column("graph_runs", "protocol_id")
+    with op.batch_alter_table("graph_runs") as batch_op:
+        batch_op.drop_index("ix_graph_runs_protocol_id")
+        batch_op.drop_column("protocol_id")
