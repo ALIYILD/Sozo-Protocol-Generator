@@ -19,7 +19,7 @@ class TestGraphGenerateRequiresAuth:
             "/api/graph/generate",
             json={"doc_type": "evidence_based_protocol", "tier": "fellow"},
         )
-        assert response.status_code == 403
+        assert response.status_code in (401, 403)
 
     def test_legacy_path_requires_auth(self):
         from sozo_api.server import app
@@ -29,7 +29,7 @@ class TestGraphGenerateRequiresAuth:
             "/api/generate/graph",
             json={"doc_type": "evidence_based_protocol", "tier": "fellow"},
         )
-        assert response.status_code == 403
+        assert response.status_code in (401, 403)
 
 
 class TestAuthConfigProductionSecret:

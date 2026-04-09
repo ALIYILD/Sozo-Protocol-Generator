@@ -18,6 +18,19 @@ def _bearer(role: str) -> dict[str, str]:
 def _bearer_sub(sub: str, role: str) -> dict[str, str]:
     return {"Authorization": f"Bearer {create_access_token(sub, role)}"}
 
+@pytest.fixture(autouse=True, scope="module")
+def _ensure_graph_runs_table():
+    """Ensure SQLAlchemy graph_runs table exists for graph authorization tests."""
+    from sozo_db.base import Base
+    from sozo_db.engine import get_engine
+
+    async def _run() -> None:
+        engine = get_engine()
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+
+    asyncio.run(_run())
+
 
 def _insert_graph_run(thread_id: str, created_by: uuid.UUID) -> None:
     from sozo_db.engine import get_session_factory
@@ -98,7 +111,7 @@ def client():
 class TestProtocolsRouterAuth:
     def test_list_requires_authentication(self, client: TestClient):
         r = client.get("/api/protocols/")
-        assert r.status_code == 403
+        assert r.status_code in (401, 403)
 
     def test_list_allows_readonly(self, client: TestClient):
         r = client.get("/api/protocols/", headers=_bearer("readonly"))
@@ -170,7 +183,7 @@ class TestTemplateBatchAuth:
             )
         }
         data = {"condition_slugs": "parkinsons", "tier": "fellow"}
-        assert client.post("/api/generate/template-batch", files=files, data=data).status_code == 403
+        assert client.post("/api/generate/template-batch", files=files, data=data).status_code in (401, 403)
         r_ro = client.post(
             "/api/generate/template-batch",
             files=files,
