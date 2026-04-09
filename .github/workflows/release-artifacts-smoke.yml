@@ -1,0 +1,62 @@
+name: Release artifacts smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pyproject.toml"
+      - "README.md"
+      - "src/**"
+      - "requirements.txt"
+      - ".github/workflows/release-artifacts-smoke.yml"
+  pull_request:
+    paths:
+      - "pyproject.toml"
+      - "README.md"
+      - "src/**"
+      - "requirements.txt"
+      - ".github/workflows/release-artifacts-smoke.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Build wheel + sdist
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build twine
+          python -m build
+          python -m twine check dist/*
+
+      - name: Install wheel into clean environment
+        run: |
+          python -m venv .venv-wheel
+          .venv-wheel/bin/python -m pip install --upgrade pip
+          .venv-wheel/bin/python -m pip install dist/*.whl
+
+      - name: Console scripts smoke
+        run: |
+          .venv-wheel/bin/sozo --help >/dev/null
+          .venv-wheel/bin/autoagent-clinical --help >/dev/null
+
+      - name: Import smoke
+        run: |
+          .venv-wheel/bin/python -c "import sozo_generator, sozo_auth, sozo_api; print('imports_ok')"
+
+      - name: Upload dist/
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
