@@ -33,6 +33,18 @@ class GraphRunRepository:
     def __init__(self, session: AsyncSession):
         self.session = session
 
+    def _created_by_uuid_from_state(self, state: dict) -> Optional[uuid.UUID]:
+        raw = state.get("created_by")
+        if raw is None or raw == "":
+            return None
+        if isinstance(raw, uuid.UUID):
+            return raw
+        try:
+            return uuid.UUID(str(raw))
+        except ValueError:
+            logger.warning("Invalid created_by in graph state: %r", raw)
+            return None
+
     async def create(self, state: dict) -> GraphRun:
         """Create a GraphRun from a graph state dict."""
         condition = state.get("condition", {})
@@ -72,6 +84,7 @@ class GraphRunRepository:
             node_history=state.get("node_history"),
             errors=state.get("errors"),
             graph_version=state.get("graph_version"),
+            created_by=self._created_by_uuid_from_state(state),
         )
 
         self.session.add(run)

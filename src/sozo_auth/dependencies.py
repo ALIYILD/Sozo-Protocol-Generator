@@ -4,6 +4,7 @@ from __future__ import annotations
 from typing import Callable
 
 import jwt
+import logging
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
@@ -11,6 +12,7 @@ from sozo_auth.models import UserResponse
 from sozo_auth.tokens import decode_token
 
 _bearer_scheme = HTTPBearer(auto_error=True)
+logger = logging.getLogger(__name__)
 
 
 async def get_current_user(
@@ -33,9 +35,10 @@ async def get_current_user(
             headers={"WWW-Authenticate": "Bearer"},
         )
     except jwt.InvalidTokenError as exc:
+        logger.warning("JWT validation failed", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=f"Invalid token: {exc}",
+            detail="Invalid token",
             headers={"WWW-Authenticate": "Bearer"},
         )
 

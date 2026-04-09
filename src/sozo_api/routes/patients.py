@@ -364,7 +364,7 @@ def _patient_response(patient: dict) -> PatientResponse:
     response_model=PatientResponse,
     summary="Create a new patient",
 )
-async def create_patient(
+def create_patient(
     request: CreatePatientRequest,
     current_user: UserResponse = Depends(get_current_user),
 ):
@@ -404,7 +404,7 @@ async def create_patient(
     response_model=dict,
     summary="List patients",
 )
-async def list_patients(
+def list_patients(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     search: Optional[str] = None,
@@ -463,7 +463,7 @@ async def list_patients(
     response_model=PatientResponse,
     summary="Get patient details",
 )
-async def get_patient(
+def get_patient(
     patient_id: UUID,
     current_user: UserResponse = Depends(get_current_user),
 ):
@@ -478,7 +478,7 @@ async def get_patient(
     response_model=PatientResponse,
     summary="Update patient",
 )
-async def update_patient(
+def update_patient(
     patient_id: UUID,
     request: CreatePatientRequest,
     current_user: UserResponse = Depends(get_current_user),
@@ -521,7 +521,7 @@ async def update_patient(
     response_model=MedicationResponse,
     summary="Add medication",
 )
-async def add_medication(
+def add_medication(
     patient_id: UUID,
     request: MedicationRequest,
     current_user: UserResponse = Depends(get_current_user),
@@ -570,7 +570,7 @@ async def add_medication(
     response_model=list[MedicationResponse],
     summary="List medications",
 )
-async def list_medications(
+def list_medications(
     patient_id: UUID,
     active_only: bool = True,
     current_user: UserResponse = Depends(get_current_user),
@@ -617,7 +617,7 @@ async def list_medications(
     status_code=status.HTTP_200_OK,
     summary="Discontinue medication",
 )
-async def remove_medication(
+def remove_medication(
     patient_id: UUID,
     medication_id: UUID,
     current_user: UserResponse = Depends(get_current_user),
@@ -659,7 +659,7 @@ async def remove_medication(
     response_model=AssessmentResponse,
     summary="Record assessment",
 )
-async def record_assessment(
+def record_assessment(
     patient_id: UUID,
     request: AssessmentRequest,
     current_user: UserResponse = Depends(get_current_user),
@@ -721,7 +721,7 @@ async def record_assessment(
     response_model=list[AssessmentResponse],
     summary="List assessments",
 )
-async def list_assessments(
+def list_assessments(
     patient_id: UUID,
     scale: Optional[str] = None,
     limit: int = Query(50, ge=1, le=200),
@@ -768,7 +768,7 @@ async def list_assessments(
     "/{patient_id}/assessments/trajectory",
     summary="Assessment score trajectory",
 )
-async def get_assessment_trajectory(
+def get_assessment_trajectory(
     patient_id: UUID,
     scale_name: str,
     current_user: UserResponse = Depends(get_current_user),
@@ -834,7 +834,7 @@ async def get_assessment_trajectory(
     response_model=TreatmentRecordResponse,
     summary="Record treatment",
 )
-async def add_treatment_record(
+def add_treatment_record(
     patient_id: UUID,
     request: TreatmentRecordRequest,
     current_user: UserResponse = Depends(get_current_user),
@@ -905,7 +905,7 @@ async def add_treatment_record(
     response_model=list[TreatmentRecordResponse],
     summary="List treatment history",
 )
-async def list_treatment_history(
+def list_treatment_history(
     patient_id: UUID,
     current_user: UserResponse = Depends(get_current_user),
 ):
@@ -1015,7 +1015,7 @@ _RELATIVE_CONTRAINDICATIONS: dict[str, list[str]] = {
     response_model=PatientSafetyCheckResponse,
     summary="Run patient safety check",
 )
-async def check_patient_safety(
+def check_patient_safety(
     patient_id: UUID,
     modalities: Optional[str] = Query(
         None,
@@ -1154,7 +1154,7 @@ async def check_patient_safety(
     response_model=list[PatientTimelineEntry],
     summary="Patient event timeline",
 )
-async def get_patient_timeline(
+def get_patient_timeline(
     patient_id: UUID,
     limit: int = Query(50, ge=1, le=500),
     current_user: UserResponse = Depends(get_current_user),
@@ -1249,7 +1249,7 @@ async def get_patient_timeline(
     "/scales/available",
     summary="List available assessment scales",
 )
-async def list_available_scales(condition: Optional[str] = None):
+def list_available_scales(condition: Optional[str] = None):
     """List validated clinical assessment scales.
 
     Optionally filter by condition slug to see only scales validated for

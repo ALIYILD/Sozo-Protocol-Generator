@@ -1,6 +1,9 @@
 """Authorization rules for protected /api routes (roles + authentication)."""
 from __future__ import annotations
 
+import asyncio
+import uuid
+
 import pytest
 
 pytest.importorskip("fastapi")
@@ -12,6 +15,33 @@ from sozo_auth.tokens import create_access_token
 def _bearer(role: str) -> dict[str, str]:
     return {"Authorization": f"Bearer {create_access_token('test-user', role)}"}
 
+def _bearer_sub(sub: str, role: str) -> dict[str, str]:
+    return {"Authorization": f"Bearer {create_access_token(sub, role)}"}
+
+
+def _insert_graph_run(thread_id: str, created_by: uuid.UUID) -> None:
+    from sozo_db.engine import get_session_factory
+    from sozo_db.models.graph_run import GraphRun
+
+    async def _run() -> None:
+        factory = get_session_factory()
+        async with factory() as session:
+            session.add(
+                GraphRun(
+                    thread_id=thread_id,
+                    status="queued",
+                    condition_slug="test",
+                    condition_name="Test",
+                    source_mode="prompt",
+                    created_by=created_by,
+                    final_state={"request_id": thread_id, "status": "queued"},
+                    node_history=[],
+                    errors=[],
+                )
+            )
+            await session.commit()
+
+    asyncio.run(_run())
 
 def _minimal_template_docx_bytes() -> bytes:
     """Tiny DOCX with one Heading for template-batch tests."""
@@ -232,3 +262,50 @@ class TestRefreshTokenType:
             headers={"Authorization": f"Bearer {refresh}"},
         )
         assert r.status_code == 401
+
+
+class TestGraphThreadOwnership:
+    def test_graph_status_forbidden_for_non_owner(self, client: TestClient):
+        thread_id = str(uuid.uuid4())
+        owner_id = uuid.uuid4()
+        other_user_id = uuid.uuid4()
+        _insert_graph_run(thread_id, created_by=owner_id)
+
+        r = client.get(
+            f"/api/graph/status/{thread_id}",
+            headers=_bearer_sub(str(other_user_id), "clinician"),
+        )
+        assert r.status_code == 403
+
+    def test_graph_link_protocol_forbidden_for_non_owner(self, client: TestClient):
+        thread_id = str(uuid.uuid4())
+        owner_id = uuid.uuid4()
+        other_user_id = uuid.uuid4()
+        _insert_graph_run(thread_id, created_by=owner_id)
+
+        r = client.post(
+            "/api/graph/link-protocol",
+            json={
+                "thread_id": thread_id,
+                "protocol_id": "550e8400-e29b-41d4-a716-446655440000",
+            },
+            headers=_bearer_sub(str(other_user_id), "clinician"),
+        )
+        assert r.status_code == 403
+
+    def test_graph_review_forbidden_for_non_owner(self, client: TestClient):
+        thread_id = str(uuid.uuid4())
+        owner_id = uuid.uuid4()
+        other_user_id = uuid.uuid4()
+        _insert_graph_run(thread_id, created_by=owner_id)
+
+        r = client.post(
+            "/api/graph/review",
+            json={
+                "thread_id": thread_id,
+                "decision": "approve",
+                "reviewer_id": "ignored",
+            },
+            headers=_bearer_sub(str(other_user_id), "reviewer"),
+        )
+        assert r.status_code == 403

@@ -95,6 +95,44 @@ def create_app() -> FastAPI:
     _require_operator_or_admin = [Depends(require_role("operator", "admin"))]
     _require_clinician = [Depends(require_clinician)]
 
+    def _is_privileged_graph_user(user: UserResponse) -> bool:
+        role = getattr(user, "role", None)
+        return role in {"admin", "operator"}
+
+    async def _assert_graph_run_access(thread_id: str, user: UserResponse) -> None:
+        """Object-level authorization for thread-scoped graph endpoints.
+
+        If we cannot attribute ownership (missing DB row or created_by), deny access
+        for non-privileged users.
+        """
+        if _is_privileged_graph_user(user):
+            return
+
+        try:
+            from sozo_db.repositories.graph_run_repo import GraphRunRepository
+            from sozo_db.engine import get_session_factory
+
+            try:
+                user_uuid = uuid.UUID(str(user.id))
+            except Exception:
+                user_uuid = None
+
+            factory = get_session_factory()
+            async with factory() as session:
+                repo = GraphRunRepository(session)
+                run = await repo.get_by_thread_id(thread_id)
+                if run is None:
+                    raise HTTPException(status_code=404, detail=f"Thread {thread_id} not found")
+                if run.created_by is None:
+                    raise HTTPException(status_code=403, detail="Not allowed to access this graph run")
+                if user_uuid is None or run.created_by != user_uuid:
+                    raise HTTPException(status_code=403, detail="Not allowed to access this graph run")
+        except HTTPException:
+            raise
+        except Exception:
+            logger.exception("Graph run access check failed")
+            raise HTTPException(status_code=500, detail=INTERNAL_SERVER_DETAIL)
+
     # Validate against the **current** process environment (not only the import-time
     # singleton), so a second create_app() under tests or dynamic reload still enforces secrets.
     AuthConfig()
@@ -186,7 +224,9 @@ def create_app() -> FastAPI:
             async with factory() as session:
                 count = (await session.execute(select(func.count()).select_from(User))).scalar_one()
 
-            if count == 0:
+            env_name = (os.environ.get("SOZO_ENV") or "dev").strip().lower()
+            seed_enabled = (os.environ.get("SOZO_SEED_DEMO_USERS") or "").strip() == "1"
+            if count == 0 and seed_enabled and env_name not in {"prod", "production", "staging"}:
                 now = datetime.now(timezone.utc)
                 await _insert_user({
                     "id": _uuid.uuid4().hex,
@@ -206,10 +246,7 @@ def create_app() -> FastAPI:
                     "created_at": now,
                     "password_hash": hash_password("SozoAdmin2026!"),
                 })
-                logger.info(
-                    "Seeded demo users: demo@sozo.app/SozoDemo2026! (clinician), "
-                    "admin@sozo.app/SozoAdmin2026! (admin)"
-                )
+                logger.info("Seeded demo users (demo@sozo.app, admin@sozo.app)")
         except Exception as exc:
             logger.warning("Demo user seeding skipped: %s", exc)
 
@@ -589,6 +626,7 @@ def create_app() -> FastAPI:
                     "request_id": thread_id,
                     "status": "queued",
                     "source_mode": "prompt",
+                    "created_by": str(current_user.id),
                     "condition": {
                         "slug": (body.condition_slug or "").strip(),
                         "display_name": None,
@@ -660,7 +698,7 @@ def create_app() -> FastAPI:
     @application.get("/api/graph/status/{thread_id}")
     async def graph_status(
         thread_id: str,
-        _user: UserResponse = Depends(require_clinician),
+        current_user: UserResponse = Depends(require_clinician),
     ) -> dict:
         """Get the current status of a graph execution by thread_id.
 
@@ -670,6 +708,7 @@ def create_app() -> FastAPI:
         from sozo_graph.unified_graph import build_unified_graph
 
         try:
+            await _assert_graph_run_access(thread_id, current_user)
             checkpointer = get_graph_checkpointer()
             graph = build_unified_graph(checkpointer=checkpointer)
             config = {"configurable": {"thread_id": thread_id}}
@@ -859,12 +898,13 @@ def create_app() -> FastAPI:
     @application.post("/api/graph/link-protocol")
     async def link_graph_protocol(
         body: GraphLinkProtocolRequest,
-        _user: UserResponse = Depends(require_clinician),
+        current_user: UserResponse = Depends(require_clinician),
     ) -> dict:
         """Attach a REST protocol id to a graph run (checkpoint `output` + GraphRun row)."""
         from sozo_graph.unified_graph import build_unified_graph
 
         try:
+            await _assert_graph_run_access(body.thread_id, current_user)
             try:
                 pid = uuid.UUID(body.protocol_id.strip())
             except ValueError:
@@ -923,6 +963,7 @@ def create_app() -> FastAPI:
         from datetime import datetime, timezone
 
         try:
+            await _assert_graph_run_access(body.thread_id, current_user)
             checkpointer = get_graph_checkpointer()
             graph = build_unified_graph(checkpointer=checkpointer)
             config = {"configurable": {"thread_id": body.thread_id}}

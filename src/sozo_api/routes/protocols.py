@@ -381,7 +381,7 @@ async def list_available_conditions() -> dict[str, Any]:
 
 
 @router.get("/templates", summary="List protocol templates")
-async def list_templates() -> dict[str, Any]:
+def list_templates() -> dict[str, Any]:
     """List protocol templates available for cloning."""
     try:
         conn = _db()
@@ -397,9 +397,12 @@ async def list_templates() -> dict[str, Any]:
         conn.close()
         templates = [_row_to_list_item(r) for r in rows]
         return {"templates": [t.model_dump(mode="json") for t in templates]}
-    except Exception as e:
-        logger.error(f"list_templates failed: {e}")
-        return {"templates": []}
+    except Exception:
+        logger.exception("list_templates failed")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=INTERNAL_SERVER_DETAIL,
+        )
 
 
 @router.get(
@@ -417,7 +420,7 @@ async def get_generation_status(task_id: str) -> GenerationStatusResponse:
 
 
 @router.get("/", response_model=PaginatedResponse, summary="List protocols")
-async def list_protocols(
+def list_protocols(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     condition: Optional[str] = None,
@@ -504,10 +507,12 @@ async def list_protocols(
             page_size=page_size,
             pages=pages,
         )
-    except Exception as e:
-        logger.error(f"list_protocols failed: {e}")
-        # Return empty response on DB errors rather than 500
-        return PaginatedResponse(items=[], total=0, page=page, page_size=page_size, pages=1)
+    except Exception:
+        logger.exception("list_protocols failed")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=INTERNAL_SERVER_DETAIL,
+        )
 
 
 @router.post(
@@ -516,7 +521,7 @@ async def list_protocols(
     summary="Create / generate a protocol",
     dependencies=_clinician_writes,
 )
-async def create_protocol(
+def create_protocol(
     request: GenerateProtocolRequest,
     current_user: UserResponse = Depends(get_current_user),
 ) -> dict[str, Any]:
@@ -694,7 +699,7 @@ async def create_protocol(
 
 
 @router.get("/{protocol_id}", summary="Get full protocol")
-async def get_protocol(
+def get_protocol(
     protocol_id: UUID,
     current_user: UserResponse = Depends(get_current_user),
 ) -> dict[str, Any]:
@@ -752,7 +757,7 @@ async def get_protocol(
 @router.get(
     "/{protocol_id}/versions", summary="List protocol versions"
 )
-async def list_protocol_versions(
+def list_protocol_versions(
     protocol_id: UUID,
     current_user: UserResponse = Depends(get_current_user),
 ) -> dict[str, Any]:
@@ -805,7 +810,7 @@ async def list_protocol_versions(
     "/{protocol_id}/versions/{version}",
     summary="Get specific protocol version",
 )
-async def get_protocol_version(
+def get_protocol_version(
     protocol_id: UUID,
     version: int,
     current_user: UserResponse = Depends(get_current_user),
@@ -856,7 +861,7 @@ async def get_protocol_version(
     summary="Update protocol (new version)",
     dependencies=_clinician_writes,
 )
-async def update_protocol(
+def update_protocol(
     protocol_id: UUID,
     data: dict[str, Any],
     current_user: UserResponse = Depends(get_current_user),
@@ -937,7 +942,7 @@ async def update_protocol(
     summary="Submit protocol for review",
     dependencies=_clinician_writes,
 )
-async def submit_for_review(
+def submit_for_review(
     protocol_id: UUID,
     request: SubmitReviewRequest,
     current_user: UserResponse = Depends(get_current_user),
@@ -1005,7 +1010,7 @@ async def submit_for_review(
     summary="Transition protocol status",
     dependencies=[Depends(require_reviewer)],
 )
-async def transition_status(
+def transition_status(
     protocol_id: UUID,
     request: StatusTransitionRequest,
 ) -> dict[str, Any]:
@@ -1072,7 +1077,7 @@ async def transition_status(
     summary="Clone protocol as new draft",
     dependencies=_clinician_writes,
 )
-async def clone_protocol(
+def clone_protocol(
     protocol_id: UUID,
     current_user: UserResponse = Depends(get_current_user),
 ) -> dict[str, Any]:
@@ -1138,7 +1143,7 @@ async def clone_protocol(
     summary="Export protocol as DOCX or PDF",
     dependencies=_clinician_writes,
 )
-async def export_protocol(
+def export_protocol(
     protocol_id: UUID,
     fmt: str,
     current_user: UserResponse = Depends(get_current_user),
@@ -1215,7 +1220,7 @@ async def export_protocol(
 @router.get(
     "/{protocol_id}/evidence", summary="Get protocol evidence summary"
 )
-async def get_protocol_evidence(
+def get_protocol_evidence(
     protocol_id: UUID,
     current_user: UserResponse = Depends(get_current_user),
 ) -> dict[str, Any]:
@@ -1266,7 +1271,7 @@ async def get_protocol_evidence(
 @router.get(
     "/{protocol_id}/audit", summary="Get protocol audit trail"
 )
-async def get_protocol_audit_trail(
+def get_protocol_audit_trail(
     protocol_id: UUID,
     current_user: UserResponse = Depends(get_current_user),
 ) -> dict[str, Any]:

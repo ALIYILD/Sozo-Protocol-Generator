@@ -116,3 +116,50 @@ class TestCorsConfiguration:
 
         with pytest.raises(ValidationError):
             create_app()
+
+
+class TestJwtErrorDetailsAreStable:
+    def test_invalid_bearer_token_detail_does_not_leak(self):
+        from sozo_api.server import app
+
+        client = TestClient(app)
+        r = client.get(
+            "/api/protocols/",
+            headers={"Authorization": "Bearer not-a-jwt"},
+        )
+        assert r.status_code == 401
+        assert r.json().get("detail") == "Invalid token"
+
+    def test_invalid_refresh_token_detail_does_not_leak(self):
+        from sozo_api.server import app
+
+        client = TestClient(app)
+        r = client.post("/api/auth/refresh", json={"refresh_token": "not-a-jwt"})
+        assert r.status_code == 401
+        assert r.json().get("detail") == "Invalid refresh token"
+
+
+class TestRefreshTokenTypeStrictness:
+    def test_refresh_rejects_token_without_type_claim(self):
+        from datetime import datetime, timedelta, timezone
+        import jwt
+
+        from sozo_api.server import app
+        from sozo_auth.config import auth_config
+
+        client = TestClient(app)
+
+        now = datetime.now(timezone.utc)
+        payload = {
+            "sub": "11111111-1111-1111-1111-111111111111",
+            "role": "readonly",
+            "exp": now + timedelta(days=1),
+            "iat": now,
+            "jti": "legacy-refresh-no-type",
+            # Intentionally omit "type"
+        }
+        legacy = jwt.encode(payload, auth_config.secret_key, algorithm=auth_config.algorithm)
+
+        r = client.post("/api/auth/refresh", json={"refresh_token": legacy})
+        assert r.status_code == 401
+        assert r.json().get("detail") == "Refresh token required"

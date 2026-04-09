@@ -25,6 +25,9 @@ class AuthConfig(BaseSettings):
     access_token_expire_minutes: int = 480  # 8 hours
     refresh_token_expire_days: int = 30
     min_password_length: int = 12
+    #: Backward-compatibility toggle: allow refresh tokens missing the JWT ``type`` claim.
+    #: Safer default is False; can be enabled temporarily during migrations.
+    allow_legacy_refresh_tokens_without_type: bool = False
 
     model_config = {"env_prefix": "SOZO_AUTH_"}
 

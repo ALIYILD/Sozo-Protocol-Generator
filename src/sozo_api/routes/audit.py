@@ -93,7 +93,7 @@ class ProtocolBuildTrace(BaseModel):
 # ---------------------------------------------------------------------------
 
 @router.get("/events", response_model=AuditEventList)
-async def list_audit_events(
+def list_audit_events(
     page: int = Query(1, ge=1),
     page_size: int = Query(50, ge=1, le=200),
     entity_type: Optional[str] = None,
@@ -135,14 +135,14 @@ async def list_audit_events(
 
 
 @router.get("/summary", response_model=AuditSummary)
-async def get_audit_summary():
+def get_audit_summary():
     """Get audit activity summary for dashboard."""
     summary = audit_service.get_summary()
     return AuditSummary(**summary)
 
 
 @router.get("/entity/{entity_type}/{entity_id}")
-async def get_entity_audit_trail(entity_type: str, entity_id: str):
+def get_entity_audit_trail(entity_type: str, entity_id: str):
     """Get complete audit trail for a specific entity.
 
     Useful for tracing all actions on a specific protocol or patient.
@@ -169,7 +169,7 @@ async def get_entity_audit_trail(entity_type: str, entity_id: str):
 
 
 @router.get("/build-trace/{build_id}", response_model=ProtocolBuildTrace)
-async def get_build_trace(build_id: str):
+def get_build_trace(build_id: str):
     """Get LangGraph node execution trace for a protocol build.
 
     Shows each node's execution: timing, input/output hashes, decisions.
@@ -234,7 +234,7 @@ async def get_build_trace(build_id: str):
 
 
 @router.get("/export")
-async def export_audit_log(
+def export_audit_log(
     entity_type: Optional[str] = None,
     entity_id: Optional[str] = None,
     action: Optional[str] = None,
@@ -303,7 +303,7 @@ async def export_audit_log(
 
 
 @router.get("/actions")
-async def list_available_actions():
+def list_available_actions():
     """List all action types recorded in audit log."""
     return {
         "actions": [
@@ -320,7 +320,7 @@ async def list_available_actions():
 
 
 @router.get("/entity-types")
-async def list_entity_types():
+def list_entity_types():
     """List all entity types in audit log."""
     return {
         "entity_types": [

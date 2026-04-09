@@ -12,6 +12,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from sozo_auth.dependencies import get_current_user, require_admin
+from sozo_auth.config import auth_config
 from sozo_auth.models import (
     LoginRequest,
     PasswordChange,
@@ -182,13 +183,18 @@ async def refresh(body: RefreshRequest) -> TokenPair:
             detail="Refresh token has expired",
         )
     except _jwt.InvalidTokenError as exc:
+        logger.warning("Refresh token validation failed", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=f"Invalid refresh token: {exc}",
+            detail="Invalid refresh token",
         )
 
-    # Reject access tokens; allow ``type=refresh`` or legacy tokens with no ``type`` claim.
-    if payload.token_type == "access":
+    token_type = payload.token_type
+    if token_type == "refresh":
+        pass
+    elif token_type is None and auth_config.allow_legacy_refresh_tokens_without_type:
+        pass
+    else:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Refresh token required",
