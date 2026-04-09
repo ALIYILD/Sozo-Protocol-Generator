@@ -28,6 +28,7 @@ on:
 
 permissions:
   contents: read
+  actions: write # BuildKit cache export (type=gha cache-to)
 
 jobs:
   build:
@@ -60,6 +61,8 @@ jobs:
           load: true
           provenance: false
           sbom: false
+          cache-from: type=gha,scope=sozo-docker-${{ matrix.name }}
+          cache-to: type=gha,mode=max,scope=sozo-docker-${{ matrix.name }}
 
       - name: Run container (${{ matrix.name }}) and smoke /api/health
         run: |
