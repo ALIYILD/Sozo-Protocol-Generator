@@ -6,7 +6,8 @@ from pydantic_settings import BaseSettings
 
 from sozo_auth.runtime import is_production_like_deployment
 
-_PLACEHOLDER_SECRET = "CHANGE-ME-IN-PRODUCTION"
+# Keep placeholder obvious, but long enough to avoid HS256 key-length warnings in dev/tests.
+_PLACEHOLDER_SECRET = "CHANGE-ME-IN-PRODUCTION-CHANGE-ME-IN-PRODUCTION"
 
 
 class AuthConfig(BaseSettings):
