@@ -8,6 +8,7 @@ from sozo_auth.runtime import is_production_like_deployment
 
 # Keep placeholder obvious, but long enough to avoid HS256 key-length warnings in dev/tests.
 _PLACEHOLDER_SECRET = "CHANGE-ME-IN-PRODUCTION-CHANGE-ME-IN-PRODUCTION"
+_PLACEHOLDER_SECRET_PREFIX = "CHANGE-ME-IN-PRODUCTION"
 
 
 class AuthConfig(BaseSettings):
@@ -37,7 +38,7 @@ class AuthConfig(BaseSettings):
         if not is_production_like_deployment():
             return self
         key = (self.secret_key or "").strip()
-        if not key or key == _PLACEHOLDER_SECRET:
+        if not key or key == _PLACEHOLDER_SECRET or key.startswith(_PLACEHOLDER_SECRET_PREFIX):
             raise ValueError(
                 "SOZO_AUTH_SECRET_KEY must be set to a non-default secret when "
                 "SOZO_ENV or ENVIRONMENT is production, prod, staging, or stg"
@@ -45,5 +46,27 @@ class AuthConfig(BaseSettings):
         return self
 
 
-# Module-level singleton — import this rather than constructing new instances.
-auth_config = AuthConfig()
+_auth_config: AuthConfig | None = None
+
+
+def get_auth_config() -> AuthConfig:
+    """Return a cached AuthConfig instance.
+
+    Kept lazy to avoid import-time failures when tests temporarily set production-like
+    env vars and expect ValidationError only when constructing AuthConfig explicitly.
+    """
+    global _auth_config
+    if _auth_config is None:
+        _auth_config = AuthConfig()
+    return _auth_config
+
+
+class _AuthConfigProxy:
+    """Lazy proxy for backwards-compatible `auth_config` import sites."""
+
+    def __getattr__(self, item: str):
+        return getattr(get_auth_config(), item)
+
+
+# Backwards-compatible module-level name (lazy, not instantiated at import time).
+auth_config = _AuthConfigProxy()

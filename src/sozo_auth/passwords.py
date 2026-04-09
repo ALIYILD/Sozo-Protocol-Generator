@@ -5,7 +5,7 @@ import re
 
 from passlib.context import CryptContext
 
-from sozo_auth.config import auth_config
+from sozo_auth.config import get_auth_config
 
 _pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -26,6 +26,7 @@ def validate_password_strength(password: str) -> list[str]:
     An empty list means the password passes all checks.
     """
     issues: list[str] = []
+    auth_config = get_auth_config()
 
     if len(password) < auth_config.min_password_length:
         issues.append(

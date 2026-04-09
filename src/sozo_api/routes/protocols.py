@@ -33,15 +33,36 @@ def _is_privileged_protocol_user(user: UserResponse) -> bool:
 
 
 def _can_access_protocol(created_by: str | None, user: UserResponse) -> bool:
+    return _can_access_protocol_with_template(created_by=created_by, user=user, is_template=False)
+
+
+def _can_access_protocol_with_template(
+    created_by: str | None,
+    user: UserResponse,
+    is_template: bool,
+) -> bool:
     if _is_privileged_protocol_user(user):
         return True
-    if created_by is None or created_by == "":
+    if is_template:
         return True
+    # Default-deny when ownership is unknown to avoid IDOR. Legacy rows without
+    # `created_by` become visible only to privileged users.
+    if created_by is None or created_by == "":
+        return False
     return created_by in (user.id, user.email)
 
 
-def _assert_protocol_access(created_by: str | None, user: UserResponse) -> None:
-    if not _can_access_protocol(created_by, user):
+def _assert_protocol_access(
+    created_by: str | None,
+    user: UserResponse,
+    *,
+    is_template: bool = False,
+) -> None:
+    if not _can_access_protocol_with_template(
+        created_by=created_by,
+        user=user,
+        is_template=is_template,
+    ):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Not allowed to access this protocol",
@@ -730,7 +751,7 @@ def get_protocol(
             detail=f"Protocol {protocol_id} not found",
         )
 
-    _assert_protocol_access(row["created_by"], current_user)
+    _assert_protocol_access(row["created_by"], current_user, is_template=bool(row["is_template"]))
 
     data = _parse_json(row["data"])
     evidence = data.get("evidence", {})
@@ -767,7 +788,7 @@ def list_protocol_versions(
         conn = _db()
         # Verify protocol exists
         proto = conn.execute(
-            "SELECT id, created_by FROM protocols WHERE id = ?", (pid,)
+            "SELECT id, created_by, is_template FROM protocols WHERE id = ?", (pid,)
         ).fetchone()
         if proto is None:
             conn.close()
@@ -775,7 +796,11 @@ def list_protocol_versions(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Protocol {protocol_id} not found",
             )
-        _assert_protocol_access(proto["created_by"], current_user)
+        _assert_protocol_access(
+            proto["created_by"],
+            current_user,
+            is_template=bool(proto["is_template"]),
+        )
         rows = conn.execute("""
             SELECT id, version_number, status, created_at, created_by, generation_method
             FROM protocol_versions
@@ -841,7 +866,7 @@ def get_protocol_version(
             detail=f"Version {version} not found for protocol {protocol_id}",
         )
 
-    _assert_protocol_access(row["protocol_created_by"], current_user)
+    _assert_protocol_access(row["protocol_created_by"], current_user, is_template=bool(row["is_template"]))
 
     data = _parse_json(row["data"])
     return {
@@ -891,7 +916,7 @@ def update_protocol(
                 detail=f"Protocol {protocol_id} not found",
             )
 
-        _assert_protocol_access(row["created_by"], current_user)
+        _assert_protocol_access(row["created_by"], current_user, is_template=bool(row["is_template"]))
 
         current_status = row["status"] or "draft"
         if current_status != "draft":
@@ -967,7 +992,7 @@ def submit_for_review(
                 detail=f"Protocol {protocol_id} not found",
             )
 
-        _assert_protocol_access(row["created_by"], current_user)
+        _assert_protocol_access(row["created_by"], current_user, is_template=bool(row["is_template"]))
 
         current_status = ProtocolStatusEnum(row["status"] or "draft")
         _validate_transition(current_status, ProtocolStatusEnum.PENDING_REVIEW)
@@ -1102,7 +1127,7 @@ def clone_protocol(
                 detail=f"Protocol {protocol_id} not found",
             )
 
-        _assert_protocol_access(row["created_by"], current_user)
+        _assert_protocol_access(row["created_by"], current_user, is_template=bool(row["is_template"]))
 
         new_pid = str(uuid4())
         new_vid = str(uuid4())
@@ -1182,7 +1207,7 @@ def export_protocol(
             detail=f"Protocol {protocol_id} not found",
         )
 
-    _assert_protocol_access(row["created_by"], current_user)
+    _assert_protocol_access(row["created_by"], current_user, is_template=bool(row["is_template"]))
 
     data = _parse_json(row["data"])
     generation = data.get("generation", {})
@@ -1249,7 +1274,7 @@ def get_protocol_evidence(
             detail=f"Protocol {protocol_id} not found",
         )
 
-    _assert_protocol_access(row["created_by"], current_user)
+    _assert_protocol_access(row["created_by"], current_user, is_template=bool(row["is_template"]))
 
     data = _parse_json(row["data"])
     evidence = data.get("evidence", {})
@@ -1282,7 +1307,7 @@ def get_protocol_audit_trail(
         conn = _db()
         # Verify protocol exists
         proto = conn.execute(
-            "SELECT id, created_by FROM protocols WHERE id = ?", (pid,)
+            "SELECT id, created_by, is_template FROM protocols WHERE id = ?", (pid,)
         ).fetchone()
         if proto is None:
             conn.close()
@@ -1291,7 +1316,11 @@ def get_protocol_audit_trail(
                 detail=f"Protocol {protocol_id} not found",
             )
 
-        _assert_protocol_access(proto["created_by"], current_user)
+        _assert_protocol_access(
+            proto["created_by"],
+            current_user,
+            is_template=bool(proto["is_template"]),
+        )
 
         rows = conn.execute("""
             SELECT action, actor_id, timestamp, details

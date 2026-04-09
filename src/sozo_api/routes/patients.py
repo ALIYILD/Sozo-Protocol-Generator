@@ -272,8 +272,10 @@ def _is_privileged_patient_user(user: UserResponse) -> bool:
 def _can_access_patient(created_by: str | None, user: UserResponse) -> bool:
     if _is_privileged_patient_user(user):
         return True
+    # Default-deny when ownership is unknown to avoid IDOR. Legacy rows without
+    # `created_by` become visible only to privileged users.
     if created_by is None or created_by == "":
-        return True
+        return False
     return created_by in (user.id, user.email)
 
 
@@ -424,7 +426,7 @@ def list_patients(
             ).fetchall()
         else:
             rows = conn.execute(
-                "SELECT * FROM patients WHERE created_by IS NULL OR created_by = ? "
+                "SELECT * FROM patients WHERE created_by = ? "
                 "ORDER BY created_at DESC",
                 (current_user.id,),
             ).fetchall()

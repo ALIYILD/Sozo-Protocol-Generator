@@ -83,7 +83,7 @@ def create_app() -> FastAPI:
     """Build and return the configured FastAPI application."""
 
     # Fail fast for production-like profiles (JWT secret, CORS).
-    from sozo_auth.config import AuthConfig, auth_config
+    from sozo_auth.config import AuthConfig, get_auth_config
     from sozo_auth.dependencies import (
         require_clinician,
         require_reviewer,
@@ -136,7 +136,7 @@ def create_app() -> FastAPI:
     # Validate against the **current** process environment (not only the import-time
     # singleton), so a second create_app() under tests or dynamic reload still enforces secrets.
     AuthConfig()
-    _ = auth_config
+    get_auth_config()
 
     cors_origins, cors_credentials = resolve_cors_allow_origins_and_credentials()
 

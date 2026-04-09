@@ -6,12 +6,13 @@ from datetime import datetime, timedelta, timezone
 
 import jwt
 
-from sozo_auth.config import auth_config
+from sozo_auth.config import get_auth_config
 from sozo_auth.models import TokenPair, TokenPayload
 
 
 def create_access_token(user_id: str, role: str) -> str:
     """Create a short-lived access JWT."""
+    auth_config = get_auth_config()
     now = datetime.now(timezone.utc)
     payload = {
         "sub": user_id,
@@ -26,6 +27,7 @@ def create_access_token(user_id: str, role: str) -> str:
 
 def create_refresh_token(user_id: str) -> str:
     """Create a long-lived refresh JWT (no role — forces re-lookup on refresh)."""
+    auth_config = get_auth_config()
     now = datetime.now(timezone.utc)
     payload = {
         "sub": user_id,
@@ -51,6 +53,7 @@ def decode_token(token: str) -> TokenPayload:
     Raises ``jwt.ExpiredSignatureError`` if the token has expired and
     ``jwt.InvalidTokenError`` for any other validation failure.
     """
+    auth_config = get_auth_config()
     raw = jwt.decode(
         token,
         auth_config.secret_key,

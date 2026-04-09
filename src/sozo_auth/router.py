@@ -12,7 +12,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from sozo_auth.dependencies import get_current_user, require_admin
-from sozo_auth.config import auth_config
+from sozo_auth.config import get_auth_config
 from sozo_auth.models import (
     LoginRequest,
     PasswordChange,
@@ -175,6 +175,7 @@ async def refresh(body: RefreshRequest) -> TokenPair:
     """Exchange a valid refresh token for a new token pair."""
     import jwt as _jwt
 
+    auth_config = get_auth_config()
     try:
         payload = decode_token(body.refresh_token)
     except _jwt.ExpiredSignatureError:
