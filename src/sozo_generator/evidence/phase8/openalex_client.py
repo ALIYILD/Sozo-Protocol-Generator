@@ -12,10 +12,8 @@ try:
     import pyalex
     from pyalex import Works
 except ImportError as _oa_import_err:
-    raise ImportError(
-        "pyalex is required for OpenAlexClient. "
-        "Install it with: pip install pyalex"
-    ) from _oa_import_err
+    pyalex = None  # type: ignore[assignment]
+    Works = None  # type: ignore[assignment]
 
 logger = logging.getLogger(__name__)
 
@@ -80,6 +78,11 @@ class OpenAlexClient:
             max_retries: Number of times to retry a failed request.
             per_page: Number of results to request per API page (max 200).
         """
+        if pyalex is None or Works is None:
+            raise ImportError(
+                "pyalex is required for OpenAlexClient. "
+                "Install it with: pip install pyalex"
+            )
         self.email = email
         self.api_key = api_key
         self.max_retries = max_retries

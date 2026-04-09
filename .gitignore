@@ -38,6 +38,9 @@ outputs/documents/
 outputs/visuals/
 outputs/langgraph_checkpoints.db
 outputs/langgraph_checkpoints.db-*
+outputs/resolutions/
+outputs/revision_history/
+outputs/promotion_proposals/
 
 # PubMed cache (regenerate with ingest-evidence)
 data/raw/
@@ -64,6 +67,7 @@ Thumbs.db
 
 # Processed condition JSON (derived from generators)
 data/processed/
+data/template_profiles/
 
 # Local job / workspace run state (operator or tooling)
 jobs/

@@ -173,6 +173,16 @@ def load_shared_rules(knowledge_dir: Path | None = None) -> dict[str, SharedClin
             continue
         try:
             data = _load_yaml(path)
+            # Some YAML files in knowledge/shared are reference/framework docs rather than rules.
+            # Skip anything that clearly isn't a SharedClinicalRule payload.
+            if (
+                isinstance(data, dict)
+                and "rules" not in data
+                and "slug" not in data
+                and "framework" in data
+            ):
+                logger.debug("Skipping non-rule shared YAML: %s", path.name)
+                continue
             if "rules" in data:
                 for item in data["rules"]:
                     r = SharedClinicalRule(**item)

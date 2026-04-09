@@ -11,7 +11,7 @@ from enum import Enum
 from typing import Optional, Literal
 from uuid import UUID, uuid4
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from ..core.enums import EvidenceLevel, EvidenceType, Modality
 from .validators import validate_pmid
@@ -414,14 +414,15 @@ class SozoProtocol(BaseModel):
     # Audit
     audit: AuditMetadata
 
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "title": "SozoProtocol",
             "description": (
                 "Canonical neuromodulation protocol representation "
                 "for Sozo Protocol Generator"
             ),
         }
+    )
 
 
 # ---------------------------------------------------------------------------

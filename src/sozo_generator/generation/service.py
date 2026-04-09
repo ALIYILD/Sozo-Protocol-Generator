@@ -213,19 +213,45 @@ class GenerationService:
         # Execute — prefer canonical path where safe
         results = []
         for req in requests:
-            dt_value = req.doc_type.value if hasattr(req.doc_type, 'value') else str(req.doc_type)
-            tier_value = req.tier.value if hasattr(req.tier, 'value') else str(req.tier)
+            dt_value = req.doc_type.value if hasattr(req.doc_type, "value") else str(req.doc_type)
+            tier_value = req.tier.value if hasattr(req.tier, "value") else str(req.tier)
 
-            # Always use the enhanced DocumentExporter pipeline which includes
-            # rich protocol tables, FNON variants, device specs, per-protocol
-            # montage images, and all system-level builder enhancements.
-            # The canonical assembler path is disabled as it uses a separate
-            # document assembly pipeline that lacks these features.
-            result = self._execute_single(schema, req)
+            result: GenerationResult
+            if self._can_route_canonical(condition=req.condition_slug, doc_type=dt_value, tier=tier_value):
+                # Canonical (blueprint-driven) path: sets build_id=canon-* and writes provenance sidecar.
+                result = self.generate_canonical(
+                    condition=req.condition_slug,
+                    doc_type=dt_value,
+                    tier=tier_value,
+                )
+            else:
+                # Legacy/exporter path (fallback).
+                result = self._execute_single(schema, req)
 
             results.append(result)
 
         return results
+
+    def _can_route_canonical(self, condition: str, doc_type: str, tier: str) -> bool:
+        """Return True if canonical assembly is available for the request."""
+        import os
+
+        if (os.environ.get("SOZO_DISABLE_CANONICAL") or "").strip() == "1":
+            return False
+        kb = self.knowledge_base
+        if not kb:
+            return False
+        try:
+            # Condition must exist and blueprint must be available.
+            if kb.get_condition(condition) is None:
+                return False
+            if kb.get_blueprint(doc_type) is None:
+                return False
+            if tier not in {"fellow", "partners"}:
+                return False
+            return True
+        except Exception:
+            return False
 
     def generate_all(
         self,

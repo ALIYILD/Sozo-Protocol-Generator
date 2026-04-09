@@ -10,7 +10,7 @@ import uuid
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_serializer
 
 
 def _uid(prefix: str = "") -> str:
@@ -144,6 +144,8 @@ class VisualizationResponse(BaseModel):
     error: str = ""
     warnings: list[str] = Field(default_factory=list)
 
-    class Config:
-        # Exclude bytes from JSON serialization
-        json_encoders = {bytes: lambda v: f"<{len(v)} bytes>"}
+    @field_serializer("image_bytes", when_used="json")
+    def _serialize_image_bytes(self, v: Optional[bytes]) -> Optional[str]:
+        if not v:
+            return None
+        return f"<{len(v)} bytes>"

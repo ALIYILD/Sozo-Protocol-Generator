@@ -58,18 +58,23 @@ class ComparisonResult:
         if self.legacy_section_count == 0:
             return 0.0
         overlap = len(self.sections_in_both)
-        total_unique = len(set(
-            self.sections_in_both + self.sections_only_legacy + self.sections_only_canonical
-        ))
-        return overlap / max(total_unique, 1)
+        # Use legacy section count as the baseline so canonical consolidation
+        # (fewer sections) doesn't artificially deflate parity when key sections
+        # are still present.
+        return overlap / max(self.legacy_section_count, 1)
 
     @property
     def safe_to_route(self) -> bool:
         """Whether canonical can safely replace legacy."""
+        # Canonical blueprints often consolidate multiple legacy sections into fewer,
+        # larger sections, so section-count parity is not a reliable gate.
+        # Prefer a blended structural + content + evidence gate.
         return (
-            self.canonical_section_count >= self.legacy_section_count * 0.8
+            self.parity_score >= 0.3
+            and self.canonical_total_chars >= self.legacy_total_chars * 0.6
             and self.canonical_ref_count >= self.legacy_ref_count * 0.5
             and self.canonical_placeholders <= 2
+            and (self.canonical_readiness or "") in {"ready", "review_required"}
         )
 
     def to_text(self) -> str:

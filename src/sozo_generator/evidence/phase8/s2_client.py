@@ -14,10 +14,8 @@ try:
         ObjectNotFoundException,
     )
 except ImportError as _s2_import_err:
-    raise ImportError(
-        "semanticscholar is required for SemanticScholarClient. "
-        "Install it with: pip install semanticscholar"
-    ) from _s2_import_err
+    SemanticScholar = None  # type: ignore[assignment]
+    ObjectNotFoundException = Exception  # type: ignore[assignment]
 
 logger = logging.getLogger(__name__)
 
@@ -70,6 +68,11 @@ class SemanticScholarClient:
             max_retries: Number of times to retry a failed request with
                 exponential backoff (delays: 1 s, 2 s, 4 s, …).
         """
+        if SemanticScholar is None:
+            raise ImportError(
+                "semanticscholar is required for SemanticScholarClient. "
+                "Install it with: pip install semanticscholar"
+            )
         self.api_key = api_key
         self.max_retries = max_retries
         self.s2 = SemanticScholar(api_key=api_key)

@@ -359,7 +359,7 @@ class PICOExtractor:
 
         # --- OpenAI (fallback) ---
         if response_text is None:
-            if self._openai_api_key and openai is not None:
+            if self._openai_api_key:
                 response_text = self._call_openai(prompt)
             else:
                 if anthropic_error:

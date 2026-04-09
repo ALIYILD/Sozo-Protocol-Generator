@@ -94,10 +94,19 @@ class EvidenceIngestor:
         )
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
-        self.openalex_client = OpenAlexClient(email=settings.ncbi_email)
-        self.s2_client = SemanticScholarClient(
-            api_key=settings.semantic_scholar_api_key or None
-        )
+        try:
+            self.openalex_client = OpenAlexClient(email=settings.ncbi_email)
+        except ImportError:
+            logger.warning("OpenAlex client unavailable (missing pyalex); skipping OpenAlex source")
+            self.openalex_client = None
+
+        try:
+            self.s2_client = SemanticScholarClient(
+                api_key=settings.semantic_scholar_api_key or None
+            )
+        except ImportError:
+            logger.warning("Semantic Scholar client unavailable (missing semanticscholar); skipping S2 source")
+            self.s2_client = None
         self.pubmed_client = PubMedClient(email=settings.ncbi_email)
         self.pico_extractor = PICOExtractor(
             anthropic_api_key=settings.anthropic_api_key,
@@ -277,6 +286,8 @@ class EvidenceIngestor:
         Returns:
             Accumulated list of :class:`PaperRaw` objects.
         """
+        if self.openalex_client is None:
+            return []
         papers: list[PaperRaw] = []
         queries = cfg.openalex_queries or []
 
@@ -322,6 +333,8 @@ class EvidenceIngestor:
         Returns:
             Accumulated list of :class:`PaperRaw` objects.
         """
+        if self.s2_client is None:
+            return []
         papers: list[PaperRaw] = []
         queries = cfg.s2_queries or []
 
@@ -410,6 +423,8 @@ class EvidenceIngestor:
 
         # ---- OpenAlex priority DOIs -------------------------------------
         # OpenAlexClient.fetch_by_doi(doi) accepts only the doi positional arg.
+        if self.openalex_client is None:
+            return papers
         priority_dois: list[str] = list(cfg.priority_dois or [])
         for doi in priority_dois:
             try:
