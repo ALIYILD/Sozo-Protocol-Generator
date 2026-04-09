@@ -53,7 +53,7 @@ dependencies = [
 [project.optional-dependencies]
 # Multi-worker LangGraph checkpointing (PostgreSQL + psycopg pool).
 postgres-checkpoint = [
-    "langgraph-checkpoint-postgres>=2.0,<3",
+    "langgraph-checkpoint-postgres>=2.0,<4",
     "psycopg[binary]>=3.1,<4",
 ]
 # Phase 8 evidence clients (OpenAlex / Semantic Scholar); required for import-all deployment smoke.
