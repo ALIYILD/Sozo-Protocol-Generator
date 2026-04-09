@@ -1,0 +1,54 @@
+name: Docker build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Dockerfile"
+      - "Dockerfile.unified"
+      - "deploy/**"
+      - "src/**"
+      - "requirements.txt"
+      - "pyproject.toml"
+      - "alembic/**"
+      - "alembic.ini"
+      - ".github/workflows/docker-build.yml"
+  pull_request:
+    paths:
+      - "Dockerfile"
+      - "Dockerfile.unified"
+      - "deploy/**"
+      - "src/**"
+      - "requirements.txt"
+      - "pyproject.toml"
+      - "alembic/**"
+      - "alembic.ini"
+      - ".github/workflows/docker-build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dockerfile:
+          - Dockerfile
+          - Dockerfile.unified
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build (${{ matrix.dockerfile }})
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ${{ matrix.dockerfile }}
+          push: false
+          provenance: false
+          sbom: false
