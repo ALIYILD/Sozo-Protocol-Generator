@@ -35,9 +35,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        dockerfile:
-          - Dockerfile
-          - Dockerfile.unified
+        include:
+          - name: api
+            dockerfile: Dockerfile
+            image: sozo-protocol-generator:ci
+            host_port: 18080
+          - name: unified
+            dockerfile: Dockerfile.unified
+            image: sozo-protocol-generator-unified:ci
+            host_port: 18081
     steps:
       - uses: actions/checkout@v4
 
@@ -49,6 +55,35 @@ jobs:
         with:
           context: .
           file: ${{ matrix.dockerfile }}
+          tags: ${{ matrix.image }}
           push: false
+          load: true
           provenance: false
           sbom: false
+
+      - name: Run container (${{ matrix.name }}) and smoke /api/health
+        run: |
+          set -euo pipefail
+          cname="sozo-smoke-${{ matrix.name }}"
+          docker rm -f "$cname" >/dev/null 2>&1 || true
+
+          docker run -d --rm \
+            --name "$cname" \
+            -p 127.0.0.1:${{ matrix.host_port }}:8080 \
+            -e "SOZO_ENV=production" \
+            -e "SOZO_AUTH_SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+            -e "SOZO_CORS_ORIGINS=https://example.com" \
+            "${{ matrix.image }}"
+
+          # Retry health endpoint (startup can take time due to deps/migrations).
+          for i in {1..60}; do
+            if curl -fsS -m 2 "http://127.0.0.1:${{ matrix.host_port }}/api/health" >/dev/null; then
+              break
+            fi
+            sleep 2
+          done
+
+          curl -fsS -m 5 "http://127.0.0.1:${{ matrix.host_port }}/api/health"
+
+          docker logs "$cname" --tail 200 || true
+          docker rm -f "$cname" >/dev/null 2>&1 || true
