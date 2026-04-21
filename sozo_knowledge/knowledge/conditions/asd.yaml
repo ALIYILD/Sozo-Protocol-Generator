@@ -958,3 +958,454 @@ neuromod_profile:
   primary_stimulation_targets: "DLPFC (F3/F4), SMA (FCz), temporal/social cortex"
   stimulation_rationale: >
     DLPFC TMS/tDCS targets executive function and repetitive behaviors; SMA modulation ↓ motor stereotypies; neurofeedback alpha training → ↑ social cortex inhibitory gating; TPS to enhance long-range connectivity
+
+# ── Deterministic authored content blocks (for long-form 3×2 documents) ──────
+content_blocks:
+  # ── Clinical exam additions ───────────────────────────────────────────────
+  - block_id: asd_assessment_workflow_fellow
+    title: "Standardized Intake Workflow (Fellow)"
+    doc_types: [clinical_exam]
+    section_slugs: [assessment_workflow]
+    tier: fellow
+    kind: list
+    clinician_only: true
+    items:
+      - Confirm diagnostic context and stage (DSM-5 level; language level; intellectual disability; seizure history).
+      - Establish primary treatment goals with caregiver/patient (communication, irritability, anxiety, sleep, sensory, executive function).
+      - "Baseline measures: pick 1–2 primary outcomes (SRS-2, ABC-I, RBS-R) plus function (Vineland) when feasible."
+      - Screen safety and contraindications for each modality (tDCS/TPS/CES/taVNS) and document off-label disclosure plan.
+      - Phenotype assignment (SOC/SENS/RRB/EF/MOOD/SLEEP) with a one-sentence rationale tied to network profile.
+      - Define escalation rules and “stop/hold” criteria (new seizures, marked agitation, severe headache, emergent suicidality).
+      - Set follow-up schedule (Week 2 tolerance check, Week 4 response checkpoint, Week 8–10 end-of-block decision).
+
+  - block_id: asd_red_flags_all
+    title: "Red Flags & Escalation Triggers (ASD)"
+    doc_types: [clinical_exam, evidence_based_protocol, handbook]
+    section_slugs: [red_flags, safety_screening, safety]
+    tier: both
+    kind: list
+    clinician_only: true
+    items:
+      - New-onset seizure, status epilepticus, or rapid increase in seizure frequency → urgent medical escalation; hold stimulation.
+      - Acute regression (loss of language, major functional drop) or new focal neurological deficit → urgent escalation before treatment.
+      - Severe agitation, violent behavior, or uncontrolled self-injury → stabilize and coordinate behavioral/psychiatric care first.
+      - Active suicidality or severe depression/anxiety decompensation → urgent escalation and stabilize before neuromodulation.
+      - Unclear implant status (DBS/VNS/pacemaker/metal hardware) or recent neurosurgery → confirm safety before any device use.
+
+  # ── Evidence-based protocol: core long-form expansions ─────────────────────
+  - block_id: asd_clinical_overview_expanded
+    title: "Clinical Overview (Expanded Context)"
+    doc_types: [evidence_based_protocol]
+    section_slugs: [clinical_overview]
+    tier: both
+    kind: prose
+    clinician_only: true
+    text: >-
+      Autism Spectrum Disorder (ASD) is a lifelong neurodevelopmental condition defined by differences in
+      social communication/interaction and restricted or repetitive behaviors (RRBs), with highly heterogeneous
+      presentation across language ability, cognitive profile, sensory processing, comorbidity burden, and
+      functional impairment. In clinical operations, two distinctions matter for protocol design: (1) the
+      “core ASD” phenotype (social cognition, pragmatic language, RRBs) versus (2) the “overlay phenotype”
+      that drives disability and caregiver distress (irritability/aggression, anxiety, sleep disruption,
+      ADHD-like executive dysfunction, and sensory dysregulation). Neuromodulation plans should be organized
+      around measurable targets that matter to the patient/family (e.g., SRS-2 social responsiveness; ABC-I
+      irritability; sleep onset latency; classroom participation), and should be framed as adjunctive and
+      off-label/investigational where applicable. The evidence base for non-invasive neuromodulation in ASD
+      is emerging, with many small heterogeneous trials; therefore, governance and documentation (baseline,
+      safety, objective follow-up, and explicit disclosure) are part of the treatment itself.
+    citations:
+      - pmid: "32214087"
+        citation_key: "Maenner2020_ADDM2016"
+        note: "ASD surveillance prevalence paper (ADDM Network)."
+
+  - block_id: asd_pathophysiology_mechanisms_expanded
+    title: "Mechanisms & Circuit-Level Rationale"
+    doc_types: [evidence_based_protocol]
+    section_slugs: [pathophysiology]
+    tier: both
+    kind: prose
+    clinician_only: true
+    text: >-
+      Mechanistically, ASD is best conceptualized as a family of developmental trajectories that converge on
+      atypical network-level communication. Across subgroups, recurring themes include excitation–inhibition
+      imbalance (altered GABA/glutamate signaling), atypical thalamocortical gating and sensory prediction,
+      and altered long-range integration between frontal control systems and temporal–parietal social cognition
+      nodes (TPJ/STS/mPFC). These mechanisms motivate a two-lane protocol strategy: Lane A targets social
+      cognition/communication (temporal–parietal and medial prefrontal nodes, often via DLPFC-temporal coupling
+      strategies), and Lane B targets regulation and participation (executive control, salience/anxiety circuits,
+      sleep and arousal stabilization). In practice, improvements in regulation often unlock participation and
+      response to behavioral therapies, even when “core ASD” symptoms change modestly. Protocol selection should
+      therefore integrate baseline phenotype, comorbidity overlays, and the family’s prioritized functional goals.
+
+  - block_id: asd_inclusion_exclusion_operational
+    title: "Operational Inclusion/Exclusion Notes"
+    doc_types: [evidence_based_protocol]
+    section_slugs: [inclusion, exclusion]
+    tier: both
+    kind: prose
+    clinician_only: true
+    text: >-
+      Operationally, neuromodulation candidates are those with (a) stable diagnosis and care team involvement,
+      (b) measurable target symptoms with a feasible assessment plan, and (c) the capacity for safe, consistent
+      attendance and monitoring (caregiver support, communication supports, and realistic tolerance expectations).
+      Exclusion decisions should consider seizure risk and instability, severe behavioral dysregulation that
+      prevents safe delivery, and medical instability. Where evidence is limited, the threshold for documentation
+      and clinician oversight should increase rather than decrease.
+
+  # ── Evidence-based protocol: device + dosing + monitoring ──────────────────
+  - block_id: asd_device_requirements_tdcs
+    title: "tDCS Setup Notes (ASD)"
+    doc_types: [evidence_based_protocol]
+    section_slugs: [device_requirements]
+    tier: both
+    modalities: [tdcs]
+    kind: prose
+    clinician_only: true
+    text: >-
+      Use a conservative, tolerance-first setup. Confirm electrode placement using standardized coordinates,
+      document montage and polarity, and prioritize stable contact/impedance over aggressive dosing. For patients
+      with sensory sensitivities, consider desensitization steps (brief skin contact practice, predictable routine,
+      caregiver involvement, visual schedule). Document ramp-up/down settings and stop criteria. Because ASD trials
+      vary widely in montage, dose, and outcomes, avoid unreviewed parameter changes; apply changes only under
+      Doctor authorization with a documented rationale tied to outcomes and tolerability.
+    citations:
+      - pmid: "41861357"
+        citation_key: "Singh2026_tDCS_ASD_SRMA"
+        note: "Systematic review/meta-analysis of tDCS in ASD (children/adolescents)."
+      - pmid: "41412208"
+        citation_key: "Efficacy2025_tDCS_ASD_SRMA"
+        note: "Systematic review/meta-analysis of pediatric tDCS in ASD (clinical outcomes)."
+
+  - block_id: asd_device_requirements_tps
+    title: "TPS Setup Notes (ASD)"
+    doc_types: [evidence_based_protocol]
+    section_slugs: [device_requirements]
+    tier: both
+    modalities: [tps]
+    kind: prose
+    clinician_only: true
+    text: >-
+      TPS in ASD should be treated as investigational/off-label unless a clear on-label indication applies for the
+      specific device and jurisdiction. Confirm target selection, ensure documentation of off-label disclosure and
+      consent, and use a standardized positioning workflow (consistent head model/orientation, target landmarks,
+      and session logging). For patients with anxiety or sensory sensitivity, plan predictable session pacing and
+      include breaks. Any parameter changes require Doctor authorization and a recorded rationale.
+
+  - block_id: asd_session_schedule_template
+    title: "Example Session Schedule (Template)"
+    doc_types: [evidence_based_protocol]
+    section_slugs: [session_schedule]
+    tier: both
+    kind: table
+    clinician_only: true
+    table:
+      caption: "Example schedule (adjust per age, phenotype, comorbidities, and tolerability)"
+      headers: ["Week", "Sessions", "Clinical focus", "Decision points"]
+      rows:
+        - ["0–1", "1–2", "Orientation + tolerance", "Confirm baseline measures; finalize goals; complete consent/off-label disclosures"]
+        - ["1–2", "2–3/week", "Stabilize routine", "If intolerance → step down; if stable → continue"]
+        - ["3–4", "2–3/week", "Primary target block", "Week-4 checkpoint: responder/partial/non-responder classification"]
+        - ["5–8", "2/week", "Titration + consolidation", "Only adjust with Doctor authorization; document outcome deltas"]
+        - ["8–10", "1–2/week", "Maintenance planning", "End-of-block outcomes; decide maintenance vs stop vs re-phenotype"]
+
+  - block_id: asd_titration_rules_summary
+    title: "Progression & Titration Rules (Summary)"
+    doc_types: [evidence_based_protocol]
+    section_slugs: [session_schedule, followup]
+    tier: both
+    kind: list
+    clinician_only: true
+    items:
+      - Prefer increasing consistency and adherence before increasing intensity or changing montages.
+      - Adjust one variable at a time (dose OR montage OR cadence), and only with Doctor authorization.
+      - If agitation/anxiety increases within 24–48h after sessions, hold escalation and re-check sleep, schedule, and comedications.
+      - If seizures occur or seizure frequency increases, stop treatment and escalate medically; re-start only after clearance.
+      - Require a documented outcome delta at Week 4 before continuing a “core symptom” target plan unchanged.
+
+  - block_id: asd_monitoring_adverse_events
+    title: "Monitoring & Adverse Event Workflow (ASD)"
+    doc_types: [evidence_based_protocol, handbook]
+    section_slugs: [monitoring_adverse_events, stage_6]
+    tier: both
+    kind: list
+    clinician_only: true
+    items:
+      - "Pre-session: screen sleep, illness, seizures, new meds; confirm baseline anxiety level and behavioral stability."
+      - "During: monitor distress signals (avoidance, agitation, shutdown); pause/stop for severe discomfort; document response."
+      - "Post-session: record parameters, tolerance, and any headache/dizziness/mood change; schedule follow-up if events occur."
+      - "Between sessions: caregiver-reported sleep/behavior logs; rapid check-in if irritability or anxiety worsens."
+
+  - block_id: asd_responder_criteria_tracking
+    title: "Responder Criteria (Operational)"
+    doc_types: [evidence_based_protocol, handbook]
+    section_slugs: [responder_criteria, stage_7]
+    tier: both
+    kind: list
+    clinician_only: true
+    items:
+      - Define 1–2 primary outcomes at baseline (e.g., SRS-2, ABC-I, sleep onset latency) and pre-specify the minimal meaningful change.
+      - "Responder: clear improvement in primary outcome(s) with stable or improved function/participation and acceptable tolerability."
+      - "Partial responder: modest improvement with strong adherence/tolerability → consider extending block or minor authorized adjustment."
+      - "Non-responder: no meaningful change by Week 4–6 → re-phenotype, reconsider target lane (regulation vs core symptoms), reassess comorbidities."
+
+  # ── Handbook: stage-by-stage operational guidance ──────────────────────────
+  - block_id: asd_handbook_stage_1_notes
+    title: "Stage 1 Notes (ASD)"
+    doc_types: [handbook]
+    section_slugs: [stage_1]
+    tier: both
+    kind: prose
+    clinician_only: true
+    text: >-
+      Pre-screening for ASD must include caregiver capacity and session feasibility (transport, school schedule,
+      tolerance of headgear/electrodes, and the ability to track outcomes). Request baseline collateral:
+      prior diagnostic reports (ADOS/ADI-R when available), school or therapy plans, seizure history, and current
+      medications. Where there is high behavioral volatility, coordinate stabilization first to avoid false “non-response.”
+
+  - block_id: asd_handbook_stage_2_consent
+    title: "Stage 2 Consent & Communication (ASD)"
+    doc_types: [handbook]
+    section_slugs: [stage_2]
+    tier: both
+    kind: prose
+    clinician_only: true
+    text: >-
+      Consent in ASD is a process, not a single form. Use plain language and visual supports where appropriate.
+      For minors or adults with limited capacity, ensure caregiver consent and assent processes are documented.
+      Explicitly document investigational/off-label status by modality and indication, and set expectations that
+      improvements may be incremental and domain-specific (regulation, sleep, participation).
+
+  - block_id: asd_handbook_stage_3_intake
+    title: "Stage 3 Psychological Intake (ASD)"
+    doc_types: [handbook]
+    section_slugs: [stage_3]
+    tier: both
+    kind: prose
+    clinician_only: true
+    text: >-
+      Intake should separate core ASD traits from treatable overlays (anxiety, ADHD, sleep, irritability, depression,
+      trauma exposure). Document communication profile (receptive/expressive), sensory triggers, and high-risk behaviors
+      (elopement, self-injury). Choose scales that can be reliably repeated in your setting; avoid over-instrumentation
+      that reduces adherence.
+
+  - block_id: asd_handbook_stage_4_exam
+    title: "Stage 4 Examination & Phenotype (ASD)"
+    doc_types: [handbook]
+    section_slugs: [stage_4]
+    tier: both
+    kind: prose
+    clinician_only: true
+    text: >-
+      Use structured observation and caregiver report to confirm the dominant phenotype lane: social cognition/communication,
+      sensory dysregulation, RRB rigidity/inflexibility, executive dysfunction/attention, mood/anxiety, or sleep.
+      Document the primary lane and a secondary lane. This drives target prioritization and prevents “everything at once”
+      protocols that are hard to interpret.
+
+  - block_id: asd_handbook_stage_5_protocol_selection
+    title: "Stage 5 Protocol Selection Notes (ASD)"
+    doc_types: [handbook]
+    section_slugs: [stage_5]
+    tier: both
+    kind: prose
+    clinician_only: true
+    text: >-
+      Select protocols by mapping lane → network target → modality feasibility. When family goals prioritize participation
+      and daily functioning, stabilize regulation (sleep/anxiety/irritability) before pursuing subtle core-symptom shifts.
+      Maintain a “one-change” rule for parameter adjustments and align all changes with measured outcomes.
+
+  - block_id: asd_handbook_stage_6_delivery
+    title: "Stage 6 Delivery Notes (ASD)"
+    doc_types: [handbook]
+    section_slugs: [stage_6]
+    tier: both
+    kind: prose
+    clinician_only: true
+    text: >-
+      Predictability is the primary safety intervention: consistent session structure, clear start/stop cues, and a brief
+      tolerance protocol for sensory-sensitive patients. Use caregiver presence strategically. Document adverse events in a
+      structured way, distinguishing transient discomfort from behavioral escalation requiring plan change.
+
+  - block_id: asd_handbook_stage_7_response
+    title: "Stage 7 Response Tracking Notes (ASD)"
+    doc_types: [handbook]
+    section_slugs: [stage_7]
+    tier: both
+    kind: prose
+    clinician_only: true
+    text: >-
+      Response in ASD may present as “access gains” (more eye contact, tolerance of demands, improved sleep, fewer meltdowns)
+      before standardized scores shift. Track both an objective scale and a practical functional marker (school attendance,
+      therapy participation, family routines). At Week 4, make a decision: continue unchanged (responder), minor authorized
+      adjustment (partial), or re-phenotype (non-responder).
+
+  - block_id: asd_handbook_stage_8_maintenance
+    title: "Stage 8 Maintenance & Discharge Notes (ASD)"
+    doc_types: [handbook]
+    section_slugs: [stage_8]
+    tier: both
+    kind: prose
+    clinician_only: true
+    text: >-
+      Maintenance planning should prioritize sustainability and family burden. For responders, taper frequency while
+      preserving routine. Provide a relapse plan (sleep disruption, school transitions) and coordinate with behavioral and
+      educational supports to preserve gains.
+
+  # ── Patient handouts (must be clinician_only: false) ───────────────────────
+  - block_id: asd_patient_handout_overview
+    title: "Family Handout: What This Treatment Is"
+    doc_types: [handbook]
+    section_slugs: [patient_handouts]
+    tier: both
+    clinician_only: false
+    kind: prose
+    text: >-
+      This program uses non-invasive neuromodulation techniques (such as gentle electrical stimulation or focused pulses,
+      depending on the plan) together with careful tracking of symptoms and day-to-day functioning. In autism, these
+      approaches are often considered off-label or investigational. Your clinician will explain what is known, what is
+      uncertain, and what outcomes we will track together. Many families focus on practical goals such as better sleep,
+      fewer meltdowns, improved participation in school/therapy, and smoother daily routines.
+
+  - block_id: asd_patient_handout_what_to_expect
+    title: "Family Handout: What to Expect"
+    doc_types: [handbook]
+    section_slugs: [patient_handouts]
+    tier: both
+    clinician_only: false
+    kind: list
+    items:
+      - Sessions are designed to be predictable and supportive; caregivers may be invited to participate.
+      - Mild, short-lived discomfort can happen (tingling/itching, brief headache). Tell staff immediately.
+      - We will track a few key outcomes repeatedly (for example irritability, social responsiveness, or sleep).
+      - If behavior or anxiety worsens after sessions, we will pause and reassess the plan.
+
+  # ── Evidence-based protocol: long-form clinical operations (adds bulk) ─────
+  - block_id: asd_inclusion_exclusion_longform
+    title: "Inclusion/Exclusion: Practical Decision Guide"
+    doc_types: [evidence_based_protocol]
+    section_slugs: [inclusion_exclusion]
+    tier: both
+    clinician_only: true
+    kind: prose
+    text: >-
+      This section operationalizes inclusion/exclusion criteria for ASD protocols to reduce variability across clinicians.
+      Start by confirming that the presenting problems are both measurable and actionable. “Measurable” means you can
+      collect baseline and follow-up data in the same way at least twice (e.g., SRS-2 weekly or biweekly; ABC-I every
+      2–4 weeks; caregiver sleep log nightly; school participation tracker). “Actionable” means the target symptom is
+      plausibly linked to a network-level lane with a clear plan for dosing, monitoring, and escalation. Where ASD
+      neurobiology is heterogeneous, protocol success depends on implementation discipline: adherence, consistent
+      measurement, and documented adjustments.
+      
+      Inclusion is strongest when (a) the patient/family can attend sessions reliably, (b) the comorbidity overlay is
+      stable enough to interpret change (no ongoing medication churn, acute crisis, or untreated sleep disorder), and
+      (c) there is an active support system to generalize gains (school accommodations, therapy, caregiver coaching).
+      Consider a brief stabilization phase (sleep hygiene plan, anxiety supports, sensory plan) before starting a
+      neuromodulation block if baseline volatility is high; otherwise, non-response is uninterpretable.
+      
+      Exclusion is not only about device contraindications. Exclude or defer when there is uncontrolled seizure activity,
+      medical instability, severe behavioral dysregulation that creates unsafe sessions, or inability to track outcomes.
+      For patients with high sensory sensitivity, deferral is often unnecessary; instead, build a tolerance protocol
+      (predictable sequence, shorter initial sessions, caregiver presence, and clear stop cues) and document the plan.
+
+  - block_id: asd_tdcs_protocol_notes_longform
+    title: "tDCS Protocol Implementation Notes (ASD)"
+    doc_types: [evidence_based_protocol]
+    section_slugs: [protocols_tdcs]
+    tier: both
+    clinician_only: true
+    kind: prose
+    modalities: [tdcs]
+    text: >-
+      Implementation principle: treat tDCS in ASD as a structured “behavioral pharmacology” trial. You are not only
+      delivering current; you are delivering a repeatable routine that interacts with arousal, sleep, expectation, and
+      caregiver scaffolding. Therefore, the protocol has two outputs: (1) neuromodulatory dose exposure and (2) adherence
+      and tolerability data that enable learning. Keep the first 1–2 weeks tolerance-first with conservative parameters,
+      then progress only if tolerability is stable and outcome tracking is in place.
+      
+      In ASD, the most common operational failures are not physiological; they are measurement and interpretation failures:
+      changing multiple parameters at once, adding/removing medications mid-block without documentation, or switching
+      targets before Week-4 outcomes. Use a “one-change rule” (dose OR montage OR cadence) and record the hypothesis for
+      every change. If the family goal is regulation, prioritize stability and generalization rather than chasing small
+      score changes. If the goal is social cognition, ensure that the patient is receiving parallel social learning inputs
+      (therapy, coaching) so that any gains can be expressed.
+      
+      Safety/tolerability notes: sensory discomfort can be misread as behavioral escalation. Distinguish distress from
+      adverse events by documenting timing, context, and recovery. Use clear stop criteria and predictable session
+      structure. When headaches occur, reduce dose progression, check hydration and sleep, and consider shorter ramps.
+    citations:
+      - pmid: "41861357"
+        citation_key: "Singh2026_tDCS_ASD_SRMA"
+      - pmid: "41412208"
+        citation_key: "Efficacy2025_tDCS_ASD_SRMA"
+
+  - block_id: asd_tps_protocol_notes_longform
+    title: "TPS Protocol Implementation Notes (ASD)"
+    doc_types: [evidence_based_protocol]
+    section_slugs: [protocols_tps]
+    tier: both
+    clinician_only: true
+    kind: prose
+    modalities: [tps]
+    text: >-
+      TPS delivery in ASD should follow a strict governance posture: off-label disclosure, conservative dosing,
+      standardized targeting workflow, and outcome-driven progression. Because evidence is variable and patient
+      heterogeneity is high, TPS should not be used as a “last resort” in acute instability; it should be used in
+      a stable operational context where changes can be measured.
+      
+      Targeting strategy should match lane selection: social cognition lane emphasizes temporal–parietal and medial
+      prefrontal nodes; regulation lane emphasizes prefrontal control and salience stabilization. Operationally, do not
+      change targets without a Week-4 review and documented rationale. Where the patient has anxiety or sensory
+      defensiveness, prioritize predictable pacing and communication supports. Document tolerance, any behavioral
+      changes within 24–48 hours, and caregiver observations using a structured template.
+
+  - block_id: asd_safety_longform
+    title: "Safety & Risk Management (ASD)"
+    doc_types: [evidence_based_protocol, handbook]
+    section_slugs: [safety]
+    tier: both
+    clinician_only: true
+    kind: prose
+    text: >-
+      Safety in ASD is primarily about predictability, escalation pathways, and medical risk screening. Medical risks
+      include seizure disorders (higher prevalence in ASD, especially with intellectual disability), medication changes
+      (stimulants, SSRIs, antipsychotics), sleep disruption, and dehydration/poor intake that can increase headache and
+      irritability. Behavioral risks include aggression, elopement, and self-injury, which can create unsafe sessions if
+      not anticipated. The safety plan should specify “hold” criteria (new seizures, marked agitation, severe headache,
+      significant sleep collapse, or new neurologic symptoms) and the escalation workflow.
+      
+      Use caregiver education as a safety tool. Families should know what to report, how quickly to report it, and what
+      to do after-hours for urgent symptoms. Encourage simple daily tracking (sleep, irritability, major stressors) so
+      that adverse trends are detected early rather than after a failed block. When risk is unclear, reduce exposure by
+      shortening sessions or lowering cadence, rather than continuing unchanged without data.
+
+  # ── Handbook: add bulk to introduction + modalities + patient journey ──────
+  - block_id: asd_handbook_introduction_expanded
+    title: "Introduction (Expanded Operational Guide)"
+    doc_types: [handbook]
+    section_slugs: [introduction]
+    tier: both
+    clinician_only: true
+    kind: prose
+    text: >-
+      This handbook organizes ASD care around an operational reality: the greatest improvements often occur when
+      regulation improves enough for the patient to access learning and relationships. Therefore, treatment blocks are
+      designed to be measurable, repeatable, and interpretable. Choose a small set of outcomes, maintain protocol
+      discipline for at least 4 weeks, and adjust only when tolerability and measurement justify it.
+      
+      The SOZO approach integrates neuromodulation with structured monitoring and family-centered goals. It is not a
+      replacement for behavioral therapies, educational supports, or medical management of comorbidities. Instead, it is
+      a framework for creating a stable platform on which therapies can work better. Clinicians must document off-label
+      status where applicable, maintain governance rules for parameter changes, and use a clear responder/non-responder
+      pathway.
+
+  - block_id: asd_handbook_patient_handouts_safety
+    title: "Family Handout: Safety and When to Call Us"
+    doc_types: [handbook]
+    section_slugs: [patient_handouts]
+    tier: both
+    clinician_only: false
+    kind: list
+    items:
+      - "Call us the same day if there is a new seizure, fainting, severe headache, or major behavior change."
+      - "Tell us about sleep changes, illness, or medication changes before the next session."
+      - "If your child becomes very distressed during a session, staff will pause/stop and help them recover."
+      - "Bring comfort items and use the same routine each visit when possible."
