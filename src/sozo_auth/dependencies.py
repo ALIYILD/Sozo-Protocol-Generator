@@ -34,7 +34,8 @@ async def get_current_user(
             detail="Token has expired",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    except jwt.InvalidTokenError as exc:
+    except jwt.InvalidTokenError:
+        # Keep client-facing message stable and non-leaky.
         logger.warning("JWT validation failed", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

@@ -38,23 +38,39 @@ def _insert_graph_run(thread_id: str, created_by: uuid.UUID) -> None:
 
     async def _run() -> None:
         factory = get_session_factory()
-        async with factory() as session:
-            session.add(
-                GraphRun(
-                    thread_id=thread_id,
-                    status="queued",
-                    condition_slug="test",
-                    condition_name="Test",
-                    source_mode="prompt",
-                    created_by=created_by,
-                    final_state={"request_id": thread_id, "status": "queued"},
-                    node_history=[],
-                    errors=[],
-                )
-            )
-            await session.commit()
+        import sqlalchemy
+        import asyncio as _asyncio
+
+        # SQLite can transiently lock under concurrent async test usage on Windows.
+        # Retry a few times to avoid flaky failures.
+        for attempt in range(6):
+            try:
+                async with factory() as session:
+                    session.add(
+                        GraphRun(
+                            thread_id=thread_id,
+                            status="queued",
+                            condition_slug="test",
+                            condition_name="Test",
+                            source_mode="prompt",
+                            created_by=created_by,
+                            final_state={"request_id": thread_id, "status": "queued"},
+                            node_history=[],
+                            errors=[],
+                        )
+                    )
+                    await session.commit()
+                return
+            except sqlalchemy.exc.OperationalError as e:
+                if "database is locked" not in str(e).lower() or attempt >= 5:
+                    raise
+                await _asyncio.sleep(0.05 * (attempt + 1))
 
     asyncio.run(_run())
+
+def _bearer_sub(role: str, sub: str) -> dict[str, str]:
+    return {"Authorization": f"Bearer {create_access_token(sub, role)}"}
+
 
 def _minimal_template_docx_bytes() -> bytes:
     """Tiny DOCX with one Heading for template-batch tests."""
@@ -248,6 +264,34 @@ class TestInlineRoutesRoles:
             headers=_bearer("readonly"),
         )
         assert r.status_code == 403
+
+
+class TestGenerationTaskScoping:
+    def test_generation_status_other_user_not_found(self, client: TestClient):
+        from sozo_api.routes import protocols as protocols_module
+
+        task_id = "task-authz-isolation"
+        protocols_module._TASKS[task_id] = {
+            "task_id": task_id,
+            "status": "generating",
+            "progress": 0.1,
+            "message": "queued",
+            "result": None,
+            "owner_id": "user-a",
+        }
+        try:
+            r = client.get(
+                f"/api/protocols/generation-status/{task_id}",
+                headers=_bearer_sub("clinician", "user-b"),
+            )
+            assert r.status_code == 404
+            r_own = client.get(
+                f"/api/protocols/generation-status/{task_id}",
+                headers=_bearer_sub("clinician", "user-a"),
+            )
+            assert r_own.status_code == 200
+        finally:
+            protocols_module._TASKS.pop(task_id, None)
 
 
 class TestPublicReferenceRoutes:

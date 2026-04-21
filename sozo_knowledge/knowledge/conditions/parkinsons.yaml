@@ -1510,3 +1510,97 @@ neuromod_profile:
   primary_stimulation_targets: "STN (DBS), GPi (DBS), M1 (C3/C4), SMA (Cz/FCz), L-DLPFC (F3)"
   stimulation_rationale: >
     DBS STN disrupts pathological beta hypersynchrony → ↓ motor suppression; high-freq TMS M1 enhances corticospinal excitability; DLPFC iTBS addresses comorbid depression
+
+# ── Deterministic authored content blocks (for long-form 3×2 documents) ──────
+content_blocks:
+  - block_id: pd_assessment_workflow_fellow
+    title: "Standardized Intake Workflow (Fellow)"
+    doc_types: [clinical_exam]
+    section_slugs: [assessment_workflow]
+    tier: fellow
+    kind: list
+    clinician_only: true
+    items:
+      - Confirm diagnosis context (Hoehn & Yahr stage, medication ON/OFF state).
+      - Screen contraindications for planned modalities (tDCS/TPS/CES) before any stimulation.
+      - Administer baseline motor scale (MDS-UPDRS III) and freezing/falls screen if indicated.
+      - Select phenotype (tremor-dominant vs PIGD vs cognitive/mood overlay) and document rationale.
+      - Record planned outcome measures and follow-up schedule (Week 4 and Week 8–10).
+
+  - block_id: pd_red_flags_all
+    title: "Red Flags"
+    doc_types: [clinical_exam, evidence_based_protocol, handbook]
+    section_slugs: [red_flags, safety_screening, safety]
+    tier: both
+    kind: list
+    clinician_only: true
+    items:
+      - New severe headache, acute focal neurological deficit, or suspected stroke → urgent medical escalation.
+      - Recurrent unexplained syncope, severe orthostatic symptoms, or chest pain → medical escalation before treatment.
+      - Active suicidality or severe psychiatric decompensation → urgent escalation and stabilize before neuromodulation.
+      - New implanted device/metalwork, recent neurosurgery, or unclear implant status → confirm safety before stimulation.
+
+  - block_id: pd_device_setup_tdcs
+    title: "tDCS Setup Notes (PD)"
+    doc_types: [evidence_based_protocol]
+    section_slugs: [device_requirements]
+    tier: both
+    modalities: [tdcs]
+    kind: prose
+    clinician_only: true
+    text: >-
+      Verify electrode placement against the intended montage (10–10 coordinates). Ensure skin integrity,
+      confirm current ramp-up/down settings, and document impedance checks. If dyskinesias worsen acutely,
+      pause and reassess parameters with supervising Doctor.
+
+  - block_id: pd_device_setup_tps
+    title: "TPS Setup Notes (PD)"
+    doc_types: [evidence_based_protocol]
+    section_slugs: [device_requirements]
+    tier: both
+    modalities: [tps]
+    kind: prose
+    clinician_only: true
+    text: >-
+      Confirm target selection and positioning for M1/SMA/DLPFC as applicable. TPS is investigational/off-label
+      for Parkinson’s disease; ensure off-label disclosure and informed consent are documented prior to treatment.
+
+  - block_id: pd_session_schedule_table
+    title: "Example Session Schedule (Template)"
+    doc_types: [evidence_based_protocol]
+    section_slugs: [session_schedule]
+    tier: both
+    kind: table
+    clinician_only: true
+    table:
+      caption: "Example schedule (adjust per phenotype, response, and tolerability)"
+      headers: ["Week", "Sessions", "Focus", "Notes"]
+      rows:
+        - ["1–2", "2–3/week", "Baseline stabilization", "Document baseline outcomes and tolerability"]
+        - ["3–4", "2–3/week", "Primary target block", "Review Week-4 measures; adjust only with Doctor authorization"]
+        - ["5–8", "2/week", "Progression / titration", "Escalate only if tolerability acceptable and response insufficient"]
+        - ["8–10", "1–2/week", "Consolidation", "End-of-block outcomes; maintenance planning"]
+
+  - block_id: pd_monitoring_adverse_events
+    title: "Monitoring & Adverse Event Workflow (Summary)"
+    doc_types: [evidence_based_protocol, handbook]
+    section_slugs: [monitoring_adverse_events, stage_6]
+    tier: both
+    kind: list
+    clinician_only: true
+    items:
+      - "Pre-session: confirm medication state, sleep, hydration, and new symptoms; re-check contraindications if changed."
+      - "During: monitor discomfort, dizziness, headache, mood changes; stop immediately if severe symptoms occur."
+      - "Post-session: document parameters and any adverse events; schedule follow-up checks if events occurred."
+
+  - block_id: pd_patient_handout_intro
+    title: "Patient Information (Handout)"
+    doc_types: [handbook]
+    section_slugs: [patient_handouts]
+    tier: both
+    clinician_only: false
+    kind: prose
+    text: >-
+      This treatment uses non-invasive neuromodulation techniques that may be used off-label depending on
+      the modality and indication. Your clinician will explain the expected benefits, potential risks, and
+      what to do if you experience discomfort or side effects during or after a session.

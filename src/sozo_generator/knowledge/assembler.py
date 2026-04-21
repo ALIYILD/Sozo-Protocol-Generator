@@ -209,7 +209,12 @@ class CanonicalDocumentAssembler:
         # Build sections
         sections = []
         for sb in section_blueprints:
-            section, sec_prov = self._build_section(condition, sb, tier)
+            section, sec_prov = self._build_section(
+                condition,
+                sb,
+                tier,
+                blueprint_doc_type=blueprint.doc_type,
+            )
             sections.append(section)
             provenance.sections.append(sec_prov)
 
@@ -274,6 +279,7 @@ class CanonicalDocumentAssembler:
         condition: KnowledgeCondition,
         blueprint: SectionBlueprint,
         tier: str,
+        blueprint_doc_type: str,
     ) -> tuple[SectionContent, SectionProvenance]:
         """Build one section from its blueprint and condition knowledge."""
 
@@ -361,11 +367,27 @@ class CanonicalDocumentAssembler:
         if expanded:
             content_parts.append(expanded)
 
+        # Structured authored content blocks (tier/doc-type/section/modality filtered)
+        authored = self._render_content_blocks(
+            condition=condition,
+            section_slug=blueprint.slug,
+            tier=tier,
+            doc_type=blueprint_doc_type,
+            modality_filter=blueprint.modality_filter,
+        )
+        if authored:
+            content_parts.append(authored)
+
         # Build subsections recursively
         for sub_bp in blueprint.subsections:
             if sub_bp.tier not in ("both", tier):
                 continue
-            sub_section, _ = self._build_section(condition, sub_bp, tier)
+            sub_section, _ = self._build_section(
+                condition,
+                sub_bp,
+                tier,
+                blueprint_doc_type=blueprint_doc_type,
+            )
             subsections.append(sub_section)
 
         # Collect evidence PMIDs from references
@@ -581,6 +603,64 @@ class CanonicalDocumentAssembler:
                     parts.append(f"  Source: {rule.source}")
 
         return "\n".join(parts)
+
+    def _render_content_blocks(
+        self,
+        *,
+        condition: KnowledgeCondition,
+        section_slug: str,
+        tier: str,
+        doc_type: str,
+        modality_filter: str,
+    ) -> str:
+        """Render matching structured content blocks into section prose."""
+        blocks = []
+        for b in getattr(condition, "content_blocks", []) or []:
+            if b.tier not in ("both", tier):
+                continue
+            if b.doc_types and doc_type not in b.doc_types:
+                continue
+            if b.section_slugs and section_slug not in b.section_slugs:
+                continue
+            if modality_filter and b.modalities and modality_filter not in b.modalities:
+                continue
+            blocks.append(b)
+
+        if not blocks:
+            return ""
+
+        rendered_parts: list[str] = []
+        for b in blocks:
+            if b.title:
+                rendered_parts.append(b.title)
+
+            if b.kind == "prose" and b.text:
+                rendered_parts.append(b.text)
+            elif b.kind == "list" and b.items:
+                for item in b.items:
+                    rendered_parts.append(f"• {item}")
+            elif b.kind == "table" and b.table and b.table.headers:
+                rendered_parts.append(
+                    f"[TABLE] {b.table.caption}".strip()
+                    if b.table.caption
+                    else "[TABLE]"
+                )
+                rendered_parts.append(" | ".join(b.table.headers))
+                for row in b.table.rows:
+                    rendered_parts.append(" | ".join(str(c) for c in row))
+            elif b.kind == "figure" and b.figure:
+                rendered_parts.append(f"[FIGURE] {b.figure.title}")
+                if b.figure.caption:
+                    rendered_parts.append(b.figure.caption)
+                if b.figure.source:
+                    rendered_parts.append(f"Source: {b.figure.source}")
+
+            if b.citations:
+                pmids = [c.pmid for c in b.citations if c.pmid]
+                if pmids:
+                    rendered_parts.append(f"Citations (PMID): {', '.join(pmids)}")
+
+        return "\n".join(rendered_parts).strip()
 
     def _expand_protocol_detail(self, proto, condition: KnowledgeCondition, tier: str) -> str:
         """Generate a detailed description block for one protocol."""

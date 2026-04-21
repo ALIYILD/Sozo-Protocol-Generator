@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { assertProductionAuthBypassNotEnabled } from './auth/authEnvGuard';
 import { AuthProvider } from './hooks/useAuth';
 import App from './App';
+import { AppErrorBoundary } from './components/AppErrorBoundary';
 import './index.css';
 
 assertProductionAuthBypassNotEnabled();
@@ -24,7 +25,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter future={ROUTER_V7_FUTURE_FLAGS}>
         <AuthProvider>
-          <App />
+          <AppErrorBoundary>
+            <App />
+          </AppErrorBoundary>
         </AuthProvider>
       </BrowserRouter>
     </QueryClientProvider>

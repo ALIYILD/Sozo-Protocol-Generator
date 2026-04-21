@@ -192,10 +192,38 @@ sections:
         caption_template: "{condition_name} — TPS Stimulation Targets (Sagittal View)"
         modality_filter: tps
 
+  - slug: device_requirements
+    title: "Device Requirements & Setup"
+    purpose: Device requirements, setup, targeting and positioning notes
+    order: 10
+    content_type: mixed
+    knowledge_fields: []
+    preamble: >-
+      Device setup must follow manufacturer instructions and SOZO operational SOPs.
+      Where figures are unavailable, use the labeled placeholders and confirm positioning clinically.
+
+  - slug: session_schedule
+    title: "Session Schedule, Progression & Titration"
+    purpose: Session planning, titration logic, and progression rules
+    order: 11
+    content_type: mixed
+    knowledge_fields: []
+    preamble: >-
+      Define the session cadence, titration logic, and progression criteria. Record all parameter changes.
+
+  - slug: monitoring_adverse_events
+    title: "Monitoring & Adverse Event Workflow"
+    purpose: Monitoring workflow and adverse event escalation logic
+    order: 12
+    content_type: mixed
+    knowledge_fields: []
+    preamble: >-
+      Monitor patient status before, during, and after each session. Follow SOZO AE grading and escalation rules.
+
   - slug: safety
     title: "Safety & Contraindications"
     purpose: Safety monitoring, adverse event grading, contraindications
-    order: 10
+    order: 13
     content_type: table
     knowledge_fields: [safety_rules, contraindications]
     table_headers: [Category, Severity, Description, Source]
@@ -209,7 +237,7 @@ sections:
   - slug: assessments
     title: "Assessment Tools & Outcome Measures"
     purpose: Validated clinical scales for baseline and follow-up
-    order: 11
+    order: 14
     content_type: table
     knowledge_fields: [assessments]
     table_headers: [Scale, Full Name, Domains, Timing, Evidence PMID]
@@ -218,7 +246,7 @@ sections:
   - slug: responder_criteria
     title: "Responder Criteria & Tracking"
     purpose: Define response classification and non-responder pathway
-    order: 12
+    order: 15
     content_type: mixed
     knowledge_fields: [responder_criteria, non_responder_pathway]
     visuals:
@@ -228,7 +256,7 @@ sections:
   - slug: followup
     title: "Follow-Up Assessments and Decision-Making"
     purpose: Assessment timing and response decision workflow
-    order: 13
+    order: 16
     content_type: prose
     knowledge_fields: []
     preamble: >-
@@ -239,7 +267,7 @@ sections:
   - slug: evidence_summary
     title: "Evidence Summary & Gaps"
     purpose: Summary of evidence quality and identified gaps
-    order: 14
+    order: 17
     content_type: mixed
     knowledge_fields: [evidence_summary, evidence_quality, evidence_gaps]
     requires_evidence: true
@@ -247,6 +275,6 @@ sections:
   - slug: references
     title: "References & Evidence Sources"
     purpose: Formatted bibliography
-    order: 15
+    order: 18
     content_type: reference_list
     knowledge_fields: [references]

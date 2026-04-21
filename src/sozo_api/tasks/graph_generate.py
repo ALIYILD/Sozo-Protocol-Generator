@@ -20,6 +20,47 @@ from sozo_api.celery_app import celery_app
 logger = logging.getLogger(__name__)
 
 
+def _ensure_graph_run_row(thread_id: str, user_id: str) -> None:
+    """Create a minimal GraphRun if the API stub insert failed (best-effort)."""
+    try:
+        from sozo_db.engine import get_session_factory
+        from sozo_db.repositories.graph_run_repo import GraphRunRepository
+
+        async def _run() -> None:
+            factory = get_session_factory()
+            async with factory() as session:
+                repo = GraphRunRepository(session)
+                existing = await repo.get_by_thread_id(thread_id)
+                if existing is not None:
+                    return
+                await repo.create(
+                    {
+                        "request_id": thread_id,
+                        "status": "queued",
+                        "source_mode": "prompt",
+                        "condition": {"slug": "", "display_name": None},
+                        "intake": {"user_prompt": ""},
+                        "evidence": {},
+                        "safety": {},
+                        "protocol": {},
+                        "review": {},
+                        "output": {},
+                        "node_history": [],
+                        "errors": [],
+                        "created_by_user_id": user_id,
+                    }
+                )
+                await session.commit()
+
+        asyncio.run(_run())
+    except Exception as db_err:  # pragma: no cover — best-effort
+        logger.warning(
+            "GraphRun ensure-row skipped for thread_id=%s: %s",
+            thread_id,
+            db_err,
+        )
+
+
 def _set_graph_run_status(thread_id: str, status: str, error: Optional[str] = None) -> None:
     """Best-effort update of the GraphRun DB row's status column.
 
@@ -117,6 +158,7 @@ def run_graph_generate(
         condition_slug,
     )
 
+    _ensure_graph_run_row(thread_id, user_id)
     _set_graph_run_status(thread_id, "running")
 
     try:
@@ -158,7 +200,9 @@ def run_graph_generate(
 
         result = graph.invoke(initial_state, config=config)
 
-        _persist_final_state(result)
+        merged = dict(result)
+        merged["created_by_user_id"] = user_id
+        _persist_final_state(merged)
 
         try:
             from sozo_api.routes.audit_service import audit_service

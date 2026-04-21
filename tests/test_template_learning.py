@@ -102,7 +102,7 @@ class TestPatternExtractor:
 
 
 class TestConsistencyScorer:
-    def test_score_existing_document(self):
+    def test_score_existing_document(self, tmp_path):
         """An existing document should score high against its own profile."""
         from sozo_generator.template.learning.learn import learn_from_existing
         from sozo_generator.template.learning.document_ingester import ingest_document
@@ -112,8 +112,10 @@ class TestConsistencyScorer:
         if not list(doc_dir.rglob("*.docx")):
             pytest.skip("No generated documents found")
 
-        profile = learn_from_existing(doc_dir, Path("/tmp/test_learned/"))
+        profile = learn_from_existing(doc_dir, tmp_path / "test_learned")
         doc_path = Path("outputs/documents/parkinsons/fellow/Evidence_Based_Protocol_Fellow.docx")
+        if not doc_path.exists():
+            pytest.skip("Expected reference document not found")
         fp = ingest_document(doc_path)
         scorer = ConsistencyScorer(profile)
         report = scorer.score_document(fp)
@@ -122,7 +124,7 @@ class TestConsistencyScorer:
 
 
 class TestProfileGuidedGenerator:
-    def test_generates_with_profile(self, parkinsons_condition):
+    def test_generates_with_profile(self, parkinsons_condition, tmp_path):
         """Profile-guided generator produces valid DocumentSpec."""
         from sozo_generator.template.learning.learn import learn_from_existing
         from sozo_generator.template.learning.profile_guided_generator import ProfileGuidedGenerator
@@ -132,7 +134,7 @@ class TestProfileGuidedGenerator:
         if not list(doc_dir.rglob("*.docx")):
             pytest.skip("No generated documents found")
 
-        profile = learn_from_existing(doc_dir, Path("/tmp/test_learned/"))
+        profile = learn_from_existing(doc_dir, tmp_path / "test_learned")
         gen = ProfileGuidedGenerator(profile=profile)
         assert gen.has_profile
 

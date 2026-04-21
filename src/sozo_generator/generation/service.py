@@ -356,6 +356,26 @@ class GenerationService:
             safety_issues: list[str] = []
             cond_obj = kb.get_condition(condition)
             if cond_obj:
+                # Deterministic content/governance validation for canonical YAML blocks
+                try:
+                    from ..knowledge.validators.document_content_validator import (
+                        validate_condition_content_blocks,
+                    )
+
+                    content_issues = validate_condition_content_blocks(cond_obj)
+                    for issue in content_issues:
+                        safety_issues.append(f"[{issue.severity.value.upper()}] {issue.location}: {issue.message}")
+                    if any(i.severity == QASeverity.BLOCK for i in content_issues):
+                        assembled.error = "Blocking governance/content validation issues"
+                        assembled.safety_qa_issues = safety_issues
+                        return assembled
+                except Exception as val_err:
+                    logger.warning(
+                        "Content block validation skipped due to error: %s",
+                        val_err,
+                        exc_info=True,
+                    )
+
                 from ..knowledge.safety import SafetyValidator
 
                 validator = SafetyValidator()

@@ -68,6 +68,18 @@ def _assert_protocol_access(
             detail="Not allowed to access this protocol",
         )
 
+
+def _assert_generation_task_access(task: dict[str, Any], user: UserResponse) -> None:
+    """In-memory generation tasks are scoped to the user who started them."""
+    if _is_privileged_protocol_user(user) or user.role == "reviewer":
+        return
+    owner = task.get("owner_id")
+    if owner is None or owner not in (user.id, user.email):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Task not found",
+        )
+
 # ---------------------------------------------------------------------------
 # Router
 # ---------------------------------------------------------------------------
@@ -429,7 +441,10 @@ def list_templates() -> dict[str, Any]:
 @router.get(
     "/generation-status/{task_id}", summary="Poll generation task status"
 )
-async def get_generation_status(task_id: str) -> GenerationStatusResponse:
+async def get_generation_status(
+    task_id: str,
+    current_user: UserResponse = Depends(get_current_user),
+) -> GenerationStatusResponse:
     """Poll async generation task status."""
     task = _TASKS.get(task_id)
     if task is None:
@@ -437,7 +452,14 @@ async def get_generation_status(task_id: str) -> GenerationStatusResponse:
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Task {task_id} not found",
         )
-    return GenerationStatusResponse(**task)
+    _assert_generation_task_access(task, current_user)
+    return GenerationStatusResponse(
+        task_id=task["task_id"],
+        status=task["status"],
+        progress=task["progress"],
+        message=task["message"],
+        result=task.get("result"),
+    )
 
 
 @router.get("/", response_model=PaginatedResponse, summary="List protocols")
@@ -649,6 +671,7 @@ def create_protocol(
                         "output_path": result.output_path,
                         "build_id": result.build_id,
                     },
+                    "owner_id": current_user.id,
                 }
             else:
                 generation_data = {
@@ -661,6 +684,7 @@ def create_protocol(
                     "progress": 0.0,
                     "message": f"Generation failed: {result.error}",
                     "result": None,
+                    "owner_id": current_user.id,
                 }
         except Exception as e:
             logger.error(f"GenerationService failed: {e}")
@@ -671,6 +695,7 @@ def create_protocol(
                 "progress": 0.0,
                 "message": f"Generation error: {e}",
                 "result": None,
+                "owner_id": current_user.id,
             }
     else:
         # For prompt-based or template-clone, queue as generating
@@ -680,6 +705,7 @@ def create_protocol(
             "progress": 0.0,
             "message": f"Queued {gen_method} generation for {request.condition_slug}",
             "result": None,
+            "owner_id": current_user.id,
         }
 
     # Store the version data: merge generation output + evidence
@@ -1231,6 +1257,7 @@ def export_protocol(
         "progress": 0.0,
         "message": f"Exporting protocol {protocol_id} as {fmt.upper()}",
         "result": None,
+        "owner_id": current_user.id,
     }
 
     return {

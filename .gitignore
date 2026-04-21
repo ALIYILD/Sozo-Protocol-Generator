@@ -38,6 +38,8 @@ outputs/documents/
 outputs/visuals/
 outputs/langgraph_checkpoints.db
 outputs/langgraph_checkpoints.db-*
+outputs/manifests/
+outputs/reviews/
 outputs/resolutions/
 outputs/revision_history/
 outputs/promotion_proposals/

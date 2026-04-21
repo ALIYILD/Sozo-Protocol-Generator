@@ -52,9 +52,17 @@ sections:
     table_headers: [Scale, Full Name, Domains, Timing, Evidence PMID]
     table_row_source: assessments
 
+  - slug: assessment_workflow
+    title: "Assessment Workflow"
+    order: 4
+    content_type: prose
+    knowledge_fields: []
+    preamble: >-
+      Use this workflow to standardize intake, screening, baseline measurement, and phenotype assignment.
+
   - slug: clinical_examination
     title: "Clinical Examination Domains"
-    order: 4
+    order: 5
     content_type: mixed
     knowledge_fields: [core_symptoms, brain_regions]
     preamble: >-
@@ -62,7 +70,7 @@ sections:
 
   - slug: phenotype_identification
     title: "Phenotype Identification"
-    order: 5
+    order: 6
     content_type: table
     knowledge_fields: [phenotypes]
     table_headers: [Phenotype, Key Features, Primary Networks, Preferred Modalities]
@@ -70,9 +78,16 @@ sections:
     preamble: >-
       Based on clinical examination findings, identify the primary clinical phenotype.
 
+  - slug: red_flags
+    title: "Red Flags & Escalation Triggers"
+    order: 7
+    content_type: list
+    knowledge_fields: []
+    fallback_content: "[REVIEW REQUIRED: No red flags defined]"
+
   - slug: safety_screening
     title: "Safety Screening Checklist"
-    order: 6
+    order: 8
     content_type: table
     knowledge_fields: [safety_rules, contraindications]
     table_headers: [Safety Item, Status, Notes]
@@ -82,6 +97,6 @@ sections:
 
   - slug: references
     title: "References"
-    order: 7
+    order: 9
     content_type: reference_list
     knowledge_fields: [references]

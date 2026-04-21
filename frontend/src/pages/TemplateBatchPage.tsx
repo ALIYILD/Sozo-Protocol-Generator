@@ -1,10 +1,12 @@
 import { useState, type FormEvent } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { FileUp, Download } from 'lucide-react';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { listConditions } from '../api/evidence';
+import { postTemplateBatch } from '../api/templateBatch';
 
 const DOC_TYPE_OPTIONS: { value: string; label: string }[] = [
   { value: '', label: 'Infer from template filename (default)' },
@@ -69,12 +71,6 @@ export default function TemplateBatchPage() {
       return;
     }
 
-    const token = localStorage.getItem('sozo_token');
-    if (!token) {
-      setError('Not signed in.');
-      return;
-    }
-
     const form = new FormData();
     form.append('template', file);
     form.append('condition_slugs', selectedSlugs.join(','));
@@ -84,23 +80,7 @@ export default function TemplateBatchPage() {
 
     setBusy(true);
     try {
-      const res = await fetch('/api/generate/template-batch', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}` },
-        body: form,
-      });
-      if (!res.ok) {
-        let detail = `Request failed (${res.status})`;
-        try {
-          const j = await res.json();
-          if (typeof j?.detail === 'string') detail = j.detail;
-        } catch {
-          /* use generic */
-        }
-        setError(detail);
-        return;
-      }
-      const blob = await res.blob();
+      const blob = await postTemplateBatch(form);
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -108,7 +88,30 @@ export default function TemplateBatchPage() {
       a.click();
       URL.revokeObjectURL(url);
       setStatus(`Downloaded ZIP with ${selectedSlugs.length} condition(s).`);
-    } catch {
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response?.data instanceof Blob) {
+        try {
+          const text = await err.response.data.text();
+          const j = JSON.parse(text) as { detail?: unknown };
+          if (typeof j?.detail === 'string') {
+            setError(j.detail);
+            return;
+          }
+        } catch {
+          /* fall through */
+        }
+      }
+      if (
+        axios.isAxiosError(err) &&
+        err.response?.data &&
+        typeof err.response.data === 'object' &&
+        err.response.data !== null &&
+        'detail' in err.response.data &&
+        typeof (err.response.data as { detail?: unknown }).detail === 'string'
+      ) {
+        setError((err.response.data as { detail: string }).detail);
+        return;
+      }
       setError('Network error — could not reach the API.');
     } finally {
       setBusy(false);

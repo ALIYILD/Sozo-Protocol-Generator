@@ -95,6 +95,88 @@ class AssessmentRef(BaseModel):
     notes: str = ""
 
 
+class ContentCitation(BaseModel):
+    """Structured citation used by authored content blocks."""
+
+    pmid: Optional[str] = None
+    doi: Optional[str] = None
+    url: Optional[str] = None
+    citation_key: str = ""
+    note: str = ""
+
+    @field_validator("pmid", mode="before")
+    @classmethod
+    def _validate_pmid(cls, v):
+        return validate_pmid(v)
+
+
+class ContentTable(BaseModel):
+    """Deterministic table content (headers + rows)."""
+
+    headers: list[str] = Field(default_factory=list)
+    rows: list[list[str]] = Field(default_factory=list)
+    caption: str = ""
+
+
+class FigureDef(BaseModel):
+    """Figure/diagram definition with asset-or-placeholder semantics."""
+
+    figure_id: str
+    title: str
+    caption: str = ""
+    alt_text: str = ""
+    asset_path: Optional[str] = None  # if present and exists, renderer may embed; else placeholder
+    source: str = ""
+
+
+class ConditionContentBlock(BaseModel):
+    """Reusable structured content block for deterministic assembly.
+
+    Blocks can be re-used across document types and sections, and are filtered by:
+    - tier (fellow / partners / both)
+    - document types (doc_type slugs)
+    - section slugs (blueprint section identifiers)
+    - modality relevance (optional)
+    """
+
+    block_id: str
+    title: str = ""
+
+    # Routing filters
+    doc_types: list[str] = Field(default_factory=list)  # e.g. ["clinical_exam","evidence_based_protocol","handbook"]
+    section_slugs: list[str] = Field(default_factory=list)  # e.g. ["safety","contraindications"]
+    tier: str = "both"  # both | fellow | partners
+    modalities: list[str] = Field(default_factory=list)  # e.g. ["tdcs","tps","ces"]
+
+    # Audience / visibility controls
+    clinician_only: bool = True
+
+    # Content
+    kind: str = "prose"  # prose | list | table | figure
+    text: str = ""
+    items: list[str] = Field(default_factory=list)
+    table: Optional[ContentTable] = None
+    figure: Optional[FigureDef] = None
+
+    citations: list[ContentCitation] = Field(default_factory=list)
+
+    @field_validator("tier")
+    @classmethod
+    def _validate_tier(cls, v: str) -> str:
+        allowed = {"both", "fellow", "partners"}
+        if v not in allowed:
+            raise ValueError(f"Invalid tier '{v}'. Must be one of: {sorted(allowed)}")
+        return v
+
+    @field_validator("kind")
+    @classmethod
+    def _validate_kind(cls, v: str) -> str:
+        allowed = {"prose", "list", "table", "figure"}
+        if v not in allowed:
+            raise ValueError(f"Invalid content kind '{v}'. Must be one of: {sorted(allowed)}")
+        return v
+
+
 # ── Core Knowledge Objects ─────────────────────────────────────────────────
 
 
@@ -160,6 +242,9 @@ class KnowledgeCondition(BaseModel):
     clinical_tips: list[str] = Field(default_factory=list)
     governance_rules: list[str] = Field(default_factory=list)
     patient_journey_notes: dict[str, str] = Field(default_factory=dict)
+
+    # Structured authored blocks for deterministic long-form assembly
+    content_blocks: list[ConditionContentBlock] = Field(default_factory=list)
 
 
 class KnowledgeModality(BaseModel):

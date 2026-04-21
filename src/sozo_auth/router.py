@@ -183,7 +183,8 @@ async def refresh(body: RefreshRequest) -> TokenPair:
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Refresh token has expired",
         )
-    except _jwt.InvalidTokenError as exc:
+    except _jwt.InvalidTokenError:
+        # Keep client-facing message stable and non-leaky.
         logger.warning("Refresh token validation failed", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

@@ -436,7 +436,7 @@ data/
 - Off-label use of any modality (tDCS, TPS, taVNS, CES) must be marked in `StimulationTarget.off_label = True`
   and requires documented informed consent.
 
-See `docs/evidence_policy.md` for the full policy.
+See `docs/protocol-evidence-governance-policy.md` (source-of-truth link target) and `docs/evidence_policy.md` for full details.
 
 ---
 

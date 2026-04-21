@@ -273,6 +273,7 @@ def create_app() -> FastAPI:
     from sozo_api.routes.reviews import router as reviews_router
     from sozo_api.routes.audit import router as audit_router
     from sozo_api.routes.template_batch import router as template_batch_router
+    from sozo_api.routes.documents import router as documents_router
 
     try:
         from sozo_auth import auth_router
@@ -285,6 +286,7 @@ def create_app() -> FastAPI:
     application.include_router(reviews_router)
     application.include_router(audit_router)
     application.include_router(template_batch_router)
+    application.include_router(documents_router)
 
     # ── Health ────────────────────────────────────────────────────────
 
@@ -576,6 +578,37 @@ def create_app() -> FastAPI:
 
     # ── Graph-based generation ─────────────────────────────────────────
 
+    def _graph_run_owned_by_user(run: Any, user: UserResponse) -> bool:
+        """Match GraphRun to a JWT principal (UUID FK and/or stub final_state)."""
+        if getattr(run, "created_by", None) is not None:
+            return str(run.created_by) == str(user.id)
+        fs = run.final_state if isinstance(run.final_state, dict) else {}
+        owner = fs.get("created_by_user_id")
+        return owner is not None and str(owner) == str(user.id)
+
+    async def _require_graph_run_clinician_access(
+        thread_id: str,
+        current_user: UserResponse,
+    ) -> None:
+        """Clinicians may only access threads they enqueued; admins/reviewers see all."""
+        if current_user.role in ("admin", "reviewer"):
+            return
+        try:
+            from sozo_db.engine import get_session_factory
+            from sozo_db.repositories.graph_run_repo import GraphRunRepository
+
+            factory = get_session_factory()
+            async with factory() as session:
+                repo = GraphRunRepository(session)
+                run = await repo.get_by_thread_id(thread_id)
+        except Exception:
+            logger.exception(
+                "GraphRun access check failed for thread_id=%s", thread_id
+            )
+            raise HTTPException(status_code=500, detail=INTERNAL_SERVER_DETAIL)
+        if run is None or not _graph_run_owned_by_user(run, current_user):
+            raise HTTPException(status_code=404, detail="Thread not found")
+
     @application.post("/api/graph/generate")
     async def generate_via_graph(
         body: GraphGenerateRequest,
@@ -639,6 +672,7 @@ def create_app() -> FastAPI:
                     "output": {},
                     "node_history": [],
                     "errors": [],
+                    "created_by_user_id": str(current_user.id),
                 }
                 factory = get_session_factory()
                 async with factory() as session:

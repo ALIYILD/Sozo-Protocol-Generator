@@ -136,9 +136,10 @@ def post_template_batch(
                     try:
                         condition = registry.get(slug)
                     except ConditionNotFoundError as exc:
+                        logger.info("Template batch: condition not found: %s", exc)
                         raise HTTPException(
                             status_code=status.HTTP_404_NOT_FOUND,
-                            detail=str(exc),
+                            detail="Unknown or unsupported condition slug",
                         ) from exc
                     for t in tiers:
                         spec = generator.generate_for_condition(

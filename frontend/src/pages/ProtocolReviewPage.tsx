@@ -55,6 +55,37 @@ export default function ProtocolReviewPage() {
     },
   });
 
+  // ═══ LEGACY REVIEW MODE ══════════════════════════════════════════
+  // Hooks must always be called in the same order, so we declare the legacy hooks
+  // unconditionally and gate network execution with `enabled`.
+  const { data: protocol, isLoading } = useQuery({
+    queryKey: ['protocol', id],
+    queryFn: () => getProtocol(id!),
+    enabled: !!id && !isGraphReview,
+  });
+
+  const approveMutation = useMutation({
+    mutationFn: () => {
+      if (!id) throw new Error('Missing protocol id');
+      return transitionStatus(id, 'approved', notes || undefined);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['protocol', id] });
+      navigate(`/protocols/${id}`);
+    },
+  });
+
+  const rejectMutation = useMutation({
+    mutationFn: () => {
+      if (!id) throw new Error('Missing protocol id');
+      return transitionStatus(id, 'rejected', notes);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['protocol', id] });
+      navigate(`/protocols/${id}`);
+    },
+  });
+
   if (isGraphReview) {
     if (graphLoading) return <LoadingSpinner size="lg" className="mt-20" />;
     if (!graphState) return <p className="mt-20 text-center text-gray-500">Thread not found.</p>;
@@ -236,29 +267,6 @@ export default function ProtocolReviewPage() {
       </div>
     );
   }
-
-  // ═══ LEGACY REVIEW MODE ══════════════════════════════════════════
-  const { data: protocol, isLoading } = useQuery({
-    queryKey: ['protocol', id],
-    queryFn: () => getProtocol(id!),
-    enabled: !!id && !isGraphReview,
-  });
-
-  const approveMutation = useMutation({
-    mutationFn: () => transitionStatus(id!, 'approved', notes || undefined),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['protocol', id] });
-      navigate(`/protocols/${id}`);
-    },
-  });
-
-  const rejectMutation = useMutation({
-    mutationFn: () => transitionStatus(id!, 'rejected', notes),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['protocol', id] });
-      navigate(`/protocols/${id}`);
-    },
-  });
 
   if (isLoading) return <LoadingSpinner size="lg" className="mt-20" />;
   if (!protocol) return <p className="mt-20 text-center text-gray-500">Protocol not found.</p>;

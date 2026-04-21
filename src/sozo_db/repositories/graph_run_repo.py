@@ -54,6 +54,14 @@ class GraphRunRepository:
         review = state.get("review", {})
         output = state.get("output", {})
 
+        created_by_uuid: Optional[uuid.UUID] = None
+        raw_owner = state.get("created_by_user_id")
+        if raw_owner:
+            try:
+                created_by_uuid = uuid.UUID(str(raw_owner))
+            except ValueError:
+                logger.warning("Invalid created_by_user_id on GraphRun create: %r", raw_owner)
+
         run = GraphRun(
             thread_id=state.get("request_id", ""),
             status=state.get("status", "pending"),
@@ -84,7 +92,7 @@ class GraphRunRepository:
             node_history=state.get("node_history"),
             errors=state.get("errors"),
             graph_version=state.get("graph_version"),
-            created_by=self._created_by_uuid_from_state(state),
+            created_by=(self._created_by_uuid_from_state(state) or created_by_uuid),
         )
 
         self.session.add(run)
@@ -127,6 +135,16 @@ class GraphRunRepository:
 
         if review.get("status") == "approved":
             run.approved_at = datetime.now(timezone.utc)
+
+        if run.created_by is None:
+            raw_owner = state.get("created_by_user_id")
+            if raw_owner:
+                try:
+                    run.created_by = uuid.UUID(str(raw_owner))
+                except ValueError:
+                    logger.warning(
+                        "Invalid created_by_user_id on GraphRun update: %r", raw_owner
+                    )
 
         await self.session.flush()
         return run
