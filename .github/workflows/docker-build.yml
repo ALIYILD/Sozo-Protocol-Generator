@@ -26,6 +26,10 @@ on:
       - ".github/workflows/docker-build.yml"
   workflow_dispatch:
 
+concurrency:
+  group: docker-build-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   actions: write # BuildKit cache export (type=gha cache-to)

@@ -18,6 +18,10 @@ on:
       - ".github/workflows/release-artifacts-smoke.yml"
   workflow_dispatch:
 
+concurrency:
+  group: release-smoke-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
