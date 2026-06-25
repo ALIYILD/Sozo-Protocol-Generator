@@ -46,7 +46,7 @@ jobs:
             image: sozo-protocol-generator-unified:ci
             host_port: 18081
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
